@@ -10,7 +10,10 @@
 		<!-- 序列化插件 -->
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<!-- 修改生成的Example类的名称，放开后生成的Example类后缀变为Criteria -->
-		<!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin"> <property name="searchString" value="Example$" /> <property name="replaceString" value="Criteria" /> </plugin> -->
+		<!-- <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin> -->
 		<!--分页插件路径 -->
 		<!-- <plugin type="com.cfilmcloud.framework.utils.mybatis.generator.plugin.MySQLPaginationPlugin" /> -->
 		<!--<plugin type="com.cfilmcloud.framework.utils.mybatis.generator.plugin.OraclePaginationPlugin" /> -->
@@ -45,6 +48,8 @@
 		<!-- Oracle自增长序列时需要 -->
 		<!-- <generatedKey column="CODE_ID" sqlStatement="select trim(to_char(WLK_SEQ_ANTIFAKE.nextval, '000000000009')) from dual" /> -->
 		<!-- </table> -->
-		<table tableName="t_user_compete_rel" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="t_dw_spider_cinema_rel" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="t_dw_spider_cinemas" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
+		<table tableName="t_dw_spider_film_rel" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
 	</context>
 </generatorConfiguration>
