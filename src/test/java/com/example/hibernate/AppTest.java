@@ -51,7 +51,7 @@ public class AppTest {
 		}
 	}
 
-	private static final String local = "D:/docs/hibernate/userguide/";
+	private static final String local = "D:/TDDOWNLOAD/hibernate/userguide/";
 	private static final String remote = "http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/";
 
 	@Test
