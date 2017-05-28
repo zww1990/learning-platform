@@ -48,6 +48,7 @@
 		<!-- Oracle自增长序列时需要 -->
 		<!-- <generatedKey column="CODE_ID" sqlStatement="select trim(to_char(WLK_SEQ_ANTIFAKE.nextval, '000000000009')) from dual" /> -->
 		<!-- </table> -->
-		<table catalog="dw" tableName="t_dw_spider_film" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
+		<!-- <table catalog="dw" tableName="t_dw_spider_film" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table> -->
+		<table catalog="dw" tableName="t_dw_spider_cinemas" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table>
 	</context>
 </generatorConfiguration>
