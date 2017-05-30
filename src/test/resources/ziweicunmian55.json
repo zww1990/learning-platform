@@ -1,0 +1,530 @@
+{
+	"3103": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u59d1\u5a18\u5341\u516b \u4e0b\u96c6",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1125_gunianshibaxiabudorlrkc.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"3090": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u59d1\u5a18\u5341\u516b \u4e0a\u96c6",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1119_gunianshibashangbudfierlree.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"3072": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u7236\u5973\u4ea4*\u914d\u60c5 \u4e09",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/112_funvjiaopeiqingdisanjilpxa.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"3051": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u7236\u5973\u4ea4*\u914d\u60c5 \u4e8c",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1028_funvjiaopeiqingdiyijifeyhbwn.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"3003": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u7236\u5973\u4ea4*\u914d\u60c5 \u4e00",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1028_funvjiaopeiqingdiyijifeyhbwn.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2962": {
+		"dance_name": "\u66fc\u66fc&\u7238\u7238\u597d\u7231\u4f60",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1022_babahaoainiffejwee.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2935": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u6f58\u91d1\u83b2\u4e4b\u67f4\u623f\u5927\u6218 \u4e0b",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1015_panjinlianzhicaifangdazhangxibueieil.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2910": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u6f58\u91d1\u83b2\u4e4b\u67f4\u623f\u5927\u6218 \u4e0a",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1008_panjinlianzhicaifangdazhangshangbudielqe.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2883": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u4e1c\u5317\u9a9a\u5a4a\u5b50",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/1001_dongbeisaobiaozfefkqe.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2849": {
+		"dance_name": "\u5c0f\u54aa\u513f&\u5c0f\u54aa\u513f\u5c31\u662f\u6211",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/917xiaomierjiushiwoiieuulfa.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2820": {
+		"dance_name": "\u5c0f\u54aa\u513f&\u5929*\u4e0b*\u7b2c*\u4e00*\u6deb*\u5987*\u6f58*\u91d1*\u83b2 \u4e0b\u96c6",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/910tianxiaodiyiyingfupjlxijiuixiaoiiie.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2803": {
+		"dance_name": "\u5c0f\u54aa\u513f&\u5929*\u4e0b*\u7b2c*\u4e00*\u6deb*\u5987*\u6f58*\u91d1*\u83b2 \u4e0a\u96c6",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/903tianxiaodiyiyingdafupjlshangjifeykkcxa.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2741": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u9a9a\u674e\u5029\u7684\u81ea\u767d",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/828saoliqiandezibaidadfusaoiei.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2696": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u5c0f\u54aa\u513f\u7684\u81ea\u767d",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/820xiaomierdezibaidfjebnnewx.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2652": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u5c0f\u54aa\u7231\u64cd*\u903c",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/813xiaomiaicabiadfbbne.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2632": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u7ad9\u8857\u5973\u7684\u53eb\u5356",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/807zhangjienvdejiaomaidiisue.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2617": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u5c0f\u54aa\u627e\u64cd",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/730xiaomizhaocao.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2585": {
+		"dance_name": "\u5c0f\u54aa\u513f-\u5c0f\u54aa\u73a93P",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/2016723_xiaomiwansanpadfkeoiiuyff.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2584": {
+		"dance_name": "\u66fc\u66fc-\u5531\u5531\u66fc\u66fc\u9a9a",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/2016716_changchangmanmansaosdfewnnqooxx.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2255": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u59bb\u4e4b\u6252\u7070 \u7b2c\u4e00\u5f39",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/20160608yingqizhibafeidiyidanladfbe.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2227": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6c42\u6c42\u4f60\u6027\u8650\u6211",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/20160611qiuqiunixinnuewoaldfbner.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2180": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u8361\u9ec4\u5b97\u83b9",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/201665langdanhuangzongyingdisandanklwbmmne.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"2116": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u9152\u5427\u5077\u64cd\u9a9a\u4eba\u59bb",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/2016521jiubatouchasaorenqiadlfkjwerb.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1866": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5c0f\u4fdd\u59c6\u5356\u903c\u8bb0",
+		"class_id": "55",
+		"file_path": "\/kedou\/old\/20160508xiaobaomumaibijiadbwra.m4a",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1854": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u591c\u5e97\u8f6e\u64cd\u9a9a\u59d0\u59b9",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160430_212123.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1784": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u6d6a\u8d31\u903c\u674e\u79cb\u7ea2\u4e4b\u5077\u7537\u4eba",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160417_161115.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1766": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u98ce\u9a9a\u91ce\u9e21\u9ec4\u5b97\u83b9",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_211354.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1696": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u8d31\u6d6a\u903c\u674e\u79cb\u7ea2",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_211502.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1695": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u98ce\u6d41\u513f\u5b50\u6deb\u8361\u5988 \u7b2c\u4e8c\u756a",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_211551.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1694": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u98ce\u6d41\u513f\u5b50\u6deb\u8361\u5988",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_211743.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1693": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u9a9a\u674e\u5029",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_211942.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1692": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u8d75\u68a6\u5a77\u53c8\u6765\u4e86",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160415_212400.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1529": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u6559\u5e08\u548c\u5927\u5c4c\u751f",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/2016028_103201.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1528": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5201\u54e5\u4e0e\u66f9\u59b9\u7b2c\u4e8c\u5b63",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/2016028_103026.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1454": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5201\u54e5\u4e0e\u66f9\u59b9",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20160121_132023.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1351": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u516d\u5143\u9ebb\u8fa3\u70eb",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151226_211747.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1321": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-AV\u5973\u5fe7\u771f\u4ed6\u5988\u6d6a",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151220_124953.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1307": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6211\u4ed6\u5988\u5c31\u662f\u5c0f\u592a\u59b9",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151217_102340.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1278": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u4e71\u9a9a\u9ea6\u82b3\u9648\u620f\u6bcd\u4e0b",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151211_030802.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1240": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u4e71\u9a9a\u9ea6\u82b3\u9648\u620f\u6bcd\u4e0a",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151129_024512.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1239": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6fc0\u60c5\u9a9a\u9ea6\u9152\u5427\u6447",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151129_024355.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1238": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6211\u662f\u5927\u9a9a\u5305",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151129_024309.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1237": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u6d6a\u5973\u516c\u5173 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/new2\/20151129_024216.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1230": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u897f\u5317\u6478\u5427",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_130041.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1229": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u81c0\u9a9a\u599e\u5c0f\u5c0f\u82ee",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_131251.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1228": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4fcf\u4e3d\u5927\u5976\u6d6a\u6751\u5987\u7b2c\u4e8c\u5b63 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_125948.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1227": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4fcf\u4e3d\u5927\u5976\u6d6a\u6751\u5987",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_125842.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1226": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u7236\u5973\u4e71\u4f26\u4e4b\u5973\u513f\u7ea2",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_125736.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1225": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u65e5\u672c\u516c\u4e3b\u6deb\u4e71\u8bb0",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151123_125513.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1204": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u966a\u73a9\u5356\u8089\u5c0f\u9a9a\u59b9",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151118_012754.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1203": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6c42\u4f60\u64cd\u6211\u903c",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151118_011821.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1202": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u591c\u4f1a\u4fcf\u5be1\u5987",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151118_011730.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1201": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u8361\u4e08\u6bcd\u5a18\u7b2c\u4e8c\u90e8",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151118_011556.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1200": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6deb\u8361\u4e08\u6bcd\u5a18\u7b2c\u4e8c\u5b63\u7b2c\u4e00\u90e8 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151118_011503.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1157": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u808f\u5e08\u59b9 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151110_070844.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1156": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4ed9\u513f\u4e71\u4f26\u9a9a",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151110_070625.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1155": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u7f8e\u8273\u7ee7\u6bcd",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151110_070208.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1154": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4e71\u4f26\u4e00\u5bb6\u4eb2\u60ca\u4eba\u7684\u79d8\u5bc6",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151110_070101.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1153": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4e71\u4f26\u4e00\u5bb6\u4eb2\u4e4b\u786c\u4e0a\u5c0f\u6674",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151110_065202.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1108": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u8d27\u8d75\u68a6\u5a77\u7b2c\u56db\u5b63",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015116_095413.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1107": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u8d27\u8d75\u68a6\u5a77\u7b2c\u4e09\u5b63",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015116_095303.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1101": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u8d27\u8d75\u68a6\u5a77\u7b2c\u4e8c\u5b63",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015115_090012.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1100": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6d6a\u8d27\u8d75\u68a6\u5a77",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015115_085821.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1099": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4e08\u6bcd\u5a18\u7684\u5927\u9a9a\u903c",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015115_085613.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1095": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u9a9a\u59d0\u52fe\u5f15\u5f1f",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015114_061515.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1094": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u9a9a\u599e\u5c0f\u4ed9\u513f",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015114_061228.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1093": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u98ce\u9a9a\u5154\u5973\u90ce",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015114_060945.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1067": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u9a9a\u6d6a\u8d31 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015111_022319.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1066": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u8f66\u4e2d\u4e71",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015111_022200.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1065": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6211\u7ed9\u8001\u516c\u6234\u7eff\u5e3d",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015111_022001.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1064": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u7f51\u4e0a\u6deb\u7f18",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/2015111_021825.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"1029": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5356\u903c\u7684\u5c0f\u5c0f\u7490",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151031_092011.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"992": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u8bf1\u60d1\u5077\u6b22\u9a9a",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151029_115036.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"990": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u725b\u903c\u59d0\u548c\u64cd\u903c\u54e5",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151029_114232.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"989": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u4e3d\u5a1c\u8001\u5e08\u5927\u9a9a\u903c",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151029_113625.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"979": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5927\u9a9a\u903c\u4e3d\u5a1c",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151029_015917.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"968": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u7238\u7238\u7684\u5927\u9e21\u5427",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151028_024816.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"967": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u59d0\u59d0\u5976\u6c34\u5473\u9053\u5999",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151028_023531.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"964": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6b22\u5929\u559c\u5730\u64cd\u903c\u72c2",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151027_130551.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"957": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5973\u6d41\u6c13 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151027_054609.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"954": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u65b0\u7248\u5341\u516b\u6478",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151027_035443.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"953": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u91ce\u6218\u9a9a ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151027_031021.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"952": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u516c\u516c\u5077\u4eba\u59bb",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151027_030838.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"949": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u72d7\u7537\u5973 ",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151026_133206.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"946": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u516c\u516c\u620f\u513f\u5ab3",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151026_090810.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"945": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u82f1\u96c4\u8054\u76df\u4e4b\u64b8\u795e\u7eaa",
+		"class_id": "55",
+		"file_path": "\/dj66\/new\/20151026_082959.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"394": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u6b66\u677e\u4e0e\u5ac2",
+		"class_id": "55",
+		"file_path": "\/dj66\/mcxiaoxianer\/wsys.mp3",
+		"className": "\u9a9a\u9ea6"
+	},
+	"393": {
+		"dance_name": "Mc\u5c0f\u4ed9\u513f-\u5439\u5587\u53ed",
+		"class_id": "55",
+		"file_path": "\/dj66\/mcxiaoxianer\/clb.mp3",
+		"className": "\u9a9a\u9ea6"
+	}
+}

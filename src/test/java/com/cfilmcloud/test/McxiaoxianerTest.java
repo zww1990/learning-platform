@@ -2,7 +2,6 @@ package com.cfilmcloud.test;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,28 +18,23 @@ import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SuppressWarnings("unchecked")
-public class ZiweicunmianTest {
+public class McxiaoxianerTest {
 	private static final String DANCE_SHOW_URL = "http://www.dj66.net/index.php/ajax/dance_show";
-	private static final int seq = 55;
 
 	@Test
 	public void writeFile() {
-		String url_1 = "http://www.dj66.net/ziweicunmian----21----1.html";
-		String url_2 = "http://www.dj66.net/ziweicunmian----55----1.html";
-		String cssQuery = "div.content > div.list > form#list > ul.share_list > li > div.song > span.cbox > input";
+		String cssQuery = "div.header_new > div.content_special > div.right > ul#list > li > div.song > span.cbox > input";
 		try {
-			List<String> values = new ArrayList<String>();
-			for (int i = 1; i <= 3; i++) {
-				String url = "http://www.dj66.net/ziweicunmian----" + seq + "----" + i + ".html";
+			for (int i = 1; i <= 7; i++) {
+				String url = "http://www.dj66.net/zj----mcxiaoxianer----" + i + ".html";
 				Element body = Jsoup.connect(url).get().body();
 				List<String> list = body.select(cssQuery).stream().map(x -> x.val()).collect(Collectors.toList());
-				values.addAll(list);
+				String did = StringUtils.collectionToCommaDelimitedString(list);
+				Document doc = Jsoup.connect(DANCE_SHOW_URL).data("did", did).post();
+				String text = doc.body().text();
+				File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\mcxiaoxianer" + i + ".json");
+				FileUtils.writeStringToFile(file, text, "UTF-8");
 			}
-			String did = StringUtils.collectionToCommaDelimitedString(values);
-			Document doc = Jsoup.connect(DANCE_SHOW_URL).data("did", did).post();
-			String text = doc.body().text();
-			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\ziweicunmian" + seq + ".json");
-			FileUtils.writeStringToFile(file, text, "UTF-8");
 			System.err.println("ok!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,14 +43,14 @@ public class ZiweicunmianTest {
 
 	private static final String URL_PREFIX = "http://dpn.sosotxt.com";
 	private static final String FILE_DIR_PREFIX = "F:\\TDDOWNLOAD\\Mc小仙儿-自慰催眠\\";
-	private static final String FILE_SUFFIX = ".m4a";
 	private static final String REGEX = "[\\/:*?\"<>|]";
 
 	@Test
 	public void readFile() {
 		try {
+			int seq = 1;
 			ObjectMapper mapper = new ObjectMapper();
-			ClassPathResource resource = new ClassPathResource("ziweicunmian" + seq + ".json");
+			ClassPathResource resource = new ClassPathResource("mcxiaoxianer" + seq + ".json");
 			Map<String, Map<String, String>> map = mapper.readValue(resource.getInputStream(), Map.class);
 			Collection<Map<String, String>> values = map.values();
 			values.stream().forEach(v -> {
@@ -65,7 +59,8 @@ public class ZiweicunmianTest {
 				String class_id = v.get("class_id");// 类别ID
 				dance_name = dance_name.replaceAll(REGEX, "");
 				try {
-					File destination = new File(FILE_DIR_PREFIX + class_id, dance_name + FILE_SUFFIX);
+					String file_ext = StringUtils.getFilenameExtension(file_path);
+					File destination = new File(FILE_DIR_PREFIX + class_id, dance_name + '.' + file_ext);
 					if (destination.exists()) {// 如果该文件已存在，直接跳过
 						System.err.println(dance_name + "|已存在");
 						return;
