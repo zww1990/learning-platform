@@ -48,7 +48,7 @@ public class McxiaoxianerTest {
 	@Test
 	public void readFile() {
 		try {
-			int seq = 1;
+			int seq = 7;
 			ObjectMapper mapper = new ObjectMapper();
 			ClassPathResource resource = new ClassPathResource("mcxiaoxianer" + seq + ".json");
 			Map<String, Map<String, String>> map = mapper.readValue(resource.getInputStream(), Map.class);

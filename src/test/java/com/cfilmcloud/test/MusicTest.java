@@ -49,7 +49,7 @@ public class MusicTest {
 	@Test
 	public void readFile() {
 		try {
-			int seq = 1;
+			int seq = 3;
 			ObjectMapper mapper = new ObjectMapper();
 			ClassPathResource resource = new ClassPathResource("music" + seq + ".json");
 			Map<String, Map<String, String>> map = mapper.readValue(resource.getInputStream(), Map.class);
