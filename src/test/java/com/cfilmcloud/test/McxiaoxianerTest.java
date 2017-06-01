@@ -2,6 +2,7 @@ package com.cfilmcloud.test;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +24,23 @@ public class McxiaoxianerTest {
 
 	@Test
 	public void writeFile() {
+		int length = 7;
 		String cssQuery = "div.header_new > div.content_special > div.right > ul#list > li > div.song > span.cbox > input";
 		try {
-			for (int i = 1; i <= 7; i++) {
+			List<String> valueList = new ArrayList<String>();
+			for (int i = 1; i <= length; i++) {
 				String url = "http://www.dj66.net/zj----mcxiaoxianer----" + i + ".html";
 				Element body = Jsoup.connect(url).get().body();
 				List<String> list = body.select(cssQuery).stream().map(x -> x.val()).collect(Collectors.toList());
-				String did = StringUtils.collectionToCommaDelimitedString(list);
-				Document doc = Jsoup.connect(DANCE_SHOW_URL).data("did", did).post();
-				String text = doc.body().text();
-				File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\mcxiaoxianer" + i + ".json");
-				FileUtils.writeStringToFile(file, text, "UTF-8");
+				valueList.addAll(list);
 			}
+			String did = StringUtils.collectionToCommaDelimitedString(valueList);
+			Document doc = Jsoup.connect(DANCE_SHOW_URL).data("did", did).post();
+			String text = doc.body().text();
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String, Map<String, String>> valueMap = mapper.readValue(text, Map.class);
+			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\mcxiaoxianer.json");
+			mapper.writeValue(file, valueMap);
 			System.err.println("ok!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,13 +69,13 @@ public class McxiaoxianerTest {
 					String file_ext = StringUtils.getFilenameExtension(file_path);
 					File destination = new File(FILE_DIR_PREFIX + class_id, dance_name + '.' + file_ext);
 					if (destination.exists()) {// 如果该文件已存在，直接跳过
-//						System.err.println(dance_name + "|已存在");
+						// System.err.println(dance_name + "|已存在");
 						return;
 					}
-//					System.err.println(dance_name + "|正在下载");
+					// System.err.println(dance_name + "|正在下载");
 					URL source = new URL(file_path);
 					FileUtils.copyURLToFile(source, destination);
-//					System.err.println(dance_name + "|下载完成");
+					// System.err.println(dance_name + "|下载完成");
 				} catch (Exception e) {
 					System.err.println(dance_name + "|下载出错|" + file_path);
 				}
