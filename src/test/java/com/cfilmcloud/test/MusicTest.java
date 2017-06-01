@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MusicTest {
 	private static final String MUSIC_URL = "http://mcxiaoxianer.i.dj66.net/music/";
 	private static final String DANCE_SHOW_URL = "http://www.dj66.net/index.php/ajax/dance_show";
+	private static final String PARENT = "D:\\Projects\\zww\\mybatis\\src\\test\\resources";
 
 	@Test
 	public void writeFile() {
@@ -39,7 +40,7 @@ public class MusicTest {
 			String text = doc.body().text();
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, Map<String, String>> valueMap = mapper.readValue(text, Map.class);
-			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\music.json");
+			File file = new File(PARENT, "music.json");
 			mapper.writeValue(file, valueMap);
 			System.err.println("ok!");
 		} catch (Exception e) {

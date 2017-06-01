@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings("unchecked")
 public class McxiaoxianerTest {
 	private static final String DANCE_SHOW_URL = "http://www.dj66.net/index.php/ajax/dance_show";
+	private static final String PARENT = "D:\\Projects\\zww\\mybatis\\src\\test\\resources";
 
 	@Test
 	public void writeFile() {
@@ -39,7 +40,7 @@ public class McxiaoxianerTest {
 			String text = doc.body().text();
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, Map<String, String>> valueMap = mapper.readValue(text, Map.class);
-			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\mcxiaoxianer.json");
+			File file = new File(PARENT, "mcxiaoxianer.json");
 			mapper.writeValue(file, valueMap);
 			System.err.println("ok!");
 		} catch (Exception e) {

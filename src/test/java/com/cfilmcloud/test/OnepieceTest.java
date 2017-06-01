@@ -13,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 
 public class OnepieceTest {
 	private static final String charsetName = "UTF-8";
+	private static final String PARENT = "D:\\Projects\\zww\\mybatis\\src\\test\\resources";
 
 	@Test
 	public void writeFile() {
@@ -21,7 +22,7 @@ public class OnepieceTest {
 			Element body = Jsoup.parse(resource.getFile(), charsetName).body();
 			String cssQuery = "body#anime > div#page > div#contents > div#main-area > article > div.contents-section-wrap > div.contents-section-inner > div#tab-main";
 			String html = body.select(cssQuery).html();
-			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\index2.html");
+			File file = new File(PARENT, "index2.html");
 			FileUtils.writeStringToFile(file, html, charsetName);
 			System.out.println("OK!");
 		} catch (Exception e) {
@@ -42,7 +43,7 @@ public class OnepieceTest {
 				title = title.trim();
 				titles.add(title);
 			}
-			File file = new File("D:\\Projects\\zww\\mybatis\\src\\test\\resources\\title2.txt");
+			File file = new File(PARENT, "title2.txt");
 			FileUtils.writeLines(file, charsetName, titles);
 			System.out.println("OK!");
 		} catch (Exception e) {
