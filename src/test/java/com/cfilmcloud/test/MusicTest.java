@@ -49,11 +49,12 @@ public class MusicTest {
 	@Test
 	public void readFile() {
 		try {
-			int seq = 3;
+			int seq = 10;
 			ObjectMapper mapper = new ObjectMapper();
 			ClassPathResource resource = new ClassPathResource("music" + seq + ".json");
 			Map<String, Map<String, String>> map = mapper.readValue(resource.getInputStream(), Map.class);
 			Collection<Map<String, String>> values = map.values();
+			System.err.println("开始下载。。。");
 			values.stream().forEach(v -> {
 				String dance_name = v.get("dance_name");// 文件名称
 				String file_path = URL_PREFIX + v.get("file_path");// 文件路径
@@ -63,13 +64,13 @@ public class MusicTest {
 					String file_ext = StringUtils.getFilenameExtension(file_path);
 					File destination = new File(FILE_DIR_PREFIX + class_id, dance_name + '.' + file_ext);
 					if (destination.exists()) {// 如果该文件已存在，直接跳过
-						System.err.println(dance_name + "|已存在");
+//						System.err.println(dance_name + "|已存在");
 						return;
 					}
-					System.err.println(dance_name + "|正在下载");
+//					System.err.println(dance_name + "|正在下载");
 					URL source = new URL(file_path);
 					FileUtils.copyURLToFile(source, destination);
-					System.err.println(dance_name + "|下载完成");
+//					System.err.println(dance_name + "|下载完成");
 				} catch (Exception e) {
 					System.err.println(dance_name + "|下载出错|" + file_path);
 				}
