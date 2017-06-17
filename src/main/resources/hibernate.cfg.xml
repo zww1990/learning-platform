@@ -3,12 +3,37 @@
                                          "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://rm-2ze8t398f386rwjb2o.mysql.rds.aliyuncs.com:3306/ods</property>
-		<property name="hibernate.connection.username">dev</property>
-		<property name="hibernate.connection.password">Nebula2016</property>
-		<property name="hibernate.show_sql">true</property>
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property> 
+			<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> 
+			<property name="hibernate.connection.url">jdbc:mysql://rm-2ze8t398f386rwjb2o.mysql.rds.aliyuncs.com:3306/ods</property> 
+			<property name="hibernate.connection.username">dev</property> <property name="hibernate.connection.password">Nebula2016</property> 
+			<property name="hibernate.show_sql">true</property> -->
+		<property name="myeclipse.connection.profile">
+			duizhang
+		</property>
+		<property name="connection.url">
+			jdbc:mysql://rm-2ze8t398f386rwjb2o.mysql.rds.aliyuncs.com/duizhang?useSSL=false&amp;allowMultiQueries=true&amp;zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8
+		</property>
+		<property name="connection.username">dev</property>
+		<property name="connection.password">Nebula2016</property>
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="show_sql">true</property>
 		<mapping class="com.example.hibernate.model.ZDoubanFilm" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsConfig" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysTaskCheckResult" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsConfigItem" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysTaskConfig" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysTaskConfigItemRel" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsItemDict" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsConfigFile" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsConfigDb" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsUploadFile" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysTaskBatchLog" />
+		<mapping class="com.cfilmcloud.collate.orm.domain.TSysTaskSchedule" />
 	</session-factory>
 </hibernate-configuration>

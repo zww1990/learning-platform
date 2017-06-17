@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,12 +28,15 @@ import com.example.hibernate.model.ZDoubanFilm;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class HibernateTest {
 	@Test
 	public void testApp() {
 		try {
-			StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
-			SessionFactory factory = new MetadataSources().buildMetadata(registry).buildSessionFactory();
+			StandardServiceRegistryBuilder registryBuilder = new StandardServiceRegistryBuilder().configure();
+			StandardServiceRegistry registry = registryBuilder.build();
+			MetadataSources sources = new MetadataSources();
+			Metadata metadata = sources.buildMetadata(registry);
+			SessionFactory factory = metadata.buildSessionFactory();
 			Session session = factory.openSession();
 			CriteriaBuilder builder = session.getCriteriaBuilder();
 			CriteriaQuery<Tuple> query = builder.createQuery(Tuple.class);
