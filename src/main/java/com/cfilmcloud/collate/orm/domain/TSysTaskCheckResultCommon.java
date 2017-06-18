@@ -2,21 +2,49 @@ package com.cfilmcloud.collate.orm.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class TSysTaskCheckResultCommon {
+	@Id
+	@Column(name = "row_id")
+	private Integer rowId;
+	@Column(name = "batch_no")
 	private String batchNo;
+	@Column(name = "task_no")
 	private String taskNo;
+	@Column(name = "check_date_begin")
 	private Date checkDateBegin;
+	@Column(name = "check_date_end")
 	private Date checkDateEnd;
+	@Column(name = "check_type")
 	private Integer checkType;
+	@Column(name = "create_time")
 	private Date createTime;
+	@Column(name = "dim_list")
 	private String dimList;
+	@Column(name = "fact_list")
 	private String factList;
+	@Column(name = "source_dim_list")
 	private String sourceDimList;
+	@Column(name = "source_fact_list")
 	private String sourceFactList;
+	@Column(name = "target_dim_list")
 	private String targetDimList;
+	@Column(name = "target_fact_list")
 	private String targetFactList;
 
 	public TSysTaskCheckResultCommon() {
+	}
+
+	public Integer getRowId() {
+		return rowId;
+	}
+
+	public void setRowId(Integer rowId) {
+		this.rowId = rowId;
 	}
 
 	public String getBatchNo() {
