@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,6 +39,9 @@ public class TSysDsItemDict implements java.io.Serializable {
 	private Date updateTime;
 	private String creater;
 	private String updater;
+	private String colunmTypeName;
+	private String dateFormatName;
+	private String enalbeName;
 
 	// Constructors
 
@@ -165,6 +169,33 @@ public class TSysDsItemDict implements java.io.Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	@Transient
+	public String getColunmTypeName() {
+		return colunmTypeName;
+	}
+
+	public void setColunmTypeName(String colunmTypeName) {
+		this.colunmTypeName = colunmTypeName;
+	}
+
+	@Transient
+	public String getDateFormatName() {
+		return dateFormatName;
+	}
+
+	public void setDateFormatName(String dateFormatName) {
+		this.dateFormatName = dateFormatName;
+	}
+
+	@Transient
+	public String getEnalbeName() {
+		return enalbeName;
+	}
+
+	public void setEnalbeName(String enalbeName) {
+		this.enalbeName = enalbeName;
 	}
 
 }

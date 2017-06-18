@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -41,6 +42,9 @@ public class TSysTaskConfig implements java.io.Serializable {
 	private Date deleteTime;
 	private Date createTime;
 	private Date updateTime;
+	private String sourceDataSourceName;
+	private String targetDataSourceName;
+	private String enableName;
 
 	// Constructors
 
@@ -213,6 +217,33 @@ public class TSysTaskConfig implements java.io.Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	@Transient
+	public String getSourceDataSourceName() {
+		return sourceDataSourceName;
+	}
+
+	public void setSourceDataSourceName(String sourceDataSourceName) {
+		this.sourceDataSourceName = sourceDataSourceName;
+	}
+
+	@Transient
+	public String getTargetDataSourceName() {
+		return targetDataSourceName;
+	}
+
+	public void setTargetDataSourceName(String targetDataSourceName) {
+		this.targetDataSourceName = targetDataSourceName;
+	}
+
+	@Transient
+	public String getEnableName() {
+		return enableName;
+	}
+
+	public void setEnableName(String enableName) {
+		this.enableName = enableName;
 	}
 
 }

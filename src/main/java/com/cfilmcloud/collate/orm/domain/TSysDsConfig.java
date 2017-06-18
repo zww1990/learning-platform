@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,6 +37,8 @@ public class TSysDsConfig implements java.io.Serializable {
 	private Date updateTime;
 	private String creater;
 	private String updater;
+	private String methodName;
+	private String enableName;
 
 	// Constructors
 
@@ -154,6 +157,24 @@ public class TSysDsConfig implements java.io.Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	@Transient
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
+	@Transient
+	public String getEnableName() {
+		return enableName;
+	}
+
+	public void setEnableName(String enableName) {
+		this.enableName = enableName;
 	}
 
 }

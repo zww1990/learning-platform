@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -33,6 +34,8 @@ public class TSysTaskCheckResult implements java.io.Serializable {
 	private Integer diffRows;
 	private Integer checkRows;
 	private Date createTime;
+	private String taskDesc;
+	private String checkResultName;
 
 	// Constructors
 
@@ -125,6 +128,24 @@ public class TSysTaskCheckResult implements java.io.Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	@Transient
+	public String getTaskDesc() {
+		return taskDesc;
+	}
+
+	public void setTaskDesc(String taskDesc) {
+		this.taskDesc = taskDesc;
+	}
+
+	@Transient
+	public String getCheckResultName() {
+		return checkResultName;
+	}
+
+	public void setCheckResultName(String checkResultName) {
+		this.checkResultName = checkResultName;
 	}
 
 }

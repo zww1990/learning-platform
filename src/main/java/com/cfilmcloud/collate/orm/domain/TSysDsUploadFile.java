@@ -11,9 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * TSysDsUploadFile entity. @author MyEclipse Persistence Tools
@@ -40,6 +43,7 @@ public class TSysDsUploadFile implements java.io.Serializable {
 	private Date updateTime;
 	private String creater;
 	private String updater;
+	private String dataSourceName;
 
 	// Constructors
 
@@ -153,6 +157,7 @@ public class TSysDsUploadFile implements java.io.Serializable {
 
 	@Column(name = "CREATE_TIME", nullable = false, length = 19, updatable = false)
 	@CreationTimestamp
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getCreateTime() {
 		return this.createTime;
 	}
@@ -163,6 +168,7 @@ public class TSysDsUploadFile implements java.io.Serializable {
 
 	@Column(name = "UPDATE_TIME", nullable = false, length = 19)
 	@UpdateTimestamp
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}
@@ -187,6 +193,15 @@ public class TSysDsUploadFile implements java.io.Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	@Transient
+	public String getDataSourceName() {
+		return dataSourceName;
+	}
+
+	public void setDataSourceName(String dataSourceName) {
+		this.dataSourceName = dataSourceName;
 	}
 
 }
