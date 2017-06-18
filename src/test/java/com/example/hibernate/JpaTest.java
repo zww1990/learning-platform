@@ -30,6 +30,7 @@ import com.cfilmcloud.collate.orm.domain.TSysTaskConfig;
 import com.cfilmcloud.collate.orm.domain.TSysTaskSchedule;
 import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultCommonDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultDao;
+import com.cfilmcloud.collate.orm.repository.TSysTaskConfigDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskScheduleDao;
 
 @RunWith(SpringRunner.class)
@@ -162,9 +163,20 @@ public class JpaTest {
 			System.err.println("getNumber=" + page.getNumber());
 			System.err.println("getNumberOfElements=" + page.getNumberOfElements());
 			System.err.println("getSize=" + page.getSize());
-			System.err.println("getTotalElements=" + page.getTotalElements());
+			System.err.println("getTotalElements=" + (int) page.getTotalElements());
 			System.err.println("getTotalPages=" + page.getTotalPages());
 			page.getContent().stream().forEach(x -> System.err.println(x.getRowId()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test8() {
+		try {
+			TSysTaskConfigDao dao = this.context.getBean(TSysTaskConfigDao.class);
+			TSysTaskConfig obj = dao.findByTaskNo("T1000019");
+			System.out.println(obj.getTaskDesc());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
