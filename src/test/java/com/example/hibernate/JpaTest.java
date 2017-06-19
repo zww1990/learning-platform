@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
+import javax.transaction.Transactional;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +25,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cfilmcloud.collate.Application;
+import com.cfilmcloud.collate.orm.domain.TSysDsConfigItem;
 import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResult;
 import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResultCommon;
 import com.cfilmcloud.collate.orm.domain.TSysTaskConfig;
 import com.cfilmcloud.collate.orm.domain.TSysTaskSchedule;
+import com.cfilmcloud.collate.orm.repository.TSysDsConfigItemDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultCommonDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskConfigDao;
@@ -43,6 +46,7 @@ public class JpaTest {
 	private EntityManager em;
 
 	@Test
+	@Transactional
 	public void test1() {
 		try {
 			TSysTaskScheduleDao dao = this.context.getBean(TSysTaskScheduleDao.class);
@@ -62,8 +66,9 @@ public class JpaTest {
 			obj.setThisTime(new Date());
 			obj.setNextTime(new Date());
 			obj.setLastTime(new Date());
-			obj.setRowId(17);
-			dao.save(obj);
+			// obj.setRowId(17);
+			// dao.save(obj);
+			System.err.println(dao.deleteByRowIdAndTaskNo(Arrays.asList(17, 18), "11"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -87,6 +92,7 @@ public class JpaTest {
 				return builder.equal(root.get("taskNo"), "1");
 			});
 			System.err.println(obj);
+			System.err.println(dao.count((root, query, builder) -> builder.notEqual(root.get("taskNo"), "1")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -122,6 +128,7 @@ public class JpaTest {
 	}
 
 	@Test
+	@Transactional
 	public void test6() {
 		try {
 			TSysTaskCheckResultCommonDao dao = this.context.getBean(TSysTaskCheckResultCommonDao.class);
@@ -129,6 +136,10 @@ public class JpaTest {
 			List<TSysTaskCheckResultCommon> list = dao.select(table);
 			System.out.println(list.size());
 			System.out.println(dao.count(table));
+			dao.dropTable("t100001820170613135553581");
+			String result = dao.taskExecCreateTable("T1000018", "T100001820170609184737790", "2017-06-08至2017-06-08");
+			System.out.println(result);
+			System.out.println(dao.taskCheckResultCreateTable("123456"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -176,7 +187,21 @@ public class JpaTest {
 		try {
 			TSysTaskConfigDao dao = this.context.getBean(TSysTaskConfigDao.class);
 			TSysTaskConfig obj = dao.findByTaskNo("T1000019");
-			System.out.println(obj.getTaskDesc());
+			System.out.println(obj);
+			System.err.println(dao.generateTaskNo());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test9() {
+		try {
+			TSysDsConfigItemDao dao = this.context.getBean(TSysDsConfigItemDao.class);
+			List<TSysDsConfigItem> list1 = dao.findADsConfigItem("DS000010", "T1000025");
+			System.out.println(list1.size());
+			List<TSysDsConfigItem> list2 = dao.findBDsConfigItem("DS000005", "T1000025");
+			System.out.println(list2.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
