@@ -22,6 +22,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cfilmcloud.collate.Application;
@@ -44,6 +45,8 @@ public class JpaTest {
 	private ApplicationContext context;
 	@PersistenceContext
 	private EntityManager em;
+	@Resource
+	private JdbcTemplate jt;
 
 	@Test
 	@Transactional
@@ -189,6 +192,7 @@ public class JpaTest {
 			TSysTaskConfig obj = dao.findByTaskNo("T1000019");
 			System.out.println(obj);
 			System.err.println(dao.generateTaskNo());
+			System.err.println(dao.findTaskNo());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -202,6 +206,17 @@ public class JpaTest {
 			System.out.println(list1.size());
 			List<TSysDsConfigItem> list2 = dao.findBDsConfigItem("DS000005", "T1000025");
 			System.out.println(list2.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test10() {
+		try {
+			String sql = "INSERT INTO t_sys_task_schedule (task_no) VALUES ('a'),('b')";
+			int rows = this.jt.update(sql);
+			System.err.println(rows);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
