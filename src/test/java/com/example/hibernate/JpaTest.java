@@ -25,7 +25,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.cfilmcloud.collate.Application;
+import com.cfilmcloud.Application;
 import com.cfilmcloud.collate.orm.domain.TSysDsConfigItem;
 import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResult;
 import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResultCommon;
@@ -36,6 +36,7 @@ import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultCommonDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskConfigDao;
 import com.cfilmcloud.collate.orm.repository.TSysTaskScheduleDao;
+import com.cfilmcloud.poly.orm.domain.TDmDzCardRecharge;
 
 @RunWith(SpringRunner.class)
 @SuppressWarnings("unchecked")
@@ -217,6 +218,31 @@ public class JpaTest {
 			String sql = "INSERT INTO t_sys_task_schedule (task_no) VALUES ('a'),('b')";
 			int rows = this.jt.update(sql);
 			System.err.println(rows);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test11() {
+		try {
+			CriteriaBuilder cb = this.em.getCriteriaBuilder();
+			CriteriaQuery<TDmDzCardRecharge> cq = cb.createQuery(TDmDzCardRecharge.class);
+			Root<TDmDzCardRecharge> root = cq.from(TDmDzCardRecharge.class);
+			cq.where(cb.equal(root.get("id").get("cinemaCode"), "32017511"));
+			List<TDmDzCardRecharge> list = this.em.createQuery(cq).getResultList();
+			list.stream().forEach(x -> System.err.println(x.getPaymentName()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test12() {
+		try {
+			String sql = "SELECT t.* FROM t_dm_dz_card_recharge t WHERE t.CINEMA_CODE = '32017511'";
+			List<TDmDzCardRecharge> list = this.em.createNativeQuery(sql, TDmDzCardRecharge.class).getResultList();
+			list.stream().forEach(x -> System.err.println(x));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -33,30 +33,6 @@ public class ZDoubanFilm implements java.io.Serializable {
 	public ZDoubanFilm() {
 	}
 
-	public ZDoubanFilm(String filmId) {
-		this.filmId = filmId;
-	}
-
-	public ZDoubanFilm(String filmId, String filmName, String year, String writers, String types, String countries,
-			String languages, String pubdates, String durations, String alias, String summary, String score,
-			String star, String votecount, String tag) {
-		this.filmId = filmId;
-		this.filmName = filmName;
-		this.year = year;
-		this.writers = writers;
-		this.types = types;
-		this.countries = countries;
-		this.languages = languages;
-		this.pubdates = pubdates;
-		this.durations = durations;
-		this.alias = alias;
-		this.summary = summary;
-		this.score = score;
-		this.star = star;
-		this.votecount = votecount;
-		this.tag = tag;
-	}
-
 	@Id
 	@Column(name = "film_id", unique = true, nullable = false)
 	public String getFilmId() {

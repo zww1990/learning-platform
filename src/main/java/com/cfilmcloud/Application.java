@@ -1,4 +1,4 @@
-package com.cfilmcloud.collate;
+package com.cfilmcloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
