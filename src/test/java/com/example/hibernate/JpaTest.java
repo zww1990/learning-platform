@@ -199,9 +199,9 @@ public class JpaTest {
 	public void test9() {
 		try {
 			TSysDsConfigItemDao dao = this.context.getBean(TSysDsConfigItemDao.class);
-			List<TSysDsConfigItem> list1 = dao.findADsConfigItem("DS000010", "T1000025");
+			List<TSysDsConfigItem> list1 = dao.findADsConfigItem("DS000010");
 			System.out.println(list1.size());
-			List<TSysDsConfigItem> list2 = dao.findBDsConfigItem("DS000005", "T1000025");
+			List<TSysDsConfigItem> list2 = dao.findBDsConfigItem("DS000005");
 			System.out.println(list2.size());
 		} catch (Exception e) {
 			e.printStackTrace();
