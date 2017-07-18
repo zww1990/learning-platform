@@ -19,34 +19,5 @@
 		</property>
 		<property name="show_sql">true</property>
 		<mapping class="com.example.hibernate.model.ZDoubanFilm" />
-		<mapping class="com.cfilmcloud.collate.orm.domain.TSysDsConfig" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysTaskCheckResult" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysDsConfigItem" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysTaskConfig" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysTaskConfigItemRel" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysDsItemDict" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysDsConfigFile" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysDsConfigDb" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysDsUploadFile" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysTaskBatchLog" />
-		<mapping
-			class="com.cfilmcloud.collate.orm.domain.TSysTaskSchedule" />
-		<mapping
-			class="com.cfilmcloud.poly.orm.domain.TDmDzIncomeDetail" />
-		<mapping class="com.cfilmcloud.poly.orm.domain.TDmDzGoodSales" />
-		<mapping
-			class="com.cfilmcloud.poly.orm.domain.TDmDzCardRecharge" />
-		<mapping
-			class="com.cfilmcloud.poly.orm.domain.TDmDzTicketOrder" />
-		<mapping class="com.cfilmcloud.poly.orm.domain.TDmDzGoodOrder" />
 	</session-factory>
 </hibernate-configuration>
