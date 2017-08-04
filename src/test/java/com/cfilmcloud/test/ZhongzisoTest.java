@@ -104,14 +104,51 @@ public class ZhongzisoTest {
 	public void update() {
 		String[] times = { "6", "11", "12" };
 		List<String> values = new ArrayList<>();
+		String search_url = null;
+		Element body = null;
+		String cssQuery = null;
+		Elements elements = null;
+		String title = null;
+		String href = null;
+		Elements torrents = null;
+		Optional<Element> optional = null;
+		String thunder = null;
 		for (String time : times) {
-			values.add(time);
+			try {
+				search_url = "http://www.zhongziso.net/search/c%E4%BB%94/time-" + time + ".html";
+				body = Jsoup.connect(search_url).headers(headers).cookies(cookies).get().body();
+				cssQuery = "div#wrapper > div#content > div#wall > div.search-item > div.item-title > h3 > a";
+				elements = body.select(cssQuery);
+				for (Element element : elements) {
+					title = element.attr("title");
+					href = element.attr("href");
+					try {
+						body = Jsoup.connect(href).headers(headers).cookies(cookies).get().body();
+						cssQuery = "div#wrapper > div#content > div#wall > div.fileDetail > div.detail-panel.detail-width > div.panel-body > a";
+						torrents = body.select(cssQuery);
+						optional = torrents.stream().filter(x -> x.attr("href").startsWith("thunder://")).findFirst();
+						if (optional.isPresent()) {
+							thunder = optional.get().attr("href");
+							values.add(thunder);
+						}
+					} catch (Exception e) {
+						System.err.println("ERROR=" + e.getLocalizedMessage());
+						System.err.println("title=" + title);
+						System.err.println("href=" + href);
+					}
+				}
+			} catch (Exception e) {
+				System.err.println("ERROR=" + e.getLocalizedMessage());
+				System.err.println("Search URL=" + search_url);
+			}
 		}
-		try {
-			File file = new File(parent, "zhongziso.txt");
-			FileUtils.writeLines(file, charsetName, values, true);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (!values.isEmpty()) {
+			try {
+				File file = new File(parent, "zhongziso.txt");
+				FileUtils.writeLines(file, charsetName, values, true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		System.out.println("OK!");
 	}
