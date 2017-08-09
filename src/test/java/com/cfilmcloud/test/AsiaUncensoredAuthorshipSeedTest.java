@@ -1,0 +1,101 @@
+package com.cfilmcloud.test;
+
+import java.io.File;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.junit.Test;
+
+/**
+ * @author Alienware
+ * @date 2017年8月9日,下午8:41:59
+ * @see
+ * @serial
+ * @since
+ * @version
+ */
+public class AsiaUncensoredAuthorshipSeedTest {
+	private static final Map<String, String> cookies = new HashMap<>();
+	private static final Map<String, String> headers = new HashMap<>();
+	private static final String prefix_url = "http://162.252.9.10/forum/";
+	private static final String prefix_file_dir = "E:\\projects\\torrents\\亚洲无码原创区\\";
+	static {
+		headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		headers.put("Accept-Encoding", "gzip, deflate");
+		headers.put("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3");
+		headers.put("Connection", "keep-alive");
+		headers.put("Host", "162.252.9.10");
+		headers.put("Upgrade-Insecure-Requests", "1");
+		headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0");
+		// cookies.put("_ga", "GA1.1.576789365.1502261359");
+		// cookies.put("_gat", "1");
+		// cookies.put("_gid", "GA1.1.786046367.1502261359");
+		// cookies.put("cdb2_fid143", "1502259240");
+		// cookies.put("cdb2_fid25", "1502246359");
+		// cookies.put("cdb2_oldtopics", "D9990286D9964603D9989230D");
+		// cookies.put("cdb2_sid", "FhzUGl");
+	}
+
+	@Test
+	public void list() {
+		int connectionTimeout = 10000;
+		int readTimeout = 10000;
+		String forumdisplay_url = prefix_url + "forumdisplay.php";
+		String cssQuery = "div#wrapper > div > div.mainbox.threadlist > form > table:last-child > tbody > tr > th > span[id] > a";
+		String href = null;
+		String title = null;
+		String childCssQuery = "div#wrapper > div > form > div.mainbox.viewthread > table > tbody > tr > td.postcontent > div.postmessage.defaultpost > div.box.postattachlist > dl.t_attachlist > dt > a:eq(2)";
+		Elements childElements = null;
+		String childHref = null;
+		URL source = null;
+		File destination = null;
+		int page = 1;
+		try {
+			Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
+					.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
+					.cookies(cookies).headers(headers).get().body();
+			Elements elements = body.select(cssQuery);
+			for (Element element : elements) {
+				href = element.attr("href");
+				try {
+					body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers).get()
+							.body();
+				} catch (Exception e) {
+					System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + prefix_url + href);
+					continue;
+				}
+				try {
+					childElements = body.select(childCssQuery);
+					childHref = childElements.attr("href");
+					title = childElements.text();
+					source = new URL(prefix_url + childHref);
+					destination = new File(prefix_file_dir, title);
+					FileUtils.copyURLToFile(source, destination);
+				} catch (Exception e) {
+					System.err.println("Error=" + e.getLocalizedMessage() + ",Child Url=" + prefix_url + childHref);
+					continue;
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + forumdisplay_url + ",Page=" + page);
+		}
+		System.err.println("OK!");
+	}
+
+	@Test
+	public void download() {
+		try {
+			String href = prefix_url + "attachment.php?aid=2952250";
+			URL source = new URL(href);
+			String title = "spiderleon@第一会所@ 廣州富姐巨獻酒店調教凌辱女奴高跟絲襪下部.torrent";
+			File destination = new File(prefix_file_dir, title);
+			FileUtils.copyURLToFile(source, destination);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
