@@ -6,6 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Alienware
@@ -46,7 +47,7 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String childCssQuery = "div#wrapper > div > form > div.mainbox.viewthread > table > tbody > tr > td.postcontent > div.postmessage.defaultpost > div.box.postattachlist > dl.t_attachlist > dt > a:eq(2)";
 		Elements childElements = null;
 		String childHref = null;
-		int page = 12;
+		int page = 20;
 		try {
 			Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
 					.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
@@ -63,7 +64,11 @@ public class AsiaUncensoredAuthorshipSeedTest {
 				}
 				childElements = body.select(childCssQuery);
 				childHref = childElements.attr("href");
-				System.out.println(prefix_url + childHref);
+				if (StringUtils.hasText(childHref)) {
+					System.out.println(prefix_url + childHref);
+				} else {
+					System.err.println(prefix_url + href);
+				}
 			}
 		} catch (Exception e) {
 			System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + forumdisplay_url + ",Page=" + page);
