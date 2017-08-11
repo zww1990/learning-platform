@@ -1,10 +1,7 @@
 package com.cfilmcloud.test;
 
-import java.io.File;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -22,7 +19,6 @@ public class AsiaUncensoredAuthorshipSeedTest {
 	private static final Map<String, String> cookies = new HashMap<>();
 	private static final Map<String, String> headers = new HashMap<>();
 	private static final String prefix_url = "http://162.252.9.10/forum/";
-	private static final String prefix_file_dir = "E:\\projects\\torrents\\亚洲无码原创区\\";
 	static {
 		headers.put("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 		headers.put("Accept-Encoding", "gzip, deflate");
@@ -47,13 +43,10 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String forumdisplay_url = prefix_url + "forumdisplay.php";
 		String cssQuery = "div#wrapper > div > div.mainbox.threadlist > form > table:last-child > tbody > tr > th > span[id] > a";
 		String href = null;
-		String title = null;
 		String childCssQuery = "div#wrapper > div > form > div.mainbox.viewthread > table > tbody > tr > td.postcontent > div.postmessage.defaultpost > div.box.postattachlist > dl.t_attachlist > dt > a:eq(2)";
 		Elements childElements = null;
 		String childHref = null;
-		URL source = null;
-		File destination = null;
-		int page = 1;
+		int page = 12;
 		try {
 			Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
 					.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
@@ -68,34 +61,13 @@ public class AsiaUncensoredAuthorshipSeedTest {
 					System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + prefix_url + href);
 					continue;
 				}
-				try {
-					childElements = body.select(childCssQuery);
-					childHref = childElements.attr("href");
-					title = childElements.text();
-					source = new URL(prefix_url + childHref);
-					destination = new File(prefix_file_dir, title);
-					FileUtils.copyURLToFile(source, destination);
-				} catch (Exception e) {
-					System.err.println("Error=" + e.getLocalizedMessage() + ",Child Url=" + prefix_url + childHref);
-					continue;
-				}
+				childElements = body.select(childCssQuery);
+				childHref = childElements.attr("href");
+				System.out.println(prefix_url + childHref);
 			}
 		} catch (Exception e) {
 			System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + forumdisplay_url + ",Page=" + page);
 		}
 		System.err.println("OK!");
-	}
-
-	@Test
-	public void download() {
-		try {
-			String href = prefix_url + "attachment.php?aid=2952250";
-			URL source = new URL(href);
-			String title = "spiderleon@第一会所@ 廣州富姐巨獻酒店調教凌辱女奴高跟絲襪下部.torrent";
-			File destination = new File(prefix_file_dir, title);
-			FileUtils.copyURLToFile(source, destination);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }
