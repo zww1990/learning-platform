@@ -47,32 +47,33 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String childCssQuery = "div#wrapper > div > form > div.mainbox.viewthread > table > tbody > tr > td.postcontent > div.postmessage.defaultpost > div.box.postattachlist > dl.t_attachlist > dt > a:eq(2)";
 		Elements childElements = null;
 		String childHref = null;
-		int page = 20;
-		try {
-			Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
-					.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
-					.cookies(cookies).headers(headers).get().body();
-			Elements elements = body.select(cssQuery);
-			for (Element element : elements) {
-				href = element.attr("href");
-				try {
-					body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers).get()
-							.body();
-				} catch (Exception e) {
-					System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + prefix_url + href);
-					continue;
+		for (int page = 49, length = 74; page <= length; page++) {
+			try {
+				Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
+						.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
+						.cookies(cookies).headers(headers).get().body();
+				Elements elements = body.select(cssQuery);
+				for (Element element : elements) {
+					href = element.attr("href");
+					try {
+						body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers)
+								.get().body();
+						childElements = body.select(childCssQuery);
+						childHref = childElements.attr("href");
+						if (StringUtils.hasText(childHref)) {
+							System.out.println(prefix_url + childHref);
+						} else {
+							System.err.println(prefix_url + href);
+						}
+					} catch (Exception e) {
+						System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + prefix_url + href);
+					}
 				}
-				childElements = body.select(childCssQuery);
-				childHref = childElements.attr("href");
-				if (StringUtils.hasText(childHref)) {
-					System.out.println(prefix_url + childHref);
-				} else {
-					System.err.println(prefix_url + href);
-				}
+			} catch (Exception e) {
+				System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + forumdisplay_url + ",Page=" + page);
 			}
-		} catch (Exception e) {
-			System.err.println("Error=" + e.getLocalizedMessage() + ",Url=" + forumdisplay_url + ",Page=" + page);
+			System.out.println("-------------------------------第" + page + "页结束---------------------------------");
 		}
-		System.err.println("OK!");
+		System.out.println("OK!");
 	}
 }
