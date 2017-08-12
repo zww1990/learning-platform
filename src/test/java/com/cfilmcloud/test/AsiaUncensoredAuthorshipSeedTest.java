@@ -44,7 +44,7 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String forumdisplay_url = prefix_url + "forumdisplay.php";
 		String cssQuery = "div#wrapper > div > div.mainbox.threadlist > form > table:last-child > tbody > tr > th > span[id] > a";
 		String href = null;
-		String childCssQuery = "div#wrapper > div > form > div.mainbox.viewthread > table > tbody > tr > td.postcontent > div.postmessage.defaultpost > div.box.postattachlist > dl.t_attachlist > dt > a:eq(2)";
+		String childCssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div.box.postattachlist dl.t_attachlist dt a[href^=attachment]";
 		Elements childElements = null;
 		String childHref = null;
 		for (int page = 49, length = 74; page <= length; page++) {
@@ -75,5 +75,17 @@ public class AsiaUncensoredAuthorshipSeedTest {
 			System.out.println("-------------------------------第" + page + "页结束---------------------------------");
 		}
 		System.out.println("OK!");
+	}
+
+	@Test
+	public void detail() {
+		try {
+			String url = "http://162.252.9.10/forum/viewthread.php?tid=9214572&extra=page%3D32%26amp%3Bfilter%3Dtype%26amp%3Btypeid%3D76";
+			Element body = Jsoup.connect(url).timeout(10000).cookies(cookies).headers(headers).get().body();
+			String cssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div.box.postattachlist dl.t_attachlist dt a[href^=attachment]";
+			System.err.println(body.select(cssQuery));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
