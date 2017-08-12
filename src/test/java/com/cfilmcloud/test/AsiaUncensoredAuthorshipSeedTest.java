@@ -1,6 +1,8 @@
 package com.cfilmcloud.test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
@@ -47,7 +49,7 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String childCssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div.box.postattachlist dl.t_attachlist dt a[href^=attachment]";
 		Elements childElements = null;
 		String childHref = null;
-		for (int page = 49, length = 74; page <= length; page++) {
+		for (int page = 1, length = 74; page <= length; page++) {
 			try {
 				Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
 						.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
@@ -79,13 +81,21 @@ public class AsiaUncensoredAuthorshipSeedTest {
 
 	@Test
 	public void detail() {
-		try {
-			String url = "http://162.252.9.10/forum/viewthread.php?tid=9214572&extra=page%3D32%26amp%3Bfilter%3Dtype%26amp%3Btypeid%3D76";
-			Element body = Jsoup.connect(url).timeout(10000).cookies(cookies).headers(headers).get().body();
-			String cssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div.box.postattachlist dl.t_attachlist dt a[href^=attachment]";
-			System.err.println(body.select(cssQuery));
-		} catch (Exception e) {
-			e.printStackTrace();
+		List<String> urls = Arrays.asList();
+		for (String url : urls) {
+			try {
+				Element body = Jsoup.connect(url).timeout(10000).cookies(cookies).headers(headers).get().body();
+				String cssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div a[href^=attachment]:last-child";
+				Elements elements = body.select(cssQuery);
+				String href = elements.attr("href");
+				if (StringUtils.hasText(href)) {
+					System.out.println("http://162.252.9.10/forum/" + href);
+				} else {
+					System.err.println(url);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
