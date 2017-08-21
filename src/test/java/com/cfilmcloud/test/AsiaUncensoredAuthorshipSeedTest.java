@@ -57,6 +57,7 @@ public class AsiaUncensoredAuthorshipSeedTest {
 				Elements elements = body.select(cssQuery);
 				for (Element element : elements) {
 					href = element.attr("href");
+					System.out.println(element.text());
 					try {
 						body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers)
 								.get().body();
