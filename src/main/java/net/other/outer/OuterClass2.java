@@ -1,4 +1,4 @@
-package net.example.outer;
+package net.other.outer;
 
 public class OuterClass2 {
 	public InnerClass2 getInnerClass(final int num, String str2) {

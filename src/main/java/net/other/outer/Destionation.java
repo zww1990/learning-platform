@@ -1,4 +1,4 @@
-package net.example.outer;
+package net.other.outer;
 
 public interface Destionation {
 	String readLabel();

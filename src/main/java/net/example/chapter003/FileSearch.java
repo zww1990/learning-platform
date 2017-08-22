@@ -26,11 +26,11 @@ public class FileSearch implements Runnable {
 	private void directoryProcess(File file) throws InterruptedException {
 		File[] list = file.listFiles();
 		if (list != null) {
-			for (int i = 0; i < list.length; i++) {
-				if (list[i].isDirectory()) {
-					directoryProcess(list[i]);
+			for (File f : list) {
+				if (f.isDirectory()) {
+					this.directoryProcess(f);
 				} else {
-					fileProcess(list[i]);
+					this.fileProcess(f);
 				}
 			}
 		}

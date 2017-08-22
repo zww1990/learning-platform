@@ -1,4 +1,4 @@
-package net.example.sql;
+package net.other.sql;
 
 import java.util.HashMap;
 import java.util.Map;

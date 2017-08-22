@@ -1,4 +1,4 @@
-package net.example.sql;
+package net.other.sql;
 
 import static java.util.regex.Pattern.compile;
 

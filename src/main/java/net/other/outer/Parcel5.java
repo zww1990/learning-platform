@@ -1,4 +1,4 @@
-package net.example.outer;
+package net.other.outer;
 
 public class Parcel5 {
 	public Destionation destionation(String str) {
