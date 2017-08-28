@@ -1,0 +1,34 @@
+{
+	"id": "1",
+	"nice_name": "2017 CI 7",
+	"win": {
+		"file_id": "966",
+		"label": "Bundled Installer",
+		"os": "win",
+		"size": "1.57gb",
+		"md5": "437aed078d26e1ececc9076a4a8f211f",
+		"filename": "myeclipse-2017-ci-7-offline-installer-windows.exe",
+		"nice_os": "Windows",
+		"url": "https:\/\/www.genuitec.com\/products\/myeclipse\/download\/get\/?966"
+	},
+	"mac": {
+		"file_id": "967",
+		"label": "Bundled Installer",
+		"os": "mac",
+		"size": "1.37gb",
+		"md5": "5604d29ab95f813ae194462e2e6ff572",
+		"filename": "myeclipse-2017-ci-7-offline-installer-macosx.dmg",
+		"nice_os": "Mac",
+		"url": "https:\/\/www.genuitec.com\/products\/myeclipse\/download\/get\/?967"
+	},
+	"lin": {
+		"file_id": "969",
+		"label": "Bundled Installer",
+		"os": "lin",
+		"size": "1.55gb",
+		"md5": "5fc46452c2c9f18f164283647f3718f5",
+		"filename": "myeclipse-2017-ci-7-offline-installer-linux.run",
+		"nice_os": "Linux",
+		"url": "https:\/\/www.genuitec.com\/products\/myeclipse\/download\/get\/?969"
+	}
+}
