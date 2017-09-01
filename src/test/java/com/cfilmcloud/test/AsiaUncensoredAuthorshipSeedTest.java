@@ -49,15 +49,16 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String childCssQuery = "div#wrapper div form div.mainbox.viewthread table tbody tr td.postcontent div.postmessage.defaultpost div.box.postattachlist dl.t_attachlist dt a[href^=attachment]";
 		Elements childElements = null;
 		String childHref = null;
-		for (int page = 1, length = 74; page <= length; page++) {
+		for (int page = 74, length = 74; page <= length; page++) {
 			try {
-				Element body = Jsoup.connect(forumdisplay_url).timeout(connectionTimeout)
-						.data("fid", "143", "filter", "type", "typeid", "76", "page", Integer.toString(page))
+				Element body = Jsoup.connect(forumdisplay_url)
+						.timeout(connectionTimeout).data("fid", "143", "filter", "type", "typeid", "76", "orderby",
+								"dateline", "ascdesc", "ASC", "page", Integer.toString(page))
 						.cookies(cookies).headers(headers).get().body();
 				Elements elements = body.select(cssQuery);
 				for (Element element : elements) {
 					href = element.attr("href");
-					System.out.println(element.text());
+//					System.out.println(element.text());
 					try {
 						body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers)
 								.get().body();
