@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wiwj.cbs.erm.mapper.BasBusinessMapper">
+  <resultMap id="BaseResultMap" type="com.wiwj.cbs.erm.po.BasBusiness">
+    <id column="BUSI_ID" jdbcType="DECIMAL" property="busiId" />
+    <result column="BUSI_NAME" jdbcType="VARCHAR" property="busiName" />
+    <result column="BUSI_LOCATION" jdbcType="VARCHAR" property="busiLocation" />
+    <result column="BUSI_STATUS" jdbcType="VARCHAR" property="busiStatus" />
+    <result column="AREA_ID" jdbcType="DECIMAL" property="areaId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="VERSION" jdbcType="DECIMAL" property="version" />
+    <result column="COMP_ID" jdbcType="DECIMAL" property="compId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BUSI_ID, BUSI_NAME, BUSI_LOCATION, BUSI_STATUS, AREA_ID, CREATE_BY, CREATE_TIME, 
+    UPDATE_BY, UPDATE_TIME, VERSION, COMP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BAS_BUSINESS
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from BAS_BUSINESS
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    <selectKey keyProperty="busiId" order="BEFORE" resultType="java.lang.Long">
+      select BAS_BUSI_SEQ.nextval from dual
+    </selectKey>
+    insert into BAS_BUSINESS (BUSI_ID, BUSI_NAME, BUSI_LOCATION, 
+      BUSI_STATUS, AREA_ID, CREATE_BY, 
+      CREATE_TIME, UPDATE_BY, UPDATE_TIME, 
+      VERSION, COMP_ID)
+    values (#{busiId,jdbcType=DECIMAL}, #{busiName,jdbcType=VARCHAR}, #{busiLocation,jdbcType=VARCHAR}, 
+      #{busiStatus,jdbcType=VARCHAR}, #{areaId,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=DECIMAL}, #{compId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    <selectKey keyProperty="busiId" order="BEFORE" resultType="java.lang.Long">
+      select BAS_BUSI_SEQ.nextval from dual
+    </selectKey>
+    insert into BAS_BUSINESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      BUSI_ID,
+      <if test="busiName != null">
+        BUSI_NAME,
+      </if>
+      <if test="busiLocation != null">
+        BUSI_LOCATION,
+      </if>
+      <if test="busiStatus != null">
+        BUSI_STATUS,
+      </if>
+      <if test="areaId != null">
+        AREA_ID,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="compId != null">
+        COMP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{busiId,jdbcType=DECIMAL},
+      <if test="busiName != null">
+        #{busiName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiLocation != null">
+        #{busiLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="busiStatus != null">
+        #{busiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="compId != null">
+        #{compId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    update BAS_BUSINESS
+    <set>
+      <if test="busiName != null">
+        BUSI_NAME = #{busiName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiLocation != null">
+        BUSI_LOCATION = #{busiLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="busiStatus != null">
+        BUSI_STATUS = #{busiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        AREA_ID = #{areaId,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="compId != null">
+        COMP_ID = #{compId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    update BAS_BUSINESS
+    set BUSI_NAME = #{busiName,jdbcType=VARCHAR},
+      BUSI_LOCATION = #{busiLocation,jdbcType=VARCHAR},
+      BUSI_STATUS = #{busiStatus,jdbcType=VARCHAR},
+      AREA_ID = #{areaId,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=DECIMAL},
+      COMP_ID = #{compId,jdbcType=DECIMAL}
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </update>
+  <resultMap id="BaseResultMap" type="com.wiwj.cbs.erm.po.BasBusiness">
+    <id column="BUSI_ID" jdbcType="DECIMAL" property="busiId" />
+    <result column="BUSI_NAME" jdbcType="VARCHAR" property="busiName" />
+    <result column="BUSI_LOCATION" jdbcType="VARCHAR" property="busiLocation" />
+    <result column="BUSI_STATUS" jdbcType="VARCHAR" property="busiStatus" />
+    <result column="AREA_ID" jdbcType="DECIMAL" property="areaId" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="VERSION" jdbcType="DECIMAL" property="version" />
+    <result column="COMP_ID" jdbcType="DECIMAL" property="compId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BUSI_ID, BUSI_NAME, BUSI_LOCATION, BUSI_STATUS, AREA_ID, CREATE_BY, CREATE_TIME, 
+    UPDATE_BY, UPDATE_TIME, VERSION, COMP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BAS_BUSINESS
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from BAS_BUSINESS
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    <selectKey keyProperty="busiId" order="BEFORE" resultType="java.lang.Long">
+      select BAS_BUSI_SEQ.nextval from dual
+    </selectKey>
+    insert into BAS_BUSINESS (BUSI_ID, BUSI_NAME, BUSI_LOCATION, 
+      BUSI_STATUS, AREA_ID, CREATE_BY, 
+      CREATE_TIME, UPDATE_BY, UPDATE_TIME, 
+      VERSION, COMP_ID)
+    values (#{busiId,jdbcType=DECIMAL}, #{busiName,jdbcType=VARCHAR}, #{busiLocation,jdbcType=VARCHAR}, 
+      #{busiStatus,jdbcType=VARCHAR}, #{areaId,jdbcType=DECIMAL}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=DECIMAL}, #{compId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    <selectKey keyProperty="busiId" order="BEFORE" resultType="java.lang.Long">
+      select BAS_BUSI_SEQ.nextval from dual
+    </selectKey>
+    insert into BAS_BUSINESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      BUSI_ID,
+      <if test="busiName != null">
+        BUSI_NAME,
+      </if>
+      <if test="busiLocation != null">
+        BUSI_LOCATION,
+      </if>
+      <if test="busiStatus != null">
+        BUSI_STATUS,
+      </if>
+      <if test="areaId != null">
+        AREA_ID,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+      <if test="compId != null">
+        COMP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{busiId,jdbcType=DECIMAL},
+      <if test="busiName != null">
+        #{busiName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiLocation != null">
+        #{busiLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="busiStatus != null">
+        #{busiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="compId != null">
+        #{compId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    update BAS_BUSINESS
+    <set>
+      <if test="busiName != null">
+        BUSI_NAME = #{busiName,jdbcType=VARCHAR},
+      </if>
+      <if test="busiLocation != null">
+        BUSI_LOCATION = #{busiLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="busiStatus != null">
+        BUSI_STATUS = #{busiStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        AREA_ID = #{areaId,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=DECIMAL},
+      </if>
+      <if test="compId != null">
+        COMP_ID = #{compId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wiwj.cbs.erm.po.BasBusiness">
+    update BAS_BUSINESS
+    set BUSI_NAME = #{busiName,jdbcType=VARCHAR},
+      BUSI_LOCATION = #{busiLocation,jdbcType=VARCHAR},
+      BUSI_STATUS = #{busiStatus,jdbcType=VARCHAR},
+      AREA_ID = #{areaId,jdbcType=DECIMAL},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=DECIMAL},
+      COMP_ID = #{compId,jdbcType=DECIMAL}
+    where BUSI_ID = #{busiId,jdbcType=DECIMAL}
+  </update>
+</mapper>
