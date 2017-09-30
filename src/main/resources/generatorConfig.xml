@@ -18,8 +18,8 @@
 		</sqlMapGenerator>
 		<javaClientGenerator targetPackage="${javaClientGenerator.targetPackage}" targetProject="${javaClientGenerator.targetProject}" type="XMLMAPPER">
 		</javaClientGenerator>
-		<table tableName="BAS_BUSINESS" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="BUSI_ID" sqlStatement="select BAS_BUSI_SEQ.nextval from dual"/>
+		<table tableName="TEMP" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<generatedKey column="USER_ID" sqlStatement="select E_TEMP_SEQ.nextval from dual"/>
 		</table>
 	</context>
 </generatorConfiguration>
