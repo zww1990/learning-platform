@@ -3,6 +3,7 @@ package com.example.dubbo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
@@ -13,31 +14,31 @@ import com.alibaba.dubbo.config.spring.AnnotationBean;
 @ComponentScan(basePackages = "com.example.dubbo")
 public class AppConfig {
 	@Bean
-	public static AnnotationBean annotationBean() {
+	public static AnnotationBean annotationBean(Environment env) {
 		AnnotationBean bean = new AnnotationBean();
-		bean.setPackage("com.example.dubbo.service");
+		bean.setPackage(env.getProperty("dubbo.annotation.package"));
 		return bean;
 	}
 
 	@Bean
-	public ApplicationConfig applicationConfig() {
+	public ApplicationConfig applicationConfig(AppProperties props) {
 		ApplicationConfig config = new ApplicationConfig();
-		config.setName("dubbo-provider");
+		config.setName(props.getAppName());
 		return config;
 	}
 
 	@Bean
-	public RegistryConfig registryConfig() {
+	public RegistryConfig registryConfig(AppProperties props) {
 		RegistryConfig config = new RegistryConfig();
-		config.setAddress("zookeeper://127.0.0.1:2181");
+		config.setAddress(props.getRegistryAddress());
 		return config;
 	}
 
 	@Bean
-	public ProtocolConfig protocolConfig() {
+	public ProtocolConfig protocolConfig(AppProperties props) {
 		ProtocolConfig config = new ProtocolConfig();
-		config.setName("dubbo");
-		config.setPort(20880);
+		config.setName(props.getProtocolName());
+		config.setPort(props.getProtocolPort());
 		return config;
 	}
 }
