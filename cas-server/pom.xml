@@ -1608,8 +1608,8 @@
         <maven-jetty-plugin.version>9.3.0.v20150612</maven-jetty-plugin.version>
 
         <!-- Project configuration -->
-        <project.build.sourceVersion>1.7</project.build.sourceVersion>
-        <project.build.targetVersion>1.7</project.build.targetVersion>
+        <project.build.sourceVersion>1.8</project.build.sourceVersion>
+        <project.build.targetVersion>1.8</project.build.targetVersion>
         <maven.compiler.aspectj.skip>false</maven.compiler.aspectj.skip>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssa</maven.build.timestamp.format>
         <cs.dir>${project.basedir}</cs.dir>
