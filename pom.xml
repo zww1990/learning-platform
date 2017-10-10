@@ -25,9 +25,11 @@
 		<junit.version>4.12</junit.version>
 		<jackson.version>2.8.8</jackson.version>
 		<javaee.version>8.0</javaee.version>
+		<log4j2.version>2.9.1</log4j2.version>
 	</properties>
 	
 	<dependencies>
+		<!-- mybatis -->
 		<dependency>
 		    <groupId>org.mybatis.generator</groupId>
 		    <artifactId>mybatis-generator-core</artifactId>
@@ -61,6 +63,7 @@
 		    <version>3.3.7</version>
 		</dependency>
 		
+		<!-- spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -78,12 +81,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
 		
+		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -91,6 +96,7 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- javaee -->
 		<dependency>
 		    <groupId>javax</groupId>
 		    <artifactId>javaee-api</artifactId>
@@ -102,6 +108,23 @@
 		    <artifactId>javaee-web-api</artifactId>
 		    <version>${javaee.version}</version>
 		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- log4j -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j-impl</artifactId>
+		    <version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-jcl</artifactId>
+		    <version>${log4j2.version}</version>
 		</dependency>
 	</dependencies>
 
