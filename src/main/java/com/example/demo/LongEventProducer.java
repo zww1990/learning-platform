@@ -1,13 +1,13 @@
 package com.example.demo;
 
 import java.nio.ByteBuffer;
-
 import com.lmax.disruptor.RingBuffer;
 
 /**
  * @author ZhangWeiWei
  * @date 2017年10月10日,上午11:23:45
- * @description 我们将需要这些事件的源，为了一个例子，我将假定数据来自某种I / O设备，例如 网络或文件以ByteBuffer的形式。
+ * @description 我们将需要这些事件的源，为了一个例子，<br>
+ * 				我将假定数据来自某种I / O设备，例如 网络或文件以ByteBuffer的形式。
  */
 public class LongEventProducer {
 	private final RingBuffer<LongEvent> ringBuffer;
