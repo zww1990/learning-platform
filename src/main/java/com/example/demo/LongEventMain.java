@@ -18,24 +18,17 @@ public class LongEventMain {
 		ThreadFactory threadFactory = Executors.defaultThreadFactory();
 		// 工厂为事件
 		LongEventFactory factory = new LongEventFactory();
-
 		// 指定环形缓冲区的大小，必须是2的幂。
 		int bufferSize = 1024;
-
 		// 构建Disruptor
 		Disruptor<LongEvent> disruptor = new Disruptor<>(factory, bufferSize, threadFactory);
-
 		// 连接处理程序
 		disruptor.handleEventsWith(new LongEventHandler());
-
 		// 启动Disruptor，启动运行的所有线程
 		disruptor.start();
-
 		// 从Disruptor获取环形缓冲区，用于发布。
 		RingBuffer<LongEvent> ringBuffer = disruptor.getRingBuffer();
-
 		LongEventProducerWithTranslator producer = new LongEventProducerWithTranslator(ringBuffer);
-
 		ByteBuffer bb = ByteBuffer.allocate(8);
 		for (long l = 0; true; l++) {
 			bb.putLong(0, l);

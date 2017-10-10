@@ -16,5 +16,4 @@ public class LongEvent {
 	public void setValue(long value) {
 		this.value = value;
 	}
-
 }
