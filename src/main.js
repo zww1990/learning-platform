@@ -5,6 +5,15 @@ import App from './App'
 import router from './router'
 
 Vue.config.productionTip = false
+Vue.component('todo-item',{
+  template:`
+            <li>
+              {{title}}
+              <button @click="$emit('remove')">X</button>
+            </li>
+  `,
+  props:['title']
+})
 
 /* eslint-disable no-new */
 new Vue({
