@@ -10,7 +10,7 @@
     <button @click="reverseMessage">逆转消息</button>
     <input v-model="msg">
     <div>
-      <input v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="请输入内容">
+      <input v-model.trim="newTodoText" @keyup.enter="addNewTodo" placeholder="请输入内容" v-focus>
       <ol>
         <li 
         is="todo-item" 
@@ -27,6 +27,7 @@
     <ul>
       <li v-for="(value,key,index) in user" :key="key">{{index}}.{{key}}:{{value}}</li>
     </ul>
+    <button @click.once="doThis">点击事件将只会触发一次</button>
   </div>
 </template>
 
@@ -73,6 +74,9 @@ export default {
         title:this.newTodoText
       })
       this.newTodoText=''
+    },
+    doThis(){
+      alert('点击事件将只会触发一次')
     }
   },
   computed:{

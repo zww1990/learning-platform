@@ -14,6 +14,9 @@ Vue.component('todo-item',{
   `,
   props:['title']
 })
+Vue.directive('focus',{
+  inserted:(el)=>el.focus()
+})
 
 /* eslint-disable no-new */
 new Vue({
