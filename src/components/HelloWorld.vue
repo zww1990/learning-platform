@@ -28,6 +28,7 @@
       <li v-for="(value,key,index) in user" :key="key">{{index}}.{{key}}:{{value}}</li>
     </ul>
     <button @click.once="doThis">点击事件将只会触发一次</button>
+    <button @click="$router.push('/user/foo')">编程式的导航</button>
   </div>
 </template>
 
