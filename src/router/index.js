@@ -13,10 +13,11 @@ const Bar={
 const User={
   template:`
             <div class="user">
-              <h2>我是:{{$route.params.id}}</h2>
+              <h2>我是:{{id}}</h2>
               <router-view></router-view>
             </div>
-  `
+  `,
+  props:['id']
 }
 const UserProfile={
   template:`<h1>UserProfile</h1>`
@@ -29,6 +30,7 @@ const UserHome={
 }
 
 export default new Router({
+  mode:'history',
   routes: [
     {
       path: '/',
@@ -52,8 +54,16 @@ export default new Router({
       component:Bar
     },
     {
+      path:'/abc',
+      beforeEnter:(to,from,next)=>{
+        alert('禁止访问')
+        next(false)
+      }
+    },
+    {
       path:'/user/:id',
       component:User,
+      props:true,
       children:[
         {
           path:'',

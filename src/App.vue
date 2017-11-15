@@ -3,6 +3,7 @@
     <p>
       <router-link to="/foo">跳转foo</router-link>
       <router-link to="/bar">跳转bar</router-link>
+      <router-link to="/abc">跳转abc</router-link>
     </p>
     <p>
       动态路由匹配
