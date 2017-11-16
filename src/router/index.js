@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// import HelloWorld from '@/components/HelloWorld'
+// import Post from '@/components/Post'
+// import Post2 from '@/components/Post2'
 
 Vue.use(Router)
 
@@ -28,6 +30,9 @@ const UserPosts={
 const UserHome={
   template:`<h1>UserHome</h1>`
 }
+const LoginPage={
+  template:`<h1>对不起，您没有登录，无法访问该页面！</h1>`
+}
 
 export default new Router({
   mode:'history',
@@ -36,7 +41,7 @@ export default new Router({
       path: '/',
       name: 'Hello',
       components: {
-        default:HelloWorld,
+        default:()=>import('@/components/HelloWorld'),
         a:Foo,
         b:Bar
       }
@@ -64,6 +69,9 @@ export default new Router({
       path:'/user/:id',
       component:User,
       props:true,
+      meta:{
+        requiresAuth:true
+      },
       children:[
         {
           path:'',
@@ -78,6 +86,18 @@ export default new Router({
           component:UserPosts
         }
       ]
+    },
+    {
+      path:'/login',
+      component:LoginPage
+    },
+    {
+      path:'/post',
+      component:()=>import('@/components/Post')
+    },
+    {
+      path:'/post2',
+      component:()=>import('@/components/Post2')
     }
   ]
 })

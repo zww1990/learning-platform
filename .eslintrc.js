@@ -28,10 +28,14 @@ module.exports = {
     'keyword-spacing': 0,
     'comma-spacing': 0,
     'block-spacing': 0,
+    'spaced-comment': 0,
     'semi': 0,
+    'indent': 0,
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'no-constant-condition': 0,
+    'no-trailing-spaces': 0
   }
 }

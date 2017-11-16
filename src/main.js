@@ -18,6 +18,29 @@ Vue.directive('focus',{
   inserted:(el)=>el.focus()
 })
 
+const auth={
+  loggedIn(){
+    return false
+  }
+}
+
+router.beforeEach((to,from,next)=>{
+  if (to.matched.some(record=>record.meta.requiresAuth)) {
+    if (!auth.loggedIn()) {//暂时先模拟未登录状态
+      next({
+        path:'/login',
+        query:{
+          redirect:to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
