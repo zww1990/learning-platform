@@ -39,7 +39,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
+      name: 'HelloWorld',
       components: {
         default:()=>import('@/components/HelloWorld'),
         a:Foo,
