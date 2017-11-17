@@ -6,6 +6,7 @@
       <router-link to="/abc">跳转abc</router-link>
       <router-link to="/post">跳转post</router-link>
       <router-link to="/post2">跳转post2</router-link>
+      <router-link to="/counter">跳转counter</router-link>
     </p>
     <p>
       动态路由匹配

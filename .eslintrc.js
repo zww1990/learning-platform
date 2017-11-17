@@ -31,11 +31,13 @@ module.exports = {
     'spaced-comment': 0,
     'semi': 0,
     'indent': 0,
+    'eol-last': 0,
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     'no-constant-condition': 0,
-    'no-trailing-spaces': 0
+    'no-trailing-spaces': 0,
+    'no-multiple-empty-lines': 0
   }
 }

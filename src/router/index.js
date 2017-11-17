@@ -1,38 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-// import Post from '@/components/Post'
-// import Post2 from '@/components/Post2'
 
 Vue.use(Router)
-
-const Foo={
-  template:'<div>我是foo</div>'
-}
-const Bar={
-  template:'<div>我是bar</div>'
-}
-const User={
-  template:`
-            <div class="user">
-              <h2>我是:{{id}}</h2>
-              <router-view></router-view>
-            </div>
-  `,
-  props:['id']
-}
-const UserProfile={
-  template:`<h1>UserProfile</h1>`
-}
-const UserPosts={
-  template:`<h1>UserPosts</h1>`
-}
-const UserHome={
-  template:`<h1>UserHome</h1>`
-}
-const LoginPage={
-  template:`<h1>对不起，您没有登录，无法访问该页面！</h1>`
-}
 
 export default new Router({
   mode:'history',
@@ -42,8 +11,8 @@ export default new Router({
       name: 'HelloWorld',
       components: {
         default:()=>import('@/components/HelloWorld'),
-        a:Foo,
-        b:Bar
+        a:()=>import('@/components/FooComponent'),
+        b:()=>import('@/components/BarComponent')
       }
     },
     {
@@ -52,11 +21,11 @@ export default new Router({
     },
     {
       path:'/foo',
-      component:Foo
+      component:()=>import('@/components/FooComponent')
     },
     {
       path:'/bar',
-      component:Bar
+      component:()=>import('@/components/BarComponent')
     },
     {
       path:'/abc',
@@ -67,7 +36,7 @@ export default new Router({
     },
     {
       path:'/user/:id',
-      component:User,
+      component:()=>import('@/components/User'),
       props:true,
       meta:{
         requiresAuth:true
@@ -75,21 +44,21 @@ export default new Router({
       children:[
         {
           path:'',
-          component:UserHome
+          component:()=>import('@/components/UserHome')
         },
         {
           path:'profile',
-          component:UserProfile
+          component:()=>import('@/components/UserProfile')
         },
         {
           path:'posts',
-          component:UserPosts
+          component:()=>import('@/components/UserPosts')
         }
       ]
     },
     {
       path:'/login',
-      component:LoginPage
+      component:()=>import('@/components/LoginPage')
     },
     {
       path:'/post',
@@ -98,6 +67,10 @@ export default new Router({
     {
       path:'/post2',
       component:()=>import('@/components/Post2')
+    },
+    {
+      path:'/counter',
+      component:()=>import('@/components/Counter')
     }
   ]
 })

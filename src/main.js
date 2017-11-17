@@ -3,17 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
-Vue.component('todo-item',{
-  template:`
-            <li>
-              {{title}}
-              <button @click="$emit('remove')">X</button>
-            </li>
-  `,
-  props:['title']
-})
+Vue.component('todo-item',()=>import('./components/TodoItem'))
 Vue.directive('focus',{
   inserted:(el)=>el.focus()
 })
@@ -45,6 +38,7 @@ router.beforeEach((to,from,next)=>{
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
