@@ -19,9 +19,19 @@ const store=new Vuex.Store({
             }
         ]
     },
-    mutations:{
-        increment(state){
+    mutations:{//mutation 必须是同步函数。
+        increment(state,payload){
             state.count++
+        }
+    },
+    actions:{//action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
+        increment({commit}){
+            commit('increment')
+        },
+        incrementAsync({commit}){
+            setTimeout(()=>{
+                commit('increment')
+            },1000)
         }
     },
     getters:{

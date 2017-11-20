@@ -2,16 +2,17 @@
   <div class="counter">
       <h1>store.state.count={{count}}</h1>
       <h1>store.getters.doneTodosCount={{doneTodosCount}}</h1>
-      <button @click="clickMe">点我</button>
+      <button @click="clickMe">点我(同步方法)</button>
+      <button @click="clickMe2">点我(异步方法)</button>
   </div>
 </template>
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapState} from 'vuex'
 export default {
   computed:{
-      count(){
-          return this.$store.state.count
-      },
+      ...mapState([
+          'count'
+      ]),
       ...mapGetters([
           'doneTodos',
           'doneTodosCount'
@@ -19,7 +20,14 @@ export default {
   },
   methods:{
       clickMe(){
-          this.$store.commit('increment')
+          this.$store.commit({
+              type:'increment'
+          })
+      },
+      clickMe2(){
+          this.$store.dispatch({
+              type:'incrementAsync'
+          })
       }
   }
 }
