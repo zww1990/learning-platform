@@ -25,14 +25,18 @@ export default {
   },
   methods:{
     expandChange(row,expandedRows){
-      console.log(row.id)
+        if (expandedRows.length===0) {//如果当前没有行展开
+            return
+        }
+        if(row.id===expandedRows[expandedRows.length-1].id){//如果当前行被展开
+            axios.get('/static/data/tableData.json').then(res=>{
+                this.tableData=res.data
+            }).catch(e=>{
+                console.log(e.response.status,e.response.statusText)
+            })
+        }
     },
     loadTableData(){
-        axios.get('/static/data/tableData.json').then(res=>{
-            this.tableData=res.data
-        }).catch(e=>{
-            console.log(e.response.status,e.response.statusText)
-        })
         axios.get('/static/data/tableData5.json').then(res=>{
             this.tableData5=res.data
         }).catch(e=>{
