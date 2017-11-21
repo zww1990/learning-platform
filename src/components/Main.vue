@@ -1,12 +1,12 @@
 <template>
 <el-container style="height: 500px; border: 1px solid #eee">
   <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu>
-      <el-submenu v-for="i in 3" :key="i" :index="`${i}`">
-        <template slot="title"><i class="el-icon-menu"></i>导航{{i}}</template>
-        <el-submenu v-for="j in 3" :key="j" :index="`${i}-${j}`">
-          <template slot="title">选项{{i}}-{{j}}</template>
-          <el-menu-item v-for="k in 3" :key="k" :index="`${i}-${j}-${k}`">选项{{i}}-{{j}}-{{k}}</el-menu-item>
+    <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router>
+      <el-submenu v-for="item in menuData" :key="item.id" :index="`${item.id}`">
+        <template slot="title"><i class="el-icon-menu"></i>{{item.name}}</template>
+        <el-submenu v-for="subitem in item.submenu" :key="subitem.id" :index="`${subitem.id}`">
+          <template slot="title">{{subitem.name}}</template>
+          <el-menu-item v-for="menu in subitem.submenu" :key="menu.id" :index="menu.url">{{menu.name}}</el-menu-item>
         </el-submenu>
       </el-submenu>
     </el-menu>
@@ -26,83 +26,31 @@
     </el-header>
     
     <el-main>
-      <el-table :data="tableData5" style="width: 100%" @expand-change="expandChange">
-        <el-table-column type="expand">
-            <el-table :data="tableData" style="width: 100%">
-                <el-table-column prop="date" label="日期" width="180"></el-table-column>
-                <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-                <el-table-column prop="address" label="地址"></el-table-column>
-            </el-table>
-        </el-table-column>
-        <el-table-column label="商品 ID" prop="id"></el-table-column>
-        <el-table-column label="商品名称" prop="name"></el-table-column>
-        <el-table-column label="描述" prop="desc"></el-table-column>
-      </el-table>
+      <router-view></router-view>
     </el-main>
   </el-container>
 </el-container>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
-      return {
-        tableData5: [{
-          id: '12987122',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987123',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987125',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987126',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }],
-        tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }]
-      }
-    },
-    methods:{
-        expandChange(row,expandedRows){
-            console.log(row.id)
-        }
+    return {
+      menuData:null
     }
+  },
+  methods:{
+    loadMenuData(){
+      axios.get('/static/data/menuData.json').then(res=>{
+        this.menuData=res.data
+      }).catch(e=>{
+        console.log(e.response.status,e.response.statusText)
+      })
+    }
+  },
+  beforeRouteEnter(to,from,next){
+    next(vm=>vm.loadMenuData())
+  }
 }
 </script>
 <style>
@@ -113,17 +61,5 @@ export default {
   }
   .el-aside {
     color: #333;
-  }
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    width: 90px;
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
   }
 </style>

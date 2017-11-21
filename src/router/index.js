@@ -8,7 +8,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: ()=>import('@/components/Main')
+      component: ()=>import('@/components/Main'),
+      children:[
+        {
+          path:'/table',
+          component:()=>import('@/components/TableComponent')
+        }
+      ]
     }
   ]
 })
