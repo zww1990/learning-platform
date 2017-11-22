@@ -3,10 +3,10 @@
 </template>
 <script>
 export default {
-  data(){
-      return{
-          msg:'我是bar'
-      }
+  data() {
+    return {
+      msg: "我是bar"
+    };
   }
-}
+};
 </script>

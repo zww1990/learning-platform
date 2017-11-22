@@ -14,7 +14,7 @@
       <router-link to="/user/bar">跳转bar</router-link>
     </p>
     <transition name="fade">
-      <router-view class="view one"/>
+      <router-view class="view one" />
     </transition>
     <transition name="bounce">
       <router-view class="view two" name="a"></router-view>
@@ -27,22 +27,24 @@
 
 <script>
 export default {
-  name: 'app'
-}
+  name: "app"
+};
 </script>
 
 <style>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to {
-  opacity: 0
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 .bounce-enter-active {
-  animation: bounce-in .5s;
+  animation: bounce-in 0.5s;
 }
 .bounce-leave-active {
-  animation: bounce-in .5s reverse;
+  animation: bounce-in 0.5s reverse;
 }
 @keyframes bounce-in {
   0% {
@@ -56,12 +58,13 @@ export default {
   }
 }
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter, .slide-fade-leave-to {
+.slide-fade-enter,
+.slide-fade-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }

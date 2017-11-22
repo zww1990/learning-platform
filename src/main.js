@@ -6,24 +6,24 @@ import router from './router'
 import store from './store'
 
 Vue.config.productionTip = false
-Vue.component('todo-item',()=>import('./components/TodoItem'))
-Vue.directive('focus',{
-  inserted:(el)=>el.focus()
+Vue.component('todo-item', () => import('./components/TodoItem'))
+Vue.directive('focus', {
+  inserted: (el) => el.focus()
 })
 
-const auth={
-  loggedIn(){
+const auth = {
+  loggedIn() {
     return false
   }
 }
 
-router.beforeEach((to,from,next)=>{
-  if (to.matched.some(record=>record.meta.requiresAuth)) {
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!auth.loggedIn()) {//暂时先模拟未登录状态
       next({
-        path:'/login',
-        query:{
-          redirect:to.fullPath
+        path: '/login',
+        query: {
+          redirect: to.fullPath
         }
       })
     } else {
