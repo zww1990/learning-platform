@@ -4,15 +4,15 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',
+  mode: 'history',
   routes: [
     {
       path: '/',
-      component: ()=>import('@/components/Main'),
-      children:[
+      component: () => import('@/components/Main'),
+      children: [
         {
-          path:'/table',
-          component:()=>import('@/components/TableComponent')
+          path: '/table',
+          component: () => import('@/components/TableComponent')
         }
       ]
     }

@@ -1,14 +1,14 @@
 <template>
   <div>
-      <h1>{{msg}}</h1>
+    <h1>{{msg}}</h1>
   </div>
 </template>
 <script>
 export default {
-  data(){
-      return{
-          msg:'UserProfile'
-      }
+  data() {
+    return {
+      msg: "UserProfile"
+    };
   }
-}
+};
 </script>

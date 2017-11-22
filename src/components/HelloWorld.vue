@@ -12,12 +12,7 @@
     <div>
       <input v-model.trim="newTodoText" @keyup.enter="addNewTodo" placeholder="请输入内容" v-focus>
       <ol>
-        <li 
-        is="todo-item" 
-        v-for="(item,index) in groceryList" 
-        :key="item.id" 
-        :title="item.title" 
-        @remove="groceryList.splice(index,1)"></li>
+        <li is="todo-item" v-for="(item,index) in groceryList" :key="item.id" :title="item.title" @remove="groceryList.splice(index,1)"></li>
       </ol>
     </div>
     <span v-once>这个将不会改变:{{msg}}</span>
@@ -34,77 +29,84 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "HelloWorld",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      message:'页面加载于 '+new Date().toLocaleString(),
-      seen:false,
-      newTodoText:'',
-      todos:[
-        { id:1,title: '学习 JavaScript' },
-        { id:2,title: '学习 Vue' },
-        { id:3,title: '整个牛项目' }
+      msg: "Welcome to Your Vue.js App",
+      message: "页面加载于 " + new Date().toLocaleString(),
+      seen: false,
+      newTodoText: "",
+      todos: [
+        { id: 1, title: "学习 JavaScript" },
+        { id: 2, title: "学习 Vue" },
+        { id: 3, title: "整个牛项目" }
       ],
-      nextTodoId:4,
-      groceryList:[
-        { id: 1, title: '蔬菜' },
-        { id: 2, title: '奶酪' },
-        { id: 3, title: '随便其他什么人吃的东西' }
+      nextTodoId: 4,
+      groceryList: [
+        { id: 1, title: "蔬菜" },
+        { id: 2, title: "奶酪" },
+        { id: 3, title: "随便其他什么人吃的东西" }
       ],
-      rawHtml:'<button>我是一个按钮</button>',
-      isShow:false,
-      user:{
-        firstName:'zhang',
-        lastName:'san',
-        age:23
+      rawHtml: "<button>我是一个按钮</button>",
+      isShow: false,
+      user: {
+        firstName: "zhang",
+        lastName: "san",
+        age: 23
       }
-    }
+    };
   },
-  methods:{
-    reverseMessage(event){
-      console.log(JSON.stringify(event))
-      this.msg=this.msg.split('').reverse().join('')
+  methods: {
+    reverseMessage(event) {
+      console.log(JSON.stringify(event));
+      this.msg = this.msg
+        .split("")
+        .reverse()
+        .join("");
     },
-    addNewTodo(){
+    addNewTodo() {
       if (!this.newTodoText) {
-        return
+        return;
       }
       this.groceryList.push({
-        id:this.nextTodoId++,
-        title:this.newTodoText
-      })
-      this.newTodoText=''
+        id: this.nextTodoId++,
+        title: this.newTodoText
+      });
+      this.newTodoText = "";
     },
-    doThis(){
-      alert('点击事件将只会触发一次')
+    doThis() {
+      alert("点击事件将只会触发一次");
     }
   },
-  computed:{
-    reverse:{
-      get(){
-        return this.msg.split('').reverse().join('')
+  computed: {
+    reverse: {
+      get() {
+        return this.msg
+          .split("")
+          .reverse()
+          .join("");
       },
-      set(value){
-        this.msg=value
+      set(value) {
+        this.msg = value;
       }
     }
   },
-  created(){
-    console.log('created')
+  created() {
+    console.log("created");
   },
-  beforeCreate(){
-    console.log('beforeCreate')
+  beforeCreate() {
+    console.log("beforeCreate");
   },
-  destroyed(){
-    console.log('destroyed')
+  destroyed() {
+    console.log("destroyed");
   },
-  beforeDestroy(){
-    console.log('beforeDestroy')
+  beforeDestroy() {
+    console.log("beforeDestroy");
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 </style>
