@@ -25,14 +25,14 @@ export default {
   },
   methods: {
     expandChange(row, expandedRows) {
+      //如果当前没有行展开
       if (expandedRows.length === 0) {
-        //如果当前没有行展开
         return;
       }
+      //如果当前行被展开
       if (row.id === expandedRows[expandedRows.length - 1].id) {
-        //如果当前行被展开
         axios
-          .get("/static/data/tableData.json")
+          .get(`/static/data/tableData${row.id}.json`)
           .then(res => {
             this.tableData = res.data;
           })
