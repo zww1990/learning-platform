@@ -8,11 +8,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/components/Main'),
+      component: () => import('@/views/main'),
       children: [
         {
           path: '/table',
-          component: () => import('@/components/TableComponent')
+          component: () => import('@/views/table')
         }
       ]
     }

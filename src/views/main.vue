@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 500px; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router>
+      <el-menu background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router unique-opened>
         <el-submenu v-for="item in menuData" :key="item.id" :index="`${item.id}`">
           <template slot="title">
             <i class="el-icon-menu"></i>{{item.name}}</template>
@@ -40,13 +40,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      menuData: null
+      menuData: []
     };
   },
   methods: {
     loadMenuData() {
       axios
-        .get("/static/data/menuData.json")
+        .get("/static/data/menudata.json")
         .then(res => {
           this.menuData = res.data;
         })

@@ -19,8 +19,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      tableData5: null,
-      tableData: null
+      tableData5: [],
+      tableData: []
     };
   },
   methods: {
@@ -32,7 +32,7 @@ export default {
       //如果当前行被展开
       if (row.id === expandedRows[expandedRows.length - 1].id) {
         axios
-          .get(`/static/data/tableData${row.id}.json`)
+          .get(`/static/data/tabledata-${row.id}.json`)
           .then(res => {
             this.tableData = res.data;
           })
@@ -43,7 +43,7 @@ export default {
     },
     loadTableData() {
       axios
-        .get("/static/data/tableData5.json")
+        .get("/static/data/tabledata-5.json")
         .then(res => {
           this.tableData5 = res.data;
         })
