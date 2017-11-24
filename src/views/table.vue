@@ -1,12 +1,8 @@
 <template>
-  <el-table :data="tableData5" style="width: 100%" @expand-change="expandChange">
+  <el-table :data="tableData" style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="date" label="日期" width="180"></el-table-column>
-          <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-          <el-table-column prop="address" label="地址"></el-table-column>
-        </el-table>
+        <my-table :row="props.row"></my-table>
       </template>
     </el-table-column>
     <el-table-column label="商品 ID" prop="id"></el-table-column>
@@ -16,36 +12,22 @@
 </template>
 <script>
 import axios from "axios";
+import myTable from "./my-table";
 export default {
+  components: {
+    myTable
+  },
   data() {
     return {
-      tableData5: [],
       tableData: []
     };
   },
   methods: {
-    expandChange(row, expandedRows) {
-      //如果当前没有行展开
-      if (expandedRows.length === 0) {
-        return;
-      }
-      //如果当前行被展开
-      if (row.id === expandedRows[expandedRows.length - 1].id) {
-        axios
-          .get(`/static/data/tabledata-${row.id}.json`)
-          .then(res => {
-            this.tableData = res.data;
-          })
-          .catch(e => {
-            console.log(e.response.status, e.response.statusText);
-          });
-      }
-    },
     loadTableData() {
       axios
-        .get("/static/data/tabledata-5.json")
+        .get("/static/data/tabledata.json")
         .then(res => {
-          this.tableData5 = res.data;
+          this.tableData = res.data;
         })
         .catch(e => {
           console.log(e.response.status, e.response.statusText);
