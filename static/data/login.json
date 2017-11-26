@@ -1,0 +1,10 @@
+{
+  "code": 200,
+  "msg": "请求成功",
+  "user": {
+    "id": 1,
+    "username": "admin",
+    "avatar": "/static/images/user.png",
+    "name": "我是你爷爷"
+  }
+}

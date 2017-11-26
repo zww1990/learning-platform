@@ -2,7 +2,7 @@
   <el-table :data="tableData" style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
-        <my-table :row="props.row"></my-table>
+        <table1 :row="props.row"></table1>
       </template>
     </el-table-column>
     <el-table-column label="商品 ID" prop="id"></el-table-column>
@@ -12,10 +12,10 @@
 </template>
 <script>
 import axios from "axios";
-import myTable from "./my-table";
+import table1 from "./table1";
 export default {
   components: {
-    myTable
+    table1
   },
   data() {
     return {

@@ -8,7 +8,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "my-table",
+  name: "table1",
   props: {
     row: {
       type: Object,
