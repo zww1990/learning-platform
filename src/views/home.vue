@@ -6,7 +6,7 @@
       </el-col>
       <el-col :span="10">
         <div class="tools" @click.prevent="collapse">
-          <i class="fa fa-align-justify"></i>
+          <i :class="collapsed?'el-icon-arrow-right':'el-icon-arrow-left'"></i>
         </div>
       </el-col>
       <el-col :span="4" class="userinfo">
