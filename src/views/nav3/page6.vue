@@ -1,12 +1,12 @@
-<template>
-  <div>
-    <h1>页面6</h1>
-  </div>
-</template>
 <script>
 export default {
   data() {
-    return {};
+    return {
+      text: "hello world!"
+    };
+  },
+  render(h) {
+    return <div>{this.text}</div>;
   }
 };
 </script>
