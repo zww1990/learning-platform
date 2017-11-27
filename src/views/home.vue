@@ -79,7 +79,7 @@
 export default {
   data() {
     return {
-      sysName: "VUEADMIN",
+      sysName: "我爱我家",
       collapsed: false,
       sysUserName: "",
       sysUserAvatar: "",
