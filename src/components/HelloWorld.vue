@@ -24,12 +24,17 @@
     </ul>
     <button @click.once="doThis">点击事件将只会触发一次</button>
     <button @click="$router.push('/user/foo')">编程式的导航</button>
+    <anchored-heading></anchored-heading>
   </div>
 </template>
 
 <script>
+import AnchoredHeading from "./AnchoredHeading";
 export default {
   name: "HelloWorld",
+  components: {
+    AnchoredHeading
+  },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
