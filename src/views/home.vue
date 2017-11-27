@@ -105,10 +105,10 @@ export default {
     handleclose() {
       //console.log('handleclose');
     },
-    handleselect: function(a, b) {},
+    handleselect(a, b) {},
     //退出登录
-    logout: function() {
-      var _this = this;
+    logout() {
+      let _this = this;
       this.$confirm("确认退出吗?", "提示", {
         //type: 'warning'
       })
@@ -119,7 +119,7 @@ export default {
         .catch(() => {});
     },
     //折叠导航栏
-    collapse: function() {
+    collapse() {
       this.collapsed = !this.collapsed;
     },
     showMenu(i, status) {
@@ -129,7 +129,7 @@ export default {
     }
   },
   mounted() {
-    var user = sessionStorage.getItem("user");
+    let user = sessionStorage.getItem("user");
     if (user) {
       user = JSON.parse(user);
       this.sysUserName = user.name || "";

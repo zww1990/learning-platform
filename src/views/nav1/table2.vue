@@ -151,7 +151,7 @@ export default {
   },
   methods: {
     //性别显示转换
-    formatSex: function(row, column) {
+    formatSex(row, column) {
       return row.sex === 1 ? "男" : row.sex === 0 ? "女" : "未知";
     },
     handleCurrentChange(val) {
@@ -174,7 +174,7 @@ export default {
       });
     },
     //删除
-    handleDel: function(index, row) {
+    handleDel(index, row) {
       this.$confirm("确认删除该记录吗?", "提示", {
         type: "warning"
       })
@@ -195,12 +195,12 @@ export default {
         .catch(() => {});
     },
     //显示编辑界面
-    handleEdit: function(index, row) {
+    handleEdit(index, row) {
       this.editFormVisible = true;
       this.editForm = Object.assign({}, row);
     },
     //显示新增界面
-    handleAdd: function() {
+    handleAdd() {
       this.addFormVisible = true;
       this.addForm = {
         name: "",
@@ -211,7 +211,7 @@ export default {
       };
     },
     //编辑
-    editSubmit: function() {
+    editSubmit() {
       this.$refs.editForm.validate(valid => {
         if (valid) {
           this.$confirm("确认提交吗？", "提示", {}).then(() => {
@@ -238,7 +238,7 @@ export default {
       });
     },
     //新增
-    addSubmit: function() {
+    addSubmit() {
       this.$refs.addForm.validate(valid => {
         if (valid) {
           this.$confirm("确认提交吗？", "提示", {}).then(() => {
@@ -264,19 +264,19 @@ export default {
         }
       });
     },
-    selsChange: function(sels) {
+    selsChange(sels) {
       this.sels = sels;
     },
     //批量删除
-    batchRemove: function() {
-      var ids = this.sels.map(item => item.id).toString();
+    batchRemove() {
+      let ids = this.sels.map(item => item.id).toString();
       this.$confirm("确认删除选中记录吗？", "提示", {
         type: "warning"
       })
         .then(() => {
           this.listLoading = true;
           //NProgress.start();
-          let para = { ids: ids };
+          let para = { ids };
           batchRemoveUser(para).then(res => {
             this.listLoading = false;
             //NProgress.done();

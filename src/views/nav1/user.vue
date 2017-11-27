@@ -45,11 +45,11 @@ export default {
   },
   methods: {
     //性别显示转换
-    formatSex: function(row, column) {
+    formatSex(row, column) {
       return row.sex === 1 ? "男" : row.sex === 0 ? "女" : "未知";
     },
     //获取用户列表
-    getUser: function() {
+    getUser() {
       let para = {
         name: this.filters.name
       };
