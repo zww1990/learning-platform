@@ -21,7 +21,7 @@
       </el-col>
     </el-col>
     <el-col :span="24" class="main">
-      <aside>
+      <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
         <el-menu :default-active="$route.path" unique-opened router :collapse="collapsed">
           <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
@@ -175,6 +175,14 @@ export default {
       .el-menu {
         height: 100%;
       }
+    }
+    .menu-collapsed {
+      flex: 0 0 60px;
+      width: 60px;
+    }
+    .menu-expanded {
+      flex: 0 0 230px;
+      width: 230px;
     }
     .content-container {
       // background: #f1f2f7;
