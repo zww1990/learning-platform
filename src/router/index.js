@@ -23,22 +23,26 @@ export default new Router({
         {
           path: '/table',
           component: () => import('@/views/nav1/table'),
-          name: '表格嵌套表格'
+          name: '表格嵌套表格',
+          iconCls:'fa fa-table'
         },
         {
           path: '/form',
           component: () => import('@/views/nav1/form'),
-          name: '表单'
+          name: '表单',
+          iconCls:'fa fa-first-order'
         },
         {
           path: '/table2',
           component: () => import('@/views/nav1/table2'),
-          name: '表格'
+          name: '表格',
+          iconCls:'fa fa-list'
         },
         {
           path: '/user',
           component: () => import('@/views/nav1/user'),
-          name: '用户'
+          name: '用户',
+          iconCls:'fa fa-users'
         }
       ]
     },
@@ -56,12 +60,14 @@ export default new Router({
         {
           path: '/page4',
           component: () => import('@/views/nav2/page4'),
-          name: '页面4'
+          name: '页面4',
+          iconCls:'fa fa-fort-awesome'
         },
         {
           path: '/page5',
           component: () => import('@/views/nav2/page5'),
-          name: '页面5'
+          name: '页面5',
+          iconCls:'fa fa-film'
         }
       ]
     },
