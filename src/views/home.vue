@@ -21,39 +21,23 @@
       </el-col>
     </el-col>
     <el-col :span="24" class="main">
-      <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
+      <aside>
         <!--导航菜单-->
-        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect" unique-opened router v-show="!collapsed">
+        <el-menu :default-active="$route.path" unique-opened router :collapse="collapsed">
           <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
             <el-submenu :index="index+''" v-if="!item.leaf" :key="index">
               <template slot="title">
-                <i :class="item.iconCls"></i>{{item.name}}</template>
+                <i :class="item.iconCls"></i>
+                <span slot="title">{{item.name}}</span>
+              </template>
               <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">{{child.name}}</el-menu-item>
             </el-submenu>
             <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
-              <i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
+              <i :class="item.iconCls"></i>
+              <span slot="title">{{item.children[0].name}}</span>
+            </el-menu-item>
           </template>
         </el-menu>
-        <!--导航菜单-折叠后-->
-        <ul class="el-menu el-menu-vertical-demo collapsed" v-show="collapsed" ref="menuCollapsed">
-          <li v-for="(item,index) in $router.options.routes" v-if="!item.hidden" class="el-submenu item" :key="index">
-            <template v-if="!item.leaf">
-              <div class="el-submenu__title" style="padding-left: 20px;" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)">
-                <i :class="item.iconCls"></i>
-              </div>
-              <ul class="el-menu submenu" :class="'submenu-hook-'+index" @mouseover="showMenu(index,true)" @mouseout="showMenu(index,false)">
-                <li v-for="child in item.children" v-if="!child.hidden" :key="child.path" class="el-menu-item" style="padding-left: 40px;" :class="$route.path==child.path?'is-active':''" @click="$router.push(child.path)">{{child.name}}</li>
-              </ul>
-            </template>
-            <template v-else>
-              <li class="el-submenu">
-                <div class="el-submenu__title el-menu-item" style="padding-left: 20px;height: 56px;line-height: 56px;padding: 0 20px;" :class="$route.path==item.children[0].path?'is-active':''" @click="$router.push(item.children[0].path)">
-                  <i :class="item.iconCls"></i>
-                </div>
-              </li>
-            </template>
-          </li>
-        </ul>
       </aside>
       <section class="content-container">
         <div class="grid-content bg-purple-light">
@@ -82,30 +66,10 @@ export default {
       sysName: "我爱我家",
       collapsed: false,
       sysUserName: "",
-      sysUserAvatar: "",
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
-      }
+      sysUserAvatar: ""
     };
   },
   methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
-    handleopen() {
-      //console.log('handleopen');
-    },
-    handleclose() {
-      //console.log('handleclose');
-    },
-    handleselect(a, b) {},
     //退出登录
     logout() {
       let _this = this;
@@ -121,11 +85,6 @@ export default {
     //折叠导航栏
     collapse() {
       this.collapsed = !this.collapsed;
-    },
-    showMenu(i, status) {
-      this.$refs.menuCollapsed.getElementsByClassName(
-        "submenu-hook-" + i
-      )[0].style.display = status ? "block" : "none";
     }
   },
   mounted() {
@@ -188,7 +147,9 @@ export default {
       width: 230px;
     }
     .logo-collapse-width {
-      width: 60px;
+      width: 65px;
+      background-image: url(../assets/images/logo.png);
+      background-size: cover;
     }
     .tools {
       padding: 0px 23px;
@@ -214,28 +175,6 @@ export default {
       .el-menu {
         height: 100%;
       }
-      .collapsed {
-        width: 60px;
-        .item {
-          position: relative;
-        }
-        .submenu {
-          position: absolute;
-          top: 0px;
-          left: 60px;
-          z-index: 99999;
-          height: auto;
-          display: none;
-        }
-      }
-    }
-    .menu-collapsed {
-      flex: 0 0 60px;
-      width: 60px;
-    }
-    .menu-expanded {
-      flex: 0 0 230px;
-      width: 230px;
     }
     .content-container {
       // background: #f1f2f7;
