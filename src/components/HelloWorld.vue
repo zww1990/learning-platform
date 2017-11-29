@@ -24,12 +24,30 @@
     </ul>
     <button @click.once="doThis">点击事件将只会触发一次</button>
     <button @click="$router.push('/user/foo')">编程式的导航</button>
+    <div class="post">
+      <div class="loading" v-if="loading">加载中。。。</div>
+      <div class="error" v-if="error">{{error}}</div>
+      <div class="content" v-if="post">
+        <h2>{{post.title}}</h2>
+        <p>{{post.body}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import TodoItem from "./TodoItem";
 export default {
   name: "HelloWorld",
+  directives: {
+    focus: {
+      inserted: el => el.focus()
+    }
+  },
+  components: {
+    TodoItem
+  },
   data() {
     return {
       msg: "Welcome to Your Vue.js App",
@@ -53,7 +71,10 @@ export default {
         firstName: "zhang",
         lastName: "san",
         age: 23
-      }
+      },
+      loading: false,
+      post: null,
+      error: null
     };
   },
   methods: {
@@ -76,6 +97,20 @@ export default {
     },
     doThis() {
       alert("点击事件将只会触发一次");
+    },
+    fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+      axios
+        .get("/static/data/post.json")
+        .then(res => {
+          this.loading = false;
+          this.post = res.data[0];
+        })
+        .catch(e => {
+          this.loading = false;
+          this.error = `${e.response.status} - ${e.response.statusText}`;
+        });
     }
   },
   computed: {
@@ -92,7 +127,7 @@ export default {
     }
   },
   created() {
-    console.log("created");
+    this.fetchData();
   },
   beforeCreate() {
     console.log("beforeCreate");
@@ -102,11 +137,9 @@ export default {
   },
   beforeDestroy() {
     console.log("beforeDestroy");
+  },
+  watch: {
+    $route: "fetchData"
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

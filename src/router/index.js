@@ -12,7 +12,7 @@ export default new Router({
       path: '/',
       component: home,
       name: '导航一',
-      iconCls: 'el-icon-message',
+      iconClass: 'el-icon-message',
       children: [
         {
           path: '/main',
@@ -24,25 +24,25 @@ export default new Router({
           path: '/table',
           component: () => import('@/views/nav1/table'),
           name: '表格嵌套表格',
-          iconCls:'fa fa-table'
+          iconClass: 'fa fa-table'
         },
         {
           path: '/form',
           component: () => import('@/views/nav1/form'),
           name: '表单',
-          iconCls:'fa fa-first-order'
+          iconClass: 'fa fa-first-order'
         },
         {
           path: '/table2',
           component: () => import('@/views/nav1/table2'),
           name: '表格',
-          iconCls:'fa fa-list'
+          iconClass: 'fa fa-list'
         },
         {
           path: '/user',
           component: () => import('@/views/nav1/user'),
           name: '用户',
-          iconCls:'fa fa-users'
+          iconClass: 'fa fa-users'
         }
       ]
     },
@@ -55,26 +55,26 @@ export default new Router({
       path: '/',
       component: home,
       name: '导航二',
-      iconCls: 'el-icon-menu',
+      iconClass: 'el-icon-menu',
       children: [
         {
           path: '/page4',
           component: () => import('@/views/nav2/page4'),
           name: '页面4',
-          iconCls:'fa fa-fort-awesome'
+          iconClass: 'fa fa-fort-awesome'
         },
         {
           path: '/page5',
           component: () => import('@/views/nav2/page5'),
           name: '页面5',
-          iconCls:'fa fa-film'
+          iconClass: 'fa fa-film'
         }
       ]
     },
     {
       path: '/',
       component: home,
-      iconCls: 'el-icon-setting',
+      iconClass: 'el-icon-setting',
       leaf: true,
       children: [
         {

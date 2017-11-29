@@ -14,13 +14,13 @@
           <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <i class="fa fa-info-circle"></i>我的消息
+              <i class="fa fa-info-circle fa-fw"></i>我的消息
             </el-dropdown-item>
             <el-dropdown-item>
-              <i class="fa fa-sliders"></i>设置
+              <i class="fa fa-sliders fa-fw"></i>设置
             </el-dropdown-item>
             <el-dropdown-item divided @click.native="logout">
-              <i class="fa fa-sign-out"></i>退出登录
+              <i class="fa fa-sign-out fa-fw"></i>退出登录
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -33,15 +33,15 @@
           <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
             <el-submenu :index="index+''" v-if="!item.leaf" :key="index">
               <template slot="title">
-                <i :class="item.iconCls"></i>
+                <i :class="item.iconClass"></i>
                 <span slot="title">{{item.name}}</span>
               </template>
               <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">
-                <i :class="child.iconCls"></i>{{child.name}}
+                <i :class="child.iconClass"></i>{{child.name}}
               </el-menu-item>
             </el-submenu>
             <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
-              <i :class="item.iconCls"></i>
+              <i :class="item.iconClass"></i>
               <span slot="title">{{item.children[0].name}}</span>
             </el-menu-item>
           </template>
