@@ -11,7 +11,7 @@
   </el-table>
 </template>
 <script>
-import axios from "axios";
+import { loadTableData } from "@/api/api";
 import table1 from "./table1";
 export default {
   components: {
@@ -22,20 +22,11 @@ export default {
       tableData: []
     };
   },
-  methods: {
-    loadTableData() {
-      axios
-        .get("/static/data/tabledata.json")
-        .then(res => {
-          this.tableData = res.data;
-        })
-        .catch(e => {
-          console.log(e.response.status, e.response.statusText);
-        });
-    }
-  },
+  methods: {},
   mounted() {
-    this.loadTableData();
+    loadTableData().then(res => {
+      this.tableData = res.data;
+    });
   }
 };
 </script>

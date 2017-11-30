@@ -6,7 +6,7 @@
   </el-table>
 </template>
 <script>
-import axios from "axios";
+import { loadChildTableData } from "@/api/api";
 export default {
   name: "table1",
   props: {
@@ -21,19 +21,10 @@ export default {
     };
   },
   mounted() {
-    this.loadData();
+    loadChildTableData(this.row.id).then(res => {
+      this.tableData = res.data;
+    });
   },
-  methods: {
-    loadData() {
-      axios
-        .get(`/static/data/tabledata-${this.row.id}.json`)
-        .then(res => {
-          this.tableData = res.data;
-        })
-        .catch(e => {
-          console.log(e.response.status, e.response.statusText);
-        });
-    }
-  }
+  methods: {}
 };
 </script>
