@@ -12,70 +12,58 @@ export default new Router({
       path: '/',
       component: home,
       name: '导航一',
-      iconClass: 'el-icon-message',
       children: [
         {
           path: '/main',
           component: () => import('@/views/main'),
-          name: '主页',
-          hidden: true
+          name: '主页'
         },
         {
           path: '/table',
           component: () => import('@/views/nav1/table'),
-          name: '表格嵌套表格',
-          iconClass: 'fa fa-table'
+          name: '表格嵌套表格'
         },
         {
           path: '/form',
           component: () => import('@/views/nav1/form'),
-          name: '表单',
-          iconClass: 'fa fa-first-order'
+          name: '表单'
         },
         {
           path: '/table2',
           component: () => import('@/views/nav1/table2'),
-          name: '表格',
-          iconClass: 'fa fa-list'
+          name: '表格'
         },
         {
           path: '/user',
           component: () => import('@/views/nav1/user'),
-          name: '用户',
-          iconClass: 'fa fa-users'
+          name: '用户'
         }
       ]
     },
     {
       path: '/login',
-      component: () => import('@/views/login'),
-      hidden: true
+      component: () => import('@/views/login')
     },
     {
       path: '/',
       component: home,
       name: '导航二',
-      iconClass: 'el-icon-menu',
       children: [
         {
           path: '/page4',
           component: () => import('@/views/nav2/page4'),
-          name: '页面4',
-          iconClass: 'fa fa-fort-awesome'
+          name: '页面4'
         },
         {
           path: '/page5',
           component: () => import('@/views/nav2/page5'),
-          name: '页面5',
-          iconClass: 'fa fa-film'
+          name: '页面5'
         }
       ]
     },
     {
       path: '/',
       component: home,
-      iconClass: 'el-icon-setting',
-      leaf: true,
       children: [
         {
           path: '/page6',
@@ -86,13 +74,11 @@ export default new Router({
     },
     {
       path: '/404',
-      component: () => import('@/views/error/404'),
-      hidden: true
+      component: () => import('@/views/error/404')
     },
     {
       path: '*',
-      redirect: '/404',
-      hidden: true
+      redirect: '/404'
     }
   ]
 })

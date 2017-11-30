@@ -29,14 +29,14 @@
     <el-col :span="24" class="main">
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
-        <el-menu :default-active="$route.path" unique-opened router :collapse="collapsed">
-          <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-            <el-submenu :index="index+''" v-if="!item.leaf" :key="index">
+        <el-menu unique-opened router :collapse="collapsed">
+          <template v-for="(item,index) in menuData">
+            <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
               <template slot="title">
                 <i :class="item.iconClass"></i>
                 <span slot="title">{{item.name}}</span>
               </template>
-              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">
+              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
                 <i :class="child.iconClass"></i>{{child.name}}
               </el-menu-item>
             </el-submenu>
@@ -68,13 +68,15 @@
   </el-row>
 </template>
 <script>
+import { loadMenuData } from "@/api/api";
 export default {
   data() {
     return {
       sysName: "我爱我家",
       collapsed: false,
       sysUserName: "",
-      sysUserAvatar: ""
+      sysUserAvatar: "",
+      menuData: []
     };
   },
   methods: {
@@ -101,6 +103,9 @@ export default {
       user = JSON.parse(user);
       this.sysUserName = user.name || "";
       this.sysUserAvatar = user.avatar || "";
+      loadMenuData().then(res => {
+        this.menuData = res.data;
+      });
     }
   }
 };

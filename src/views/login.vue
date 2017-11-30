@@ -3,11 +3,11 @@
     <h3 class="title">
       <i class="fa fa-sign-in fa-fw"></i>系统登录
     </h3>
-    <el-form-item prop="account">
-      <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="账号" prefix-icon="fa fa-user"></el-input>
+    <el-form-item prop="username">
+      <el-input type="text" v-model="ruleForm2.username" auto-complete="off" placeholder="账号" prefix-icon="fa fa-user"></el-input>
     </el-form-item>
-    <el-form-item prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码" prefix-icon="fa fa-key"></el-input>
+    <el-form-item prop="password">
+      <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码" prefix-icon="fa fa-key"></el-input>
     </el-form-item>
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
@@ -25,12 +25,12 @@ export default {
     return {
       logining: false,
       ruleForm2: {
-        account: "admin",
-        checkPass: "123456"
+        username: "admin",
+        password: "123456"
       },
       rules2: {
-        account: [{ required: true, message: "请输入账号", trigger: "blur" }],
-        checkPass: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       },
       checked: true
     };
@@ -43,13 +43,9 @@ export default {
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {
           this.logining = true;
-          let loginParams = {
-            username: this.ruleForm2.account,
-            password: this.ruleForm2.checkPass
-          };
-          requestLogin(loginParams).then(data => {
+          requestLogin(this.ruleForm2).then(res => {
             this.logining = false;
-            let { msg, code, user } = data;
+            let { msg, code, user } = res.data;
             if (code !== 200) {
               this.$message({
                 message: msg,
