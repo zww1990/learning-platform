@@ -68,7 +68,7 @@
   </el-row>
 </template>
 <script>
-import { loadMenuData } from "@/api/api";
+import api from "@/api";
 export default {
   data() {
     return {
@@ -82,15 +82,12 @@ export default {
   methods: {
     //退出登录
     logout() {
-      let _this = this;
       this.$confirm("确认退出吗?", "提示", {
         //type: 'warning'
-      })
-        .then(() => {
-          sessionStorage.removeItem("user");
-          _this.$router.push("/login");
-        })
-        .catch(() => {});
+      }).then(() => {
+        sessionStorage.removeItem("user");
+        this.$router.push("/login");
+      });
     },
     //折叠导航栏
     collapse() {
@@ -103,7 +100,7 @@ export default {
       user = JSON.parse(user);
       this.sysUserName = user.name || "";
       this.sysUserAvatar = user.avatar || "";
-      loadMenuData().then(res => {
+      api.loadMenuData(user).then(res => {
         this.menuData = res.data;
       });
     }

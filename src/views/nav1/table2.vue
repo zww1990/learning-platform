@@ -101,13 +101,7 @@
 </template>
 <script>
 import util from "@/assets/js/util";
-import {
-  getUserListPage,
-  removeUser,
-  batchRemoveUser,
-  editUser,
-  addUser
-} from "@/api/api";
+import api from "@/api";
 export default {
   data() {
     return {
@@ -164,7 +158,7 @@ export default {
         name: this.filters.name
       };
       this.listLoading = true;
-      getUserListPage(para).then(res => {
+      api.getUserListPage(para).then(res => {
         this.total = res.data.total;
         this.users = res.data.users;
         this.listLoading = false;
@@ -174,20 +168,18 @@ export default {
     handleDel(index, row) {
       this.$confirm("确认删除该记录吗?", "提示", {
         type: "warning"
-      })
-        .then(() => {
-          this.listLoading = true;
-          let para = { id: row.id };
-          removeUser(para).then(res => {
-            this.listLoading = false;
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.getUsers();
+      }).then(() => {
+        this.listLoading = true;
+        let para = { id: row.id };
+        api.removeUser(para).then(res => {
+          this.listLoading = false;
+          this.$message({
+            message: "删除成功",
+            type: "success"
           });
-        })
-        .catch(() => {});
+          this.getUsers();
+        });
+      });
     },
     //显示编辑界面
     handleEdit(index, row) {
@@ -216,7 +208,7 @@ export default {
               !para.birth || para.birth === ""
                 ? ""
                 : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
-            editUser(para).then(res => {
+            api.editUser(para).then(res => {
               this.editLoading = false;
               this.$message({
                 message: "提交成功",
@@ -241,7 +233,7 @@ export default {
               !para.birth || para.birth === ""
                 ? ""
                 : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
-            addUser(para).then(res => {
+            api.addUser(para).then(res => {
               this.addLoading = false;
               this.$message({
                 message: "提交成功",
@@ -263,20 +255,18 @@ export default {
       let ids = this.sels.map(item => item.id).toString();
       this.$confirm("确认删除选中记录吗？", "提示", {
         type: "warning"
-      })
-        .then(() => {
-          this.listLoading = true;
-          let para = { ids };
-          batchRemoveUser(para).then(res => {
-            this.listLoading = false;
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.getUsers();
+      }).then(() => {
+        this.listLoading = true;
+        let para = { ids };
+        api.batchRemoveUser(para).then(res => {
+          this.listLoading = false;
+          this.$message({
+            message: "删除成功",
+            type: "success"
           });
-        })
-        .catch(() => {});
+          this.getUsers();
+        });
+      });
     }
   },
   mounted() {

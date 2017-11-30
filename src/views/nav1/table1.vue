@@ -6,7 +6,7 @@
   </el-table>
 </template>
 <script>
-import { loadChildTableData } from "@/api/api";
+import api from "@/api";
 export default {
   name: "table1",
   props: {
@@ -21,10 +21,9 @@ export default {
     };
   },
   mounted() {
-    loadChildTableData(this.row.id).then(res => {
+    api.loadChildTableData(this.row.id).then(res => {
       this.tableData = res.data;
     });
-  },
-  methods: {}
+  }
 };
 </script>

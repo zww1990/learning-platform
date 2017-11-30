@@ -1,14 +1,14 @@
 <template>
   <section>
-    main
+    {{content}}
   </section>
 </template>
 <script>
 export default {
   data() {
-    return {};
-  },
-  methods: {},
-  mounted() {}
+    return {
+      content: "this is main page"
+    };
+  }
 };
 </script>

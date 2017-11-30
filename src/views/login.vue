@@ -19,7 +19,7 @@
   </el-form>
 </template>
 <script>
-import { requestLogin } from "@/api/api";
+import api from "@/api";
 export default {
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {
           this.logining = true;
-          requestLogin(this.ruleForm2).then(res => {
+          api.requestLogin(this.ruleForm2).then(res => {
             this.logining = false;
             let { msg, code, user } = res.data;
             if (code !== 200) {

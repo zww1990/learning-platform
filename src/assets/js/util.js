@@ -1,13 +1,15 @@
 let SIGN_REGEXP = /([yYMdDhHsSm])(\1*)/g;
 let DEFAULT_PATTERN = 'yyyy-MM-dd';
-function padding(s, len) {
+let padding = (s, len) => {
   let _len = len - (s + '').length;
-  for (let i = 0; i < _len; i++) { s = '0' + s; }
+  for (let i = 0; i < _len; i++) {
+    s = '0' + s;
+  }
   return s;
 };
 
 export default {
-  getQueryStringByName: function (name) {
+  getQueryStringByName(name) {
     let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     let r = window.location.search.substr(1).match(reg);
     let context = "";
@@ -19,9 +21,9 @@ export default {
     return context == null || context === "" || context === "undefined" ? "" : context;
   },
   formatDate: {
-    format: function (date, pattern) {
+    format(date, pattern) {
       pattern = pattern || DEFAULT_PATTERN;
-      return pattern.replace(SIGN_REGEXP, function ($0) {
+      return pattern.replace(SIGN_REGEXP, ($0) => {
         switch ($0.charAt(0)) {
           case 'Y':
           case 'y': return padding(date.getFullYear(), $0.length);
@@ -37,7 +39,7 @@ export default {
         }
       });
     },
-    parse: function (dateString, pattern) {
+    parse(dateString, pattern) {
       let matchs1 = pattern.match(SIGN_REGEXP);
       let matchs2 = dateString.match(/(\d)+/g);
       if (matchs1.length === matchs2.length) {

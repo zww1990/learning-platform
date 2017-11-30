@@ -11,7 +11,7 @@
   </el-table>
 </template>
 <script>
-import { loadTableData } from "@/api/api";
+import api from "@/api";
 import table1 from "./table1";
 export default {
   components: {
@@ -22,9 +22,8 @@ export default {
       tableData: []
     };
   },
-  methods: {},
   mounted() {
-    loadTableData().then(res => {
+    api.loadTableData().then(res => {
       this.tableData = res.data;
     });
   }
