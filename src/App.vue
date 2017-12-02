@@ -47,7 +47,7 @@ body {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.2s ease;
+  transition: all 0.5s ease-in-out;
 }
 .fade-enter,
 .fade-leave-active {

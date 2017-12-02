@@ -29,6 +29,7 @@
     <el-col :span="24" class="main">
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
+        <transition name="fade" mode="out-in">
         <el-menu unique-opened router :collapse="collapsed">
           <template v-for="(item,index) in menuData">
             <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
@@ -46,6 +47,7 @@
             </el-menu-item>
           </template>
         </el-menu>
+        </transition>
       </aside>
       <section class="content-container">
         <div class="grid-content bg-purple-light">
