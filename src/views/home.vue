@@ -1,9 +1,7 @@
 <template>
   <el-row class="container">
     <el-col :span="24" class="header">
-      <el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
-        {{collapsed?'':sysName}}
-      </el-col>
+      <el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">{{collapsed?'':sysName}}</el-col>
       <el-col :span="10">
         <div class="tools" @click.prevent="collapse">
           <i :class="'fa fa-bars'"></i>
@@ -30,34 +28,31 @@
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
         <transition name="fade" mode="out-in">
-        <el-menu unique-opened router :collapse="collapsed">
-          <template v-for="(item,index) in menuData">
-            <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
-              <template slot="title">
+          <el-menu unique-opened router :collapse="collapsed" :default-active="$route.path">
+            <template v-for="(item,index) in menuData">
+              <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
+                <template slot="title">
+                  <i :class="item.iconClass"></i>
+                  <span slot="title">{{item.name}}</span>
+                </template>
+                <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
+                  <i :class="child.iconClass"></i>{{child.name}}
+                </el-menu-item>
+              </el-submenu>
+              <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
                 <i :class="item.iconClass"></i>
-                <span slot="title">{{item.name}}</span>
-              </template>
-              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
-                <i :class="child.iconClass"></i>{{child.name}}
+                <span slot="title">{{item.children[0].name}}</span>
               </el-menu-item>
-            </el-submenu>
-            <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
-              <i :class="item.iconClass"></i>
-              <span slot="title">{{item.children[0].name}}</span>
-            </el-menu-item>
-          </template>
-        </el-menu>
+            </template>
+          </el-menu>
         </transition>
       </aside>
       <section class="content-container">
         <div class="grid-content bg-purple-light">
-          <el-col :span="24" class="breadcrumb-container">
-            <strong class="title">{{$route.name}}</strong>
-            <el-breadcrumb separator="/" class="breadcrumb-inner">
-              <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-                {{ item.name }}
-              </el-breadcrumb-item>
-            </el-breadcrumb>
+          <el-col :span="24">
+            <el-tabs v-model="activeIndex" type="card" closable @tab-remove="tabRemove" @tab-click="tabClick" v-if="options.length">
+              <el-tab-pane v-for="(item, index) in options" :key="item.name" :label="item.name" :name="item.path"></el-tab-pane>
+            </el-tabs>
           </el-col>
           <el-col :span="24" class="content-wrapper">
             <transition name="fade" mode="out-in">
@@ -94,6 +89,30 @@ export default {
     //折叠导航栏
     collapse() {
       this.collapsed = !this.collapsed;
+    },
+    // tab切换时，动态的切换路由
+    tabClick(tab) {
+      let path = this.activeIndex;
+      this.$router.push({ path: path });
+    },
+    tabRemove(targetName) {
+      // 首页不可删除
+      if (targetName === "/main") {
+        return;
+      }
+      this.$store.commit("delete_tabs", targetName);
+      if (this.activeIndex === targetName) {
+        // 设置当前激活的路由
+        if (this.options && this.options.length >= 1) {
+          this.$store.commit(
+            "set_active_index",
+            this.options[this.options.length - 1].path
+          );
+          this.$router.push({ path: this.activeIndex });
+        } else {
+          this.$router.push({ path: "/main" });
+        }
+      }
     }
   },
   mounted() {
@@ -105,6 +124,46 @@ export default {
       api.loadMenuData(user).then(res => {
         this.menuData = res.data;
       });
+      if (this.$route.path !== "/main") {
+        this.$store.commit("add_tabs", { path: "/main", name: "主页" });
+      }
+      this.$store.commit("add_tabs", {
+        path: this.$route.path,
+        name: this.$route.name
+      });
+      this.$store.commit("set_active_index", this.$route.path);
+    }
+  },
+  computed: {
+    options() {
+      return this.$store.state.options;
+    },
+    activeIndex: {
+      get() {
+        return this.$store.state.activeIndex;
+      },
+      set(val) {
+        this.$store.commit("set_active_index", val);
+      }
+    }
+  },
+  watch: {
+    $route: function(to) {
+      let flag = false;
+      for (let option of this.options) {
+        if (option.name === to.name) {
+          flag = true;
+          this.$store.commit("set_active_index", to.path);
+          break;
+        }
+      }
+      if (!flag) {
+        this.$store.commit("add_tabs", {
+          path: to.path,
+          name: to.name
+        });
+        this.$store.commit("set_active_index", to.path);
+      }
     }
   }
 };
@@ -205,18 +264,7 @@ export default {
       // bottom: 0px;
       // left: 230px;
       overflow-y: auto;
-      padding: 20px;
-      .breadcrumb-container {
-        //margin-bottom: 15px;
-        .title {
-          width: 200px;
-          float: left;
-          color: #475669;
-        }
-        .breadcrumb-inner {
-          float: right;
-        }
-      }
+      padding: 10px;
       .content-wrapper {
         background-color: #fff;
         box-sizing: border-box;

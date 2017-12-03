@@ -5,42 +5,35 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
-    todos: [
-      {
-        id: 1,
-        text: '...',
-        done: true
-      },
-      {
-        id: 2,
-        text: '...',
-        done: false
-      }
-    ]
+    options: [],
+    activeIndex: '/main'
   },
-  mutations: {//mutation 必须是同步函数。
-    increment(state, payload) {
-      state.count++
-    }
-  },
-  actions: {//action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
-    increment({ commit }) {
-      commit('increment')
+  //mutation 必须是同步函数。
+  mutations: {
+    // 添加tabs
+    add_tabs(state, data) {
+      this.state.options.push(data);
     },
-    incrementAsync({ commit }) {
-      setTimeout(() => {
-        commit('increment')
-      }, 1000)
+    // 删除tabs
+    delete_tabs(state, path) {
+      let index = 0;
+      for (let option of state.options) {
+        if (option.path === path) {
+          break;
+        }
+        index++;
+      }
+      this.state.options.splice(index, 1);
+    },
+    // 设置当前激活的tab
+    set_active_index(state, index) {
+      this.state.activeIndex = index;
     }
+  },
+  //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
+  actions: {
   },
   getters: {
-    doneTodos: state => {
-      return state.todos.filter(todo => todo.done)
-    },
-    doneTodosCount: (state, getters) => {
-      return getters.doneTodos.length
-    }
   }
 })
 
