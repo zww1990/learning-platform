@@ -6,7 +6,7 @@
 </template>
 <script>
 import axios from "axios";
-import util from "@/assets/js/util";
+import moment from "moment";
 export default {
   data() {
     return {
@@ -20,10 +20,7 @@ export default {
   },
   methods: {
     onClick() {
-      this.param.date = util.formatDate.format(
-        new Date(),
-        "YYYY-MM-DD HH:mm:SS"
-      );
+      this.param.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
       console.log(JSON.stringify(this.param));
       let url = "/demo/api/add";
       axios.post(url, this.param).then(res => {

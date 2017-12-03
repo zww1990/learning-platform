@@ -100,7 +100,7 @@
   </section>
 </template>
 <script>
-import util from "@/assets/js/util";
+import moment from "moment";
 import api from "@/api";
 export default {
   data() {
@@ -207,7 +207,7 @@ export default {
             para.birth =
               !para.birth || para.birth === ""
                 ? ""
-                : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
+                : moment(new Date(para.birth)).format("yyyy-MM-dd");
             api.editUser(para).then(res => {
               this.editLoading = false;
               this.$message({
@@ -232,7 +232,7 @@ export default {
             para.birth =
               !para.birth || para.birth === ""
                 ? ""
-                : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
+                : moment(new Date(para.birth)).format("yyyy-MM-dd");
             api.addUser(para).then(res => {
               this.addLoading = false;
               this.$message({
