@@ -3,10 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:property-placeholder location="classpath:cas.properties"/>
+	<context:annotation-config/>
+	<context:component-scan base-package="com.example.client.web"/>
+	<mvc:annotation-driven/>
+	<mvc:view-resolvers>
+		<mvc:jsp cache-views="false" prefix="/WEB-INF/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
 
 	<!-- 实现单点登出协议。 它处理注册会话并销毁会话。 -->
 	<bean class="org.jasig.cas.client.session.SingleSignOutFilter" id="singleSignOutFilter">
@@ -37,12 +45,4 @@
 			</bean>
 		</property>
 	</bean>
-	
-	<!-- 包装一个HttpServletRequest，以便getRemoteUser和getPrincipal返回CAS相关的条目。 -->
-	<bean class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter"
-		id="httpServletRequestWrapperFilter" />
-		
-	<!-- 将断言置于ThreadLocal中，以便其他资源可以访问不具有Web层会话的权限。 -->
-	<bean class="org.jasig.cas.client.util.AssertionThreadLocalFilter"
-		id="assertionThreadLocalFilter" />
 </beans>

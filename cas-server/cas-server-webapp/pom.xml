@@ -44,6 +44,13 @@
             </exclusion>
         </exclusions>
     </dependency>
+    <!-- 添加restful支持 -->
+    <dependency>
+    	<groupId>org.jasig.cas</groupId>
+    	<artifactId>cas-server-support-rest</artifactId>
+    	<version>${project.version}</version>
+    </dependency>
+    <!-- 添加restful支持 -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-expression</artifactId>
