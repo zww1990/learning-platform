@@ -84,6 +84,7 @@ export default {
       }).then(() => {
         api.casDeleteTGT(sessionStorage.getItem("CAS-TGT"));
         sessionStorage.clear();
+        this.$store.commit("clean_tabs");
         this.$router.push("/login");
       });
     },
@@ -98,9 +99,9 @@ export default {
     },
     tabRemove(targetName) {
       // 首页不可删除
-      // if (targetName === "/main") {
-      //   return;
-      // }
+      if (targetName === "/main") {
+        return;
+      }
       this.$store.commit("delete_tabs", targetName);
       if (this.activeIndex === targetName) {
         // 设置当前激活的路由
@@ -125,14 +126,15 @@ export default {
       api.loadMenuData(user).then(res => {
         this.menuData = res.data;
       });
+      this.$store.commit("clean_tabs");
       if (this.$route.path !== "/main") {
-        // this.$store.commit("add_tabs", { path: "/main", name: "主页" });
-        this.$store.commit("add_tabs", {
-          path: this.$route.path,
-          name: this.$route.name
-        });
-        this.$store.commit("set_active_index", this.$route.path);
+        this.$store.commit("add_tabs", { path: "/main", name: "主页" });
       }
+      this.$store.commit("add_tabs", {
+        path: this.$route.path,
+        name: this.$route.name
+      });
+      this.$store.commit("set_active_index", this.$route.path);
     }
   },
   computed: {
@@ -150,9 +152,6 @@ export default {
   },
   watch: {
     $route: function(to) {
-      if (to.path === "/main") {
-        return;
-      }
       let flag = false;
       for (let option of this.options) {
         if (option.name === to.name) {

@@ -28,6 +28,10 @@ const store = new Vuex.Store({
     // 设置当前激活的tab
     set_active_index(state, index) {
       this.state.activeIndex = index;
+    },
+    //清空tabs数组
+    clean_tabs(state) {
+      this.state.options = []
     }
   },
   //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
