@@ -44,13 +44,17 @@ export default {
         if (valid) {
           this.logining = true;
           api
-            .casCreatedTGT(this.ruleForm2)
+            .casCreateTGT(this.ruleForm2)
             .then(res => {
-              this.logining = false;
-              api.casCreatedST(res.headers.location).then(res2 => {
+              let location = res.headers.location;
+              let ticket = location.substring(location.lastIndexOf("/") + 1);
+              api.casCreateST(ticket).then(res2 => {
                 api.casServiceValidate(res2.data).then(res3 => {
+                  this.logining = false;
                   if (res3.data.trim().indexOf("INVALID_TICKET") === -1) {
                     api.requestLogin(this.ruleForm2).then(res4 => {
+                      sessionStorage.setItem("CAS-TGT", ticket);
+                      sessionStorage.setItem("CAS-ST", res2.data);
                       sessionStorage.setItem(
                         "user",
                         JSON.stringify(res4.data.user)

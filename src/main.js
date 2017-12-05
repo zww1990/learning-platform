@@ -13,13 +13,11 @@ Vue.use(ElementUI)
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
-    sessionStorage.removeItem('user')
+    sessionStorage.clear()
   }
-  let user = JSON.parse(sessionStorage.getItem('user'))
-  if (!user && to.path !== '/login') {
-    next({
-      path: '/login'
-    })
+  let casSt = sessionStorage.getItem('CAS-ST')
+  if (!casSt && to.path !== '/login') {
+    next('/login')
   } else {
     next()
   }

@@ -34,16 +34,17 @@ export default {
   loadChildTableData(params) {
     return axios.get(`${base}/tabledata-${params}.json`)
   },
-  casCreatedTGT(params) {
+  //创建新的票证授予票证
+  casCreateTGT(params) {
     return axios.post(`/cas/v1/tickets`, qs.stringify(params), {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
   },
-  casCreatedST(location) {
-    location = location.substring(location.indexOf('/cas'))
-    return axios.post(location, qs.stringify({
+  //创建新的服务票据
+  casCreateST(ticket) {
+    return axios.post(`/cas/v1/tickets/${ticket}`, qs.stringify({
       service: 'http://localhost:8080/cas'
     }), {
         headers: {
@@ -51,6 +52,7 @@ export default {
         }
       })
   },
+  //CAS验证服务
   casServiceValidate(ticket) {
     return axios.post(`/cas/serviceValidate`, qs.stringify({
       ticket,
@@ -61,5 +63,14 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
+  },
+  //销毁票证授予票证
+  casDeleteTGT(ticket) {
+    return axios.delete(`/cas/v1/tickets/${ticket}`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text'
+    }).then(() => { })
   }
 }
