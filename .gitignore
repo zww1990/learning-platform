@@ -4,6 +4,7 @@ target
 .settings
 .classpath
 .project
+.springBeans
 
 # Log file
 *.log
