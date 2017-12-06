@@ -12,13 +12,5 @@
     "transform-runtime",
     "syntax-dynamic-import",
     "transform-vue-jsx"
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        "env",
-        "stage-2"
-      ]
-    }
-  }
+  ]
 }
