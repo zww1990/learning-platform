@@ -12,7 +12,7 @@ const store = new Vuex.Store({
   mutations: {
     // 添加tabs
     add_tabs(state, data) {
-      this.state.options.push(data);
+      state.options.push(data);
     },
     // 删除tabs
     delete_tabs(state, path) {
@@ -23,15 +23,15 @@ const store = new Vuex.Store({
         }
         index++;
       }
-      this.state.options.splice(index, 1);
+      state.options.splice(index, 1);
     },
     // 设置当前激活的tab
     set_active_index(state, index) {
-      this.state.activeIndex = index;
+      state.activeIndex = index;
     },
     //清空tabs数组
     clean_tabs(state) {
-      this.state.options = []
+      state.options = []
     }
   },
   //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
