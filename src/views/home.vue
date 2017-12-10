@@ -27,25 +27,23 @@
     <el-col :span="24" class="main">
       <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
         <!--导航菜单-->
-        <transition name="fade" mode="out-in">
-          <el-menu unique-opened router :collapse="collapsed" :default-active="$route.path">
-            <template v-for="(item,index) in menuData">
-              <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
-                <template slot="title">
-                  <i :class="item.iconClass"></i>
-                  <span slot="title">{{item.name}}</span>
-                </template>
-                <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
-                  <i :class="child.iconClass"></i>{{child.name}}
-                </el-menu-item>
-              </el-submenu>
-              <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
+        <el-menu unique-opened router :collapse="collapsed" :default-active="$route.path">
+          <template v-for="(item,index) in menuData">
+            <el-submenu :index="`${index}`" v-if="!item.leaf" :key="index">
+              <template slot="title">
                 <i :class="item.iconClass"></i>
-                <span slot="title">{{item.children[0].name}}</span>
+                <span slot="title">{{item.name}}</span>
+              </template>
+              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path">
+                <i :class="child.iconClass"></i>{{child.name}}
               </el-menu-item>
-            </template>
-          </el-menu>
-        </transition>
+            </el-submenu>
+            <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path" :key="index">
+              <i :class="item.iconClass"></i>
+              <span slot="title">{{item.children[0].name}}</span>
+            </el-menu-item>
+          </template>
+        </el-menu>
       </aside>
       <section class="content-container">
         <div class="grid-content bg-purple-light">
