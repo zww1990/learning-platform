@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-popover ref="popover" placement="bottom-start" width="400" trigger="click">
-      <el-table :data="gridData" @selection-change="handleSelectionChange">
+      <el-table :data="gridData" @selection-change="handleSelectionChange" ref="multipleTable">
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column width="150" property="date" label="日期"></el-table-column>
         <el-table-column width="100" property="name" label="姓名"></el-table-column>
         <el-table-column width="100" property="address" label="地址" show-overflow-tooltip></el-table-column>
       </el-table>
     </el-popover>
-    <el-input suffix-icon="el-icon-arrow-down" placeholder="请输入内容" v-model="input" clearable v-popover:popover></el-input>
+    <el-input suffix-icon="el-icon-arrow-down" placeholder="请输入内容" v-model="input" clearable v-popover:popover @change="handleInputChange"></el-input>
   </div>
 </template>
 
@@ -48,6 +48,11 @@ export default {
   methods: {
     handleSelectionChange(values) {
       this.input = values.map(v => v.name).toString();
+    },
+    handleInputChange(value) {
+      if (!value) {
+        this.$refs.multipleTable.clearSelection();
+      }
     }
   }
 };
