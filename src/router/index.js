@@ -64,11 +64,17 @@ export default new Router({
     {
       path: '/',
       component: home,
+      name: '导航三',
       children: [
         {
           path: '/page6',
           component: () => import('@/views/nav3/page6'),
           name: '页面6'
+        },
+        {
+          path: '/page7',
+          component: () => import('@/views/nav3/page7'),
+          name: '页面7'
         }
       ]
     },

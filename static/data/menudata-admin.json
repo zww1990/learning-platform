@@ -45,12 +45,17 @@
   },
   {
     "path": "/",
+    "name": "导航三",
     "iconClass": "el-icon-setting",
-    "leaf": true,
+    "leaf": false,
     "children": [
       {
         "path": "/page6",
         "name": "页面6"
+      },
+      {
+        "path": "/page7",
+        "name": "页面7"
       }
     ]
   }
