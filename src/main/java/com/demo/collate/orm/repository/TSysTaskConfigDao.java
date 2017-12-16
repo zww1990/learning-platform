@@ -1,4 +1,4 @@
-package com.cfilmcloud.collate.orm.repository;
+package com.demo.collate.orm.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.cfilmcloud.collate.orm.domain.TSysTaskConfig;
+import com.demo.collate.orm.domain.TSysTaskConfig;
 
 public interface TSysTaskConfigDao
 		extends JpaRepository<TSysTaskConfig, Integer>, JpaSpecificationExecutor<TSysTaskConfig> {

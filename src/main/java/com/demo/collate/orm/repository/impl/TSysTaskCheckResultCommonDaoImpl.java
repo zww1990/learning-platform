@@ -1,4 +1,4 @@
-package com.cfilmcloud.collate.orm.repository.impl;
+package com.demo.collate.orm.repository.impl;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import javax.persistence.StoredProcedureQuery;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResultCommon;
-import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultCommonDao;
+import com.demo.collate.orm.domain.TSysTaskCheckResultCommon;
+import com.demo.collate.orm.repository.TSysTaskCheckResultCommonDao;
 
 @Repository
 @SuppressWarnings("unchecked")

@@ -22,17 +22,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.cfilmcloud.Application;
-import com.cfilmcloud.collate.orm.domain.TSysDsConfigItem;
-import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResult;
-import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResultCommon;
-import com.cfilmcloud.collate.orm.domain.TSysTaskConfig;
-import com.cfilmcloud.collate.orm.domain.TSysTaskSchedule;
-import com.cfilmcloud.collate.orm.repository.TSysDsConfigItemDao;
-import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultCommonDao;
-import com.cfilmcloud.collate.orm.repository.TSysTaskCheckResultDao;
-import com.cfilmcloud.collate.orm.repository.TSysTaskConfigDao;
-import com.cfilmcloud.collate.orm.repository.TSysTaskScheduleDao;
+import com.demo.Application;
+import com.demo.collate.orm.domain.TSysDsConfigItem;
+import com.demo.collate.orm.domain.TSysTaskCheckResult;
+import com.demo.collate.orm.domain.TSysTaskCheckResultCommon;
+import com.demo.collate.orm.domain.TSysTaskConfig;
+import com.demo.collate.orm.domain.TSysTaskSchedule;
+import com.demo.collate.orm.repository.TSysDsConfigItemDao;
+import com.demo.collate.orm.repository.TSysTaskCheckResultCommonDao;
+import com.demo.collate.orm.repository.TSysTaskCheckResultDao;
+import com.demo.collate.orm.repository.TSysTaskConfigDao;
+import com.demo.collate.orm.repository.TSysTaskScheduleDao;
 
 @RunWith(SpringRunner.class)
 @SuppressWarnings("unchecked")

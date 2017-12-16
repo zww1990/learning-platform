@@ -1,4 +1,4 @@
-package com.cfilmcloud.collate.orm.repository;
+package com.demo.collate.orm.repository;
 
 import java.util.Collection;
 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.cfilmcloud.collate.orm.domain.TSysTaskSchedule;
+import com.demo.collate.orm.domain.TSysTaskSchedule;
 
 public interface TSysTaskScheduleDao
 		extends JpaRepository<TSysTaskSchedule, Integer>, JpaSpecificationExecutor<TSysTaskSchedule> {

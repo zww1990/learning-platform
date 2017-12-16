@@ -1,8 +1,8 @@
-package com.cfilmcloud.collate.orm.repository;
+package com.demo.collate.orm.repository;
 
 import java.util.List;
 
-import com.cfilmcloud.collate.orm.domain.TSysTaskCheckResultCommon;
+import com.demo.collate.orm.domain.TSysTaskCheckResultCommon;
 
 public interface TSysTaskCheckResultCommonDao {
 	List<TSysTaskCheckResultCommon> select(String table);

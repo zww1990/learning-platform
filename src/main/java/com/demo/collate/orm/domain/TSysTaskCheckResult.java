@@ -1,4 +1,4 @@
-package com.cfilmcloud.collate.orm.domain;
+package com.demo.collate.orm.domain;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

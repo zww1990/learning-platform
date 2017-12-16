@@ -1,11 +1,11 @@
-package com.cfilmcloud.collate.orm.repository;
+package com.demo.collate.orm.repository;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.cfilmcloud.collate.orm.domain.TSysDsConfigItem;
+import com.demo.collate.orm.domain.TSysDsConfigItem;
 
 public interface TSysDsConfigItemDao
 		extends JpaRepository<TSysDsConfigItem, Integer>, JpaSpecificationExecutor<TSysDsConfigItem> {
