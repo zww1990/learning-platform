@@ -29,9 +29,9 @@ public class ExerciseSunlandsTest {
 	public void init() {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
-		cookies.add("Hm_lvt_042f1b4fd18a22ee217f0673c4c1b92f=1513400586");
-		cookies.add("JSESSIONID=5C94276FE16EDC42D49DD3A0CA4FA9D1");
-		cookies.add("stuToken=203871f7743683c714352f733e25d6b7");
+//		cookies.add("Hm_lvt_042f1b4fd18a22ee217f0673c4c1b92f=1513400586");
+		cookies.add("JSESSIONID=844F6B7FF5F84A4F845419315B436950");
+		cookies.add("stuToken=599012022dcb01d8ea43b4cb0a4823bb");
 		headers.put(HttpHeaders.COOKIE, cookies);
 	}
 
@@ -40,12 +40,12 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "7159");
-			param.add("recordId", "1729665");
+			param.add("paperId", "7059");
+			param.add("recordId", "1751596");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
-			File file = new File(PARENT, "retrievePaperUserRecords.json");
+			File file = new File(PARENT, "retrievePaperUserRecords_1214.json");
 			this.mapper.writeValue(file, data);
 			System.err.println("OK!");
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class ExerciseSunlandsTest {
 	@Test
 	public void readJsonFile() {
 		try {
-			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords.json"),
+			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords_1214.json"),
 					List.class);
 			List<String> lines = new ArrayList<>();
 			data.forEach(x -> {
@@ -79,7 +79,7 @@ public class ExerciseSunlandsTest {
 					lines.add("\t" + optionTitle + " " + _content + (isCorrect == 1 ? "（√）" : ""));
 				});
 			});
-			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords.txt"), lines);
+			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords_1214.txt"), lines);
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();
