@@ -15,8 +15,8 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     sessionStorage.clear()
   }
-  let user = sessionStorage.getItem('user')
-  if (!user && to.path !== '/login') {
+  let casSt = sessionStorage.getItem('CAS-ST')
+  if (!casSt && to.path !== '/login') {
     next('/login')
   } else {
     next()

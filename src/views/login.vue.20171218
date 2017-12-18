@@ -44,11 +44,31 @@ export default {
         if (valid) {
           this.logining = true;
           api
-            .requestLogin(this.ruleForm2)
-            .then(res4 => {
-              this.logining = false;
-              sessionStorage.setItem("user", JSON.stringify(res4.data.user));
-              this.$router.push("/main");
+            .casCreateTGT(this.ruleForm2)
+            .then(res => {
+              let location = res.headers.location;
+              let ticket = location.substring(location.lastIndexOf("/") + 1);
+              api.casCreateST(ticket).then(res2 => {
+                api.casServiceValidate(res2.data).then(res3 => {
+                  this.logining = false;
+                  if (res3.data.trim().indexOf("INVALID_TICKET") === -1) {
+                    api.requestLogin(this.ruleForm2).then(res4 => {
+                      sessionStorage.setItem("CAS-TGT", ticket);
+                      sessionStorage.setItem("CAS-ST", res2.data);
+                      sessionStorage.setItem(
+                        "user",
+                        JSON.stringify(res4.data.user)
+                      );
+                      this.$router.push("/main");
+                    });
+                  } else {
+                    this.$message({
+                      message: `未能够识别出目标 [${res2.data}] 票根`,
+                      type: "error"
+                    });
+                  }
+                });
+              });
             })
             .catch(e => {
               this.logining = false;
