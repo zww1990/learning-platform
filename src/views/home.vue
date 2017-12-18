@@ -49,7 +49,7 @@
         <div class="grid-content bg-purple-light">
           <el-col :span="24">
             <el-tabs v-model="activeIndex" type="card" closable @tab-remove="tabRemove" @tab-click="tabClick" v-if="options.length">
-              <el-tab-pane v-for="(item, index) in options" :key="item.name" :label="item.name" :name="item.path"></el-tab-pane>
+              <el-tab-pane v-for="item in options" :key="item.name" :label="item.name" :name="item.path"></el-tab-pane>
             </el-tabs>
           </el-col>
           <el-col :span="24" class="content-wrapper">
