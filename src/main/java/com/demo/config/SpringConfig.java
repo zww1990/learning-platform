@@ -1,8 +1,34 @@
 package com.demo.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.spring.AnnotationBean;
 
 @Configuration
 @ComponentScan("com.demo")
-public class SpringConfig {}
+public class SpringConfig {
+	@Bean
+	public static AnnotationBean annotationBean(Environment env) {
+		AnnotationBean bean = new AnnotationBean();
+		bean.setPackage(env.getProperty("dubbo.annotation.package"));
+		return bean;
+	}
+
+	@Bean
+	public ApplicationConfig applicationConfig(AppProperties props) {
+		ApplicationConfig config = new ApplicationConfig();
+		config.setName(props.getAppName());
+		return config;
+	}
+
+	@Bean
+	public RegistryConfig registryConfig(AppProperties props) {
+		RegistryConfig config = new RegistryConfig();
+		config.setAddress(props.getRegistryAddress());
+		return config;
+	}
+}

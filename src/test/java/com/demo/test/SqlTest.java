@@ -4,29 +4,10 @@ import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.Test;
-
-import com.demo.nebula.crawler.dao.mapper.TSysDsConfigSqlProvider;
-import com.demo.nebula.crawler.model.TSysDsConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SqlTest {
-	@Test
-	public void testSql() {
-		try {
-			TSysDsConfigSqlProvider provider = new TSysDsConfigSqlProvider();
-			TSysDsConfig record = new TSysDsConfig();
-			record.setCreater("zww");
-			record.setCreateTime(new Date());
-			record.setIsDelete(1);
-			String sql = provider.insertSelective(record);
-			System.out.println(sql);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	@Test
 	public void testJson() {
 		try {

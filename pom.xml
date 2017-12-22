@@ -134,6 +134,33 @@
 		    <artifactId>log4j-over-slf4j</artifactId>
 		    <version>${slf4j.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.wiwj.cbs</groupId>
+			<artifactId>bdm-base-api</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>dubbo</artifactId>
+		    <version>2.5.5</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>org.jboss.netty</groupId>
+		    		<artifactId>netty</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>com.101tec</groupId>
+		    <artifactId>zkclient</artifactId>
+		    <version>0.10</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.zookeeper</groupId>
+		    <artifactId>zookeeper</artifactId>
+		    <version>3.4.10</version>
+		</dependency>
 	</dependencies>
 
 	<build>
