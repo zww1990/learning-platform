@@ -22,8 +22,8 @@ public class AppTest {
 	@Test
 	public void test() {
 		try {
-			System.out.println(this.aservice);
-			System.out.println(this.bservice);
+			System.err.println(this.aservice);
+			System.err.println(this.bservice);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
