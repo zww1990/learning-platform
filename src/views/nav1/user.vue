@@ -13,18 +13,41 @@
     </el-col>
     <!--列表-->
     <template>
-      <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
+      <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;" @cell-click="onCellDbclick">
         <el-table-column type="index" width="60">
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="120" sortable>
+          <template slot-scope="scope">
+            <span v-show="!scope.row.editable">{{scope.row.name}}</span>
+            <el-input v-model="scope.row.name" placeholder="请输入姓名" v-show="scope.row.editable"></el-input>
+          </template>
         </el-table-column>
-        <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
+        <el-table-column prop="sex" label="性别" width="150" sortable>
+          <template slot-scope="scope">
+            <span v-show="!scope.row.editable">{{formatSex(scope.row)}}</span>
+            <el-radio-group v-model="scope.row.sex" v-show="scope.row.editable">
+              <el-radio :label="1">男</el-radio>
+              <el-radio :label="0">女</el-radio>
+            </el-radio-group>
+          </template>
         </el-table-column>
-        <el-table-column prop="age" label="年龄" width="100" sortable>
+        <el-table-column prop="age" label="年龄" width="200" sortable>
+          <template slot-scope="scope">
+            <span v-show="!scope.row.editable">{{scope.row.age}}</span>
+            <el-input-number v-model="scope.row.age" v-show="scope.row.editable" :min="1" :max="100"></el-input-number>
+          </template>
         </el-table-column>
-        <el-table-column prop="birth" label="生日" width="120" sortable>
+        <el-table-column prop="birth" label="生日" width="250" sortable>
+          <template slot-scope="scope">
+            <span v-show="!scope.row.editable">{{scope.row.birth}}</span>
+            <el-date-picker v-model="scope.row.birth" placeholder="请选择日期" v-show="scope.row.editable"></el-date-picker>
+          </template>
         </el-table-column>
-        <el-table-column prop="addr" label="地址" min-width="180" sortable>
+        <el-table-column prop="addr" label="地址" min-width="200" sortable>
+          <template slot-scope="scope">
+            <span v-show="!scope.row.editable">{{scope.row.addr}}</span>
+            <el-input v-model="scope.row.addr" placeholder="请输入地址" v-show="scope.row.editable"></el-input>
+          </template>
         </el-table-column>
       </el-table>
     </template>
@@ -54,9 +77,15 @@ export default {
       };
       this.loading = true;
       api.getUserList(para).then(res => {
-        this.users = res.data.users;
+        this.users = res.data.users.map(v => {
+          v.editable = false;
+          return v;
+        });
         this.loading = false;
       });
+    },
+    onCellDbclick(row, column, cell, event) {
+      row.editable = true;
     }
   },
   mounted() {
