@@ -85,6 +85,11 @@ export default new Router({
           path: '/page9',
           component: () => import('@/views/nav3/page9'),
           name: '页面9'
+        },
+        {
+          path: '/page10',
+          component: () => import('@/views/nav3/page10'),
+          name: '页面10'
         }
       ]
     },

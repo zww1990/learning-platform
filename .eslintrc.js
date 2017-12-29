@@ -16,7 +16,7 @@ module.exports = {
     'html'
   ],
   // add your custom rules here
-  'rules': {
+  rules: {
     // allow paren-less arrow functions
     'arrow-parens': 0,
     'arrow-spacing': 0,
@@ -40,5 +40,8 @@ module.exports = {
     'no-constant-condition': 0,
     'no-trailing-spaces': 0,
     'no-multiple-empty-lines': 0
+  },
+  globals: {
+    'AMap': true
   }
 }
