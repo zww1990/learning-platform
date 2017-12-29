@@ -7,9 +7,9 @@
     </el-col>
     <el-col :span="12">
       <el-card>
-        <el-input v-model="position.lng" placeholder="请输入经度值"></el-input>
-        <el-input v-model="position.lat" placeholder="请输入纬度值"></el-input>
         <el-button type="primary" @click="addMarker">添加坐标</el-button>
+        <div>经纬度：[{{ position.lng }}, {{ position.lat }}]</div>
+        <div>地址：{{ address }}</div>
       </el-card>
     </el-col>
   </el-row>
@@ -18,11 +18,13 @@
 import VueAMap from "vue-amap";
 export default {
   data() {
+    let self = this;
     return {
       position: {
-        lng: "",
-        lat: ""
+        lng: 116.397474,
+        lat: 39.908692
       },
+      address: "",
       zoom: 12,
       center: [116.397474, 39.908692],
       amapManager: new VueAMap.AMapManager(),
@@ -32,18 +34,28 @@ export default {
             position: [116.397474, 39.908692]
           });
           marker.setMap(map);
+        },
+        click(e) {
+          let { lng, lat } = e.lnglat;
+          self.position = { lng, lat };
+          let geocoder = new AMap.Geocoder({
+            radius: 1000,
+            extensions: "all"
+          });
+          geocoder.getAddress([lng, lat], (status, result) => {
+            if (status === "complete" && result.info === "OK") {
+              if (result && result.regeocode) {
+                self.address = result.regeocode.formattedAddress;
+                self.$nextTick();
+              }
+            }
+          });
         }
       }
     };
   },
   methods: {
     addMarker() {
-      if (!this.position.lng || !this.position.lat) {
-        return;
-      }
-      if (isNaN(this.position.lng) || isNaN(this.position.lat)) {
-        return;
-      }
       let map = this.amapManager.getMap();
       let marker = new AMap.Marker({
         position: [this.position.lng, this.position.lat]
