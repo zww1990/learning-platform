@@ -1,45 +1,59 @@
 <template>
-  <el-card>
-    <el-amap class="amap-box" vid="amap-vue" :center="center" :amap-manager="amapManager" :zoom="zoom" :events="events"></el-amap>
-    <el-button type="primary" @click="add">添加</el-button>
-  </el-card>
+  <el-row :gutter="10">
+    <el-col :span="12">
+      <el-card>
+        <el-amap class="amap-box" vid="amap-vue" :center="center" :amap-manager="amapManager" :zoom="zoom" :events="events"></el-amap>
+      </el-card>
+    </el-col>
+    <el-col :span="12">
+      <el-card>
+        <el-input v-model="position.lng" placeholder="请输入经度值"></el-input>
+        <el-input v-model="position.lat" placeholder="请输入纬度值"></el-input>
+        <el-button type="primary" @click="addMarker">添加坐标</el-button>
+      </el-card>
+    </el-col>
+  </el-row>
 </template>
 <script>
 import VueAMap from "vue-amap";
-let amapManager = new VueAMap.AMapManager();
 export default {
   data() {
     return {
+      position: {
+        lng: "",
+        lat: ""
+      },
       zoom: 12,
-      center: [121.59996, 31.197646],
-      amapManager,
+      center: [116.397474, 39.908692],
+      amapManager: new VueAMap.AMapManager(),
       events: {
-        init(o) {
+        init(map) {
           let marker = new AMap.Marker({
-            position: [121.59996, 31.197646]
+            position: [116.397474, 39.908692]
           });
-          marker.setMap(o);
+          marker.setMap(map);
         }
       }
     };
   },
   methods: {
-    add() {
-      let o = amapManager.getMap();
+    addMarker() {
+      if (!this.position.lng || !this.position.lat) {
+        return;
+      }
+      if (isNaN(this.position.lng) || isNaN(this.position.lat)) {
+        return;
+      }
+      let map = this.amapManager.getMap();
       let marker = new AMap.Marker({
-        position: [121.59996, 31.177646]
+        position: [this.position.lng, this.position.lat]
       });
-      marker.setMap(o);
+      marker.setMap(map);
     }
   }
 };
 </script>
-
 <style scoped>
-.el-card {
-  width: 500px;
-  height: 600px;
-}
 .amap-box {
   width: 500px;
   height: 500px;
