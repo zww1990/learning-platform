@@ -32,7 +32,7 @@ public class ExerciseSunlandsTest {
 		cookies.add("stuToken=ec9f3ea001b20c80ca63e3db1a1af0f3");
 		cookies.add("JSESSIONID=45FECAE8B94F3264D30B17210983C39A");
 		headers.put(HttpHeaders.COOKIE, cookies);
-		fileName = "retrievePaperUserRecords_1213";
+		fileName = "retrievePaperUserRecords_1226";
 	}
 
 	@Test
@@ -40,8 +40,8 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "6912");
-			param.add("recordId", "2043416");
+			param.add("paperId", "8271");
+			param.add("recordId", "2043747");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
