@@ -30,8 +30,8 @@ public class ExerciseSunlandsTest {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
 //		cookies.add("Hm_lvt_042f1b4fd18a22ee217f0673c4c1b92f=1513400586");
-		cookies.add("JSESSIONID=844F6B7FF5F84A4F845419315B436950");
-		cookies.add("stuToken=599012022dcb01d8ea43b4cb0a4823bb");
+		cookies.add("JSESSIONID=6C1F638D87822070F1C219F65E30FE32");
+		cookies.add("stuToken=b3f0d0e152decd967f2804be17e9e576");
 		headers.put(HttpHeaders.COOKIE, cookies);
 	}
 
@@ -40,12 +40,12 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "7059");
-			param.add("recordId", "1751596");
+			param.add("paperId", "7919");
+			param.add("recordId", "1988374");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
-			File file = new File(PARENT, "retrievePaperUserRecords_1214.json");
+			File file = new File(PARENT, "retrievePaperUserRecords_1222.json");
 			this.mapper.writeValue(file, data);
 			System.err.println("OK!");
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class ExerciseSunlandsTest {
 	@Test
 	public void readJsonFile() {
 		try {
-			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords_1214.json"),
+			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords_1222.json"),
 					List.class);
 			List<String> lines = new ArrayList<>();
 			data.forEach(x -> {
@@ -79,7 +79,7 @@ public class ExerciseSunlandsTest {
 					lines.add("\t" + optionTitle + " " + _content + (isCorrect == 1 ? "（√）" : ""));
 				});
 			});
-			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords_1214.txt"), lines);
+			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords_1222.txt"), lines);
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();
