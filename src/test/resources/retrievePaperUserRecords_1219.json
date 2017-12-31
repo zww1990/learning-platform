@@ -1,0 +1,1520 @@
+[
+	{
+		"recordId": 2041972,
+		"id": 265717,
+		"paperId": 7503,
+		"sequence": 1,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在社会存在与社会意识的关系问题上，两种根本对立的观点是（ ）",
+		"correctAnswer": "C",
+		"analysis": "P128，社会存在和社会意识的关系问题，是划分历史唯物主义和历史唯心主义的根本标准。凡是认为社会存在决定社会意识的，属于历史唯物主义；凡是认为社会意识决定社会存在的，属于历史唯心主义。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984274,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "机械唯物主义和辩证唯物主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 984275,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "可知论与不可知论",
+				"isCorrect": 0
+			},
+			{
+				"id": 984276,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "历史唯物主义与历史唯心主义",
+				"isCorrect": 1
+			},
+			{
+				"id": 984277,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "辩证法与形而上学",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265718,
+		"paperId": 7503,
+		"sequence": 2,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在生产关系的诸要素中起决定作用的是（ ）",
+		"correctAnswer": "D",
+		"analysis": "P130，生产关系是指人们在物质生产过程中结成的经济关系。它包括三项内容：（1）生产资料的所有制形式；（2）人们在生产中的地位及其相互关系（包括交换）；（3）产品的分配方式。其中生产资料所有制形式起着决定作用，它是整个生产关系的基础。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984278,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "产品的分配方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984279,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人们在生产中的地位",
+				"isCorrect": 0
+			},
+			{
+				"id": 984280,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "产品的交换方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984281,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "生产资料的所有制形式",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265719,
+		"paperId": 7503,
+		"sequence": 3,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "中国根据自己所处的社会主义初级阶段的国情，建立的基本经济制度是（ ）",
+		"correctAnswer": "B",
+		"analysis": "P132，生产关系必须适合生产力性质的规律，是无产阶级政党制定正确的路线、方针、政策的理论依据。我国社会主义初级阶段实行以公有制为主体、多种所有制经济共同发展的基本经济制度，就是以这一规律为理论依据的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984282,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会主义市场经济体制",
+				"isCorrect": 0
+			},
+			{
+				"id": 984283,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "以公有制为主体多种所有制经济共同发展的制度",
+				"isCorrect": 1
+			},
+			{
+				"id": 984284,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "对个人消费品实行各尽所能、按劳分配的制度",
+				"isCorrect": 0
+			},
+			{
+				"id": 984285,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "共产党领导的人民当家做主的制度",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265720,
+		"paperId": 7503,
+		"sequence": 4,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列关于政治上层建筑与观念上层建筑之间的关系，错误的是（ ）",
+		"correctAnswer": "D",
+		"analysis": "P133，政治上层建筑与观念上层建筑之间既相互区别，又互相依赖、互相渗透、互相作用、互相转化。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984286,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "相互区别",
+				"isCorrect": 0
+			},
+			{
+				"id": 984287,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "互相依赖",
+				"isCorrect": 0
+			},
+			{
+				"id": 984288,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "互相渗透、互相作用、互相转化",
+				"isCorrect": 0
+			},
+			{
+				"id": 984289,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "没有关系",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265721,
+		"paperId": 7503,
+		"sequence": 5,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列关于经济基础与上层建筑之间的矛盾，错误的是（ ）",
+		"correctAnswer": "D",
+		"analysis": "P133-134，①经济基础决定上层建筑。②上层建筑反作用于经济基础。③经济基础和上层建筑之间的矛盾运动。上层建筑必须适合经济基础发展要求的规律，是无产阶级政党制定正确的路线、方针、政策的理论依据。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984290,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "经济基础决定上层建筑",
+				"isCorrect": 0
+			},
+			{
+				"id": 984291,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "上层建筑反作用于经济基础",
+				"isCorrect": 0
+			},
+			{
+				"id": 984292,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "上层建筑必须适合经济基础发展要求的规律",
+				"isCorrect": 0
+			},
+			{
+				"id": 984293,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "上层建筑决定经济基础",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265722,
+		"paperId": 7503,
+		"sequence": 6,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "按照技术社会形态的划分标准，我们可以把人类历史划分为（ ）",
+		"correctAnswer": "B",
+		"analysis": "P136，技术社会形态划分法：以生产力和技术发展水平以及与此相适应的产业结构为标准划分社会形态。这样划分开来的社会形态，我们把它称为技术社会形态。人类历史的技术社会形态序列：渔猎社会—农业社会—工业社会—信息社会。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984294,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "古代社会、近代社会、现代社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 984295,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "渔猎社会、农业社会、工业社会、信息社会",
+				"isCorrect": 1
+			},
+			{
+				"id": 984296,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "自然经济社会、商品经济社会、产品经济社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 984297,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的依赖性社会、物的依赖性社会、个人全面发展的社会",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265723,
+		"paperId": 7503,
+		"sequence": 7,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列关于社会历史发展的决定性与选择性不正确的是",
+		"correctAnswer": "D",
+		"analysis": "P137-138，社会历史发展的决定性是指历史决定论，社会历史发展的选择性是指主体选择的作用。承认历史决定论和承认主体选择的作用是一致的。首先，在历史决定论看来，纯粹的必然性只存在于逻辑中。其次，在历史决定论看来，社会规律所揭示的社会过程之间的联系，不是单值对应的线性因果联系，即单义决定，而是多值的、或然的、非线性的因果联系，即或然决定。再次，每一种可能性的实现，又会有多种多样的形式，即各种具体的模式和途径。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984298,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会历史发展的决定性是指历史决定论",
+				"isCorrect": 0
+			},
+			{
+				"id": 984299,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会历史发展的选择性是指主体选择的作用",
+				"isCorrect": 0
+			},
+			{
+				"id": 984300,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "承认历史决定论和承认主体选择的作用是一致的",
+				"isCorrect": 0
+			},
+			{
+				"id": 984301,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "历史决定论与主体选择论没有什么关系",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265724,
+		"paperId": 7503,
+		"sequence": 8,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "推动社会发展的基本动力是（ ）",
+		"correctAnswer": "A",
+		"analysis": "P139-140，推动社会历史发展的动力是多方面的，构成人类社会的一切要素和矛盾，都可以构成社会历史发展的动力。其中，社会基本矛盾是社会发展的基本动力。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984302,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会基本矛盾",
+				"isCorrect": 1
+			},
+			{
+				"id": 984303,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "阶级斗争",
+				"isCorrect": 0
+			},
+			{
+				"id": 984304,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "社会革命",
+				"isCorrect": 0
+			},
+			{
+				"id": 984305,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "社会改革",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265725,
+		"paperId": 7503,
+		"sequence": 9,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "阶级斗争归根结底是由（ ）",
+		"correctAnswer": "A",
+		"analysis": "P142， 物质利益的对立是阶级斗争的根源。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984306,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "物质利益的对立引起的",
+				"isCorrect": 1
+			},
+			{
+				"id": 984307,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "思想观念的分歧引起的",
+				"isCorrect": 0
+			},
+			{
+				"id": 984308,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "政治理念的差异引起的",
+				"isCorrect": 0
+			},
+			{
+				"id": 984309,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "宗教信仰的不同引起的",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265726,
+		"paperId": 7503,
+		"sequence": 10,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "人的本质在于（ ）",
+		"correctAnswer": "C",
+		"analysis": "P148，人的本质不是由人的自然属性决定的，而是由人的社会属性决定的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984310,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人的自然属性",
+				"isCorrect": 0
+			},
+			{
+				"id": 984311,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人的道德品质",
+				"isCorrect": 0
+			},
+			{
+				"id": 984312,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人的社会属性",
+				"isCorrect": 1
+			},
+			{
+				"id": 984313,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的学识修养",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265727,
+		"paperId": 7503,
+		"sequence": 11,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "历史唯心主义和历史唯物主义在历史创造者问题上的根本对立在于是否承认（ ）",
+		"correctAnswer": "C",
+		"analysis": "P151，（1）在谁是历史创造者问题上，历史唯物主义和历史唯心主义存在着根本分歧。（2）历史唯心主义从社会意识决定社会存在的前提出发，认为历史是少数英雄人物创造的，否认人民群众是推动历史发展的决定力量，这是英雄史观。（3）历史唯物主义从社会存在决定社会意识的基本原理出发，认为人类历史首先是生产发展的历史。人民群众是历史的创造者，这是群众史观。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984314,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "个人在历史发展中的作用",
+				"isCorrect": 0
+			},
+			{
+				"id": 984315,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "思想动机在社会发展中的作用",
+				"isCorrect": 0
+			},
+			{
+				"id": 984316,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人民群众是推动历史发展的决定力量",
+				"isCorrect": 1
+			},
+			{
+				"id": 984317,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "剥削阶级代表人物在历史发展中的作用",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265728,
+		"paperId": 7503,
+		"sequence": 12,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "人民群众创造历史的活动受既定的历史条件的制约。这种观点是说（ ）",
+		"correctAnswer": "D",
+		"analysis": "P152，历史是人民群众创造的，但人民群众却不能随心所欲地创造历史，人民群众创造历史的活动受既定的历史条件的制约。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984318,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人民群众不是社会发展的决定力量",
+				"isCorrect": 0
+			},
+			{
+				"id": 984319,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人民群众不是历史的创造者",
+				"isCorrect": 0
+			},
+			{
+				"id": 984320,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人民群众不是历史活动的主体",
+				"isCorrect": 0
+			},
+			{
+				"id": 984321,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人民群众不能随心所欲地创造历史",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265729,
+		"paperId": 7503,
+		"sequence": 13,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "无产阶级领袖属于（ ）",
+		"correctAnswer": "A",
+		"analysis": "P156，无产阶级领袖也是杰出人物，但他们又与历史上的杰出人物不同，他们的历史作用是历史上其他杰出人物的作用无法比拟的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984322,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "杰出人物",
+				"isCorrect": 1
+			},
+			{
+				"id": 984323,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "普通人物",
+				"isCorrect": 0
+			},
+			{
+				"id": 984324,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "历史人物",
+				"isCorrect": 0
+			},
+			{
+				"id": 984325,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "社会群众",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265730,
+		"paperId": 7503,
+		"sequence": 14,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品的二因素包括（ ）",
+		"correctAnswer": "A",
+		"analysis": "P160，商品的二因素：使用价值和价值。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984326,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "使用价值和价值",
+				"isCorrect": 1
+			},
+			{
+				"id": 984327,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "超额剩余价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 984328,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "剩余价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 984329,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "相对价值",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265731,
+		"paperId": 7503,
+		"sequence": 15,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列关系中属于社会基本矛盾的有（ ）",
+		"correctAnswer": "A",
+		"analysis": "P124，生产力和生产关系之间的矛盾、经济基础和上层建筑之间的矛盾是人类社会的基本矛盾。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984330,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产力和生产关系",
+				"isCorrect": 1
+			},
+			{
+				"id": 984331,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产力与经济基础",
+				"isCorrect": 0
+			},
+			{
+				"id": 984332,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产力与上层建筑",
+				"isCorrect": 0
+			},
+			{
+				"id": 984333,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "生产关系和上层建筑",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265732,
+		"paperId": 7503,
+		"sequence": 16,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "地理环境是人类生存发展所依赖的诸种自然条件的总和，它由（ ）构成",
+		"correctAnswer": "D",
+		"analysis": "P124，地理环境是人类生存发展所依赖的诸种自然条件的总和，它由大气圈、水圈和岩石圈构成，适合生物生存的范围叫生物圈。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984334,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "大气圈",
+				"isCorrect": 0
+			},
+			{
+				"id": 984335,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "水圈",
+				"isCorrect": 0
+			},
+			{
+				"id": 984336,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "岩石圈",
+				"isCorrect": 0
+			},
+			{
+				"id": 984337,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "以上都是",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265733,
+		"paperId": 7503,
+		"sequence": 17,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "（ ）与（ ）的关系以及社会形态的划分和更替，与社会基本矛盾运动紧密相连",
+		"correctAnswer": "B",
+		"analysis": "P124，社会存在和社会意识的关系以及社会形态的划分和更替，与社会基本矛盾运动紧密相连。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984338,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产力和生产关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 984339,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会存在和社会意识",
+				"isCorrect": 1
+			},
+			{
+				"id": 984340,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "经济基础和上层建筑",
+				"isCorrect": 0
+			},
+			{
+				"id": 984341,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "政治生活和精神生活",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265734,
+		"paperId": 7503,
+		"sequence": 18,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "地理环境对生产的影响，下列说法正确的是（ ）",
+		"correctAnswer": "C",
+		"analysis": "P125，地理环境在社会发展中的作用：①地理环境通过对生产的影响，加速或延缓社会的发展。②地理环境还可以通过对军事、政治的影响，在一定程度上制约不同国家社会的发展。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984342,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "加速社会的发展",
+				"isCorrect": 0
+			},
+			{
+				"id": 984343,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "延缓社会的发展",
+				"isCorrect": 0
+			},
+			{
+				"id": 984344,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "加速或延缓社会的发展",
+				"isCorrect": 1
+			},
+			{
+				"id": 984345,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "无任何影响",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265735,
+		"paperId": 7503,
+		"sequence": 19,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "以下属于意识形态的范围的思想体系有（ ）",
+		"correctAnswer": "D",
+		"analysis": "P126，属于意识形态范围的思想体系，包括政治思想、法律思想、道德、宗教、艺术、哲学和绝大部分社会科学，它们是上层建筑的重要组成部分，反映特定的经济基础并为之服务，在阶级社会里具有一定的阶级性。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984346,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "自然科学",
+				"isCorrect": 0
+			},
+			{
+				"id": 984347,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "语言学",
+				"isCorrect": 0
+			},
+			{
+				"id": 984348,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "逻辑学",
+				"isCorrect": 0
+			},
+			{
+				"id": 984349,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "政治思想",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265736,
+		"paperId": 7503,
+		"sequence": 20,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "“作为观念形态的文艺作品，都是一定的社会生活在人类头脑中的反映的产物”，这句话强调的是（ ）",
+		"correctAnswer": "A",
+		"analysis": "P127，所谓社会存在决定社会意识，是指社会意识是社会存在的反映，社会意识依赖于社会存在。主要表现在以下三个方面：第一，社会意识的内容来源于社会存在。第二，社会意识随着社会存在的发展变化而发展变化。第三，社会意识受反映者(意识主体)的立场、观点、方法的影响和制约，而反映者的立场、观点、方法是由人们在社会存在中的地位决定的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984350,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会意识根源于社会存在",
+				"isCorrect": 1
+			},
+			{
+				"id": 984351,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会意识具有历史继承性",
+				"isCorrect": 0
+			},
+			{
+				"id": 984352,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "社会存在根源于社会意识",
+				"isCorrect": 0
+			},
+			{
+				"id": 984353,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "社会意识具有相对独立性",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265737,
+		"paperId": 7503,
+		"sequence": 21,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在社会存在与社会意识的关系问题上，两种根本对立的观点是（ ）",
+		"correctAnswer": "C",
+		"analysis": "P128，社会存在和社会意识的关系问题，是划分历史唯物主义和历史唯心主义的根本标准。凡是认为社会存在决定社会意识的，属于历史唯物主义；凡是认为社会意识决定社会存在的，属于历史唯心主义。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984354,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "机械唯物主义和辩证唯物主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 984355,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "可知论与不可知论",
+				"isCorrect": 0
+			},
+			{
+				"id": 984356,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "历史唯物主义与历史唯心主义",
+				"isCorrect": 1
+			},
+			{
+				"id": 984357,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "辩证法与形而上学",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265738,
+		"paperId": 7503,
+		"sequence": 22,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "现代生产力系统的四类要素不包括（ ）",
+		"correctAnswer": "A",
+		"analysis": "P128-129，现代生产力系统包括四类要素:（1）独立的实体性因素（2）运筹性的综合因素（3）渗透性因素（4）准备性因素。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984358,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "独立性因素",
+				"isCorrect": 1
+			},
+			{
+				"id": 984359,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "运筹性的综合因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 984360,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "渗透性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 984361,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "准备性因素",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265739,
+		"paperId": 7503,
+		"sequence": 23,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在现代生产力系统中，经济管理和预测决策属于（ ）",
+		"correctAnswer": "C",
+		"analysis": "P129，运筹性的综合因素，包括分工协作、经济管理、预测决策等。这类因素的作用，在于通过对生产力系统的其他因素的选择、调动、处置、匹配等手段，在数量和比例上做到合理结合，从而形成生产力的整体功能。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984362,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "独立的实体性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 984363,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "渗透性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 984364,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "运筹性的综合因素",
+				"isCorrect": 1
+			},
+			{
+				"id": 984365,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "准备性因素",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265740,
+		"paperId": 7503,
+		"sequence": 24,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在生产关系的诸要素中起决定作用的是（ ）",
+		"correctAnswer": "D",
+		"analysis": "P130，生产关系是指人们在物质生产过程中结成的经济关系。它包括三项内容：（1）生产资料的所有制形式；（2）人们在生产中的地位及其相互关系(包括交换)；（3）产品的分配方式。其中生产资料所有制形式起着决定作用，它是整个生产关系的基础。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984366,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "产品的分配方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984367,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人们在生产中的地位",
+				"isCorrect": 0
+			},
+			{
+				"id": 984368,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "产品的交换方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984369,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "生产资料的所有制形式",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265741,
+		"paperId": 7503,
+		"sequence": 25,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "经济基础是指一个社会中占统治地位的生产关系各个方面的总和，包括（ ）",
+		"correctAnswer": "D",
+		"analysis": "P132，经济基础是指一个社会中占统治地位的生产关系各个方面的总和，即生产资料所有制形式、各种不同的社会集团在生产中的地位及其相互关系、产品分配方式三个方面的总和。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984370,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产资料所有制形式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984371,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "各种不同的社会集团在生产中的地位及其相互关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 984372,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "产品分配方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 984373,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "以上都是",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265742,
+		"paperId": 7503,
+		"sequence": 26,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "（ ）是指一个社会中占统治地位的生产关系各个方面的总和",
+		"correctAnswer": "A",
+		"analysis": "P132，经济基础是指一个社会中占统治地位的生产关系各个方面的总和，即生产资料所有制形式、各种不同的社会集团在生产中的地位及其相互关系、产品分配方式三个方面的总和。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984374,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "经济基础",
+				"isCorrect": 1
+			},
+			{
+				"id": 984375,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产力",
+				"isCorrect": 0
+			},
+			{
+				"id": 984376,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "上层建筑",
+				"isCorrect": 0
+			},
+			{
+				"id": 984377,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "社会形态",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265743,
+		"paperId": 7503,
+		"sequence": 27,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "中国根据自己所处的社会主义初级阶段的国情，建立的基本经济制度是（ ）",
+		"correctAnswer": "B",
+		"analysis": "P132，生产关系必须适合生产力性质的规律，是无产阶级政党制定正确的路线、方针、政策的理论依据。我国社会主义初级阶段实行以公有制为主体、多种所有制经济共同发展的基本经济制度，就是以这一规律为理论依据的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984378,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会主义市场经济体制",
+				"isCorrect": 0
+			},
+			{
+				"id": 984379,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "以公有制为主体多种所有制经济共同发展的制度",
+				"isCorrect": 1
+			},
+			{
+				"id": 984380,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "对个人消费品实行各尽所能、按劳分配的制度",
+				"isCorrect": 0
+			},
+			{
+				"id": 984381,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "共产党领导的人民当家做主的制度",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265744,
+		"paperId": 7503,
+		"sequence": 28,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "社会的政治、法律、艺术、道德、宗教、哲学等意识形态以及与这些意识形态相适应的政治法律制度和设施的总和是指（ ）",
+		"correctAnswer": "A",
+		"analysis": "P133，上层建筑是与经济基础相对应的范畴，指社会的政治、法律、艺术、道德、宗教、哲学等意识形态以及与这些意识形态相适应的政治法律制度和设施的总和，分为政治上层建筑和观念上层建筑两部分。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984382,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "上层建筑",
+				"isCorrect": 1
+			},
+			{
+				"id": 984383,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "经济基础",
+				"isCorrect": 0
+			},
+			{
+				"id": 984384,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "政治制度",
+				"isCorrect": 0
+			},
+			{
+				"id": 984385,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "政治思想",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265745,
+		"paperId": 7503,
+		"sequence": 29,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列关于社会历史发展的决定性与选择性不正确的是（ ）",
+		"correctAnswer": "C",
+		"analysis": "P137-138，社会历史发展的决定性是指历史决定论，社会历史发展的选择性是指主体选择的作用。承认历史决定论和承认主体选择的作用是一致的：首先，在历史决定论看来，纯粹的必然性只存在于逻辑中。其次，在历史决定论看来，社会规律所揭示的社会过程之间的联系，不是单值对应的线性因果联系，即单义决定，而是多值的、或然的、非线性的因果联系，即或然决定。再次，每一种可能性的实现，又会有多种多样的形式，即各种具体的模式和途径。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984386,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会历史发展的决定性是指历史决定论",
+				"isCorrect": 0
+			},
+			{
+				"id": 984387,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会历史发展的选择性是指主体选择的作用",
+				"isCorrect": 0
+			},
+			{
+				"id": 984388,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "历史决定论与主体选择论没有什么关系",
+				"isCorrect": 1
+			},
+			{
+				"id": 984389,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "承认历史决定论和承认主体选择的作用是一致的",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265746,
+		"paperId": 7503,
+		"sequence": 30,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "两对社会基本矛盾之间的关系为（ ）",
+		"correctAnswer": "C",
+		"analysis": "P139-140，生产力和生产关系之间的矛盾、经济基础和上层建筑之间的矛盾这两对基本矛盾，不是互相孤立、互相平行的，而是相互制约、有主次之分的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984390,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "互相孤立，互相平行",
+				"isCorrect": 0
+			},
+			{
+				"id": 984391,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "相互制约，无主次之分",
+				"isCorrect": 0
+			},
+			{
+				"id": 984392,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "相互制约，有主次之分",
+				"isCorrect": 1
+			},
+			{
+				"id": 984393,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "无关系",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265747,
+		"paperId": 7503,
+		"sequence": 31,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "阶级产生的根本原因是（ ）",
+		"correctAnswer": "C",
+		"analysis": "P141，到原始社会末期，生产力有了一定发展，出现了剩余产品，劳动力有了价值，为阶级的产生提供了可能性。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984394,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "用暴力掠夺他人财产",
+				"isCorrect": 0
+			},
+			{
+				"id": 984395,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "用特权掠夺他人财产",
+				"isCorrect": 0
+			},
+			{
+				"id": 984396,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产力有一定发展而出现剩余产品",
+				"isCorrect": 1
+			},
+			{
+				"id": 984397,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "由于分配不公平而出现两极化",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265748,
+		"paperId": 7503,
+		"sequence": 32,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "以下几点不是人民群众推动历史发展的作用的是（ ）",
+		"correctAnswer": "D",
+		"analysis": "P152，人民群众推动历史发展的作用，主要表现在以下三个方面，第一，人民群众是物质财富的创造者。第二，人民群众是精神财富的创造者。第三，人民群众是实现社会变革的决定力量。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984398,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人民群众是物质财富的创造者",
+				"isCorrect": 0
+			},
+			{
+				"id": 984399,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人民群众是精神财富的创造者",
+				"isCorrect": 0
+			},
+			{
+				"id": 984400,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人民群众是实现社会变革的决定力量",
+				"isCorrect": 0
+			},
+			{
+				"id": 984401,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人民群众不能随心所欲地创造历史",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2041972,
+		"id": 265749,
+		"paperId": 7503,
+		"sequence": 33,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "无产阶级政党及其成员言行的最高准则为（ ）",
+		"correctAnswer": "B",
+		"analysis": "P153，无产阶级政党及其成员，要把向人民群众负责作为自己言行的最高准则，要为人民群众的利益坚持真理、修正错误，把对党的领导机关负责和对人民群众负责统一起来。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 33,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 984402,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "努力帮助人民群众",
+				"isCorrect": 0
+			},
+			{
+				"id": 984403,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "向人民群众负责",
+				"isCorrect": 1
+			},
+			{
+				"id": 984404,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "不搞特权",
+				"isCorrect": 0
+			},
+			{
+				"id": 984405,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "充分尊重人民所表达的意愿",
+				"isCorrect": 0
+			}
+		]
+	}
+]
