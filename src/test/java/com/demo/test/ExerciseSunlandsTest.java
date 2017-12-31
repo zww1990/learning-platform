@@ -29,10 +29,10 @@ public class ExerciseSunlandsTest {
 	public void init() {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
-		cookies.add("JSESSIONID=6C1F638D87822070F1C219F65E30FE32");
-		cookies.add("stuToken=b3f0d0e152decd967f2804be17e9e576");
+		cookies.add("stuToken=ec9f3ea001b20c80ca63e3db1a1af0f3");
+		cookies.add("JSESSIONID=45FECAE8B94F3264D30B17210983C39A");
 		headers.put(HttpHeaders.COOKIE, cookies);
-		fileName = "retrievePaperUserRecords_1219";
+		fileName = "retrievePaperUserRecords_1213";
 	}
 
 	@Test
@@ -40,8 +40,8 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "7440");
-			param.add("recordId", "2042540");
+			param.add("paperId", "6912");
+			param.add("recordId", "2043416");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
