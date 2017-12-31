@@ -40,12 +40,12 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "7919");
-			param.add("recordId", "1988374");
+			param.add("paperId", "7734");
+			param.add("recordId", "1989700");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
-			File file = new File(PARENT, "retrievePaperUserRecords_1222.json");
+			File file = new File(PARENT, "retrievePaperUserRecords_1221.json");
 			this.mapper.writeValue(file, data);
 			System.err.println("OK!");
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class ExerciseSunlandsTest {
 	@Test
 	public void readJsonFile() {
 		try {
-			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords_1222.json"),
+			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, "retrievePaperUserRecords_1221.json"),
 					List.class);
 			List<String> lines = new ArrayList<>();
 			data.forEach(x -> {
@@ -79,7 +79,7 @@ public class ExerciseSunlandsTest {
 					lines.add("\t" + optionTitle + " " + _content + (isCorrect == 1 ? "（√）" : ""));
 				});
 			});
-			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords_1222.txt"), lines);
+			FileUtils.writeLines(new File(PARENT, "retrievePaperUserRecords_1221.txt"), lines);
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();
