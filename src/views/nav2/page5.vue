@@ -24,8 +24,10 @@ export default {
   methods: {
     showTimes() {
       this.times = JSON.parse(sessionStorage.getItem("times")) || [];
+      let today = Date.now();
       setInterval(() => {
-        let time = moment(this.now).fromNow();
+        this.now = Date.now();
+        let time = moment(today).fromNow();
         if (!this.times.includes(time)) {
           this.times.push(time);
           sessionStorage.setItem("times", JSON.stringify(this.times));
