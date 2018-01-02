@@ -1,4 +1,4 @@
-package com.cfilmcloud.test;
+package com.demo.test;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -51,14 +51,14 @@ public class AsiaUncensoredAuthorshipSeedTest {
 		String childHref = null;
 		for (int page = 74, length = 74; page <= length; page++) {
 			try {
-				Element body = Jsoup.connect(forumdisplay_url)
-						.timeout(connectionTimeout).data("fid", "143", "filter", "type", "typeid", "76", "orderby",
-								"dateline", "ascdesc", "ASC", "page", Integer.toString(page))
+				Element body = Jsoup
+						.connect(forumdisplay_url).timeout(connectionTimeout).data("fid", "143", "filter", "type",
+								"typeid", "76", "orderby", "dateline", "ascdesc", "ASC", "page", Integer.toString(page))
 						.cookies(cookies).headers(headers).get().body();
 				Elements elements = body.select(cssQuery);
 				for (Element element : elements) {
 					href = element.attr("href");
-//					System.out.println(element.text());
+					// System.out.println(element.text());
 					try {
 						body = Jsoup.connect(prefix_url + href).timeout(readTimeout).cookies(cookies).headers(headers)
 								.get().body();

@@ -14,9 +14,6 @@
 			<property name="searchString" value="Example$" />
 			<property name="replaceString" value="Criteria" />
 		</plugin> -->
-		<!--分页插件路径 -->
-		<!-- <plugin type="com.cfilmcloud.framework.utils.mybatis.generator.plugin.MySQLPaginationPlugin" /> -->
-		<!--<plugin type="com.cfilmcloud.framework.utils.mybatis.generator.plugin.OraclePaginationPlugin" /> -->
 		<!-- 该插件给Example类添加方法（实际上是给Criteria内部类）来支持不区分大小写的LIKE搜索 -->
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<!-- 去除自动生成的注释 -->

@@ -1,4 +1,4 @@
-package com.cfilmcloud.test;
+package com.demo.test;
 
 import java.io.File;
 import java.net.URL;
@@ -19,19 +19,19 @@ import org.springframework.util.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SuppressWarnings("unchecked")
-public class McxiaoxianerTest {
+public class MusicTest {
+	private static final String MUSIC_URL = "http://mcxiaoxianer.i.dj66.net/music/";
 	private static final String DANCE_SHOW_URL = "http://www.dj66.net/index.php/ajax/dance_show";
 	private static final String PARENT = "D:\\Projects\\zww\\mybatis\\src\\test\\resources";
 
 	@Test
 	public void writeFile() {
-		int length = 7;
-		String cssQuery = "div.header_new > div.content_special > div.right > ul#list > li > div.song > span.cbox > input";
+		int length = 10;
+		String cssQuery = "div.spaceMain > div.mainCenter > div.publicLeft > div.stageBox > div.stageBoxCenter > div.danceFavoritesList > form#list > ul.share_list > li > div.song > span.cbox > input";
 		try {
 			List<String> valueList = new ArrayList<String>();
 			for (int i = 1; i <= length; i++) {
-				String url = "http://www.dj66.net/zj----mcxiaoxianer----" + i + ".html";
-				Element body = Jsoup.connect(url).get().body();
+				Element body = Jsoup.connect(MUSIC_URL + i).get().body();
 				List<String> list = body.select(cssQuery).stream().map(x -> x.val()).collect(Collectors.toList());
 				valueList.addAll(list);
 			}
@@ -40,7 +40,7 @@ public class McxiaoxianerTest {
 			String text = doc.body().text();
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String, Map<String, String>> valueMap = mapper.readValue(text, Map.class);
-			File file = new File(PARENT, "mcxiaoxianer.json");
+			File file = new File(PARENT, "music.json");
 			mapper.writeValue(file, valueMap);
 			System.err.println("ok!");
 		} catch (Exception e) {
@@ -49,15 +49,15 @@ public class McxiaoxianerTest {
 	}
 
 	private static final String URL_PREFIX = "http://dpn.sosotxt.com";
-	private static final String FILE_DIR_PREFIX = "F:\\TDDOWNLOAD\\Mc小仙儿-自慰催眠\\";
+	private static final String FILE_DIR_PREFIX = "F:\\TDDOWNLOAD\\Mc小仙儿-music\\";
 	private static final String REGEX = "[\\/:*?\"<>|]";
 
 	@Test
 	public void readFile() {
 		try {
-			int seq = 7;
+			int seq = 10;
 			ObjectMapper mapper = new ObjectMapper();
-			ClassPathResource resource = new ClassPathResource("mcxiaoxianer" + seq + ".json");
+			ClassPathResource resource = new ClassPathResource("music" + seq + ".json");
 			Map<String, Map<String, String>> map = mapper.readValue(resource.getInputStream(), Map.class);
 			Collection<Map<String, String>> values = map.values();
 			System.err.println("开始下载。。。");
