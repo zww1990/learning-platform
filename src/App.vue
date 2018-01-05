@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-  name: "app"
+  name: 'app'
 };
 </script>
 <style lang="scss">
@@ -28,11 +28,11 @@ body {
   bottom: 0px;
   width: 100%;
 }
-.el-submenu [class^="fa"] {
+.el-submenu [class^='fa'] {
   vertical-align: baseline;
   margin-right: 10px;
 }
-.el-menu-item [class^="fa"] {
+.el-menu-item [class^='fa'] {
   vertical-align: baseline;
   margin-right: 10px;
 }

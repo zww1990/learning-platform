@@ -15,7 +15,7 @@
   </el-row>
 </template>
 <script>
-import VueAMap from "vue-amap";
+import VueAMap from 'vue-amap';
 export default {
   data() {
     let self = this;
@@ -24,7 +24,7 @@ export default {
         lng: 116.397474,
         lat: 39.908692
       },
-      address: "",
+      address: '',
       zoom: 12,
       center: [116.397474, 39.908692],
       amapManager: new VueAMap.AMapManager(),
@@ -40,10 +40,10 @@ export default {
           self.position = { lng, lat };
           let geocoder = new AMap.Geocoder({
             radius: 1000,
-            extensions: "all"
+            extensions: 'all'
           });
           geocoder.getAddress([lng, lat], (status, result) => {
-            if (status === "complete" && result.info === "OK") {
+            if (status === 'complete' && result.info === 'OK') {
               if (result && result.regeocode) {
                 self.address = result.regeocode.formattedAddress;
                 self.$nextTick();

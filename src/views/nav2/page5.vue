@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import moment from "moment";
-moment.locale("zh-cn");
+import moment from 'moment';
+moment.locale('zh-cn');
 export default {
   data() {
     return {
@@ -23,19 +23,19 @@ export default {
   },
   methods: {
     showTimes() {
-      this.times = JSON.parse(sessionStorage.getItem("times")) || [];
+      this.times = JSON.parse(sessionStorage.getItem('times')) || [];
       let today = Date.now();
       setInterval(() => {
         this.now = Date.now();
         let time = moment(today).fromNow();
         if (!this.times.includes(time)) {
           this.times.push(time);
-          sessionStorage.setItem("times", JSON.stringify(this.times));
+          sessionStorage.setItem('times', JSON.stringify(this.times));
         }
       }, 1000);
     },
     resetTime() {
-      sessionStorage.removeItem("times");
+      sessionStorage.removeItem('times');
       this.times = [];
       this.now = Date.now();
     }
@@ -46,7 +46,7 @@ export default {
   filters: {
     datetime(value, format) {
       if (!format) {
-        format = "YYYY-MM-DD HH:mm:ss";
+        format = 'YYYY-MM-DD HH:mm:ss';
       }
       return moment(value).format(format);
     }
@@ -60,7 +60,7 @@ export default {
 .clearfix:before,
 .clearfix:after {
   display: table;
-  content: "";
+  content: '';
 }
 .clearfix:after {
   clear: both;

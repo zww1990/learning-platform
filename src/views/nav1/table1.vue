@@ -6,9 +6,9 @@
   </el-table>
 </template>
 <script>
-import api from "@/api";
+import api from '@/api';
 export default {
-  name: "table1",
+  name: 'table1',
   props: {
     row: {
       type: Object,

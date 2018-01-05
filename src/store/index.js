@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
@@ -31,14 +31,12 @@ const store = new Vuex.Store({
     },
     //清空tabs数组
     clean_tabs(state) {
-      state.options = []
+      state.options = [];
     }
   },
   //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
-  actions: {
-  },
-  getters: {
-  }
-})
+  actions: {},
+  getters: {}
+});
 
-export default store
+export default store;

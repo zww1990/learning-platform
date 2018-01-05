@@ -100,13 +100,13 @@
   </section>
 </template>
 <script>
-import moment from "moment";
-import api from "@/api";
+import moment from 'moment';
+import api from '@/api';
 export default {
   data() {
     return {
       filters: {
-        name: ""
+        name: ''
       },
       users: [],
       total: 0,
@@ -116,36 +116,36 @@ export default {
       editFormVisible: false, //编辑界面是否显示
       editLoading: false,
       editFormRules: {
-        name: [{ required: true, message: "请输入姓名", trigger: "blur" }]
+        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
       },
       //编辑界面数据
       editForm: {
         id: 0,
-        name: "",
+        name: '',
         sex: -1,
         age: 0,
-        birth: "",
-        addr: ""
+        birth: '',
+        addr: ''
       },
       addFormVisible: false, //新增界面是否显示
       addLoading: false,
       addFormRules: {
-        name: [{ required: true, message: "请输入姓名", trigger: "blur" }]
+        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
       },
       //新增界面数据
       addForm: {
-        name: "",
+        name: '',
         sex: -1,
         age: 0,
-        birth: "",
-        addr: ""
+        birth: '',
+        addr: ''
       }
     };
   },
   methods: {
     //性别显示转换
     formatSex(row, column) {
-      return row.sex === 1 ? "男" : row.sex === 0 ? "女" : "未知";
+      return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知';
     },
     handleCurrentChange(val) {
       this.page = val;
@@ -166,16 +166,16 @@ export default {
     },
     //删除
     handleDel(index, row) {
-      this.$confirm("确认删除该记录吗?", "提示", {
-        type: "warning"
+      this.$confirm('确认删除该记录吗?', '提示', {
+        type: 'warning'
       }).then(() => {
         this.listLoading = true;
         let para = { id: row.id };
         api.removeUser(para).then(res => {
           this.listLoading = false;
           this.$message({
-            message: "删除成功",
-            type: "success"
+            message: '删除成功',
+            type: 'success'
           });
           this.getUsers();
         });
@@ -190,31 +190,31 @@ export default {
     handleAdd() {
       this.addFormVisible = true;
       this.addForm = {
-        name: "",
+        name: '',
         sex: -1,
         age: 0,
-        birth: "",
-        addr: ""
+        birth: '',
+        addr: ''
       };
     },
     //编辑
     editSubmit() {
       this.$refs.editForm.validate(valid => {
         if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(() => {
+          this.$confirm('确认提交吗？', '提示', {}).then(() => {
             this.editLoading = true;
             let para = Object.assign({}, this.editForm);
             para.birth =
-              !para.birth || para.birth === ""
-                ? ""
-                : moment(new Date(para.birth)).format("yyyy-MM-dd");
+              !para.birth || para.birth === ''
+                ? ''
+                : moment(new Date(para.birth)).format('yyyy-MM-dd');
             api.editUser(para).then(res => {
               this.editLoading = false;
               this.$message({
-                message: "提交成功",
-                type: "success"
+                message: '提交成功',
+                type: 'success'
               });
-              this.$refs["editForm"].resetFields();
+              this.$refs['editForm'].resetFields();
               this.editFormVisible = false;
               this.getUsers();
             });
@@ -226,20 +226,20 @@ export default {
     addSubmit() {
       this.$refs.addForm.validate(valid => {
         if (valid) {
-          this.$confirm("确认提交吗？", "提示", {}).then(() => {
+          this.$confirm('确认提交吗？', '提示', {}).then(() => {
             this.addLoading = true;
             let para = Object.assign({}, this.addForm);
             para.birth =
-              !para.birth || para.birth === ""
-                ? ""
-                : moment(new Date(para.birth)).format("yyyy-MM-dd");
+              !para.birth || para.birth === ''
+                ? ''
+                : moment(new Date(para.birth)).format('yyyy-MM-dd');
             api.addUser(para).then(res => {
               this.addLoading = false;
               this.$message({
-                message: "提交成功",
-                type: "success"
+                message: '提交成功',
+                type: 'success'
               });
-              this.$refs["addForm"].resetFields();
+              this.$refs['addForm'].resetFields();
               this.addFormVisible = false;
               this.getUsers();
             });
@@ -253,16 +253,16 @@ export default {
     //批量删除
     batchRemove() {
       let ids = this.sels.map(item => item.id).toString();
-      this.$confirm("确认删除选中记录吗？", "提示", {
-        type: "warning"
+      this.$confirm('确认删除选中记录吗？', '提示', {
+        type: 'warning'
       }).then(() => {
         this.listLoading = true;
         let para = { ids };
         api.batchRemoveUser(para).then(res => {
           this.listLoading = false;
           this.$message({
-            message: "删除成功",
-            type: "success"
+            message: '删除成功',
+            type: 'success'
           });
           this.getUsers();
         });

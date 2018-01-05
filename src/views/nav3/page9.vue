@@ -12,12 +12,12 @@ export default {
   data() {
     return {
       images: [
-        "/static/images/yuzexue/001.jpg",
-        "/static/images/yuzexue/002.jpg",
-        "/static/images/yuzexue/003.jpg",
-        "/static/images/yuzexue/004.jpg",
-        "/static/images/yuzexue/005.jpg",
-        "/static/images/yuzexue/006.jpg"
+        '/static/images/yuzexue/001.jpg',
+        '/static/images/yuzexue/002.jpg',
+        '/static/images/yuzexue/003.jpg',
+        '/static/images/yuzexue/004.jpg',
+        '/static/images/yuzexue/005.jpg',
+        '/static/images/yuzexue/006.jpg'
       ]
     };
   }

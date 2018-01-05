@@ -19,18 +19,18 @@
   </el-form>
 </template>
 <script>
-import api from "@/api";
+import api from '@/api';
 export default {
   data() {
     return {
       logining: false,
       ruleForm2: {
-        username: "admin",
-        password: "admin"
+        username: 'admin',
+        password: 'admin'
       },
       rules2: {
-        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }]
+        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       },
       checked: true
     };
@@ -47,18 +47,18 @@ export default {
             .requestLogin(this.ruleForm2)
             .then(res4 => {
               this.logining = false;
-              sessionStorage.setItem("user", JSON.stringify(res4.data.user));
-              this.$router.push("/main");
+              sessionStorage.setItem('user', JSON.stringify(res4.data.user));
+              this.$router.push('/main');
             })
             .catch(e => {
               this.logining = false;
               this.$message({
-                message: "用户名或密码错误！",
-                type: "error"
+                message: '用户名或密码错误！',
+                type: 'error'
               });
             });
         } else {
-          console.log("error submit!!");
+          console.log('error submit!!');
         }
       });
     }

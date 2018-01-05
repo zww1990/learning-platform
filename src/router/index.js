@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(Router)
+Vue.use(Router);
 
-const home = () => import('@/views/home')
+const home = () => import('@/views/home');
 
 export default new Router({
   mode: 'history',
@@ -102,4 +102,4 @@ export default new Router({
       redirect: '/404'
     }
   ]
-})
+});

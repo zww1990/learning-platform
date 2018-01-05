@@ -59,12 +59,12 @@
   </section>
 </template>
 <script>
-import api from "@/api";
+import api from '@/api';
 export default {
   data() {
     return {
       filters: {
-        name: ""
+        name: ''
       },
       loading: false,
       users: []
@@ -73,7 +73,7 @@ export default {
   methods: {
     //性别显示转换
     formatSex(row, column) {
-      return row.sex === 1 ? "男" : row.sex === 0 ? "女" : "未知";
+      return row.sex === 1 ? '男' : row.sex === 0 ? '女' : '未知';
     },
     //获取用户列表
     getUser() {
@@ -90,7 +90,7 @@ export default {
       });
     },
     onCellDbclick(row, column, cell, event) {
-      if (column.label === "操作" || column.type === "index") {
+      if (column.label === '操作' || column.type === 'index') {
         return;
       }
       row.editable = true;

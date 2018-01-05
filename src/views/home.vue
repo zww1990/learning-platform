@@ -63,26 +63,26 @@
   </el-row>
 </template>
 <script>
-import api from "@/api";
+import api from '@/api';
 export default {
   data() {
     return {
-      sysName: "我爱我家",
+      sysName: '我爱我家',
       collapsed: false,
-      sysUserName: "",
-      sysUserAvatar: "",
+      sysUserName: '',
+      sysUserAvatar: '',
       menuData: []
     };
   },
   methods: {
     //退出登录
     logout() {
-      this.$confirm("确认退出吗?", "提示", {
+      this.$confirm('确认退出吗?', '提示', {
         //type: 'warning'
       }).then(() => {
         sessionStorage.clear();
-        this.$store.commit("clean_tabs");
-        this.$router.push("/login");
+        this.$store.commit('clean_tabs');
+        this.$router.push('/login');
       });
     },
     //折叠导航栏
@@ -96,42 +96,42 @@ export default {
     },
     tabRemove(targetName) {
       // 首页不可删除
-      if (targetName === "/main") {
+      if (targetName === '/main') {
         return;
       }
-      this.$store.commit("delete_tabs", targetName);
+      this.$store.commit('delete_tabs', targetName);
       if (this.activeIndex === targetName) {
         // 设置当前激活的路由
         if (this.options && this.options.length >= 1) {
           this.$store.commit(
-            "set_active_index",
+            'set_active_index',
             this.options[this.options.length - 1].path
           );
           this.$router.push({ path: this.activeIndex });
         } else {
-          this.$router.push({ path: "/main" });
+          this.$router.push({ path: '/main' });
         }
       }
     }
   },
   mounted() {
-    let user = sessionStorage.getItem("user");
+    let user = sessionStorage.getItem('user');
     if (user) {
       user = JSON.parse(user);
-      this.sysUserName = user.name || "";
-      this.sysUserAvatar = user.avatar || "";
+      this.sysUserName = user.name || '';
+      this.sysUserAvatar = user.avatar || '';
       api.loadMenuData(user).then(res => {
         this.menuData = res.data;
       });
-      this.$store.commit("clean_tabs");
-      if (this.$route.path !== "/main") {
-        this.$store.commit("add_tabs", { path: "/main", name: "主页" });
+      this.$store.commit('clean_tabs');
+      if (this.$route.path !== '/main') {
+        this.$store.commit('add_tabs', { path: '/main', name: '主页' });
       }
-      this.$store.commit("add_tabs", {
+      this.$store.commit('add_tabs', {
         path: this.$route.path,
         name: this.$route.name
       });
-      this.$store.commit("set_active_index", this.$route.path);
+      this.$store.commit('set_active_index', this.$route.path);
     }
   },
   computed: {
@@ -143,7 +143,7 @@ export default {
         return this.$store.state.activeIndex;
       },
       set(val) {
-        this.$store.commit("set_active_index", val);
+        this.$store.commit('set_active_index', val);
       }
     }
   },
@@ -153,23 +153,23 @@ export default {
       for (let option of this.options) {
         if (option.name === to.name) {
           flag = true;
-          this.$store.commit("set_active_index", to.path);
+          this.$store.commit('set_active_index', to.path);
           break;
         }
       }
       if (!flag) {
-        this.$store.commit("add_tabs", {
+        this.$store.commit('add_tabs', {
           path: to.path,
           name: to.name
         });
-        this.$store.commit("set_active_index", to.path);
+        this.$store.commit('set_active_index', to.path);
       }
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "../assets/styles/element-variables.scss";
+@import '../assets/styles/element-variables.scss';
 .container {
   position: absolute;
   top: 0px;

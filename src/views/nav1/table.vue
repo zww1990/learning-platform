@@ -11,8 +11,8 @@
   </el-table>
 </template>
 <script>
-import api from "@/api";
-import table1 from "./table1";
+import api from '@/api';
+import table1 from './table1';
 export default {
   components: {
     table1
