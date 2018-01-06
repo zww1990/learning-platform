@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -34,10 +33,10 @@ public class ExerciseSunlandsTest {
 	public void init() {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
-		cookies.add("stuToken=ec9f3ea001b20c80ca63e3db1a1af0f3");
-		cookies.add("JSESSIONID=45FECAE8B94F3264D30B17210983C39A");
+		cookies.add("stuToken=827dbc817fe1a3d11a565a14d7c12b52");
+		cookies.add("JSESSIONID=D92891B53893AC30F0D3241B80A3AA66");
 		headers.put(HttpHeaders.COOKIE, cookies);
-		fileName = "retrievePaperUserRecords_1229";
+		fileName = "近代史精讲1强化-1222-闫怀北";
 	}
 
 	@Test
@@ -45,8 +44,8 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "8703");
-			param.add("recordId", "2044564");
+			param.add("paperId", "8404");
+			param.add("recordId", "2157416");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
@@ -60,23 +59,29 @@ public class ExerciseSunlandsTest {
 
 	@Test
 	public void readJsonFile() {
-		try {
+		try (OutputStream stream = new FileOutputStream(new File(PARENT, fileName + ".docx"));
+				XWPFDocument document = new XWPFDocument();) {
 			List<Map<String, Object>> data = this.mapper.readValue(new File(PARENT, fileName + ".json"), List.class);
-			List<String> lines = new ArrayList<>();
 			data.forEach(x -> {
 				Integer sequence = (Integer) x.get("sequence");// 序号
 				String content = (String) x.get("content");// 题目
 				List<Map<String, Object>> resPaperQuestionOptionsList = (List<Map<String, Object>>) x
 						.get("resPaperQuestionOptionsList");// 选项
-				lines.add(sequence + "、" + content);
+				document.createParagraph().createRun().setText(sequence + "、" + content);
 				resPaperQuestionOptionsList.forEach(y -> {
 					String optionTitle = (String) y.get("optionTitle");// 选项字母
 					String _content = (String) y.get("content");// 选项内容
+					_content = _content.startsWith(optionTitle) ? _content : optionTitle + " " + _content;
 					Integer isCorrect = (Integer) y.get("isCorrect");// 是否为正确选项
-					lines.add("\t" + optionTitle + " " + _content + (isCorrect == 1 ? "（√）" : ""));
+					XWPFRun run = document.createParagraph().createRun();
+					if (isCorrect == 1) {
+						run.setBold(true);
+						run.setColor("FF0000");
+					}
+					run.setText("       " + _content);
 				});
 			});
-			FileUtils.writeLines(new File(PARENT, fileName + ".txt"), lines);
+			document.write(stream);
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,6 +95,8 @@ public class ExerciseSunlandsTest {
 			XWPFParagraph paragraph = document.createParagraph();
 			XWPFRun run = paragraph.createRun();
 			run.setText("hello world");
+			run.setColor("FF0000");
+			run.setBold(true);
 			document.write(stream);
 			System.err.println("OK!");
 		} catch (Exception e) {
