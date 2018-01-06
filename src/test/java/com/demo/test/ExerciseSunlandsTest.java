@@ -1,11 +1,16 @@
 package com.demo.test;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -72,6 +77,20 @@ public class ExerciseSunlandsTest {
 				});
 			});
 			FileUtils.writeLines(new File(PARENT, fileName + ".txt"), lines);
+			System.err.println("OK!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void writeWord() {
+		File file = new File(PARENT, "test.docx");
+		try (OutputStream stream = new FileOutputStream(file); XWPFDocument document = new XWPFDocument();) {
+			XWPFParagraph paragraph = document.createParagraph();
+			XWPFRun run = paragraph.createRun();
+			run.setText("hello world");
+			document.write(stream);
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();

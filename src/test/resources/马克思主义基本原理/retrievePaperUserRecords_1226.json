@@ -1,0 +1,4142 @@
+[
+	{
+		"recordId": 2043747,
+		"id": 305447,
+		"paperId": 8271,
+		"sequence": 1,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列选项属于马克思主义三个组成部分之一的是",
+		"correctAnswer": "B",
+		"analysis": "马克思主义的三个组成部分分别是马克思主义哲学、政治经济学、科学社会主义。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139011,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "马克思主义政治学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139012,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "马克思主义哲学",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139013,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "马克思主义伦理学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139014,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "马克思主义社会学",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305448,
+		"paperId": 8271,
+		"sequence": 2,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "马克思主义的根本理论特征是",
+		"correctAnswer": "A",
+		"analysis": "马克思主义的理论特征——实践性基础上的科学性和革命性的统一。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139015,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "科学性和革命性的统一",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139016,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "逻辑性和历史性的统一",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139017,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "自然观和历史观的统一",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139018,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "世界观和方法论的统一",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305449,
+		"paperId": 8271,
+		"sequence": 3,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "划分唯物主义和唯心主义的标准在于如何回答",
+		"correctAnswer": "A",
+		"analysis": "对于物质和意识哪个是本原、哪个是第一性的问题的回答是划分唯物主义和唯心主义的标准。凡是认为物质是本原的、第一性的，意识是派生的，第二性的哲学，属于唯物主义；凡是认为意识是本原的、第一性的，物质是派生的、第二性的哲学，属于唯心主义。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139019,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "物质和意识哪个是第一性的问题",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139020,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "物质世界可不可以认识的问题",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139021,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "物质世界是否普遍联系的问题",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139022,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "物质世界是否永恒发展的问题",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305450,
+		"paperId": 8271,
+		"sequence": 4,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列观点中表述唯物辩证法总特征的是",
+		"correctAnswer": "C",
+		"analysis": "唯物辩证法的两个总特征是联系和发展的观点。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139023,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "量变和质变的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139024,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "对立统一的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139025,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "联系和发展的观点",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139026,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "辩证否定的观点",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305451,
+		"paperId": 8271,
+		"sequence": 5,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "否定之否定规律揭示了",
+		"correctAnswer": "C",
+		"analysis": "否定之否定规律揭示事物发展要经历“肯定-否定-否定之否定”的过程，也就是说事物发展所的趋势和道路。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139027,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "事物发展的动力和源泉",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139028,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "事物发展的状态和形式",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139029,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "事物发展的趋势和道路",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139030,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "事物发展的内因和外因",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305452,
+		"paperId": 8271,
+		"sequence": 6,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列选项中，表示要坚持适度原则的是",
+		"correctAnswer": "C",
+		"analysis": "量变是质变的必要准备，质变是量变的必然结果。如果需要保持事物的性质不变，就要注意分寸，坚持适度原则，把量变控制在一定范围之内。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139031,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "因地制宜",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139032,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "对症下药",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139033,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "注意分寸",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139034,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "实事求是",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305453,
+		"paperId": 8271,
+		"sequence": 7,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "假象同真相一样，也是客观存在的。这是一种",
+		"correctAnswer": "B",
+		"analysis": "马克思主义的唯物辩证法认为：事物的现象是复杂多样的。有些现象与本质是一致的，通常叫做真相；有些现象与本质似乎不一致，这种情况通常叫做假象。假象同真相一样，也是客观存在的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139035,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "辩证法的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139036,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "唯物辩证法的观点",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139037,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "形而上学的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139038,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "主观唯心主义的观点",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305454,
+		"paperId": 8271,
+		"sequence": 8,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "能动反映论区别于机械反映论的根本标志是",
+		"correctAnswer": "D",
+		"analysis": "能动反映论和机械反映论的共同点都是从客观到主观的认识路径。但是机械反映论是一种类似于镜子似的反映，而能动反映论带有认识主体的主观能动性，不同的认识主体对同一对象会有不同的认识，都加入了认识主体的创造。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139039,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "肯定思维能正确地反映存在",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139040,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "认为认识过程是纯粹的观念创造",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139041,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "肯定思维对存在的决定作用",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139042,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "认为认识过程是反映和创造的统一",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305455,
+		"paperId": 8271,
+		"sequence": 9,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "唯物辩证法与形而上学在真理观上的对立，表现在是否承认",
+		"correctAnswer": "B",
+		"analysis": "第二章第115页。真理的相对性指的是真理需要在实践中不断扩展、深化，也就是说真理是发展的。形而上学否认运动，所以也否认真理的相对性。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139043,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "真理具有客观性",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139044,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "真理具有相对性",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139045,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "真理中包含着错误",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139046,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "真理来源于主观创造",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305456,
+		"paperId": 8271,
+		"sequence": 10,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "“纸上得来终觉浅，绝知此事要躬行。”这句话强调的是",
+		"correctAnswer": "D",
+		"analysis": "这句诗的意思是从书本上得来的知识只能被浅显地理解，要想取得实际效果，还是需要靠实践。所以题干中强调的是实践是重要性。选择D选项",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139047,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "直接经验是知识的唯一来源",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139048,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "书本知识是根本不可靠的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139049,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "间接经验是知识的唯一来源",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139050,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "真理是在实践中检验和发展的",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305457,
+		"paperId": 8271,
+		"sequence": 11,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列选择中属于意识形态的是",
+		"correctAnswer": "C",
+		"analysis": "意识形态包括思想政治、法律思想、道德宗教、艺术、哲学和绝大部分社会科学，它们是上层建筑的重要组成部分，反映特定的经济基础并为之服务，在阶级社会里具有一定的阶级性。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139051,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "语言学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139052,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "物理学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139053,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "哲学",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139054,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "数学",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305458,
+		"paperId": 8271,
+		"sequence": 12,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "按照技术社会形态的划分标准，我们可以把人类历史划分为",
+		"correctAnswer": "B",
+		"analysis": "技术社会形态序列：渔猎社会——农业社会——工业社会——信息社会。A选项属于经济社会形态划分。C和D不属于马克思主义对社会形态的划分。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139055,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人的依赖性社会、物的依赖性社会、个人全面发展的社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139056,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "渔猎社会 、农业社会、工业社会、信息社会",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139057,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "自然经济社会、商品经济社会、产品经济社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139058,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "古代社会、近代社会、现代社会",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305459,
+		"paperId": 8271,
+		"sequence": 13,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在现代生产力系统中，经济管理和预测决策属于",
+		"correctAnswer": "B",
+		"analysis": "独立的实体性因素包括劳动者、劳动对象、劳动资料。运筹性的综合因素包括分工协作、经济管理、预测决策。渗透性因素主要指自然科学。准备性因素主要指教育。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139059,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "独立的实体性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139060,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "运筹性的综合因素",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139061,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "渗透性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139062,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "准备性因素",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305460,
+		"paperId": 8271,
+		"sequence": 14,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本积累的源泉是",
+		"correctAnswer": "B",
+		"analysis": "把剩余价值再转化为资本，或者说，剩余价值的资本化，就叫做资本积累。剩余价值是资本积累的源泉，而资本积累是资本主义扩大再生产的重要源泉。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139063,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "使用价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139064,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "剩余价值",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139065,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139066,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "交换价值",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305461,
+		"paperId": 8271,
+		"sequence": 15,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "社会主义的根本的和首要的任务是",
+		"correctAnswer": "B",
+		"analysis": "社会主义的根本的和首要的任务是解放和发展生产力",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139067,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人民当家作主",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139068,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "解放和发展生产力",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139069,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "消除两极分化",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139070,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "消灭剥削",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305462,
+		"paperId": 8271,
+		"sequence": 16,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "实现共产主义社会的根本条件和基础是",
+		"correctAnswer": "B",
+		"analysis": "实现共产主义社会的根本条件和基础是社会生产力的高度发展",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139071,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人们精神境界的极大提高",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139072,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会生产力的高度发展",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139073,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "全人类的彻底解放",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139074,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的自由而全面发展",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305463,
+		"paperId": 8271,
+		"sequence": 17,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "垄断利润本质上来自于",
+		"correctAnswer": "D",
+		"analysis": "垄断利润本质上来自于工人阶级和劳动人民创造的剩余价值",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139075,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "垄断组织创造的价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139076,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "海外企业的利润",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139077,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "非垄断企业的利润",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139078,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "工人阶级和劳动人民创造的剩余价值",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305464,
+		"paperId": 8271,
+		"sequence": 18,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "无产阶级专政的实质是",
+		"correctAnswer": "A",
+		"analysis": "无产阶级专政的实质是无产阶级作为统治阶级掌握国家政权",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139079,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "无产阶级作为统治阶级掌握国家政权",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139080,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "少数人对多数人的专政",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139081,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "共产主义的政权形势",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139082,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "所有社会成员当家作主",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305465,
+		"paperId": 8271,
+		"sequence": 19,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "二战后，一些西方国家对经济实行政府干预和宏观调控，这是当代资本主义在",
+		"correctAnswer": "B",
+		"analysis": "二战后，一些西方国家对经济实行政府干预和宏观调控，这是当代资本主义在生产关系方面的新变化",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139083,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产力方面的新变化",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139084,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产关系方面的新变化",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139085,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "科学技术方面的新变化",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139086,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "上层建筑方面的新变化",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305466,
+		"paperId": 8271,
+		"sequence": 20,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "当代资本主义所发生的诸种新变化属于",
+		"correctAnswer": "D",
+		"analysis": "当代资本主义所发生的诸种新变化属于资本主义总的量变过程中阶段性的部分质变",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139087,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "资本主义生产方式的根本改变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139088,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "资本主义生产关系的根本改变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139089,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "资本主义总的量变过程中的爆发式质变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139090,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "资本主义总的量变过程中阶段性的部分质变",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305467,
+		"paperId": 8271,
+		"sequence": 21,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "根据在剩余价值生产中所起作用的不同，马克思把资本划分为",
+		"correctAnswer": "B",
+		"analysis": "根据在剩余价值生产中所起作用的不同，马克思把资本划分为不变资本和可变资本",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139091,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "职能资本与货币资本",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139092,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "不变资本和可变资本",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139093,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产资本与商业资本",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139094,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "固定资本和流动资本",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305468,
+		"paperId": 8271,
+		"sequence": 22,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "19世纪末20世纪初，资本主义的发展进入了",
+		"correctAnswer": "B",
+		"analysis": "19世纪末20世纪初，资本主义的发展进入了垄断资本主义阶段",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": null,
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139095,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "自由竞争资本主义阶段",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139096,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "垄断资本主义阶段",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139097,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "帝国主义阶段",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139098,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "国家资本主义阶段",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305469,
+		"paperId": 8271,
+		"sequence": 23,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "剩余价值率与利润率的关系是",
+		"correctAnswer": "C",
+		"analysis": "剩余价值率与利润率的关系是利润率是剩余价值率的转化形式",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": null,
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139099,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "剩余价值率大于利润率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139100,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "利润率大于剩余价值率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139101,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "利润率是剩余价值率的转化形式",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139102,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "剩余价值率是利润率的转化形式",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305470,
+		"paperId": 8271,
+		"sequence": 24,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "英国自15世纪末开始的“圈地运动”的实质是",
+		"correctAnswer": "C",
+		"analysis": "“圈地运动”的实质是资本的原始积累",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": null,
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139103,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "封建制度的建立",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139104,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "资本家对雇佣工人的剥削",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139105,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "资本的原始积累",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139106,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "奴隶主对奴隶的压迫",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305471,
+		"paperId": 8271,
+		"sequence": 25,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "实现共产主义社会的根本条件和基础是",
+		"correctAnswer": "A",
+		"analysis": "只有在社会生产力高度发展的基础上，才有可能建立起共产主义的经济基础和上层建筑，从而人类社会才能进人共产主义社会。所以，社会生产力的高度发展，是实现共产主义社会的根本条件和基础。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139107,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会生产力的高度发展",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139108,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人与人关系的高度和谐",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139109,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人的思想觉悟的极大提高",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139110,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "自然生态环境的极大改善",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305472,
+		"paperId": 8271,
+		"sequence": 26,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "马克思主义的创始人是",
+		"correctAnswer": "D",
+		"analysis": "马克思、恩格斯不仅是马克思主义的创立者，而且也是马克思主义的发展者。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139111,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "马克思和李嘉图",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139112,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "马克思和圣西门",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139113,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "马克思和费尔巴哈",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139114,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "马克思和恩格斯",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305473,
+		"paperId": 8271,
+		"sequence": 27,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "哲学上的二元论否认",
+		"correctAnswer": "A",
+		"analysis": "世界的本质问题，实质上是世界的统一性问题。对这个问题的回答存在着一元论和二元论的对立。一元论承认世界的统一性，而二元论否认世界的统一性",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139115,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "世界的统一性",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139116,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "世界的物质性",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139117,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "世界的可知性",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139118,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "世界的多样性",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305474,
+		"paperId": 8271,
+		"sequence": 28,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列观点中表述唯物辩证法总特征的是",
+		"correctAnswer": "C",
+		"analysis": "唯物辩证法认为，物质世界是普遍联系和永恒发展的。联系的观点和发展的观点是唯物辩证法的总特征。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139119,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "量变和质变的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139120,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "对立统一的观点",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139121,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "联系和发展的观点",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139122,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "辩证否定的观点",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305475,
+		"paperId": 8271,
+		"sequence": 29,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在唯物辩证法看来，粮食同玉米、高梁、小麦之间的关系属于",
+		"correctAnswer": "A",
+		"analysis": "矛盾的普遍性和特殊性的关系，也就是共性与个性、一般与个别的关系，它们是辩证统一的。题干中的粮食即一般，玉米、高粱、小麦即个别。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139123,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "一般和个别的关系",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139124,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "整体和局部的关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139125,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "本质和现象的关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139126,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "内容和形式的关系",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305476,
+		"paperId": 8271,
+		"sequence": 30,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "质量互变规律揭示了",
+		"correctAnswer": "B",
+		"analysis": "量变和质变是事物发展变化的两种状态。质量互变规律提示了事物的运动发展都是量变和质变的统一，都是量变和质变相互转化的过程。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139127,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "事物发展的原因和结果",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139128,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "事物发展的状态和过程",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139129,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "事物发展的趋势和道路",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139130,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "事物发展的源泉和动力",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305477,
+		"paperId": 8271,
+		"sequence": 31,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "意识的能动性最突出的表现是，意识能够",
+		"correctAnswer": "A",
+		"analysis": "意识能通过指导实践改造客观物质世界，这是意识的能动性最突出的表现。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139131,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "通过指导实践改造客观世界",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139132,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "通过指导实践改造客观规律",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139133,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "通过改造规律反映客观世界",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139134,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "通过改造世界消灭客观规律",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305478,
+		"paperId": 8271,
+		"sequence": 32,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "辩证唯物主义认为，认识的本质是",
+		"correctAnswer": "C",
+		"analysis": "人的认识就是在主客体的相互作用中产生和发展的。认识的真正本质是在实践中主体对客体的能动反映，这是马克思主义哲学对认识本质的科学提示。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139135,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "主体对客体的直观反映",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139136,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "绝对观念的显现",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139137,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "主体对客体的能动反映",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139138,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "神秘天意的启示",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305479,
+		"paperId": 8271,
+		"sequence": 33,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "“感觉到了的东西，我们不能立刻理解它，只有理解了的东西才能更深刻地感觉它”，这句话表明",
+		"correctAnswer": "D",
+		"analysis": "在认识过程中，感性认识非常重要，但我们不能停留于、满足于感性认识，因为“感觉到了的东西，我们不能立刻理解它，只有理解了的东西才更深刻地感觉它。感觉只解决现象问题，理论才解决本质问题。”认识的高级阶段是理性认识。故A、B、C三项表述错误。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139139,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "感性认识是微不足道的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139140,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "感性认识是认识的高级阶段",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139141,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "理性认识是唯一可靠的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139142,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "理性认识是认识的高级阶段",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305480,
+		"paperId": 8271,
+		"sequence": 34,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "一个完整的认识过程，需要经过两次飞跃。下列选项中属于第二次飞跃的是",
+		"correctAnswer": "D",
+		"analysis": "马克思主义哲学认识论认为，认识由感性认识上升到理性认识，至此认识运动并未完结，这只是认识运动的一半，还有非常重要的另一半没有完成，这就是要把前一阶段获得的理论用于指导实践，实现对客观世界的改造。也就是说，还要实现由理性认识向实践的飞跃。因此D项符合题意。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139143,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "调查研究，了解情况",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139144,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "深入思考，形成理论",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139145,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "精心安排，制定策略",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139146,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "执行计划，付诸实践",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305481,
+		"paperId": 8271,
+		"sequence": 35,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "党的思想路线的核心是",
+		"correctAnswer": "B",
+		"analysis": "“实事求是”这四个大字是党的思想路线的核心，也是马克思主义哲学的精髓，它充分地体现了马克思主义认识论的根本原则。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139147,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "一切从实际出发",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139148,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "实事求是",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139149,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "理论联系实际",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139150,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "在实践中检验和发展真理",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305482,
+		"paperId": 8271,
+		"sequence": 36,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "生产要素的购买时间属于资本周转过程中的",
+		"correctAnswer": "B",
+		"analysis": "资本周转有三个阶段：购买阶段、生产阶段、销售阶段。购买阶段和销售阶段属于流通时间。生产要素的购买属于购买阶段，所以是流通时间。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139151,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139152,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "流通时间",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139153,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139154,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "停工时间",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305483,
+		"paperId": 8271,
+		"sequence": 37,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资产阶级道德观的基本原则是",
+		"correctAnswer": "A",
+		"analysis": "在阶级社会里，道德也是有阶级性的。资产阶级的道德观是为维护和巩固资产阶级的统治地位和经济利益服务的。它以尊重和增进个人利益作为人们行为的准则和规范，利己主义成为资本主义道德的基本原则。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139155,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "利己主义",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139156,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "拜金主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139157,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "自由主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139158,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "享乐主义",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305484,
+		"paperId": 8271,
+		"sequence": 38,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品最本质的因素是",
+		"correctAnswer": "B",
+		"analysis": "作为商品，必然同时具有使用价值和价值两个因素。没有使用价值的物品，不可能有价值，使用价值是价值的物质承担者，而价值则寓于使用价值之中。有使用价值但没有价值的物品，也不是商品，价值是商品的最本质因素。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139159,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "使用价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139160,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "价值",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139161,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "交换价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139162,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "价格",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305485,
+		"paperId": 8271,
+		"sequence": 39,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义民主制的核心和主要标志是",
+		"correctAnswer": "C",
+		"analysis": "资产阶级民主制以议会制为核心和主要标志。以“三权分立制”、普选制、两党制（或多党制），以及公民享有各种权利为主要内容。这些制度被资产阶级作为民主制的标志而加以推崇和颂扬。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139163,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "普选制",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139164,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "三权分立制",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139165,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "议会制",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139166,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "民主共和制",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305486,
+		"paperId": 8271,
+		"sequence": 40,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "实行垄断价格的根本目的是为了",
+		"correctAnswer": "C",
+		"analysis": "垄断是为了获取高额垄断利润，它是通过各种垄断组织和垄断价格取得的。垄断并没有消除竞争。垄断是帝国主义的经济实质。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139167,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "最大限度占领市场",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139168,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "最大限度降低成本",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139169,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "获取高额垄断利润",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139170,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "获取行业控制权力",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305487,
+		"paperId": 8271,
+		"sequence": 41,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "马克思说，资本主义“不自觉地为一个更高级的生产形势创造物质条件”，它的“历史人物和存在理由”是",
+		"correctAnswer": "B",
+		"analysis": "马克思指出：“发展社会劳动生产力，是资本主义的历史任务和存在理由。资本正是以此不自觉地为一个更高级的生产形式创造物质条件。”这是对资本主义历史过渡性最精辟而辩证的论述。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139171,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "发明创造新科技成果",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139172,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "发展社会劳动生产力",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139173,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产先进的机器设备",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139174,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "建立完善的市场经济",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305488,
+		"paperId": 8271,
+		"sequence": 42,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "无产阶级革命的发生归根结底是",
+		"correctAnswer": "A",
+		"analysis": "恩格斯指出：“在这些国家的每一个国家中，共产主义革命发展得较快或较慢，要看这个国家是否有较发达的工业，较多的财富和比较大量的生产力。”可见，革命的发生归根结底是由生产力发展水平决定的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139175,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产力的发展水平决定的",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139176,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产关系的性质决定的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139177,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "被统治阶级的意愿决定的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139178,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "统治阶级的压迫决定的",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305489,
+		"paperId": 8271,
+		"sequence": 43,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "无产阶级专政的最终目标是",
+		"correctAnswer": "A",
+		"analysis": "无产阶级专政的最终目标是消灭剥削、消灭阶级，进入无阶级社会。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139179,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "消灭剥削、消灭阶级，进入无阶级社会",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139180,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "镇压敌对势力的反抗，巩固无产阶级政权",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139181,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "进行社会主义改造，建立社会主义公有制",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139182,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "保护群众合法权益，建设社会主义民主政治",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305490,
+		"paperId": 8271,
+		"sequence": 44,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "世界上第一个无产阶级政党是",
+		"correctAnswer": "A",
+		"analysis": "马克思和恩格斯在工人运动的实践中，总结、吸收前人优秀思想成果，逐步形成了科学社会主义理论1847 年底他们受世界上第一个无产阶级政党“共产主义者同盟”的委托起草并于1848年2月发表的《共产党宣言》。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139183,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "共产主义者同盟",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139184,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "布尔什维克",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139185,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "德国社会民主工党",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139186,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "中国共产党",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305491,
+		"paperId": 8271,
+		"sequence": 45,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "阶级消灭和国家消亡是在",
+		"correctAnswer": "D",
+		"analysis": "在共产主义社会，阶级的消灭和国家的消亡，意味着实现了世界的和谐。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139187,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会主义革命中实现的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139188,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会主义初级阶段实现的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139189,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "无产阶级专政建立后实现的",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139190,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "共产主义社会实现的",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305492,
+		"paperId": 8271,
+		"sequence": 46,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "实现共产主义社会的根本条件和基础是",
+		"correctAnswer": "A",
+		"analysis": "只有在社会生产力高度发展的基础上，才有可能建立起共产主义的经济基础和上层建筑，从而人类社会才能进人共产主义社会。所以，社会生产力的高度发展，是实现共产主义社会的根本条件和基础。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139191,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会生产力的高度发展",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139192,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人与人关系的高度和谐",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139193,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人的思想觉悟的极大提高",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139194,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "自然生态环境的极大改善",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305493,
+		"paperId": 8271,
+		"sequence": 47,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在人类社会发展中起决定作用的是",
+		"correctAnswer": "D",
+		"analysis": "生产方式是人类借以向自然界谋取必需的生活资料的方式，包括生产力和生产关系两个方面，是特定的生产力和生产关系的统一。生产方式在社会发展中起决定作用。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139195,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "差异多样的地理环境",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139196,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "丰腴富饶的自然资源",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139197,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "协调合理的人口结构",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139198,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "物质资料的生产方式",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305494,
+		"paperId": 8271,
+		"sequence": 48,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在现代生产力系统中，教育属于",
+		"correctAnswer": "C",
+		"analysis": "现代生产力系统包括四类因素：独立的实体性因素，包括劳动者、劳动资料和劳动对象。运筹性的综合因素，包扩分工协作、经济管理、预测决策等。渗透性因素，主要指自然科学。准备性因素，主要指教育。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139199,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "实体性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139200,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "运筹性因素",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139201,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "准备性因素",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139202,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "渗透性因素",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305495,
+		"paperId": 8271,
+		"sequence": 49,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "社会主义社会的改革是",
+		"correctAnswer": "D",
+		"analysis": "我国的改革是社会主义制度的自我完善和发展，是由社会主义社会基本矛盾的性质和特点决定的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139203,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会主义基本经济制度的改变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139204,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会主义基本政治制度的改变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139205,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "社会主义基本文化制度的改变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139206,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "社会主义的自我完善和发展",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305496,
+		"paperId": 8271,
+		"sequence": 50,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "人的本质在于",
+		"correctAnswer": "C",
+		"analysis": "马克思主义认为，人的本质不是由人的自然属性决定的，而是由人的社会属性决定的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139207,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人的自然属性",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139208,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人的道德素质",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139209,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人的社会属性",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139210,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的文化素质",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305497,
+		"paperId": 8271,
+		"sequence": 51,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "具体劳动",
+		"correctAnswer": "A",
+		"analysis": "具体劳动是生产商品劳动的自然属性，创造出商品的使用价值。抽象劳动是生产商品劳动的社会属性，生产商品的抽象劳动创造了商品的价值",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139211,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "反映人与自然的关系",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139212,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "是劳动的社会属性",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139213,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "反映社会生产关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139214,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "创造剩余价值",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305498,
+		"paperId": 8271,
+		"sequence": 52,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "货币转化为资本的决定性条件是在流通中购买到",
+		"correctAnswer": "B",
+		"analysis": "货币之所以能转化为资本，原因就在于资本家在市场上购买到一种特殊的商品，这种商品具有特殊的使用价值，能够创造出剩余价值。这种特殊商品就是劳动力。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139215,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产资料",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139216,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "劳动力",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139217,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "劳动资料",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139218,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "劳动对象",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305499,
+		"paperId": 8271,
+		"sequence": 53,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "相对剩余价值生产的条件是",
+		"correctAnswer": "C",
+		"analysis": "当社会劳动生产率提高后，单位商品价值便会下降，劳动力价值随之下降，再生产劳动力价值的必要劳动时间便会缩短，剩余的劳动时间则相应延长，从而生产出相对剩余价值，由此可见，相对剩余价值生产是以社会劳动生产率的提高为条件的。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139219,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "个别企业劳动生产率的提高",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139220,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "本部门劳动生产率的提高",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139221,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "社会劳动生产率的提高",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139222,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "个别企业劳动生产率的提高快于社会劳动生产率的提高",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305500,
+		"paperId": 8271,
+		"sequence": 54,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义国家的立法机构是",
+		"correctAnswer": "D",
+		"analysis": "资本主义国家的议会又称为国会或议院，它一般是资本主义国家的最高立法机关，通常由定期选举产生的议员所组成，由议长担任领导。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139223,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "检察机构",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139224,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "法院",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139225,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "警察机构",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139226,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "议院或国会",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305501,
+		"paperId": 8271,
+		"sequence": 55,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "把在法律和生产上独立的企业在流通环节统一起来，进行垄断经营的企业组织形式是",
+		"correctAnswer": "B",
+		"analysis": "较为重要的垄断组织形式有卡特尔、辛迪加、托拉斯和康采恩。其中，辛迪加是把一些在法律上和生产上还是独立的大垄断企业在流通环节上统一起来，进行垄断经营的组织形式。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139227,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "卡特尔",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139228,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "辛迪加",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139229,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "托拉斯",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139230,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "康采恩",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305502,
+		"paperId": 8271,
+		"sequence": 56,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义的国有资本和国有经济一般不参与",
+		"correctAnswer": "C",
+		"analysis": "资本主义国家直接投资建立的国有经济、国有企业，往往是需要资本量很大、私人资本无力兴建的一些大型超大型新兴产业、支柱产业，或一些投资巨大但收回投资需要很长时间的公共产品的生产或基础设施建设，或是一些从事高科技开发研制的企业，或是为了国防等方面的需要而建立的军工企业，等等",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139231,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "基础设施的建设",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139232,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "战略性科学研究",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139233,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "普通消费品生产",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139234,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "公共产品生产",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305503,
+		"paperId": 8271,
+		"sequence": 57,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "除了剩余价值与可变资本的比率外，剩余价值率还可以表示为",
+		"correctAnswer": "A",
+		"analysis": "雇佣工人的工作日分为必要劳动时间和剩余劳动时间两部分，剩余价值率因而也可以用另一种形式表示，即m'=剩余劳动时间/必要劳动时间。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139235,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "剩余劳动时间与必要劳动时间的比率",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139236,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "剩余劳动时间与社会必要劳动时间的比率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139237,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "可变资本与不变资本的比率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139238,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "利润与预付总资本的比率",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305504,
+		"paperId": 8271,
+		"sequence": 58,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "货币的本质是",
+		"correctAnswer": "A",
+		"analysis": "货币的产生和起源是商品交换长期发展的产物，并不是聪明人的发明，也不是人们协商的结果。货币产生的过程也揭示出，货币的本质是固定充当一般等价物的商品，它体现着商品经济条件下商品生产者之间的社会经济关系。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139239,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "固定充当一般等价物的商品",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139240,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "偶尔充当一般等价物的商品",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139241,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "固定充当特殊等价物的商品",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139242,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "偶尔充当特殊等价物的商品",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305505,
+		"paperId": 8271,
+		"sequence": 59,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "货币转化为资本的关键是",
+		"correctAnswer": "A",
+		"analysis": "资本家要想有钱作为资本进行投资，必须占有大量的工人创造的剩余价值。剩余价值只能由工人的劳动力生产出来。所以货币转化为资本的前提或关键是货币所有者购买到劳动力商品，或者说劳动力成为商品。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139243,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "劳动力成为商品",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139244,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产资料可以买卖",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139245,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "货币是一般等价物",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139246,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "货币是社会财富的一般代表",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305506,
+		"paperId": 8271,
+		"sequence": 60,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "货币转化为资本的前提是",
+		"correctAnswer": "C",
+		"analysis": "资本家要想有钱作为资本进行投资，必须占有大量的工人创造的剩余价值。剩余价值只能由工人的劳动力生产出来。所以货币转化为资本的前提是货币所有者购买到劳动力商品，或者说劳动力成为商品。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139247,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "货币在运动中发生了价值增殖",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139248,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "货币投入流通带来剩余价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139249,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "货币所有者购买到劳动力商品",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139250,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "货币可以购买到生产资料",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305507,
+		"paperId": 8271,
+		"sequence": 61,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品的使用价值反映的是",
+		"correctAnswer": "B",
+		"analysis": "使用价值是商品的自然属性，它是由物品的物理、化学、生物等特性所决定的。反映的是人与自然的关系。价值是商品的社会属性，反映的是人与人的关系。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139251,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人与人的关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139252,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人与自然的关系",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139253,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产关系",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139254,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "交换关系",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305508,
+		"paperId": 8271,
+		"sequence": 62,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品的最本质因素是",
+		"correctAnswer": "B",
+		"analysis": "作为商品，必然同时具有使用价值和价值两个因素。没有使用价值的物品，不可能有价值，使用价值是价值的物质承担者，而价值则寓于使用价值之中。有使用价值但没有价值的物品，也不是商品，价值是商品的最本质因素",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139255,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "使用价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139256,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "价值",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139257,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "交换价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139258,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "剩余价值",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305509,
+		"paperId": 8271,
+		"sequence": 63,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品经济产生和存在的决定性条件是",
+		"correctAnswer": "D",
+		"analysis": "商品经济的产生和存在需要两个基本经济条件。第一个条件是社会分工的产生和存在。是商品经济产生和存在的一般条件和基础。第二个也是决定性的条件，是生产资料和劳动产品属于不同的所有者。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139259,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "社会分工的出现和发展",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139260,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "市场经济体制的建立",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139261,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "劳动力成为商品",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139262,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "生产资料和劳动产品属于不同的所有者",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305510,
+		"paperId": 8271,
+		"sequence": 64,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品生产者要获得更多收益，必须使生产商品的",
+		"correctAnswer": "B",
+		"analysis": "个别企业率先采用先进的生产设备和技术，提髙了劳动生产率，使生产商品的个别劳动时间低于社会必要劳动时间，商品个别价值低于社会价值，这个企业的资本家就会由于按社会价值出售商品，而能够比其他资本家获得更多的剩余价值，即获得超额剩余价值。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139263,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "个别劳动时间等于社会必要劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139264,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "个别劳动时间低于社会必要劳动时间",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139265,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "个别劳动时间高于社会必要劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139266,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "个别劳动时间低于必要劳动时间",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305511,
+		"paperId": 8271,
+		"sequence": 65,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "党的十八大报告提出要积极培育和践行社会主义核心价值观，其中从个人层面对社会主义核心价值观基本理念的凝练表达是",
+		"correctAnswer": "C",
+		"analysis": "第二章第117页。“富强、民主、文明、和谐”是从国家层面，“自由、平等、公正、法治”是从社会层面，“爱国、敬业、诚信、友善”是从个人行为层面对社会主义核心价值观基本理念的凝练。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139267,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "富强、民主、文明、和谐",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139268,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "自由、平等、公正、法治",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139269,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "爱国、敬业、诚信、友善",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139270,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "创新、包容、开放、进取",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305512,
+		"paperId": 8271,
+		"sequence": 66,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "马克思主义把人类社会的发展划分为三种社会形态的标准是",
+		"correctAnswer": "D",
+		"analysis": "第三章第一节。马克思根据作为社会主体的人的发展状况，把人类历史划分为人的依赖性社会、物的依赖性社会、个人全面发展的社会三种依次更替的社会形态。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139271,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "意识形态的不同性质",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139272,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "生产关系的不同性质　",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139273,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产力的不同水平",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139274,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的发展的不同状况",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305513,
+		"paperId": 8271,
+		"sequence": 67,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "人口因素在社会发展中的作用表现在",
+		"correctAnswer": "D",
+		"analysis": "第三章第一节。所谓人口因素，是一个包括人口数量、质量、密度、构成、人口的发展、人口分布和迁移、人口的自然变动和社会变动等各种因素的综合范畴。人口因素也是社会物质生活的必要条件之一，对社会发展起着制约和影响作用。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139275,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "它决定社会制度的性质",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139276,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "它决定社会形态的更替　",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139277,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "它决定社会进步的程度",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139278,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "它制约和影响社会发展",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305514,
+		"paperId": 8271,
+		"sequence": 68,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在上层建筑的各种要素中，居于主导地位的是",
+		"correctAnswer": "C",
+		"analysis": "第三章第一节。在上层建筑各种因素中，政治居于主导地位；在阶级社会里，国家政权和领导国家政权的政党是上层建筑的主要组成部分。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139279,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "艺术",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139280,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "宗教",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139281,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "政治",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139282,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "哲学",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305515,
+		"paperId": 8271,
+		"sequence": 69,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "唯物史观认为，人的本质在其现实性上是",
+		"correctAnswer": "D",
+		"analysis": "第三章第三节。马克思在《关于费尔巴哈的提纲》中说：“人的本质不是单个人所固有的抽象物，在其现实性上，它是一切社会关系的总和。”“人的本质是一切社会关系的总和”这一对人的本质的界定，讲的不是人与动物的区别，而是人与人之间的区别，既包括不同时代的人之间的区别，又包含同一时代处于不同社会地位的人之间的区别。所以它讲的不是一切人所有的共同本质，而是不同的人所具有的不同的本质，即人的具体本质。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139283,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人的价值追求",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139284,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "人的政治立场",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139285,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人的情感态度",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139286,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人的一切社会关系的总和",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305516,
+		"paperId": 8271,
+		"sequence": 70,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "按照技术社会形态的划分标准，我们可以把人类历史划分为",
+		"correctAnswer": "B",
+		"analysis": "第三章第136页。技术社会形态序列：渔猎社会——农业社会——工业社会——信息社会。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139287,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "人的依赖性社会、物的依赖性社会、个人全面发展的社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139288,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "渔猎社会 、农业社会、工业社会、信息社会",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139289,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "自然经济社会、商品经济社会、产品经济社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139290,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "古代社会、近代社会、现代社会",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305517,
+		"paperId": 8271,
+		"sequence": 71,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "划分阶级的唯一标准是",
+		"correctAnswer": "C",
+		"analysis": "第三章第二节。阶级首先是一个经济范畴，是一些经济集团，划分阶级的唯一标准是经济标准，不能用政治标准和思想标准划分阶级。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139291,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "政治标准",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139292,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "思想标准",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139293,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "经济标准",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139294,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "文化标准",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305518,
+		"paperId": 8271,
+		"sequence": 72,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "人区别于动物的根本标志在于人能够",
+		"correctAnswer": "A",
+		"analysis": "第三章第三节。人与动物有很多区别，如人有自我意识，动物没有自我意识；人有宗教信仰，动物没有宗教信仰；人使用文字符号，动物不会使用文字符号；等等。但这些都不是人区别于动物的根本标志和特征。人区别于动物的根本标志和特征，是能制造和使用生产工具从事生产劳动，以获取自己所必需的物质生活资料。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139295,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "制造和使用工具",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139296,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "创造和使用语言符号",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139297,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "积极地适应外部环境",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139298,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "能动地反映客观世界",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305519,
+		"paperId": 8271,
+		"sequence": 73,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "单位商品的价值量与包含在该商品中的社会必要劳动量",
+		"correctAnswer": "A",
+		"analysis": "商品价值量同劳动生产率的关系：单位商品的价值量与包含在商品中的社会必要劳动量成正比，而与生产该商品的劳动生产率成反比。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139299,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "成正比",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139300,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "成反比",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139301,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "不成比例",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139302,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "反向变化",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305520,
+		"paperId": 8271,
+		"sequence": 74,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "部门平均劳动生产率提高之后，会导致单位商品的价值量",
+		"correctAnswer": "B",
+		"analysis": "部门平均劳动生产率与商品的价值量成反比，所以部门平均劳动生产率提高，单位商品的价值量降低。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139303,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "增加",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139304,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "降低",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139305,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "不变",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139306,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "无法判断",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305521,
+		"paperId": 8271,
+		"sequence": 75,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "决定商品价值量的是生产该种商品的",
+		"correctAnswer": "B",
+		"analysis": "社会必要劳动时间决定商品的价值",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139307,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "必要劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139308,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "社会必要劳动时间　",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139309,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "劳动生产率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139310,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "个别劳动时间",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305522,
+		"paperId": 8271,
+		"sequence": 76,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在生产商品的劳动二重性中创造商品使用价值的是",
+		"correctAnswer": "A",
+		"analysis": "生产商品的劳动二重性中具体劳动创造商品的使用价值，抽象劳动创造商品的价值。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139311,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "具体劳动",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139312,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "抽象劳动",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139313,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "简单劳动",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139314,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "复杂劳动",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305523,
+		"paperId": 8271,
+		"sequence": 77,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义的基本经济规律是",
+		"correctAnswer": "B",
+		"analysis": "剩余价值规律是资本主义的基本经济规律",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139315,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "价值规律",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139316,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "剩余价值规律",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139317,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "资本积累规律",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139318,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "平均利润规律",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305524,
+		"paperId": 8271,
+		"sequence": 78,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义意识形态的核心是",
+		"correctAnswer": "D",
+		"analysis": "利己主义是资本主义意识形态的核心。利己主义是生产资料私有制的必然产物，是一切以私有制为基础的剥削阶级所共有的观念。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139319,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "实用主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139320,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "享乐主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139321,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "功利主义",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139322,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "利己主义",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305525,
+		"paperId": 8271,
+		"sequence": 79,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品的最本质因素是",
+		"correctAnswer": "B",
+		"analysis": "商品必然同时具有使用价值和价值。没有使用价值的物品，不可能有价值，使用价值是价值的物质承担者，而价值则寓于使用价值之中。价值是商品的最本质因素。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139323,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "使用价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139324,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "价值",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139325,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "交换价值",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139326,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "剩余价值",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305526,
+		"paperId": 8271,
+		"sequence": 80,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列选项属于意识形态的是",
+		"correctAnswer": "D",
+		"analysis": "第三章第126页。意识形态包括思想政治、法律思想、道德宗教、艺术、哲学和绝大部分社会科学，它们是上层建筑的重要组成部分，反映特定的经济基础并为之服务，在阶级社会里具有一定的阶级性。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139327,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "语言学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139328,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "逻辑学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139329,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "数学",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139330,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "哲学",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305527,
+		"paperId": 8271,
+		"sequence": 81,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "在生产关系体系中，起决定作用的是",
+		"correctAnswer": "A",
+		"analysis": "第三章第130页。生产资料所有制形式在生产关系体系中起着决定作用，是整个生产关系的基础，主要表现在以下几个方面：（1）生产资料所有制形式是生产劳动得以进行的前提。（2）生产资料所有制形式决定整个生产关系的性质。（3）生产资料所有制形式决定人们在生产中的地位及其相互关系。（4）生产资料所有制形式决定产品的分配方式。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139331,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产资料所有制形式",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139332,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "产品的分配方式",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139333,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "人们在生产中的地位",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139334,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "人们在生产中的相互关系",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305528,
+		"paperId": 8271,
+		"sequence": 82,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "生产方式包括",
+		"correctAnswer": "C",
+		"analysis": "第三章第一节。生产方式是人类借以向自然界谋取必需的生活资料的方式，包括生产力和生产关系两个方面，是特定的生产力和生产关系的统一。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139335,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "劳动者和劳动工具两个方面",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139336,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "地理环境和人口因素两个方面",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139337,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产力和生产关系两个方面",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139338,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "经济基础和上层建筑两个方面",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305529,
+		"paperId": 8271,
+		"sequence": 83,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "现代生产力系统的渗透性因素是指",
+		"correctAnswer": "D",
+		"analysis": "第三章第129页。教育属于准备性因素，管理属于运筹性的综合因素，生产资料属于独立性的实体因素。Z自然科学为渗透性因素。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "D",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139339,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "教育",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139340,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "管理",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139341,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "生产资料",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139342,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "自然科学",
+				"isCorrect": 1
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305530,
+		"paperId": 8271,
+		"sequence": 84,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "下列各项中，属于经济社会形态序列的是",
+		"correctAnswer": "B",
+		"analysis": "第三章第一节。经济社会形态是直接或间接以生产关系的性质为标准划分的社会形态。在经济社会形态的范围内，又有两种基本的划分方法：一种是五种社会形态划分法，另一种是三种社会形态划分法。五种社会形态，即原始社会、奴隶社会、封建社会、资本主义。社会主义、共产主义社会（社会主义社会是它的第一阶段）。三种社会形态划分法。人的依赖性社会、物的依赖性社会、个人全面发展的社会三种依次更替的社会形态。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139343,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "渔猎社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139344,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "封建社会",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139345,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "工业社会",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139346,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "信息社会",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305531,
+		"paperId": 8271,
+		"sequence": 85,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "生产力发展水平的主要标志是",
+		"correctAnswer": "A",
+		"analysis": "这道题主要考查了生产力发展水平，每次生产力的极度飞跃都是生产工具的发展创新，比如几次工业革命，所以，生产力发展水平的主要标志是生产工具，所以这道题选A。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139347,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "生产工具",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139348,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "运输工具",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139349,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "通讯设备",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139350,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "包装设备",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305532,
+		"paperId": 8271,
+		"sequence": 86,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "商品生产者要获得更多收益，必须使生产商品的",
+		"correctAnswer": "B",
+		"analysis": "第四章第162页。个别企业率先采用先进的生产设备和技术，提髙了劳动生产率，使生产商品的个别劳动时间低于社会必要劳动时间，商品个别价值低于社会价值，这个企业的资本家就会由于按社会价值出售商品，而能够比其他资本家获得更多的剩余价值，即获得超额剩余价值。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "B",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139351,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "个别劳动时间等于社会必要劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139352,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "个别劳动时间低于社会必要劳动时间",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139353,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "个别劳动时间高于社会必要劳动时间",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139354,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "个别劳动时间低于必要劳动时间",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305533,
+		"paperId": 8271,
+		"sequence": 87,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "资本主义民主制的核心和主要标志是",
+		"correctAnswer": "A",
+		"analysis": "第四章第191页。资产阶级民主制以议会制为核心和主要标志。以“三权分立制”、普选制、两党制（或多党制），以及公民享有各种权利为主要内容。这些制度被资产阶级作为民主制的标志而加以推崇和颂扬。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139355,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "议会制",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139356,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "君主立宪制",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139357,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "民主共和制",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139358,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "普选制",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305534,
+		"paperId": 8271,
+		"sequence": 88,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "以私有制为基础的商品经济的基本矛盾是",
+		"correctAnswer": "C",
+		"analysis": "以生产资料私有制为基础的商品经济的基本矛盾，是私人劳动和社会劳动的矛盾。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139359,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "价值与使用价值的矛盾",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139360,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "具体劳动与抽象劳动的矛盾",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139361,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "私人劳动与社会劳动的矛盾",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139362,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "生产社会化与占有私人性的矛盾",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305535,
+		"paperId": 8271,
+		"sequence": 89,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "除了剩余价值与可变资本的比率外，剩余价值率还可以表示为",
+		"correctAnswer": "A",
+		"analysis": "剩余价值率（m´）=剩余价值（m）/可变资本（v）=剩余劳动时间/必要劳动时间",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "A",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139363,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "剩余劳动时间与必要劳动时间的比率",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139364,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "剩余劳动时间与社会必要劳动时间的比率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139365,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "可变资本与不变资本的比率",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139366,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "利润与预付总资本的比率",
+				"isCorrect": 0
+			}
+		]
+	},
+	{
+		"recordId": 2043747,
+		"id": 305536,
+		"paperId": 8271,
+		"sequence": 90,
+		"questionType": "SINGLE_CHOICE",
+		"isObjective": 1,
+		"content": "劳动力价值决定的一个重要特点是",
+		"correctAnswer": "C",
+		"analysis": "劳动力的价值决定还有一个重要的特点，就是它包括历史和道德的因素。这就是说，雇佣劳动者的必要生活资料的种类和数量，要受一定历史条件下的经济和文化发展水平以及各个国家风俗和习惯的制约。",
+		"score": 2.0,
+		"answerFlag": null,
+		"answer": "C",
+		"questionAmount": 90,
+		"videoUrl": null,
+		"resPaperQuestionOptionsList": [
+			{
+				"id": 1139367,
+				"sequence": 1,
+				"optionTitle": "A",
+				"content": "它由其生产的剩余价值决定",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139368,
+				"sequence": 2,
+				"optionTitle": "B",
+				"content": "它由其使用价值决定",
+				"isCorrect": 0
+			},
+			{
+				"id": 1139369,
+				"sequence": 3,
+				"optionTitle": "C",
+				"content": "它包含历史和道德因素",
+				"isCorrect": 1
+			},
+			{
+				"id": 1139370,
+				"sequence": 4,
+				"optionTitle": "D",
+				"content": "它包含习惯和法律因素",
+				"isCorrect": 0
+			}
+		]
+	}
+]
