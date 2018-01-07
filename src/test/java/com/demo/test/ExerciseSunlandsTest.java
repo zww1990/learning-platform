@@ -33,8 +33,8 @@ public class ExerciseSunlandsTest {
 	public void init() {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
-		cookies.add("stuToken=827dbc817fe1a3d11a565a14d7c12b52");
-		cookies.add("JSESSIONID=D92891B53893AC30F0D3241B80A3AA66");
+		cookies.add("stuToken=3e42f72daa1fc55fa791c7f4aa43033e");
+		cookies.add("JSESSIONID=B5EE2764D74C0F1814C6AE6CD6C1A5DF");
 		headers.put(HttpHeaders.COOKIE, cookies);
 		fileName = "近代史精讲1强化-1222-闫怀北";
 	}
@@ -89,6 +89,7 @@ public class ExerciseSunlandsTest {
 	}
 
 	@Test
+	@Deprecated
 	public void writeWord() {
 		File file = new File(PARENT, "test.docx");
 		try (OutputStream stream = new FileOutputStream(file); XWPFDocument document = new XWPFDocument();) {
