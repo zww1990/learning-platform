@@ -1,0 +1,58 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo">logo</div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+      <ng-template ngFor let-child [ngForOf]="menu">
+        <li nz-menu-item [routerLink]="child.link" [nzSelected]="child.selected" *ngIf="!child.children">
+          <span>
+            <i class="anticon {{child.icon}}"></i>
+            <span class="nav-text">{{ child.text }}</span>
+          </span>
+        </li>
+        <li nz-submenu [nzOpen]="child.selected" *ngIf="child.children">
+          <span title>
+            <i class="anticon {{child.icon}}"></i>
+            <span class="nav-text">{{ child.text }}</span>
+          </span>
+          <ul *ngFor="let item of child.children">
+            <li nz-menu-item [routerLink]="item.link" [nzSelected]="item.selected">{{ item.text }}</li>
+          </ul>
+        </li>
+      </ng-template>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;">
+      <div nz-row>
+        <div nz-col [nzSpan]="2">
+          <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+        </div>
+        <div nz-col [nzSpan]="20"></div>
+        <div nz-col [nzSpan]="2">
+          <nz-dropdown>
+            <a class="ant-dropdown-link" nz-dropdown>
+              <nz-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
+            </a>
+            <ul nz-menu>
+              <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" href="#">我的消息</a>
+              </li>
+              <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" href="#">个人设置</a>
+              </li>
+              <li nz-menu-item>
+                <a target="_blank" rel="noopener noreferrer" href="#">退出登录</a>
+              </li>
+            </ul>
+          </nz-dropdown>
+        </div>
+      </div>
+    </nz-header>
+    <nz-content style="margin:0 16px;">
+      <div style="padding:24px; background: #fff; min-height: 600px; min-width: 800px;">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;"></nz-footer>
+  </nz-layout>
+</nz-layout>
