@@ -1,6 +1,6 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo">logo</div>
+    <div class="logo"></div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
       <ng-template ngFor let-child [ngForOf]="menu">
         <li nz-menu-item [routerLink]="child.link" [nzSelected]="child.selected" *ngIf="!child.children">
@@ -28,7 +28,7 @@
           <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
         </div>
         <div nz-col [nzSpan]="20"></div>
-        <div nz-col [nzSpan]="2">
+        <div nz-col [nzSpan]="1" style="text-align: right">
           <nz-dropdown>
             <a class="ant-dropdown-link" nz-dropdown>
               <nz-avatar nzIcon="user" style="background-color:#87d068;"></nz-avatar>
@@ -41,11 +41,12 @@
                 <a target="_blank" rel="noopener noreferrer" href="#">个人设置</a>
               </li>
               <li nz-menu-item>
-                <a target="_blank" rel="noopener noreferrer" href="#">退出登录</a>
+                <a (click)="logout()">退出登录</a>
               </li>
             </ul>
           </nz-dropdown>
         </div>
+        <div nz-col [nzSpan]="1">{{user?.name}}</div>
       </div>
     </nz-header>
     <nz-content style="margin:0 16px;">
