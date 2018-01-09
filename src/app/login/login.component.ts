@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -25,5 +30,17 @@ export class LoginComponent implements OnInit {
     this.validateForm.controls['password'].markAsDirty();
     sessionStorage.setItem('user', 'admin');
     this.router.navigate(['']);
+  }
+
+  casCreateTGT(params) {
+    const body = new HttpParams()
+      .set('username', '58831')
+      .set('password', '1q2w3e4r');
+    return this.http.post('/cas/v1/tickets', body, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text'
+    });
   }
 }
