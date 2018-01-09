@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-layout',
@@ -11,11 +14,15 @@ export class LayoutComponent implements OnInit {
   menu = [];
   user = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private confirm: NzModalService
+  ) {}
 
   ngOnInit() {
     this.user = {
-      name: 'admin'
+      name: sessionStorage.getItem('user')
     };
     this.menu = [
       {
@@ -51,7 +58,22 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.clear();
-    this.router.navigate(['login']);
+    this.confirm.confirm({
+      title: '退出提示',
+      content: '您确认要退出APP吗？',
+      onOk: () => {
+        sessionStorage.clear();
+        this.router.navigate(['login']);
+      }
+    });
+  }
+  // 销毁票证授予票证
+  casDeleteTGT(ticket) {
+    return this.http.delete(`/cas/v1/tickets/${ticket}`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text'
+    });
   }
 }

@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
+import { NzMessageService } from 'ng-zorro-antd';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,29 +16,61 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private message: NzMessageService
   ) {}
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      userName: ['admin', [Validators.required]],
-      password: ['admin', [Validators.required]],
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
       remember: [true]
     });
   }
 
   submitForm() {
-    this.validateForm.controls['userName'].markAsDirty();
-    this.validateForm.controls['password'].markAsDirty();
-    sessionStorage.setItem('user', 'admin');
-    this.router.navigate(['']);
+    this.casCreateTGT().subscribe(
+      res => {
+        const location = res.headers.get('location');
+        console.log(location);
+        sessionStorage.setItem('user', this.validateForm.get('userName').value);
+        this.router.navigate(['']);
+      },
+      err => {
+        this.message.error('用户名或密码错误！');
+      }
+    );
   }
-
-  casCreateTGT(params) {
+  // 第一步：创建新的票证授予票证
+  casCreateTGT() {
     const body = new HttpParams()
-      .set('username', '58831')
-      .set('password', '1q2w3e4r');
+      .set('username', this.validateForm.get('userName').value)
+      .set('password', this.validateForm.get('password').value);
     return this.http.post('/cas/v1/tickets', body, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text',
+      observe: 'response'
+    });
+  }
+  // 第二步：创建新的服务票据
+  casCreateST(ticket) {
+    const body = new HttpParams().set('service', location.origin);
+    return this.http.post(`/cas/v1/tickets/${ticket}`, body, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      responseType: 'text'
+    });
+  }
+  // 第三步：CAS验证服务
+  casServiceValidate(ticket) {
+    const body = new HttpParams()
+      .set('ticket', ticket)
+      .set('service', location.origin)
+      .set('locale', 'zh_CN');
+    return this.http.post('/cas/serviceValidate', body, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
