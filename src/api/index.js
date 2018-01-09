@@ -47,7 +47,7 @@ export default {
     return axios.post(
       `/cas/v1/tickets/${ticket}`,
       qs.stringify({
-        service: 'http://localhost:8080/cas'
+        service: location.origin
       }),
       {
         headers: {
@@ -62,7 +62,7 @@ export default {
       `/cas/serviceValidate`,
       qs.stringify({
         ticket,
-        service: 'http://localhost:8080/cas',
+        service: location.origin,
         locale: 'zh_CN'
       }),
       {
