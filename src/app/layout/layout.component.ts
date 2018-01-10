@@ -14,6 +14,7 @@ export class LayoutComponent implements OnInit {
   menu = [];
   user = null;
   tabs = [];
+  selectedIndex = 0;
 
   constructor(
     private router: Router,
@@ -65,18 +66,30 @@ export class LayoutComponent implements OnInit {
     ];
     this.tabs = [
       {
-        name: 'Tab 1'
-      },
-      {
-        name: 'Tab 2'
+        text: '首页',
+        link: ''
       }
     ];
   }
-
+  // 选中某个菜单
+  clickMenuItem(menuItem) {
+    const index = this.tabs.findIndex(m => m.link === menuItem.link);
+    if (index === -1) {
+      this.tabs.push(menuItem);
+      this.selectedIndex = this.tabs.length - 1;
+    } else {
+      this.selectedIndex = index;
+    }
+  }
+  // 选中某个标签页
+  selectTab(tab) {
+    this.router.navigate([tab.link]);
+  }
+  // 关闭某个标签页
   closeTab(tab) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
   }
-
+  // 清空所有标签页
   closeAllTabs() {
     this.confirm.confirm({
       title: '操作提示',
@@ -84,13 +97,15 @@ export class LayoutComponent implements OnInit {
       onOk: () => {
         this.tabs = [
           {
-            name: '首页'
+            text: '首页',
+            link: ''
           }
         ];
+        this.selectedIndex = 0;
       }
     });
   }
-
+  // 用户退出登录
   logout() {
     this.confirm.confirm({
       title: '退出提示',

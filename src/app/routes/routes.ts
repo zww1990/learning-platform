@@ -13,7 +13,7 @@ export const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       {
-        path: 'index',
+        path: '',
         component: IndexComponent
       }
     ]

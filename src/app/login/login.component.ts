@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         const location = res.headers.get('location');
         console.log(location);
         sessionStorage.setItem('user', this.validateForm.get('userName').value);
-        this.router.navigate(['/index']);
+        this.router.navigate(['']);
       },
       err => {
         this.message.error('用户名或密码错误！');
