@@ -49,8 +49,8 @@
         <div nz-col [nzSpan]="1">{{user?.name}}</div>
       </div>
     </nz-header>
-    <nz-content style="margin:0 16px;">
-      <div style="margin:12px 0;padding:24px; background: #fff; min-height: 600px; min-width: 800px;">
+    <nz-content>
+      <div #nzcontent style="padding:10px; background: #fff;">
         <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
           <nz-tab *ngFor="let tab of tabs" (nzSelect)="selectTab(tab)">
             <ng-template #nzTabHeading>
@@ -66,6 +66,5 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer style="text-align: center;"></nz-footer>
   </nz-layout>
 </nz-layout>
