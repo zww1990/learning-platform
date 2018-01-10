@@ -24,10 +24,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canLoad(route: Route) {
     return this.checkLogin();
   }
-
+  // 验证用户是否登录
   checkLogin() {
     const user = sessionStorage.getItem('user');
-    console.log(user);
     if (!user) {
       this.router.navigate(['/login']);
       return false;
