@@ -34,12 +34,12 @@ export class LayoutComponent implements OnInit {
         children: [
           {
             text: '页面一',
-            link: '/page/page1',
+            link: '/demo/page1',
             selected: false
           },
           {
             text: '页面二',
-            link: '/page/page2',
+            link: '/demo/page2',
             selected: false
           }
         ]
@@ -52,12 +52,12 @@ export class LayoutComponent implements OnInit {
         children: [
           {
             text: '页面三',
-            link: '/page/page3',
+            link: '/demo/page3',
             selected: false
           },
           {
             text: '页面四',
-            link: '/page/page4',
+            link: '/demo/page4',
             selected: false
           }
         ]
