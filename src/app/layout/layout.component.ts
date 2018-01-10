@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -9,18 +15,26 @@ import { NzModalService } from 'ng-zorro-antd';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.less']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, AfterViewInit {
   isCollapsed = false;
   menu = [];
   user = null;
   tabs = [];
   selectedIndex = 0;
+  @ViewChild('nzcontent') nzcontent: ElementRef;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private confirm: NzModalService
   ) {}
+
+  ngAfterViewInit() {
+    this.nzcontent.nativeElement.style.height = window.innerHeight + 'px';
+    window.onresize = () => {
+      this.nzcontent.nativeElement.style.height = window.innerHeight + 'px';
+    };
+  }
 
   ngOnInit() {
     this.user = {
