@@ -3,7 +3,7 @@
     <div class="logo"></div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
       <ng-template ngFor let-child [ngForOf]="menu">
-        <li nz-menu-item [routerLink]="child.link" [nzSelected]="child.selected" *ngIf="!child.children">
+        <li nz-menu-item (click)="clickMenuItem(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
             <i class="{{child.icon}}"></i>
             <span class="nav-text">{{ child.text }}</span>
@@ -15,7 +15,7 @@
             <span class="nav-text">{{ child.text }}</span>
           </span>
           <ul *ngFor="let item of child.children">
-            <li nz-menu-item [routerLink]="item.link" [nzSelected]="item.selected">{{ item.text }}</li>
+            <li nz-menu-item (click)="clickMenuItem(item)" [nzSelected]="item.selected">{{ item.text }}</li>
           </ul>
         </li>
       </ng-template>
@@ -51,11 +51,11 @@
     </nz-header>
     <nz-content style="margin:0 16px;">
       <div style="margin:12px 0;padding:24px; background: #fff; min-height: 600px; min-width: 800px;">
-        <nz-tabset [nzType]="'card'">
-          <nz-tab *ngFor="let tab of tabs">
+        <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
+          <nz-tab *ngFor="let tab of tabs" (nzSelect)="selectTab(tab)">
             <ng-template #nzTabHeading>
-              <div>{{tab.name}}
-                <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
+              <div>{{tab.text}}
+                <i class="anticon anticon-cross" (click)="closeTab(tab)" *ngIf="tabs.length>1"></i>
               </div>
             </ng-template>
           </nz-tab>
