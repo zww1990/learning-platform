@@ -97,7 +97,7 @@ export class LayoutComponent implements OnInit {
       content: '您确认要退出APP吗？',
       onOk: () => {
         sessionStorage.clear();
-        this.router.navigate(['login']);
+        this.router.navigate(['/login']);
       }
     });
   }
