@@ -1,7 +1,10 @@
 {
   "/cas": {
-    "target": "http://10.2.1.23:8080/",
+    "target": "http://sso.bacic5i5j.com/",
     "secure": false,
-    "changeOrigin": true
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/cas": ""
+    }
   }
 }
