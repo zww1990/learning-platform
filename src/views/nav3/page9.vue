@@ -17,7 +17,8 @@ export default {
         '/static/images/yuzexue/003.jpg',
         '/static/images/yuzexue/004.jpg',
         '/static/images/yuzexue/005.jpg',
-        '/static/images/yuzexue/006.jpg'
+        '/static/images/yuzexue/006.jpg',
+        '/static/images/yuzexue/007.jpg'
       ]
     };
   }
