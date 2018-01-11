@@ -30,9 +30,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.nzcontent.nativeElement.style.height = window.innerHeight + 'px';
+    this.nzcontent.nativeElement.style.height = window.innerHeight - 64 + 'px';
     window.onresize = () => {
-      this.nzcontent.nativeElement.style.height = window.innerHeight + 'px';
+      this.nzcontent.nativeElement.style.height =
+        window.innerHeight - 64 + 'px';
     };
   }
 
