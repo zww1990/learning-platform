@@ -78,12 +78,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         ]
       }
     ];
-    this.tabs = [
-      {
-        text: '首页',
-        link: ''
-      }
-    ];
+    // this.tabs = [
+    //   {
+    //     text: '首页',
+    //     link: ''
+    //   }
+    // ];
   }
   // 选中某个菜单
   clickMenuItem(menuItem) {
@@ -91,8 +91,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     if (index === -1) {
       this.tabs.push(menuItem);
       this.selectedIndex = this.tabs.length - 1;
+      this.router.navigate([menuItem.link]);
     } else {
       this.selectedIndex = index;
+      this.router.navigate([this.tabs[index].link]);
     }
   }
   // 选中某个标签页
@@ -102,6 +104,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   // 关闭某个标签页
   closeTab(tab) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
+    this.selectedIndex = this.tabs.length - 1;
+    this.router.navigate([this.tabs[this.selectedIndex].link]);
   }
   // 清空所有标签页
   closeAllTabs() {
@@ -110,10 +114,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       content: '您确认要清空所有打开的标签嘛？',
       onOk: () => {
         this.tabs = [
-          {
-            text: '首页',
-            link: ''
-          }
+          // {
+          //   text: '首页',
+          //   link: ''
+          // }
         ];
         this.selectedIndex = 0;
       }
