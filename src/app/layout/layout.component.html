@@ -2,20 +2,20 @@
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo"></div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
-      <ng-template ngFor let-child [ngForOf]="menu">
-        <li nz-menu-item (click)="clickMenuItem(child)" [nzSelected]="child.selected" *ngIf="!child.children">
+      <ng-template ngFor let-child [ngForOf]="menus">
+        <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
             <i class="{{child.icon}}"></i>
             <span class="nav-text">{{ child.text }}</span>
           </span>
         </li>
-        <li nz-submenu [nzOpen]="child.selected" *ngIf="child.children">
+        <li nz-submenu [nzOpen]="child.selected" (nzOpenChange)="openChange(child)" *ngIf="child.children">
           <span title>
             <i class="{{child.icon}}"></i>
             <span class="nav-text">{{ child.text }}</span>
           </span>
           <ul *ngFor="let item of child.children">
-            <li nz-menu-item (click)="clickMenuItem(item)" [nzSelected]="item.selected">{{ item.text }}</li>
+            <li nz-menu-item (click)="clickMenu(item)" [nzSelected]="item.selected">{{ item.text }}</li>
           </ul>
         </li>
       </ng-template>

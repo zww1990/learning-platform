@@ -17,7 +17,7 @@ import { NzModalService } from 'ng-zorro-antd';
 })
 export class LayoutComponent implements OnInit, AfterViewInit {
   isCollapsed = false;
-  menu = [];
+  menus = [];
   user = null;
   tabs = [];
   selectedIndex = 0;
@@ -41,11 +41,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.user = {
       name: sessionStorage.getItem('user')
     };
-    this.menu = [
+    this.menus = [
       {
         text: '菜单一',
         link: '',
-        icon: 'fa fa-address-book',
+        icon: 'anticon anticon-area-chart',
         selected: false,
         children: [
           {
@@ -63,7 +63,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       {
         text: '菜单二',
         link: '',
-        icon: 'fa fa-bandcamp',
+        icon: 'anticon anticon-pie-chart',
         selected: false,
         children: [
           {
@@ -77,20 +77,56 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             selected: false
           }
         ]
+      },
+      {
+        text: '菜单三',
+        link: '',
+        icon: 'anticon anticon-pie-chart',
+        selected: false,
+        children: [
+          {
+            text: '页面五',
+            link: '/demo/page3',
+            selected: false
+          },
+          {
+            text: '页面六',
+            link: '/demo/page4',
+            selected: false
+          }
+        ]
       }
     ];
   }
   // 选中某个菜单
-  clickMenuItem(menuItem) {
-    const index = this.tabs.findIndex(m => m.link === menuItem.link);
+  clickMenu(menu) {
+    const index = this.tabs.findIndex(m => m === menu);
     if (index === -1) {
-      this.tabs.push(menuItem);
+      this.tabs.push(menu);
       this.selectedIndex = this.tabs.length - 1;
-      this.router.navigate([menuItem.link]);
+      this.router.navigate([menu.link]);
     } else {
       this.selectedIndex = index;
       this.router.navigate([this.tabs[index].link]);
     }
+  }
+  // 菜单展开关闭回调
+  openChange(menu) {
+    this.menus.forEach(child => {
+      child.selected = false;
+      if (menu === child) {
+        child.selected = true;
+      }
+      if (child.children && child.children.length > 0) {
+        child.children.forEach(item => {
+          item.selected = false;
+          if (menu === item) {
+            child.selected = true;
+            item.selected = true;
+          }
+        });
+      }
+    });
   }
   // 选中某个标签页
   selectTab(tab) {
