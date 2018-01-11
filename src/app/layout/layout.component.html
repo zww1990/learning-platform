@@ -51,16 +51,16 @@
     </nz-header>
     <nz-content>
       <div #nzcontent style="padding:10px; background: #fff;">
-        <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
-          <nz-tab *ngFor="let tab of tabs" (nzSelect)="selectTab(tab)">
+        <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex" *ngIf="tabs.length>1">
+          <nz-tab *ngFor="let tab of tabs" (nzClick)="selectTab(tab)">
             <ng-template #nzTabHeading>
               <div>{{tab.text}}
-                <i class="anticon anticon-cross" (click)="closeTab(tab)" *ngIf="tabs.length>1"></i>
+                <i class="anticon anticon-cross" (click)="closeTab(tab)"></i>
               </div>
             </ng-template>
           </nz-tab>
           <ng-template #nzTabBarExtraContent>
-            <i class="anticon anticon-delete" style="cursor: pointer" (click)="closeAllTabs()" *ngIf="tabs.length>1"></i>
+            <i class="anticon anticon-delete" style="cursor: pointer" (click)="closeAllTabs()"></i>
           </ng-template>
         </nz-tabset>
         <router-outlet></router-outlet>
