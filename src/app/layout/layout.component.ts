@@ -78,12 +78,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         ]
       }
     ];
-    // this.tabs = [
-    //   {
-    //     text: '首页',
-    //     link: ''
-    //   }
-    // ];
   }
   // 选中某个菜单
   clickMenuItem(menuItem) {
@@ -113,12 +107,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       title: '操作提示',
       content: '您确认要清空所有打开的标签嘛？',
       onOk: () => {
-        this.tabs = [
-          // {
-          //   text: '首页',
-          //   link: ''
-          // }
-        ];
+        this.tabs = [];
         this.selectedIndex = 0;
       }
     });
