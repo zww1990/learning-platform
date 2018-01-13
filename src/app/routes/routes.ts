@@ -6,17 +6,22 @@ import { AuthGuard } from '../auth/auth-guard';
 import { IndexComponent } from '../index/index.component';
 
 export const routes: Routes = [
+  // {
+  //   path: '',
+  //   component: LayoutComponent,
+  //   canActivate: [AuthGuard],
+  //   canActivateChild: [AuthGuard],
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: IndexComponent
+  //     }
+  //   ]
+  // },
   {
     path: '',
-    component: LayoutComponent,
-    canActivate: [AuthGuard],
-    canActivateChild: [AuthGuard],
-    children: [
-      {
-        path: '',
-        component: IndexComponent
-      }
-    ]
+    redirectTo: '/demo/page1',
+    pathMatch: 'full'
   },
   {
     path: 'login',

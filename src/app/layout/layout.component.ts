@@ -41,62 +41,30 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.user = {
       name: sessionStorage.getItem('user')
     };
-    this.menus = [
-      {
-        text: '菜单一',
+    this.tabs.push({
+      text: '首页',
+      link: ''
+    });
+    for (let i = 1; i <= 10; i++) {
+      this.menus.push({
+        text: '菜单' + i,
         link: '',
         icon: 'anticon anticon-area-chart',
         selected: false,
         children: [
           {
-            text: '页面一',
+            text: '页面1' + i,
             link: '/demo/page1',
             selected: false
           },
           {
-            text: '页面二',
+            text: '页面2' + i,
             link: '/demo/page2',
             selected: false
           }
         ]
-      },
-      {
-        text: '菜单二',
-        link: '',
-        icon: 'anticon anticon-pie-chart',
-        selected: false,
-        children: [
-          {
-            text: '页面三',
-            link: '/demo/page3',
-            selected: false
-          },
-          {
-            text: '页面四',
-            link: '/demo/page4',
-            selected: false
-          }
-        ]
-      },
-      {
-        text: '菜单三',
-        link: '',
-        icon: 'anticon anticon-pie-chart',
-        selected: false,
-        children: [
-          {
-            text: '页面五',
-            link: '/demo/page3',
-            selected: false
-          },
-          {
-            text: '页面六',
-            link: '/demo/page4',
-            selected: false
-          }
-        ]
-      }
-    ];
+      });
+    }
   }
   // 选中某个菜单
   clickMenu(menu) {
@@ -144,8 +112,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       title: '操作提示',
       content: '您确认要清空所有打开的标签嘛？',
       onOk: () => {
-        this.tabs = [];
+        this.tabs = [
+          {
+            text: '首页',
+            link: ''
+          }
+        ];
         this.selectedIndex = 0;
+        this.selectTab(this.tabs[0]);
       }
     });
   }
