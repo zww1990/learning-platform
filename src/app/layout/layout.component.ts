@@ -108,20 +108,25 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
   // 清空所有标签页
   closeAllTabs() {
-    this.confirm.confirm({
-      title: '操作提示',
-      content: '您确认要清空所有打开的标签嘛？',
-      onOk: () => {
-        this.tabs = [
-          {
-            text: '首页',
-            link: ''
-          }
-        ];
-        this.selectedIndex = 0;
-        this.selectTab(this.tabs[0]);
+    if (this.tabs.length < 2) {
+      return;
+    }
+    this.tabs = [
+      {
+        text: '首页',
+        link: ''
       }
-    });
+    ];
+    this.selectedIndex = 0;
+    this.selectTab(this.tabs[0]);
+  }
+  // 关闭除当前打开外的其他所有标签页
+  closeOtherTabs() {
+    if (this.tabs.length < 2) {
+      return;
+    }
+    this.tabs = [this.tabs[this.selectedIndex]];
+    this.selectedIndex = 0;
   }
   // 用户退出登录
   logout() {
