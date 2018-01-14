@@ -78,7 +78,6 @@ export default {
     //退出登录
     logout() {
       this.$confirm('确认退出吗?', '提示', {
-        //type: 'warning'
       }).then(() => {
         api.casDeleteTGT(sessionStorage.getItem('CAS-TGT'));
         sessionStorage.clear();
@@ -198,7 +197,6 @@ export default {
       }
     }
     .logo {
-      //width:230px;
       height: 60px;
       font-size: 22px;
       padding-left: 20px;
@@ -233,7 +231,6 @@ export default {
   }
   .main {
     display: flex;
-    // background: #324057;
     position: absolute;
     top: 60px;
     bottom: 0px;
@@ -241,9 +238,6 @@ export default {
     aside {
       flex: 0 0 230px;
       width: 230px;
-      // position: absolute;
-      // top: 0px;
-      // bottom: 0px;
       .el-menu {
         height: 100%;
       }
@@ -257,13 +251,7 @@ export default {
       width: 230px;
     }
     .content-container {
-      // background: #f1f2f7;
       flex: 1;
-      // position: absolute;
-      // right: 0px;
-      // top: 0px;
-      // bottom: 0px;
-      // left: 230px;
       overflow-y: auto;
       padding: 10px;
       .content-wrapper {

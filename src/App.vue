@@ -14,9 +14,6 @@ export default {
 body {
   margin: 0px;
   padding: 0px;
-  // background: url(./assets/images/bg1.jpg) center !important;
-  // background-size: cover;
-  // background: #1F2D3D;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
     Microsoft YaHei, SimSun, sans-serif;
   font-size: 14px;
@@ -37,9 +34,7 @@ body {
   margin-right: 10px;
 }
 .toolbar {
-  // background: #f2f2f2;
   padding: 10px;
-  //border:1px solid #dfe6ec;
   margin: 10px 0px;
   .el-form-item {
     margin-bottom: 10px;

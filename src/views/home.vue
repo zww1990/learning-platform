@@ -1,13 +1,16 @@
 <template>
   <el-row class="container">
     <el-col :span="24" class="header">
-      <el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">{{collapsed?'':sysName}}</el-col>
-      <el-col :span="10">
+      <el-col :span="6" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">{{collapsed?'':sysName}}</el-col>
+      <el-col :span="2">
         <div class="tools" @click.prevent="collapse">
-          <i :class="'fa fa-bars'"></i>
+          <i class="fa fa-bars fa-2x" :class="collapsed?'fa-rotate-90':'fa-rotate-0'"></i>
         </div>
       </el-col>
-      <el-col :span="4" class="userinfo">
+      <el-col :span="16" class="userinfo">
+        <span style="cursor:pointer;margin-right:10px;vertical-align:sub" @click="handlerScreenfull">
+          <i class="fa fa-arrows-alt fa-2x"></i>
+        </span>
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
           <el-dropdown-menu slot="dropdown">
@@ -64,6 +67,7 @@
 </template>
 <script>
 import api from '@/api';
+import screenfull from 'screenfull';
 export default {
   data() {
     return {
@@ -77,9 +81,7 @@ export default {
   methods: {
     //退出登录
     logout() {
-      this.$confirm('确认退出吗?', '提示', {
-        //type: 'warning'
-      }).then(() => {
+      this.$confirm('确认退出吗?', '提示', {}).then(() => {
         sessionStorage.clear();
         this.$store.commit('clean_tabs');
         this.$router.push('/login');
@@ -112,6 +114,9 @@ export default {
           this.$router.push({ path: '/main' });
         }
       }
+    },
+    handlerScreenfull() {
+      screenfull.toggle(); //全屏切换
     }
   },
   mounted() {
@@ -197,7 +202,6 @@ export default {
       }
     }
     .logo {
-      //width:230px;
       height: 60px;
       font-size: 22px;
       padding-left: 20px;
@@ -223,16 +227,12 @@ export default {
       background-size: cover;
     }
     .tools {
-      padding: 0px 23px;
-      width: 14px;
-      height: 60px;
-      line-height: 60px;
+      padding: 5px 23px;
       cursor: pointer;
     }
   }
   .main {
     display: flex;
-    // background: #324057;
     position: absolute;
     top: 60px;
     bottom: 0px;
@@ -240,9 +240,6 @@ export default {
     aside {
       flex: 0 0 230px;
       width: 230px;
-      // position: absolute;
-      // top: 0px;
-      // bottom: 0px;
       .el-menu {
         height: 100%;
       }
@@ -256,13 +253,7 @@ export default {
       width: 230px;
     }
     .content-container {
-      // background: #f1f2f7;
       flex: 1;
-      // position: absolute;
-      // right: 0px;
-      // top: 0px;
-      // bottom: 0px;
-      // left: 230px;
       overflow-y: auto;
       padding: 10px;
       .content-wrapper {
