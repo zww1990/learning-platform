@@ -7,7 +7,7 @@
 export default {
   data() {
     return {
-      content: 'this is main page'
+      content: '这是App首页'
     };
   }
 };

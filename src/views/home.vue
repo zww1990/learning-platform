@@ -67,7 +67,7 @@ import api from '@/api';
 export default {
   data() {
     return {
-      sysName: '我爱我家',
+      sysName: 'MyVue',
       collapsed: false,
       sysUserName: '',
       sysUserAvatar: '',
