@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { NzModalService } from 'ng-zorro-antd';
+import * as screenfull from 'screenfull';
 
 @Component({
   selector: 'app-layout',
@@ -147,5 +148,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       },
       responseType: 'text'
     });
+  }
+  // 全屏切换
+  toggleFullscreen() {
+    if (screenfull.enabled) {
+      screenfull.toggle();
+    }
   }
 }
