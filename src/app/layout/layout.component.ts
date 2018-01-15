@@ -98,7 +98,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
   }
   // 选中某个标签页
-  selectTab(tab) {
+  selectTab(tab, index) {
+    this.selectedIndex = index;
     this.router.navigate([tab.link]);
   }
   // 关闭某个标签页
@@ -118,8 +119,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         link: ''
       }
     ];
-    this.selectedIndex = 0;
-    this.selectTab(this.tabs[0]);
+    this.selectTab(this.tabs[0], 0);
   }
   // 关闭除当前打开外的其他所有标签页
   closeOtherTabs() {
