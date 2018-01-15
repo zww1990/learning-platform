@@ -29,17 +29,17 @@ export class LoginComponent implements OnInit {
   }
   // 用户登录
   submitForm() {
-    this.casCreateTGT().subscribe(
-      res => {
-        const location = res.headers.get('location');
-        console.log(location);
+    // this.casCreateTGT().subscribe(
+    //   res => {
+    //     const location = res.headers.get('location');
+    //     console.log(location);
         sessionStorage.setItem('user', this.validateForm.get('userName').value);
         this.router.navigate(['']);
-      },
-      err => {
-        this.message.error('用户名或密码错误！');
-      }
-    );
+    //   },
+    //   err => {
+    //     this.message.error('用户名或密码错误！');
+    //   }
+    // );
   }
   // 第一步：创建新的票证授予票证
   casCreateTGT() {
