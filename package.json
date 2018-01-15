@@ -26,7 +26,7 @@
     "ztree": "^3.5.24"
   },
   "devDependencies": {
-    "@types/jquery": "^3.2.17",
+    "@types/jquery": "^3.2.18",
     "@types/lodash": "^4.14.92",
     "@types/screenfull": "^3.3.1",
     "autoprefixer": "^7.2.5",
@@ -75,7 +75,7 @@
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.2",
-    "webpack-dev-server": "^2.10.1",
+    "webpack-dev-server": "^2.11.0",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
