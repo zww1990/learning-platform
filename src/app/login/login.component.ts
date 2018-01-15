@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       remember: [true]
     });
   }
-
+  // 用户登录
   submitForm() {
     this.casCreateTGT().subscribe(
       res => {
