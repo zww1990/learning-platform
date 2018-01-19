@@ -7,22 +7,22 @@
       {
         "path": "/table",
         "name": "表格嵌套表格",
-        "iconClass": "fa fa-table"
+        "iconClass": "fa fa-500px"
       },
       {
         "path": "/form",
         "name": "表单",
-        "iconClass": "fa fa-first-order"
+        "iconClass": "fa fa-adn"
       },
       {
         "path": "/table2",
         "name": "表格",
-        "iconClass": "fa fa-list"
+        "iconClass": "fa fa-amazon"
       },
       {
         "path": "/user",
         "name": "用户",
-        "iconClass": "fa fa-users"
+        "iconClass": "fa fa-android"
       }
     ]
   },
@@ -32,14 +32,19 @@
     "iconClass": "el-icon-menu",
     "children": [
       {
+        "path": "/page1",
+        "name": "页面1",
+        "iconClass": "fa fa-angellist"
+      },
+      {
         "path": "/page4",
         "name": "页面4",
-        "iconClass": "fa fa-fort-awesome"
+        "iconClass": "fa fa-apple"
       },
       {
         "path": "/page5",
         "name": "页面5",
-        "iconClass": "fa fa-film"
+        "iconClass": "fa fa-bandcamp"
       }
     ]
   },
@@ -51,19 +56,23 @@
     "children": [
       {
         "path": "/page6",
-        "name": "页面6"
+        "name": "页面6",
+        "iconClass": "fa fa-behance"
       },
       {
         "path": "/page7",
-        "name": "页面7"
+        "name": "页面7",
+        "iconClass": "fa fa-behance-square"
       },
       {
         "path": "/page8",
-        "name": "页面8"
+        "name": "页面8",
+        "iconClass": "fa fa-bitbucket"
       },
       {
         "path": "/page10",
-        "name": "页面10"
+        "name": "页面10",
+        "iconClass": "fa fa-bitbucket-square"
       }
     ]
   }
