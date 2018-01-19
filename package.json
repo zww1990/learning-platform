@@ -22,6 +22,7 @@
     "vue-amap": "^0.4.5",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
+    "xlsx": "^0.11.17",
     "ztree": "^3.5.24"
   },
   "devDependencies": {
