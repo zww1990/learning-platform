@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="24">
-      <el-upload action="https://jsonplaceholder.typicode.com/posts/" drag :accept="accepts.toString()" :before-upload="beforeUpload">
+      <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload" :on-progress="handleProgress">
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
       </el-upload>
@@ -13,6 +13,7 @@
 export default {
   data() {
     return {
+      action: 'https://jsonplaceholder.typicode.com/posts/',
       accepts: [
         'application/vnd.ms-excel',
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
@@ -30,6 +31,9 @@ export default {
         this.$message.error('上传的文件大小不能超过10MB');
       }
       return isAccept && isLimit;
+    },
+    handleProgress(event, file, fileList) {
+      console.log(file);
     }
   }
 };
