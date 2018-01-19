@@ -15,7 +15,6 @@
     "element-ui": "^2.0.11",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4",
     "moment": "^2.20.1",
     "qs": "^6.5.1",
     "screenfull": "^3.3.2",
@@ -27,7 +26,6 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.2.18",
-    "@types/lodash": "^4.14.92",
     "@types/screenfull": "^3.3.1",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.22.1",
