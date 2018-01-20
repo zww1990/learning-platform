@@ -75,6 +75,11 @@
         "iconClass": "fa fa-bitbucket"
       },
       {
+        "path": "/page9",
+        "name": "页面9",
+        "iconClass": "fa fa-black-tie"
+      },
+      {
         "path": "/page10",
         "name": "页面10",
         "iconClass": "fa fa-bitbucket-square"
