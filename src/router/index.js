@@ -55,6 +55,11 @@ export default new Router({
           name: '页面1'
         },
         {
+          path: '/page2',
+          component: () => import('@/views/nav2/page2'),
+          name: '页面2'
+        },
+        {
           path: '/page4',
           component: () => import('@/views/nav2/page4'),
           name: '页面4'

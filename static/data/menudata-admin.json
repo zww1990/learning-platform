@@ -37,6 +37,11 @@
         "iconClass": "fa fa-angellist"
       },
       {
+        "path": "/page2",
+        "name": "页面2",
+        "iconClass": "fa fa-btc"
+      },
+      {
         "path": "/page4",
         "name": "页面4",
         "iconClass": "fa fa-apple"

@@ -8,7 +8,7 @@
     </el-col>
     <el-col :span="24">
       <el-table :data="tableData" border highlight-current-row stripe size="mini">
-        <el-table-column v-for="item of tableHeader" :key="item.id" :label="item.name" :prop="item.id"></el-table-column>
+        <el-table-column v-for="item of tableHeader" :key="item" :label="item" :prop="item"></el-table-column>
       </el-table>
     </el-col>
   </el-row>
@@ -47,13 +47,7 @@ export default {
           const firstSheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[firstSheetName];
           this.tableHeader = this.getHeaderRow(worksheet);
-          this.tableData = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            blankrows: false
-          });
-          this.tableData.forEach(x => {
-            console.log(JSON.stringify(x));
-          });
+          this.tableData = XLSX.utils.sheet_to_json(worksheet);
         };
         reader.readAsArrayBuffer(file);
       }
@@ -83,7 +77,7 @@ export default {
         if (cell && cell.t) {
           header = XLSX.utils.format_cell(cell);
         }
-        headers.push({ id: `${C}`, name: header });
+        headers.push(header);
       }
       return headers;
     }
