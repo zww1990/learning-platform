@@ -24,7 +24,6 @@ import com.wiwj.test.Detail.TypeCode;
 public class ExcelTest {
 	String parent = "E:\\projects";
 	String child = "加班明细-技术中心201712.xlsx";
-	String sheetname = "费控报销";// sheet页名称
 	double myID = 8143969D;// 员工号
 	int idIndex = 1;// 员工号索引
 	int nameIndex = 2;// 员工姓名索引
@@ -38,6 +37,7 @@ public class ExcelTest {
 	@Test
 	public void writeExcel() {
 		String myName = "";// 员工姓名
+		String sheetName = "";// sheet页名称
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 		File file = new File(parent, child);
@@ -91,6 +91,7 @@ public class ExcelTest {
 				}
 			}
 			sheet = wb.getSheetAt(myPageIndex);// 个人加班记录明细页索引
+			sheetName = sheet.getSheetName();
 			row = sheet.getRow(0);// 表头行
 			row.forEach(c -> header.add(c.getStringCellValue()));
 		} catch (Exception e) {
@@ -99,9 +100,9 @@ public class ExcelTest {
 		System.err.println(myName + "的加班记录总数=" + details.size());
 		file = new File(parent, myName + "-" + child);
 		try (SXSSFWorkbook wb = new SXSSFWorkbook(SXSSFWorkbook.DEFAULT_WINDOW_SIZE); // 在内存中保留100行，超出行将被刷新到磁盘
-				OutputStream stream = new FileOutputStream(file)) {
+				OutputStream os = new FileOutputStream(file)) {
 			wb.setCompressTempFiles(true);// 临时文件将被gzip压缩
-			SXSSFSheet sheet = wb.createSheet(sheetname);// 创建sheet页
+			SXSSFSheet sheet = wb.createSheet(sheetName);// 创建sheet页
 			SXSSFRow row = sheet.createRow(0);// 创建表头行
 			for (int i = 0, len = header.size(); i < len; i++) {
 				row.createCell(i).setCellValue(header.get(i));
@@ -133,7 +134,7 @@ public class ExcelTest {
 				row.createCell(20).setCellValue(detail.getStartTime());// 上车时间
 				row.createCell(21).setCellValue(detail.getEndPoint());// 下车地点
 			}
-			wb.write(stream);// 写入文件
+			wb.write(os);// 写入文件
 			wb.dispose();// 处理在磁盘上备份此工作簿的临时文件
 		} catch (Exception e) {
 			e.printStackTrace();
