@@ -7,7 +7,7 @@
       </el-upload>
     </el-col>
     <el-col :span="24">
-      <el-table :data="tableData" border highlight-current-row>
+      <el-table :data="tableData" border highlight-current-row stripe size="mini">
         <el-table-column v-for="item of tableHeader" :key="item" :label="item" :prop="item"></el-table-column>
       </el-table>
     </el-col>
@@ -41,8 +41,9 @@ export default {
         const reader = new FileReader();
         reader.onload = e => {
           const data = e.target.result;
-          const fixedData = this.fixdata(data);
-          const workbook = XLSX.read(btoa(fixedData), { type: 'base64' });
+          const workbook = XLSX.read(btoa(this.fixdata(data)), {
+            type: 'base64'
+          });
           const firstSheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[firstSheetName];
           this.tableHeader = this.getHeaderRow(worksheet);
@@ -68,16 +69,15 @@ export default {
     getHeaderRow(sheet) {
       const headers = [];
       const range = XLSX.utils.decode_range(sheet['!ref']);
-      let C;
       const R = range.s.r; //从第一行开始
-      for (C = range.s.c; C <= range.e.c; ++C) {
+      for (let C = range.s.c; C <= range.e.c; ++C) {
         //循环范围内的每一列
-        var cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
-        var hdr = 'UNKNOWN ' + C; //用你想要的默认值替换
+        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
+        let header = 'UNKNOWN ' + C; //用你想要的默认值替换
         if (cell && cell.t) {
-          hdr = XLSX.utils.format_cell(cell);
+          header = XLSX.utils.format_cell(cell);
         }
-        headers.push(hdr);
+        headers.push(header);
       }
       return headers;
     }
