@@ -35,7 +35,7 @@ public class ExcelTest {
 	int myPageIndex = 1;// 个人加班记录明细页索引
 
 	@Test
-	public void writeExcel() {
+	public void readExcel() {
 		String myName = "";// 员工姓名
 		String sheetName = "";// sheet页名称
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -98,6 +98,11 @@ public class ExcelTest {
 			e.printStackTrace();
 		}
 		System.err.println(myName + "的加班记录总数=" + details.size());
+		this.writeExcel(myName, sheetName, details, header);
+	}
+
+	public void writeExcel(String myName, String sheetName, List<Detail> details, List<String> header) {
+		File file;
 		file = new File(parent, myName + "-" + child);
 		try (SXSSFWorkbook wb = new SXSSFWorkbook(SXSSFWorkbook.DEFAULT_WINDOW_SIZE); // 在内存中保留100行，超出行将被刷新到磁盘
 				OutputStream os = new FileOutputStream(file)) {
