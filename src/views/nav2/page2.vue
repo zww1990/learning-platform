@@ -24,7 +24,8 @@ export default {
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       ],
       tableData: [],
-      tableHeader: []
+      tableHeader: [],
+      rABS: true //true:readAsBinaryString; false:readAsArrayBuffer;
     };
   },
   methods: {
@@ -40,31 +41,25 @@ export default {
       if (isAccept && isLimit) {
         const reader = new FileReader();
         reader.onload = e => {
-          const data = e.target.result;
-          const workbook = XLSX.read(btoa(this.fixdata(data)), {
-            type: 'base64'
+          let data = e.target.result;
+          if (!this.rABS) {
+            data = new Uint8Array(data);
+          }
+          const workbook = XLSX.read(data, {
+            type: this.rABS ? 'binary' : 'array'
           });
           const firstSheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[firstSheetName];
           this.tableHeader = this.getHeaderRow(worksheet);
           this.tableData = XLSX.utils.sheet_to_json(worksheet);
         };
-        reader.readAsArrayBuffer(file);
+        if (this.rABS) {
+          reader.readAsBinaryString(file);
+        } else {
+          reader.readAsArrayBuffer(file);
+        }
       }
       return false;
-    },
-    fixdata(data) {
-      let o = '';
-      let l = 0;
-      const w = 10240;
-      for (; l < data.byteLength / w; ++l) {
-        o += String.fromCharCode.apply(
-          null,
-          new Uint8Array(data.slice(l * w, l * w + w))
-        );
-      }
-      o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-      return o;
     },
     getHeaderRow(sheet) {
       const headers = [];

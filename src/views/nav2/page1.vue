@@ -1,20 +1,35 @@
 <template>
   <el-row>
-    <el-col :span="24">
-      <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
-      </el-upload>
-    </el-col>
-    <el-col :span="24">
-      <el-table :data="tableData" border highlight-current-row stripe size="mini">
-        <el-table-column v-for="item of tableHeader" :key="item.id" :label="item.name" :prop="item.id"></el-table-column>
-      </el-table>
-    </el-col>
+    <template v-if="isShow">
+      <el-col :span="6">
+        <el-input v-model.trim="params.myID" placeholder="请输入员工号" clearable></el-input>
+      </el-col>
+      <el-col :span="18">
+        <el-button type="primary" @click="toNext">下一步</el-button>
+      </el-col>
+    </template>
+    <template v-else>
+      <el-col :span="6">
+        <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
+        </el-upload>
+      </el-col>
+      <el-col :span="18">
+        <el-button type="primary" @click="toBack">上一步</el-button>
+      </el-col>
+      <el-col :span="24">
+        <el-table :data="tableData" border highlight-current-row stripe size="mini">
+          <el-table-column v-for="item of tableHeader" :key="item.id" :label="item.name" :prop="item.id"></el-table-column>
+        </el-table>
+      </el-col>
+    </template>
   </el-row>
 </template>
 <script>
 import XLSX from 'xlsx';
+import moment from 'moment-timezone';
+moment.locale('zh-cn');
 export default {
   data() {
     return {
@@ -24,10 +39,41 @@ export default {
         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
       ],
       tableData: [],
-      tableHeader: []
+      tableHeader: [],
+      isShow: true,
+      rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
+      params: {
+        myID: '8143969', // 员工号
+        myName: '', // 员工姓名
+        idIndex: 1, // 员工号索引
+        nameIndex: 2, // 员工姓名索引
+        deptIndex: 3, // 部门索引
+        approvalIndex: 6, // 审批单号索引
+        overtimeIndex: 8, // 加班日期索引
+        deadlineIndex: 10, // 加班截止时间索引
+        empPageIndex: 0, // 员工加班记录明细页索引
+        myPageIndex: 1, // 个人加班记录明细页索引
+        dateParse: 'MM/DD/YY', //解析字符串日期样式
+        dateFormat: 'YYYY/MM/DD', //格式化日期样式
+        timeFormat: 'HH:mm:ss', //格式化时间样式
+        timezone: 'Asia/Shanghai', //中国时区
+        taxiTime: '21:00:00' //规定打车开始时间
+      }
     };
   },
   methods: {
+    toNext() {
+      if (!this.params.myID) {
+        this.$message.error('请输入员工号');
+        return;
+      }
+      this.isShow = !this.isShow;
+    },
+    toBack() {
+      this.isShow = !this.isShow;
+      this.tableData = [];
+      this.tableHeader = [];
+    },
     beforeUpload(file) {
       const isAccept = this.accepts.includes(file.type);
       const isLimit = file.size / 1024 / 1024 < 10;
@@ -40,37 +86,97 @@ export default {
       if (isAccept && isLimit) {
         const reader = new FileReader();
         reader.onload = e => {
-          const data = e.target.result;
-          const workbook = XLSX.read(btoa(this.fixdata(data)), {
-            type: 'base64'
+          let data = e.target.result;
+          if (!this.rABS) {
+            data = new Uint8Array(data);
+          }
+          const workbook = XLSX.read(data, {
+            type: this.rABS ? 'binary' : 'array'
           });
-          const firstSheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[firstSheetName];
-          this.tableHeader = this.getHeaderRow(worksheet);
-          this.tableData = XLSX.utils.sheet_to_json(worksheet, {
-            header: 1,
-            blankrows: false
-          });
-          this.tableData.forEach(x => {
-            console.log(JSON.stringify(x));
+          if (workbook.SheetNames.length < 2) {
+            this.$message.error(
+              'Excel中Sheet页的数量小于2，数据不完整无法解析。'
+            );
+            return;
+          }
+          const empSheetName = workbook.SheetNames[this.params.empPageIndex]; // 员工加班记录明细页索引
+          const empSheet = workbook.Sheets[empSheetName];
+          const mySheetName = workbook.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
+          const mySheet = workbook.Sheets[mySheetName];
+          this.tableHeader = this.getHeaderRow(mySheet); // 表头行
+          const empData = XLSX.utils
+            .sheet_to_json(empSheet, {
+              header: 1,
+              blankrows: false
+            })
+            .filter(x => x[this.params.idIndex] === this.params.myID)
+            .map(x => {
+              this.params.myName = x[this.params.nameIndex];
+              x[this.params.overtimeIndex] = this.formatOverTime(
+                x[this.params.overtimeIndex]
+              );
+              return x;
+            });
+          empData.forEach(x => {
+            this.tableData.push([
+              x[this.params.deptIndex],
+              x[this.params.approvalIndex],
+              x[this.params.nameIndex] + '-餐费',
+              '5001',
+              'T01106',
+              'I00002',
+              '1',
+              '50',
+              '',
+              '',
+              '2017-09',
+              '9001000000089',
+              '647158',
+              '',
+              '',
+              '0',
+              '990000',
+              x[this.params.overtimeIndex],
+              x[this.params.deadlineIndex]
+            ]);
+            if (this.isAfterTime(x[this.params.deadlineIndex])) {
+              this.tableData.push([
+                x[this.params.deptIndex],
+                x[this.params.approvalIndex],
+                x[this.params.nameIndex] + '-交通',
+                '5001',
+                'T01107',
+                'I00084',
+                '1',
+                '',
+                '',
+                '',
+                '2017-09',
+                '9001000000089',
+                '647158',
+                '',
+                '',
+                '0',
+                '990000',
+                x[this.params.overtimeIndex],
+                x[this.params.deadlineIndex],
+                '公司（来广营朝来科技园）',
+                '',
+                '家（西城区阜成门内）'
+              ]);
+            }
           });
         };
-        reader.readAsArrayBuffer(file);
+        if (this.rABS) {
+          reader.readAsBinaryString(file);
+        } else {
+          reader.readAsArrayBuffer(file);
+        }
       }
       return false;
     },
-    fixdata(data) {
-      let o = '';
-      let l = 0;
-      const w = 10240;
-      for (; l < data.byteLength / w; ++l) {
-        o += String.fromCharCode.apply(
-          null,
-          new Uint8Array(data.slice(l * w, l * w + w))
-        );
-      }
-      o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
-      return o;
+    formatOverTime(time) {
+      return moment(time, this.params.dateParse).format(this.params.dateFormat);
     },
     getHeaderRow(sheet) {
       const headers = [];
@@ -86,6 +192,15 @@ export default {
         headers.push({ id: `${C}`, name: header });
       }
       return headers;
+    },
+    isAfterTime(time) {
+      const deadline = moment(time, this.params.timeFormat).tz(
+        this.params.timezone
+      ); //加班截止时间
+      const startTime = moment(this.params.taxiTime, this.params.timeFormat).tz(
+        this.params.timezone
+      ); //规定打车开始时间
+      return deadline.isSameOrAfter(startTime);
     }
   }
 };

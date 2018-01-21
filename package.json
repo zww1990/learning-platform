@@ -14,8 +14,9 @@
     "axios": "^0.17.0",
     "element-ui": "^2.0.11",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.3.0",
+    "jquery": "^3.3.1",
     "moment": "^2.20.1",
+    "moment-timezone": "^0.5.14",
     "qs": "^6.5.1",
     "screenfull": "^3.3.2",
     "vue": "^2.5.13",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.2.18",
+    "@types/moment-timezone": "^0.5.3",
     "@types/screenfull": "^3.3.1",
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.22.1",
@@ -74,7 +76,7 @@
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.2",
-    "webpack-dev-server": "^2.11.0",
+    "webpack-dev-server": "^2.11.1",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
