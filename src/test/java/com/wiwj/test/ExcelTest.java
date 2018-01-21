@@ -22,28 +22,32 @@ import com.wiwj.test.Detail.ProjectCode;
 import com.wiwj.test.Detail.TypeCode;
 
 public class ExcelTest {
-	String parent = "E:\\projects";
-	String child = "加班明细-技术中心201712.xlsx";
-	double myID = 8143969D;// 员工号
-	int idIndex = 1;// 员工号索引
-	int nameIndex = 2;// 员工姓名索引
-	int deptIndex = 3;// 部门索引
-	int approvalIndex = 6;// 审批单号索引
-	int overtimeIndex = 8;// 加班日期索引
-	int deadlineIndex = 10;// 加班截止时间索引
-	int empPageIndex = 0;// 员工加班记录明细页索引
-	int myPageIndex = 1;// 个人加班记录明细页索引
+	private static final String parent = "E:\\projects";
+	private static final String child = "加班明细-技术中心201712.xlsx";
+	private static final double myID = 8143969D;// 员工号
+	private static final int idIndex = 1;// 员工号索引
+	private static final int nameIndex = 2;// 员工姓名索引
+	private static final int deptIndex = 3;// 部门索引
+	private static final int approvalIndex = 6;// 审批单号索引
+	private static final int overtimeIndex = 8;// 加班日期索引
+	private static final int deadlineIndex = 10;// 加班截止时间索引
+	private static final int empPageIndex = 0;// 员工加班记录明细页索引
+	private static final int myPageIndex = 1;// 个人加班记录明细页索引
+	private static final String TAXI_TIME = "21:00:00";// 规定打车开始时间
+	private static final String datePattern = "yyyy/MM/dd";// 格式化日期样式
+	private static final String timePattern = "HH:mm:ss";// 格式化时间样式
 
 	@Test
 	public void readExcel() {
 		String myName = "";// 员工姓名
 		String sheetName = "";// sheet页名称
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(datePattern);
+		SimpleDateFormat timeFormat = new SimpleDateFormat(timePattern);
 		File file = new File(parent, child);
 		List<Detail> details = new ArrayList<>();
 		List<String> header = new ArrayList<>();
 		try (Workbook wb = WorkbookFactory.create(file)) {
+			long taxiTime = timeFormat.parse(TAXI_TIME).getTime();
 			Sheet sheet = wb.getSheetAt(empPageIndex);// 员工加班记录明细页索引
 			int rowNum = sheet.getLastRowNum();// 获取sheet页最后一行的索引位置，从0开始
 			Row row = null;
@@ -74,8 +78,8 @@ public class ExcelTest {
 					}
 				}
 				details.add(detail);
-				String[] deadlines = detail.getDeadline().split(":");
-				if (Integer.valueOf(deadlines[0]) >= 21) {// 超过21点，添加打车记录
+				long deadlineTime = timeFormat.parse(detail.getDeadline()).getTime();
+				if (deadlineTime >= taxiTime) {// 超过21点，添加打车记录
 					Detail copy = new Detail();
 					copy.setDescription(myName + Description.TrafficFee.getName());
 					copy.setDepartment(detail.getDepartment());
@@ -98,12 +102,11 @@ public class ExcelTest {
 			e.printStackTrace();
 		}
 		System.err.println(myName + "的加班记录总数=" + details.size());
-		this.writeExcel(myName, sheetName, details, header);
+		this.writeExcel(myName, sheetName, details, header);// 写入文件
 	}
 
 	public void writeExcel(String myName, String sheetName, List<Detail> details, List<String> header) {
-		File file;
-		file = new File(parent, myName + "-" + child);
+		File file = new File(parent, myName + "-" + child);
 		try (SXSSFWorkbook wb = new SXSSFWorkbook(SXSSFWorkbook.DEFAULT_WINDOW_SIZE); // 在内存中保留100行，超出行将被刷新到磁盘
 				OutputStream os = new FileOutputStream(file)) {
 			wb.setCompressTempFiles(true);// 临时文件将被gzip压缩
@@ -144,6 +147,6 @@ public class ExcelTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.err.println("OK!");
+		System.err.println("文件位置>>" + file);
 	}
 }
