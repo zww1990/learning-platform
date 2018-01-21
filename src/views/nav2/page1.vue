@@ -35,9 +35,13 @@
 </template>
 <script>
 import XLSX from 'xlsx';
-// import FileSaver from 'file-saver';
+import FileSaver from 'file-saver';
 import moment from 'moment-timezone';
 moment.locale('zh-cn');
+function Workbook() {
+  this.SheetNames = [];
+  this.Sheets = {};
+}
 export default {
   data() {
     return {
@@ -66,7 +70,9 @@ export default {
         dateFormat: 'YYYY/MM/DD', //格式化日期样式
         timeFormat: 'HH:mm:ss', //格式化时间样式
         timezone: 'Asia/Shanghai', //中国时区
-        taxiTime: '21:00:00' //规定打车开始时间
+        taxiTime: '21:00:00', //规定打车开始时间
+        mySheetName: '',
+        fileName: ''
       }
     };
   },
@@ -88,18 +94,78 @@ export default {
         this.$message.error('当前表格没有可用数据');
         return;
       }
-      const workbook = XLSX.utils.json_to_sheet(this.tableData, {
+      const wb = new Workbook();
+      const ws = XLSX.utils.json_to_sheet(this.tableData, {
         header: this.tableHeader
       });
-      console.log(
-        XLSX.write(workbook, {
-          bookType: 'xlsx',
-          bookSST: false,
-          type: 'binary'
-        })
+      wb.SheetNames.push(this.params.mySheetName);
+      wb.Sheets[this.params.mySheetName] = ws;
+      FileSaver.saveAs(
+        new Blob(
+          [
+            this.s2ab(
+              XLSX.write(wb, {
+                bookType: 'xlsx',
+                bookSST: false,
+                type: 'binary'
+              })
+            )
+          ],
+          { type: 'application/octet-stream' }
+        ),
+        this.params.myName + '-' + this.params.fileName
       );
     },
+    sheet_from_array_of_arrays(data) {
+      const ws = {};
+      const range = { s: { c: 10000000, r: 10000000 }, e: { c: 0, r: 0 } };
+      for (let R = 0; R !== data.length; ++R) {
+        for (let C = 0; C !== data[R].length; ++C) {
+          if (range.s.r > R) range.s.r = R;
+          if (range.s.c > C) range.s.c = C;
+          if (range.e.r < R) range.e.r = R;
+          if (range.e.c < C) range.e.c = C;
+          let cell = { v: data[R][C] };
+          if (cell.v === null) {
+            continue;
+          }
+          let cellRef = XLSX.utils.encode_cell({ c: C, r: R });
+          if (typeof cell.v === 'number') {
+            cell.t = 'n';
+          } else if (typeof cell.v === 'boolean') {
+            cell.t = 'b';
+          } else if (cell.v instanceof Date) {
+            cell.t = 'n';
+            cell.z = XLSX.SSF._table[14];
+            cell.v = this.datenum(cell.v);
+          } else {
+            cell.t = 's';
+          }
+          ws[cellRef] = cell;
+        }
+      }
+      if (range.s.c < 10000000) {
+        ws['!ref'] = XLSX.utils.encode_range(range);
+      }
+      return ws;
+    },
+    datenum(v, date1904) {
+      if (date1904) {
+        v += 1462;
+      }
+      const epoch = Date.parse(v);
+      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
+    },
+    s2ab(s) {
+      const buf = new ArrayBuffer(s.length);
+      const view = new Uint8Array(buf);
+      for (let i = 0; i !== s.length; ++i) {
+        view[i] = s.charCodeAt(i) & 0xff;
+      }
+      return buf;
+    },
     beforeUpload(file) {
+      this.params.fileName = file.name;
       const isAccept = this.accepts.includes(file.type);
       const isLimit = file.size / 1024 / 1024 < 10;
       if (!isAccept) {
@@ -126,8 +192,9 @@ export default {
           }
           const empSheetName = workbook.SheetNames[this.params.empPageIndex]; // 员工加班记录明细页索引
           const empSheet = workbook.Sheets[empSheetName];
-          const mySheetName = workbook.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
-          const mySheet = workbook.Sheets[mySheetName];
+          this.params.mySheetName =
+            workbook.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
+          const mySheet = workbook.Sheets[this.params.mySheetName];
           this.tableHeader = this.getHeaderRow(mySheet); // 表头行
           const empData = XLSX.utils
             .sheet_to_json(empSheet, {
@@ -162,7 +229,15 @@ export default {
               '0',
               '990000',
               x[this.params.overtimeIndex],
-              x[this.params.deadlineIndex]
+              x[this.params.deadlineIndex],
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              ''
             ]);
             if (this.isAfterTime(x[this.params.deadlineIndex])) {
               this.tableData.push([
@@ -187,7 +262,12 @@ export default {
                 x[this.params.deadlineIndex],
                 '公司（来广营朝来科技园）',
                 '',
-                this.params.myEndPoint
+                this.params.myEndPoint,
+                '',
+                '',
+                '',
+                '',
+                ''
               ]);
             }
           });
