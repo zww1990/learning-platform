@@ -2,25 +2,32 @@
   <el-row>
     <template v-if="isShow">
       <el-col :span="6">
-        <el-input v-model.trim="params.myID" placeholder="请输入员工号" clearable></el-input>
+        员工号：（必填）<el-input v-model.trim="params.myID" placeholder="请输入员工号" clearable></el-input>
       </el-col>
-      <el-col :span="18">
-        <el-button type="primary" @click="toNext">下一步</el-button>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="6">
+        下车地点：（选填）<el-input v-model.trim="params.myEndPoint" placeholder="请输入下车地点" clearable></el-input>
+      </el-col>
+      <el-col :span="2">&nbsp;</el-col>
+      <el-col :span="24">&nbsp;</el-col>
+      <el-col :span="24">
+        <el-button type="primary" @click="toNext" :disabled="!params.myID">下一步</el-button>
       </el-col>
     </template>
     <template v-else>
-      <el-col :span="6">
+      <el-col :span="10">
         <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
         </el-upload>
       </el-col>
-      <el-col :span="18">
+      <el-col :span="14">
         <el-button type="primary" @click="toBack">上一步</el-button>
+        <el-button type="primary" @click="exportExcel" :disabled="tableData.length===0">导出Excel文件</el-button>
       </el-col>
       <el-col :span="24">
         <el-table :data="tableData" border highlight-current-row stripe size="mini">
-          <el-table-column v-for="item of tableHeader" :key="item.id" :label="item.name" :prop="item.id"></el-table-column>
+          <el-table-column v-for="(item,index) of tableHeader" :key="item" :label="item" :prop="`${index}`"></el-table-column>
         </el-table>
       </el-col>
     </template>
@@ -28,6 +35,7 @@
 </template>
 <script>
 import XLSX from 'xlsx';
+// import FileSaver from 'file-saver';
 import moment from 'moment-timezone';
 moment.locale('zh-cn');
 export default {
@@ -44,6 +52,7 @@ export default {
       rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
       params: {
         myID: '8143969', // 员工号
+        myEndPoint: '家（西城区阜成门内）', //下车地点
         myName: '', // 员工姓名
         idIndex: 1, // 员工号索引
         nameIndex: 2, // 员工姓名索引
@@ -73,6 +82,22 @@ export default {
       this.isShow = !this.isShow;
       this.tableData = [];
       this.tableHeader = [];
+    },
+    exportExcel() {
+      if (this.tableData.length === 0) {
+        this.$message.error('当前表格没有可用数据');
+        return;
+      }
+      const workbook = XLSX.utils.json_to_sheet(this.tableData, {
+        header: this.tableHeader
+      });
+      console.log(
+        XLSX.write(workbook, {
+          bookType: 'xlsx',
+          bookSST: false,
+          type: 'binary'
+        })
+      );
     },
     beforeUpload(file) {
       const isAccept = this.accepts.includes(file.type);
@@ -162,7 +187,7 @@ export default {
                 x[this.params.deadlineIndex],
                 '公司（来广营朝来科技园）',
                 '',
-                '家（西城区阜成门内）'
+                this.params.myEndPoint
               ]);
             }
           });
@@ -189,7 +214,7 @@ export default {
         if (cell && cell.t) {
           header = XLSX.utils.format_cell(cell);
         }
-        headers.push({ id: `${C}`, name: header });
+        headers.push(header);
       }
       return headers;
     },
