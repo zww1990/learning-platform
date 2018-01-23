@@ -2,11 +2,13 @@
   <el-row>
     <template v-if="isShow">
       <el-col :span="6">
-        员工号：（必填）<el-input v-model.trim="params.myID" placeholder="请输入员工号" clearable></el-input>
+        员工号：（必填）
+        <el-input v-model.trim="params.myID" placeholder="请输入员工号" clearable></el-input>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="6">
-        下车地点：（选填）<el-input v-model.trim="params.myEndPoint" placeholder="请输入下车地点" clearable></el-input>
+        下车地点：（选填）
+        <el-input v-model.trim="params.myEndPoint" placeholder="请输入下车地点" clearable></el-input>
       </el-col>
       <el-col :span="2">&nbsp;</el-col>
       <el-col :span="24">&nbsp;</el-col>
@@ -18,7 +20,8 @@
       <el-col :span="10">
         <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
           <i class="el-icon-upload"></i>
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
+          <div class="el-upload__text">将文件拖到此处，或
+            <em>点击上传</em><br>只能上传xls/xlsx文件</div>
         </el-upload>
       </el-col>
       <el-col :span="14">
@@ -100,19 +103,13 @@ export default {
       });
       wb.SheetNames.push(this.params.mySheetName);
       wb.Sheets[this.params.mySheetName] = ws;
+      const wbout = XLSX.write(wb, {
+        bookType: 'xlsx',
+        bookSST: false,
+        type: 'array'
+      });
       FileSaver.saveAs(
-        new Blob(
-          [
-            this.s2ab(
-              XLSX.write(wb, {
-                bookType: 'xlsx',
-                bookSST: false,
-                type: 'binary'
-              })
-            )
-          ],
-          { type: 'application/octet-stream' }
-        ),
+        new Blob([wbout], { type: 'application/octet-stream' }),
         this.params.myName + '-' + this.params.fileName
       );
     },
@@ -155,14 +152,6 @@ export default {
       }
       const epoch = Date.parse(v);
       return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
-    },
-    s2ab(s) {
-      const buf = new ArrayBuffer(s.length);
-      const view = new Uint8Array(buf);
-      for (let i = 0; i !== s.length; ++i) {
-        view[i] = s.charCodeAt(i) & 0xff;
-      }
-      return buf;
     },
     beforeUpload(file) {
       this.params.fileName = file.name;
