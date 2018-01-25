@@ -1,7 +1,6 @@
 package com.example.dubbo;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import com.example.dubbo.action.BarAction;
 import com.example.dubbo.config.AppConfig;
 

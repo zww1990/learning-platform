@@ -3,23 +3,15 @@ package com.example.dubbo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
-
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.spring.AnnotationBean;
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 
 @Configuration
 @ComponentScan(basePackages = "com.example.dubbo")
+@EnableDubbo(scanBasePackages = "com.example.dubbo.service.provider")
 public class AppConfig {
-	@Bean
-	public static AnnotationBean annotationBean(Environment env) {
-		AnnotationBean bean = new AnnotationBean();
-		bean.setPackage(env.getProperty("dubbo.annotation.package"));
-		return bean;
-	}
-
 	@Bean
 	public ApplicationConfig applicationConfig(AppProperties props) {
 		ApplicationConfig config = new ApplicationConfig();
