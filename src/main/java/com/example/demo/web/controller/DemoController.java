@@ -69,7 +69,8 @@ public class DemoController {
 
 	@PostMapping("/json")
 	@ApiOperation(value = "提交json格式数据", notes = "提交json格式数据时，请求内容类型必须是application/json")
-	public UserModel json(@ApiParam(value = "用户模型", required = true) @RequestBody UserModel user) {
+	@ApiImplicitParam(name = "user", value = "用户模型", paramType = "body", dataType = "UserModel", required = true)
+	public UserModel json(@RequestBody UserModel user) {
 		log.info("用户ID：{}，用户名：{}", user.getUserId(), user.getUserName());
 		return user;
 	}
