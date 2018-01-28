@@ -17,7 +17,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	private static final Logger log = LoggerFactory.getLogger(UserInfoHandlerMethodArgumentResolver.class);
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
+
+	public UserInfoHandlerMethodArgumentResolver(ObjectMapper mapper) {
+		this.mapper = mapper;
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
