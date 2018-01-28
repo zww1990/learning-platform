@@ -10,7 +10,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.example.demo.root.AppConfig;
-import com.example.demo.web.DispatcherConfig;
+import com.example.demo.web.config.DispatcherConfig;
 
 public class WebAppInitializer implements WebApplicationInitializer {
 
@@ -31,6 +31,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher",
 				new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
+		dispatcher.setAsyncSupported(true);
 		dispatcher.addMapping("/");
 	}
 

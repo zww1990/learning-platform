@@ -15,7 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import com.example.demo.root.AppConfig;
-import com.example.demo.web.DispatcherConfig;
+import com.example.demo.web.config.DispatcherConfig;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { AppConfig.class, DispatcherConfig.class })

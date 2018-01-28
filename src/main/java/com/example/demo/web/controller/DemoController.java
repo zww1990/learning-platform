@@ -1,4 +1,4 @@
-package com.example.demo.web;
+package com.example.demo.web.controller;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.web.config.UserInfo;
+import com.example.demo.web.model.UserModel;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

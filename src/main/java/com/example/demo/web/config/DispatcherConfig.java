@@ -1,4 +1,4 @@
-package com.example.demo.web;
+package com.example.demo.web.config;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
