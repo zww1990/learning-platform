@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
+import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -25,13 +27,15 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
 		// 创建调度servlet的Spring应用程序上下文
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-		dispatcherContext.register(DispatcherConfig.class);
+		Class<DispatcherConfig> annotatedClasses = DispatcherConfig.class;
+		dispatcherContext.register(annotatedClasses);
 
 		// 注册并映射调度servlet
 		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher",
 				new DispatcherServlet(dispatcherContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.setAsyncSupported(true);
+		dispatcher.setMultipartConfig(new MultipartConfigElement(annotatedClasses.getAnnotation(MultipartConfig.class)));
 		dispatcher.addMapping("/");
 	}
 
