@@ -89,7 +89,7 @@
       </div>
     </nz-header>
     <nz-content>
-      <div #nzcontent style="padding:10px; background: #fff;">
+      <div style="padding:10px; background: #fff;">
         <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
           <nz-tab *ngFor="let tab of tabs;let i=index" (nzClick)="selectTab(tab,i)">
             <ng-template #nzTabHeading>

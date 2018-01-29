@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterViewInit
-} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -16,27 +10,18 @@ import * as screenfull from 'screenfull';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.less']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit {
   isCollapsed = false;
   menus = [];
   user = null;
   tabs = [];
   selectedIndex = 0;
-  @ViewChild('nzcontent') nzcontent: ElementRef;
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private confirm: NzModalService
   ) {}
-
-  ngAfterViewInit() {
-    this.nzcontent.nativeElement.style.height = window.innerHeight - 64 + 'px';
-    window.onresize = () => {
-      this.nzcontent.nativeElement.style.height =
-        window.innerHeight - 64 + 'px';
-    };
-  }
 
   ngOnInit() {
     this.user = {
