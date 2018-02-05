@@ -3,20 +3,15 @@ package com.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
+
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.spring.AnnotationBean;
+import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 
 @Configuration
 @ComponentScan("com.demo")
+@DubboComponentScan("dubbo.annotation.package")
 public class SpringConfig {
-	@Bean
-	public static AnnotationBean annotationBean(Environment env) {
-		AnnotationBean bean = new AnnotationBean();
-		bean.setPackage(env.getProperty("dubbo.annotation.package"));
-		return bean;
-	}
 
 	@Bean
 	public ApplicationConfig applicationConfig(AppProperties props) {
