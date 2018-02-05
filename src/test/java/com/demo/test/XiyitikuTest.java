@@ -36,9 +36,9 @@ public class XiyitikuTest {
 			param.put("systemNumber", "PORTAL");
 			param.put("paperTypeCode", "WORK");
 			param.put("userNumber", "2713997");
-			param.put("paperId", "2ba9-d9db-4419-8fb5");
-			param.put("field1", "257036");
-			param.put("md5CallbackSignData", "c626e4028d40f18782bce7b12155a15c");
+			param.put("paperId", "7708-3ed8-42a9-9195");
+			param.put("field1", "257037");
+			param.put("md5CallbackSignData", "cf9d2f990454207f3894c84018a823b7");
 			Document doc = Jsoup.connect(selectClassWorkInfoUrl).data(param).get();
 			String cssQuery = "div.container.rank-table > table.table.table-border > tbody > tr > td.curs > em";
 			Elements elements = doc.body().select(cssQuery);
@@ -137,8 +137,8 @@ public class XiyitikuTest {
 			String goBackAnswerCardUrl = "http://t.xiyitiku.com/tiku-war/quizzes/goBackAnswerCard.action";
 			String ajaxQueryResolveQuestionUrl = "http://t.xiyitiku.com/tiku-war/quizzes/ajaxQueryResolveQuestion.action";
 			Map<String, String> param = new HashMap<>();
-			param.put("userPaperId", "13442325");
-			param.put("quizzesPaperId", "a553-f393-4a4c-bc24");
+			param.put("userPaperId", "13569100");
+			param.put("quizzesPaperId", "9357-6e4a-46a7-ac6c");
 			Document doc = Jsoup.connect(goBackAnswerCardUrl).data(param).get();
 			String cssQuery = "div.ri-wrap > div#hand-wr > div.wr-botm > div.div_center > span.gre";
 			Elements elements = doc.body().select(cssQuery);
