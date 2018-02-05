@@ -4,7 +4,8 @@
 <generatorConfiguration>
 	<properties resource="generatorConfig4Maven.properties" />
 	<classPathEntry location="${location}" />
-	<context id="DB2Tables" targetRuntime="MyBatis3">
+	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<commentGenerator>
@@ -19,14 +20,13 @@
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="${sqlMapGenerator.targetPackage}" targetProject="${sqlMapGenerator.targetProject}">
+		<!-- <sqlMapGenerator targetPackage="${sqlMapGenerator.targetPackage}" targetProject="${sqlMapGenerator.targetProject}">
 			<property name="enableSubPackages" value="false" />
-		</sqlMapGenerator>
+		</sqlMapGenerator> -->
 		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
 		<javaClientGenerator targetPackage="${javaClientGenerator.targetPackage}" targetProject="${javaClientGenerator.targetProject}" type="ANNOTATEDMAPPER">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
-		<!-- <table catalog="dw" tableName="t_dw_spider_film" enableSelectByExample="false" enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false"></table> -->
-		<table tableName="t_sys_ds_config"></table>
+		<table tableName="user"></table>
 	</context>
 </generatorConfiguration>
