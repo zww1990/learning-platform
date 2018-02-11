@@ -33,10 +33,10 @@ public class ExerciseSunlandsTest {
 	public void init() {
 		headers.setContentType(MediaType.parseMediaType("application/x-www-form-urlencoded; charset=UTF-8"));
 		List<String> cookies = new ArrayList<>();
-		cookies.add("stuToken=5c868918a7c0a911c4e8164593fabba4");
-		cookies.add("JSESSIONID=DDF6A9474541EB3CDAEA43D5AE93E914");
+		cookies.add("stuToken=f17e2f100a64cb55577d4b99a2cd0ed1");
+		cookies.add("JSESSIONID=21B67AEEA9CB497AE8B4D0B6FD943834");
 		headers.put(HttpHeaders.COOKIE, cookies);
-		fileName = "近代史56章0103-闫怀北-副本";
+		fileName = "2018-1-7小伟老师30天攻克近代史";
 	}
 
 	@Test
@@ -44,8 +44,8 @@ public class ExerciseSunlandsTest {
 		try {
 			String url = "http://exercise.sunlands.com/exercise/student/retrievePaperUserRecords";
 			MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
-			param.add("paperId", "9295");
-			param.add("recordId", "2465887");
+			param.add("paperId", "9757");
+			param.add("recordId", "3236023");
 			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
 			Map<String, Object> map = this.restTemplate.postForObject(url, entity, Map.class);
 			List<Map<String, Object>> data = (List<Map<String, Object>>) map.get("data");
@@ -65,21 +65,30 @@ public class ExerciseSunlandsTest {
 			data.forEach(x -> {
 				Integer sequence = (Integer) x.get("sequence");// 序号
 				String content = (String) x.get("content");// 题目
-				List<Map<String, Object>> resPaperQuestionOptionsList = (List<Map<String, Object>>) x
-						.get("resPaperQuestionOptionsList");// 选项
+				String questionType = (String) x.get("questionType");// 题目
 				document.createParagraph().createRun().setText(sequence + "、" + content);
-				resPaperQuestionOptionsList.forEach(y -> {
-					String optionTitle = (String) y.get("optionTitle");// 选项字母
-					String _content = (String) y.get("content");// 选项内容
-					_content = _content.startsWith(optionTitle) ? _content : optionTitle + " " + _content;
-					Integer isCorrect = (Integer) y.get("isCorrect");// 是否为正确选项
+				if ("SUBJECTIVE".equals(questionType)) {// 简答题或论述题
+					String correctAnswer = (String) x.get("correctAnswer");// 答案
 					XWPFRun run = document.createParagraph().createRun();
-					if (isCorrect == 1) {
-						run.setBold(true);
-						run.setColor("FF0000");
-					}
-					run.setText("       " + _content);
-				});
+					run.setBold(true);
+					run.setColor("FF0000");
+					run.setText("       " + correctAnswer);
+				} else {// 单选题或多选题
+					List<Map<String, Object>> resPaperQuestionOptionsList = (List<Map<String, Object>>) x
+							.get("resPaperQuestionOptionsList");// 选项
+					resPaperQuestionOptionsList.forEach(y -> {
+						String optionTitle = (String) y.get("optionTitle");// 选项字母
+						String _content = (String) y.get("content");// 选项内容
+						_content = _content.startsWith(optionTitle) ? _content : optionTitle + " " + _content;
+						Integer isCorrect = (Integer) y.get("isCorrect");// 是否为正确选项
+						XWPFRun run = document.createParagraph().createRun();
+						if (isCorrect == 1) {
+							run.setBold(true);
+							run.setColor("FF0000");
+						}
+						run.setText("       " + _content);
+					});
+				}
 			});
 			document.write(stream);
 			System.err.println("OK!");
