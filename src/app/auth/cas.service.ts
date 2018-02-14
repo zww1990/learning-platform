@@ -10,7 +10,7 @@ import { LoginForm } from '../login/login-form.model';
  */
 export class CasResult {
   /**
-   * 构造认证结果
+   * 构造CAS认证结果
    * @param status 认证结果状态：true成功，false失败
    * @param text 认证结果内容
    */
@@ -23,6 +23,10 @@ export class CasResult {
  */
 @Injectable()
 export class CasService {
+  /**
+   * 构造CAS认证服务
+   * @param http http client
+   */
   constructor(private http: HttpClient) {}
 
   /**

@@ -10,6 +10,10 @@ import { CasService } from './cas.service';
  */
 @Injectable()
 export class UserService {
+  /**
+   * 构造用户服务
+   * @param cas CAS认证服务
+   */
   constructor(private cas: CasService) {}
 
   /**
