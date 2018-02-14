@@ -36,6 +36,10 @@ const routes: Routes = [
   }
 ];
 
+/**
+ * 示例模块
+ * @author zww
+ */
 @NgModule({
   imports: [CommonModule, RouterModule.forRoot(routes)],
   declarations: [
