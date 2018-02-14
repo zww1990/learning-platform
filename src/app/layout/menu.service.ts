@@ -14,26 +14,34 @@ export class MenuService {
    */
   queryMenus(): MenuItem[] {
     const menus: MenuItem[] = [];
-    for (let i = 1; i <= 10; i++) {
-      menus.push({
-        menuName: '菜单' + i,
-        menuUrl: '',
-        menuIcon: 'anticon anticon-area-chart',
-        selected: false,
-        children: [
-          {
-            menuName: '页面1' + i,
-            menuUrl: '/demo/page1',
-            selected: false
-          },
-          {
-            menuName: '页面2' + i,
-            menuUrl: '/demo/page2',
-            selected: false
-          }
-        ]
-      });
-    }
+    menus.push({
+      menuName: '菜单',
+      menuUrl: '',
+      menuIcon: 'anticon anticon-area-chart',
+      selected: false,
+      children: [
+        {
+          menuName: '页面1',
+          menuUrl: '/demo/page1',
+          selected: false
+        },
+        {
+          menuName: '页面2',
+          menuUrl: '/demo/page2',
+          selected: false
+        },
+        {
+          menuName: '页面3',
+          menuUrl: '/demo/page3',
+          selected: false
+        },
+        {
+          menuName: '页面4',
+          menuUrl: '/demo/page4',
+          selected: false
+        }
+      ]
+    });
     return menus;
   }
 }

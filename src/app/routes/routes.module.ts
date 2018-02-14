@@ -7,7 +7,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { routes } from './routes.route';
 import { LayoutComponent } from '../layout/layout.component';
 import { LoginComponent } from '../login/login.component';
-import { IndexComponent } from '../index/index.component';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { CasService } from '../auth/cas.service';
 import { MenuService } from '../layout/menu.service';
@@ -25,7 +24,7 @@ import { UserService } from '../auth/user.service';
     RouterModule.forRoot(routes),
     NgZorroAntdModule.forRoot()
   ],
-  declarations: [LayoutComponent, LoginComponent, IndexComponent],
+  declarations: [LayoutComponent, LoginComponent],
   exports: [RouterModule],
   providers: [AuthGuard, CasService, MenuService, UserService]
 })
