@@ -18,7 +18,7 @@ import { UserService } from './user.service';
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   /**
-   * 构造路由守卫
+   * 构造路由守卫服务
    * @param router 路由器
    * @param userService 用户服务
    */
