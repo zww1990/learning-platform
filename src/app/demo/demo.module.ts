@@ -8,6 +8,7 @@ import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { Page3Component } from './page3/page3.component';
 import { Page4Component } from './page4/page4.component';
+import { IndexComponent } from './index/index.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
+      {
+        path: 'index',
+        component: IndexComponent
+      },
       {
         path: 'page1',
         component: Page1Component
@@ -43,6 +48,7 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forRoot(routes)],
   declarations: [
+    IndexComponent,
     Page1Component,
     Page2Component,
     Page3Component,
