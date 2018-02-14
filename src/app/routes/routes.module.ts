@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
-import { routes } from './routes';
+import { routes } from './routes.route';
 import { LayoutComponent } from '../layout/layout.component';
 import { LoginComponent } from '../login/login.component';
 import { IndexComponent } from '../index/index.component';

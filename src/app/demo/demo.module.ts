@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from '../layout/layout.component';
-import { AuthGuard } from '../auth/auth-guard';
+import { AuthGuard } from '../auth/auth-guard.service';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { Page3Component } from './page3/page3.component';

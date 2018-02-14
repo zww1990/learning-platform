@@ -1,9 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { NzModalService } from 'ng-zorro-antd';
 import * as screenfull from 'screenfull';
+import { User } from '../auth/user.model';
+import { SessionKey } from '../auth/session-key.enum';
 
 @Component({
   selector: 'app-layout',
@@ -13,20 +14,14 @@ import * as screenfull from 'screenfull';
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
   menus = [];
-  user = null;
+  user: User = null;
   tabs = [];
   selectedIndex = 0;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    private confirm: NzModalService
-  ) {}
+  constructor(private router: Router, private confirm: NzModalService) {}
 
   ngOnInit() {
-    this.user = {
-      name: sessionStorage.getItem('user')
-    };
+    this.user = JSON.parse(sessionStorage.getItem(SessionKey.CAS_USER));
     this.tabs.push({
       text: '首页',
       link: ''
@@ -52,7 +47,11 @@ export class LayoutComponent implements OnInit {
       });
     }
   }
-  // 选中某个菜单
+
+  /**
+   * 选中某个菜单
+   * @param menu 菜单
+   */
   clickMenu(menu) {
     const index = this.tabs.findIndex(m => m === menu);
     if (index === -1) {
@@ -64,7 +63,11 @@ export class LayoutComponent implements OnInit {
       this.router.navigate([this.tabs[index].link]);
     }
   }
-  // 菜单展开关闭回调
+
+  /**
+   * 菜单展开关闭回调
+   * @param menu 菜单
+   */
   openChange(menu) {
     this.menus.forEach(child => {
       child.selected = false;
@@ -82,18 +85,30 @@ export class LayoutComponent implements OnInit {
       }
     });
   }
-  // 选中某个标签页
+
+  /**
+   * 选中某个标签页
+   * @param tab 标签页
+   * @param index 索引
+   */
   selectTab(tab, index) {
     this.selectedIndex = index;
     this.router.navigate([tab.link]);
   }
-  // 关闭某个标签页
+
+  /**
+   * 关闭某个标签页
+   * @param tab 标签页
+   */
   closeTab(tab) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
     this.selectedIndex = this.tabs.length - 1;
     this.router.navigate([this.tabs[this.selectedIndex].link]);
   }
-  // 清空所有标签页
+
+  /**
+   * 清空所有标签页
+   */
   closeAllTabs() {
     if (this.tabs.length < 2) {
       return;
@@ -106,7 +121,10 @@ export class LayoutComponent implements OnInit {
     ];
     this.selectTab(this.tabs[0], 0);
   }
-  // 关闭除当前打开外的其他所有标签页
+
+  /**
+   * 关闭除当前打开外的其他所有标签页
+   */
   closeOtherTabs() {
     if (this.tabs.length < 2) {
       return;
@@ -114,7 +132,10 @@ export class LayoutComponent implements OnInit {
     this.tabs = [this.tabs[this.selectedIndex]];
     this.selectedIndex = 0;
   }
-  // 用户退出登录
+
+  /**
+   * 用户退出登录
+   */
   logout() {
     this.confirm.confirm({
       title: '退出提示',
@@ -125,16 +146,10 @@ export class LayoutComponent implements OnInit {
       }
     });
   }
-  // 销毁票证授予票证
-  casDeleteTGT(ticket) {
-    return this.http.delete(`/cas/v1/tickets/${ticket}`, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      responseType: 'text'
-    });
-  }
-  // 全屏切换
+
+  /**
+   * 全屏切换
+   */
   toggleFullscreen() {
     if (screenfull.enabled) {
       screenfull.toggle();
