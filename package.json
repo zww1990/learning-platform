@@ -1,7 +1,10 @@
 {
   "name": "my-angular",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
+  "description": "A Angular project",
+  "author": "zhangweiwei",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve -pc proxy.conf.json",
@@ -10,7 +13,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^5.2.4",
     "@angular/common": "^5.2.4",
