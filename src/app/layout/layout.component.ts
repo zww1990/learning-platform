@@ -1,10 +1,12 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { NzModalService } from 'ng-zorro-antd';
 import * as screenfull from 'screenfull';
 import { User } from '../auth/user.model';
-import { SessionKey } from '../auth/session-key.enum';
+import { MenuItem } from './menu-item.model';
+import { MenuService } from './menu.service';
+import { UserService } from '../auth/user.service';
 
 @Component({
   selector: 'app-layout',
@@ -13,54 +15,37 @@ import { SessionKey } from '../auth/session-key.enum';
 })
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
-  menus = [];
-  user: User = null;
-  tabs = [];
   selectedIndex = 0;
+  user: User = null;
+  menus: MenuItem[] = [];
+  tabs: MenuItem[] = [];
 
-  constructor(private router: Router, private confirm: NzModalService) {}
+  constructor(
+    private router: Router,
+    private confirm: NzModalService,
+    private menuService: MenuService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem(SessionKey.CAS_USER));
-    this.tabs.push({
-      text: '首页',
-      link: ''
-    });
-    for (let i = 1; i <= 10; i++) {
-      this.menus.push({
-        text: '菜单' + i,
-        link: '',
-        icon: 'anticon anticon-area-chart',
-        selected: false,
-        children: [
-          {
-            text: '页面1' + i,
-            link: '/demo/page1',
-            selected: false
-          },
-          {
-            text: '页面2' + i,
-            link: '/demo/page2',
-            selected: false
-          }
-        ]
-      });
-    }
+    this.user = this.userService.querySessionUser();
+    this.menus = this.menuService.queryMenus();
+    this.openDefaultTab();
   }
 
   /**
    * 选中某个菜单
    * @param menu 菜单
    */
-  clickMenu(menu) {
+  clickMenu(menu: MenuItem) {
     const index = this.tabs.findIndex(m => m === menu);
     if (index === -1) {
       this.tabs.push(menu);
       this.selectedIndex = this.tabs.length - 1;
-      this.router.navigate([menu.link]);
+      this.router.navigate([menu.menuUrl]);
     } else {
       this.selectedIndex = index;
-      this.router.navigate([this.tabs[index].link]);
+      this.router.navigate([this.tabs[index].menuUrl]);
     }
   }
 
@@ -68,7 +53,7 @@ export class LayoutComponent implements OnInit {
    * 菜单展开关闭回调
    * @param menu 菜单
    */
-  openChange(menu) {
+  openChange(menu: MenuItem) {
     this.menus.forEach(child => {
       child.selected = false;
       if (menu === child) {
@@ -91,19 +76,19 @@ export class LayoutComponent implements OnInit {
    * @param tab 标签页
    * @param index 索引
    */
-  selectTab(tab, index) {
+  selectTab(tab: MenuItem, index: number) {
     this.selectedIndex = index;
-    this.router.navigate([tab.link]);
+    this.router.navigate([tab.menuUrl]);
   }
 
   /**
    * 关闭某个标签页
    * @param tab 标签页
    */
-  closeTab(tab) {
+  closeTab(tab: MenuItem) {
     this.tabs.splice(this.tabs.indexOf(tab), 1);
     this.selectedIndex = this.tabs.length - 1;
-    this.router.navigate([this.tabs[this.selectedIndex].link]);
+    this.router.navigate([this.tabs[this.selectedIndex].menuUrl]);
   }
 
   /**
@@ -113,13 +98,20 @@ export class LayoutComponent implements OnInit {
     if (this.tabs.length < 2) {
       return;
     }
+    this.openDefaultTab();
+    this.selectTab(this.tabs[0], 0);
+  }
+
+  /**
+   * 打开默认的标签
+   */
+  openDefaultTab() {
     this.tabs = [
       {
-        text: '首页',
-        link: ''
+        menuName: '首页',
+        menuUrl: ''
       }
     ];
-    this.selectTab(this.tabs[0], 0);
   }
 
   /**
@@ -141,7 +133,7 @@ export class LayoutComponent implements OnInit {
       title: '退出提示',
       content: '您确认要退出APP吗？',
       onOk: () => {
-        sessionStorage.clear();
+        this.userService.removeSessionUser();
         this.router.navigate(['/login']);
       }
     });

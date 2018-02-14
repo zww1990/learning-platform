@@ -18,7 +18,7 @@ export class CasResult {
 }
 
 /**
- * CAS认证
+ * CAS认证服务
  * @author zww
  */
 @Injectable()

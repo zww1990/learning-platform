@@ -9,15 +9,20 @@ import {
   Route
 } from '@angular/router';
 
-import { SessionKey } from './session-key.enum';
+import { UserService } from './user.service';
 
 /**
- * 路由守卫
+ * 路由守卫服务
  * @author zww
  */
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private router: Router) {}
+  /**
+   * 构造路由守卫
+   * @param router 路由器
+   * @param userService 用户服务
+   */
+  constructor(private router: Router, private userService: UserService) {}
 
   /**
    * 检查路由的访问权限
@@ -49,7 +54,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
    * 验证用户是否登录
    */
   checkLogin() {
-    const user = sessionStorage.getItem(SessionKey.CAS_USER);
+    const user = this.userService.querySessionUser();
     if (!user) {
       this.router.navigate(['/login']);
       return false;
