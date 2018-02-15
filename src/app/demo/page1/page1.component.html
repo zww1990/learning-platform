@@ -1,3 +1,7 @@
-<p>
-  page1 works!
-</p>
+<nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
+  <p class="ant-upload-drag-icon">
+    <i class="anticon anticon-inbox"></i>
+  </p>
+  <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
+  <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
+</nz-upload>
