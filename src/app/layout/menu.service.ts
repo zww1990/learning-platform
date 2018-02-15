@@ -15,30 +15,24 @@ export class MenuService {
   queryMenus(): MenuItem[] {
     const menus: MenuItem[] = [];
     menus.push({
-      menuName: '菜单',
-      menuUrl: '',
-      menuIcon: 'anticon anticon-area-chart',
-      selected: false,
+      menuName: '示例',
+      menuIcon: 'anticon anticon-appstore',
       children: [
         {
-          menuName: '页面1',
-          menuUrl: '/demo/page1',
-          selected: false
+          menuName: '示例1',
+          menuUrl: '/demo/page1'
         },
         {
-          menuName: '页面2',
-          menuUrl: '/demo/page2',
-          selected: false
+          menuName: '示例2',
+          menuUrl: '/demo/page2'
         },
         {
-          menuName: '页面3',
-          menuUrl: '/demo/page3',
-          selected: false
+          menuName: '示例3',
+          menuUrl: '/demo/page3'
         },
         {
-          menuName: '页面4',
-          menuUrl: '/demo/page4',
-          selected: false
+          menuName: '示例4',
+          menuUrl: '/demo/page4'
         }
       ]
     });
