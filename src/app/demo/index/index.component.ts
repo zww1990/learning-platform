@@ -9,13 +9,13 @@ import { CanComponentDeactivate } from '../../auth/auth-guard.service';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.less']
 })
-export class IndexComponent implements OnInit, CanComponentDeactivate {
+export class IndexComponent implements OnInit/* , CanComponentDeactivate */ {
   constructor() {}
 
   ngOnInit() {}
 
-  canDeactivate() {
-    const confirmation = window.confirm('你确定要离开首页?');
-    return Observable.of(confirmation);
-  }
+  // canDeactivate() {
+  //   const confirmation = window.confirm('你确定要离开首页?');
+  //   return Observable.of(confirmation);
+  // }
 }
