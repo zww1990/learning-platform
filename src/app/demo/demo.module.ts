@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { Page1Component } from './page1/page1.component';
 import { Page2Component } from './page2/page2.component';
 import { Page3Component } from './page3/page3.component';
@@ -38,7 +39,11 @@ const routes: Routes = [
  * @author zww
  */
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    NgZorroAntdModule.forRoot()
+  ],
   declarations: [
     IndexComponent,
     Page1Component,
