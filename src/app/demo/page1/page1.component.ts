@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import * as XLSX from 'xlsx';
+import { utils, read, write } from 'xlsx';
+import { saveAs } from 'file-saver';
+import { Workbook } from './workbook.model';
 
 @Component({
   selector: 'app-page1',
@@ -16,11 +18,15 @@ export class Page1Component implements OnInit {
   tableData = [];
   tableHeader: string[] = [];
   rABS = true; // true:readAsBinaryString; false:readAsArrayBuffer;
+  fileName: string;
 
   constructor(private msg: NzMessageService) {}
 
   ngOnInit() {}
 
+  /**
+   * 上传文件之前，对上传的文件进行校验
+   */
   beforeUpload = (file: File) => {
     const isAccept = this.accepts.includes(file.type);
     const isLimit = file.size / 1024 / 1024 < 10;
@@ -37,23 +43,24 @@ export class Page1Component implements OnInit {
   };
 
   /**
-   * 读取上传的文件
-   * @param file 上传的文件
+   * 读取Excel文件
+   * @param file Excel文件
    */
   readFile(file: File) {
+    this.fileName = file.name;
     const reader = new FileReader();
     reader.onload = () => {
       let data = reader.result;
       if (!this.rABS) {
         data = new Uint8Array(data);
       }
-      const workbook = XLSX.read(data, {
+      const workbook = read(data, {
         type: this.rABS ? 'binary' : 'array'
       });
       const firstSheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[firstSheetName];
-      this.tableHeader = this.getHeaderRow(worksheet);
-      this.tableData = XLSX.utils.sheet_to_json(worksheet);
+      this.tableHeader = Workbook.getHeaderRow(worksheet);
+      this.tableData = utils.sheet_to_json(worksheet);
     };
     if (this.rABS) {
       reader.readAsBinaryString(file);
@@ -63,33 +70,20 @@ export class Page1Component implements OnInit {
   }
 
   /**
-   * 获取表头行
-   * @param sheet 工作表
+   * 导出Excel文件
    */
-  getHeaderRow(sheet): string[] {
-    const headers: string[] = [];
-    const range = XLSX.utils.decode_range(sheet['!ref']);
-    const R = range.s.r; // 从第一行开始
-    for (let C = range.s.c; C <= range.e.c; ++C) {
-      // 循环范围内的每一列
-      const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; // 在第一行找到单元格
-      const header = this.format_cell(cell);
-      headers.push(header);
-    }
-    return headers;
-  }
-
-  /**
-   * 格式化单元格
-   * @param cell 单元格
-   */
-  format_cell(cell): string {
-    if (cell === null || cell.t === null || cell.t === 'z') {
-      return '<UNKNOWN>';
-    }
-    if (cell.w !== undefined) {
-      return cell.w;
-    }
-    return cell.v || cell.h || cell.w;
+  exportExcel() {
+    const wb = new Workbook();
+    wb.SheetNames.push(this.fileName);
+    wb.Sheets[this.fileName] = utils.json_to_sheet(this.tableData);
+    const wbout = write(wb, {
+      bookType: 'xlsx',
+      bookSST: false,
+      type: 'array'
+    });
+    saveAs(
+      new Blob([wbout], { type: 'application/octet-stream' }),
+      this.fileName
+    );
   }
 }
