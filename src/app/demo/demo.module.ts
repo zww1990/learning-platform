@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'index',
     component: IndexComponent,
-    canDeactivate: [AuthGuard]
+    // canDeactivate: [AuthGuard]
   },
   {
     path: 'page1',
