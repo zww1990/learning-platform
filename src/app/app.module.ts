@@ -31,6 +31,6 @@ export class AppModule {
    * @param router 路由器
    */
   constructor(router: Router) {
-    console.log(JSON.stringify(router.config, null, 2));
+    // console.log(JSON.stringify(router.config, null, 2));
   }
 }
