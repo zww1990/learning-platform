@@ -1,6 +1,8 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="/assets/images/logo-nav.png" alt="">
+    </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
       <ng-template ngFor let-child [ngForOf]="menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
