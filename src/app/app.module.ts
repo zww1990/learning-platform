@@ -8,7 +8,6 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { AppComponent } from './app.component';
 import { RoutesModule } from './routes/routes.module';
-import { DemoModule } from './demo/demo.module'; // 示例模块
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +18,6 @@ import { DemoModule } from './demo/demo.module'; // 示例模块
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
-    DemoModule, // 示例模块
     RoutesModule
   ],
   providers: [],
