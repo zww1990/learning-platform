@@ -32,9 +32,11 @@ export class Page1Component implements OnInit {
     const isLimit = file.size / 1024 / 1024 < 10;
     if (!isAccept) {
       this.msg.error('只能上传xls/xlsx文件');
+      return false;
     }
     if (!isLimit) {
       this.msg.error('上传的文件大小不能超过10MB');
+      return false;
     }
     if (isAccept && isLimit) {
       this.readFile(file);
