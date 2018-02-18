@@ -23,7 +23,7 @@
                 <i class="anticon anticon-lock"></i>
               </ng-template>
             </nz-input>
-            <span nz-form-text>找回密码</span>
+            <a nz-form-text style="padding-left: 10px" (click)="forgotPassword()">找回密码</a>
             <div nz-form-explain *ngIf="loginForm.get('password').dirty&&loginForm.get('password').hasError('required')">请输入您的密码!</div>
           </div>
         </div>

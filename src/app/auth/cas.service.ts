@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 
 import { xml2js } from 'xml-js';
+import * as $ from 'jquery';
 import { LoginForm } from '../login/login-form.model';
 
 /**
@@ -128,5 +129,30 @@ export class CasService {
         responseType: 'text'
       })
       .toPromise();
+  }
+
+  /**
+   * 找回密码
+   * @param username 用户名
+   */
+  casForgotPassword(username: string) {
+    return $.post({
+      url: '/cas/query-domain',
+      data: { username: username },
+      async: false
+    }).responseJSON;
+  }
+
+  /**
+   * 找回密码URL
+   * @param domain 域名
+   * @param username 用户名
+   */
+  casForgotPasswordUrl(domain: any, username: string): string {
+    return `http://${
+      domain['VALUE_NAME']
+    }/5i5j/jsp/FindPassWord/FindPassWordPage.jsp?username=${window['escape'](
+      username
+    )}`;
   }
 }
