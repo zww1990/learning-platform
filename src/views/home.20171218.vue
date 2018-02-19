@@ -65,20 +65,17 @@
 <script>
 import api from '@/api';
 export default {
-  data() {
-    return {
-      sysName: 'MyVue',
-      collapsed: false,
-      sysUserName: '',
-      sysUserAvatar: '',
-      menuData: []
-    };
-  },
+  data: () => ({
+    sysName: 'MyVue',
+    collapsed: false,
+    sysUserName: '',
+    sysUserAvatar: '',
+    menuData: []
+  }),
   methods: {
     //退出登录
     logout() {
-      this.$confirm('确认退出吗?', '提示', {
-      }).then(() => {
+      this.$confirm('确认退出吗?', '提示', {}).then(() => {
         api.casDeleteTGT(sessionStorage.getItem('CAS-TGT'));
         sessionStorage.clear();
         this.$store.commit('clean_tabs');

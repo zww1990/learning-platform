@@ -26,21 +26,19 @@
 <script>
 import xmlJs from 'xml-js';
 export default {
-  data() {
-    return {
-      xmlData: '',
-      jsonData: '',
-      options: {
-        compact: true, //简化
-        spaces: 2, //间距
-        trim: true, //忽略首尾空格
-        ignoreComment: true, //忽略注释
-        ignoreDoctype: true, //忽略文档类型
-        ignoreDeclaration: true, //忽略声明
-        ignoreInstruction: true //忽略指令
-      }
-    };
-  },
+  data: () => ({
+    xmlData: '',
+    jsonData: '',
+    options: {
+      compact: true, //简化
+      spaces: 2, //间距
+      trim: true, //忽略首尾空格
+      ignoreComment: true, //忽略注释
+      ignoreDoctype: true, //忽略文档类型
+      ignoreDeclaration: true, //忽略声明
+      ignoreInstruction: true //忽略指令
+    }
+  }),
   methods: {
     cleanData() {
       this.xmlData = '';

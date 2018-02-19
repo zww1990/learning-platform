@@ -69,15 +69,13 @@
 import api from '@/api';
 import screenfull from 'screenfull';
 export default {
-  data() {
-    return {
-      sysName: 'MyVue',
-      collapsed: false,
-      sysUserName: '',
-      sysUserAvatar: '',
-      menuData: []
-    };
-  },
+  data: () => ({
+    sysName: 'MyVue',
+    collapsed: false,
+    sysUserName: '',
+    sysUserAvatar: '',
+    menuData: []
+  }),
   methods: {
     //退出登录
     logout() {

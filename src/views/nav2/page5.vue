@@ -15,12 +15,10 @@
 import moment from 'moment';
 moment.locale('zh-cn');
 export default {
-  data() {
-    return {
-      now: Date.now(),
-      times: []
-    };
-  },
+  data: () => ({
+    now: Date.now(),
+    times: []
+  }),
   methods: {
     showTimes() {
       this.times = JSON.parse(sessionStorage.getItem('times')) || [];

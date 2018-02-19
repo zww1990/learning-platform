@@ -46,39 +46,37 @@ function Workbook() {
   this.Sheets = {};
 }
 export default {
-  data() {
-    return {
-      action: '',
-      accepts: [
-        'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      ],
-      tableData: [],
-      tableHeader: [],
-      isShow: true,
-      rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
-      params: {
-        myID: '8143969', // 员工号
-        myEndPoint: '家（西城区阜成门内）', //下车地点
-        myName: '', // 员工姓名
-        idIndex: 1, // 员工号索引
-        nameIndex: 2, // 员工姓名索引
-        deptIndex: 3, // 部门索引
-        approvalIndex: 6, // 审批单号索引
-        overtimeIndex: 8, // 加班日期索引
-        deadlineIndex: 10, // 加班截止时间索引
-        empPageIndex: 0, // 员工加班记录明细页索引
-        myPageIndex: 1, // 个人加班记录明细页索引
-        dateParse: 'MM/DD/YY', //解析字符串日期样式
-        dateFormat: 'YYYY/MM/DD', //格式化日期样式
-        timeFormat: 'HH:mm:ss', //格式化时间样式
-        timezone: 'Asia/Shanghai', //中国时区
-        taxiTime: '21:00:00', //规定打车开始时间
-        mySheetName: '',
-        fileName: ''
-      }
-    };
-  },
+  data: () => ({
+    action: '',
+    accepts: [
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ],
+    tableData: [],
+    tableHeader: [],
+    isShow: true,
+    rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
+    params: {
+      myID: '8143969', // 员工号
+      myEndPoint: '家（西城区阜成门内）', //下车地点
+      myName: '', // 员工姓名
+      idIndex: 1, // 员工号索引
+      nameIndex: 2, // 员工姓名索引
+      deptIndex: 3, // 部门索引
+      approvalIndex: 6, // 审批单号索引
+      overtimeIndex: 8, // 加班日期索引
+      deadlineIndex: 10, // 加班截止时间索引
+      empPageIndex: 0, // 员工加班记录明细页索引
+      myPageIndex: 1, // 个人加班记录明细页索引
+      dateParse: 'MM/DD/YY', //解析字符串日期样式
+      dateFormat: 'YYYY/MM/DD', //格式化日期样式
+      timeFormat: 'HH:mm:ss', //格式化时间样式
+      timezone: 'Asia/Shanghai', //中国时区
+      taxiTime: '21:00:00', //规定打车开始时间
+      mySheetName: '',
+      fileName: ''
+    }
+  }),
   methods: {
     toNext() {
       if (!this.params.myID) {
@@ -122,14 +120,16 @@ export default {
       const isLimit = file.size / 1024 / 1024 < 10;
       if (!isAccept) {
         this.$message.error('只能上传xls/xlsx文件');
+        return false;
       }
       if (!isLimit) {
         this.$message.error('上传的文件大小不能超过10MB');
+        return false;
       }
       if (isAccept && isLimit) {
         const reader = new FileReader();
-        reader.onload = e => {
-          let data = e.target.result;
+        reader.onload = () => {
+          let data = reader.result;
           if (!this.rABS) {
             data = new Uint8Array(data);
           }
@@ -229,10 +229,7 @@ export default {
       for (let C = range.s.c; C <= range.e.c; ++C) {
         //循环范围内的每一列
         const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
-        let header = 'UNKNOWN ' + C; //用你想要的默认值替换
-        if (cell && cell.t) {
-          header = XLSX.utils.format_cell(cell);
-        }
+        const header = XLSX.utils.format_cell(cell);
         headers.push(header);
       }
       return headers;

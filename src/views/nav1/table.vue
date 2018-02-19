@@ -17,11 +17,9 @@ export default {
   components: {
     table1
   },
-  data() {
-    return {
-      tableData: []
-    };
-  },
+  data: () => ({
+    tableData: []
+  }),
   mounted() {
     api.loadTableData().then(res => {
       this.tableData = res.data;

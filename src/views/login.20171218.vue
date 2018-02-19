@@ -21,20 +21,18 @@
 <script>
 import api from '@/api';
 export default {
-  data() {
-    return {
-      logining: false,
-      ruleForm2: {
-        username: 'admin',
-        password: 'admin'
-      },
-      rules2: {
-        username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-      },
-      checked: true
-    };
-  },
+  data: () => ({
+    logining: false,
+    ruleForm2: {
+      username: 'admin',
+      password: 'admin'
+    },
+    rules2: {
+      username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+      password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+    },
+    checked: true
+  }),
   methods: {
     // handleReset2() {
     //   this.$refs.ruleForm2.resetFields();

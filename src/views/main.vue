@@ -5,10 +5,8 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      content: '这是App首页'
-    };
-  }
+  data: () => ({
+    content: '这是App首页'
+  })
 };
 </script>

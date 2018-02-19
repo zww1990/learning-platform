@@ -15,11 +15,9 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      tableData: []
-    };
-  },
+  data: () => ({
+    tableData: []
+  }),
   mounted() {
     api.loadChildTableData(this.row.id).then(res => {
       this.tableData = res.data;

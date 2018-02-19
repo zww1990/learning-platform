@@ -3,7 +3,8 @@
     <el-col :span="24">
       <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
         <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em><br>只能上传xls/xlsx文件</div>
+        <div class="el-upload__text">将文件拖到此处，或
+          <em>点击上传</em><br>只能上传xls/xlsx文件</div>
       </el-upload>
     </el-col>
     <el-col :span="24">
@@ -16,32 +17,32 @@
 <script>
 import XLSX from 'xlsx';
 export default {
-  data() {
-    return {
-      action: '',
-      accepts: [
-        'application/vnd.ms-excel',
-        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-      ],
-      tableData: [],
-      tableHeader: [],
-      rABS: true //true:readAsBinaryString; false:readAsArrayBuffer;
-    };
-  },
+  data: () => ({
+    action: '',
+    accepts: [
+      'application/vnd.ms-excel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    ],
+    tableData: [],
+    tableHeader: [],
+    rABS: true //true:readAsBinaryString; false:readAsArrayBuffer;
+  }),
   methods: {
     beforeUpload(file) {
       const isAccept = this.accepts.includes(file.type);
       const isLimit = file.size / 1024 / 1024 < 10;
       if (!isAccept) {
         this.$message.error('只能上传xls/xlsx文件');
+        return false;
       }
       if (!isLimit) {
         this.$message.error('上传的文件大小不能超过10MB');
+        return false;
       }
       if (isAccept && isLimit) {
         const reader = new FileReader();
-        reader.onload = e => {
-          let data = e.target.result;
+        reader.onload = () => {
+          let data = reader.result;
           if (!this.rABS) {
             data = new Uint8Array(data);
           }
@@ -68,10 +69,7 @@ export default {
       for (let C = range.s.c; C <= range.e.c; ++C) {
         //循环范围内的每一列
         const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
-        let header = 'UNKNOWN ' + C; //用你想要的默认值替换
-        if (cell && cell.t) {
-          header = XLSX.utils.format_cell(cell);
-        }
+        const header = XLSX.utils.format_cell(cell);
         headers.push(header);
       }
       return headers;

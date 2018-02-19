@@ -103,45 +103,43 @@
 import moment from 'moment';
 import api from '@/api';
 export default {
-  data() {
-    return {
-      filters: {
-        name: ''
-      },
-      users: [],
-      total: 0,
-      page: 1,
-      listLoading: false,
-      sels: [], //列表选中列
-      editFormVisible: false, //编辑界面是否显示
-      editLoading: false,
-      editFormRules: {
-        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
-      },
-      //编辑界面数据
-      editForm: {
-        id: 0,
-        name: '',
-        sex: -1,
-        age: 0,
-        birth: '',
-        addr: ''
-      },
-      addFormVisible: false, //新增界面是否显示
-      addLoading: false,
-      addFormRules: {
-        name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
-      },
-      //新增界面数据
-      addForm: {
-        name: '',
-        sex: -1,
-        age: 0,
-        birth: '',
-        addr: ''
-      }
-    };
-  },
+  data: () => ({
+    filters: {
+      name: ''
+    },
+    users: [],
+    total: 0,
+    page: 1,
+    listLoading: false,
+    sels: [], //列表选中列
+    editFormVisible: false, //编辑界面是否显示
+    editLoading: false,
+    editFormRules: {
+      name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
+    },
+    //编辑界面数据
+    editForm: {
+      id: 0,
+      name: '',
+      sex: -1,
+      age: 0,
+      birth: '',
+      addr: ''
+    },
+    addFormVisible: false, //新增界面是否显示
+    addLoading: false,
+    addFormRules: {
+      name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
+    },
+    //新增界面数据
+    addForm: {
+      name: '',
+      sex: -1,
+      age: 0,
+      birth: '',
+      addr: ''
+    }
+  }),
   methods: {
     //性别显示转换
     formatSex(row, column) {

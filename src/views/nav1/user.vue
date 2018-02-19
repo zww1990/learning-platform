@@ -61,15 +61,13 @@
 <script>
 import api from '@/api';
 export default {
-  data() {
-    return {
-      filters: {
-        name: ''
-      },
-      loading: false,
-      users: []
-    };
-  },
+  data: () => ({
+    filters: {
+      name: ''
+    },
+    loading: false,
+    users: []
+  }),
   methods: {
     //性别显示转换
     formatSex(row, column) {

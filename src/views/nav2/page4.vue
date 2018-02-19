@@ -10,11 +10,9 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      fullscreenLoading: false
-    };
-  },
+  data: () => ({
+    fullscreenLoading: false
+  }),
   methods: {
     openFullScreen() {
       this.fullscreenLoading = true;
