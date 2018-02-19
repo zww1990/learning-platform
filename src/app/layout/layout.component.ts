@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { NzModalService } from 'ng-zorro-antd';
 import * as screenfull from 'screenfull';
 import { User } from '../auth/user.model';
 import { MenuItem } from './menu-item.model';
-import { MenuService } from './menu.service';
 import { UserService } from '../auth/user.service';
 
 @Component({
@@ -22,14 +21,16 @@ export class LayoutComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private confirm: NzModalService,
-    private menuService: MenuService,
     private userService: UserService
   ) {}
 
   ngOnInit() {
     this.user = this.userService.querySessionUser();
-    this.menus = this.menuService.queryMenus();
+    this.route.data.subscribe(data => {
+      this.menus = data.menus;
+    });
     this.openDefaultTab();
   }
 
