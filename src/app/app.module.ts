@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
 /**
- * APP主模块
+ * 应用的根模块
  * @author zww
  */
 @NgModule({
