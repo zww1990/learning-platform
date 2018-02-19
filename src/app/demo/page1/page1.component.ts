@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { utils, read, write } from 'xlsx';
 import { saveAs } from 'file-saver';
-import { Workbook } from './workbook.model';
+import { Workbook, Table } from './workbook.model';
 
 @Component({
   selector: 'app-page1',
@@ -15,10 +15,9 @@ export class Page1Component implements OnInit {
     'application/vnd.ms-excel',
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   ];
-  tableData = [];
-  tableHeader: string[] = [];
   rABS = true; // true:readAsBinaryString; false:readAsArrayBuffer;
   fileName: string;
+  tables: Table[] = [];
 
   constructor(private msg: NzMessageService) {}
 
@@ -56,13 +55,19 @@ export class Page1Component implements OnInit {
       if (!this.rABS) {
         data = new Uint8Array(data);
       }
-      const workbook = read(data, {
+      const wb = read(data, {
         type: this.rABS ? 'binary' : 'array'
       });
-      const firstSheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[firstSheetName];
-      this.tableHeader = Workbook.getHeaderRow(worksheet);
-      this.tableData = utils.sheet_to_json(worksheet);
+      wb.SheetNames.forEach(sheetName => {
+        const ws = wb.Sheets[sheetName];
+        this.tables.push(
+          new Table(
+            sheetName,
+            Workbook.getHeaderRow(ws),
+            utils.sheet_to_json(ws)
+          )
+        );
+      });
     };
     if (this.rABS) {
       reader.readAsBinaryString(file);
@@ -76,8 +81,10 @@ export class Page1Component implements OnInit {
    */
   exportExcel() {
     const wb = new Workbook();
-    wb.SheetNames.push(this.fileName);
-    wb.Sheets[this.fileName] = utils.json_to_sheet(this.tableData);
+    this.tables.forEach(table => {
+      wb.SheetNames.push(table.name);
+      wb.Sheets[table.name] = utils.json_to_sheet(table.data);
+    });
     const wbout = write(wb, {
       bookType: 'xlsx',
       bookSST: false,
