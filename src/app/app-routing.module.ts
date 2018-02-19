@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { UserService } from './auth/user.service';
 import { CasService } from './auth/cas.service';
 import { MenuService } from './layout/menu.service';
+import { MenuResolverService } from './layout/menu-resolver.service';
 
 const routes: Routes = [
   // 示例模块采用惰性加载路由配置
@@ -20,6 +21,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     canLoad: [AuthGuard],
+    resolve: { menus: MenuResolverService },
     loadChildren: 'app/demo/demo.module#DemoModule'
   },
   {
@@ -54,6 +56,12 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   declarations: [LayoutComponent, LoginComponent],
-  providers: [AuthGuard, UserService, CasService, MenuService]
+  providers: [
+    AuthGuard,
+    UserService,
+    CasService,
+    MenuService,
+    MenuResolverService
+  ]
 })
 export class AppRoutingModule {}

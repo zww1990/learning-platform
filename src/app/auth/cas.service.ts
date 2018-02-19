@@ -135,7 +135,7 @@ export class CasService {
    * 找回密码
    * @param username 用户名
    */
-  casForgotPassword(username: string) {
+  casForgotPassword(username: string): any {
     return $.post({
       url: '/cas/query-domain',
       data: { username: username },
