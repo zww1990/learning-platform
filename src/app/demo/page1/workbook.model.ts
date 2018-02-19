@@ -45,3 +45,21 @@ export class Workbook implements WorkBook {
     return cell.v || cell.h || cell.w;
   }
 }
+
+/**
+ * 表格数据模型
+ * @author zww
+ */
+export class Table {
+  /**
+   * 构造表格
+   * @param name 表格名称
+   * @param header 表头行
+   * @param data 表格数据
+   */
+  constructor(
+    public name: string,
+    public header: string[],
+    public data: any[]
+  ) {}
+}
