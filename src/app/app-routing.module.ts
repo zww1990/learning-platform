@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -12,6 +8,7 @@ import { UserService } from './auth/user.service';
 import { CasService } from './auth/cas.service';
 import { MenuService } from './layout/menu.service';
 import { MenuResolverService } from './layout/menu-resolver.service';
+import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
   // 示例模块采用惰性加载路由配置
@@ -46,14 +43,7 @@ const routes: Routes = [
  * @author zww
  */
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { useHash: true }),
-    NgZorroAntdModule.forRoot(),
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ],
+  imports: [RouterModule.forRoot(routes, { useHash: true }), SharedModule],
   exports: [RouterModule],
   declarations: [LayoutComponent, LoginComponent],
   providers: [
