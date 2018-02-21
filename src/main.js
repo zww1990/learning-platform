@@ -6,6 +6,7 @@ import router from './router';
 import store from './store';
 import Vuetify from 'vuetify';
 import './main.styl';
+import '../node_modules/mdi/css/materialdesignicons.min.css';
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify, {
