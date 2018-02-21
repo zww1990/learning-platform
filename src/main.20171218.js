@@ -7,7 +7,6 @@ import store from './store';
 import ElementUI from 'element-ui';
 import VueAMap from 'vue-amap';
 import './assets/styles/element-variables.scss';
-import 'font-awesome/css/font-awesome.min.css';
 import 'ztree/css/metroStyle/metroStyle.css';
 
 Vue.config.productionTip = false;
