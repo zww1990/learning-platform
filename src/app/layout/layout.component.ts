@@ -28,10 +28,15 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.querySessionUser();
+    this.openDefaultTab();
     this.route.data.subscribe(data => {
       this.menus = data.menus;
+      const menu = MenuItem.querySingleMenu(this.menus, this.router.url);
+      if (menu) {
+        this.tabs.push(menu);
+        this.selectedIndex = 1;
+      }
     });
-    this.openDefaultTab();
   }
 
   /**

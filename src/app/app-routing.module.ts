@@ -43,7 +43,7 @@ const routes: Routes = [
  * @author zww
  */
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true }), SharedModule],
+  imports: [RouterModule.forRoot(routes, { useHash: false }), SharedModule],
   exports: [RouterModule],
   declarations: [LayoutComponent, LoginComponent],
   providers: [
