@@ -31,4 +31,20 @@ export class MenuItem {
    * 子菜单
    */
   children?: MenuItem[];
+
+  /**
+   * 按路由地址递归查询单个菜单
+   * @param menuItems 菜单集合
+   * @param menuUrl 菜单链接
+   */
+  static querySingleMenu(menuItems: MenuItem[], menuUrl: string): MenuItem {
+    for (const item of menuItems) {
+      if (item.menuUrl === menuUrl) {
+        return item;
+      } else if (item.children && item.children.length) {
+        return this.querySingleMenu(item.children, menuUrl);
+      }
+    }
+    return null;
+  }
 }
