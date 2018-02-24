@@ -21,21 +21,11 @@ const routes: Routes = [
     resolve: { menus: MenuResolverService },
     loadChildren: 'app/demo/demo.module#DemoModule'
   },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  { path: 'login', component: LoginComponent },
   // 空路径表示应用的默认路径，该路由将重定向到指定的路由
-  {
-    path: '',
-    redirectTo: '/demo/index',
-    pathMatch: 'full'
-  },
+  { path: '', redirectTo: '/demo/index', pathMatch: 'full' },
   // 通配符路由必须放在最后，当没有匹配到上面的路由时，该路由将重定向到指定的路由
-  {
-    path: '**',
-    redirectTo: '/demo/index'
-  }
+  { path: '**', redirectTo: '/demo/index' }
 ];
 
 /**
