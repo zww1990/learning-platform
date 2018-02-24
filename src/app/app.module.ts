@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouteReuseStrategy } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { SimpleReuseStrategy } from './layout/simple-reuse-strategy';
 
 /**
  * 应用的根模块
@@ -22,7 +23,10 @@ import { environment } from '../environments/environment';
       enabled: environment.production
     })
   ],
-  providers: [],
+  providers: [
+    // 注册路由重用策略
+    // { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -10,27 +10,11 @@ import { AuthGuard } from '../auth/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
-  {
-    path: 'index',
-    component: IndexComponent
-    // canDeactivate: [AuthGuard]
-  },
-  {
-    path: 'page1',
-    component: Page1Component
-  },
-  {
-    path: 'page2',
-    component: Page2Component
-  },
-  {
-    path: 'page3',
-    component: Page3Component
-  },
-  {
-    path: 'page4',
-    component: Page4Component
-  }
+  { path: 'index', component: IndexComponent /* canDeactivate: [AuthGuard] */ },
+  { path: 'page1', component: Page1Component },
+  { path: 'page2', component: Page2Component },
+  { path: 'page3', component: Page3Component },
+  { path: 'page4', component: Page4Component }
 ];
 
 /**
