@@ -35,11 +35,8 @@ export class UserService {
     const item = sessionStorage.getItem(SessionKey.CAS_TGT);
     this.cas
       .casDeleteTGT(item)
-      .then(res => {
-        sessionStorage.clear();
-      })
-      .catch(err => {
-        sessionStorage.clear();
-      });
+      .then(res => {})
+      .catch(err => {});
+    sessionStorage.clear();
   }
 }

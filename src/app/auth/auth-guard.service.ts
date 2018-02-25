@@ -79,7 +79,15 @@ export class AuthGuard
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
   ) {
-    return component.canDeactivate ? component.canDeactivate() : true;
+    if (nextState.url === '/login') {
+      const user = this.userService.querySessionUser();
+      if (!!user) {
+        this.router.navigate(['']);
+        return false;
+      }
+    }
+    return true;
+    // return component.canDeactivate ? component.canDeactivate() : true;
   }
 
   /**
