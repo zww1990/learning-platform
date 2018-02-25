@@ -9,15 +9,30 @@ import {
  * @author zww
  */
 export class SimpleReuseStrategy implements RouteReuseStrategy {
-  public static handlers: { [key: string]: DetachedRouteHandle } = {};
-  excludePaths = ['/login'];
+  private static handlers: { [key: string]: DetachedRouteHandle } = {};
+  private static excludePaths = ['/login'];
+  private static waitDelete: string;
+
+  /**
+   * 删除指定的路由快照
+   * @param url 路由url
+   */
+  static deleteRouteSnapshot(url: string) {
+    if (SimpleReuseStrategy.handlers[url]) {
+      delete SimpleReuseStrategy.handlers[url];
+    } else {
+      SimpleReuseStrategy.waitDelete = url;
+    }
+  }
 
   /**
    * 是否允许复用路由
    * @param route 当前激活的路由快照
    */
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    return !this.excludePaths.includes(route['_routerState'].url);
+    return !SimpleReuseStrategy.excludePaths.includes(
+      route['_routerState'].url
+    );
   }
 
   /**
@@ -26,7 +41,16 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
    * @param handle 组件当前实例对象
    */
   store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-    SimpleReuseStrategy.handlers[route['_routerState'].url] = handle;
+    const url: string = route['_routerState'].url;
+    if (
+      SimpleReuseStrategy.waitDelete &&
+      SimpleReuseStrategy.waitDelete === url
+    ) {
+      // 如果待删除是当前路由则不存储快照
+      SimpleReuseStrategy.waitDelete = null;
+      return;
+    }
+    SimpleReuseStrategy.handlers[url] = handle;
   }
 
   /**

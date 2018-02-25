@@ -6,6 +6,7 @@ import * as screenfull from 'screenfull';
 import { User } from '../auth/user.model';
 import { MenuItem } from './menu-item.model';
 import { UserService } from '../auth/user.service';
+import { SimpleReuseStrategy } from './simple-reuse-strategy';
 
 @Component({
   selector: 'app-layout',
@@ -37,6 +38,18 @@ export class LayoutComponent implements OnInit {
         this.selectedIndex = 1;
       }
     });
+  }
+
+  /**
+   * 打开默认的标签
+   */
+  openDefaultTab() {
+    this.tabs = [
+      {
+        menuName: '首页',
+        menuUrl: ''
+      }
+    ];
   }
 
   /**
@@ -92,6 +105,7 @@ export class LayoutComponent implements OnInit {
    * @param tab 标签页
    */
   closeTab(tab: MenuItem) {
+    // SimpleReuseStrategy.deleteRouteSnapshot(tab.menuUrl);
     this.tabs.splice(this.tabs.indexOf(tab), 1);
     this.selectedIndex = this.tabs.length - 1;
     this.router.navigate([this.tabs[this.selectedIndex].menuUrl]);
@@ -106,18 +120,6 @@ export class LayoutComponent implements OnInit {
     }
     this.openDefaultTab();
     this.selectTab(this.tabs[0], 0);
-  }
-
-  /**
-   * 打开默认的标签
-   */
-  openDefaultTab() {
-    this.tabs = [
-      {
-        menuName: '首页',
-        menuUrl: ''
-      }
-    ];
   }
 
   /**
