@@ -1,24 +1,38 @@
 [
   {
-    "menuName": "示例",
+    "menuId": 1,
+    "menuName": "示例1",
     "menuIcon": "anticon anticon-appstore",
-    "children": [
-      {
-        "menuName": "示例1",
-        "menuUrl": "/demo/page1"
-      },
-      {
-        "menuName": "示例2",
-        "menuUrl": "/demo/page2"
-      },
-      {
-        "menuName": "示例3",
-        "menuUrl": "/demo/page3"
-      },
-      {
-        "menuName": "示例4",
-        "menuUrl": "/demo/page4"
-      }
-    ]
+    "parentMenuId": null
+  },
+  {
+    "menuId": 2,
+    "menuName": "示例2",
+    "menuIcon": "anticon anticon-appstore",
+    "parentMenuId": null
+  },
+  {
+    "menuId": 11,
+    "menuName": "示例1.1",
+    "menuUrl": "/demo/page1",
+    "parentMenuId": 1
+  },
+  {
+    "menuId": 12,
+    "menuName": "示例1.2",
+    "menuUrl": "/demo/page2",
+    "parentMenuId": 1
+  },
+  {
+    "menuId": 23,
+    "menuName": "示例2.3",
+    "menuUrl": "/demo/page3",
+    "parentMenuId": 2
+  },
+  {
+    "menuId": 24,
+    "menuName": "示例2.4",
+    "menuUrl": "/demo/page4",
+    "parentMenuId": 2
   }
 ]
