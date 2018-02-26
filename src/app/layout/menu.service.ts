@@ -15,7 +15,7 @@ export class MenuService {
   /**
    * 查询菜单集合
    */
-  queryMenus(): MenuItem[] | Observable<MenuItem[]> | Promise<MenuItem[]> {
-    return this.http.get<MenuItem[]>('/assets/data/menu.json');
+  queryMenus(): Promise<MenuItem[]> {
+    return this.http.get<MenuItem[]>('/assets/data/menu.json').toPromise();
   }
 }
