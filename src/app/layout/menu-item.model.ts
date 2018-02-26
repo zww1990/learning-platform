@@ -41,8 +41,12 @@ export class MenuItem {
     for (const item of menuItems) {
       if (item.menuUrl === menuUrl) {
         return item;
-      } else if (item.children && item.children.length) {
-        return this.querySingleMenu(item.children, menuUrl);
+      }
+      if (item.children && item.children.length) {
+        const menu = this.querySingleMenu(item.children, menuUrl);
+        if (menu) {
+          return menu;
+        }
       }
     }
     return null;

@@ -26,6 +26,8 @@ export class MenuResolverService implements Resolve<MenuItem[]> {
    * @param state 即将到达的状态
    */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.menuService.queryMenus();
+    return this.menuService.queryMenus().then(resp => {
+      return MenuItem.queryTreeMenus(resp);
+    });
   }
 }

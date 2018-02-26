@@ -31,7 +31,7 @@ export class LayoutComponent implements OnInit {
     this.user = this.userService.querySessionUser();
     this.openDefaultTab();
     this.route.data.subscribe(data => {
-      this.menus = MenuItem.queryTreeMenus(data.menus);
+      this.menus = data.menus;
       const menu = MenuItem.querySingleMenu(this.menus, this.router.url);
       if (menu) {
         this.tabs.push(menu);
