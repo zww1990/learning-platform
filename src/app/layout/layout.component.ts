@@ -36,6 +36,7 @@ export class LayoutComponent implements OnInit {
       if (menu) {
         this.tabs.push(menu);
         this.selectedIndex = 1;
+        this.openChange(menu);
       }
     });
   }
@@ -75,13 +76,13 @@ export class LayoutComponent implements OnInit {
   openChange(menu: MenuItem) {
     this.menus.forEach(child => {
       child.selected = false;
-      if (menu === child) {
+      if (menu.parentMenuId === child.menuId) {
         child.selected = true;
       }
-      if (child.children && child.children.length > 0) {
+      if (child.children && child.children.length) {
         child.children.forEach(item => {
           item.selected = false;
-          if (menu === item) {
+          if (menu.menuId === item.menuId) {
             child.selected = true;
             item.selected = true;
           }
@@ -97,6 +98,7 @@ export class LayoutComponent implements OnInit {
    */
   selectTab(tab: MenuItem, index: number) {
     this.selectedIndex = index;
+    this.openChange(tab);
     this.router.navigate([tab.menuUrl]);
   }
 

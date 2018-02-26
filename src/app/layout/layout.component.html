@@ -11,7 +11,7 @@
             <span class="nav-text">{{ child.menuName }}</span>
           </span>
         </li>
-        <li nz-submenu [nzOpen]="child.selected" (nzOpenChange)="openChange(child)" *ngIf="child.children">
+        <li nz-submenu [nzOpen]="child.selected" *ngIf="child.children">
           <span title>
             <i class="{{child.menuIcon}}"></i>
             <span class="nav-text">{{ child.menuName }}</span>
@@ -95,7 +95,8 @@
         <nz-tabset [nzType]="'card'" [nzSelectedIndex]="selectedIndex">
           <nz-tab *ngFor="let tab of tabs;let i=index" (nzClick)="selectTab(tab,i)">
             <ng-template #nzTabHeading>
-              <div>{{tab.menuName}}
+              <div>
+                {{tab.menuName}}
                 <i class="anticon anticon-cross" style="margin-right: 0px" (click)="closeTab(tab)" *ngIf="tabs.length>1"></i>
               </div>
             </ng-template>
