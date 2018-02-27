@@ -25,7 +25,7 @@ import { SimpleReuseStrategy } from './layout/simple-reuse-strategy';
   ],
   providers: [
     // 注册路由重用策略
-    // { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
+    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
   ],
   bootstrap: [AppComponent]
 })
