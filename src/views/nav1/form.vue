@@ -50,6 +50,7 @@
 </template>
 <script>
 export default {
+  name: 'my-form',
   data: () => ({
     ruleForm: {
       name: '',

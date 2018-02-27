@@ -103,6 +103,7 @@
 import moment from 'moment';
 import api from '@/api';
 export default {
+  name: 'my-table2',
   data: () => ({
     filters: {
       name: ''

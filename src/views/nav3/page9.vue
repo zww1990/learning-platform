@@ -26,6 +26,7 @@
 <script>
 import xmlJs from 'xml-js';
 export default {
+  name: 'my-page9',
   data: () => ({
     xmlData: '',
     jsonData: '',

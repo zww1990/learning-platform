@@ -57,7 +57,9 @@
           </el-col>
           <el-col :span="24" class="content-wrapper">
             <transition name="fade" mode="out-in">
-              <router-view></router-view>
+              <keep-alive :include="cachedViews">
+                <router-view></router-view>
+              </keep-alive>
             </transition>
           </el-col>
         </div>
@@ -96,10 +98,15 @@ export default {
     },
     tabRemove(targetName) {
       // 首页不可删除
-      if (targetName === '/main') {
+      if (targetName === '/index') {
         return;
       }
+      const menu = api.querySingleMenu(this.$router.options.routes, targetName);
       this.$store.commit('delete_tabs', targetName);
+      this.$store.dispatch('delVisitedViews', {
+        path: menu.path,
+        name: menu.name
+      });
       if (this.activeIndex === targetName) {
         // 设置当前激活的路由
         if (this.options && this.options.length >= 1) {
@@ -109,7 +116,7 @@ export default {
           );
           this.$router.push({ path: this.activeIndex });
         } else {
-          this.$router.push({ path: '/main' });
+          this.$router.push({ path: '/index' });
         }
       }
     },
@@ -127,13 +134,15 @@ export default {
         this.menuData = res.data;
       });
       this.$store.commit('clean_tabs');
-      if (this.$route.path !== '/main') {
-        this.$store.commit('add_tabs', { path: '/main', name: '主页' });
+      if (this.$route.path !== '/index') {
+        this.$store.commit('add_tabs', { path: '/index', name: '主页' });
+        this.$store.dispatch('addVisitedViews', this.$route);
       }
       this.$store.commit('add_tabs', {
         path: this.$route.path,
-        name: this.$route.name
+        name: this.$route.meta.title
       });
+      this.$store.dispatch('addVisitedViews', this.$route);
       this.$store.commit('set_active_index', this.$route.path);
     }
   },
@@ -148,13 +157,16 @@ export default {
       set(val) {
         this.$store.commit('set_active_index', val);
       }
+    },
+    cachedViews() {
+      return this.$store.state.tagsView.cachedViews;
     }
   },
   watch: {
     $route: function(to) {
       let flag = false;
       for (let option of this.options) {
-        if (option.name === to.name) {
+        if (option.name === to.meta.title) {
           flag = true;
           this.$store.commit('set_active_index', to.path);
           break;
@@ -163,8 +175,9 @@ export default {
       if (!flag) {
         this.$store.commit('add_tabs', {
           path: to.path,
-          name: to.name
+          name: to.meta.title
         });
+        this.$store.dispatch('addVisitedViews', this.$route);
         this.$store.commit('set_active_index', to.path);
       }
     }

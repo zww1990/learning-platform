@@ -12,6 +12,7 @@
 import $ from 'jquery';
 import 'ztree';
 export default {
+  name: 'my-page8',
   data: () => ({
     setting: {
       view: {

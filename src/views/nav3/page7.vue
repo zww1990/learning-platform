@@ -30,6 +30,7 @@
 </template>
 <script>
 export default {
+  name: 'my-page7',
   data: () => ({
     rightData: [],
     leftData: [

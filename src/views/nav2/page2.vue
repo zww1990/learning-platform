@@ -17,6 +17,7 @@
 <script>
 import XLSX from 'xlsx';
 export default {
+  name: 'my-page2',
   data: () => ({
     action: '',
     accepts: [

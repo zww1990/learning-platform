@@ -8,7 +8,7 @@
 <script>
 import api from '@/api';
 export default {
-  name: 'table1',
+  name: 'my-table1',
   props: {
     row: {
       type: Object,

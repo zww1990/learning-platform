@@ -82,5 +82,24 @@ export default {
         responseType: 'text'
       })
       .then(() => {});
+  },
+  /**
+   * 按路由地址递归查询单个菜单
+   * @param menuItems 菜单集合
+   * @param menuUrl 菜单链接
+   */
+  querySingleMenu(menuItems, menuUrl) {
+    for (const item of menuItems) {
+      if (item.path === menuUrl) {
+        return item;
+      }
+      if (item.children && item.children.length) {
+        const menu = this.querySingleMenu(item.children, menuUrl);
+        if (menu) {
+          return menu;
+        }
+      }
+    }
+    return null;
   }
 };

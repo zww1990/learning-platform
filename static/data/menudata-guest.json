@@ -1,6 +1,5 @@
 [
   {
-    "path": "/",
     "name": "导航二",
     "iconClass": "el-icon-menu",
     "children": [
@@ -17,7 +16,6 @@
     ]
   },
   {
-    "path": "/",
     "name": "导航三",
     "iconClass": "el-icon-setting",
     "leaf": false,

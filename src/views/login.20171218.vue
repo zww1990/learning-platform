@@ -57,7 +57,7 @@ export default {
                         'user',
                         JSON.stringify(res4.data.user)
                       );
-                      this.$router.push('/main');
+                      this.$router.push('/index');
                     });
                   } else {
                     this.$message({

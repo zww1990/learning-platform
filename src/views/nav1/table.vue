@@ -2,7 +2,7 @@
   <el-table :data="tableData" style="width: 100%">
     <el-table-column type="expand">
       <template slot-scope="props">
-        <table1 :row="props.row"></table1>
+        <my-table1 :row="props.row"></my-table1>
       </template>
     </el-table-column>
     <el-table-column label="商品 ID" prop="id"></el-table-column>
@@ -12,10 +12,11 @@
 </template>
 <script>
 import api from '@/api';
-import table1 from './table1';
+import MyTable1 from './table1';
 export default {
+  name: 'my-table',
   components: {
-    table1
+    MyTable1
   },
   data: () => ({
     tableData: []

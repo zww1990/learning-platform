@@ -93,7 +93,7 @@ export default {
     },
     tabRemove(targetName) {
       // 首页不可删除
-      if (targetName === '/main') {
+      if (targetName === '/index') {
         return;
       }
       this.$store.commit('delete_tabs', targetName);
@@ -106,7 +106,7 @@ export default {
           );
           this.$router.push({ path: this.activeIndex });
         } else {
-          this.$router.push({ path: '/main' });
+          this.$router.push({ path: '/index' });
         }
       }
     }
@@ -121,8 +121,8 @@ export default {
         this.menuData = res.data;
       });
       this.$store.commit('clean_tabs');
-      if (this.$route.path !== '/main') {
-        this.$store.commit('add_tabs', { path: '/main', name: '主页' });
+      if (this.$route.path !== '/index') {
+        this.$store.commit('add_tabs', { path: '/index', name: '主页' });
       }
       this.$store.commit('add_tabs', {
         path: this.$route.path,

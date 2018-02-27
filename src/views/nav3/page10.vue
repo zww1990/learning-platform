@@ -17,6 +17,7 @@
 <script>
 import VueAMap from 'vue-amap';
 export default {
+  name: 'my-page10',
   data() {
     let self = this;
     return {

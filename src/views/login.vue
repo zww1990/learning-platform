@@ -46,7 +46,7 @@ export default {
             .then(res4 => {
               this.logining = false;
               sessionStorage.setItem('user', JSON.stringify(res4.data.user));
-              this.$router.push('/main');
+              this.$router.push('/index');
             })
             .catch(e => {
               this.logining = false;

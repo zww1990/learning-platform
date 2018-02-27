@@ -61,6 +61,7 @@
 <script>
 import api from '@/api';
 export default {
+  name: 'my-user',
   data: () => ({
     filters: {
       name: ''

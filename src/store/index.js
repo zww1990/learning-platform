@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import tagsView from './modules/tagsView';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     options: [],
-    activeIndex: '/main'
+    activeIndex: '/index'
   },
   //mutation 必须是同步函数。
   mutations: {
@@ -36,7 +37,11 @@ const store = new Vuex.Store({
   },
   //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
   actions: {},
-  getters: {}
+  getters: {
+    visitedViews: state => state.tagsView.visitedViews,
+    cachedViews: state => state.tagsView.cachedViews
+  },
+  modules: { tagsView }
 });
 
 export default store;

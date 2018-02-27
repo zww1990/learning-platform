@@ -15,6 +15,7 @@
 import moment from 'moment';
 moment.locale('zh-cn');
 export default {
+  name: 'my-page5',
   data: () => ({
     now: Date.now(),
     times: []

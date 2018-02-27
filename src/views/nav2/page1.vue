@@ -46,6 +46,7 @@ function Workbook() {
   this.Sheets = {};
 }
 export default {
+  name: 'my-page1',
   data: () => ({
     action: '',
     accepts: [

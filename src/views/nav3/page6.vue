@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'my-page6',
   data: () => ({
     input: '',
     gridData: [
