@@ -107,7 +107,7 @@ export class LayoutComponent implements OnInit {
    * @param tab 标签页
    */
   closeTab(tab: MenuItem) {
-    // SimpleReuseStrategy.deleteRouteSnapshot(tab.menuUrl);
+    SimpleReuseStrategy.deleteRouteSnapshot(tab.menuUrl);
     this.tabs.splice(this.tabs.indexOf(tab), 1);
     this.selectedIndex = this.tabs.length - 1;
     this.router.navigate([this.tabs[this.selectedIndex].menuUrl]);
@@ -116,24 +116,24 @@ export class LayoutComponent implements OnInit {
   /**
    * 清空所有标签页
    */
-  closeAllTabs() {
-    if (this.tabs.length < 2) {
-      return;
-    }
-    this.openDefaultTab();
-    this.selectTab(this.tabs[0], 0);
-  }
+  // closeAllTabs() {
+  //   if (this.tabs.length < 2) {
+  //     return;
+  //   }
+  //   this.openDefaultTab();
+  //   this.selectTab(this.tabs[0], 0);
+  // }
 
   /**
    * 关闭除当前打开外的其他所有标签页
    */
-  closeOtherTabs() {
-    if (this.tabs.length < 2) {
-      return;
-    }
-    this.tabs = [this.tabs[this.selectedIndex]];
-    this.selectedIndex = 0;
-  }
+  // closeOtherTabs() {
+  //   if (this.tabs.length < 2) {
+  //     return;
+  //   }
+  //   this.tabs = [this.tabs[this.selectedIndex]];
+  //   this.selectedIndex = 0;
+  // }
 
   /**
    * 用户退出登录
