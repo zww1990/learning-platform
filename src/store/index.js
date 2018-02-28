@@ -6,10 +6,9 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    options: [],
-    activeIndex: '/index'
+    options: []
   },
-  //mutation 必须是同步函数。
+  // mutation 必须是同步函数。
   mutations: {
     // 添加tabs
     add_tabs(state, data) {
@@ -26,16 +25,12 @@ const store = new Vuex.Store({
       }
       state.options.splice(index, 1);
     },
-    // 设置当前激活的tab
-    set_active_index(state, index) {
-      state.activeIndex = index;
-    },
-    //清空tabs数组
+    // 清空tabs数组
     clean_tabs(state) {
       state.options = [];
     }
   },
-  //action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
+  // action 提交的是 mutation，而不是直接变更状态。action 可以包含任意异步操作。
   actions: {},
   getters: {
     visitedViews: state => state.tagsView.visitedViews,

@@ -51,9 +51,17 @@
       <section class="content-container">
         <div class="grid-content bg-purple-light">
           <el-col :span="24">
-            <el-tabs v-model="activeIndex" type="card" closable @tab-remove="tabRemove" @tab-click="tabClick" v-if="options.length">
-              <el-tab-pane v-for="item in options" :key="item.name" :label="item.name" :name="item.path"></el-tab-pane>
+            <el-tabs v-model="activeIndex" type="card" closable @tab-remove="tabRemove">
+              <el-tab-pane v-for="item in options" :key="item.name" :name="item.path">
+                <span slot="label">
+                  <router-link :to="item.path" @contextmenu.prevent.native="openMenu(item,$event)">{{item.name}}</router-link>
+                </span>
+              </el-tab-pane>
             </el-tabs>
+            <ul class='contextmenu' v-show="visible" :style="{left:left+'px',top:top+'px'}">
+              <li @click="closeSelectedTag(selectedTag)">关闭当前</li>
+              <li @click="closeAllTags">关闭所有</li>
+            </ul>
           </el-col>
           <el-col :span="24" class="content-wrapper">
             <transition name="fade" mode="out-in">
@@ -76,25 +84,51 @@ export default {
     collapsed: false,
     sysUserName: '',
     sysUserAvatar: '',
-    menuData: []
+    menuData: [],
+    activeIndex: '/index',
+    visible: false,
+    top: 55,
+    left: 0,
+    selectedTag: {}
   }),
   methods: {
+    closeSelectedTag(view) {
+      this.tabRemove(view.path);
+    },
+    closeAllTags() {
+      if (this.options.length === 1) {
+        return;
+      }
+      this.$store.commit('clean_tabs');
+      this.$store.dispatch('delAllViews');
+      this.$router.push('/index');
+      this.$store.commit('add_tabs', {
+        path: this.$route.path,
+        name: this.$route.meta.title
+      });
+      this.$store.dispatch('addVisitedViews', this.$route);
+      this.activeIndex = this.$route.path;
+    },
+    openMenu(tag, e) {
+      this.visible = true;
+      this.selectedTag = tag;
+      this.left = e.clientX;
+    },
+    closeMenu() {
+      this.visible = false;
+    },
     //退出登录
     logout() {
       this.$confirm('确认退出吗?', '提示', {}).then(() => {
         sessionStorage.clear();
         this.$store.commit('clean_tabs');
+        this.$store.dispatch('delAllViews');
         this.$router.push('/login');
       });
     },
     //折叠导航栏
     collapse() {
       this.collapsed = !this.collapsed;
-    },
-    // tab切换时，动态的切换路由
-    tabClick(tab) {
-      let path = this.activeIndex;
-      this.$router.push({ path: path });
     },
     tabRemove(targetName) {
       // 首页不可删除
@@ -110,18 +144,17 @@ export default {
       if (this.activeIndex === targetName) {
         // 设置当前激活的路由
         if (this.options && this.options.length >= 1) {
-          this.$store.commit(
-            'set_active_index',
-            this.options[this.options.length - 1].path
-          );
-          this.$router.push({ path: this.activeIndex });
+          this.activeIndex = this.options[this.options.length - 1].path;
+          this.$router.push(this.activeIndex);
         } else {
-          this.$router.push({ path: '/index' });
+          this.$router.push('/index');
         }
       }
     },
     handlerScreenfull() {
-      screenfull.toggle(); //全屏切换
+      if (screenfull.enabled) {
+        screenfull.toggle(); //全屏切换
+      }
     }
   },
   mounted() {
@@ -134,6 +167,7 @@ export default {
         this.menuData = res.data;
       });
       this.$store.commit('clean_tabs');
+      this.$store.dispatch('delAllViews');
       if (this.$route.path !== '/index') {
         this.$store.commit('add_tabs', { path: '/index', name: '主页' });
         this.$store.dispatch('addVisitedViews', this.$route);
@@ -143,32 +177,32 @@ export default {
         name: this.$route.meta.title
       });
       this.$store.dispatch('addVisitedViews', this.$route);
-      this.$store.commit('set_active_index', this.$route.path);
+      this.activeIndex = this.$route.path;
     }
   },
   computed: {
     options() {
       return this.$store.state.options;
     },
-    activeIndex: {
-      get() {
-        return this.$store.state.activeIndex;
-      },
-      set(val) {
-        this.$store.commit('set_active_index', val);
-      }
-    },
     cachedViews() {
       return this.$store.state.tagsView.cachedViews;
     }
   },
   watch: {
+    visible(value) {
+      if (value) {
+        document.body.addEventListener('click', this.closeMenu);
+      } else {
+        document.body.removeEventListener('click', this.closeMenu);
+      }
+    },
+    // 监听路由
     $route: function(to) {
       let flag = false;
       for (let option of this.options) {
         if (option.name === to.meta.title) {
           flag = true;
-          this.$store.commit('set_active_index', to.path);
+          this.activeIndex = to.path;
           break;
         }
       }
@@ -178,7 +212,7 @@ export default {
           name: to.meta.title
         });
         this.$store.dispatch('addVisitedViews', this.$route);
-        this.$store.commit('set_active_index', to.path);
+        this.activeIndex = to.path;
       }
     }
   }
@@ -270,6 +304,27 @@ export default {
       .content-wrapper {
         background-color: #fff;
         box-sizing: border-box;
+      }
+      .contextmenu {
+        margin: 0;
+        background: #fff;
+        z-index: 2;
+        position: absolute;
+        list-style-type: none;
+        padding: 5px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #333;
+        box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+        li {
+          margin: 0;
+          padding: 7px 16px;
+          cursor: pointer;
+          &:hover {
+            background: #eee;
+          }
+        }
       }
     }
   }
