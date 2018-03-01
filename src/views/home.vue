@@ -92,9 +92,11 @@ export default {
     selectedTag: {}
   }),
   methods: {
+    // 关闭当前标签
     closeSelectedTag(view) {
       this.tabRemove(view.path);
     },
+    // 关闭所有标签
     closeAllTags() {
       if (this.options.length === 1) {
         return;
@@ -109,27 +111,31 @@ export default {
       this.$store.dispatch('addVisitedViews', this.$route);
       this.activeIndex = this.$route.path;
     },
+    // 打开右键菜单
     openMenu(tag, e) {
       this.visible = true;
       this.selectedTag = tag;
       this.left = e.clientX;
     },
+    // 关闭右键菜单
     closeMenu() {
       this.visible = false;
     },
-    //退出登录
+    // 退出登录
     logout() {
       this.$confirm('确认退出吗?', '提示', {}).then(() => {
+        // api.casDeleteTGT(sessionStorage.getItem('CAS-TGT'));
         sessionStorage.clear();
         this.$store.commit('clean_tabs');
         this.$store.dispatch('delAllViews');
         this.$router.push('/login');
       });
     },
-    //折叠导航栏
+    // 折叠导航栏
     collapse() {
       this.collapsed = !this.collapsed;
     },
+    // 删除标签
     tabRemove(targetName) {
       // 首页不可删除
       if (targetName === '/index') {
@@ -151,9 +157,10 @@ export default {
         }
       }
     },
+    // 全屏切换
     handlerScreenfull() {
       if (screenfull.enabled) {
-        screenfull.toggle(); //全屏切换
+        screenfull.toggle();
       }
     }
   },

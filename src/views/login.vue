@@ -37,6 +37,49 @@ export default {
     // handleReset2() {
     //   this.$refs.ruleForm2.resetFields();
     // },
+    // handleSubmit1() {
+    //   this.$refs.ruleForm2.validate(valid => {
+    //     if (valid) {
+    //       this.logining = true;
+    //       api
+    //         .casCreateTGT(this.ruleForm2)
+    //         .then(res => {
+    //           let location = res.headers.location;
+    //           let ticket = location.substring(location.lastIndexOf('/') + 1);
+    //           api.casCreateST(ticket).then(res2 => {
+    //             api.casServiceValidate(res2.data).then(res3 => {
+    //               this.logining = false;
+    //               if (res3.data.trim().indexOf('INVALID_TICKET') === -1) {
+    //                 api.requestLogin(this.ruleForm2).then(res4 => {
+    //                   sessionStorage.setItem('CAS-TGT', ticket);
+    //                   sessionStorage.setItem('CAS-ST', res2.data);
+    //                   sessionStorage.setItem(
+    //                     'user',
+    //                     JSON.stringify(res4.data.user)
+    //                   );
+    //                   this.$router.push('/index');
+    //                 });
+    //               } else {
+    //                 this.$message({
+    //                   message: `未能够识别出目标 [${res2.data}] 票根`,
+    //                   type: 'error'
+    //                 });
+    //               }
+    //             });
+    //           });
+    //         })
+    //         .catch(e => {
+    //           this.logining = false;
+    //           this.$message({
+    //             message: '用户名或密码错误！',
+    //             type: 'error'
+    //           });
+    //         });
+    //     } else {
+    //       console.log('error submit!!');
+    //     }
+    //   });
+    // },
     handleSubmit2() {
       this.$refs.ruleForm2.validate(valid => {
         if (valid) {

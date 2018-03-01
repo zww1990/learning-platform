@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import tagsView from './modules/tagsView';
+import tagsView from './modules/tags-view';
 
 Vue.use(Vuex);
 

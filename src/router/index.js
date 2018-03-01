@@ -4,14 +4,12 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 const home = () => import('@/views/home');
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
       component: home,
-      meta: { title: '导航一' },
       children: [
         {
           path: '/index',
@@ -42,18 +40,7 @@ export default new Router({
           component: () => import('@/views/nav1/user'),
           name: 'my-user',
           meta: { title: '用户' }
-        }
-      ]
-    },
-    {
-      path: '/login',
-      component: () => import('@/views/login')
-    },
-    {
-      path: '/',
-      component: home,
-      meta: { title: '导航二' },
-      children: [
+        },
         {
           path: '/page1',
           component: () => import('@/views/nav2/page1'),
@@ -77,14 +64,7 @@ export default new Router({
           component: () => import('@/views/nav2/page5'),
           name: 'my-page5',
           meta: { title: '页面5' }
-        }
-      ]
-    },
-    {
-      path: '/',
-      component: home,
-      meta: { title: '导航三' },
-      children: [
+        },
         {
           path: '/page6',
           component: () => import('@/views/nav3/page6'),
@@ -117,9 +97,34 @@ export default new Router({
         }
       ]
     },
-    {
-      path: '*',
-      redirect: '/index'
-    }
+    { path: '/login', component: () => import('@/views/login') },
+    { path: '*', redirect: '/index' }
   ]
 });
+
+export default router;
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    sessionStorage.clear();
+  }
+  const user = sessionStorage.getItem('user');
+  if (!user && to.path !== '/login') {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/login') {
+//     sessionStorage.clear();
+//   }
+//   const casSt = sessionStorage.getItem('CAS-ST');
+//   if (!casSt && to.path !== '/login') {
+//     next('/login');
+//   } else {
+//     next();
+//   }
+// });
