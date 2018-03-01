@@ -333,6 +333,9 @@ export default {
           }
         }
       }
+      .router-link-active {
+        text-decoration: none;
+      }
     }
   }
 }
