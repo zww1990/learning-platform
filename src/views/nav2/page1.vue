@@ -38,13 +38,10 @@
 </template>
 <script>
 import XLSX from 'xlsx';
+import Workbook from './workbook';
 import FileSaver from 'file-saver';
 import moment from 'moment-timezone';
 moment.locale('zh-cn');
-function Workbook() {
-  this.SheetNames = [];
-  this.Sheets = {};
-}
 export default {
   name: 'my-page1',
   data: () => ({
@@ -99,9 +96,7 @@ export default {
       const wb = new Workbook();
       const ws = XLSX.utils.json_to_sheet(
         [this.tableHeader, ...this.tableData],
-        {
-          skipHeader: true
-        }
+        { skipHeader: true }
       );
       wb.SheetNames.push(this.params.mySheetName);
       wb.Sheets[this.params.mySheetName] = ws;
@@ -150,10 +145,7 @@ export default {
           const mySheet = workbook.Sheets[this.params.mySheetName];
           this.tableHeader = this.getHeaderRow(mySheet); // 表头行
           const empData = XLSX.utils
-            .sheet_to_json(empSheet, {
-              header: 1,
-              blankrows: false
-            })
+            .sheet_to_json(empSheet, { header: 1, blankrows: false })
             .filter(x => x[this.params.idIndex] === this.params.myID)
             .map(x => {
               this.params.myName = x[this.params.nameIndex];

@@ -8,14 +8,22 @@
       </el-upload>
     </el-col>
     <el-col :span="24">
-      <el-table :data="tableData" border highlight-current-row stripe size="mini">
-        <el-table-column v-for="item of tableHeader" :key="item" :label="item" :prop="item"></el-table-column>
+      <el-table :data="fileList" border highlight-current-row stripe style="width:500px" size="mini">
+        <el-table-column type="index" label="序号"></el-table-column>
+        <el-table-column label="文件名" prop="name"></el-table-column>
+        <el-table-column label="数据量" prop="count"></el-table-column>
       </el-table>
+    </el-col>
+    <el-col :span="24">
+      <el-input v-model.trim="fileName" placeholder="请输入文件名称" style="width:200px" clearable></el-input>
+      <el-button type="primary" @click="exportExcel" :disabled="tableData.length===0">导出Excel文件</el-button>
     </el-col>
   </el-row>
 </template>
 <script>
 import XLSX from 'xlsx';
+import Workbook from './workbook';
+import FileSaver from 'file-saver';
 export default {
   name: 'my-page2',
   data: () => ({
@@ -25,41 +33,71 @@ export default {
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ],
     tableData: [],
-    tableHeader: [],
-    rABS: true //true:readAsBinaryString; false:readAsArrayBuffer;
+    rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
+    fileList: [],
+    sheetName: '',
+    fileName: '合并导出文件'
   }),
   methods: {
+    exportExcel() {
+      if (this.tableData.length === 0) {
+        this.$message.error('当前表格没有可用数据');
+        return;
+      }
+      if (!this.fileName) {
+        this.$message.error('请输入文件名称');
+        return;
+      }
+      const wb = new Workbook();
+      const ws = XLSX.utils.json_to_sheet(this.tableData);
+      wb.SheetNames.push(this.sheetName);
+      wb.Sheets[this.sheetName] = ws;
+      const wbout = XLSX.write(wb, {
+        bookType: 'xlsx',
+        bookSST: false,
+        type: 'array'
+      });
+      FileSaver.saveAs(
+        new Blob([wbout], { type: 'application/octet-stream' }),
+        `${this.fileName}.xlsx`
+      );
+    },
     beforeUpload(file) {
       const isAccept = this.accepts.includes(file.type);
-      const isLimit = file.size / 1024 / 1024 < 10;
       if (!isAccept) {
         this.$message.error('只能上传xls/xlsx文件');
         return false;
       }
+      const isLimit = file.size / 1024 / 1024 < 10;
       if (!isLimit) {
         this.$message.error('上传的文件大小不能超过10MB');
         return false;
       }
-      if (isAccept && isLimit) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          let data = reader.result;
-          if (!this.rABS) {
-            data = new Uint8Array(data);
-          }
-          const workbook = XLSX.read(data, {
-            type: this.rABS ? 'binary' : 'array'
-          });
-          const firstSheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[firstSheetName];
-          this.tableHeader = this.getHeaderRow(worksheet);
-          this.tableData = XLSX.utils.sheet_to_json(worksheet);
-        };
-        if (this.rABS) {
-          reader.readAsBinaryString(file);
-        } else {
-          reader.readAsArrayBuffer(file);
+      const hasFile = this.fileList.some(item => item.name === file.name);
+      if (hasFile) {
+        this.$message.error('请不要重复上传该文件');
+        return false;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        let result = reader.result;
+        if (!this.rABS) {
+          result = new Uint8Array(result);
         }
+        const workbook = XLSX.read(result, {
+          type: this.rABS ? 'binary' : 'array'
+        });
+        const length = workbook.SheetNames.length;
+        this.sheetName = workbook.SheetNames[length - 1];
+        const worksheet = workbook.Sheets[this.sheetName];
+        const data = XLSX.utils.sheet_to_json(worksheet);
+        this.tableData.push(...data);
+        this.fileList.push({ name: file.name, count: data.length });
+      };
+      if (this.rABS) {
+        reader.readAsBinaryString(file);
+      } else {
+        reader.readAsArrayBuffer(file);
       }
       return false;
     },
