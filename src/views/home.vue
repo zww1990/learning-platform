@@ -333,8 +333,10 @@ export default {
           }
         }
       }
-      .router-link-active {
-        text-decoration: none;
+      .el-tabs__item {
+        a {
+          text-decoration: none;
+        }
       }
     }
   }
