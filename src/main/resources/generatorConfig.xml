@@ -5,33 +5,24 @@
 	<properties resource="generatorConfig4Maven.properties" />
 	<classPathEntry location="${location}" />
 	<context id="wiwj" targetRuntime="MyBatis3">
-		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 		<jdbcConnection driverClass="${driverClassName}" connectionURL="${url}" userId="${username}" password="${password}" />
+		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
 		<javaModelGenerator targetPackage="${javaModelGenerator.targetPackage}" targetProject="${javaModelGenerator.targetProject}">
 		</javaModelGenerator>
 		<sqlMapGenerator targetPackage="${sqlMapGenerator.targetPackage}" targetProject="${sqlMapGenerator.targetProject}">
 		</sqlMapGenerator>
 		<javaClientGenerator targetPackage="${javaClientGenerator.targetPackage}" targetProject="${javaClientGenerator.targetProject}" type="XMLMAPPER">
 		</javaClientGenerator>
-		<!-- <table tableName="ERM_SYSTEM_USER_ROLE_RELATION" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="ID" sqlStatement="select ERM_SYSTEM_USER_ROLE_REL_SEQ.nextval from dual"/>
-		</table>
-		<table tableName="ERM_SYSTEM_ROLE" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="ROLE_ID" sqlStatement="select ERM_SYSTEM_ROLE_SEQ.nextval from dual"/>
-		</table>
-		<table tableName="ERM_SYSTEM_USER_PRIV_RELATION" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="ID" sqlStatement="select ERM_SYSTEM_USER_PRIV_REL_SEQ.nextval from dual"/>
-		</table>
-		<table tableName="ERM_SYSTEM_MENU" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="MENU_ID" sqlStatement="select ERM_SYSTEM_MENU_SEQ.nextval from dual"/>
-		</table> -->
-		<table tableName="ERM_USER" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="USER_ID" sqlStatement="select ERM_USER_SEQ.nextval from dual"/>
+		<table tableName="BDM_SHOPS" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<generatedKey column="SHOP_ID" sqlStatement="select BDM_SHOPS_SEQ.nextval from dual"/>
 		</table>
 	</context>
 </generatorConfiguration>
