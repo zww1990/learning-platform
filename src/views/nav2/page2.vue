@@ -8,7 +8,7 @@
       </el-upload>
     </el-col>
     <el-col :span="24">
-      <el-table :data="fileList" border highlight-current-row stripe style="width:500px" size="mini">
+      <el-table :data="fileList" border highlight-current-row stripe show-summary style="width:500px" size="mini">
         <el-table-column type="index" label="序号"></el-table-column>
         <el-table-column label="文件名" prop="name"></el-table-column>
         <el-table-column label="数据量" prop="count"></el-table-column>
@@ -16,7 +16,7 @@
     </el-col>
     <el-col :span="24">
       <el-input v-model.trim="fileName" placeholder="请输入文件名称" style="width:200px" clearable></el-input>
-      <el-button type="primary" @click="exportExcel" :disabled="tableData.length===0">导出Excel文件</el-button>
+      <el-button type="primary" @click="exportExcel" :disabled="tableData.length===0 || !fileName">导出Excel文件</el-button>
     </el-col>
   </el-row>
 </template>

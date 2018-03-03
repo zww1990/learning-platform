@@ -54,24 +54,24 @@ export default {
     isShow: true,
     rABS: true, //true:readAsBinaryString; false:readAsArrayBuffer;
     params: {
-      myID: '8143969', // 员工号
-      myEndPoint: '家（西城区阜成门内）', //下车地点
-      myName: '', // 员工姓名
-      idIndex: 1, // 员工号索引
-      nameIndex: 2, // 员工姓名索引
-      deptIndex: 3, // 部门索引
-      approvalIndex: 6, // 审批单号索引
-      overtimeIndex: 8, // 加班日期索引
-      deadlineIndex: 10, // 加班截止时间索引
-      empPageIndex: 0, // 员工加班记录明细页索引
-      myPageIndex: 1, // 个人加班记录明细页索引
-      dateParse: 'MM/DD/YY', //解析字符串日期样式
-      dateFormat: 'YYYY/MM/DD', //格式化日期样式
-      timeFormat: 'HH:mm:ss', //格式化时间样式
-      timezone: 'Asia/Shanghai', //中国时区
-      taxiTime: '21:00:00', //规定打车开始时间
-      mySheetName: '',
-      fileName: ''
+      // myID: '8143969', // 员工号
+      // myEndPoint: '家（西城区阜成门内）', //下车地点
+      // myName: '', // 员工姓名
+      // idIndex: 1, // 员工号索引
+      // nameIndex: 2, // 员工姓名索引
+      // deptIndex: 3, // 部门索引
+      // approvalIndex: 6, // 审批单号索引
+      // overtimeIndex: 8, // 加班日期索引
+      // deadlineIndex: 10, // 加班截止时间索引
+      // empPageIndex: 0, // 员工加班记录明细页索引
+      // myPageIndex: 1, // 个人加班记录明细页索引
+      // dateParse: 'MM/DD/YY', //解析字符串日期样式
+      // dateFormat: 'YYYY/MM/DD', //格式化日期样式
+      // timeFormat: 'HH:mm:ss', //格式化时间样式
+      // timezone: 'Asia/Shanghai', //中国时区
+      // taxiTime: '21:00:00', //规定打车开始时间
+      // mySheetName: '',
+      // fileName: ''
     }
   }),
   methods: {
@@ -143,20 +143,7 @@ export default {
               x[this.params.deptIndex],
               x[this.params.approvalIndex],
               x[this.params.nameIndex] + '-餐费',
-              '5001',
-              'T01106',
-              'I00002',
-              '1',
-              '50',
-              '',
-              '',
-              '2017-09',
-              '9001000000089',
-              '647158',
-              '',
-              '',
-              '0',
-              '990000',
+              ...this.params.mealFee,
               x[this.params.overtimeIndex],
               x[this.params.deadlineIndex]
             ]);
@@ -165,24 +152,10 @@ export default {
                 x[this.params.deptIndex],
                 x[this.params.approvalIndex],
                 x[this.params.nameIndex] + '-交通',
-                '5001',
-                'T01107',
-                'I00084',
-                '1',
-                '',
-                '',
-                '',
-                '2017-09',
-                '9001000000089',
-                '647158',
-                '',
-                '',
-                '0',
-                '990000',
+                ...this.params.trafficFee1,
                 x[this.params.overtimeIndex],
                 x[this.params.deadlineIndex],
-                '公司（来广营朝来科技园）',
-                '',
+                ...this.params.trafficFee2,
                 this.params.myEndPoint
               ]);
             }
@@ -204,6 +177,13 @@ export default {
       ); //规定打车开始时间
       return deadline.isSameOrAfter(startTime);
     }
+  },
+  mounted() {
+    fetch('/static/data/excel-config.json')
+      .then(res => res.json())
+      .then(data => {
+        this.params = data;
+      });
   }
 };
 </script>
