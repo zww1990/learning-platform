@@ -23,7 +23,6 @@
 <script>
 import XLSX from 'xlsx';
 import Workbook from './workbook';
-import FileSaver from 'file-saver';
 export default {
   name: 'my-page2',
   data: () => ({
@@ -52,15 +51,7 @@ export default {
       const ws = XLSX.utils.json_to_sheet(this.tableData);
       wb.SheetNames.push(this.sheetName);
       wb.Sheets[this.sheetName] = ws;
-      const wbout = XLSX.write(wb, {
-        bookType: 'xlsx',
-        bookSST: false,
-        type: 'array'
-      });
-      FileSaver.saveAs(
-        new Blob([wbout], { type: 'application/octet-stream' }),
-        `${this.fileName}.xlsx`
-      );
+      wb.writeWorkbook(`${this.fileName}.xlsx`);
     },
     beforeUpload(file) {
       const isAccept = this.accepts.includes(file.type);
@@ -80,38 +71,16 @@ export default {
       }
       const reader = new FileReader();
       reader.onload = () => {
-        let result = reader.result;
-        if (!this.rABS) {
-          result = new Uint8Array(result);
-        }
-        const workbook = XLSX.read(result, {
-          type: this.rABS ? 'binary' : 'array'
-        });
-        const length = workbook.SheetNames.length;
-        this.sheetName = workbook.SheetNames[length - 1];
-        const worksheet = workbook.Sheets[this.sheetName];
+        const wb = Workbook.readWorkbook(reader, this.rABS);
+        const length = wb.SheetNames.length;
+        this.sheetName = wb.SheetNames[length - 1];
+        const worksheet = wb.Sheets[this.sheetName];
         const data = XLSX.utils.sheet_to_json(worksheet);
         this.tableData.push(...data);
         this.fileList.push({ name: file.name, count: data.length });
       };
-      if (this.rABS) {
-        reader.readAsBinaryString(file);
-      } else {
-        reader.readAsArrayBuffer(file);
-      }
+      Workbook.fileReadAs(this.rABS, reader, file);
       return false;
-    },
-    getHeaderRow(sheet) {
-      const headers = [];
-      const range = XLSX.utils.decode_range(sheet['!ref']);
-      const R = range.s.r; //从第一行开始
-      for (let C = range.s.c; C <= range.e.c; ++C) {
-        //循环范围内的每一列
-        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
-        const header = XLSX.utils.format_cell(cell);
-        headers.push(header);
-      }
-      return headers;
     }
   }
 };

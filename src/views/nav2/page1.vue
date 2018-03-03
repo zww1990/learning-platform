@@ -39,7 +39,6 @@
 <script>
 import XLSX from 'xlsx';
 import Workbook from './workbook';
-import FileSaver from 'file-saver';
 import moment from 'moment-timezone';
 moment.locale('zh-cn');
 export default {
@@ -100,15 +99,7 @@ export default {
       );
       wb.SheetNames.push(this.params.mySheetName);
       wb.Sheets[this.params.mySheetName] = ws;
-      const wbout = XLSX.write(wb, {
-        bookType: 'xlsx',
-        bookSST: false,
-        type: 'array'
-      });
-      FileSaver.saveAs(
-        new Blob([wbout], { type: 'application/octet-stream' }),
-        this.params.myName + '-' + this.params.fileName
-      );
+      wb.writeWorkbook(this.params.myName + '-' + this.params.fileName);
     },
     beforeUpload(file) {
       this.params.fileName = file.name;
@@ -125,25 +116,18 @@ export default {
       if (isAccept && isLimit) {
         const reader = new FileReader();
         reader.onload = () => {
-          let data = reader.result;
-          if (!this.rABS) {
-            data = new Uint8Array(data);
-          }
-          const workbook = XLSX.read(data, {
-            type: this.rABS ? 'binary' : 'array'
-          });
-          if (workbook.SheetNames.length < 2) {
+          const wb = Workbook.readWorkbook(reader, this.rABS);
+          if (wb.SheetNames.length < 2) {
             this.$message.error(
               'Excel中Sheet页的数量小于2，数据不完整无法解析。'
             );
             return;
           }
-          const empSheetName = workbook.SheetNames[this.params.empPageIndex]; // 员工加班记录明细页索引
-          const empSheet = workbook.Sheets[empSheetName];
-          this.params.mySheetName =
-            workbook.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
-          const mySheet = workbook.Sheets[this.params.mySheetName];
-          this.tableHeader = this.getHeaderRow(mySheet); // 表头行
+          const empSheetName = wb.SheetNames[this.params.empPageIndex]; // 员工加班记录明细页索引
+          const empSheet = wb.Sheets[empSheetName];
+          this.params.mySheetName = wb.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
+          const mySheet = wb.Sheets[this.params.mySheetName];
+          this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
           const empData = XLSX.utils
             .sheet_to_json(empSheet, { header: 1, blankrows: false })
             .filter(x => x[this.params.idIndex] === this.params.myID)
@@ -204,28 +188,12 @@ export default {
             }
           });
         };
-        if (this.rABS) {
-          reader.readAsBinaryString(file);
-        } else {
-          reader.readAsArrayBuffer(file);
-        }
+        Workbook.fileReadAs(this.rABS, reader, file);
       }
       return false;
     },
     formatOverTime(time) {
       return moment(time, this.params.dateParse).format(this.params.dateFormat);
-    },
-    getHeaderRow(sheet) {
-      const headers = [];
-      const range = XLSX.utils.decode_range(sheet['!ref']);
-      const R = range.s.r; //从第一行开始
-      for (let C = range.s.c; C <= range.e.c; ++C) {
-        //循环范围内的每一列
-        const cell = sheet[XLSX.utils.encode_cell({ c: C, r: R })]; //在第一行找到单元格
-        const header = XLSX.utils.format_cell(cell);
-        headers.push(header);
-      }
-      return headers;
     },
     isAfterTime(time) {
       const deadline = moment(time, this.params.timeFormat).tz(
