@@ -70,8 +70,12 @@ export class Page1Component implements OnInit {
   exportExcel() {
     const wb = new Workbook();
     this.tables.forEach((table, index) => {
-      wb.SheetNames.push(table.name + index);
-      wb.Sheets[table.name + index] = utils.json_to_sheet(table.data);
+      let tableName = table.name;
+      if (wb.SheetNames.includes(tableName)) {
+        tableName += index;
+      }
+      wb.SheetNames.push(tableName);
+      wb.Sheets[tableName] = utils.json_to_sheet(table.data);
     });
     wb.writeWorkbook(this.fileName);
   }
