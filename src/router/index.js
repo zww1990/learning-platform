@@ -45,13 +45,13 @@ const router = new Router({
           path: '/page1',
           component: () => import('@/views/nav2/page1'),
           name: 'my-page1',
-          meta: { title: '页面1' }
+          meta: { title: '我的考勤' }
         },
         {
           path: '/page2',
           component: () => import('@/views/nav2/page2'),
           name: 'my-page2',
-          meta: { title: '页面2' }
+          meta: { title: '合并考勤' }
         },
         {
           path: '/page4',
@@ -88,13 +88,13 @@ const router = new Router({
           component: () => import('@/views/nav3/page9'),
           name: 'my-page9',
           meta: { title: '页面9' }
-        },
+        } /* ,
         {
           path: '/page10',
           component: () => import('@/views/nav3/page10'),
           name: 'my-page10',
           meta: { title: '页面10' }
-        }
+        } */
       ]
     },
     { path: '/login', component: () => import('@/views/login') },
