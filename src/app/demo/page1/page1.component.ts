@@ -53,13 +53,12 @@ export class Page1Component implements OnInit {
       const wb = Workbook.readWorkbook(reader, this.rABS);
       wb.SheetNames.forEach(sheetName => {
         const ws = wb.Sheets[sheetName];
-        this.tables.push(
-          new Table(
-            sheetName,
-            Workbook.getHeaderRow(ws),
-            utils.sheet_to_json(ws)
-          )
-        );
+        const header = Workbook.getHeaderRow(ws);
+        if (header.length) {
+          this.tables.push(
+            new Table(sheetName, header, utils.sheet_to_json(ws))
+          );
+        }
       });
     };
     Workbook.fileReadAs(this.rABS, reader, file);
@@ -70,9 +69,9 @@ export class Page1Component implements OnInit {
    */
   exportExcel() {
     const wb = new Workbook();
-    this.tables.forEach(table => {
-      wb.SheetNames.push(table.name);
-      wb.Sheets[table.name] = utils.json_to_sheet(table.data);
+    this.tables.forEach((table, index) => {
+      wb.SheetNames.push(table.name + index);
+      wb.Sheets[table.name + index] = utils.json_to_sheet(table.data);
     });
     wb.writeWorkbook(this.fileName);
   }
