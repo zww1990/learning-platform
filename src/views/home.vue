@@ -121,13 +121,15 @@ export default {
     },
     // 退出登录
     logout() {
-      this.$confirm('确认退出吗?', '提示', {}).then(() => {
-        // api.casDeleteTGT(sessionStorage.getItem('CAS-TGT'));
-        sessionStorage.clear();
-        this.$store.commit('clean_tabs');
-        this.$store.dispatch('delAllViews');
-        this.$router.push('/login');
-      });
+      this.$confirm('确认退出吗?', '提示')
+        .then(() => {
+          // api.casDeleteTGT(sessionStorage.getItem('CAS-TGT'));
+          sessionStorage.clear();
+          this.$store.commit('clean_tabs');
+          this.$store.dispatch('delAllViews');
+          this.$router.push('/login');
+        })
+        .catch(() => {});
     },
     // 折叠导航栏
     collapse() {
