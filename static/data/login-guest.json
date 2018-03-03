@@ -4,7 +4,8 @@
   "user": {
     "id": 2,
     "username": "guest",
-    "avatar": "/static/images/lufei.jpg",
-    "name": "海贼王"
+    "sysUserAvatar": "/static/images/user.png",
+    "sysUserName": "大美女",
+    "sysName": "考勤系统"
   }
 }

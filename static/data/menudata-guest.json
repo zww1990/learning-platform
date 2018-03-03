@@ -1,32 +1,17 @@
 [
   {
-    "name": "导航二",
+    "name": "考勤",
     "iconClass": "el-icon-menu",
     "children": [
       {
-        "path": "/page4",
-        "name": "页面4",
-        "iconClass": "fa fa-fort-awesome"
+        "path": "/page1",
+        "name": "我的考勤",
+        "iconClass": "fa fa-angellist"
       },
       {
-        "path": "/page5",
-        "name": "页面5",
-        "iconClass": "fa fa-film"
-      }
-    ]
-  },
-  {
-    "name": "导航三",
-    "iconClass": "el-icon-setting",
-    "leaf": false,
-    "children": [
-      {
-        "path": "/page6",
-        "name": "页面6"
-      },
-      {
-        "path": "/page9",
-        "name": "页面9"
+        "path": "/page2",
+        "name": "合并考勤",
+        "iconClass": "fa fa-btc"
       }
     ]
   }

@@ -4,12 +4,12 @@
       <i class="fa fa-sign-in fa-fw"></i>系统登录
     </h3>
     <el-form-item prop="username">
-      <el-input type="text" v-model="ruleForm2.username" auto-complete="off" placeholder="账号" prefix-icon="fa fa-user"></el-input>
+      <el-input type="text" v-model.trim="ruleForm2.username" auto-complete="off" placeholder="账号" prefix-icon="fa fa-user" clearable></el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="密码" prefix-icon="fa fa-key"></el-input>
+      <el-input type="password" v-model.trim="ruleForm2.password" auto-complete="off" placeholder="密码" prefix-icon="fa fa-key" clearable></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+    <!-- <el-checkbox v-model="ruleForm2.checked" checked class="remember">记住密码</el-checkbox> -->
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">
         <i class="fa fa-hand-pointer-o fa-fw"></i>登录
@@ -25,13 +25,13 @@ export default {
     logining: false,
     ruleForm2: {
       username: 'admin',
-      password: 'admin'
+      password: 'admin',
+      checked: true
     },
     rules2: {
       username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
       password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-    },
-    checked: true
+    }
   }),
   methods: {
     // handleReset2() {

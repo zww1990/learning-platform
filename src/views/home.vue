@@ -1,7 +1,7 @@
 <template>
   <el-row class="container">
     <el-col :span="24" class="header">
-      <el-col :span="6" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">{{collapsed?'':sysName}}</el-col>
+      <el-col :span="6" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">{{collapsed?'':user.sysName}}</el-col>
       <el-col :span="2">
         <div class="tools" @click.prevent="collapse">
           <i class="fa fa-bars fa-2x" :class="collapsed?'fa-rotate-90':'fa-rotate-0'"></i>
@@ -12,7 +12,7 @@
           <i class="fa fa-arrows-alt fa-2x"></i>
         </span>
         <el-dropdown trigger="hover">
-          <span class="el-dropdown-link userinfo-inner"><img :src="this.sysUserAvatar" /> {{sysUserName}}</span>
+          <span class="el-dropdown-link userinfo-inner"><img :src="user.sysUserAvatar" /> {{user.sysUserName}}</span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
               <i class="fa fa-info-circle fa-fw"></i>我的消息
@@ -80,10 +80,8 @@ import api from '@/api';
 import screenfull from 'screenfull';
 export default {
   data: () => ({
-    sysName: 'MyVue',
     collapsed: false,
-    sysUserName: '',
-    sysUserAvatar: '',
+    user: {},
     menuData: [],
     activeIndex: '/index',
     visible: false,
@@ -167,10 +165,8 @@ export default {
   mounted() {
     let user = sessionStorage.getItem('user');
     if (user) {
-      user = JSON.parse(user);
-      this.sysUserName = user.name || '';
-      this.sysUserAvatar = user.avatar || '';
-      api.loadMenuData(user).then(res => {
+      this.user = JSON.parse(user);
+      api.loadMenuData(this.user).then(res => {
         this.menuData = res.data;
       });
       this.$store.commit('clean_tabs');
