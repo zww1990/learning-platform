@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import { utils, read, write } from 'xlsx';
-import { saveAs } from 'file-saver';
+import { utils } from 'xlsx';
 import { Workbook, Table } from './workbook.model';
 
 @Component({
@@ -51,13 +50,7 @@ export class Page1Component implements OnInit {
     this.fileName = file.name;
     const reader = new FileReader();
     reader.onload = () => {
-      let data = reader.result;
-      if (!this.rABS) {
-        data = new Uint8Array(data);
-      }
-      const wb = read(data, {
-        type: this.rABS ? 'binary' : 'array'
-      });
+      const wb = Workbook.readWorkbook(reader, this.rABS);
       wb.SheetNames.forEach(sheetName => {
         const ws = wb.Sheets[sheetName];
         this.tables.push(
@@ -69,11 +62,7 @@ export class Page1Component implements OnInit {
         );
       });
     };
-    if (this.rABS) {
-      reader.readAsBinaryString(file);
-    } else {
-      reader.readAsArrayBuffer(file);
-    }
+    Workbook.fileReadAs(this.rABS, reader, file);
   }
 
   /**
@@ -85,14 +74,6 @@ export class Page1Component implements OnInit {
       wb.SheetNames.push(table.name);
       wb.Sheets[table.name] = utils.json_to_sheet(table.data);
     });
-    const wbout = write(wb, {
-      bookType: 'xlsx',
-      bookSST: false,
-      type: 'array'
-    });
-    saveAs(
-      new Blob([wbout], { type: 'application/octet-stream' }),
-      this.fileName
-    );
+    wb.writeWorkbook(this.fileName);
   }
 }
