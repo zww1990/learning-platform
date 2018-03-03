@@ -3,13 +3,12 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-const home = () => import('@/views/home');
 const router = new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
-      component: home,
+      component: () => import('@/views/home'),
       children: [
         {
           path: '/index',
