@@ -44,13 +44,13 @@ const router = new Router({
           path: '/page1',
           component: () => import('@/views/nav2/page1'),
           name: 'my-page1',
-          meta: { title: '我的考勤' }
+          meta: { title: '我的加班' }
         },
         {
           path: '/page2',
           component: () => import('@/views/nav2/page2'),
           name: 'my-page2',
-          meta: { title: '合并考勤' }
+          meta: { title: '合并加班' }
         },
         {
           path: '/page4',

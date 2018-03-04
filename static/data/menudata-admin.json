@@ -26,17 +26,17 @@
     ]
   },
   {
-    "name": "考勤",
+    "name": "加班",
     "iconClass": "el-icon-menu",
     "children": [
       {
         "path": "/page1",
-        "name": "我的考勤",
+        "name": "我的加班",
         "iconClass": "fa fa-angellist"
       },
       {
         "path": "/page2",
-        "name": "合并考勤",
+        "name": "合并加班",
         "iconClass": "fa fa-btc"
       }
     ]

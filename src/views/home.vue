@@ -9,7 +9,9 @@
       </el-col>
       <el-col :span="16" class="userinfo">
         <span style="cursor:pointer;margin-right:10px;vertical-align:sub" @click="handlerScreenfull">
-          <i class="fa fa-arrows-alt fa-2x"></i>
+          <el-tooltip content="全屏切换" placement="bottom">
+            <i class="fa fa-arrows-alt fa-2x"></i>
+          </el-tooltip>
         </span>
         <el-dropdown trigger="hover">
           <span class="el-dropdown-link userinfo-inner"><img :src="user.sysUserAvatar" /> {{user.sysUserName}}</span>
