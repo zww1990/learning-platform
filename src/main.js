@@ -27,18 +27,6 @@ Vue.use(Vuetify, {
 Validator.localize('zh_CN', messages);
 Vue.use(VeeValidate);
 
-router.beforeEach((to, from, next) => {
-  if (to.path === '/login') {
-    sessionStorage.clear();
-  }
-  let user = sessionStorage.getItem('user');
-  if (!user && to.path !== '/login') {
-    next('/login');
-  } else {
-    next();
-  }
-});
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
