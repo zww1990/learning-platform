@@ -1,7 +1,7 @@
 <template>
   <el-row>
     <el-col :span="24">
-      <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
+      <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload" multiple>
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">将文件拖到此处，或
           <em>点击上传</em><br>只能上传xls/xlsx文件</div>
