@@ -63,9 +63,7 @@ import api from '@/api';
 export default {
   name: 'my-user',
   data: () => ({
-    filters: {
-      name: ''
-    },
+    filters: { name: '' },
     loading: false,
     users: []
   }),
@@ -76,11 +74,8 @@ export default {
     },
     //获取用户列表
     getUser() {
-      let para = {
-        name: this.filters.name
-      };
       this.loading = true;
-      api.getUserList(para).then(res => {
+      api.getUserList({ name: this.filters.name }).then(res => {
         this.users = res.data.users.map(v => {
           v.editable = false;
           return v;

@@ -15,9 +15,7 @@ import api from '@/api';
 import MyTable1 from './table1';
 export default {
   name: 'my-table',
-  components: {
-    MyTable1
-  },
+  components: { MyTable1 },
   data: () => ({
     tableData: []
   }),

@@ -23,11 +23,7 @@ import api from '@/api';
 export default {
   data: () => ({
     logining: false,
-    ruleForm2: {
-      username: 'admin',
-      password: 'admin',
-      checked: true
-    },
+    ruleForm2: { username: 'admin', password: 'admin', checked: true },
     rules2: {
       username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
       password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
@@ -70,10 +66,7 @@ export default {
     //         })
     //         .catch(e => {
     //           this.logining = false;
-    //           this.$message({
-    //             message: '用户名或密码错误！',
-    //             type: 'error'
-    //           });
+    //           this.$message({ message: '用户名或密码错误！', type: 'error' });
     //         });
     //     } else {
     //       console.log('error submit!!');
@@ -93,10 +86,7 @@ export default {
             })
             .catch(e => {
               this.logining = false;
-              this.$message({
-                message: '用户名或密码错误！',
-                type: 'error'
-              });
+              this.$message({ message: '用户名或密码错误！', type: 'error' });
             });
         } else {
           console.log('error submit!!');

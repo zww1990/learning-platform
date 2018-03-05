@@ -21,10 +21,7 @@ export default {
   data() {
     let self = this;
     return {
-      position: {
-        lng: 116.397474,
-        lat: 39.908692
-      },
+      position: { lng: 116.397474, lat: 39.908692 },
       address: '',
       zoom: 12,
       center: [116.397474, 39.908692],

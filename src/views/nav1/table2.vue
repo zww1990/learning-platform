@@ -105,9 +105,7 @@ import api from '@/api';
 export default {
   name: 'my-table2',
   data: () => ({
-    filters: {
-      name: ''
-    },
+    filters: { name: '' },
     users: [],
     total: 0,
     page: 1,
@@ -119,27 +117,14 @@ export default {
       name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
     },
     //编辑界面数据
-    editForm: {
-      id: 0,
-      name: '',
-      sex: -1,
-      age: 0,
-      birth: '',
-      addr: ''
-    },
+    editForm: { id: 0, name: '', sex: -1, age: 0, birth: '', addr: '' },
     addFormVisible: false, //新增界面是否显示
     addLoading: false,
     addFormRules: {
       name: [{ required: true, message: '请输入姓名', trigger: 'blur' }]
     },
     //新增界面数据
-    addForm: {
-      name: '',
-      sex: -1,
-      age: 0,
-      birth: '',
-      addr: ''
-    }
+    addForm: { name: '', sex: -1, age: 0, birth: '', addr: '' }
   }),
   methods: {
     //性别显示转换
@@ -152,31 +137,23 @@ export default {
     },
     //获取用户列表
     getUsers() {
-      let para = {
-        page: this.page,
-        name: this.filters.name
-      };
       this.listLoading = true;
-      api.getUserListPage(para).then(res => {
-        this.total = res.data.total;
-        this.users = res.data.users;
-        this.listLoading = false;
-      });
+      api
+        .getUserListPage({ page: this.page, name: this.filters.name })
+        .then(res => {
+          this.total = res.data.total;
+          this.users = res.data.users;
+          this.listLoading = false;
+        });
     },
     //删除
     handleDel(index, row) {
-      this.$confirm('确认删除该记录吗?', '提示', {
-        type: 'warning'
-      })
+      this.$confirm('确认删除该记录吗?', '提示', { type: 'warning' })
         .then(() => {
           this.listLoading = true;
-          let para = { id: row.id };
-          api.removeUser(para).then(res => {
+          api.removeUser({ id: row.id }).then(res => {
             this.listLoading = false;
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            });
+            this.$message({ message: '删除成功', type: 'success' });
             this.getUsers();
           });
         })
@@ -190,13 +167,7 @@ export default {
     //显示新增界面
     handleAdd() {
       this.addFormVisible = true;
-      this.addForm = {
-        name: '',
-        sex: -1,
-        age: 0,
-        birth: '',
-        addr: ''
-      };
+      this.addForm = { name: '', sex: -1, age: 0, birth: '', addr: '' };
     },
     //编辑
     editSubmit() {
@@ -212,10 +183,7 @@ export default {
                   : moment(new Date(para.birth)).format('yyyy-MM-dd');
               api.editUser(para).then(res => {
                 this.editLoading = false;
-                this.$message({
-                  message: '提交成功',
-                  type: 'success'
-                });
+                this.$message({ message: '提交成功', type: 'success' });
                 this.$refs['editForm'].resetFields();
                 this.editFormVisible = false;
                 this.getUsers();
@@ -239,10 +207,7 @@ export default {
                   : moment(new Date(para.birth)).format('yyyy-MM-dd');
               api.addUser(para).then(res => {
                 this.addLoading = false;
-                this.$message({
-                  message: '提交成功',
-                  type: 'success'
-                });
+                this.$message({ message: '提交成功', type: 'success' });
                 this.$refs['addForm'].resetFields();
                 this.addFormVisible = false;
                 this.getUsers();
@@ -258,18 +223,12 @@ export default {
     //批量删除
     batchRemove() {
       let ids = this.sels.map(item => item.id).toString();
-      this.$confirm('确认删除选中记录吗？', '提示', {
-        type: 'warning'
-      })
+      this.$confirm('确认删除选中记录吗？', '提示', { type: 'warning' })
         .then(() => {
           this.listLoading = true;
-          let para = { ids };
-          api.batchRemoveUser(para).then(res => {
+          api.batchRemoveUser({ ids }).then(res => {
             this.listLoading = false;
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            });
+            this.$message({ message: '删除成功', type: 'success' });
             this.getUsers();
           });
         })

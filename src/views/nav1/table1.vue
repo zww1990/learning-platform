@@ -9,12 +9,7 @@
 import api from '@/api';
 export default {
   name: 'my-table1',
-  props: {
-    row: {
-      type: Object,
-      required: true
-    }
-  },
+  props: { row: { type: Object, required: true } },
   data: () => ({
     tableData: []
   }),

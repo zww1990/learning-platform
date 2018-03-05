@@ -15,19 +15,9 @@ export default {
   name: 'my-page8',
   data: () => ({
     setting: {
-      view: {
-        showLine: false
-      },
-      edit: {
-        enable: true,
-        showRemoveBtn: false,
-        showRenameBtn: false
-      },
-      data: {
-        simpleData: {
-          enable: true
-        }
-      }
+      view: { showLine: false },
+      edit: { enable: true, showRemoveBtn: false, showRenameBtn: false },
+      data: { simpleData: { enable: true } }
     },
     zNodes: [
       { id: 1, pId: 0, name: '父节点 1', open: true },

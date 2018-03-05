@@ -214,10 +214,7 @@ export default {
         }
       }
       if (!flag) {
-        this.$store.commit('add_tabs', {
-          path: to.path,
-          name: to.meta.title
-        });
+        this.$store.commit('add_tabs', { path: to.path, name: to.meta.title });
         this.$store.dispatch('addVisitedViews', this.$route);
         this.activeIndex = to.path;
       }
