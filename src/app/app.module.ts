@@ -35,6 +35,7 @@ export class AppModule {
    * @param router 路由器
    */
   constructor(router: Router) {
+    console.log(`当前运行环境[${environment.mode}]`);
     if (!environment.production) {
       console.log(JSON.stringify(router.config, null, 2));
     }
