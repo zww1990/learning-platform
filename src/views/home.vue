@@ -10,7 +10,7 @@
       <el-col :span="16" class="userinfo">
         <span style="cursor:pointer;margin-right:10px;vertical-align:sub" @click="handlerScreenfull">
           <el-tooltip content="全屏切换" placement="bottom">
-            <i class="fa fa-arrows-alt fa-2x"></i>
+            <i class="fa fa-2x" :class="isFullscreen?'fa-window-restore':'fa-arrows-alt'"></i>
           </el-tooltip>
         </span>
         <el-dropdown trigger="hover">
@@ -83,6 +83,7 @@ import screenfull from 'screenfull';
 export default {
   data: () => ({
     collapsed: false,
+    isFullscreen: false,
     user: {},
     menuData: [],
     activeIndex: '/index',
@@ -163,6 +164,7 @@ export default {
     handlerScreenfull() {
       if (screenfull.enabled) {
         screenfull.toggle();
+        this.isFullscreen = !this.isFullscreen;
       }
     }
   },
