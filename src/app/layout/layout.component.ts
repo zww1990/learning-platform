@@ -15,6 +15,7 @@ import { SimpleReuseStrategy } from './simple-reuse-strategy';
 })
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
+  isFullscreen = false;
   selectedIndex = 0;
   user: User = null;
   menus: MenuItem[] = [];
@@ -155,6 +156,7 @@ export class LayoutComponent implements OnInit {
   toggleFullscreen() {
     if (screenfull.enabled) {
       screenfull.toggle();
+      this.isFullscreen = !this.isFullscreen;
     }
   }
 }
