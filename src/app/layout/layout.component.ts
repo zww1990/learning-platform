@@ -43,7 +43,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 打开默认的标签
+   * @description 打开默认的标签
    */
   openDefaultTab() {
     this.tabs = [
@@ -55,7 +55,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 选中某个菜单
+   * @description 选中某个菜单
    * @param menu 菜单
    */
   clickMenu(menu: MenuItem) {
@@ -71,7 +71,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 菜单展开关闭回调
+   * @description 菜单展开关闭回调
    * @param menu 菜单
    */
   openChange(menu: MenuItem) {
@@ -93,7 +93,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 选中某个标签页
+   * @description 选中某个标签页
    * @param tab 标签页
    * @param index 索引
    */
@@ -104,7 +104,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 关闭某个标签页
+   * @description 关闭某个标签页
    * @param tab 标签页
    */
   closeTab(tab: MenuItem) {
@@ -115,7 +115,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 清空所有标签页
+   * @description 清空所有标签页
    */
   // closeAllTabs() {
   //   if (this.tabs.length < 2) {
@@ -126,7 +126,7 @@ export class LayoutComponent implements OnInit {
   // }
 
   /**
-   * 关闭除当前打开外的其他所有标签页
+   * @description 关闭除当前打开外的其他所有标签页
    */
   // closeOtherTabs() {
   //   if (this.tabs.length < 2) {
@@ -137,7 +137,7 @@ export class LayoutComponent implements OnInit {
   // }
 
   /**
-   * 用户退出登录
+   * @description 用户退出登录
    */
   logout() {
     this.confirm.confirm({
@@ -151,7 +151,7 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * 全屏切换
+   * @description 全屏切换
    */
   toggleFullscreen() {
     if (screenfull.enabled) {

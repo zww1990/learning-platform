@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 
 /**
- * 路由重用策略，当多tab标签切换时，保留上次操作的数据。
+ * @description 路由重用策略，当多tab标签切换时，保留上次操作的数据。
  * @author zww
  */
 export class SimpleReuseStrategy implements RouteReuseStrategy {
@@ -14,7 +14,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   private static waitDelete: string;
 
   /**
-   * 删除指定的路由快照
+   * @description 删除指定的路由快照
    * @param url 路由url
    */
   static deleteRouteSnapshot(url: string) {
@@ -26,7 +26,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   /**
-   * 是否允许复用路由
+   * @description 是否允许复用路由
    * @param route 当前激活的路由快照
    */
   shouldDetach(route: ActivatedRouteSnapshot): boolean {
@@ -36,7 +36,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   /**
-   * 当路由离开时会触发。用路由path作为key，存储组件当前实例对象。
+   * @description 当路由离开时会触发。用路由path作为key，存储组件当前实例对象。
    * @param route 当前激活的路由快照
    * @param handle 组件当前实例对象
    */
@@ -54,7 +54,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   /**
-   * 是否允许还原路由。如果路由path在缓存中存在，就认为允许还原路由。
+   * @description 是否允许还原路由。如果路由path在缓存中存在，就认为允许还原路由。
    * @param route 当前激活的路由快照
    */
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
@@ -62,7 +62,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   /**
-   * 从缓存中获取快照，如果不存在则返回null。
+   * @description 从缓存中获取快照，如果不存在则返回null。
    * @param route 当前激活的路由快照
    */
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
@@ -73,7 +73,7 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
   }
 
   /**
-   * 进入路由触发，判断是否同一路由。
+   * @description 进入路由触发，判断是否同一路由。
    * @param future 即将到达激活状态的路由快照
    * @param curr 当前激活的路由快照
    */

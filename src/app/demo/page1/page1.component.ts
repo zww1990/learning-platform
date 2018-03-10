@@ -23,7 +23,7 @@ export class Page1Component implements OnInit {
   ngOnInit() {}
 
   /**
-   * 上传文件之前，对上传的文件进行校验
+   * @description 上传文件之前，对上传的文件进行校验
    */
   beforeUpload = (file: File) => {
     const isAccept = this.accepts.includes(file.type);
@@ -43,7 +43,7 @@ export class Page1Component implements OnInit {
   };
 
   /**
-   * 读取Excel文件
+   * @description 读取Excel文件
    * @param file Excel文件
    */
   readFile(file: File) {
@@ -65,7 +65,7 @@ export class Page1Component implements OnInit {
   }
 
   /**
-   * 导出Excel文件
+   * @description 导出Excel文件
    */
   exportExcel() {
     const wb = new Workbook();

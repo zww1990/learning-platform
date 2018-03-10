@@ -2,20 +2,20 @@ import { WorkBook, WorkSheet, utils, read, write } from 'xlsx';
 import { saveAs } from 'file-saver';
 
 /**
- * 工作表数据模型
+ * @description 工作表数据模型
  * @author zww
  */
 export class Workbook implements WorkBook {
   /**
-   * 工作表
+   * @description 工作表
    */
   Sheets: { [sheet: string]: WorkSheet } = {};
   /**
-   * 工作表名称
+   * @description 工作表名称
    */
   SheetNames: string[] = [];
   /**
-   * 获取表头行
+   * @description 获取表头行
    * @param sheet 工作表
    */
   static getHeaderRow(sheet: WorkSheet): string[] {
@@ -36,7 +36,7 @@ export class Workbook implements WorkBook {
     return headers;
   }
   /**
-   * 格式化单元格
+   * @description 格式化单元格
    * @param cell 单元格
    */
   static format_cell(cell): string {
@@ -49,7 +49,7 @@ export class Workbook implements WorkBook {
     return cell.v || cell.h || cell.w;
   }
   /**
-   * 读取工作表
+   * @description 读取工作表
    * @param reader 文件读取器
    * @param rABS true：readAsBinaryString；false：readAsArrayBuffer；
    */
@@ -62,7 +62,7 @@ export class Workbook implements WorkBook {
     return wb;
   }
   /**
-   * 读取文件形式
+   * @description 读取文件形式
    * @param rABS true：readAsBinaryString；false：readAsArrayBuffer；
    * @param reader 文件读取器
    * @param file 文件
@@ -75,7 +75,7 @@ export class Workbook implements WorkBook {
     }
   }
   /**
-   * 生成excel文件
+   * @description 生成excel文件
    * @param fileName 文件名
    */
   writeWorkbook(fileName: string) {
@@ -89,12 +89,12 @@ export class Workbook implements WorkBook {
 }
 
 /**
- * 表格数据模型
+ * @description 表格数据模型
  * @author zww
  */
 export class Table {
   /**
-   * 构造表格
+   * @description 构造表格
    * @param name 表格名称
    * @param header 表头行
    * @param data 表格数据

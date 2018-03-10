@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 /**
- * 路由模块
+ * @description 路由模块
  * @author zww
  */
 @NgModule({
