@@ -1,39 +1,39 @@
 /**
- * 菜单项数据模型
+ * @description 菜单项数据模型
  * @author zww
  */
 export class MenuItem {
   /**
-   * 菜单ID
+   * @description 菜单ID
    */
   menuId?: number;
   /**
-   * 父级菜单ID
+   * @description 父级菜单ID
    */
   parentMenuId?: number;
   /**
-   * 菜单名称
+   * @description 菜单名称
    */
   menuName?: string;
   /**
-   * 菜单链接
+   * @description 菜单链接
    */
   menuUrl?: string;
   /**
-   * 菜单图标样式
+   * @description 菜单图标样式
    */
   menuIcon?: string;
   /**
-   * 是否被选中
+   * @description 是否被选中
    */
   selected?: boolean;
   /**
-   * 子菜单
+   * @description 子菜单
    */
   children?: MenuItem[];
 
   /**
-   * 按路由地址递归查询单个菜单
+   * @description 按路由地址递归查询单个菜单
    * @param menuItems 菜单集合
    * @param menuUrl 菜单链接
    */
@@ -53,7 +53,7 @@ export class MenuItem {
   }
 
   /**
-   * 将平铺的菜单形式转换成树形的菜单形式
+   * @description 将平铺的菜单形式转换成树形的菜单形式
    * @param flatMenus 平铺的菜单
    */
   static queryTreeMenus(flatMenus: MenuItem[]): MenuItem[] {
@@ -63,7 +63,7 @@ export class MenuItem {
   }
 
   /**
-   * 将平铺的菜单形式递归转换成树形的菜单形式
+   * @description 将平铺的菜单形式递归转换成树形的菜单形式
    * @param flatMenus 平铺的菜单
    * @param treeMenus 树形的菜单
    */

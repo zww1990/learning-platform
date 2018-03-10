@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * 用户登录
+   * @description 用户登录
    */
   submitForm() {
     this.cas
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * 找回密码
+   * @description 找回密码
    */
   forgotPassword() {
     const username = this.loginForm.get('username');

@@ -1,19 +1,19 @@
 /**
- * 用户信息数据模型
+ * @description 用户信息数据模型
  * @author zww
  */
 export class User {
   /**
-   * 用户ID
+   * @description 用户ID
    */
   userId: number | string;
   /**
-   * 用户名称
+   * @description 用户名称
    */
   userName: string;
 
   /**
-   * 创建用户
+   * @description 创建用户
    * @param userId 用户ID
    * @param userName 用户名称
    */

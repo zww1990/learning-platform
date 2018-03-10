@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 /**
- * 共享模块
+ * @description 共享模块
  * @author zww
  */
 @NgModule({

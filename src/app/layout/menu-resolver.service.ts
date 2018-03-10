@@ -9,19 +9,19 @@ import { MenuItem } from './menu-item.model';
 import { MenuService } from './menu.service';
 
 /**
- * 菜单解析器，导航前预先加载菜单列表
+ * @description 菜单解析器，导航前预先加载菜单列表
  * @author zww
  */
 @Injectable()
 export class MenuResolverService implements Resolve<MenuItem[]> {
   /**
-   * 构造菜单解析器
+   * @description 构造菜单解析器
    * @param menuService 菜单服务
    */
   constructor(private menuService: MenuService) {}
 
   /**
-   * 导航前预先加载菜单列表
+   * @description 导航前预先加载菜单列表
    * @param route 即将被激活的路由
    * @param state 即将到达的状态
    */

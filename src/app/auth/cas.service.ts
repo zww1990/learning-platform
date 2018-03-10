@@ -6,12 +6,12 @@ import * as $ from 'jquery';
 import { LoginForm } from '../login/login-form.model';
 
 /**
- * CAS认证结果
+ * @description CAS认证结果
  * @author zww
  */
 export class CasResult {
   /**
-   * 构造CAS认证结果
+   * @description 构造CAS认证结果
    * @param status 认证结果状态：true成功，false失败
    * @param text 认证结果内容
    */
@@ -19,19 +19,19 @@ export class CasResult {
 }
 
 /**
- * CAS认证服务
+ * @description CAS认证服务
  * @author zww
  */
 @Injectable()
 export class CasService {
   /**
-   * 构造CAS认证服务
+   * @description 构造CAS认证服务
    * @param http http client
    */
   constructor(private http: HttpClient) {}
 
   /**
-   * 第一步（1）：创建新的票证授予票证
+   * @description 第一步（1）：创建新的票证授予票证
    * @param form 登录表单数据
    */
   casCreateTGT(form: LoginForm): Promise<any> {
@@ -50,7 +50,7 @@ export class CasService {
   }
 
   /**
-   * 第一步（2）：解析响应头location参数
+   * @description 第一步（2）：解析响应头location参数
    * @param response http response
    */
   parseLocation(response: HttpResponse<any>): string {
@@ -60,7 +60,7 @@ export class CasService {
   }
 
   /**
-   * 第二步：创建新的服务票据
+   * @description 第二步：创建新的服务票据
    * @param ticket TGT票据
    */
   casCreateST(ticket: string): Promise<any> {
@@ -76,7 +76,7 @@ export class CasService {
   }
 
   /**
-   * 第三步（1）：CAS验证服务
+   * @description 第三步（1）：CAS验证服务
    * @param ticket ST票据
    */
   casServiceValidate(ticket: string): Promise<any> {
@@ -95,7 +95,7 @@ export class CasService {
   }
 
   /**
-   * 第三步（2）：解析xml文档，并返回认证结果
+   * @description 第三步（2）：解析xml文档，并返回认证结果
    * @param xml xml文档
    */
   parseXml(xml: string): CasResult {
@@ -117,7 +117,7 @@ export class CasService {
   }
 
   /**
-   * 销毁票证授予票证
+   * @description 销毁票证授予票证
    * @param ticket TGT票据
    */
   casDeleteTGT(ticket: string): Promise<any> {
@@ -132,7 +132,7 @@ export class CasService {
   }
 
   /**
-   * 找回密码
+   * @description 找回密码
    * @param username 用户名
    */
   casForgotPassword(username: string): any {
@@ -144,7 +144,7 @@ export class CasService {
   }
 
   /**
-   * 找回密码URL
+   * @description 找回密码URL
    * @param domain 域名
    * @param username 用户名
    */

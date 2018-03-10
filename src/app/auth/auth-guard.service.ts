@@ -18,30 +18,31 @@ import { UserService } from './user.service';
  */
 export interface CanComponentDeactivate {
   /**
-   * 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
+   * @description 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
    */
   canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
 }
 
 /**
- * 路由守卫服务
+ * @description 路由守卫服务
  * @author zww
  */
 @Injectable()
 export class AuthGuard
-  implements CanActivate,
+  implements
+    CanActivate,
     CanActivateChild,
     CanLoad,
     CanDeactivate<CanComponentDeactivate> {
   /**
-   * 构造路由守卫服务
+   * @description 构造路由守卫服务
    * @param router 路由器
    * @param userService 用户服务
    */
   constructor(private router: Router, private userService: UserService) {}
 
   /**
-   * 检查路由的访问权限
+   * @description 检查路由的访问权限
    * @param route 即将被激活的路由
    * @param state 即将到达的状态
    */
@@ -50,7 +51,7 @@ export class AuthGuard
   }
 
   /**
-   * 检查子路由的访问权限
+   * @description 检查子路由的访问权限
    * @param route 即将被激活的路由
    * @param state 即将到达的状态
    */
@@ -59,7 +60,7 @@ export class AuthGuard
   }
 
   /**
-   * 在加载特性模块之前进行检查
+   * @description 在加载特性模块之前进行检查
    * @param route 路由
    */
   canLoad(route: Route) {
@@ -67,7 +68,7 @@ export class AuthGuard
   }
 
   /**
-   * 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
+   * @description 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
    * @param component 当前组件
    * @param currentRoute 当前被激活的路由
    * @param currentState 当前到达的状态
@@ -91,7 +92,7 @@ export class AuthGuard
   }
 
   /**
-   * 验证用户是否登录
+   * @description 验证用户是否登录
    */
   checkLogin() {
     const user = this.userService.querySessionUser();

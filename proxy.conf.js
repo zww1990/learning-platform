@@ -18,4 +18,8 @@ if (Object.keys(proxy).length > 0) {
   console.log();
 }
 
+/**
+ * @author zww
+ * @description API代理配置
+ */
 module.exports = proxy;

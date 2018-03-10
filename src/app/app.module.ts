@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 import { SimpleReuseStrategy } from './layout/simple-reuse-strategy';
 
 /**
- * 应用的根模块
+ * @description 应用的根模块
  * @author zww
  */
 @NgModule({
@@ -31,7 +31,7 @@ import { SimpleReuseStrategy } from './layout/simple-reuse-strategy';
 })
 export class AppModule {
   /**
-   * 审查路由器配置，用于debug
+   * @description 审查路由器配置，用于debug
    * @param router 路由器
    */
   constructor(router: Router) {
