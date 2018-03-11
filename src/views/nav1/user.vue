@@ -7,13 +7,14 @@
           <el-input v-model="filters.name" placeholder="姓名"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" v-on:click="getUser">查询</el-button>
+          <el-button type="primary" @click="getUser">查询</el-button>
+          <el-button type="primary" @click="exportImage">导出表格为图片</el-button>
         </el-form-item>
       </el-form>
     </el-col>
     <!--列表-->
     <template>
-      <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;" @cell-click="onCellDbclick">
+      <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;" @cell-click="onCellDbclick" ref="table2image">
         <el-table-column type="index" width="40">
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="120" sortable>
@@ -60,6 +61,8 @@
 </template>
 <script>
 import api from '@/api';
+import html2canvas from 'html2canvas';
+import fileSaver from 'file-saver';
 export default {
   name: 'my-user',
   data: () => ({
@@ -76,7 +79,7 @@ export default {
     getUser() {
       this.loading = true;
       api.getUserList({ name: this.filters.name }).then(res => {
-        this.users = res.data.users.map(v => {
+        this.users = res.data.users.slice(0, 10).map(v => {
           v.editable = false;
           return v;
         });
@@ -97,6 +100,16 @@ export default {
         return;
       }
       row.editable = false;
+    },
+    exportImage() {
+      html2canvas(this.$refs.table2image.$el, {
+        logging: false,
+        scale: 2
+      }).then(canvas => {
+        canvas.toBlob(blob => {
+          fileSaver.saveAs(blob, 'table2image.png');
+        });
+      });
     }
   },
   mounted() {
