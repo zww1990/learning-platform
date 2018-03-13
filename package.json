@@ -31,9 +31,9 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "ng-zorro-antd": "^0.6.15",
-    "rxjs": "^5.5.6",
+    "rxjs": "^5.5.7",
     "screenfull": "^3.3.2",
-    "xlsx": "^0.12.4",
+    "xlsx": "^0.12.5",
     "xml-js": "^1.6.2",
     "zone.js": "^0.8.20"
   },
