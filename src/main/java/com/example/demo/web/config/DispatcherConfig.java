@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @MultipartConfig
 public class DispatcherConfig extends WebMvcConfigurerAdapter {
+	@Resource
+	private SwaggerProperties swaggerProps;
+
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		for (HttpMessageConverter<?> converter : converters) {
@@ -47,8 +51,10 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		if (this.swaggerProps.isEnable()) {
+			registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+			registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		}
 	}
 
 	@Bean
@@ -59,21 +65,20 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo());
+		Docket docket = new Docket(DocumentationType.SWAGGER_2);
+		if (this.swaggerProps.isEnable()) {
+			docket.apiInfo(this.apiInfo());
+		} else {
+			docket.enable(this.swaggerProps.isEnable());
+		}
+		return docket;
 	}
 
 	private ApiInfo apiInfo() {
-		String title = "我的标题";
-		String description = "我的描述";
-		String version = "我的版本";
-		String termsOfServiceUrl = "服务条款的网址";
-		String name = "我的名字";
-		String url = "我的网址";
-		String email = "我的邮箱";
-		Contact contact = new Contact(name, url, email);
-		String license = "我的许可证";
-		String licenseUrl = "我的许可证网址";
-		return new ApiInfo(title, description, version, termsOfServiceUrl, contact, license, licenseUrl,
-				Collections.emptyList());
+		Contact contact = new Contact(this.swaggerProps.getName(), this.swaggerProps.getUrl(),
+				this.swaggerProps.getEmail());
+		return new ApiInfo(this.swaggerProps.getTitle(), this.swaggerProps.getDescription(),
+				this.swaggerProps.getVersion(), this.swaggerProps.getTermsOfServiceUrl(), contact,
+				this.swaggerProps.getLicense(), this.swaggerProps.getLicenseUrl(), Collections.emptyList());
 	}
 }

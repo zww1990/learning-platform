@@ -1,0 +1,307 @@
+= 我的标题
+
+
+[[_overview]]
+== Overview
+我的描述
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 我的名字
+__Contact Email__ : 我的邮箱
+
+
+=== License information
+[%hardbreaks]
+__License__ : 我的许可证
+__License URL__ : 我的许可证网址
+__Terms of service__ : 服务条款的网址
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8080
+__BasePath__ : /spring-swagger
+
+
+=== Tags
+
+* API示例 : Demo Controller
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_deleteusingdelete]]
+=== 删除用户信息
+....
+DELETE /demo/delete/{id}
+....
+
+
+==== Description
+按id删除用户信息，使用路径传递id
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Path**|**id** +
+__required__|用户id|integer (int32)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|string
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* API示例
+
+
+[[_getusingget]]
+=== 查询用户信息
+....
+GET /demo/get
+....
+
+
+==== Description
+按id查询用户信息
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**id** +
+__required__|用户id|integer (int32)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_usermodel,UserModel>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* API示例
+
+
+[[_jsonusingpost]]
+=== 提交json格式数据
+....
+POST /demo/json
+....
+
+
+==== Description
+提交json格式数据时，请求内容类型必须是application/json
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**user** +
+__required__|用户模型|<<_usermodel,UserModel>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_usermodel,UserModel>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* API示例
+
+
+[[_uploadusingpost]]
+=== 文件上传
+....
+POST /demo/upload
+....
+
+
+==== Description
+文件上传的请求内容类型必须是multipart/form-data
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**FormData**|**file** +
+__required__|文件|file
+|**FormData**|**userId** +
+__required__|用户ID|integer (int32)
+|**FormData**|**userName** +
+__required__|用户名|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< object > array
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `multipart/form-data`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* API示例
+
+
+[[_userusingput]]
+=== 请求头传参
+....
+PUT /demo/user
+....
+
+
+==== Description
+设置请求头User-Info作为参数的名称，参数值是json字符串，需要经过base64转码，否则视为无效参数
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**User-Info** +
+__required__|用户信息|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_usermodel,UserModel>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `\*/*`
+
+
+==== Tags
+
+* API示例
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_inputstream]]
+=== InputStream
+__Type__ : object
+
+
+[[_usermodel]]
+=== UserModel
+用户模型
+
+
+[options="header", cols=".^3a,.^11a,.^4a"]
+|===
+|Name|Description|Schema
+|**userId** +
+__required__|用户ID|integer (int32)
+|**userName** +
+__required__|用户名|string
+|===
+
+
+
+
+
