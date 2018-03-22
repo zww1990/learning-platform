@@ -7,10 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.multipart.MultipartResolver;
 
 import com.example.demo.SpringSwaggerApplication;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { SpringSwaggerApplication.class })
@@ -19,12 +17,12 @@ public class AppTest {
 	private ApplicationContext context;
 
 	@Test
-	public void testLoad() {
+	public void contextLoads() {
 		try {
-			ObjectMapper mapper = this.context.getBean(ObjectMapper.class);
-			System.err.println(mapper);
-			MultipartResolver resolver = this.context.getBean(MultipartResolver.class);
-			System.err.println(resolver);
+			String[] names = this.context.getBeanDefinitionNames();
+			for (int i = 0; i < names.length; i++) {
+				System.err.println((i + 1) + "\t" + names[i]);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
