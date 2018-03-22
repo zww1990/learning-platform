@@ -12,14 +12,14 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @ComponentScan("com.example.demo.web")
 @EnableWebMvc
-public class DispatcherConfig extends WebMvcConfigurerAdapter {
+public class DispatcherConfig implements WebMvcConfigurer {
 	@Resource
 	private ObjectMapper objectMapper;
 
