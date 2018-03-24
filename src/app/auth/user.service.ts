@@ -33,10 +33,12 @@ export class UserService {
    */
   removeSessionUser() {
     const item = sessionStorage.getItem(SessionKey.CAS_TGT);
-    this.cas
-      .casDeleteTGT(item)
-      .then(res => {})
-      .catch(err => {});
+    if (item) {
+      this.cas
+        .casDeleteTGT(item)
+        .then(res => {})
+        .catch(err => {});
+    }
     sessionStorage.clear();
   }
 }
