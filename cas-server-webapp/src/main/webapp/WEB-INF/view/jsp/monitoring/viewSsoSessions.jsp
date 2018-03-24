@@ -20,7 +20,7 @@
 --%>
 <%@include file="/WEB-INF/view/jsp/default/ui/includes/top.jsp"%>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/themes/flick/jquery-ui.css">
 
 <script type="text/javascript">
 

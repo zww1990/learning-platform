@@ -17,13 +17,14 @@
  * under the License.
  */
 
-var scripts = [ "http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js",
-    "http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js",
-    "http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.min.js",
-    "js/ba-debug.min.js"];
+//var scripts = [ "http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js",
+//    "http://apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js",
+//    "http://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.min.js",
+//    "js/ba-debug.min.js"];
 
 head.ready(document, function() {
-    head.load(scripts, resourceLoadedSuccessfully);
+//    head.load(scripts, resourceLoadedSuccessfully);
+	resourceLoadedSuccessfully();
 });
 
 

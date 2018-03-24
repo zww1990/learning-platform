@@ -21,8 +21,8 @@
 <%@include file="/WEB-INF/view/jsp/default/ui/includes/top.jsp"%>
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
-<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.6/integration/jqueryui/dataTables.jqueryui.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/themes/cupertino/jquery-ui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/dataTables.jqueryui.css" />
 
 <style>
     #container {
@@ -82,11 +82,11 @@
     }
 
     function jqueryReady() {
-        var scripts = [ "https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js",
-            "https://cdn.datatables.net/plug-ins/1.10.6/integration/jqueryui/dataTables.jqueryui.js"];
+        /* var scripts = [ "https://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js",
+            "https://cdn.datatables.net/plug-ins/1.10.6/integration/jqueryui/dataTables.jqueryui.js"]; */
 
-        head.ready(document, function() {
-            head.load(scripts, function() {
+        //head.ready(document, function() {
+            //head.load(scripts, function() {
                 var table = $("#jsonTable").DataTable({
                     "columnDefs": [
                         { "width": "40%", "targets": 0 }
@@ -97,8 +97,8 @@
 
                 $("#jsonTable").show();
                 $("#msg").hide();
-            });
-        });
+            //});
+        //});
 
 
     }
@@ -143,3 +143,5 @@
 
 
 <%@include file="/WEB-INF/view/jsp/default/ui/includes/bottom.jsp" %>
+<script src="${pageContext.request.contextPath }/js/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/dataTables.jqueryui.js"></script>

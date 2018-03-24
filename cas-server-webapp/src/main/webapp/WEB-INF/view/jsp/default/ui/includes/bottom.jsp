@@ -30,7 +30,11 @@
 </footer>
 
 </div> <!-- END #container -->
-<script src="http://apps.bdimg.com/libs/headjs/1.0.3/head.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/head.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery-ui.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery.cookie.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/ba-debug.min.js"></script>
 <spring:theme code="cas.javascript.file" var="casJavascriptFile" text="" />
 <script type="text/javascript" src="<c:url value="${casJavascriptFile}" />"></script>
 </body>
