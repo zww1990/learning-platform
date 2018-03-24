@@ -67,11 +67,9 @@ public class DispatcherConfig implements WebMvcConfigurer {
 	public Docket api() {
 		Docket docket = new Docket(DocumentationType.SWAGGER_2);
 		if (this.swaggerProps.isEnable()) {
-			docket.apiInfo(this.apiInfo());
-		} else {
-			docket.enable(this.swaggerProps.isEnable());
+			return docket.apiInfo(this.apiInfo());
 		}
-		return docket;
+		return docket.enable(this.swaggerProps.isEnable());
 	}
 
 	private ApiInfo apiInfo() {
