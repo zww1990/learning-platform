@@ -6,14 +6,14 @@
 	<classPathEntry location="${location}" />
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
-		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
 			<property name="suppressDate" value="false" />
 		</commentGenerator>
 		<jdbcConnection driverClass="${driverClassName}" connectionURL="${url}" userId="${username}" password="${password}" />
-		<javaTypeResolver>
+		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<javaModelGenerator targetPackage="${javaModelGenerator.targetPackage}" targetProject="${javaModelGenerator.targetProject}">
