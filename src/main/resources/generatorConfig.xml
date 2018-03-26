@@ -2,8 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<properties resource="generatorConfig4Maven.properties" />
-	<classPathEntry location="${location}" />
+	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.42\mysql-connector-java-5.1.42.jar" />
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
@@ -12,19 +11,22 @@
 			<property name="suppressAllComments" value="true" />
 			<property name="suppressDate" value="false" />
 		</commentGenerator>
-		<jdbcConnection driverClass="${driverClassName}" connectionURL="${url}" userId="${username}" password="${password}" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test"
+			userId="root" password="root" />
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
-		<javaModelGenerator targetPackage="${javaModelGenerator.targetPackage}" targetProject="${javaModelGenerator.targetProject}">
+		<javaModelGenerator targetPackage="com.demo.model" targetProject="./src/main/java">
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		<!-- <sqlMapGenerator targetPackage="${sqlMapGenerator.targetPackage}" targetProject="${sqlMapGenerator.targetProject}">
+		<!-- <sqlMapGenerator targetPackage="com.demo.sql.mapper" targetProject="./src/main/resources">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator> -->
 		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="${javaClientGenerator.targetPackage}" targetProject="${javaClientGenerator.targetProject}" type="ANNOTATEDMAPPER">
+		<javaClientGenerator targetPackage="com.demo.dao.mapper" targetProject="./src/main/java"
+			type="ANNOTATEDMAPPER">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<table tableName="user"></table>
