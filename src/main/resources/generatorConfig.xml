@@ -3,7 +3,8 @@
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<classPathEntry location="D:\.m2\repository\com\oracle\jdbc\ojdbc\1.7\ojdbc-1.7.jar" />
-	<context id="wiwj" targetRuntime="MyBatis3">
+	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<commentGenerator>
@@ -21,7 +22,9 @@
 		</javaModelGenerator>
 		<sqlMapGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java">
 		</sqlMapGenerator>
-		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java" type="XMLMAPPER">
+		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
+		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java"
+			type="XMLMAPPER">
 		</javaClientGenerator>
 		<table tableName="BDM_SHOPS" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<generatedKey column="SHOP_ID" sqlStatement="select BDM_SHOPS_SEQ.nextval from dual" />
