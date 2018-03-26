@@ -26,8 +26,8 @@
 		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java"
 			type="XMLMAPPER">
 		</javaClientGenerator>
-		<table tableName="BDM_SHOPS" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="SHOP_ID" sqlStatement="select BDM_SHOPS_SEQ.nextval from dual" />
+		<table tableName="BDM_HR_MODIFY" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<generatedKey column="MODIFY_ID" sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual" />
 		</table>
 	</context>
 </generatorConfiguration>
