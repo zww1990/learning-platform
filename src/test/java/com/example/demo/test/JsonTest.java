@@ -1,6 +1,11 @@
 package com.example.demo.test;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.util.Base64Utils;
 
 import com.example.demo.web.model.UserModel;
@@ -23,4 +28,15 @@ public class JsonTest {
 		}
 	}
 
+	@Test
+	public void testProperties() {
+		Resource resource = new ClassPathResource("application.properties");
+		try (InputStream in = resource.getInputStream()) {
+			Properties props = new Properties();
+			props.load(in);
+			System.err.println(props);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
