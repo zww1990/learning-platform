@@ -14,9 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+		<java.version>1.8</java.version>
 		<maven.test.skip>true</maven.test.skip>
 		<spring.version>5.0.4.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>
@@ -154,7 +152,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -189,6 +186,14 @@
 					</attributes>
 				</configuration>
 			</plugin>
+            <plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-compiler-plugin</artifactId>
+            	<configuration>
+            		<source>${java.version}</source>
+		            <target>${java.version}</target>
+            	</configuration>
+            </plugin>
 		</plugins>
 	</build>
 	
