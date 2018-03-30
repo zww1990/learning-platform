@@ -1,42 +1,23 @@
 package com.example.demo;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
-import javax.servlet.annotation.MultipartConfig;
-
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-
+import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import com.example.demo.root.AppConfig;
 import com.example.demo.web.config.DispatcherConfig;
 
-public class WebAppInitializer implements WebApplicationInitializer {
-
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-		// 创建“根”Spring应用程序上下文
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(AppConfig.class);
-
-		// 管理根应用程序上下文的生命周期
-		servletContext.addListener(new ContextLoaderListener(rootContext));
-
-		// 创建调度servlet的Spring应用程序上下文
-		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-		Class<DispatcherConfig> annotatedClasses = DispatcherConfig.class;
-		dispatcherContext.register(annotatedClasses);
-
-		// 注册并映射调度servlet
-		ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher",
-				new DispatcherServlet(dispatcherContext));
-		dispatcher.setLoadOnStartup(1);
-		dispatcher.setAsyncSupported(true);
-		dispatcher.setMultipartConfig(new MultipartConfigElement(annotatedClasses.getAnnotation(MultipartConfig.class)));
-		dispatcher.addMapping("/");
+	protected Class<?>[] getRootConfigClasses() {
+		return ArrayUtils.<Class<?>>toArray(AppConfig.class);
 	}
 
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return ArrayUtils.<Class<?>>toArray(DispatcherConfig.class);
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return ArrayUtils.toArray("/");
+	}
 }
