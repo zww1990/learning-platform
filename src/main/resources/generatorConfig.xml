@@ -7,6 +7,14 @@
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.RenameJavaMapperClassPlugin">
+			<property name="searchString" value="Mapper$"/>
+			<property name="replaceString" value="Dao"/>
+		</plugin>
+		<plugin type="org.mybatis.generator.plugins.RenameXmlMapperFilePlugin">
+			<property name="searchString" value="Mapper"/>
+			<property name="replaceString" value="Dao"/>
+		</plugin>
 		<commentGenerator>
 			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="false" />
