@@ -12,8 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.demo.Application;
-import com.demo.dao.mapper.UserDynamicSqlSupport;
-import com.demo.dao.mapper.UserMapper;
+import com.demo.dao.UserDao;
+import com.demo.dao.UserDynamicSqlSupport;
 import com.demo.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,15 +36,14 @@ public class SpringAppTest {
 	}
 
 	@Resource
-	private UserMapper userMapper;
+	private UserDao userDao;
 	@Resource
 	private ObjectMapper objectMapper;
 
 	@Test
-	public void testMapper() {
+	public void testDao() {
 		try {
-			List<User> users = this.userMapper.selectByExample()
-					.where(UserDynamicSqlSupport.id, SqlBuilder.isIn(1, 2, 3))
+			List<User> users = this.userDao.selectByExample().where(UserDynamicSqlSupport.id, SqlBuilder.isIn(1, 2, 3))
 					.and(UserDynamicSqlSupport.age, SqlBuilder.isBetween(11).and(22))
 					.and(UserDynamicSqlSupport.name, SqlBuilder.isLikeCaseInsensitive("%张%"))
 					.orderBy(UserDynamicSqlSupport.birthday.descending(), UserDynamicSqlSupport.id).build().execute();

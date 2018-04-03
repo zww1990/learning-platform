@@ -31,11 +31,11 @@
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		<!-- <sqlMapGenerator targetPackage="com.demo.sql.mapper" targetProject="./src/main/resources">
+		<!-- <sqlMapGenerator targetPackage="com.demo.dao" targetProject="./src/main/java">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator> -->
 		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="com.demo.dao.mapper" targetProject="./src/main/java"
+		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java"
 			type="ANNOTATEDMAPPER">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
