@@ -8,8 +8,10 @@
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<commentGenerator>
-			<property name="suppressAllComments" value="true" />
+			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="false" />
+			<property name="addRemarkComments" value="true"/>
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
 		</commentGenerator>
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/test"
