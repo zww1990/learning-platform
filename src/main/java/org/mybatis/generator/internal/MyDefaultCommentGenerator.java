@@ -22,6 +22,11 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	}
 
 	@Override
+	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
+		// add no comments by default
+	}
+
+	@Override
 	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		topLevelClass.addJavaDocLine("/**"); //$NON-NLS-1$
 		topLevelClass.addJavaDocLine(" * @author ZhangWeiWei"); //$NON-NLS-1$
@@ -37,7 +42,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	}
 
 	@Override
-	protected void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
+	public void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
 		String s = getDateString();
 		if (s != null) {
 			StringBuilder sb = new StringBuilder();
@@ -54,7 +59,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (StringUtility.stringHasValue(remarks)) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("/*** "); //$NON-NLS-1$
-			sb.append(remarks); // $NON-NLS-1$
+			sb.append(trimAllWhitespace(remarks)); // $NON-NLS-1$
 			sb.append(" */"); //$NON-NLS-1$
 			field.addJavaDocLine(sb.toString()); // $NON-NLS-1$
 		}
@@ -93,8 +98,15 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		}
 	}
 
-	@Override
-	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
-		// add no comments by default
+	private static String trimAllWhitespace(String str) {
+		int len = str.length();
+		StringBuilder sb = new StringBuilder(str.length());
+		for (int i = 0; i < len; i++) {
+			char c = str.charAt(i);
+			if (!Character.isWhitespace(c)) {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
 	}
 }
