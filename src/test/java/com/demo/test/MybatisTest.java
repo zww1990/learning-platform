@@ -13,6 +13,7 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.mybatis.generator.internal.MyDefaultCommentGenerator.ExampleFields;
 import org.mybatis.generator.internal.MyDefaultCommentGenerator.MethodComments;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -64,6 +65,8 @@ public class MybatisTest {
 		try {
 			System.err.println(MethodComments.value("aa"));
 			System.err.println(MethodComments.value(MethodComments.deleteByPrimaryKey.name()));
+			System.err.println(ExampleFields.hasField("bb"));
+			System.err.println(ExampleFields.hasField(ExampleFields.distinct.name()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

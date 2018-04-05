@@ -22,20 +22,10 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public enum MethodComments {
-		/*** 按主键删除记录 */
-		deleteByPrimaryKey("按主键删除记录", true),
-		/*** 插入记录 */
-		insert("插入记录", false),
-		/*** 选择性插入记录 */
-		insertSelective("选择性插入记录", false),
-		/*** 按主键查询记录 */
-		selectByPrimaryKey("按主键查询记录", true),
-		/*** 按主键选择性更新记录 */
-		updateByPrimaryKeySelective("按主键选择性更新记录", false),
-		/*** 按主键更新记录包含所有BLOB类型的字段 */
-		updateByPrimaryKeyWithBLOBs("按主键更新记录包含所有BLOB类型的字段", false),
-		/*** 按主键更新记录排除所有BLOB类型的字段 */
-		updateByPrimaryKey("按主键更新记录排除所有BLOB类型的字段", false);
+		deleteByPrimaryKey("按主键删除记录", true), insert("插入记录", false), insertSelective("选择性插入记录",
+				false), selectByPrimaryKey("按主键查询记录", true), updateByPrimaryKeySelective("按主键选择性更新记录",
+						false), updateByPrimaryKeyWithBLOBs("按主键更新记录包含所有BLOB类型的字段",
+								false), updateByPrimaryKey("按主键更新记录排除所有BLOB类型的字段", false);
 		private String comment;
 		private boolean isPk;
 
@@ -46,6 +36,13 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 		public static MethodComments value(String name) {
 			return Arrays.stream(values()).filter(x -> x.name().equals(name)).findFirst().orElse(null);
+		}
+	}
+
+	public enum ExampleFields {
+		orderByClause, distinct, oredCriteria;
+		public static boolean hasField(String name) {
+			return Arrays.stream(values()).anyMatch(x -> x.name().equals(name));
 		}
 	}
 
@@ -139,6 +136,19 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	}
 
 	@Override
+	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
+		innerClass.addJavaDocLine("/**");
+		innerClass.addJavaDocLine(" * @author ZhangWeiWei");
+		String remarks = introspectedTable.getRemarks();
+		StringBuilder sb = new StringBuilder();
+		sb.append(" * @description ");
+		sb.append(remarks);
+		innerClass.addJavaDocLine(sb.toString());
+		this.addJavadocTag(innerClass, false);
+		innerClass.addJavaDocLine(" */");
+	}
+
+	@Override
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
 		String remarks = introspectedColumn.getRemarks();
@@ -151,6 +161,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 	@Override
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable) {
+		if (ExampleFields.hasField(field.getName())) {
+			return;
+		}
 		String remarks = introspectedTable.getRemarks();
 		StringBuilder sb = new StringBuilder();
 		sb.append("/*** ");
