@@ -19,9 +19,7 @@ public class RenameJavaMapperClassPlugin extends PluginAdapter {
 	public boolean validate(List<String> warnings) {
 		searchString = properties.getProperty("searchString"); //$NON-NLS-1$
 		replaceString = properties.getProperty("replaceString"); //$NON-NLS-1$
-
 		boolean valid = stringHasValue(searchString) && stringHasValue(replaceString);
-
 		if (valid) {
 			pattern = Pattern.compile(searchString);
 		} else {
@@ -36,7 +34,6 @@ public class RenameJavaMapperClassPlugin extends PluginAdapter {
 						"replaceString")); //$NON-NLS-1$
 			}
 		}
-
 		return valid;
 	}
 
@@ -45,7 +42,6 @@ public class RenameJavaMapperClassPlugin extends PluginAdapter {
 		String oldType = introspectedTable.getMyBatis3JavaMapperType();
 		Matcher matcher = pattern.matcher(oldType);
 		oldType = matcher.replaceAll(replaceString);
-
 		introspectedTable.setMyBatis3JavaMapperType(oldType);
 	}
 }
