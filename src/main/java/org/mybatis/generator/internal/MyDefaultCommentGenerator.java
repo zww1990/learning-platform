@@ -96,7 +96,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			sb2.append(" "); //$NON-NLS-1$
 			sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
 			method.addJavaDocLine(sb2.toString());
-			this.addJavadocTag(method);
+			this.addJavadocTag(method, false);
 			method.addJavaDocLine(" */"); //$NON-NLS-1$
 		}
 	}
@@ -110,7 +110,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		sb.append(" * @description ");
 		sb.append(remarks);
 		topLevelClass.addJavaDocLine(sb.toString()); // $NON-NLS-1$
-		this.addJavadocTag(topLevelClass);
+		this.addJavadocTag(topLevelClass, false);
 		topLevelClass.addJavaDocLine(" */"); //$NON-NLS-1$
 	}
 
@@ -134,7 +134,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		sb.append(" * @return "); //$NON-NLS-1$
 		sb.append(remarks); // $NON-NLS-1$
 		method.addJavaDocLine(sb.toString());
-		this.addJavadocTag(method);
+		this.addJavadocTag(method, false);
 		method.addJavaDocLine(" */"); //$NON-NLS-1$
 	}
 
@@ -150,11 +150,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		sb.append(" "); //$NON-NLS-1$
 		sb.append(remarks);
 		method.addJavaDocLine(sb.toString());
-		this.addJavadocTag(method);
+		this.addJavadocTag(method, false);
 		method.addJavaDocLine(" */"); //$NON-NLS-1$
 	}
 
-	private void addJavadocTag(JavaElement javaElement) {
+	@Override
+	public void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(" * @date ");
 		sb.append(super.getDateString());
