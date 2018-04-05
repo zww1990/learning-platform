@@ -1,6 +1,9 @@
 package com.wiwj.test;
 
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +24,19 @@ public class StringTest {
 				numbers.add(Integer.valueOf(matcher.group()));
 			}
 			System.err.println(numbers);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testJdbc() {
+		try {
+			Enumeration<Driver> drivers = DriverManager.getDrivers();
+			while (drivers.hasMoreElements()) {
+				Driver driver = drivers.nextElement();
+				System.err.println(driver);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
