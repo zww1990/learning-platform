@@ -6,7 +6,6 @@
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
-		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
 		<plugin type="org.mybatis.generator.plugins.RenameJavaMapperClassPlugin">
 			<property name="searchString" value="Mapper$"/>
 			<property name="replaceString" value="Dao"/>
@@ -31,9 +30,9 @@
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
-		<!-- <sqlMapGenerator targetPackage="com.demo.dao" targetProject="./src/main/java">
+		<sqlMapGenerator targetPackage="com.demo.dao" targetProject="./src/main/java">
 			<property name="enableSubPackages" value="false" />
-		</sqlMapGenerator> -->
+		</sqlMapGenerator>
 		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
 		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java"
 			type="ANNOTATEDMAPPER">
