@@ -41,7 +41,7 @@ public interface UserDao {
      * @author ZhangWeiWei
      * @description 插入记录
      * @param insertStatement 用户信息表
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
     int insert(InsertStatementProvider<User> insertStatement);
@@ -76,7 +76,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键删除记录
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default int deleteByPrimaryKey(Integer id_) {
         return DeleteDSL.deleteFromWithMapper(this::delete, user)
@@ -88,7 +88,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 插入记录
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default int insert(User record) {
         return insert(SqlBuilder.insert(record)
@@ -106,7 +106,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 选择性插入记录
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default int insertSelective(User record) {
         return insert(SqlBuilder.insert(record)
@@ -134,7 +134,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键查询记录
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default User selectByPrimaryKey(Integer id_) {
         return SelectDSL.selectWithMapper(this::selectOne, id, name, age, birthday, address, resume)
@@ -167,7 +167,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键更新记录排除所有BLOB类型的字段
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default int updateByPrimaryKey(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
@@ -184,7 +184,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键选择性更新记录
-     * @date 2018-04-05 21:26:00
+     * @date 2018-04-05 22:07:03
      */
     default int updateByPrimaryKeySelective(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
