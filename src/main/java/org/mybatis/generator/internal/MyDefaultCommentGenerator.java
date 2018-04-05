@@ -1,5 +1,7 @@
 package org.mybatis.generator.internal;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -42,6 +44,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			this.isPk = isPk;
 		}
 
+		public static MethodComments value(String name) {
+			return Arrays.stream(values()).filter(x -> x.name().equals(name)).findFirst().orElse(null);
+		}
 	}
 
 	@Override
@@ -80,13 +85,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
 			Set<FullyQualifiedJavaType> imports) {
-		// add no annotations by default
-		// System.err.println(method.getName());
+		this.addGeneralMethodComment(method, introspectedTable);
 	}
 
 	@Override
 	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
-		MethodComments comment = MethodComments.valueOf(method.getName());
+		MethodComments comment = MethodComments.value(method.getName());
 		if (comment != null) {
 			StringBuilder sb1 = new StringBuilder();
 			method.addJavaDocLine("/**");
@@ -94,13 +98,15 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			sb1.append(" * @description ");
 			sb1.append(comment.comment);
 			method.addJavaDocLine(sb1.toString());
-			StringBuilder sb2 = new StringBuilder();
-			Parameter parm = method.getParameters().get(0);
-			sb2.append(" * @param ");
-			sb2.append(parm.getName());
-			sb2.append(" ");
-			sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
-			method.addJavaDocLine(sb2.toString());
+			List<Parameter> params = method.getParameters();
+			if (!params.isEmpty()) {
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append(" * @param ");
+				sb2.append(params.get(0).getName());
+				sb2.append(" ");
+				sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
+				method.addJavaDocLine(sb2.toString());
+			}
 			this.addJavadocTag(method, false);
 			method.addJavaDocLine(" */");
 		}
@@ -122,6 +128,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
 		innerClass.addJavaDocLine("/**");
+		innerClass.addJavaDocLine(" * @author ZhangWeiWei");
 		String remarks = introspectedTable.getRemarks();
 		StringBuilder sb = new StringBuilder();
 		sb.append(" * @description ");

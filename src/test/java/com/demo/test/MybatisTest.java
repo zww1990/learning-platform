@@ -13,6 +13,7 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.mybatis.generator.internal.MyDefaultCommentGenerator.MethodComments;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -53,6 +54,16 @@ public class MybatisTest {
 				String remarks = columns.getString("REMARKS"); //$NON-NLS-1$
 				System.err.println(remarks);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testMethodComments() {
+		try {
+			System.err.println(MethodComments.value("aa"));
+			System.err.println(MethodComments.value(MethodComments.deleteByPrimaryKey.name()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

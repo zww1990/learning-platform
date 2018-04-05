@@ -28,8 +28,9 @@ public final class UserDynamicSqlSupport {
     public static final SqlColumn<String> resume = user.resume;
 
     /**
+     * @author ZhangWeiWei
      * @description 用户信息表
-     * @date 2018-04-05 20:35:30
+     * @date 2018-04-05 21:26:00
      */
     public static final class User extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);
