@@ -7,22 +7,22 @@
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
 		<plugin type="org.mybatis.generator.plugins.RenameJavaMapperClassPlugin">
-			<property name="searchString" value="Mapper$"/>
-			<property name="replaceString" value="Dao"/>
+			<property name="searchString" value="Mapper$" />
+			<property name="replaceString" value="Dao" />
 		</plugin>
 		<plugin type="org.mybatis.generator.plugins.RenameXmlMapperFilePlugin">
-			<property name="searchString" value="Mapper"/>
-			<property name="replaceString" value="Dao"/>
+			<property name="searchString" value="Mapper" />
+			<property name="replaceString" value="Dao" />
 		</plugin>
 		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
 			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="false" />
-			<property name="addRemarkComments" value="true"/>
-			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+			<property name="addRemarkComments" value="true" />
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/test"
-			userId="root" password="root" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test" userId="root" password="root">
+			<property name="useInformationSchema" value="true" />
+		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
@@ -34,8 +34,7 @@
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java"
-			type="ANNOTATEDMAPPER">
+		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java" type="ANNOTATEDMAPPER">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<table tableName="user"></table>

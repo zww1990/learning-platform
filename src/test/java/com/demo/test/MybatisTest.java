@@ -1,7 +1,12 @@
 package com.demo.test;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.junit.Test;
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -24,6 +29,30 @@ public class MybatisTest {
 			MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
 			myBatisGenerator.generate(null);
 			System.out.println("自动生成完毕！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void mysql() {
+		String url = "jdbc:mysql://localhost:3306/test";
+		Properties info = new Properties();
+		info.put("user", "root");
+		info.put("password", "root");
+		info.put("useInformationSchema", "true");
+		try (Connection conn = DriverManager.getConnection(url, info)) {
+			DatabaseMetaData metadata = conn.getMetaData();
+			ResultSet tables = metadata.getTables(null, null, "user", null);
+			while (tables.next()) {
+				String remarks = tables.getString("REMARKS"); //$NON-NLS-1$
+				System.err.println(remarks);
+			}
+			ResultSet columns = metadata.getColumns(null, null, "user", null);
+			while (columns.next()) {
+				String remarks = columns.getString("REMARKS"); //$NON-NLS-1$
+				System.err.println(remarks);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
