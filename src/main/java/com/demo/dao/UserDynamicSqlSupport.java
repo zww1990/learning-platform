@@ -6,20 +6,31 @@ import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 
 public final class UserDynamicSqlSupport {
+    /*** 用户信息表 */
     public static final User user = new User();
 
+    /*** 主键 */
     public static final SqlColumn<Integer> id = user.id;
 
+    /*** 姓名 */
     public static final SqlColumn<String> name = user.name;
 
+    /*** 年龄 */
     public static final SqlColumn<Integer> age = user.age;
 
+    /*** 出生日期 */
     public static final SqlColumn<Date> birthday = user.birthday;
 
+    /*** 地址 */
     public static final SqlColumn<String> address = user.address;
 
+    /*** 个人简历 */
     public static final SqlColumn<String> resume = user.resume;
 
+    /**
+     * @description 用户信息表
+     * @date 2018-04-05 20:35:30
+     */
     public static final class User extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);
 

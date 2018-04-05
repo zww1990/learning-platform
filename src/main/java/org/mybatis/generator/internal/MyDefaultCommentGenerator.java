@@ -52,31 +52,36 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassAnnotation(InnerClass innerClass, IntrospectedTable introspectedTable,
 			Set<FullyQualifiedJavaType> imports) {
-		// add no annotations by default
+		this.addClassComment(innerClass, introspectedTable);
 	}
 
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		// add no annotations by default
+		this.addFieldComment(field, introspectedTable, introspectedColumn);
 	}
 
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			Set<FullyQualifiedJavaType> imports) {
-		// add no annotations by default
+		this.addFieldComment(field, introspectedTable);
 	}
 
 	@Override
 	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		// add no annotations by default
+		if (method.getName().startsWith("get")) {
+			this.addGetterComment(method, introspectedTable, introspectedColumn);
+		} else if (method.getName().startsWith("set")) {
+			this.addSetterComment(method, introspectedTable, introspectedColumn);
+		}
 	}
 
 	@Override
 	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
 			Set<FullyQualifiedJavaType> imports) {
 		// add no annotations by default
+		// System.err.println(method.getName());
 	}
 
 	@Override
@@ -84,34 +89,46 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		MethodComments comment = MethodComments.valueOf(method.getName());
 		if (comment != null) {
 			StringBuilder sb1 = new StringBuilder();
-			method.addJavaDocLine("/**"); //$NON-NLS-1$
-			method.addJavaDocLine(" * @author ZhangWeiWei"); //$NON-NLS-1$
-			sb1.append(" * @description "); //$NON-NLS-1$
-			sb1.append(comment.comment); // $NON-NLS-1$
+			method.addJavaDocLine("/**");
+			method.addJavaDocLine(" * @author ZhangWeiWei");
+			sb1.append(" * @description ");
+			sb1.append(comment.comment);
 			method.addJavaDocLine(sb1.toString());
 			StringBuilder sb2 = new StringBuilder();
 			Parameter parm = method.getParameters().get(0);
-			sb2.append(" * @param "); //$NON-NLS-1$
+			sb2.append(" * @param ");
 			sb2.append(parm.getName());
-			sb2.append(" "); //$NON-NLS-1$
+			sb2.append(" ");
 			sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
 			method.addJavaDocLine(sb2.toString());
 			this.addJavadocTag(method, false);
-			method.addJavaDocLine(" */"); //$NON-NLS-1$
+			method.addJavaDocLine(" */");
 		}
 	}
 
 	@Override
 	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-		topLevelClass.addJavaDocLine("/**"); //$NON-NLS-1$
-		topLevelClass.addJavaDocLine(" * @author ZhangWeiWei"); //$NON-NLS-1$
+		topLevelClass.addJavaDocLine("/**");
+		topLevelClass.addJavaDocLine(" * @author ZhangWeiWei");
 		String remarks = introspectedTable.getRemarks();
 		StringBuilder sb = new StringBuilder();
 		sb.append(" * @description ");
 		sb.append(remarks);
-		topLevelClass.addJavaDocLine(sb.toString()); // $NON-NLS-1$
+		topLevelClass.addJavaDocLine(sb.toString());
 		this.addJavadocTag(topLevelClass, false);
-		topLevelClass.addJavaDocLine(" */"); //$NON-NLS-1$
+		topLevelClass.addJavaDocLine(" */");
+	}
+
+	@Override
+	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
+		innerClass.addJavaDocLine("/**");
+		String remarks = introspectedTable.getRemarks();
+		StringBuilder sb = new StringBuilder();
+		sb.append(" * @description ");
+		sb.append(remarks);
+		innerClass.addJavaDocLine(sb.toString());
+		this.addJavadocTag(innerClass, false);
+		innerClass.addJavaDocLine(" */");
 	}
 
 	@Override
@@ -119,10 +136,20 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			IntrospectedColumn introspectedColumn) {
 		String remarks = introspectedColumn.getRemarks();
 		StringBuilder sb = new StringBuilder();
-		sb.append("/*** "); //$NON-NLS-1$
-		sb.append(trimAllWhitespace(remarks)); // $NON-NLS-1$
-		sb.append(" */"); //$NON-NLS-1$
-		field.addJavaDocLine(sb.toString()); // $NON-NLS-1$
+		sb.append("/*** ");
+		sb.append(trimAllWhitespace(remarks));
+		sb.append(" */");
+		field.addJavaDocLine(sb.toString());
+	}
+
+	@Override
+	public void addFieldComment(Field field, IntrospectedTable introspectedTable) {
+		String remarks = introspectedTable.getRemarks();
+		StringBuilder sb = new StringBuilder();
+		sb.append("/*** ");
+		sb.append(remarks);
+		sb.append(" */");
+		field.addJavaDocLine(sb.toString());
 	}
 
 	@Override
@@ -130,12 +157,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			IntrospectedColumn introspectedColumn) {
 		String remarks = introspectedColumn.getRemarks();
 		StringBuilder sb = new StringBuilder();
-		method.addJavaDocLine("/**"); //$NON-NLS-1$
-		sb.append(" * @return "); //$NON-NLS-1$
-		sb.append(remarks); // $NON-NLS-1$
+		method.addJavaDocLine("/**");
+		sb.append(" * @return ");
+		sb.append(remarks);
 		method.addJavaDocLine(sb.toString());
 		this.addJavadocTag(method, false);
-		method.addJavaDocLine(" */"); //$NON-NLS-1$
+		method.addJavaDocLine(" */");
 	}
 
 	@Override
@@ -143,15 +170,15 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			IntrospectedColumn introspectedColumn) {
 		String remarks = introspectedColumn.getRemarks();
 		StringBuilder sb = new StringBuilder();
-		method.addJavaDocLine("/**"); //$NON-NLS-1$
+		method.addJavaDocLine("/**");
 		Parameter parm = method.getParameters().get(0);
-		sb.append(" * @param "); //$NON-NLS-1$
+		sb.append(" * @param ");
 		sb.append(parm.getName());
-		sb.append(" "); //$NON-NLS-1$
+		sb.append(" ");
 		sb.append(remarks);
 		method.addJavaDocLine(sb.toString());
 		this.addJavadocTag(method, false);
-		method.addJavaDocLine(" */"); //$NON-NLS-1$
+		method.addJavaDocLine(" */");
 	}
 
 	@Override
