@@ -19,7 +19,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  * @description 自定义mybatis文档注释生成器
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
-	enum MethodComments {
+	public enum MethodComments {
 		/*** 按主键删除记录 */
 		deleteByPrimaryKey("按主键删除记录", true),
 		/*** 插入记录 */
