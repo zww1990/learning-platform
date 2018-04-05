@@ -15,7 +15,7 @@
 			<property name="searchString" value="Mapper"/>
 			<property name="replaceString" value="Dao"/>
 		</plugin>
-		<commentGenerator>
+		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
 			<property name="suppressAllComments" value="false" />
 			<property name="suppressDate" value="false" />
 			<property name="addRemarkComments" value="true"/>
