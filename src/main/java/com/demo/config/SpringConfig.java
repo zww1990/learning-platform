@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan("com.demo")
-@MapperScan("com.demo.dao.mapper")
+@MapperScan("com.demo.dao")
 public class SpringConfig {
 }

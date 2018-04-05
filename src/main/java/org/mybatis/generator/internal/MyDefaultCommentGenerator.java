@@ -1,8 +1,12 @@
 package org.mybatis.generator.internal;
 
+import java.util.Set;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.JavaElement;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
@@ -43,6 +47,36 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addComment(XmlElement xmlElement) {
 		// add no comments by default
+	}
+
+	@Override
+	public void addClassAnnotation(InnerClass innerClass, IntrospectedTable introspectedTable,
+			Set<FullyQualifiedJavaType> imports) {
+		// add no annotations by default
+	}
+
+	@Override
+	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
+			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
+		// add no annotations by default
+	}
+
+	@Override
+	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
+			Set<FullyQualifiedJavaType> imports) {
+		// add no annotations by default
+	}
+
+	@Override
+	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
+			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
+		// add no annotations by default
+	}
+
+	@Override
+	public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable,
+			Set<FullyQualifiedJavaType> imports) {
+		// add no annotations by default
 	}
 
 	@Override

@@ -2,33 +2,24 @@ package com.demo.dao;
 
 import java.sql.JDBCType;
 import java.util.Date;
-import javax.annotation.Generated;
 import org.mybatis.dynamic.sql.SqlColumn;
 import org.mybatis.dynamic.sql.SqlTable;
 
 public final class UserDynamicSqlSupport {
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.739+08:00", comments="Source Table: user")
     public static final User user = new User();
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.739+08:00", comments="Source field: user.id")
     public static final SqlColumn<Integer> id = user.id;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.740+08:00", comments="Source field: user.name")
     public static final SqlColumn<String> name = user.name;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.740+08:00", comments="Source field: user.age")
     public static final SqlColumn<Integer> age = user.age;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.740+08:00", comments="Source field: user.birthday")
     public static final SqlColumn<Date> birthday = user.birthday;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.740+08:00", comments="Source field: user.address")
     public static final SqlColumn<String> address = user.address;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.740+08:00", comments="Source field: user.resume")
     public static final SqlColumn<String> resume = user.resume;
 
-    @Generated(value="org.mybatis.generator.api.MyBatisGenerator", date="2018-04-05T17:57:15.739+08:00", comments="Source Table: user")
     public static final class User extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);
 
