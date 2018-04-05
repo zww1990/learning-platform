@@ -1,5 +1,8 @@
 package org.mybatis.generator.internal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -15,7 +18,20 @@ import org.mybatis.generator.internal.util.StringUtility;
  * @date 2018年4月4日,上午9:29:29
  * @description 自定义mybatis文档注释生成器
  */
+@SuppressWarnings("serial")
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
+	private static final Map<String, String> methodComments = new HashMap<String, String>() {
+		{
+			put("deleteByPrimaryKey", "按主键删除记录");
+			put("insert", "插入记录");
+			put("insertSelective", "选择性插入记录");
+			put("selectByPrimaryKey", "按主键查询记录");
+			put("updateByPrimaryKeySelective", "按主键选择性更新记录");
+			put("updateByPrimaryKeyWithBLOBs", "按主键更新记录包含所有BLOB类型的字段");
+			put("updateByPrimaryKey", "按主键更新记录排除所有BLOB类型的字段");
+		}
+	};
+
 	@Override
 	public void addComment(XmlElement xmlElement) {
 		// add no comments by default
@@ -23,7 +39,17 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 	@Override
 	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
-		// add no comments by default
+		String methodName = method.getName();
+		if (methodComments.containsKey(methodName)) {
+			StringBuilder sb = new StringBuilder();
+			method.addJavaDocLine("/**"); //$NON-NLS-1$
+			method.addJavaDocLine(" * @author ZhangWeiWei"); //$NON-NLS-1$
+			sb.append(" * @description "); //$NON-NLS-1$
+			sb.append(methodComments.get(methodName)); // $NON-NLS-1$
+			method.addJavaDocLine(sb.toString());
+			addJavadocTag(method, false);
+			method.addJavaDocLine(" */"); //$NON-NLS-1$
+		}
 	}
 
 	@Override
