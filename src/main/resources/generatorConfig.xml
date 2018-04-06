@@ -8,7 +8,9 @@
 	<context
 		id="DB2Tables"
 		targetRuntime="MyBatis3DynamicSql">
+		<!-- 实体类序列化 -->
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin"/>
+		<!-- 将*Mapper.java重命名*Dao.java -->
 		<plugin type="org.mybatis.generator.plugins.RenameJavaMapperClassPlugin">
 			<property
 				name="searchString"
@@ -17,6 +19,7 @@
 				name="replaceString"
 				value="Dao"/>
 		</plugin>
+		<!-- 将*Mapper.xml重命名*Dao.xml -->
 		<plugin type="org.mybatis.generator.plugins.RenameXmlMapperFilePlugin">
 			<property
 				name="searchString"
@@ -28,13 +31,13 @@
 		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
 			<property
 				name="suppressAllComments"
-				value="false"/>
+				value="false"/><!-- 生成所有文档注释 -->
 			<property
 				name="suppressDate"
-				value="false"/>
+				value="false"/><!-- 生成日期注释 -->
 			<property
 				name="addRemarkComments"
-				value="true"/>
+				value="true"/><!-- 添加表、字段注释 -->
 			<property
 				name="dateFormat"
 				value="yyyy-MM-dd HH:mm:ss"/>
@@ -46,7 +49,7 @@
 			password="${spring.datasource.password}">
 			<property
 				name="useInformationSchema"
-				value="true"/>
+				value="true"/><!-- 允许读取表注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl"/>
 		<javaModelGenerator
@@ -66,6 +69,11 @@
 			targetPackage="com.demo.dao"
 			targetProject="./src/main/java"
 			type="ANNOTATEDMAPPER"/>
-		<table tableName="user"></table>
+		<table tableName="user">
+			<generatedKey
+				column="id"
+				sqlStatement="SELECT LAST_INSERT_ID()"
+				identity="true"/><!-- 主键生成策略 -->
+		</table>
 	</context>
 </generatorConfiguration>
