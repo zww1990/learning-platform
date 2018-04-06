@@ -1,7 +1,7 @@
 package org.mybatis.generator.internal;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.mybatis.generator.api.IntrospectedColumn;
@@ -14,6 +14,9 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.config.ExampleFields;
+import org.mybatis.generator.config.MethodComments;
+import org.mybatis.generator.config.MyPropertyRegistry;
 import org.mybatis.generator.internal.util.StringUtility;
 
 /**
@@ -22,64 +25,7 @@ import org.mybatis.generator.internal.util.StringUtility;
  * @description 自定义mybatis文档注释生成器
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
-	public enum MethodComments {
-		/***  */
-		deleteByPrimaryKey("按主键删除记录", true, "主键"),
-		/***  */
-		insert("插入记录", false, "插入语句"),
-		/***  */
-		insertSelective("选择性插入记录", false, ""),
-		/***  */
-		selectByPrimaryKey("按主键查询记录", true, "主键"),
-		/***  */
-		updateByPrimaryKeySelective("按主键选择性更新记录", false, ""),
-		/***  */
-		updateByPrimaryKeyWithBLOBs("按主键更新记录包含所有BLOB类型的字段", false, ""),
-		/***  */
-		updateByPrimaryKey("按主键更新记录", false, ""),
-		/***  */
-		count("查询计数", false, "查询语句"),
-		/***  */
-		delete("删除记录", false, "删除语句"),
-		/***  */
-		selectOne("查询一条记录", false, "查询语句"),
-		/***  */
-		selectMany("查询多条记录", false, "查询语句"),
-		/***  */
-		update("更新记录", false, "更新语句"),
-		/***  */
-		countByExample("返回表中与指定示例对象相匹配的行数", false, ""),
-		/***  */
-		deleteByExample("删除表中与指定示例对象相匹配的行数", false, ""),
-		/***  */
-		selectByExample("查询表中与指定示例对象相匹配的记录", false, ""),
-		/***  */
-		selectDistinctByExample("查询表中与指定示例对象相匹配的不重复记录", false, ""),
-		/***  */
-		updateByExample("更新表中与指定示例对象相匹配的行数", false, ""),
-		/***  */
-		updateByExampleSelective("选择性更新表中与指定示例对象相匹配的行数", false, "");
-		private String comment;
-		private boolean isPk;
-		private String remark;
-
-		private MethodComments(String comment, boolean isPk, String remark) {
-			this.comment = comment;
-			this.isPk = isPk;
-			this.remark = remark;
-		}
-
-		public static MethodComments value(String name) {
-			return Arrays.stream(values()).filter(x -> x.name().equals(name)).findFirst().orElse(null);
-		}
-	}
-
-	public enum ExampleFields {
-		orderByClause, distinct, oredCriteria;
-		public static boolean hasField(String name) {
-			return Arrays.stream(values()).anyMatch(x -> x.name().equals(name));
-		}
-	}
+	private String author;
 
 	@Override
 	public void addComment(XmlElement xmlElement) {
@@ -123,22 +69,18 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
 		MethodComments comment = MethodComments.value(method.getName());
-		StringBuilder sb1 = new StringBuilder();
 		method.addJavaDocLine("/**");
-		method.addJavaDocLine(" * @author ZhangWeiWei");
-		sb1.append(" * @description ");
+		method.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
+		StringBuilder sb1 = new StringBuilder(" * @description ");
 		if (comment != null) {
-			sb1.append(comment.comment);
+			sb1.append(comment.getComment());
 		}
 		method.addJavaDocLine(sb1.toString());
 		List<Parameter> params = method.getParameters();
 		if (!params.isEmpty()) {
-			StringBuilder sb2 = new StringBuilder();
-			sb2.append(" * @param ");
-			sb2.append(params.get(0).getName());
-			sb2.append(" ");
+			StringBuilder sb2 = new StringBuilder(" * @param ").append(params.get(0).getName()).append(" ");
 			if (comment != null) {
-				sb2.append(comment.remark);
+				sb2.append(comment.getRemark());
 			}
 			method.addJavaDocLine(sb2.toString());
 		}
@@ -149,12 +91,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		topLevelClass.addJavaDocLine("/**");
-		topLevelClass.addJavaDocLine(" * @author ZhangWeiWei");
-		String remarks = introspectedTable.getRemarks();
-		StringBuilder sb = new StringBuilder();
-		sb.append(" * @description ");
-		sb.append(remarks);
-		topLevelClass.addJavaDocLine(sb.toString());
+		topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
+		topLevelClass.addJavaDocLine(
+				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
 		this.addJavadocTag(topLevelClass, false);
 		topLevelClass.addJavaDocLine(" */");
 	}
@@ -162,12 +101,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
 		innerClass.addJavaDocLine("/**");
-		innerClass.addJavaDocLine(" * @author ZhangWeiWei");
-		String remarks = introspectedTable.getRemarks();
-		StringBuilder sb = new StringBuilder();
-		sb.append(" * @description ");
-		sb.append(remarks);
-		innerClass.addJavaDocLine(sb.toString());
+		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
+		innerClass.addJavaDocLine(
+				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
 		this.addJavadocTag(innerClass, false);
 		innerClass.addJavaDocLine(" */");
 	}
@@ -175,12 +111,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
 		innerClass.addJavaDocLine("/**");
-		innerClass.addJavaDocLine(" * @author ZhangWeiWei");
-		String remarks = introspectedTable.getRemarks();
-		StringBuilder sb = new StringBuilder();
-		sb.append(" * @description ");
-		sb.append(remarks);
-		innerClass.addJavaDocLine(sb.toString());
+		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
+		innerClass.addJavaDocLine(
+				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
 		this.addJavadocTag(innerClass, false);
 		innerClass.addJavaDocLine(" */");
 	}
@@ -192,11 +125,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (!StringUtility.stringHasValue(remarks)) {
 			return;
 		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("/*** ");
-		sb.append(trimAllWhitespace(remarks));
-		sb.append(" */");
-		field.addJavaDocLine(sb.toString());
+		field.addJavaDocLine(new StringBuilder("/*** ").append(trimAllWhitespace(remarks)).append(" */").toString());
 	}
 
 	@Override
@@ -208,22 +137,14 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (!StringUtility.stringHasValue(remarks)) {
 			return;
 		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("/*** ");
-		sb.append(remarks);
-		sb.append(" */");
-		field.addJavaDocLine(sb.toString());
+		field.addJavaDocLine(new StringBuilder("/*** ").append(remarks).append(" */").toString());
 	}
 
 	@Override
 	public void addGetterComment(Method method, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
-		String remarks = introspectedColumn.getRemarks();
-		StringBuilder sb = new StringBuilder();
 		method.addJavaDocLine("/**");
-		sb.append(" * @return ");
-		sb.append(remarks);
-		method.addJavaDocLine(sb.toString());
+		method.addJavaDocLine(new StringBuilder(" * @return ").append(introspectedColumn.getRemarks()).toString());
 		this.addJavadocTag(method, false);
 		method.addJavaDocLine(" */");
 	}
@@ -231,25 +152,22 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addSetterComment(Method method, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
-		String remarks = introspectedColumn.getRemarks();
-		StringBuilder sb = new StringBuilder();
 		method.addJavaDocLine("/**");
-		Parameter parm = method.getParameters().get(0);
-		sb.append(" * @param ");
-		sb.append(parm.getName());
-		sb.append(" ");
-		sb.append(remarks);
-		method.addJavaDocLine(sb.toString());
+		method.addJavaDocLine(new StringBuilder(" * @param ").append(method.getParameters().get(0).getName())
+				.append(" ").append(introspectedColumn.getRemarks()).toString());
 		this.addJavadocTag(method, false);
 		method.addJavaDocLine(" */");
 	}
 
 	@Override
 	public void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(" * @date ");
-		sb.append(super.getDateString());
-		javaElement.addJavaDocLine(sb.toString());
+		javaElement.addJavaDocLine(new StringBuilder(" * @date ").append(super.getDateString()).toString());
+	}
+
+	@Override
+	public void addConfigurationProperties(Properties properties) {
+		super.addConfigurationProperties(properties);
+		this.author = properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_AUTHOR);
 	}
 
 	private static String trimAllWhitespace(String str) {

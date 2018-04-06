@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author ZhangWeiWei
+ * @author zhangweiwei
  * @description 用户信息表
- * @date 2018-04-06 16:27:27
+ * @date 2018-04-06 17:07:14
  */
 @SuppressWarnings("serial")
 public class User implements Serializable {
@@ -30,7 +30,7 @@ public class User implements Serializable {
 
     /**
      * @return 主键
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public Integer getId() {
         return id;
@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     /**
      * @param id 主键
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setId(Integer id) {
         this.id = id;
@@ -46,7 +46,7 @@ public class User implements Serializable {
 
     /**
      * @return 姓名
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public String getName() {
         return name;
@@ -54,7 +54,7 @@ public class User implements Serializable {
 
     /**
      * @param name 姓名
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
@@ -62,7 +62,7 @@ public class User implements Serializable {
 
     /**
      * @return 年龄
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public Integer getAge() {
         return age;
@@ -70,7 +70,7 @@ public class User implements Serializable {
 
     /**
      * @param age 年龄
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setAge(Integer age) {
         this.age = age;
@@ -78,7 +78,7 @@ public class User implements Serializable {
 
     /**
      * @return 出生日期
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public Date getBirthday() {
         return birthday;
@@ -86,7 +86,7 @@ public class User implements Serializable {
 
     /**
      * @param birthday 出生日期
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
@@ -94,7 +94,7 @@ public class User implements Serializable {
 
     /**
      * @return 地址
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public String getAddress() {
         return address;
@@ -102,7 +102,7 @@ public class User implements Serializable {
 
     /**
      * @param address 地址
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
@@ -110,7 +110,7 @@ public class User implements Serializable {
 
     /**
      * @return 个人简历
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public String getResume() {
         return resume;
@@ -118,7 +118,7 @@ public class User implements Serializable {
 
     /**
      * @param resume 个人简历
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     public void setResume(String resume) {
         this.resume = resume == null ? null : resume.trim();

@@ -41,6 +41,9 @@
 			<property
 				name="dateFormat"
 				value="yyyy-MM-dd HH:mm:ss"/>
+			<property
+				name="author"
+				value="zhangweiwei"/><!-- 作者 -->
 		</commentGenerator>
 		<jdbcConnection
 			driverClass="com.mysql.jdbc.Driver"

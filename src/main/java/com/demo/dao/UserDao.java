@@ -33,48 +33,48 @@ import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 @Mapper
 public interface UserDao {
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 查询计数
      * @param selectStatement 查询语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     long count(SelectStatementProvider selectStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 删除记录
      * @param deleteStatement 删除语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @DeleteProvider(type=SqlProviderAdapter.class, method="delete")
     int delete(DeleteStatementProvider deleteStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 插入记录
      * @param insertStatement 插入语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="record.id", before=false, resultType=Integer.class)
     int insert(InsertStatementProvider<User> insertStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 查询一条记录
      * @param selectStatement 查询语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @ResultMap("UserResult")
     User selectOne(SelectStatementProvider selectStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 查询多条记录
      * @param selectStatement 查询语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="UserResult", value = {
@@ -88,18 +88,18 @@ public interface UserDao {
     List<User> selectMany(SelectStatementProvider selectStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 更新记录
      * @param updateStatement 更新语句
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     @UpdateProvider(type=SqlProviderAdapter.class, method="update")
     int update(UpdateStatementProvider updateStatement);
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 返回表中与指定示例对象相匹配的行数
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<Long>> countByExample() {
         return SelectDSL.selectWithMapper(this::count, SqlBuilder.count())
@@ -107,18 +107,18 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 删除表中与指定示例对象相匹配的行数
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default DeleteDSL<MyBatis3DeleteModelAdapter<Integer>> deleteByExample() {
         return DeleteDSL.deleteFromWithMapper(this::delete, user);
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 按主键删除记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default int deleteByPrimaryKey(Integer id_) {
         return DeleteDSL.deleteFromWithMapper(this::delete, user)
@@ -128,9 +128,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 插入记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default int insert(User record) {
         return insert(SqlBuilder.insert(record)
@@ -145,9 +145,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 选择性插入记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default int insertSelective(User record) {
         return insert(SqlBuilder.insert(record)
@@ -162,9 +162,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 查询表中与指定示例对象相匹配的记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<User>>> selectByExample() {
         return SelectDSL.selectWithMapper(this::selectMany, id, name, age, birthday, address, resume)
@@ -172,9 +172,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 查询表中与指定示例对象相匹配的不重复记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default QueryExpressionDSL<MyBatis3SelectModelAdapter<List<User>>> selectDistinctByExample() {
         return SelectDSL.selectDistinctWithMapper(this::selectMany, id, name, age, birthday, address, resume)
@@ -182,9 +182,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 按主键查询记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default User selectByPrimaryKey(Integer id_) {
         return SelectDSL.selectWithMapper(this::selectOne, id, name, age, birthday, address, resume)
@@ -195,9 +195,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 更新表中与指定示例对象相匹配的行数
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
@@ -209,9 +209,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 选择性更新表中与指定示例对象相匹配的行数
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
@@ -223,9 +223,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 按主键更新记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default int updateByPrimaryKey(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
@@ -240,9 +240,9 @@ public interface UserDao {
     }
 
     /**
-     * @author ZhangWeiWei
+     * @author zhangweiwei
      * @description 按主键选择性更新记录
-     * @date 2018-04-06 16:27:27
+     * @date 2018-04-06 17:07:14
      */
     default int updateByPrimaryKeySelective(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
