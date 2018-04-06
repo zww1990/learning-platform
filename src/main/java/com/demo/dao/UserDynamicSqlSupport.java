@@ -30,7 +30,7 @@ public final class UserDynamicSqlSupport {
     /**
      * @author zhangweiwei
      * @description 用户信息表
-     * @date 2018-04-06 17:07:14
+     * @date 2018-04-06 17:51:02
      */
     public static final class User extends SqlTable {
         public final SqlColumn<Integer> id = column("id", JDBCType.INTEGER);

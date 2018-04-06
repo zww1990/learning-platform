@@ -77,8 +77,8 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		}
 		method.addJavaDocLine(sb1.toString());
 		List<Parameter> params = method.getParameters();
-		if (!params.isEmpty()) {
-			StringBuilder sb2 = new StringBuilder(" * @param ").append(params.get(0).getName()).append(" ");
+		for (int i = 0, size = params.size(); i < size; i++) {
+			StringBuilder sb2 = new StringBuilder(" * @param ").append(params.get(i).getName()).append(" ");
 			if (comment != null) {
 				sb2.append(comment.getRemark());
 			}
