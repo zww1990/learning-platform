@@ -26,7 +26,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		deleteByPrimaryKey("按主键删除记录", true), insert("插入记录", false), insertSelective("选择性插入记录",
 				false), selectByPrimaryKey("按主键查询记录", true), updateByPrimaryKeySelective("按主键选择性更新记录",
 						false), updateByPrimaryKeyWithBLOBs("按主键更新记录包含所有BLOB类型的字段",
-								false), updateByPrimaryKey("按主键更新记录排除所有BLOB类型的字段", false);
+								false), updateByPrimaryKey("按主键更新记录", false);
 		private String comment;
 		private boolean isPk;
 
@@ -89,25 +89,27 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
 		MethodComments comment = MethodComments.value(method.getName());
+		StringBuilder sb1 = new StringBuilder();
+		method.addJavaDocLine("/**");
+		method.addJavaDocLine(" * @author ZhangWeiWei");
+		sb1.append(" * @description ");
 		if (comment != null) {
-			StringBuilder sb1 = new StringBuilder();
-			method.addJavaDocLine("/**");
-			method.addJavaDocLine(" * @author ZhangWeiWei");
-			sb1.append(" * @description ");
 			sb1.append(comment.comment);
-			method.addJavaDocLine(sb1.toString());
-			List<Parameter> params = method.getParameters();
-			if (!params.isEmpty()) {
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append(" * @param ");
-				sb2.append(params.get(0).getName());
-				sb2.append(" ");
-				sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
-				method.addJavaDocLine(sb2.toString());
-			}
-			this.addJavadocTag(method, false);
-			method.addJavaDocLine(" */");
 		}
+		method.addJavaDocLine(sb1.toString());
+		List<Parameter> params = method.getParameters();
+		if (!params.isEmpty()) {
+			StringBuilder sb2 = new StringBuilder();
+			sb2.append(" * @param ");
+			sb2.append(params.get(0).getName());
+			sb2.append(" ");
+			if (comment != null) {
+				sb2.append(comment.isPk ? "主键" : introspectedTable.getRemarks());
+			}
+			method.addJavaDocLine(sb2.toString());
+		}
+		this.addJavadocTag(method, false);
+		method.addJavaDocLine(" */");
 	}
 
 	@Override
