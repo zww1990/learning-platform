@@ -2,41 +2,70 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar" />
+	<properties resource="./application.properties"/>
+	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
-	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
-		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
+	<context
+		id="DB2Tables"
+		targetRuntime="MyBatis3DynamicSql">
+		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin"/>
 		<plugin type="org.mybatis.generator.plugins.RenameJavaMapperClassPlugin">
-			<property name="searchString" value="Mapper$" />
-			<property name="replaceString" value="Dao" />
+			<property
+				name="searchString"
+				value="Mapper$"/>
+			<property
+				name="replaceString"
+				value="Dao"/>
 		</plugin>
 		<plugin type="org.mybatis.generator.plugins.RenameXmlMapperFilePlugin">
-			<property name="searchString" value="Mapper" />
-			<property name="replaceString" value="Dao" />
+			<property
+				name="searchString"
+				value="Mapper"/>
+			<property
+				name="replaceString"
+				value="Dao"/>
 		</plugin>
 		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
-			<property name="suppressAllComments" value="false" />
-			<property name="suppressDate" value="false" />
-			<property name="addRemarkComments" value="true" />
-			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+			<property
+				name="suppressAllComments"
+				value="false"/>
+			<property
+				name="suppressDate"
+				value="false"/>
+			<property
+				name="addRemarkComments"
+				value="true"/>
+			<property
+				name="dateFormat"
+				value="yyyy-MM-dd HH:mm:ss"/>
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test" userId="root" password="root">
-			<property name="useInformationSchema" value="true" />
+		<jdbcConnection
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="${spring.datasource.url}"
+			userId="${spring.datasource.username}"
+			password="${spring.datasource.password}">
+			<property
+				name="useInformationSchema"
+				value="true"/>
 		</jdbcConnection>
-		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
-			<property name="forceBigDecimals" value="false" />
-		</javaTypeResolver>
-		<javaModelGenerator targetPackage="com.demo.model" targetProject="./src/main/java">
-			<property name="enableSubPackages" value="false" />
-			<property name="trimStrings" value="true" />
+		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl"/>
+		<javaModelGenerator
+			targetPackage="com.demo.model"
+			targetProject="./src/main/java">
+			<property
+				name="trimStrings"
+				value="true"/>
 		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="com.demo.dao" targetProject="./src/main/java">
-			<property name="enableSubPackages" value="false" />
-		</sqlMapGenerator>
-		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java" type="ANNOTATEDMAPPER">
-			<property name="enableSubPackages" value="false" />
-		</javaClientGenerator>
+		<sqlMapGenerator
+			targetPackage="com.demo.dao"
+			targetProject="./src/main/java"/>
+		<!-- ANNOTATEDMAPPER：全注解，
+			XMLMAPPER：全XML文件，
+			MIXEDMAPPER：注解和XML混合 -->
+		<javaClientGenerator
+			targetPackage="com.demo.dao"
+			targetProject="./src/main/java"
+			type="ANNOTATEDMAPPER"/>
 		<table tableName="user"></table>
 	</context>
 </generatorConfiguration>
