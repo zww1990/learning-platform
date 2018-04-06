@@ -16,6 +16,9 @@ import com.demo.dao.UserDao;
 import com.demo.dao.UserDynamicSqlSupport;
 import com.demo.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
@@ -48,6 +51,20 @@ public class SpringAppTest {
 					.and(UserDynamicSqlSupport.name, SqlBuilder.isLikeCaseInsensitive("%张%"))
 					.orderBy(UserDynamicSqlSupport.birthday.descending(), UserDynamicSqlSupport.id).build().execute();
 			System.err.println(this.objectMapper.writeValueAsString(users));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testPage() {
+		try {
+			Page<User> page = PageHelper.startPage(1, 10)
+					.doSelectPage(() -> this.userDao.selectByExample().build().execute());
+			System.err.println(page);
+			PageInfo<User> pageInfo = PageHelper.startPage(1, 10)
+					.doSelectPageInfo(() -> this.userDao.selectByExample().build().execute());
+			System.err.println(pageInfo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
