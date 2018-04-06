@@ -2,35 +2,67 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="D:\.m2\repository\com\oracle\jdbc\ojdbc\1.7\ojdbc-1.7.jar" />
+	<properties resource="./application.properties"/>
+	<classPathEntry location="D:\.m2\repository\com\oracle\jdbc\ojdbc\1.7\ojdbc-1.7.jar"/>
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
-	<context id="DB2Tables" targetRuntime="MyBatis3">
-		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin" />
+	<context
+		id="DB2Tables"
+		targetRuntime="MyBatis3">
+		<!-- 实体类序列化 -->
+		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin"/>
 		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
-			<property name="suppressAllComments" value="false" />
-			<property name="suppressDate" value="false" />
-			<property name="addRemarkComments" value="true" />
-			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+			<property
+				name="suppressAllComments"
+				value="false"/><!-- 生成所有文档注释 -->
+			<property
+				name="suppressDate"
+				value="false"/><!-- 生成日期注释 -->
+			<property
+				name="addRemarkComments"
+				value="true"/><!-- 添加表、字段注释 -->
+			<property
+				name="dateFormat"
+				value="yyyy-MM-dd HH:mm:ss"/>
+			<property
+				name="author"
+				value="zhangweiwei"/><!-- 作者 -->
 		</commentGenerator>
 		<jdbcConnection
 			driverClass="oracle.jdbc.OracleDriver"
-			connectionURL="jdbc:oracle:thin:@10.55.2.200:1521:cbstestdb"
-			userId="BDMDEV" password="oBSvDUoS">
-			<property name="remarksReporting" value="true"/>
+			connectionURL="${jdbc.url}"
+			userId="${jdbc.user}"
+			password="${jdbc.password}">
+			<property
+				name="remarksReporting"
+				value="true"/><!-- 允许读取表、字段注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
-			<property name="forceBigDecimals" value="false" />
+			<property
+				name="forceBigDecimals"
+				value="false"/>
 		</javaTypeResolver>
-		<javaModelGenerator targetPackage="com.wiwj.bdm.mq.domain" targetProject="./src/main/java">
-		</javaModelGenerator>
-		<sqlMapGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java">
-		</sqlMapGenerator>
-		<!-- ANNOTATEDMAPPER：全注解，XMLMAPPER：全XML文件，MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java"
-			type="XMLMAPPER">
-		</javaClientGenerator>
-		<table tableName="BDM_HR_MODIFY" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="MODIFY_ID" sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual" />
+		<javaModelGenerator
+			targetPackage="com.wiwj.bdm.mq.domain"
+			targetProject="./src/main/java"/>
+		<sqlMapGenerator
+			targetPackage="com.wiwj.bdm.mq.mapper"
+			targetProject="./src/main/java"/>
+		<!-- ANNOTATEDMAPPER：全注解，
+			XMLMAPPER：全XML文件，
+			MIXEDMAPPER：注解和XML混合 -->
+		<javaClientGenerator
+			targetPackage="com.wiwj.bdm.mq.mapper"
+			targetProject="./src/main/java"
+			type="XMLMAPPER"/>
+		<table
+			tableName="BDM_HR_MODIFY"
+			enableCountByExample="false"
+			enableDeleteByExample="false"
+			enableSelectByExample="false"
+			enableUpdateByExample="false">
+			<generatedKey
+				column="MODIFY_ID"
+				sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual"/><!-- 主键生成策略 -->
 		</table>
 	</context>
 </generatorConfiguration>
