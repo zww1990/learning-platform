@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
 import org.apache.ibatis.type.JdbcType;
@@ -41,9 +42,10 @@ public interface UserDao {
      * @author ZhangWeiWei
      * @description 插入记录
      * @param insertStatement 用户信息表
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="record.id", before=false, resultType=Integer.class)
     int insert(InsertStatementProvider<User> insertStatement);
 
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -76,7 +78,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键删除记录
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default int deleteByPrimaryKey(Integer id_) {
         return DeleteDSL.deleteFromWithMapper(this::delete, user)
@@ -88,12 +90,11 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 插入记录
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default int insert(User record) {
         return insert(SqlBuilder.insert(record)
                 .into(user)
-                .map(id).toProperty("id")
                 .map(name).toProperty("name")
                 .map(age).toProperty("age")
                 .map(birthday).toProperty("birthday")
@@ -106,12 +107,11 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 选择性插入记录
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default int insertSelective(User record) {
         return insert(SqlBuilder.insert(record)
                 .into(user)
-                .map(id).toPropertyWhenPresent("id", record::getId)
                 .map(name).toPropertyWhenPresent("name", record::getName)
                 .map(age).toPropertyWhenPresent("age", record::getAge)
                 .map(birthday).toPropertyWhenPresent("birthday", record::getBirthday)
@@ -134,7 +134,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键查询记录
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default User selectByPrimaryKey(Integer id_) {
         return SelectDSL.selectWithMapper(this::selectOne, id, name, age, birthday, address, resume)
@@ -146,7 +146,6 @@ public interface UserDao {
 
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExample(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
-                .set(id).equalTo(record::getId)
                 .set(name).equalTo(record::getName)
                 .set(age).equalTo(record::getAge)
                 .set(birthday).equalTo(record::getBirthday)
@@ -156,7 +155,6 @@ public interface UserDao {
 
     default UpdateDSL<MyBatis3UpdateModelAdapter<Integer>> updateByExampleSelective(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
-                .set(id).equalToWhenPresent(record::getId)
                 .set(name).equalToWhenPresent(record::getName)
                 .set(age).equalToWhenPresent(record::getAge)
                 .set(birthday).equalToWhenPresent(record::getBirthday)
@@ -167,7 +165,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键更新记录排除所有BLOB类型的字段
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default int updateByPrimaryKey(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
@@ -184,7 +182,7 @@ public interface UserDao {
     /**
      * @author ZhangWeiWei
      * @description 按主键选择性更新记录
-     * @date 2018-04-05 22:07:03
+     * @date 2018-04-06 12:37:09
      */
     default int updateByPrimaryKeySelective(User record) {
         return UpdateDSL.updateWithMapper(this::update, user)
