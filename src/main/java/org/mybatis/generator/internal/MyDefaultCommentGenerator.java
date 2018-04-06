@@ -14,6 +14,7 @@ import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+import org.mybatis.generator.internal.util.StringUtility;
 
 /**
  * @author ZhangWeiWei
@@ -152,6 +153,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
 		String remarks = introspectedColumn.getRemarks();
+		if (!StringUtility.stringHasValue(remarks)) {
+			return;
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("/*** ");
 		sb.append(trimAllWhitespace(remarks));
@@ -165,6 +169,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			return;
 		}
 		String remarks = introspectedTable.getRemarks();
+		if (!StringUtility.stringHasValue(remarks)) {
+			return;
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("/*** ");
 		sb.append(remarks);
