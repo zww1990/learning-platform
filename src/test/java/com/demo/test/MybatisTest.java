@@ -38,11 +38,13 @@ public class MybatisTest {
 
 	@Test
 	public void mysql() {
-		String url = "jdbc:mysql://localhost:3306/test";
+		String url = "jdbc:mysql://server1.navicat.com:4406/test";
 		Properties info = new Properties();
-		info.put("user", "root");
-		info.put("password", "root");
+		info.put("user", "navicat");
+		info.put("password", "testnavicat");
 		info.put("useInformationSchema", "true");
+		info.put("useUnicode", "true");
+		info.put("characterEncoding", "utf8");
 		try (Connection conn = DriverManager.getConnection(url, info)) {
 			DatabaseMetaData metadata = conn.getMetaData();
 			ResultSet tables = metadata.getTables(null, null, "user", null);
@@ -61,7 +63,7 @@ public class MybatisTest {
 	}
 
 	@Test
-	public void testMethodComments() {
+	public void testMethod() {
 		try {
 			System.err.println(MethodComments.value("aa"));
 			System.err.println(MethodComments.value(MethodComments.deleteByPrimaryKey.name()));
