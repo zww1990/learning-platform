@@ -141,9 +141,9 @@ export class LayoutComponent implements OnInit {
    */
   logout() {
     this.confirm.confirm({
-      title: '退出提示',
-      content: '您确认要退出APP吗？',
-      onOk: () => {
+      nzTitle: '退出提示',
+      nzContent: '您确认要退出APP吗？',
+      nzOnOk: () => {
         this.userService.removeSessionUser();
         this.router.navigate(['/login']);
       }
