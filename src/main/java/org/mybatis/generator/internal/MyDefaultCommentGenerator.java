@@ -125,7 +125,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (!StringUtility.stringHasValue(remarks)) {
 			return;
 		}
-		field.addJavaDocLine(new StringBuilder("/*** ").append(trimAllWhitespace(remarks)).append(" */").toString());
+		field.addJavaDocLine(new StringBuilder("/** ").append(trimAllWhitespace(remarks)).append(" */").toString());
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (!StringUtility.stringHasValue(remarks)) {
 			return;
 		}
-		field.addJavaDocLine(new StringBuilder("/*** ").append(remarks).append(" */").toString());
+		field.addJavaDocLine(new StringBuilder("/** ").append(remarks).append(" */").toString());
 	}
 
 	@Override
