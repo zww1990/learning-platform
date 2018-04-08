@@ -2,6 +2,11 @@ package org.mybatis.generator.config;
 
 import java.util.Arrays;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年4月8日,上午9:45:50
+ * @description
+ */
 public enum MethodComments {
 	/***  */
 	deleteByPrimaryKey("按主键删除记录", "主键"),

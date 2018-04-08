@@ -10,6 +10,11 @@ import java.util.regex.Pattern;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年4月8日,上午9:47:19
+ * @description 重命名xml文件插件
+ */
 public class RenameXmlMapperFilePlugin extends PluginAdapter {
 	private String searchString;
 	private String replaceString;
