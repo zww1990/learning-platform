@@ -3,7 +3,6 @@ package org.mybatis.generator.internal;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -125,7 +124,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (!StringUtility.stringHasValue(remarks)) {
 			return;
 		}
-		field.addJavaDocLine(new StringBuilder("/** ").append(trimAllWhitespace(remarks)).append(" */").toString());
+		field.addJavaDocLine(new StringBuilder("/** ").append(remarks).append(" */").toString());
 	}
 
 	@Override
@@ -168,17 +167,5 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public void addConfigurationProperties(Properties properties) {
 		super.addConfigurationProperties(properties);
 		this.author = properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_AUTHOR);
-	}
-
-	private static String trimAllWhitespace(String str) {
-		int len = str.length();
-		StringBuilder sb = new StringBuilder(str.length());
-		for (int i = 0; i < len; i++) {
-			char c = str.charAt(i);
-			if (!Character.isWhitespace(c)) {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
 	}
 }
