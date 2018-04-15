@@ -18,7 +18,7 @@
     </template>
     <template v-else>
       <el-col :span="10">
-        <el-upload drag :action="action" :accept="accepts.toString()" :before-upload="beforeUpload">
+        <el-upload drag :action="action" :before-upload="beforeUpload">
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或
             <em>点击上传</em><br>只能上传xls/xlsx文件</div>
