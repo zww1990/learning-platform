@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatRadioModule
-} from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { LayoutComponent } from './layout/layout.component';
+import { MaterialModule } from './material/material.module';
 
 const routes: Routes = [
   { path: '', component: LayoutComponent },
@@ -16,11 +13,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    // FormsModule,
-    // ReactiveFormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatRadioModule
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   exports: [RouterModule],
   declarations: [LayoutComponent]
