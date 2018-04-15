@@ -36,8 +36,8 @@ export class AppModule {
    */
   constructor(router: Router) {
     console.log(`当前运行环境[${environment.mode}]`);
-    if (!environment.production) {
-      console.log(JSON.stringify(router.config, null, 2));
-    }
+    // if (!environment.production) {
+    //   console.log(JSON.stringify(router.config, null, 2));
+    // }
   }
 }
