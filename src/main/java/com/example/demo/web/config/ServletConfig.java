@@ -30,7 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @MultipartConfig
 @ComponentScan("com.example.demo.web")
-public class DispatcherConfig implements WebMvcConfigurer {
+public class ServletConfig implements WebMvcConfigurer {
 	@Resource
 	private SwaggerProperties swaggerProps;
 
