@@ -1,30 +1,48 @@
-<nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
-  <p class="ant-upload-drag-icon">
-    <i class="anticon anticon-inbox"></i>
-  </p>
-  <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
-  <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
-</nz-upload>
-<ng-template [ngIf]="tables.length!==0">
-  <div class="table-operations">
-    <button nz-button (click)="exportExcel()">导出Excel文件</button>
-  </div>
-  <nz-tabset [nzTabPosition]="'bottom'">
-    <nz-tab *ngFor="let table of tables" [nzTitle]="table.name">
-      <nz-table #nzTable [nzData]="table.data" [nzPageSize]="10" [nzShowQuickJumper]="true" [nzShowSizeChanger]="true" [nzSize]="'small'">
-        <thead nz-thead>
-          <tr>
-            <th nz-th *ngFor="let item of table.header">
-              <span>{{item}}</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody nz-tbody>
-          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-            <td nz-td *ngFor="let item of table.header">{{data[item]}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </nz-tab>
-  </nz-tabset>
+<ng-template [ngIf]="this.isShow">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'inline'">
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input formControlName="myID" placeholder="请输入员工号">
+        <nz-form-explain *ngIf="validateForm.get('myID').dirty && validateForm.get('myID').errors">请输入员工号!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input formControlName="myEndPoint" placeholder="请输入下车地点">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">下一步</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template [ngIf]="!this.isShow">
+  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
+    <p class="ant-upload-drag-icon">
+      <i class="anticon anticon-inbox"></i>
+    </p>
+    <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
+    <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
+  </nz-upload>
+  <ng-template [ngIf]="this.tableData.length!==0">
+    <div class="table-operations">
+      <button nz-button (click)="exportExcel()">导出Excel文件</button>
+    </div>
+    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">
+      <thead nz-thead>
+        <tr>
+          <th nz-th *ngFor="let item of this.tableHeader">
+            <span>{{item}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+          <td nz-td *ngFor="let item of data">{{item}}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-template>
 </ng-template>
