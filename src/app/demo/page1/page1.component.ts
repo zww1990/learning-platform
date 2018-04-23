@@ -147,10 +147,10 @@ export class Page1Component implements OnInit {
   isAfterTime(time) {
     const deadline = moment(time, this.config.timeFormat).tz(
       this.config.timezone
-    ); //加班截止时间
+    ); // 加班截止时间
     const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
       this.config.timezone
-    ); //规定打车开始时间
+    ); // 规定打车开始时间
     return deadline.isSameOrAfter(startTime);
   }
 
