@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { utils } from 'xlsx';
 import { Workbook, Table } from './workbook.model';
+import { ExcelConfig } from './excel-config.model';
+import * as moment from 'moment-timezone';
 
 @Component({
   selector: 'app-page1',
@@ -15,12 +19,39 @@ export class Page1Component implements OnInit {
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
   ];
   rABS = true; // true:readAsBinaryString; false:readAsArrayBuffer;
-  fileName: string;
-  tables: Table[] = [];
+  tableHeader = [];
+  tableData = [];
+  validateForm: FormGroup;
+  isShow = true;
+  config: ExcelConfig;
 
-  constructor(private msg: NzMessageService) {}
+  constructor(
+    private msg: NzMessageService,
+    private fb: FormBuilder,
+    private http: HttpClient
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    moment.locale('zh-cn');
+    this.validateForm = this.fb.group({
+      myID: [null, [Validators.required]],
+      myEndPoint: [null]
+    });
+    this.http
+      .get<ExcelConfig>('/assets/data/excel-config.json')
+      .toPromise()
+      .then(resp => {
+        this.validateForm.setValue({
+          myID: resp.myID,
+          myEndPoint: resp.myEndPoint
+        });
+        this.config = resp;
+      });
+  }
+
+  submitForm() {
+    this.isShow = !this.isShow;
+  }
 
   /**
    * @description 上传文件之前，对上传的文件进行校验
@@ -47,17 +78,49 @@ export class Page1Component implements OnInit {
    * @param file Excel文件
    */
   readFile(file: File) {
-    this.fileName = file.name;
+    this.config.fileName = file.name;
     const reader = new FileReader();
     reader.onload = () => {
       const wb = Workbook.readWorkbook(reader, this.rABS);
-      wb.SheetNames.forEach(sheetName => {
-        const ws = wb.Sheets[sheetName];
-        const header = Workbook.getHeaderRow(ws);
-        if (header.length) {
-          this.tables.push(
-            new Table(sheetName, header, utils.sheet_to_json(ws))
+      if (wb.SheetNames.length < 2) {
+        this.msg.error('Excel中Sheet页的数量小于2，数据不完整无法解析。');
+        return;
+      }
+      const empSheetName = wb.SheetNames[this.config.empPageIndex]; // 员工加班记录明细页索引
+      const empSheet = wb.Sheets[empSheetName];
+      this.config.mySheetName = wb.SheetNames[this.config.myPageIndex]; // 个人加班记录明细页索引
+      const mySheet = wb.Sheets[this.config.mySheetName];
+      this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
+      const empData = utils
+        .sheet_to_json(empSheet, { header: 1, blankrows: false })
+        .filter(x => x[this.config.idIndex] === this.config.myID)
+        .map(x => {
+          this.config.myName = x[this.config.nameIndex];
+          x[this.config.overtimeIndex] = this.formatOverTime(
+            x[this.config.overtimeIndex]
           );
+          return x;
+        });
+      empData.forEach(x => {
+        this.tableData.push([
+          x[this.config.deptIndex],
+          x[this.config.approvalIndex],
+          x[this.config.nameIndex] + '-餐费',
+          ...this.config.mealFee,
+          x[this.config.overtimeIndex],
+          x[this.config.deadlineIndex]
+        ]);
+        if (this.isAfterTime(x[this.config.deadlineIndex])) {
+          this.tableData.push([
+            x[this.config.deptIndex],
+            x[this.config.approvalIndex],
+            x[this.config.nameIndex] + '-交通',
+            ...this.config.trafficFee1,
+            x[this.config.overtimeIndex],
+            x[this.config.deadlineIndex],
+            ...this.config.trafficFee2,
+            this.config.myEndPoint
+          ]);
         }
       });
     };
@@ -68,15 +131,30 @@ export class Page1Component implements OnInit {
    * @description 导出Excel文件
    */
   exportExcel() {
+    if (this.tableData.length === 0) {
+      this.msg.error('当前表格没有可用数据');
+      return;
+    }
     const wb = new Workbook();
-    this.tables.forEach((table, index) => {
-      let tableName = table.name;
-      if (wb.SheetNames.includes(tableName)) {
-        tableName += index;
-      }
-      wb.SheetNames.push(tableName);
-      wb.Sheets[tableName] = utils.json_to_sheet(table.data);
+    const ws = utils.json_to_sheet([this.tableHeader, ...this.tableData], {
+      skipHeader: true
     });
-    wb.writeWorkbook(this.fileName);
+    wb.SheetNames.push(this.config.mySheetName);
+    wb.Sheets[this.config.mySheetName] = ws;
+    wb.writeWorkbook(this.config.myName + '-' + this.config.fileName);
+  }
+
+  isAfterTime(time) {
+    const deadline = moment(time, this.config.timeFormat).tz(
+      this.config.timezone
+    ); //加班截止时间
+    const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
+      this.config.timezone
+    ); //规定打车开始时间
+    return deadline.isSameOrAfter(startTime);
+  }
+
+  formatOverTime(time) {
+    return moment(time, this.config.dateParse).format(this.config.dateFormat);
   }
 }
