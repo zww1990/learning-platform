@@ -1,8 +1,8 @@
 package com.demo.service.impl;
 
-import javax.inject.Named;
+import org.springframework.stereotype.Service;
 import com.demo.service.DemoService;
 
-@Named
+@Service
 public class BServiceImpl implements DemoService {
 }
