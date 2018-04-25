@@ -1,7 +1,6 @@
 package com.demo.test;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,11 +11,9 @@ import com.demo.service.DemoService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
 public class AppTest {
-	@Inject
-	@Named("AServiceImpl")
+	@Resource(name = "AServiceImpl")
 	private DemoService aservice;
-	@Inject
-	@Named("BServiceImpl")
+	@Resource(name = "BServiceImpl")
 	private DemoService bservice;
 
 	@Test
