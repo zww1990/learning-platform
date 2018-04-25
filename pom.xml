@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>org.mybatis.dynamic-sql</groupId>
 			<artifactId>mybatis-dynamic-sql</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -108,7 +108,7 @@
 		</dependency>
 		
 		<!-- javaee -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>javax</groupId>
 		    <artifactId>javaee-api</artifactId>
 		    <version>${javaee.version}</version>
@@ -119,7 +119,7 @@
 		    <artifactId>javaee-web-api</artifactId>
 		    <version>${javaee.version}</version>
 		    <scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!-- log4j -->
 		<dependency>
