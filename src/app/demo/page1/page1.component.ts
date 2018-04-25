@@ -31,6 +31,9 @@ export class Page1Component implements OnInit {
     private http: HttpClient
   ) {}
 
+  /**
+   * @description 初始化
+   */
   ngOnInit() {
     moment.locale('zh-cn');
     this.validateForm = this.fb.group({
@@ -49,8 +52,20 @@ export class Page1Component implements OnInit {
       });
   }
 
+  /**
+   * @description 下一步
+   */
   submitForm() {
     this.isShow = !this.isShow;
+    Object.assign(this.config, this.validateForm.value);
+  }
+
+  /**
+   * @description 上一步
+   */
+  goBack() {
+    this.isShow = !this.isShow;
+    this.tableData = [];
   }
 
   /**
@@ -91,7 +106,7 @@ export class Page1Component implements OnInit {
       this.config.mySheetName = wb.SheetNames[this.config.myPageIndex]; // 个人加班记录明细页索引
       const mySheet = wb.Sheets[this.config.mySheetName];
       this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
-      const empData = utils
+      utils
         .sheet_to_json(empSheet, { header: 1, blankrows: false })
         .filter(x => x[this.config.idIndex] === this.config.myID)
         .map(x => {
@@ -100,29 +115,32 @@ export class Page1Component implements OnInit {
             x[this.config.overtimeIndex]
           );
           return x;
-        });
-      empData.forEach(x => {
-        this.tableData.push([
-          x[this.config.deptIndex],
-          x[this.config.approvalIndex],
-          x[this.config.nameIndex] + '-餐费',
-          ...this.config.mealFee,
-          x[this.config.overtimeIndex],
-          x[this.config.deadlineIndex]
-        ]);
-        if (this.isAfterTime(x[this.config.deadlineIndex])) {
+        })
+        .forEach(x => {
           this.tableData.push([
             x[this.config.deptIndex],
             x[this.config.approvalIndex],
-            x[this.config.nameIndex] + '-交通',
-            ...this.config.trafficFee1,
+            x[this.config.nameIndex] + '-餐费',
+            ...this.config.mealFee,
             x[this.config.overtimeIndex],
-            x[this.config.deadlineIndex],
-            ...this.config.trafficFee2,
-            this.config.myEndPoint
+            x[this.config.deadlineIndex]
           ]);
-        }
-      });
+          if (this.isAfterTime(x[this.config.deadlineIndex])) {
+            this.tableData.push([
+              x[this.config.deptIndex],
+              x[this.config.approvalIndex],
+              x[this.config.nameIndex] + '-交通',
+              ...this.config.trafficFee1,
+              x[this.config.overtimeIndex],
+              x[this.config.deadlineIndex],
+              ...this.config.trafficFee2,
+              this.config.myEndPoint
+            ]);
+          }
+        });
+      if (!this.tableData.length) {
+        this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
+      }
     };
     Workbook.fileReadAs(this.rABS, reader, file);
   }
@@ -141,10 +159,14 @@ export class Page1Component implements OnInit {
     });
     wb.SheetNames.push(this.config.mySheetName);
     wb.Sheets[this.config.mySheetName] = ws;
-    wb.writeWorkbook(this.config.myName + '-' + this.config.fileName);
+    wb.writeWorkbook(`${this.config.myName}-${this.config.fileName}`);
   }
 
-  isAfterTime(time) {
+  /**
+   * @description 加班截止时间是否在规定打车开始时间之后
+   * @param time 加班截止时间
+   */
+  isAfterTime(time: string) {
     const deadline = moment(time, this.config.timeFormat).tz(
       this.config.timezone
     ); // 加班截止时间
@@ -154,7 +176,11 @@ export class Page1Component implements OnInit {
     return deadline.isSameOrAfter(startTime);
   }
 
-  formatOverTime(time) {
+  /**
+   * @description 格式化加班日期
+   * @param time 加班日期
+   */
+  formatOverTime(time: string) {
     return moment(time, this.config.dateParse).format(this.config.dateFormat);
   }
 }

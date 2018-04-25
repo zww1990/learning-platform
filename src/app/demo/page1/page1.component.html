@@ -26,10 +26,13 @@
     <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
     <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
   </nz-upload>
-  <ng-template [ngIf]="this.tableData.length!==0">
-    <div class="table-operations">
+  <div class="table-operations">
+    <button nz-button (click)="goBack()">上一步</button>
+    <ng-template [ngIf]="this.tableData.length!==0">
       <button nz-button (click)="exportExcel()">导出Excel文件</button>
-    </div>
+    </ng-template>
+  </div>
+  <ng-template [ngIf]="this.tableData.length!==0">
     <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">
       <thead nz-thead>
         <tr>
