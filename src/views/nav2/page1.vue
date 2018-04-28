@@ -128,7 +128,7 @@ export default {
           this.params.mySheetName = wb.SheetNames[this.params.myPageIndex]; // 个人加班记录明细页索引
           const mySheet = wb.Sheets[this.params.mySheetName];
           this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
-          const empData = XLSX.utils
+          XLSX.utils
             .sheet_to_json(empSheet, { header: 1, blankrows: false })
             .filter(x => x[this.params.idIndex] === this.params.myID)
             .map(x => {
@@ -137,29 +137,29 @@ export default {
                 x[this.params.overtimeIndex]
               );
               return x;
-            });
-          empData.forEach(x => {
-            this.tableData.push([
-              x[this.params.deptIndex],
-              x[this.params.approvalIndex],
-              x[this.params.nameIndex] + '-餐费',
-              ...this.params.mealFee,
-              x[this.params.overtimeIndex],
-              x[this.params.deadlineIndex]
-            ]);
-            if (this.isAfterTime(x[this.params.deadlineIndex])) {
+            })
+            .forEach(x => {
               this.tableData.push([
                 x[this.params.deptIndex],
                 x[this.params.approvalIndex],
-                x[this.params.nameIndex] + '-交通',
-                ...this.params.trafficFee1,
+                x[this.params.nameIndex] + '-餐费',
+                ...this.params.mealFee,
                 x[this.params.overtimeIndex],
-                x[this.params.deadlineIndex],
-                ...this.params.trafficFee2,
-                this.params.myEndPoint
+                x[this.params.deadlineIndex]
               ]);
-            }
-          });
+              if (this.isAfterTime(x[this.params.deadlineIndex])) {
+                this.tableData.push([
+                  x[this.params.deptIndex],
+                  x[this.params.approvalIndex],
+                  x[this.params.nameIndex] + '-交通',
+                  ...this.params.trafficFee1,
+                  x[this.params.overtimeIndex],
+                  x[this.params.deadlineIndex],
+                  ...this.params.trafficFee2,
+                  this.params.myEndPoint
+                ]);
+              }
+            });
         };
         Workbook.fileReadAs(this.rABS, reader, file);
       }
