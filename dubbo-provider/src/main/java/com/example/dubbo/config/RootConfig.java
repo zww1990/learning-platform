@@ -81,22 +81,22 @@ public class RootConfig {
 
 	@Bean
 	public Queue queue1() {
-		return new Queue("qu.demo1");
+		return QueueBuilder.durable("qu.demo1").withArgument("x-message-ttl", 5000).build();
 	}
 
 	@Bean
 	public Queue queue2() {
-		return new Queue("qu.demo2");
+		return QueueBuilder.durable("qu.demo2").withArgument("x-message-ttl", 5000).build();
 	}
 
 	@Bean
 	public Queue queue3() {
-		return new Queue("qu.demo3");
+		return QueueBuilder.durable("qu.demo3").withArgument("x-message-ttl", 5000).build();
 	}
 
 	@Bean
 	public Queue queue4() {
-		return new Queue("qu.demo4");
+		return QueueBuilder.durable("qu.demo4").withArgument("x-message-ttl", 5000).build();
 	}
 
 	@Bean
