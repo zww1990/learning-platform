@@ -6,9 +6,11 @@ import { LayoutModule } from '@angular/cdk/layout';
 // import { LayoutComponent } from './layout/layout.component';
 import { MaterialModule } from './material/material.module';
 import { MyNavComponent } from './my-nav/my-nav.component';
+import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
+import { MyTableComponent } from './my-table/my-table.component';
 
 const routes: Routes = [
-  { path: '', component: MyNavComponent },
+  { path: '', component: MyTableComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -21,6 +23,6 @@ const routes: Routes = [
     LayoutModule
   ],
   exports: [RouterModule],
-  declarations: [MyNavComponent]
+  declarations: [MyNavComponent, MyDashboardComponent, MyTableComponent]
 })
 export class AppRoutingModule { }
