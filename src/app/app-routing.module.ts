@@ -10,7 +10,9 @@ import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 import { MyTableComponent } from './my-table/my-table.component';
 
 const routes: Routes = [
-  { path: '', component: MyTableComponent },
+  { path: '', component: MyNavComponent },
+  { path: 'dashboard', component: MyDashboardComponent },
+  { path: 'table', component: MyTableComponent },
   { path: '**', redirectTo: '' }
 ];
 
