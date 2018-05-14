@@ -29,7 +29,7 @@ export class Page1Component implements OnInit {
     private msg: NzMessageService,
     private fb: FormBuilder,
     private http: HttpClient
-  ) {}
+  ) { }
 
   /**
    * @description 初始化
@@ -117,15 +117,17 @@ export class Page1Component implements OnInit {
           return x;
         })
         .forEach(x => {
-          this.tableData.push([
-            x[this.config.deptIndex],
-            x[this.config.approvalIndex],
-            x[this.config.nameIndex] + '-餐费',
-            ...this.config.mealFee,
-            x[this.config.overtimeIndex],
-            x[this.config.deadlineIndex]
-          ]);
-          if (this.isAfterTime(x[this.config.deadlineIndex])) {
+          if (this.isAfterDinnerTime(x[this.config.deadlineIndex])) {
+            this.tableData.push([
+              x[this.config.deptIndex],
+              x[this.config.approvalIndex],
+              x[this.config.nameIndex] + '-餐费',
+              ...this.config.mealFee,
+              x[this.config.overtimeIndex],
+              x[this.config.deadlineIndex]
+            ]);
+          }
+          if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
             this.tableData.push([
               x[this.config.deptIndex],
               x[this.config.approvalIndex],
@@ -166,13 +168,23 @@ export class Page1Component implements OnInit {
    * @description 加班截止时间是否在规定打车开始时间之后
    * @param time 加班截止时间
    */
-  isAfterTime(time: string) {
+  isAfterTaxiTime(time: string) {
     const deadline = moment(time, this.config.timeFormat).tz(
       this.config.timezone
     ); // 加班截止时间
     const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
       this.config.timezone
     ); // 规定打车开始时间
+    return deadline.isSameOrAfter(startTime);
+  }
+
+  /**
+   * @description 加班截止时间是否在规定晚饭开始时间之后
+   * @param time 加班截止时间
+   */
+  isAfterDinnerTime(time: string) {
+    const deadline = moment(time, this.config.timeFormat).tz(this.config.timezone);
+    const startTime = moment(this.config.dinnerTime, this.config.timeFormat).tz(this.config.timezone);
     return deadline.isSameOrAfter(startTime);
   }
 

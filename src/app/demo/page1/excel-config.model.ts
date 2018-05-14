@@ -67,6 +67,10 @@ export class ExcelConfig {
    */
   taxiTime: string;
   /**
+   * 规定晚饭开始时间
+   */
+  dinnerTime: string;
+  /**
    * sheet页名称
    */
   mySheetName: string;
