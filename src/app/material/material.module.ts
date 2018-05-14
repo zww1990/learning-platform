@@ -82,6 +82,7 @@ import {
     MatPseudoCheckboxModule
   ],
   exports: [
+    CommonModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -122,4 +123,4 @@ import {
   ],
   declarations: []
 })
-export class MaterialModule {}
+export class MaterialModule { }
