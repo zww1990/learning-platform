@@ -16,6 +16,12 @@ export class MyTableComponent implements OnInit {
   displayedColumns = ['id', 'name'];
 
   ngOnInit() {
+    this.paginator._intl.firstPageLabel = '第一页';
+    this.paginator._intl.lastPageLabel = '最后一页';
+    this.paginator._intl.nextPageLabel = '下一页';
+    this.paginator._intl.previousPageLabel = '上一页';
+    this.paginator._intl.itemsPerPageLabel = '每页数量';
+    this.paginator._intl.getRangeLabel = (page: number, pageSize: number, length: number) => `共 ${length} 条`;
     this.dataSource = new MyTableDataSource(this.paginator, this.sort);
   }
 }
