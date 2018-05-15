@@ -15,6 +15,7 @@
   "timeFormat": "HH:mm:ss",
   "timezone": "Asia/Shanghai",
   "taxiTime": "21:00:00",
+  "dinnerTime": "20:00:00",
   "mySheetName": "",
   "fileName": "",
   "mealFee": [

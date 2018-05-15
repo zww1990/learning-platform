@@ -139,15 +139,17 @@ export default {
               return x;
             })
             .forEach(x => {
-              this.tableData.push([
-                x[this.params.deptIndex],
-                x[this.params.approvalIndex],
-                x[this.params.nameIndex] + '-餐费',
-                ...this.params.mealFee,
-                x[this.params.overtimeIndex],
-                x[this.params.deadlineIndex]
-              ]);
-              if (this.isAfterTime(x[this.params.deadlineIndex])) {
+              if (this.isAfterDinnerTime(x[this.params.deadlineIndex])) {
+                this.tableData.push([
+                  x[this.params.deptIndex],
+                  x[this.params.approvalIndex],
+                  x[this.params.nameIndex] + '-餐费',
+                  ...this.params.mealFee,
+                  x[this.params.overtimeIndex],
+                  x[this.params.deadlineIndex]
+                ]);
+              }
+              if (this.isAfterTaxiTime(x[this.params.deadlineIndex])) {
                 this.tableData.push([
                   x[this.params.deptIndex],
                   x[this.params.approvalIndex],
@@ -168,13 +170,23 @@ export default {
     formatOverTime(time) {
       return moment(time, this.params.dateParse).format(this.params.dateFormat);
     },
-    isAfterTime(time) {
+    isAfterTaxiTime(time) {
       const deadline = moment(time, this.params.timeFormat).tz(
         this.params.timezone
       ); //加班截止时间
       const startTime = moment(this.params.taxiTime, this.params.timeFormat).tz(
         this.params.timezone
       ); //规定打车开始时间
+      return deadline.isSameOrAfter(startTime);
+    },
+    isAfterDinnerTime(time) {
+      const deadline = moment(time, this.params.timeFormat).tz(
+        this.params.timezone
+      );
+      const startTime = moment(
+        this.params.dinnerTime,
+        this.params.timeFormat
+      ).tz(this.params.timezone);
       return deadline.isSameOrAfter(startTime);
     }
   },
