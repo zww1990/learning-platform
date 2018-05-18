@@ -115,28 +115,6 @@ export class LayoutComponent implements OnInit {
   }
 
   /**
-   * @description 清空所有标签页
-   */
-  // closeAllTabs() {
-  //   if (this.tabs.length < 2) {
-  //     return;
-  //   }
-  //   this.openDefaultTab();
-  //   this.selectTab(this.tabs[0], 0);
-  // }
-
-  /**
-   * @description 关闭除当前打开外的其他所有标签页
-   */
-  // closeOtherTabs() {
-  //   if (this.tabs.length < 2) {
-  //     return;
-  //   }
-  //   this.tabs = [this.tabs[this.selectedIndex]];
-  //   this.selectedIndex = 0;
-  // }
-
-  /**
    * @description 用户退出登录
    */
   logout() {
