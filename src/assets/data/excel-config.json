@@ -13,6 +13,7 @@
   "dateParse": "MM/DD/YY",
   "dateFormat": "YYYY/MM/DD",
   "timeFormat": "HH:mm:ss",
+  "shortTimeFormat": "HH:mm",
   "timezone": "Asia/Shanghai",
   "taxiTime": "21:00:00",
   "dinnerTime": "20:00:00",
@@ -39,7 +40,7 @@
     "T01107",
     "I00084",
     "1",
-    "",
+    "0",
     "",
     "",
     "2017-09",
@@ -50,5 +51,8 @@
     "0",
     "990000"
   ],
-  "trafficFee2": ["公司（来广营朝来科技园）", ""]
+  "trafficFee2": ["公司（来广营朝来科技园）", ""],
+  "moneyIndex": 7,
+  "startTimeIndex": 20,
+  "endTimeIndex": 22
 }

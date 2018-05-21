@@ -59,6 +59,10 @@ export class ExcelConfig {
    */
   timeFormat: string;
   /**
+   * 格式化时间样式
+   */
+  shortTimeFormat: string;
+  /**
    * 中国时区
    */
   timezone: string;
@@ -90,4 +94,16 @@ export class ExcelConfig {
    * 交通费
    */
   trafficFee2: string[];
+  /**
+   * 报销金额索引
+   */
+  moneyIndex: number;
+  /**
+   * 上车时间索引
+   */
+  startTimeIndex: number;
+  /**
+   * 下车时间索引
+   */
+  endTimeIndex: number;
 }
