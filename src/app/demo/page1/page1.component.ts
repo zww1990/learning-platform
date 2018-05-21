@@ -220,6 +220,11 @@ export class Page1Component implements OnInit {
     return moment(time, this.config.dateParse).format(this.config.dateFormat);
   }
 
+  /**
+   * @description 单元格编辑开始
+   * @param row 表格行索引
+   * @param col 表格列索引
+   */
   startEdit(row: number, col: number) {
     if (col === this.config.moneyIndex) {
       this.editMoneyCache[row].edit = true;
@@ -230,6 +235,11 @@ export class Page1Component implements OnInit {
     }
   }
 
+  /**
+   * @description 单元格编辑结束
+   * @param row 表格行索引
+   * @param col 表格列索引
+   */
   finishEdit(row: number, col: number) {
     if (col === this.config.moneyIndex) {
       this.editMoneyCache[row].edit = false;
