@@ -24,12 +24,15 @@ export class Page1Component implements OnInit {
   validateForm: FormGroup;
   isShow = true;
   config: ExcelConfig;
+  editMoneyCache = {};
+  editStartTimeCache = {};
+  editEndTimeCache = {};
 
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
     private http: HttpClient
-  ) { }
+  ) {}
 
   /**
    * @description 初始化
@@ -136,12 +139,29 @@ export class Page1Component implements OnInit {
               x[this.config.overtimeIndex],
               x[this.config.deadlineIndex],
               ...this.config.trafficFee2,
-              this.config.myEndPoint
+              this.config.myEndPoint,
+              ''
             ]);
           }
         });
       if (!this.tableData.length) {
         this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
+      } else {
+        this.tableData.forEach((x, i) => {
+          x[this.config.moneyIndex] = parseFloat(x[this.config.moneyIndex]);
+          this.editMoneyCache[i] = {
+            edit: false,
+            value: x[this.config.moneyIndex]
+          };
+          this.editStartTimeCache[i] = {
+            edit: false,
+            value: null
+          };
+          this.editEndTimeCache[i] = {
+            edit: false,
+            value: null
+          };
+        });
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);
@@ -183,8 +203,12 @@ export class Page1Component implements OnInit {
    * @param time 加班截止时间
    */
   isAfterDinnerTime(time: string) {
-    const deadline = moment(time, this.config.timeFormat).tz(this.config.timezone);
-    const startTime = moment(this.config.dinnerTime, this.config.timeFormat).tz(this.config.timezone);
+    const deadline = moment(time, this.config.timeFormat).tz(
+      this.config.timezone
+    );
+    const startTime = moment(this.config.dinnerTime, this.config.timeFormat).tz(
+      this.config.timezone
+    );
     return deadline.isSameOrAfter(startTime);
   }
 
@@ -194,5 +218,44 @@ export class Page1Component implements OnInit {
    */
   formatOverTime(time: string) {
     return moment(time, this.config.dateParse).format(this.config.dateFormat);
+  }
+
+  startEdit(row: number, col: number) {
+    if (col === this.config.moneyIndex) {
+      this.editMoneyCache[row].edit = true;
+    } else if (col === this.config.startTimeIndex) {
+      this.editStartTimeCache[row].edit = true;
+    } else if (col === this.config.endTimeIndex) {
+      this.editEndTimeCache[row].edit = true;
+    }
+  }
+
+  finishEdit(row: number, col: number) {
+    if (col === this.config.moneyIndex) {
+      this.editMoneyCache[row].edit = false;
+      this.tableData.forEach((x, i) => {
+        if (i === row) {
+          x[col] = this.editMoneyCache[row].value;
+        }
+      });
+    } else if (col === this.config.startTimeIndex) {
+      this.editStartTimeCache[row].edit = false;
+      this.tableData.forEach((x, i) => {
+        if (i === row) {
+          x[col] = moment(this.editStartTimeCache[row].value).format(
+            this.config.shortTimeFormat
+          );
+        }
+      });
+    } else if (col === this.config.endTimeIndex) {
+      this.editEndTimeCache[row].edit = false;
+      this.tableData.forEach((x, i) => {
+        if (i === row) {
+          x[col] = moment(this.editEndTimeCache[row].value).format(
+            this.config.shortTimeFormat
+          );
+        }
+      });
+    }
   }
 }

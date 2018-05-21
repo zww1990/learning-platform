@@ -42,8 +42,46 @@
         </tr>
       </thead>
       <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-          <td nz-td *ngFor="let item of data">{{item}}</td>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data;index as row">
+          <td nz-td *ngFor="let item of data;index as col">
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container [ngSwitch]="col">
+                  <ng-template [ngSwitchCase]="config.moneyIndex">
+                    <ng-template [ngIf]="!editMoneyCache[row].edit">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editMoneyCache[row].edit">
+                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0"></nz-input-number>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                  </ng-template>
+                  <ng-template [ngSwitchCase]="config.startTimeIndex">
+                    <ng-template [ngIf]="!editStartTimeCache[row].edit">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editStartTimeCache[row].edit">
+                      <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                  </ng-template>
+                  <ng-template [ngSwitchCase]="config.endTimeIndex">
+                    <ng-template [ngIf]="!editEndTimeCache[row].edit">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editEndTimeCache[row].edit">
+                      <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                  </ng-template>
+                  <ng-template ngSwitchDefault>{{item}}</ng-template>
+                </ng-container>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </nz-table>
