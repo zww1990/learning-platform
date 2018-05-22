@@ -88,6 +88,10 @@ export class ExcelConfig {
    */
   mealFee: string[];
   /**
+   * 餐费
+   */
+  mealFee2: string[];
+  /**
    * 交通费
    */
   trafficFee1: string[];
@@ -95,6 +99,10 @@ export class ExcelConfig {
    * 交通费
    */
   trafficFee2: string[];
+  /**
+   * 交通费
+   */
+  trafficFee3: string[];
   /**
    * 报销金额索引
    */
