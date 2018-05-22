@@ -1,5 +1,6 @@
 /**
- * excel配置类
+ * @description excel配置类
+ * @author zww
  */
 export class ExcelConfig {
   /**
@@ -99,6 +100,10 @@ export class ExcelConfig {
    */
   moneyIndex: number;
   /**
+   * 报销金额类型索引
+   */
+  moneyTypeIndex: number;
+  /**
    * 上车时间索引
    */
   startTimeIndex: number;
@@ -106,4 +111,12 @@ export class ExcelConfig {
    * 下车时间索引
    */
   endTimeIndex: number;
+  /**
+   * 餐费类型
+   */
+  mealFeeType: string;
+  /**
+   * 交通费类型
+   */
+  trafficFeeType: string;
 }

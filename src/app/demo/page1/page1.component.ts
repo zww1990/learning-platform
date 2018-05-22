@@ -127,7 +127,15 @@ export class Page1Component implements OnInit {
               x[this.config.nameIndex] + '-餐费',
               ...this.config.mealFee,
               x[this.config.overtimeIndex],
-              x[this.config.deadlineIndex]
+              x[this.config.deadlineIndex],
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              '',
+              ''
             ]);
           }
           if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
@@ -140,6 +148,10 @@ export class Page1Component implements OnInit {
               x[this.config.deadlineIndex],
               ...this.config.trafficFee2,
               this.config.myEndPoint,
+              '',
+              '',
+              '',
+              '',
               ''
             ]);
           }
@@ -148,18 +160,22 @@ export class Page1Component implements OnInit {
         this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
       } else {
         this.tableData.forEach((x, i) => {
-          x[this.config.moneyIndex] = parseFloat(x[this.config.moneyIndex]);
+          const isTraffic =
+            x[this.config.moneyTypeIndex] === this.config.trafficFeeType;
           this.editMoneyCache[i] = {
             edit: false,
-            value: x[this.config.moneyIndex]
+            value: x[this.config.moneyIndex],
+            isTraffic: isTraffic
           };
           this.editStartTimeCache[i] = {
             edit: false,
-            value: null
+            value: null,
+            isTraffic: isTraffic
           };
           this.editEndTimeCache[i] = {
             edit: false,
-            value: null
+            value: null,
+            isTraffic: isTraffic
           };
         });
       }
