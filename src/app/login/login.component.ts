@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      username: ['蒙奇·D·路飞', [Validators.required]],
+      password: ['20180522', [Validators.required]]
     });
   }
 
@@ -74,5 +74,4 @@ export class LoginComponent implements OnInit {
   //       this.message.error('用户名或密码错误！');
   //     });
   // }
-
 }
