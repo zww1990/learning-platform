@@ -48,31 +48,32 @@
               <div class="editable-cell-text-wrapper">
                 <ng-container [ngSwitch]="col">
                   <ng-template [ngSwitchCase]="config.moneyIndex">
-                    <ng-template [ngIf]="!editMoneyCache[row].edit">
+                    <ng-template [ngIf]="!editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
                       {{item}}
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
-                    <ng-template [ngIf]="editMoneyCache[row].edit">
+                    <ng-template [ngIf]="editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
                       <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0"></nz-input-number>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
+                    <ng-template [ngIf]="!editMoneyCache[row].isTraffic">{{item}}</ng-template>
                   </ng-template>
                   <ng-template [ngSwitchCase]="config.startTimeIndex">
-                    <ng-template [ngIf]="!editStartTimeCache[row].edit">
+                    <ng-template [ngIf]="!editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
                       {{item}}
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
-                    <ng-template [ngIf]="editStartTimeCache[row].edit">
+                    <ng-template [ngIf]="editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
                       <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                   </ng-template>
                   <ng-template [ngSwitchCase]="config.endTimeIndex">
-                    <ng-template [ngIf]="!editEndTimeCache[row].edit">
+                    <ng-template [ngIf]="!editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
                       {{item}}
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
-                    <ng-template [ngIf]="editEndTimeCache[row].edit">
+                    <ng-template [ngIf]="editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
                       <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
