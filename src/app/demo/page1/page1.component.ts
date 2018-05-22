@@ -109,6 +109,10 @@ export class Page1Component implements OnInit {
       this.config.mySheetName = wb.SheetNames[this.config.myPageIndex]; // 个人加班记录明细页索引
       const mySheet = wb.Sheets[this.config.mySheetName];
       this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
+      const approvalIds = utils
+        .sheet_to_json(empSheet, { raw: true, blankrows: false, header: 1 })
+        .filter(x => `${x[this.config.idIndex]}` === this.config.myID)
+        .map(x => `${x[this.config.approvalIndex]}`); // 审批单号数组
       utils
         .sheet_to_json(empSheet, { header: 1, blankrows: false })
         .filter(x => x[this.config.idIndex] === this.config.myID)
@@ -119,11 +123,11 @@ export class Page1Component implements OnInit {
           );
           return x;
         })
-        .forEach(x => {
+        .forEach((x, i) => {
           if (this.isAfterDinnerTime(x[this.config.deadlineIndex])) {
             this.tableData.push([
               x[this.config.deptIndex],
-              x[this.config.approvalIndex],
+              approvalIds[i],
               x[this.config.nameIndex] + '-餐费',
               ...this.config.mealFee,
               x[this.config.overtimeIndex],
@@ -134,7 +138,7 @@ export class Page1Component implements OnInit {
           if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
             this.tableData.push([
               x[this.config.deptIndex],
-              x[this.config.approvalIndex],
+              approvalIds[i],
               x[this.config.nameIndex] + '-交通',
               ...this.config.trafficFee1,
               x[this.config.overtimeIndex],
