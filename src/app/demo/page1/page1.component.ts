@@ -128,14 +128,7 @@ export class Page1Component implements OnInit {
               ...this.config.mealFee,
               x[this.config.overtimeIndex],
               x[this.config.deadlineIndex],
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              '',
-              ''
+              ...this.config.mealFee2
             ]);
           }
           if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
@@ -148,11 +141,7 @@ export class Page1Component implements OnInit {
               x[this.config.deadlineIndex],
               ...this.config.trafficFee2,
               this.config.myEndPoint,
-              '',
-              '',
-              '',
-              '',
-              ''
+              ...this.config.trafficFee3
             ]);
           }
         });

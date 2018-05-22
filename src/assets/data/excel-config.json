@@ -35,6 +35,7 @@
     "0",
     "990000"
   ],
+  "mealFee2": ["", "", "", "", "", "", "", ""],
   "trafficFee1": [
     "5001",
     "T01107",
@@ -52,6 +53,7 @@
     "990000"
   ],
   "trafficFee2": ["公司（来广营朝来科技园）", ""],
+  "trafficFee3": ["", "", "", "", ""],
   "moneyIndex": 7,
   "moneyTypeIndex": 4,
   "startTimeIndex": 20,
