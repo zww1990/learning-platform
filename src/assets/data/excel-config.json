@@ -19,12 +19,9 @@
   "dinnerTime": "20:00:00",
   "mySheetName": "",
   "fileName": "",
-  "mealFee": [
-    "5001",
-    "T01106",
-    "I00002",
-    "1",
-    50,
+  "mealFee": 50,
+  "mealFee1": ["5001", "T01106", "I00002", "1"],
+  "mealFee2": [
     "",
     "",
     "2017-09",
@@ -35,7 +32,7 @@
     "0",
     "990000"
   ],
-  "mealFee2": ["", "", "", "", "", "", "", ""],
+  "mealFee3": ["", "", "", "", "", "", "", ""],
   "trafficFee1": [
     "5001",
     "T01107",
@@ -59,5 +56,12 @@
   "startTimeIndex": 20,
   "endTimeIndex": 22,
   "mealFeeType": "T01106",
-  "trafficFeeType": "T01107"
+  "trafficFeeType": "T01107",
+  "durationIndex": 17,
+  "duration4": 4,
+  "duration8": 8,
+  "typeIndex": 7,
+  "type1": "法定",
+  "type2": "周末",
+  "type3": "延时"
 }

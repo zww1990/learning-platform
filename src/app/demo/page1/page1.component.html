@@ -31,6 +31,8 @@
     <ng-template [ngIf]="this.tableData.length!==0">
       <button nz-button (click)="exportExcel()">导出Excel文件</button>
     </ng-template>
+    员工编号：{{config.myID}}
+    下车地点：{{config.myEndPoint}}
   </div>
   <ng-template [ngIf]="this.tableData.length!==0">
     <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">

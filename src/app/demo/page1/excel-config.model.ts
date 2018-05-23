@@ -86,11 +86,19 @@ export class ExcelConfig {
   /**
    * 餐费
    */
-  mealFee: string[];
+  mealFee: number;
+  /**
+   * 餐费
+   */
+  mealFee1: string[];
   /**
    * 餐费
    */
   mealFee2: string[];
+  /**
+   * 餐费
+   */
+  mealFee3: string[];
   /**
    * 交通费
    */
@@ -127,4 +135,32 @@ export class ExcelConfig {
    * 交通费类型
    */
   trafficFeeType: string;
+  /**
+   * 加班时长索引
+   */
+  durationIndex: number;
+  /**
+   * 加班时长
+   */
+  duration4: number;
+  /**
+   * 加班时长
+   */
+  duration8: number;
+  /**
+   * 加班类型索引
+   */
+  typeIndex: number;
+  /**
+   * 法定
+   */
+  type1: string;
+  /**
+   * 周末
+   */
+  type2: string;
+  /**
+   * 延时
+   */
+  type3: string;
 }

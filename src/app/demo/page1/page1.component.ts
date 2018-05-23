@@ -124,16 +124,48 @@ export class Page1Component implements OnInit {
           return x;
         })
         .forEach((x, i) => {
-          if (this.isAfterDinnerTime(x[this.config.deadlineIndex])) {
-            this.tableData.push([
-              x[this.config.deptIndex],
-              approvalIds[i],
-              x[this.config.nameIndex] + '-餐费',
-              ...this.config.mealFee,
-              x[this.config.overtimeIndex],
-              x[this.config.deadlineIndex],
-              ...this.config.mealFee2
-            ]);
+          if (x[this.config.typeIndex] === this.config.type3) {
+            if (this.isAfterDinnerTime(x[this.config.deadlineIndex])) {
+              this.tableData.push([
+                x[this.config.deptIndex],
+                approvalIds[i],
+                x[this.config.nameIndex] + '-餐费',
+                ...this.config.mealFee1,
+                this.config.mealFee,
+                ...this.config.mealFee2,
+                x[this.config.overtimeIndex],
+                x[this.config.deadlineIndex],
+                ...this.config.mealFee3
+              ]);
+            }
+          } else if (
+            [this.config.type1, this.config.type2].includes(
+              x[this.config.typeIndex]
+            )
+          ) {
+            const duration = parseFloat(x[this.config.durationIndex]);
+            let mealFee = 0;
+            if (
+              this.config.duration4 <= duration &&
+              duration < this.config.duration8
+            ) {
+              mealFee = this.config.mealFee;
+            } else if (duration >= this.config.duration8) {
+              mealFee = this.config.mealFee * 2;
+            }
+            if (mealFee > 0) {
+              this.tableData.push([
+                x[this.config.deptIndex],
+                approvalIds[i],
+                x[this.config.nameIndex] + '-餐费',
+                ...this.config.mealFee1,
+                mealFee,
+                ...this.config.mealFee2,
+                x[this.config.overtimeIndex],
+                x[this.config.deadlineIndex],
+                ...this.config.mealFee3
+              ]);
+            }
           }
           if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
             this.tableData.push([
