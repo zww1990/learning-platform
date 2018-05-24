@@ -76,18 +76,27 @@ export class LayoutComponent implements OnInit {
    */
   openChange(menu: MenuItem) {
     this.menus.forEach(child => {
-      child.selected = false;
-      if (menu.parentMenuId === child.menuId) {
+      if (child.menuId === menu.parentMenuId) {
         child.selected = true;
+        if (child.children && child.children.length) {
+          child.children.forEach(item => {
+            item.selected = item.menuId === menu.menuId;
+          });
+        }
+      } else {
+        child.selected = false;
       }
-      if (child.children && child.children.length) {
-        child.children.forEach(item => {
-          item.selected = false;
-          if (menu.menuId === item.menuId) {
-            child.selected = true;
-            item.selected = true;
-          }
-        });
+    });
+  }
+
+  /**
+   * @description 菜单展开回调
+   * @param menu 菜单
+   */
+  openHandler(menu: MenuItem) {
+    this.menus.forEach(child => {
+      if (child.menuId !== menu.menuId) {
+        child.selected = false;
       }
     });
   }
@@ -109,8 +118,9 @@ export class LayoutComponent implements OnInit {
    */
   closeTab(tab: MenuItem) {
     SimpleReuseStrategy.deleteRouteSnapshot(tab.menuUrl);
-    this.tabs.splice(this.tabs.indexOf(tab), 1);
+    this.tabs = this.tabs.filter(item => item.menuId !== tab.menuId);
     this.selectedIndex = this.tabs.length - 1;
+    this.openChange(this.tabs[this.selectedIndex]);
     this.router.navigate([this.tabs[this.selectedIndex].menuUrl]);
   }
 
