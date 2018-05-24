@@ -59,7 +59,7 @@ export class LayoutComponent implements OnInit {
    * @param menu 菜单
    */
   clickMenu(menu: MenuItem) {
-    const index = this.tabs.findIndex(m => m === menu);
+    const index = this.tabs.findIndex(item => item.menuId === menu.menuId);
     if (index === -1) {
       this.tabs.push(menu);
       this.selectedIndex = this.tabs.length - 1;
