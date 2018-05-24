@@ -104,10 +104,8 @@ export class LayoutComponent implements OnInit {
   /**
    * @description 选中某个标签页
    * @param tab 标签页
-   * @param index 索引
    */
-  selectTab(tab: MenuItem, index: number) {
-    this.selectedIndex = index;
+  selectTab(tab: MenuItem) {
     this.openChange(tab);
     this.router.navigate([tab.menuUrl]);
   }
