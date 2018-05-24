@@ -49,7 +49,8 @@ export class LayoutComponent implements OnInit {
     this.tabs = [
       {
         menuName: '首页',
-        menuUrl: ''
+        menuUrl: '',
+        allowDelete: false
       }
     ];
   }
