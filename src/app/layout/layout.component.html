@@ -4,7 +4,7 @@
       <img src="/assets/images/logo-nav.png" *ngIf="!isCollapsed">
       <img src="/assets/images/angular.svg" *ngIf="isCollapsed">
     </div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <ng-template ngFor let-child [ngForOf]="menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
