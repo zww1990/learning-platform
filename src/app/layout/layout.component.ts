@@ -77,15 +77,11 @@ export class LayoutComponent implements OnInit {
    */
   openChange(menu: MenuItem) {
     this.menus.forEach(child => {
-      if (child.menuId === menu.parentMenuId) {
-        child.selected = true;
-        if (child.children && child.children.length) {
-          child.children.forEach(item => {
-            item.selected = item.menuId === menu.menuId;
-          });
-        }
-      } else {
-        child.selected = false;
+      child.selected = child.menuId === menu.parentMenuId && !this.isCollapsed;
+      if (child.children && child.children.length) {
+        child.children.forEach(item => {
+          item.selected = item.menuId === menu.menuId;
+        });
       }
     });
   }
