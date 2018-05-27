@@ -1,31 +1,93 @@
-<nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
-  <p class="ant-upload-drag-icon">
-    <i class="anticon anticon-inbox"></i>
-  </p>
-  <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
-  <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
-</nz-upload>
-<ng-template [ngIf]="tables.length!==0">
+<ng-template [ngIf]="this.isShow">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'inline'">
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input formControlName="myID" placeholder="请输入员工编号">
+        <nz-form-explain *ngIf="validateForm.get('myID').dirty && validateForm.get('myID').errors">请输入员工编号！</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <input nz-input formControlName="myEndPoint" placeholder="请输入下车地点">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">下一步</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template [ngIf]="!this.isShow">
+  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
+    <p class="ant-upload-drag-icon">
+      <i class="anticon anticon-inbox"></i>
+    </p>
+    <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
+    <p class="ant-upload-hint">将文件拖到此处或点击上传，只能上传xls/xlsx文件。</p>
+  </nz-upload>
   <div class="table-operations">
-    <button nz-button (click)="exportExcel()">导出Excel文件</button>
+    <button nz-button (click)="goBack()">上一步</button>
+    <ng-template [ngIf]="this.tableData.length!==0">
+      <button nz-button (click)="exportExcel()">导出Excel文件</button>
+    </ng-template>
+    员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
   </div>
-  <nz-tabset [nzTabPosition]="'bottom'">
-    <nz-tab *ngFor="let table of tables">
-      <ng-template #nzTabHeading>{{table.name}}</ng-template>
-      <nz-table #nzTable [nzDataSource]="table.data" [nzPageSize]="10" [nzShowTotal]="true">
-        <thead nz-thead>
-          <tr>
-            <th nz-th *ngFor="let item of table.header">
-              <span>{{item}}</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody nz-tbody>
-          <tr nz-tbody-tr *ngFor="let data of nzTable.data">
-            <td nz-td *ngFor="let item of table.header">{{data[item]}}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </nz-tab>
-  </nz-tabset>
+  <ng-template [ngIf]="this.tableData.length!==0">
+    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">
+      <thead nz-thead>
+        <tr>
+          <th nz-th *ngFor="let item of this.tableHeader" [nzWidth]="'150px'">
+            <span>{{item}}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody nz-tbody>
+        <tr nz-tbody-tr *ngFor="let data of nzTable.data;index as row">
+          <td nz-td *ngFor="let item of data;index as col">
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container [ngSwitch]="col">
+                  <ng-template [ngSwitchCase]="config.moneyIndex">
+                    <ng-template [ngIf]="!editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
+                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0" [nzPlaceHolder]="'交通费'"></nz-input-number>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="!editMoneyCache[row].isTraffic">{{item}}</ng-template>
+                  </ng-template>
+                  <ng-template [ngSwitchCase]="config.startTimeIndex">
+                    <ng-template [ngIf]="!editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
+                      <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                        [nzHideDisabledOptions]="true" [nzClearText]="'清除上车时间'"></nz-time-picker>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                  </ng-template>
+                  <ng-template [ngSwitchCase]="config.endTimeIndex">
+                    <ng-template [ngIf]="!editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
+                      {{item}}
+                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    </ng-template>
+                    <ng-template [ngIf]="editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
+                      <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                        [nzHideDisabledOptions]="true" [nzClearText]="'清除下车时间'"></nz-time-picker>
+                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    </ng-template>
+                  </ng-template>
+                  <ng-template ngSwitchDefault>{{item}}</ng-template>
+                </ng-container>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-template>
 </ng-template>

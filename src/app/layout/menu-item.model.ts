@@ -31,6 +31,10 @@ export class MenuItem {
    * @description 子菜单
    */
   children?: MenuItem[];
+  /**
+   * @description 是否允许删除
+   */
+  allowDelete?: boolean;
 
   /**
    * @description 按路由地址递归查询单个菜单
