@@ -1,9 +1,15 @@
 [
   {
     "menuId": 1,
-    "menuName": "示例1",
+    "menuName": "加班",
     "menuIcon": "anticon anticon-appstore",
     "parentMenuId": null
+  },
+  {
+    "menuId": 11,
+    "menuName": "我的加班",
+    "menuUrl": "/demo/page1",
+    "parentMenuId": 1
   },
   {
     "menuId": 2,
@@ -12,26 +18,20 @@
     "parentMenuId": null
   },
   {
-    "menuId": 11,
-    "menuName": "示例1.1",
-    "menuUrl": "/demo/page1",
-    "parentMenuId": 1
-  },
-  {
-    "menuId": 12,
-    "menuName": "示例1.2",
+    "menuId": 21,
+    "menuName": "示例2.1",
     "menuUrl": "/demo/page2",
-    "parentMenuId": 1
+    "parentMenuId": 2
   },
   {
-    "menuId": 23,
-    "menuName": "示例2.3",
+    "menuId": 22,
+    "menuName": "示例2.2",
     "menuUrl": "/demo/page3",
     "parentMenuId": 2
   },
   {
-    "menuId": 24,
-    "menuName": "示例2.4",
+    "menuId": 23,
+    "menuName": "示例2.3",
     "menuUrl": "/demo/page4",
     "parentMenuId": 2
   }

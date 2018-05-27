@@ -49,7 +49,8 @@ export class LayoutComponent implements OnInit {
     this.tabs = [
       {
         menuName: '首页',
-        menuUrl: ''
+        menuUrl: '',
+        allowDelete: false
       }
     ];
   }
@@ -59,7 +60,7 @@ export class LayoutComponent implements OnInit {
    * @param menu 菜单
    */
   clickMenu(menu: MenuItem) {
-    const index = this.tabs.findIndex(m => m === menu);
+    const index = this.tabs.findIndex(item => item.menuId === menu.menuId);
     if (index === -1) {
       this.tabs.push(menu);
       this.selectedIndex = this.tabs.length - 1;
@@ -76,18 +77,23 @@ export class LayoutComponent implements OnInit {
    */
   openChange(menu: MenuItem) {
     this.menus.forEach(child => {
-      child.selected = false;
-      if (menu.parentMenuId === child.menuId) {
-        child.selected = true;
-      }
+      child.selected = child.menuId === menu.parentMenuId && !this.isCollapsed;
       if (child.children && child.children.length) {
         child.children.forEach(item => {
-          item.selected = false;
-          if (menu.menuId === item.menuId) {
-            child.selected = true;
-            item.selected = true;
-          }
+          item.selected = item.menuId === menu.menuId;
         });
+      }
+    });
+  }
+
+  /**
+   * @description 菜单展开回调
+   * @param menu 菜单
+   */
+  openHandler(menu: MenuItem) {
+    this.menus.forEach(child => {
+      if (child.menuId !== menu.menuId) {
+        child.selected = false;
       }
     });
   }
@@ -95,10 +101,8 @@ export class LayoutComponent implements OnInit {
   /**
    * @description 选中某个标签页
    * @param tab 标签页
-   * @param index 索引
    */
-  selectTab(tab: MenuItem, index: number) {
-    this.selectedIndex = index;
+  selectTab(tab: MenuItem) {
     this.openChange(tab);
     this.router.navigate([tab.menuUrl]);
   }
@@ -109,41 +113,20 @@ export class LayoutComponent implements OnInit {
    */
   closeTab(tab: MenuItem) {
     SimpleReuseStrategy.deleteRouteSnapshot(tab.menuUrl);
-    this.tabs.splice(this.tabs.indexOf(tab), 1);
+    this.tabs = this.tabs.filter(item => item.menuId !== tab.menuId);
     this.selectedIndex = this.tabs.length - 1;
+    this.openChange(this.tabs[this.selectedIndex]);
     this.router.navigate([this.tabs[this.selectedIndex].menuUrl]);
   }
-
-  /**
-   * @description 清空所有标签页
-   */
-  // closeAllTabs() {
-  //   if (this.tabs.length < 2) {
-  //     return;
-  //   }
-  //   this.openDefaultTab();
-  //   this.selectTab(this.tabs[0], 0);
-  // }
-
-  /**
-   * @description 关闭除当前打开外的其他所有标签页
-   */
-  // closeOtherTabs() {
-  //   if (this.tabs.length < 2) {
-  //     return;
-  //   }
-  //   this.tabs = [this.tabs[this.selectedIndex]];
-  //   this.selectedIndex = 0;
-  // }
 
   /**
    * @description 用户退出登录
    */
   logout() {
     this.confirm.confirm({
-      title: '退出提示',
-      content: '您确认要退出APP吗？',
-      onOk: () => {
+      nzTitle: '退出提示',
+      nzContent: '您确认要退出APP吗？',
+      nzOnOk: () => {
         this.userService.removeSessionUser();
         this.router.navigate(['/login']);
       }

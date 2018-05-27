@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      username: ['我是格鲁特', [Validators.required]],
+      password: ['20180522', [Validators.required]]
     });
   }
 
@@ -74,27 +74,4 @@ export class LoginComponent implements OnInit {
   //       this.message.error('用户名或密码错误！');
   //     });
   // }
-
-  /**
-   * @description 找回密码
-   */
-  forgotPassword() {
-    const username = this.loginForm.get('username');
-    if (!username.value) {
-      username.markAsDirty();
-      return;
-    }
-    // const value = username.value.trim();
-    // if (!isNaN(value)) {
-    //   this.message.error('您输入的用户名不正确！');
-    //   return;
-    // }
-    // const res = this.cas.casForgotPassword(value);
-    // if (!res.data) {
-    //   this.message.error('您输入的用户名不存在！');
-    //   return;
-    // }
-    // const url = this.cas.casForgotPasswordUrl(res.data, value);
-    // window.open(url);
-  }
 }
