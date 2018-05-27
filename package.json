@@ -10,6 +10,7 @@
     "start": "ng serve -pc proxy.conf.js",
     "build": "ng build --prod --extract-licenses false",
     "build-dev": "ng build --prod --extract-licenses false -e dev",
+    "build-pro": "ng build --prod --extract-licenses false -e pro",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
