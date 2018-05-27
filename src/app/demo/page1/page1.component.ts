@@ -194,12 +194,12 @@ export class Page1Component implements OnInit {
           };
           this.editStartTimeCache[i] = {
             edit: false,
-            value: null,
+            value: this.defaultOpenValue(),
             isTraffic: isTraffic
           };
           this.editEndTimeCache[i] = {
             edit: false,
-            value: null,
+            value: this.defaultOpenValue(),
             isTraffic: isTraffic
           };
         });
@@ -308,5 +308,26 @@ export class Page1Component implements OnInit {
         }
       });
     }
+  }
+
+  /**
+   * @description 禁止选择部分小时
+   */
+  disabledHours(): number[] {
+    const hours: number[] = [];
+    for (let i = 0; i < 21; i++) {
+      hours.push(i);
+    }
+    return hours;
+  }
+
+  /**
+   * @description 设置面板打开时默认选中的值
+   */
+  defaultOpenValue(): Date {
+    const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
+      this.config.timezone
+    ); // 规定打车开始时间
+    return startTime.toDate();
   }
 }
