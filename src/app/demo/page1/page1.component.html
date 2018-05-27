@@ -2,8 +2,8 @@
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'inline'">
     <nz-form-item>
       <nz-form-control>
-        <input nz-input formControlName="myID" placeholder="请输入员工号">
-        <nz-form-explain *ngIf="validateForm.get('myID').dirty && validateForm.get('myID').errors">请输入员工号!</nz-form-explain>
+        <input nz-input formControlName="myID" placeholder="请输入员工编号">
+        <nz-form-explain *ngIf="validateForm.get('myID').dirty && validateForm.get('myID').errors">请输入员工编号！</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -24,15 +24,14 @@
       <i class="anticon anticon-inbox"></i>
     </p>
     <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
-    <p class="ant-upload-hint">将文件拖到此处，或点击上传只能上传xls/xlsx文件</p>
+    <p class="ant-upload-hint">将文件拖到此处或点击上传，只能上传xls/xlsx文件。</p>
   </nz-upload>
   <div class="table-operations">
     <button nz-button (click)="goBack()">上一步</button>
     <ng-template [ngIf]="this.tableData.length!==0">
       <button nz-button (click)="exportExcel()">导出Excel文件</button>
     </ng-template>
-    员工编号：{{config.myID}}
-    下车地点：{{config.myEndPoint}}
+    员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
   </div>
   <ng-template [ngIf]="this.tableData.length!==0">
     <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">
@@ -55,7 +54,7 @@
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
-                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0"></nz-input-number>
+                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0" [nzPlaceHolder]="'交通费'"></nz-input-number>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="!editMoneyCache[row].isTraffic">{{item}}</ng-template>
@@ -66,7 +65,8 @@
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
-                      <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
+                      <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                        [nzHideDisabledOptions]="true" [nzClearText]="'清除上车时间'"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                   </ng-template>
@@ -76,7 +76,8 @@
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
-                      <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat"></nz-time-picker>
+                      <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                        [nzHideDisabledOptions]="true" [nzClearText]="'清除下车时间'"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                   </ng-template>
