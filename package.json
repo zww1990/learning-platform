@@ -13,8 +13,11 @@
   },
   "dependencies": {
     "antd": "^3.5.4",
+    "babel-polyfill": "^6.26.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "react-scripts-ts": "2.16.0"
   },
   "devDependencies": {

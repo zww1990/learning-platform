@@ -4,6 +4,9 @@
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]
   },
   "rules": {
-    "ordered-imports": false
+    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "binary-expression-operand-order": false,
+    "member-ordering": false
   }
 }

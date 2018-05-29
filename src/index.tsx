@@ -1,11 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import 'moment/locale/zh-cn';
+import 'babel-polyfill';
 import App from './App';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <App />,
+  <LocaleProvider locale={zh_CN}>
+    <App />
+  </LocaleProvider>,
   document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
