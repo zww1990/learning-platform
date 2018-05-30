@@ -1,26 +1,12 @@
 package com.example.dubbo.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Configuration
-@PropertySource("classpath:dubbo.properties")
+@ConfigurationProperties("dubbo")
 public class DubboProperties {
-	@Value("${dubbo.annotation.package}")
-	private String annotationPackage;
-	@Value("${dubbo.app.name}")
 	private String appName;
-	@Value("${dubbo.registry.address}")
 	private String registryAddress;
-
-	public String getAnnotationPackage() {
-		return annotationPackage;
-	}
-
-	public void setAnnotationPackage(String annotationPackage) {
-		this.annotationPackage = annotationPackage;
-	}
+	private boolean enable;
 
 	public String getAppName() {
 		return appName;
@@ -38,4 +24,11 @@ public class DubboProperties {
 		this.registryAddress = registryAddress;
 	}
 
+	public boolean isEnable() {
+		return enable;
+	}
+
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
 }
