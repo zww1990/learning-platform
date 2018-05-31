@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 
-// import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { MaterialModule } from './material/material.module';
 import { MyNavComponent } from './my-nav/my-nav.component';
 import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
@@ -15,7 +15,8 @@ const routes: Routes = [
     component: MyNavComponent,
     children: [
       { path: 'dashboard', component: MyDashboardComponent },
-      { path: 'table', component: MyTableComponent }
+      { path: 'table', component: MyTableComponent },
+      { path: 'layout', component: LayoutComponent }
     ]
   },
   { path: '', redirectTo: '/demo/dashboard', pathMatch: 'full' },
@@ -31,6 +32,11 @@ const routes: Routes = [
     LayoutModule
   ],
   exports: [RouterModule],
-  declarations: [MyNavComponent, MyDashboardComponent, MyTableComponent]
+  declarations: [
+    MyNavComponent,
+    MyDashboardComponent,
+    MyTableComponent,
+    LayoutComponent
+  ]
 })
 export class AppRoutingModule {}
