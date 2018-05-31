@@ -10,10 +10,16 @@ import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
 import { MyTableComponent } from './my-table/my-table.component';
 
 const routes: Routes = [
-  { path: '', component: MyNavComponent },
-  { path: 'dashboard', component: MyDashboardComponent },
-  { path: 'table', component: MyTableComponent },
-  { path: '**', redirectTo: '' }
+  {
+    path: 'demo',
+    component: MyNavComponent,
+    children: [
+      { path: 'dashboard', component: MyDashboardComponent },
+      { path: 'table', component: MyTableComponent }
+    ]
+  },
+  { path: '', redirectTo: '/demo/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/demo/dashboard' }
 ];
 
 @NgModule({
@@ -27,4 +33,4 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [MyNavComponent, MyDashboardComponent, MyTableComponent]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
