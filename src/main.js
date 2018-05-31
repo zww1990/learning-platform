@@ -16,7 +16,6 @@ Vue.use(Antd);
 new Vue({
   el: '#app',
   router,
-  components: { App },
   render: h => (
     <a-locale-provider locale={zhCN}>
       <App />
