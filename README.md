@@ -5,7 +5,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Documents
 - [React Router 英文版](https://reacttraining.com/react-router/web/guides/quick-start)
-- [React Router 中文版](http://react-guide.github.io/react-router-cn/index.html)
+- [React Router 中文版](https://react-guide.github.io/react-router-cn/)
 - [React Ant Design](http://ant.design/docs/react/introduce-cn)
 
 ## Table of Contents

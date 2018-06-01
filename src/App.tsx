@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout, Menu, Icon, DatePicker } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import './App.css';
 
 const { Header, Sider, Content } = Layout;
@@ -9,7 +9,7 @@ class App extends React.Component {
   public rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
   public state = {
     collapsed: false,
-    openKeys: ['sub1']
+    openKeys: new Array<string>()
   };
 
   public toggle = () => {
@@ -101,13 +101,13 @@ class App extends React.Component {
           </Header>
           <Content
             style={{
-              margin: '24px 16px',
+              margin: '10px',
               padding: 24,
               background: '#fff',
               minHeight: 280
             }}
           >
-            <DatePicker />
+            欢迎使用我的APP
           </Content>
         </Layout>
       </Layout>
