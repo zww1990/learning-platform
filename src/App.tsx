@@ -109,8 +109,7 @@ class App extends React.Component {
               style={{
                 margin: '10px',
                 padding: 24,
-                background: '#fff',
-                minHeight: 280
+                background: '#fff'
               }}
             >
               <Route path="/" component={Home} exact={true} />
