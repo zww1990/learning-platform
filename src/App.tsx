@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Switch } from 'antd';
 import './App.css';
 import Page1 from './components/Page1';
 import Home from './components/Home';
@@ -10,14 +10,11 @@ class App extends React.Component {
   public rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
   public state = {
     collapsed: false,
-    openKeys: new Array<string>()
+    openKeys: new Array<string>(),
+    theme: true
   };
 
-  public toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  };
+  public toggle = () => this.setState({ collapsed: !this.state.collapsed });
   public onOpenChange = (openKeys: any) => {
     const latestOpenKey = openKeys.find(
       (key: any) => this.state.openKeys.indexOf(key) === -1
@@ -30,22 +27,33 @@ class App extends React.Component {
       });
     }
   };
+  public currentTheme = () => (this.state.theme ? 'dark' : 'light');
+  public changeTheme = (value: boolean) => this.setState({ theme: value });
 
   public render() {
     return (
       <Router>
         <Layout>
           <Layout.Sider
-            trigger={null}
+            trigger={
+              <Switch
+                checked={this.state.theme}
+                onChange={this.changeTheme}
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+              />
+            }
             collapsible={true}
             collapsed={this.state.collapsed}
+            theme={this.currentTheme()}
           >
             <div className="logo" />
             <Menu
-              theme="dark"
+              theme={this.currentTheme()}
               mode="inline"
               openKeys={this.state.openKeys}
               onOpenChange={this.onOpenChange}
+              inlineCollapsed={this.state.collapsed}
             >
               <Menu.SubMenu
                 key="sub1"

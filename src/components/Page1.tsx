@@ -9,7 +9,10 @@ import {
   Button,
   Upload,
   Icon,
-  Rate
+  Rate,
+  Checkbox,
+  DatePicker,
+  TimePicker
 } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 
@@ -55,11 +58,7 @@ class Page1 extends React.Component<FormComponentProps> {
         <Form.Item {...formItemLayout} label="选择[多选]">
           {getFieldDecorator('select-multiple', {
             rules: [
-              {
-                required: true,
-                message: '请选择你喜欢的颜色！',
-                type: 'array'
-              }
+              { required: true, message: '请选择你喜欢的颜色！', type: 'array' }
             ]
           })(
             <Select mode="multiple" placeholder="请选择喜欢的颜色">
@@ -73,19 +72,26 @@ class Page1 extends React.Component<FormComponentProps> {
         <Form.Item {...formItemLayout} label="输入数字">
           {getFieldDecorator('input-number', {
             initialValue: 3,
-            rules: [
-              {
-                required: true,
-                message: '请输入数字'
-              }
-            ]
-          })(<InputNumber min={1} max={10} />)}
+            rules: [{ required: true, message: '请输入数字' }]
+          })(<InputNumber min={1} max={10} placeholder="整数" />)}
           <span className="ant-form-text"> 次</span>
+        </Form.Item>
+
+        <Form.Item {...formItemLayout} label="日期选择框">
+          {getFieldDecorator('date-picker', {
+            rules: [{ required: true, message: '请选择日期' }]
+          })(<DatePicker />)}
+        </Form.Item>
+
+        <Form.Item {...formItemLayout} label="时间选择框">
+          {getFieldDecorator('time-picker', {
+            rules: [{ required: true, message: '请选择时间' }]
+          })(<TimePicker />)}
         </Form.Item>
 
         <Form.Item {...formItemLayout} label="开关">
           {getFieldDecorator('switch', { valuePropName: 'checked' })(
-            <Switch />
+            <Switch checkedChildren="开" unCheckedChildren="关" />
           )}
         </Form.Item>
 
@@ -99,12 +105,7 @@ class Page1 extends React.Component<FormComponentProps> {
 
         <Form.Item {...formItemLayout} label="单选按钮">
           {getFieldDecorator('radio-group', {
-            rules: [
-              {
-                required: true,
-                message: '该选项不能为空'
-              }
-            ]
+            rules: [{ required: true, message: '该选项不能为空' }]
           })(
             <Radio.Group>
               <Radio value="a">选项 1</Radio>
@@ -116,12 +117,7 @@ class Page1 extends React.Component<FormComponentProps> {
 
         <Form.Item {...formItemLayout} label="单选按钮">
           {getFieldDecorator('radio-button', {
-            rules: [
-              {
-                required: true,
-                message: '该选项不能为空'
-              }
-            ]
+            rules: [{ required: true, message: '该选项不能为空' }]
           })(
             <Radio.Group>
               <Radio.Button value="a">选项 1</Radio.Button>
@@ -131,10 +127,22 @@ class Page1 extends React.Component<FormComponentProps> {
           )}
         </Form.Item>
 
+        <Form.Item {...formItemLayout} label="多选框">
+          {getFieldDecorator('checkbox', {
+            rules: [{ required: true, message: '该选项不能为空' }]
+          })(
+            <Checkbox.Group>
+              <Checkbox value="a">选项 1</Checkbox>
+              <Checkbox value="b">选项 2</Checkbox>
+              <Checkbox value="c">选项 3</Checkbox>
+            </Checkbox.Group>
+          )}
+        </Form.Item>
+
         <Form.Item {...formItemLayout} label="评分">
-          {getFieldDecorator('rate', {
-            initialValue: 3.5
-          })(<Rate />)}
+          {getFieldDecorator('rate', { initialValue: 3.5 })(
+            <Rate character={<Icon type="heart" />} allowHalf={true} />
+          )}
         </Form.Item>
 
         <Form.Item {...formItemLayout} label="上传" extra="可以上传一些文件">
