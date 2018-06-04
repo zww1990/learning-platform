@@ -21,12 +21,12 @@ class Page1 extends React.Component<FormComponentProps> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        // console.log('Received values of form: ', values);
+        console.log('表单数据: ', values);
       }
     });
   };
   public normFile = (e: any) => {
-    // console.log('Upload event:', e);
+    console.log('上传事件:', e);
     if (Array.isArray(e)) {
       return e;
     }
