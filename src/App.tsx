@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Layout, Menu, Icon, Switch } from 'antd';
-import './App.css';
+import './App.less';
 import Page1 from './components/Page1';
 import Home from './components/Home';
 import Page2 from './components/Page2';
