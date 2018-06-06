@@ -35,14 +35,8 @@ class App extends React.Component {
       <Router>
         <Layout>
           <Layout.Sider
-            trigger={
-              <Switch
-                checked={this.state.theme}
-                onChange={this.changeTheme}
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-              />
-            }
+            style={{ overflow: 'auto' }}
+            trigger={null}
             collapsible={true}
             collapsed={this.state.collapsed}
             theme={this.currentTheme()}
@@ -102,6 +96,15 @@ class App extends React.Component {
                 <Menu.Item key="10">菜单 10</Menu.Item>
                 <Menu.Item key="11">菜单 11</Menu.Item>
                 <Menu.Item key="12">菜单 12</Menu.Item>
+                <Menu.Item key="13">菜单 12</Menu.Item>
+                <Menu.Item key="14">菜单 12</Menu.Item>
+                <Menu.Item key="15">菜单 12</Menu.Item>
+                <Menu.Item key="16">菜单 12</Menu.Item>
+                <Menu.Item key="17">菜单 12</Menu.Item>
+                <Menu.Item key="18">菜单 12</Menu.Item>
+                <Menu.Item key="19">菜单 12</Menu.Item>
+                <Menu.Item key="20">菜单 12</Menu.Item>
+                <Menu.Item key="21">菜单 12</Menu.Item>
               </Menu.SubMenu>
             </Menu>
           </Layout.Sider>
@@ -112,12 +115,19 @@ class App extends React.Component {
                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                 onClick={this.toggle}
               />
+              <Switch
+                checked={this.state.theme}
+                onChange={this.changeTheme}
+                checkedChildren="Dark"
+                unCheckedChildren="Light"
+              />
             </Layout.Header>
             <Layout.Content
               style={{
                 margin: '10px',
                 padding: 24,
-                background: '#fff'
+                background: '#fff',
+                overflow: 'auto'
               }}
             >
               <Route path="/" component={Home} exact={true} />

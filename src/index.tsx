@@ -5,7 +5,7 @@ import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import 'moment/locale/zh-cn';
 import 'babel-polyfill';
 import App from './App';
-import './index.css';
+import './index.less';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(

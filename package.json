@@ -29,7 +29,7 @@
     "@types/react-router-redux": "^5.0.15",
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.2",
-    "ts-import-plugin": "^1.5.1",
+    "ts-import-plugin": "^1.5.2",
     "typescript": "^2.9.1"
   }
 }
