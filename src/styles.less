@@ -9,3 +9,20 @@ app-root,
 app-layout {
   min-height: 100%;
 }
+
+body {
+  scrollbar-arrow-color: @primary-color;
+  scrollbar-face-color: @primary-color;
+  scrollbar-highlight-color: #fff;
+  scrollbar-shadow-color: #fff;
+  scrollbar-track-color: #fff;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: @primary-color;
+}
