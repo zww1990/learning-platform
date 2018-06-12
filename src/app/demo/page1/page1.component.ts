@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
@@ -31,7 +31,8 @@ export class Page1Component implements OnInit {
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private element: ElementRef
   ) {}
 
   /**
@@ -203,6 +204,13 @@ export class Page1Component implements OnInit {
             isTraffic: isTraffic
           };
         });
+        setTimeout(() => {
+          const headerStyle = this.element.nativeElement.querySelector(
+            'div.ant-table-header'
+          ).style;
+          headerStyle.marginBottom = '0px';
+          headerStyle.paddingBottom = '0px';
+        }, 1000);
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);
