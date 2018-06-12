@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouteReuseStrategy } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from './auth/auth-guard.service';
@@ -9,6 +9,7 @@ import { CasService } from './auth/cas.service';
 import { MenuService } from './layout/menu.service';
 import { MenuResolverService } from './layout/menu-resolver.service';
 import { SharedModule } from './shared/shared.module';
+import { SimpleReuseStrategy } from './layout/simple-reuse-strategy';
 
 const routes: Routes = [
   // 示例模块采用惰性加载路由配置
@@ -19,7 +20,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     canLoad: [AuthGuard],
     resolve: { menus: MenuResolverService },
-    loadChildren: 'app/demo/demo.module#DemoModule'
+    loadChildren: './demo/demo.module#DemoModule'
   },
   { path: 'login', component: LoginComponent },
   // 空路径表示应用的默认路径，该路由将重定向到指定的路由
@@ -41,7 +42,9 @@ const routes: Routes = [
     UserService,
     CasService,
     MenuService,
-    MenuResolverService
+    MenuResolverService,
+    // 注册路由重用策略
+    { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
   ]
 })
 export class AppRoutingModule {}
