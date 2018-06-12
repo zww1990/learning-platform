@@ -35,16 +35,16 @@
   </div>
   <ng-template [ngIf]="this.tableData.length!==0">
     <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: 1920, y: 240 }">
-      <thead nz-thead>
+      <thead>
         <tr>
-          <th nz-th *ngFor="let item of this.tableHeader" [nzWidth]="'150px'">
+          <th *ngFor="let item of this.tableHeader" [nzWidth]="'150px'">
             <span>{{item}}</span>
           </th>
         </tr>
       </thead>
-      <tbody nz-tbody>
-        <tr nz-tbody-tr *ngFor="let data of nzTable.data;index as row">
-          <td nz-td *ngFor="let item of data;index as col">
+      <tbody>
+        <tr *ngFor="let data of nzTable.data;index as row">
+          <td *ngFor="let item of data;index as col">
             <div class="editable-cell">
               <div class="editable-cell-text-wrapper">
                 <ng-container [ngSwitch]="col">
