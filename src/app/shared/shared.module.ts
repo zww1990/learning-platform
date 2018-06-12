@@ -9,14 +9,14 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
  * @author zww
  */
 @NgModule({
-  imports: [NgZorroAntdModule.forRoot(), CommonModule],
+  imports: [CommonModule, NgZorroAntdModule],
   declarations: [],
   exports: [
-    NgZorroAntdModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgZorroAntdModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
