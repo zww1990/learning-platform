@@ -22,7 +22,8 @@ export class Page1Component implements OnInit {
   tableHeader = [];
   tableData = [];
   validateForm: FormGroup;
-  isShow = true;
+  isShowForm = true;
+  isShowUpload = true;
   config: ExcelConfig;
   editMoneyCache = {};
   editStartTimeCache = {};
@@ -60,7 +61,7 @@ export class Page1Component implements OnInit {
    * @description 下一步
    */
   submitForm() {
-    this.isShow = !this.isShow;
+    this.isShowForm = !this.isShowForm;
     Object.assign(this.config, this.validateForm.value);
   }
 
@@ -68,7 +69,7 @@ export class Page1Component implements OnInit {
    * @description 上一步
    */
   goBack() {
-    this.isShow = !this.isShow;
+    this.isShowForm = !this.isShowForm;
     this.tableData = [];
   }
 
