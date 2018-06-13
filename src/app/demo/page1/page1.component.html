@@ -1,4 +1,4 @@
-<ng-template [ngIf]="this.isShow">
+<ng-template [ngIf]="this.isShowForm">
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'inline'">
     <nz-form-item>
       <nz-form-control>
@@ -18,8 +18,8 @@
     </nz-form-item>
   </form>
 </ng-template>
-<ng-template [ngIf]="!this.isShow">
-  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
+<ng-template [ngIf]="!this.isShowForm">
+  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload" [ngStyle]="{'display':this.isShowUpload?'block':'none'}">
     <p class="ant-upload-drag-icon">
       <i class="anticon anticon-inbox"></i>
     </p>
@@ -28,6 +28,7 @@
   </nz-upload>
   <div class="table-operations">
     <button nz-button (click)="goBack()">上一步</button>
+    <button nz-button (click)="this.isShowUpload=!this.isShowUpload">折叠|展开</button>
     <ng-template [ngIf]="this.tableData.length!==0">
       <button nz-button (click)="exportExcel()">导出Excel文件</button>
     </ng-template>
