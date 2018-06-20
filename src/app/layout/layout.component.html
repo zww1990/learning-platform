@@ -31,12 +31,7 @@
           <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
         </div>
         <div nz-col [nzSpan]="18"></div>
-        <div nz-col [nzSpan]="1" style="text-align: center;padding-top: 5px">
-          <a (click)="toggleFullscreen()" nz-tooltip="全屏切换">
-            <i class="fa fa-2x" [class.fa-arrows-alt]="!isFullscreen" [class.fa-window-restore]="isFullscreen"></i>
-          </a>
-        </div>
-        <div nz-col [nzSpan]="1" style="text-align: right">
+        <div nz-col [nzSpan]="2" style="text-align: right">
           <nz-dropdown>
             <a nz-dropdown class="ant-dropdown-link">
               <nz-avatar nzIcon="anticon anticon-user" style="background-color:#87d068;"></nz-avatar>
