@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 
 import { NzMessageService } from 'ng-zorro-antd';
 import { utils } from 'xlsx';
-import { Workbook, Table } from './workbook.model';
-import { ExcelConfig } from './excel-config.model';
-import * as moment from 'moment-timezone';
+import { DateTime } from 'luxon';
+import { Workbook } from './workbook.model';
+import { ExcelConfig, EditCache } from './excel-config.model';
 
 @Component({
   selector: 'app-page1',
@@ -25,9 +25,9 @@ export class Page1Component implements OnInit {
   isShowForm = true;
   isShowUpload = true;
   config: ExcelConfig;
-  editMoneyCache = {};
-  editStartTimeCache = {};
-  editEndTimeCache = {};
+  editMoneyCache: { [key: number]: EditCache } = {};
+  editStartTimeCache: { [key: number]: EditCache } = {};
+  editEndTimeCache: { [key: number]: EditCache } = {};
 
   constructor(
     private msg: NzMessageService,
@@ -40,7 +40,6 @@ export class Page1Component implements OnInit {
    * @description 初始化
    */
   ngOnInit() {
-    moment.locale('zh-cn');
     this.validateForm = this.fb.group({
       myID: [null, [Validators.required]],
       myEndPoint: [null]
@@ -145,7 +144,7 @@ export class Page1Component implements OnInit {
               x[this.config.typeIndex]
             )
           ) {
-            const duration = parseFloat(x[this.config.durationIndex]);
+            const duration = +x[this.config.durationIndex];
             let mealFee = 0;
             if (
               this.config.duration4 <= duration &&
@@ -239,13 +238,12 @@ export class Page1Component implements OnInit {
    * @param time 加班截止时间
    */
   isAfterTaxiTime(time: string) {
-    const deadline = moment(time, this.config.timeFormat).tz(
-      this.config.timezone
-    ); // 加班截止时间
-    const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
-      this.config.timezone
+    const deadline = DateTime.fromFormat(time, this.config.timeFormat); // 加班截止时间
+    const startTime = DateTime.fromFormat(
+      this.config.taxiTime,
+      this.config.timeFormat
     ); // 规定打车开始时间
-    return deadline.isSameOrAfter(startTime);
+    return deadline >= startTime;
   }
 
   /**
@@ -253,13 +251,12 @@ export class Page1Component implements OnInit {
    * @param time 加班截止时间
    */
   isAfterDinnerTime(time: string) {
-    const deadline = moment(time, this.config.timeFormat).tz(
-      this.config.timezone
+    const deadline = DateTime.fromFormat(time, this.config.timeFormat);
+    const startTime = DateTime.fromFormat(
+      this.config.dinnerTime,
+      this.config.timeFormat
     );
-    const startTime = moment(this.config.dinnerTime, this.config.timeFormat).tz(
-      this.config.timezone
-    );
-    return deadline.isSameOrAfter(startTime);
+    return deadline >= startTime;
   }
 
   /**
@@ -267,7 +264,9 @@ export class Page1Component implements OnInit {
    * @param time 加班日期
    */
   formatOverTime(time: string) {
-    return moment(time, this.config.dateParse).format(this.config.dateFormat);
+    return DateTime.fromFormat(time, this.config.dateParse).toFormat(
+      this.config.dateFormat
+    );
   }
 
   /**
@@ -302,18 +301,18 @@ export class Page1Component implements OnInit {
       this.editStartTimeCache[row].edit = false;
       this.tableData.forEach((x, i) => {
         if (i === row) {
-          x[col] = moment(this.editStartTimeCache[row].value).format(
-            this.config.shortTimeFormat
-          );
+          x[col] = DateTime.fromJSDate(
+            this.editStartTimeCache[row].value
+          ).toFormat(this.config.shortTimeFormat);
         }
       });
     } else if (col === this.config.endTimeIndex) {
       this.editEndTimeCache[row].edit = false;
       this.tableData.forEach((x, i) => {
         if (i === row) {
-          x[col] = moment(this.editEndTimeCache[row].value).format(
-            this.config.shortTimeFormat
-          );
+          x[col] = DateTime.fromJSDate(
+            this.editEndTimeCache[row].value
+          ).toFormat(this.config.shortTimeFormat);
         }
       });
     }
@@ -334,9 +333,9 @@ export class Page1Component implements OnInit {
    * @description 设置面板打开时默认选中的值
    */
   defaultOpenValue(): Date {
-    const startTime = moment(this.config.taxiTime, this.config.timeFormat).tz(
-      this.config.timezone
-    ); // 规定打车开始时间
-    return startTime.toDate();
+    return DateTime.fromFormat(
+      this.config.taxiTime,
+      this.config.timeFormat
+    ).toJSDate(); // 规定打车开始时间
   }
 }
