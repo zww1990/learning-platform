@@ -164,3 +164,22 @@ export class ExcelConfig {
    */
   type3: string;
 }
+
+/**
+ * @description 编辑缓存
+ * @author zww
+ */
+export class EditCache {
+  /**
+   * 是否编辑状态
+   */
+  edit: boolean;
+  /**
+   * 是否交通费
+   */
+  isTraffic: boolean;
+  /**
+   * 编辑值
+   */
+  value: any;
+}
