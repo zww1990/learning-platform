@@ -1,6 +1,7 @@
 package com.example.client.web;
 
 import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ public class IndexController {
 	public ModelAndView index(Principal principal) {
 		System.err.println("当前用户：" + principal);
 		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("user", "hello world!");
+		mav.addObject("user", principal);
 		return mav;
 	}
 }
