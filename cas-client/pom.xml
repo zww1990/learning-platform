@@ -17,9 +17,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
 		<maven.test.skip>true</maven.test.skip>
-		<java.cas.client.version>3.4.1</java.cas.client.version>
-		<springframework.version>4.3.10.RELEASE</springframework.version>
-		<log4j2.version>2.9.1</log4j2.version>
+		<java.cas.client.version>3.5.0</java.cas.client.version>
+		<springframework.version>5.0.7.RELEASE</springframework.version>
+		<log4j2.version>2.11.0</log4j2.version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +78,18 @@
 			<artifactId>cas-client-integration-tomcat-v7</artifactId>
 			<version>${java.cas.client.version}</version>
 		</dependency>
+		<!-- Tomcat 8.0.x由此依赖提供 -->
+		<dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v8</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- Tomcat 8.5.x由此依赖关系提供 -->
+		<dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v85</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency>
 
 		<!-- Spring Framework -->
 		<dependency>
@@ -106,6 +118,12 @@
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-jcl</artifactId>
 		    <version>${log4j2.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.6</version>
 		</dependency>
 	</dependencies>
 

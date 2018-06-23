@@ -22,7 +22,7 @@
   
   <groupId>org.jasig.cas</groupId>
   <artifactId>cas-server-webapp</artifactId>
-  <version>4.1.7</version>
+  <version>4.1.10</version>
   <packaging>war</packaging>
   <name>Apereo CAS Web Application</name>
   
