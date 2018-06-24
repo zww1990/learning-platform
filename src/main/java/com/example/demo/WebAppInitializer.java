@@ -1,6 +1,11 @@
 package com.example.demo;
 
+import java.nio.charset.Charset;
+
+import javax.servlet.Filter;
+
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.example.demo.root.RootConfig;
@@ -20,5 +25,11 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	@Override
 	protected String[] getServletMappings() {
 		return ArrayUtils.toArray("/");
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter(Charset.defaultCharset().name(), true);
+		return ArrayUtils.toArray(encodingFilter);
 	}
 }
