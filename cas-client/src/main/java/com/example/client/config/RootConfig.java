@@ -5,6 +5,7 @@ import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter;
 import org.jasig.cas.client.validation.Cas30ServiceTicketValidator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -16,6 +17,7 @@ public class RootConfig {
 	 * @return 实现单点登出协议。 它处理注册会话并销毁会话。
 	 */
 	@Bean
+	@Conditional(CasCondition.class)
 	public SingleSignOutFilter singleSignOutFilter(CasProperties props) {
 		SingleSignOutFilter filter = new SingleSignOutFilter();
 		filter.setCasServerUrlPrefix(props.getCasServerUrlPrefix());// CAS服务器的前缀url。
@@ -27,6 +29,7 @@ public class RootConfig {
 	 * @return 是来检测用户是否需要被认证。 如果用户需要认证，则会将用户重定向到CAS服务器。
 	 */
 	@Bean
+	@Conditional(CasCondition.class)
 	public AuthenticationFilter authenticationFilter(CasProperties props) {
 		AuthenticationFilter filter = new AuthenticationFilter();
 		filter.setCasServerLoginUrl(props.getCasServerLoginUrl());// 定义CAS服务器登录URL的位置
@@ -39,6 +42,7 @@ public class RootConfig {
 	 * @return 使用CAS 3.0协议验证票据。
 	 */
 	@Bean
+	@Conditional(CasCondition.class)
 	public Cas30ProxyReceivingTicketValidationFilter ticketValidationFilter(CasProperties props) {
 		Cas30ProxyReceivingTicketValidationFilter filter = new Cas30ProxyReceivingTicketValidationFilter();
 		filter.setService(props.getCasClientUrl());// 该应用程序托管的服务器的名称。 将使用此动态构建服务URL

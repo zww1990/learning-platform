@@ -15,6 +15,8 @@ import javax.servlet.ServletRegistration;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
 import org.jasig.cas.client.util.AssertionThreadLocalFilter;
 import org.jasig.cas.client.util.HttpServletRequestWrapperFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.Conventions;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -23,43 +25,53 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.example.client.config.CasCondition;
+import com.example.client.config.CasProperties;
 import com.example.client.config.RootConfig;
 import com.example.client.config.ServletConfig;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
+	private static final Logger log = LoggerFactory.getLogger(MyWebAppInitializer.class);
 	private static final String DEFAULT_SERVLET_NAME = "dispatcher";
 	private static final boolean DEFAULT_ASYNC_SUPPORTED = true;
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		servletContext.addListener(new ContextLoaderListener(this.createRootApplicationContext()));
+		WebApplicationContext rootAppContext = this.createRootApplicationContext();
+		servletContext.addListener(new ContextLoaderListener(rootAppContext));
 		ServletRegistration.Dynamic registration = servletContext.addServlet(DEFAULT_SERVLET_NAME,
 				new DispatcherServlet(this.createServletApplicationContext()));
 		registration.setLoadOnStartup(1);
 		registration.addMapping("/");
 		registration.setAsyncSupported(DEFAULT_ASYNC_SUPPORTED);
-		// CAS中的Single Sign Out支持包括配置一个SingleSignOutFilter和一个ContextListener。
-		// 侦听器，用于检测HTTP会话何时被销毁，并将其从管理会话的映射中删除。 还允许程序性地删除会话。启用CAS单一登出功能。
-		servletContext.addListener(new SingleSignOutHttpSessionListener());
-		// 请注意，如果您已将CAS Client for Java配置为Web过滤器，则此过滤器必须位于其他过滤器之前。
-		DelegatingFilterProxy singleSignOutFilterProxy = new DelegatingFilterProxy("singleSignOutFilter");
-		// 通过Spring IoC的配置将在很大程度上取决于DelegatingFilterProxy类。
-		DelegatingFilterProxy authenticationFilterProxy = new DelegatingFilterProxy("authenticationFilter");
-		DelegatingFilterProxy ticketValidationFilterProxy = new DelegatingFilterProxy("ticketValidationFilter");
-		// 包装一个HttpServletRequest，以便getRemoteUser和getPrincipal返回CAS相关的条目。
-		HttpServletRequestWrapperFilter requestWrapperFilter = new HttpServletRequestWrapperFilter();
-		// 将断言置于ThreadLocal中，以便其他资源可以访问不具有Web层会话的权限。
-		AssertionThreadLocalFilter threadLocalFilter = new AssertionThreadLocalFilter();
-		List<Filter> filters = Arrays.asList(singleSignOutFilterProxy, authenticationFilterProxy,
-				ticketValidationFilterProxy, requestWrapperFilter, threadLocalFilter);
-		for (Filter filter : filters) {
-			this.registerServletFilter(servletContext, filter);
+		CasProperties casProps = rootAppContext.getBean(CasProperties.class);
+		if (CasCondition.CAS_MODE.equalsIgnoreCase(casProps.getCasMode())) {
+			log.info("DisplayName={}, CasMode={}", rootAppContext.getDisplayName(), casProps.getCasMode());
+			// CAS中的Single Sign Out支持包括配置一个SingleSignOutFilter和一个ContextListener。
+			// 侦听器，用于检测HTTP会话何时被销毁，并将其从管理会话的映射中删除。 还允许程序性地删除会话。启用CAS单一登出功能。
+			servletContext.addListener(new SingleSignOutHttpSessionListener());
+			// 请注意，如果您已将CAS Client for Java配置为Web过滤器，则此过滤器必须位于其他过滤器之前。
+			DelegatingFilterProxy singleSignOutFilterProxy = new DelegatingFilterProxy("singleSignOutFilter");
+			// 通过Spring IoC的配置将在很大程度上取决于DelegatingFilterProxy类。
+			DelegatingFilterProxy authenticationFilterProxy = new DelegatingFilterProxy("authenticationFilter");
+			DelegatingFilterProxy ticketValidationFilterProxy = new DelegatingFilterProxy("ticketValidationFilter");
+			// 包装一个HttpServletRequest，以便getRemoteUser和getPrincipal返回CAS相关的条目。
+			HttpServletRequestWrapperFilter requestWrapperFilter = new HttpServletRequestWrapperFilter();
+			// 将断言置于ThreadLocal中，以便其他资源可以访问不具有Web层会话的权限。
+			AssertionThreadLocalFilter threadLocalFilter = new AssertionThreadLocalFilter();
+			List<Filter> filters = Arrays.asList(singleSignOutFilterProxy, authenticationFilterProxy,
+					ticketValidationFilterProxy, requestWrapperFilter, threadLocalFilter);
+			for (Filter filter : filters) {
+				this.registerServletFilter(servletContext, filter);
+			}
 		}
 	}
 
 	private WebApplicationContext createRootApplicationContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(RootConfig.class);
+		context.refresh();// 在通过ApplicationContext访问Bean之前调用'refresh'方法，否则会抛BeanFactory未初始化或已关闭异常。
+		log.info("DisplayName={}, BeanDefinitionCount={}", context.getDisplayName(), context.getBeanDefinitionCount());
 		return context;
 	}
 
