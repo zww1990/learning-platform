@@ -1,5 +1,6 @@
 package com.example.client;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.List;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterRegistration;
-import javax.servlet.FilterRegistration.Dynamic;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -22,6 +22,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -44,6 +45,8 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 		registration.setLoadOnStartup(1);
 		registration.addMapping("/");
 		registration.setAsyncSupported(DEFAULT_ASYNC_SUPPORTED);
+		// 为给定的编码创建一个CharacterEncodingFilter。
+		this.registerServletFilter(servletContext, new CharacterEncodingFilter(Charset.defaultCharset().name(), true));
 		CasProperties casProps = rootAppContext.getBean(CasProperties.class);
 		if (CasCondition.CAS_MODE.equalsIgnoreCase(casProps.getCasMode())) {
 			log.info("DisplayName={}, CasMode={}", rootAppContext.getDisplayName(), casProps.getCasMode());
@@ -83,14 +86,13 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 
 	private FilterRegistration.Dynamic registerServletFilter(ServletContext servletContext, Filter filter) {
 		String filterName = Conventions.getVariableName(filter);
-		Dynamic registration = servletContext.addFilter(filterName, filter);
+		FilterRegistration.Dynamic registration = servletContext.addFilter(filterName, filter);
 
 		if (registration == null) {
 			int counter = 0;
 			while (registration == null) {
 				if (counter == 100) {
-					throw new IllegalStateException("Failed to register filter with name '" + filterName + "'. "
-							+ "Check if there is another filter registered under the same name.");
+					throw new IllegalStateException("无法注册过滤器 '" + filterName + "'. 检查是否有另一个过滤器以相同的名称注册.");
 				}
 				registration = servletContext.addFilter(filterName + "#" + counter, filter);
 				counter++;
