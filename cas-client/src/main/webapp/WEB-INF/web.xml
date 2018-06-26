@@ -2,8 +2,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
 
-	<display-name>Archetype Created Web Application</display-name>
-	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:application-context.xml</param-value>
@@ -35,7 +33,19 @@
 	<!-- 通过Spring IoC的配置将在很大程度上取决于DelegatingFilterProxy类。 
 	对于将通过Spring配置为CAS的每个过滤器，web.xml中需要相应的DelegatingFilterProxy。 -->
 	<filter>
-		<filter-name>CAS Authentication Filter</filter-name>
+		<filter-name>singleSignOutFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>singleSignOutFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>singleSignOutFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>authenticationFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 		<init-param>
 			<param-name>targetBeanName</param-name>
@@ -43,32 +53,40 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>CAS Authentication Filter</filter-name>
+		<filter-name>authenticationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>ticketValidationFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>ticketValidationFilter</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ticketValidationFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 	<!-- 包装一个HttpServletRequest，以便getRemoteUser和getPrincipal返回CAS相关的条目。 -->
 	<filter>
-		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<filter-name>HttpServletRequestWrapperFilter</filter-name>
 		<filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
+		<filter-name>HttpServletRequestWrapperFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
 	<!-- 将断言置于ThreadLocal中，以便其他资源可以访问不具有Web层会话的权限。 -->
 	<filter>
-		<filter-name>CAS Assertion Thread Local Filter</filter-name>
+		<filter-name>AssertionThreadLocalFilter</filter-name>
 		<filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>CAS Assertion Thread Local Filter</filter-name>
+		<filter-name>AssertionThreadLocalFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<welcome-file-list>
-		<welcome-file>/</welcome-file>
-	</welcome-file-list>
-
 </web-app>

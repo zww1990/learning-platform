@@ -7,6 +7,6 @@
 		<title>index</title>
 	</head>
 	<body>
-		<h1>${user }</h1>
+		<h1>${empty user ? 'null' : user}</h1>
 	</body>
 </html>
