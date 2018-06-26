@@ -26,9 +26,9 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import com.example.client.config.CasCondition;
 import com.example.client.config.CasProperties;
 import com.example.client.config.RootConfig;
+import com.example.client.config.RootConfig.CasCondition;
 import com.example.client.config.ServletConfig;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
