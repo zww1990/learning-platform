@@ -1,4 +1,4 @@
-package com.example.demo.web.config;
+package com.example.demo.config;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

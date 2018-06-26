@@ -9,8 +9,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.example.demo.root.RootConfig;
-import com.example.demo.web.config.ServletConfig;
+import com.example.demo.config.RootConfig;
+import com.example.demo.config.ServletConfig;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = { RootConfig.class, ServletConfig.class })

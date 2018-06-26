@@ -1,4 +1,4 @@
-package com.example.demo.web.config;
+package com.example.demo.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.example.demo.web.model.UserModel;
+import com.example.demo.model.UserModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {

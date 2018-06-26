@@ -1,4 +1,4 @@
-package com.example.demo.web.config;
+package com.example.demo.config;
 
 import java.nio.charset.Charset;
 import java.util.Collections;
@@ -9,7 +9,11 @@ import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -27,9 +31,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableWebMvc
-@EnableSwagger2
 @MultipartConfig
-@ComponentScan("com.example.demo.web")
+@ComponentScan("com.example.demo.controller")
 public class ServletConfig implements WebMvcConfigurer {
 	@Resource
 	private SwaggerProperties swaggerProps;
@@ -63,20 +66,31 @@ public class ServletConfig implements WebMvcConfigurer {
 		return resolver;
 	}
 
-	@Bean
-	public Docket api() {
-		Docket docket = new Docket(DocumentationType.SWAGGER_2);
-		if (this.swaggerProps.isEnable()) {
-			return docket.apiInfo(this.apiInfo());
+	@Configuration
+	@EnableSwagger2
+	@Conditional(SwaggerCondition.class)
+	public static class SwaggerAutoConfig {
+		@Bean
+		public Docket api(SwaggerProperties props) {
+			Docket docket = new Docket(DocumentationType.SWAGGER_2);
+			return docket.apiInfo(this.apiInfo(props));
 		}
-		return docket.enable(this.swaggerProps.isEnable());
+
+		private ApiInfo apiInfo(SwaggerProperties props) {
+			Contact contact = new Contact(props.getName(), props.getUrl(), props.getEmail());
+			return new ApiInfo(props.getTitle(), props.getDescription(), props.getVersion(),
+					props.getTermsOfServiceUrl(), contact, props.getLicense(), props.getLicenseUrl(),
+					Collections.emptyList());
+		}
+
 	}
 
-	private ApiInfo apiInfo() {
-		Contact contact = new Contact(this.swaggerProps.getName(), this.swaggerProps.getUrl(),
-				this.swaggerProps.getEmail());
-		return new ApiInfo(this.swaggerProps.getTitle(), this.swaggerProps.getDescription(),
-				this.swaggerProps.getVersion(), this.swaggerProps.getTermsOfServiceUrl(), contact,
-				this.swaggerProps.getLicense(), this.swaggerProps.getLicenseUrl(), Collections.emptyList());
+	public static class SwaggerCondition implements Condition {
+
+		@Override
+		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			return context.getEnvironment().getProperty("swagger.enable", boolean.class);
+		}
+
 	}
 }

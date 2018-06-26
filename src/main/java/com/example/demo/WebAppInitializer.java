@@ -8,8 +8,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.example.demo.root.RootConfig;
-import com.example.demo.web.config.ServletConfig;
+import com.example.demo.config.RootConfig;
+import com.example.demo.config.ServletConfig;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override

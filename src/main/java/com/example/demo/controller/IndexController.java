@@ -1,4 +1,4 @@
-package com.example.demo.web.controller;
+package com.example.demo.controller;
 
 import java.util.Arrays;
 import org.springframework.web.bind.annotation.GetMapping;
