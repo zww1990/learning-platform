@@ -40,6 +40,10 @@
                 <artifactId>c3p0</artifactId>
                 <groupId>c3p0</groupId>
             </exclusion>
+            <exclusion>
+            	<groupId>log4j</groupId>
+            	<artifactId>log4j</artifactId>
+            </exclusion>
         </exclusions>
     </dependency>
     <!-- 添加restful支持 -->
