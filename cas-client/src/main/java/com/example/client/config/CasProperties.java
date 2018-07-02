@@ -1,59 +1,53 @@
 package com.example.client.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("classpath:cas.properties")
+@ConfigurationProperties("cas")
 public class CasProperties {
-	@Value("${cas.server.url}")
-	private String casServerUrlPrefix;
-	@Value("${cas.server.login.url}")
-	private String casServerLoginUrl;
-	@Value("${cas.client.url}")
-	private String casClientUrl;
-	@Value("${cas.mode}")
-	private String casMode;
+	private String serverUrlPrefix;
+	private String serverLoginUrl;
+	private String clientUrl;
+	private String mode;
 
-	public String getCasMode() {
-		return casMode;
+	public String getServerUrlPrefix() {
+		return serverUrlPrefix;
 	}
 
-	public void setCasMode(String casMode) {
-		this.casMode = casMode;
+	public void setServerUrlPrefix(String serverUrlPrefix) {
+		this.serverUrlPrefix = serverUrlPrefix;
 	}
 
-	public String getCasServerUrlPrefix() {
-		return casServerUrlPrefix;
+	public String getServerLoginUrl() {
+		return serverLoginUrl;
 	}
 
-	public void setCasServerUrlPrefix(String casServerUrlPrefix) {
-		this.casServerUrlPrefix = casServerUrlPrefix;
+	public void setServerLoginUrl(String serverLoginUrl) {
+		this.serverLoginUrl = serverLoginUrl;
 	}
 
-	public String getCasServerLoginUrl() {
-		return casServerLoginUrl;
+	public String getClientUrl() {
+		return clientUrl;
 	}
 
-	public void setCasServerLoginUrl(String casServerLoginUrl) {
-		this.casServerLoginUrl = casServerLoginUrl;
+	public void setClientUrl(String clientUrl) {
+		this.clientUrl = clientUrl;
 	}
 
-	public String getCasClientUrl() {
-		return casClientUrl;
+	public String getMode() {
+		return mode;
 	}
 
-	public void setCasClientUrl(String casClientUrl) {
-		this.casClientUrl = casClientUrl;
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[casServerUrlPrefix=").append(casServerUrlPrefix).append(", casServerLoginUrl=")
-				.append(casServerLoginUrl).append(", casClientUrl=").append(casClientUrl).append(", casMode=")
-				.append(casMode).append("]");
+		builder.append("[serverUrlPrefix=").append(serverUrlPrefix).append(", serverLoginUrl=").append(serverLoginUrl)
+				.append(", clientUrl=").append(clientUrl).append(", mode=").append(mode).append("]");
 		return builder.toString();
 	}
 }
