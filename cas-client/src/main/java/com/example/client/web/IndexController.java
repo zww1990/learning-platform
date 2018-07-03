@@ -13,7 +13,7 @@ public class IndexController {
 	public ModelAndView index(Principal principal) {
 		System.err.println("当前用户：" + principal);
 		ModelAndView mav = new ModelAndView("index");
-		mav.addObject("user", "hello world!");
+		mav.addObject("user", principal);
 		return mav;
 	}
 }
