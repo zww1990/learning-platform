@@ -1,5 +1,8 @@
 package com.example.client.config;
 
+import javax.servlet.Filter;
+import javax.servlet.http.HttpSessionListener;
+
 import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
@@ -25,8 +28,8 @@ public class CasClientAutoConfig {
 	 *         还允许程序性地删除会话。启用CAS单一登出功能。
 	 */
 	@Bean
-	public ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> singleSignOutHttpSessionListener() {
-		ServletListenerRegistrationBean<SingleSignOutHttpSessionListener> bean = new ServletListenerRegistrationBean<>();
+	public ServletListenerRegistrationBean<HttpSessionListener> singleSignOutHttpSessionListener() {
+		ServletListenerRegistrationBean<HttpSessionListener> bean = new ServletListenerRegistrationBean<>();
 		bean.setListener(new SingleSignOutHttpSessionListener());
 		bean.setOrder(1);
 		return bean;
@@ -37,8 +40,8 @@ public class CasClientAutoConfig {
 	 * @return 实现单点登出协议。 它处理注册会话并销毁会话。
 	 */
 	@Bean
-	public FilterRegistrationBean singleSignOutFilter(CasProperties props) {
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> singleSignOutFilter(CasProperties props) {
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 		bean.setFilter(new SingleSignOutFilter());
 		bean.setOrder(3);
 		bean.addUrlPatterns("/*");
@@ -51,8 +54,8 @@ public class CasClientAutoConfig {
 	 * @return 是来检测用户是否需要被认证。 如果用户需要认证，则会将用户重定向到CAS服务器。
 	 */
 	@Bean
-	public FilterRegistrationBean authenticationFilter(CasProperties props) {
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> authenticationFilter(CasProperties props) {
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 		bean.setFilter(new AuthenticationFilter());
 		bean.setOrder(4);
 		bean.addUrlPatterns("/*");
@@ -66,8 +69,8 @@ public class CasClientAutoConfig {
 	 * @return 使用CAS 3.0协议验证票据。
 	 */
 	@Bean
-	public FilterRegistrationBean ticketValidationFilter(CasProperties props) {
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> ticketValidationFilter(CasProperties props) {
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 		Cas30ProxyReceivingTicketValidationFilter filter = new Cas30ProxyReceivingTicketValidationFilter();
 		filter.setTicketValidator(new Cas30ServiceTicketValidator(props.getServerUrlPrefix()));// 将用来验证票据的票据验证器。
 		bean.setFilter(filter);
@@ -82,8 +85,8 @@ public class CasClientAutoConfig {
 	 * @return 包装一个HttpServletRequest，以便getRemoteUser和getPrincipal返回CAS相关的条目。
 	 */
 	@Bean
-	public FilterRegistrationBean httpServletRequestWrapperFilter() {
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> httpServletRequestWrapperFilter() {
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 		bean.setFilter(new HttpServletRequestWrapperFilter());
 		bean.setOrder(6);
 		bean.addUrlPatterns("/*");
@@ -94,8 +97,8 @@ public class CasClientAutoConfig {
 	 * @return 将断言置于ThreadLocal中，以便其他资源可以访问不具有Web层会话的权限。
 	 */
 	@Bean
-	public FilterRegistrationBean assertionThreadLocalFilter() {
-		FilterRegistrationBean bean = new FilterRegistrationBean();
+	public FilterRegistrationBean<Filter> assertionThreadLocalFilter() {
+		FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 		bean.setFilter(new AssertionThreadLocalFilter());
 		bean.setOrder(7);
 		bean.addUrlPatterns("/*");
