@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
-@ComponentScan("com.example.demo.web")
 @EnableWebMvc
 public class DispatcherConfig implements WebMvcConfigurer {
 	@Resource
@@ -28,7 +26,7 @@ public class DispatcherConfig implements WebMvcConfigurer {
 		for (HttpMessageConverter<?> converter : converters) {
 			if (converter instanceof StringHttpMessageConverter) {
 				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
-				shmc.setDefaultCharset(Charset.defaultCharset());
+				shmc.setDefaultCharset(Charset.forName("UTF-8"));
 			}
 		}
 	}
