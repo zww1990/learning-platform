@@ -1,9 +1,7 @@
 package com.example.client.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
 @ConfigurationProperties("cas")
 public class CasProperties {
 	private String serverUrlPrefix;
