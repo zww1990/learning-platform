@@ -1,5 +1,7 @@
 package com.example.dubbo.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -10,8 +12,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.example.dubbo.producer.ConfirmCallbackListener;
-import com.example.dubbo.producer.ReturnCallbackListener;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -21,12 +22,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Configuration
 public class RabbitConfiguration {
+
+	private static final Logger log = LoggerFactory.getLogger(RabbitConfiguration.class);
+
 	@Bean
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, ObjectMapper jsonMapper) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(jsonMapper));
-		rabbitTemplate.setConfirmCallback(new ConfirmCallbackListener());
-		rabbitTemplate.setReturnCallback(new ReturnCallbackListener());
+		// 确认回调.
+		rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> log
+				.info("MQ消息发送到exchange: correlationData={},ack={},cause={}", correlationData, ack, cause));
+		// 返回消息回调.
+		rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> log.info(
+				"MQ消息路由到queue: message={},exchange={},routingKey={},replyCode={},replyText={}",
+				new String(message.getBody()), exchange, routingKey, replyCode, replyText));
 		// rabbitTemplate.setMandatory(true);
 		return rabbitTemplate;
 	}

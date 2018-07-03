@@ -1,9 +1,10 @@
 package com.example.dubbo.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
@@ -16,23 +17,15 @@ import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
 @Configuration
 @ConditionalOnProperty(name = "dubbo.enable", matchIfMissing = true)
 @DubboComponentScan(basePackages = "com.example.dubbo.action")
+@EnableConfigurationProperties(DubboProperties.class)
 public class DubboConfiguration {
-	@Bean
-	@ConditionalOnMissingBean
-	public DubboProperties dubboProperties() {
-		return new DubboProperties();
-	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(name = "dubbo.app-name")
 	public ApplicationConfig applicationConfig(DubboProperties props) {
 		return new ApplicationConfig(props.getAppName());
 	}
 
 	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(name = "dubbo.registry-address")
 	public RegistryConfig registryConfig(DubboProperties props) {
 		return new RegistryConfig(props.getRegistryAddress());
 	}
