@@ -7,7 +7,7 @@ public class CasProperties {
 	private String serverUrlPrefix;
 	private String serverLoginUrl;
 	private String clientUrl;
-	private String mode;
+	private EnvMode envMode;
 
 	public String getServerUrlPrefix() {
 		return serverUrlPrefix;
@@ -33,19 +33,15 @@ public class CasProperties {
 		this.clientUrl = clientUrl;
 	}
 
-	public String getMode() {
-		return mode;
+	public EnvMode getEnvMode() {
+		return envMode;
 	}
 
-	public void setMode(String mode) {
-		this.mode = mode;
+	public void setEnvMode(EnvMode envMode) {
+		this.envMode = envMode;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("[serverUrlPrefix=").append(serverUrlPrefix).append(", serverLoginUrl=").append(serverLoginUrl)
-				.append(", clientUrl=").append(clientUrl).append(", mode=").append(mode).append("]");
-		return builder.toString();
+	public enum EnvMode {
+		DEV, PROD
 	}
 }
