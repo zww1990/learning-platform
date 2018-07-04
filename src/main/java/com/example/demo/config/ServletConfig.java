@@ -3,10 +3,8 @@ package com.example.demo.config;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Condition;
@@ -21,8 +19,7 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -33,7 +30,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 @MultipartConfig
 @ComponentScan("com.example.demo.controller")
-public class ServletConfig implements WebMvcConfigurer {
+public class ServletConfig extends WebMvcConfigurerAdapter {
 	@Resource
 	private SwaggerProperties swaggerProps;
 
@@ -42,7 +39,7 @@ public class ServletConfig implements WebMvcConfigurer {
 		for (HttpMessageConverter<?> converter : converters) {
 			if (converter instanceof StringHttpMessageConverter) {
 				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
-				shmc.setDefaultCharset(Charset.defaultCharset());
+				shmc.setDefaultCharset(Charset.forName("UTF-8"));
 			}
 		}
 	}
@@ -82,15 +79,12 @@ public class ServletConfig implements WebMvcConfigurer {
 					props.getTermsOfServiceUrl(), contact, props.getLicense(), props.getLicenseUrl(),
 					Collections.emptyList());
 		}
-
 	}
 
 	public static class SwaggerCondition implements Condition {
-
 		@Override
 		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
 			return context.getEnvironment().getProperty("swagger.enable", boolean.class);
 		}
-
 	}
 }
