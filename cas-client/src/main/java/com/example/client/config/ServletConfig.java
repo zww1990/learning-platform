@@ -19,7 +19,7 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 		for (HttpMessageConverter<?> converter : converters) {
 			if (converter instanceof StringHttpMessageConverter) {
 				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
-				shmc.setDefaultCharset(Charset.defaultCharset());
+				shmc.setDefaultCharset(Charset.forName("UTF-8"));
 			}
 		}
 	}

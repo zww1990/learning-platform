@@ -46,7 +46,7 @@ public class MyWebAppInitializer implements WebApplicationInitializer {
 		registration.addMapping("/");
 		registration.setAsyncSupported(DEFAULT_ASYNC_SUPPORTED);
 		// 为给定的编码创建一个CharacterEncodingFilter。
-		this.registerServletFilter(servletContext, new CharacterEncodingFilter(Charset.defaultCharset().name(), true));
+		this.registerServletFilter(servletContext, new CharacterEncodingFilter(Charset.forName("UTF-8").name(), true));
 		CasProperties casProps = rootAppContext.getBean(CasProperties.class);
 		if (CasCondition.CAS_MODE.equalsIgnoreCase(casProps.getCasMode())) {
 			log.info("DisplayName={}, CasMode={}", rootAppContext.getDisplayName(), casProps.getCasMode());
