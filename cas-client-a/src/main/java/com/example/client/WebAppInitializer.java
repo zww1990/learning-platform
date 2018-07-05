@@ -31,8 +31,8 @@ import com.example.client.config.RootConfig;
 import com.example.client.config.RootConfig.CasCondition;
 import com.example.client.config.ServletConfig;
 
-public class MyWebAppInitializer implements WebApplicationInitializer {
-	private static final Logger log = LoggerFactory.getLogger(MyWebAppInitializer.class);
+public class WebAppInitializer implements WebApplicationInitializer {
+	private static final Logger log = LoggerFactory.getLogger(WebAppInitializer.class);
 	private static final String DEFAULT_SERVLET_NAME = "dispatcher";
 	private static final boolean DEFAULT_ASYNC_SUPPORTED = true;
 
