@@ -37,7 +37,7 @@ public class RootConfig {
 		public AuthenticationFilter authenticationFilter(CasProperties props) {
 			AuthenticationFilter filter = new AuthenticationFilter();
 			filter.setCasServerLoginUrl(props.getCasServerLoginUrl());// 定义CAS服务器登录URL的位置
-			filter.setService(props.getCasClientUrl());// 要发送到CAS服务器的服务URL
+			filter.setServerName(props.getCasClientUrl());// 要发送到CAS服务器的服务URL
 			return filter;
 		}
 
@@ -48,7 +48,7 @@ public class RootConfig {
 		@Bean
 		public Cas30ProxyReceivingTicketValidationFilter ticketValidationFilter(CasProperties props) {
 			Cas30ProxyReceivingTicketValidationFilter filter = new Cas30ProxyReceivingTicketValidationFilter();
-			filter.setService(props.getCasClientUrl());// 该应用程序托管的服务器的名称。 将使用此动态构建服务URL
+			filter.setServerName(props.getCasClientUrl());// 该应用程序托管的服务器的名称。 将使用此动态构建服务URL
 			filter.setTicketValidator(new Cas30ServiceTicketValidator(props.getCasServerUrlPrefix()));// 将用来验证票据的票据验证器。
 			return filter;
 		}
