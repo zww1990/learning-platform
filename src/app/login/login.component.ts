@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['我是格鲁特', [Validators.required]],
-      password: ['20180522', [Validators.required]]
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required]]
     });
   }
 
@@ -33,10 +33,16 @@ export class LoginComponent implements OnInit {
    * @description 用户登录
    */
   submitForm() {
-    const user = new User(
-      this.loginForm.get('username').value,
-      this.loginForm.get('username').value
-    );
+    const value = this.loginForm.value;
+    if (value.username !== 'hero') {
+      this.message.error('用户名或密码错误！请重新输入！');
+      return;
+    }
+    if (value.password !== 'hero@2018') {
+      this.message.error('用户名或密码错误！请重新输入！');
+      return;
+    }
+    const user = new User(value.username, value.username);
     sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
     this.router.navigate(['']);
   }
