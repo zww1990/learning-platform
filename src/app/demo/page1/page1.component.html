@@ -35,7 +35,7 @@
     员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
   </div>
   <ng-template [ngIf]="this.tableData.length!==0">
-    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: '4050px' }">
+    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: '4050px' }" [nzBordered]="true">
       <thead>
         <tr>
           <th *ngFor="let item of this.tableHeader" [nzWidth]="'150px'">
@@ -44,7 +44,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of nzTable.data;index as row">
+        <tr *ngFor="let data of nzTable.data;index as row;even as isEven" [ngStyle]="{'background':isEven?'#fdf5e6':'auto'}">
           <td *ngFor="let item of data;index as col">
             <div class="editable-cell">
               <div class="editable-cell-text-wrapper">
