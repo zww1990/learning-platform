@@ -60,7 +60,7 @@ public class CasClientAutoConfig {
 		bean.setOrder(4);
 		bean.addUrlPatterns("/*");
 		bean.addInitParameter("casServerLoginUrl", props.getServerLoginUrl());// 定义CAS服务器登录URL的位置
-		bean.addInitParameter("service", props.getClientUrl());// 要发送到CAS服务器的服务URL
+		bean.addInitParameter("serverName", props.getClientUrl());// 要发送到CAS服务器的服务URL
 		return bean;
 	}
 
@@ -76,7 +76,7 @@ public class CasClientAutoConfig {
 		bean.setFilter(filter);
 		bean.setOrder(5);
 		bean.addUrlPatterns("/*");
-		bean.addInitParameter("service", props.getClientUrl());// 该应用程序托管的服务器的名称。 将使用此动态构建服务URL
+		bean.addInitParameter("serverName", props.getClientUrl());// 该应用程序托管的服务器的名称。 将使用此动态构建服务URL
 		bean.addInitParameter("casServerUrlPrefix", props.getServerUrlPrefix());// 将用来验证票据的票据验证器。
 		return bean;
 	}

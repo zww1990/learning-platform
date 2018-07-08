@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example</groupId>
+	<artifactId>cas-client-b</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cas-client-b</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<maven.test.skip>true</maven.test.skip>
+		<java.cas.client.version>3.5.0</java.cas.client.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.0.3.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- spring framework -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 核心功能，包括CAS认证/验证过滤器。 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-core</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- 这种依赖关系提供了对SAML功能的支持 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-support-saml</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- 这种依赖关系提供了使用Ehcache的分布式代理票据缓存 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-support-distributed-ehcache</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- 使用Memcached分布式代理票据缓存由此依赖提供 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-support-distributed-memcached</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- 这种依赖性提供了Atlassian集成 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-atlassian</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- JBoss集成由此依赖提供 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-jboss</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- Tomcat 6集成由此依赖提供 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-tomcat-v6</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- Tomcat 7由此依赖提供 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-tomcat-v7</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- Tomcat 8.0.x由此依赖提供 -->
+		<dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v8</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency>
+		<!-- Tomcat 8.5.x由此依赖关系提供 -->
+		<dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v85</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${project.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-compiler-plugin</artifactId>
+            	<configuration>
+            		<source>${java.version}</source>
+		            <target>${java.version}</target>
+            	</configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>
