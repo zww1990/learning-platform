@@ -22,7 +22,7 @@
 		<!-- 定义CAS服务器登录URL的位置 -->
 		<property name="casServerLoginUrl" value="${cas.server.login.url}" />
 		<!-- 要发送到CAS服务器的服务URL -->
-		<property name="service" value="${cas.client.url}" />
+		<property name="serverName" value="${cas.client.url}" />
 	</bean>
 
 	<!-- 使用CAS 2.0协议验证票据。 如果您提供acceptAnyProxy或allowedProxyChains参数，将构建一个Cas20ProxyTicketValidator。 
@@ -31,7 +31,7 @@
 		class="org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter"
 		id="ticketValidationFilter">
 		<!-- 该应用程序托管的服务器的名称。 将使用此动态构建服务URL -->
-		<property name="service" value="${cas.client.url}" />
+		<property name="serverName" value="${cas.client.url}" />
 		<!-- 将用来验证票据的票据验证器。 -->
 		<property name="ticketValidator">
 			<bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
