@@ -1,6 +1,8 @@
 {
-  "myID": "8143969",
-  "myEndPoint": "家（西城区阜成门内）",
+  "myID": "",
+  "userIds": ["8143969"],
+  "myEndPoint": "",
+  "endPoints": ["家（西城区阜成门内）"],
   "myName": "",
   "idIndex": 1,
   "nameIndex": 2,
