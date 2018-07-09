@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-
-import { CanComponentDeactivate } from '../../auth/auth-guard.service';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.less']
 })
-export class IndexComponent implements OnInit/* , CanComponentDeactivate */ {
-  constructor() {}
+export class IndexComponent implements OnInit {
+  constructor(private element: ElementRef, private http: HttpClient) {}
 
-  ngOnInit() {}
-
-  // canDeactivate() {
-  //   const confirmation = window.confirm('你确定要离开首页?');
-  //   return Observable.of(confirmation);
-  // }
+  ngOnInit() {
+    const container = this.element.nativeElement.querySelector('div#globalArea');
+    const controller = new window['GIO'].Controller(container);
+    this.http
+      .get('/assets/data/sampleData.json')
+      .toPromise()
+      .then(resp => {
+        controller.addData(resp);
+        controller.init();
+      });
+  }
 }
