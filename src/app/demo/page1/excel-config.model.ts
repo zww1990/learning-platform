@@ -8,9 +8,17 @@ export class ExcelConfig {
    */
   myID: string;
   /**
+   * 员工号
+   */
+  userIds: string[];
+  /**
    * 下车地点
    */
   myEndPoint: string;
+  /**
+   * 下车地点
+   */
+  endPoints: string[];
   /**
    * 员工姓名
    */
