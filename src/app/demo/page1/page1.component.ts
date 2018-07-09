@@ -101,15 +101,9 @@ export class Page1Component implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       const wb = Workbook.readWorkbook(reader, this.rABS);
-      if (wb.SheetNames.length < 2) {
-        this.msg.error('Excel中Sheet页的数量小于2，数据不完整无法解析。');
-        return;
-      }
       const empSheetName = wb.SheetNames[this.config.empPageIndex]; // 员工加班记录明细页索引
       const empSheet = wb.Sheets[empSheetName];
-      this.config.mySheetName = wb.SheetNames[this.config.myPageIndex]; // 个人加班记录明细页索引
-      const mySheet = wb.Sheets[this.config.mySheetName];
-      this.tableHeader = Workbook.getHeaderRow(mySheet); // 表头行
+      this.tableHeader = this.config.tableHeader; // 表头行
       const approvalIds = utils
         .sheet_to_json(empSheet, { raw: true, blankrows: false, header: 1 })
         .filter(x => `${x[this.config.idIndex]}` === this.config.myID)

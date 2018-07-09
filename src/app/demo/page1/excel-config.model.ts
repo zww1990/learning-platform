@@ -80,6 +80,10 @@ export class ExcelConfig {
    */
   mySheetName: string;
   /**
+   * 表头行
+   */
+  tableHeader: string[];
+  /**
    * 导出文件名称
    */
   fileName: string;
