@@ -1,4 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  AfterViewInit
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -6,12 +12,17 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.less']
 })
-export class IndexComponent implements OnInit {
-  constructor(private element: ElementRef, private http: HttpClient) {}
+export class IndexComponent implements OnInit, AfterViewInit {
+  @ViewChild('globalArea') globalArea: ElementRef;
 
-  ngOnInit() {
-    const container = this.element.nativeElement.querySelector('div#globalArea');
-    const controller = new window['GIO'].Controller(container);
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    const controller = new window['GIO'].Controller(
+      this.globalArea.nativeElement
+    );
     this.http
       .get('/assets/data/sampleData.json')
       .toPromise()
