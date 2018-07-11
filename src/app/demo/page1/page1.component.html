@@ -3,14 +3,14 @@
     <nz-form-item>
       <nz-form-control>
         <input nz-input formControlName="myID" placeholder="请输入员工编号" [nzAutocomplete]="idAuto" style="width: 200px">
-        <nz-autocomplete #idAuto [nzDataSource]="config?.userIds || []"></nz-autocomplete>
+        <nz-autocomplete #idAuto [nzDataSource]="config?.userIds || []" [nzBackfill]="true"></nz-autocomplete>
         <nz-form-explain *ngIf="validateForm.get('myID').dirty && validateForm.get('myID').errors">请输入员工编号！</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
         <input nz-input formControlName="myEndPoint" placeholder="请输入下车地点" [nzAutocomplete]="pointAuto" style="width: 200px">
-        <nz-autocomplete #pointAuto [nzDataSource]="config?.endPoints || []"></nz-autocomplete>
+        <nz-autocomplete #pointAuto [nzDataSource]="config?.endPoints || []" [nzBackfill]="true"></nz-autocomplete>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
