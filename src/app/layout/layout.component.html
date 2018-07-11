@@ -5,7 +5,7 @@
       <img src="/assets/images/angular.svg" *ngIf="isCollapsed">
     </div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
-      <ng-template ngFor let-child [ngForOf]="menus">
+      <ng-container *ngFor="let child of menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
             <i class="{{child.menuIcon}}"></i>
@@ -21,7 +21,7 @@
             <li nz-menu-item (click)="clickMenu(item)" [nzSelected]="item.selected">{{ item.menuName }}</li>
           </ul>
         </li>
-      </ng-template>
+      </ng-container>
     </ul>
   </nz-sider>
   <nz-layout>
