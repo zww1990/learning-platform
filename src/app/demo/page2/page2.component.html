@@ -7,7 +7,7 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzRequired]="true" [nzSpan]="6">单选下拉框</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
       <nz-select formControlName="select">
         <nz-option *ngFor="let item of select_single" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
       </nz-select>
@@ -15,7 +15,7 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzRequired]="true" [nzSpan]="6">多选下拉框</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
       <nz-select formControlName="select_multiple" [nzMode]="'multiple'">
         <nz-option *ngFor="let item of select_multiple" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
       </nz-select>
@@ -23,13 +23,13 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzRequired]="true" [nzSpan]="6">日期选择框</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
       <nz-date-picker formControlName="datepicker"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzRequired]="true" [nzSpan]="6">时间选择框</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
       <nz-time-picker formControlName="timepicker"></nz-time-picker>
     </nz-form-control>
   </nz-form-item>
@@ -37,7 +37,7 @@
     <nz-form-label [nzRequired]="true" [nzSpan]="6">数字输入框</nz-form-label>
     <nz-form-control [nzSpan]="14">
       <nz-input-number formControlName="input_number" [nzStep]="1" [nzMax]="4" [nzMin]="1"></nz-input-number>
-      <span nz-form-text> 次数</span>
+      <nz-form-text> 次数</nz-form-text>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
