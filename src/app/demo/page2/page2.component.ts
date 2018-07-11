@@ -34,6 +34,7 @@ export class Page2Component implements OnInit {
     { label: '梨子', value: 'Pear', checked: false },
     { label: '橙子', value: 'Orange', checked: false }
   ];
+  auto_item = ['79878798', '46554446', '13213131'];
   now = new Date();
 
   constructor(private fb: FormBuilder) {}
@@ -49,16 +50,26 @@ export class Page2Component implements OnInit {
       slider: [null, [Validators.required]],
       radio_group: [null, [Validators.required]],
       radio_button: [null, [Validators.required]],
-      check_group: [null, [Validators.required]]
+      check_group: [null, [Validators.required]],
+      auto_text: [null, [Validators.required]]
     });
   }
 
-  submitForm(event) {
+  submitForm(event: Event) {
     event.preventDefault();
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsDirty();
       this.validateForm.controls[key].updateValueAndValidity();
     }
     console.log(this.validateForm.value);
+  }
+
+  resetForm(event: Event) {
+    event.preventDefault();
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsPristine();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
   }
 }
