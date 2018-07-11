@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-page2',
@@ -31,7 +31,7 @@ export class Page2Component implements OnInit {
   ];
   check_group = [
     { label: '苹果', value: 'Apple', checked: false },
-    { label: '梨子', value: 'Pear', checked: true },
+    { label: '梨子', value: 'Pear', checked: false },
     { label: '橙子', value: 'Orange', checked: false }
   ];
   now = new Date();
@@ -40,20 +40,25 @@ export class Page2Component implements OnInit {
 
   ngOnInit() {
     this.validateForm = this.fb.group({
-      select: ['China'],
-      select_multiple: [['Red']],
-      datepicker: [this.now],
-      timepicker: [this.now],
-      input_number: [4],
-      switch: [true],
-      slider: [0],
-      radio_group: [1],
-      radio_button: [1],
-      check_group: []
+      select: [null, [Validators.required]],
+      select_multiple: [null, [Validators.required]],
+      datepicker: [null, [Validators.required]],
+      timepicker: [null, [Validators.required]],
+      input_number: [null, [Validators.required]],
+      switch: [null, [Validators.required]],
+      slider: [null, [Validators.required]],
+      radio_group: [null, [Validators.required]],
+      radio_button: [null, [Validators.required]],
+      check_group: [null, [Validators.required]]
     });
   }
 
-  submitForm() {
+  submitForm(event) {
+    event.preventDefault();
+    for (const key in this.validateForm.controls) {
+      this.validateForm.controls[key].markAsDirty();
+      this.validateForm.controls[key].updateValueAndValidity();
+    }
     console.log(this.validateForm.value);
   }
 }
