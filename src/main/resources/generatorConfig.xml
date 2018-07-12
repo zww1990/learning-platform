@@ -15,7 +15,7 @@
 			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
 		</commentGenerator>
-		<jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="${jdbc.url}" userId="${jdbc.user}" password="${jdbc.password}">
+		<jdbcConnection driverClass="${jdbc.driver.class}" connectionURL="${jdbc.url}" userId="${jdbc.user}" password="${jdbc.password}">
 			<property name="remarksReporting" value="true"/><!-- 允许读取表、字段注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
@@ -27,8 +27,9 @@
 			XMLMAPPER：全XML文件，
 			MIXEDMAPPER：注解和XML混合 -->
 		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java" type="XMLMAPPER"/>
-		<table tableName="BDM_HR_MODIFY" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
-			<generatedKey column="MODIFY_ID" sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual"/><!-- 主键生成策略 -->
+		<table tableName="bdm_system_menu" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<!-- 主键生成策略 -->
+			<!-- <generatedKey column="MODIFY_ID" sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual"/> -->
 		</table>
 	</context>
 </generatorConfiguration>
