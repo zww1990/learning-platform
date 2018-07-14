@@ -38,10 +38,10 @@ public class MybatisTest {
 
 	@Test
 	public void mysql() {
-		String url = "jdbc:mysql://server1.navicat.com:4406/test";
+		String url = "jdbc:mysql://123.56.75.138:3306/test";
 		Properties info = new Properties();
-		info.put("user", "navicat");
-		info.put("password", "testnavicat");
+		info.put("user", "root");
+		info.put("password", "");
 		info.put("useInformationSchema", "true");
 		info.put("useUnicode", "true");
 		info.put("characterEncoding", "utf8");
