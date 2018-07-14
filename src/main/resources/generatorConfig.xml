@@ -25,7 +25,7 @@
 			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
 		</commentGenerator>
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}">
+		<jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}">
 			<property name="useInformationSchema" value="true"/><!-- 允许读取表注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl"/>
