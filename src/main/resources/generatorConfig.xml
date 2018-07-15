@@ -5,7 +5,7 @@
 	<properties resource="./application.properties"/>
 	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
-	<context id="DB2Tables" targetRuntime="MyBatis3">
+	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<!-- 实体类序列化 -->
 		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin"/>
 		<!-- 将*Mapper.java重命名*Dao.java -->
