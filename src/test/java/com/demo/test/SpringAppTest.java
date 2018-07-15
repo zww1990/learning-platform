@@ -1,6 +1,8 @@
 package com.demo.test;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -12,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.demo.Application;
+import com.demo.dao.CommonDao;
 import com.demo.dao.UserDao;
 import com.demo.dao.UserDynamicSqlSupport;
 import com.demo.model.User;
@@ -44,7 +47,7 @@ public class SpringAppTest {
 	private ObjectMapper objectMapper;
 
 	@Test
-	public void testDao() {
+	public void testList() {
 		try {
 			List<User> users = this.userDao.selectByExample().where(UserDynamicSqlSupport.id, SqlBuilder.isIn(1, 2, 3))
 					.and(UserDynamicSqlSupport.age, SqlBuilder.isBetween(11).and(22))
@@ -65,6 +68,26 @@ public class SpringAppTest {
 			PageInfo<User> pageInfo = PageHelper.startPage(1, 10)
 					.doSelectPageInfo(() -> this.userDao.selectByExample().build().execute());
 			System.err.println(pageInfo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testSelect() {
+		try {
+			CommonDao dao = this.context.getBean(CommonDao.class);
+			String sql = "SELECT r.id AS role_id,r.NAME AS role_name,r.user_id,u.NAME AS user_name,u.age,u.birthday,u.address,u.resume FROM role r LEFT JOIN USER u ON r.user_id=u.id";
+			List<Map<String, Object>> list = dao.select(sql);
+			if (list.isEmpty()) {
+				return;
+			}
+			List<String> column = list.stream().findFirst().get().entrySet().stream().map(x -> x.getKey())
+					.collect(Collectors.toList());
+			System.err.println(column);
+			for (Map<String, Object> map : list) {
+				System.err.println(map);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
