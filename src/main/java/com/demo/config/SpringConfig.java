@@ -1,7 +1,6 @@
 package com.demo.config;
 
 import javax.sql.DataSource;
-
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
@@ -56,6 +54,11 @@ public class SpringConfig {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
 		bean.setPlugins(new Interceptor[] { new PageInterceptor() });
+		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+		config.setCacheEnabled(false);
+		config.setMapUnderscoreToCamelCase(true);
+		config.setCallSettersOnNulls(true);
+		bean.setConfiguration(config);
 		return bean.getObject();
 	}
 }
