@@ -58,6 +58,7 @@ public class SpringConfig {
 		config.setCacheEnabled(false);
 		config.setMapUnderscoreToCamelCase(true);
 		config.setCallSettersOnNulls(true);
+		config.setReturnInstanceForEmptyRow(true);
 		bean.setConfiguration(config);
 		return bean.getObject();
 	}
