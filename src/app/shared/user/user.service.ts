@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { User } from './user.model';
-import { SessionKey } from './session-key.enum';
-import { CasService } from './cas.service';
+import { CasService } from '../cas.service';
+import { SessionKey } from '../session-key.enum';
 
 /**
  * @description 用户服务

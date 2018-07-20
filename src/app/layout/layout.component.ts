@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { NzModalService } from 'ng-zorro-antd';
-import { User } from '../auth/user.model';
-import { MenuItem } from './menu-item.model';
-import { UserService } from '../auth/user.service';
-import { SimpleReuseStrategy } from './simple-reuse-strategy';
+import { User } from '../shared/user/user.model';
+import { MenuItem } from '../shared/menu/menu-item.model';
+import { UserService } from '../shared/user/user.service';
+import { SimpleReuseStrategy } from '../shared/simple-reuse-strategy';
 
 @Component({
   selector: 'app-layout',
