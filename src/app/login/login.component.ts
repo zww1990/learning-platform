@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,8 +18,9 @@ import { User } from '../auth/user.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
+  @ViewChild('usernameInput') usernameInput: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +34,10 @@ export class LoginComponent implements OnInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
+  }
+
+  ngAfterViewInit() {
+    this.usernameInput.nativeElement.focus();
   }
 
   /**

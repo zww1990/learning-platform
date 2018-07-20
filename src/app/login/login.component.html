@@ -12,7 +12,7 @@
         <nz-form-item>
           <nz-form-control>
             <nz-input-group nzPrefixIcon="anticon anticon-user">
-              <input type="text" nz-input formControlName="username" placeholder="用户名">
+              <input #usernameInput type="text" nz-input formControlName="username" placeholder="用户名">
             </nz-input-group>
             <nz-form-explain *ngIf="loginForm.get('username').dirty&&loginForm.get('username').errors">请输入您的用户名!</nz-form-explain>
           </nz-form-control>
