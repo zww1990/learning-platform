@@ -10,8 +10,7 @@ import {
   Route
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-
-import { UserService } from './user.service';
+import { UserService } from './user/user.service';
 
 /**
  * @author zww
@@ -99,8 +98,7 @@ export class AuthGuard
     if (!user) {
       this.router.navigate(['/login']);
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 }

@@ -9,9 +9,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NzMessageService } from 'ng-zorro-antd';
-import { CasService } from '../auth/cas.service';
-import { SessionKey } from '../auth/session-key.enum';
-import { User } from '../auth/user.model';
+import { CasService } from '../shared/cas.service';
+import { User } from '../shared/user/user.model';
+import { SessionKey } from '../shared/session-key.enum';
 
 @Component({
   selector: 'app-login',

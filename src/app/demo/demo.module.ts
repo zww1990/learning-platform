@@ -6,8 +6,8 @@ import { Page2Component } from './page2/page2.component';
 import { Page3Component } from './page3/page3.component';
 import { Page4Component } from './page4/page4.component';
 import { IndexComponent } from './index/index.component';
-import { AuthGuard } from '../auth/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
+import { AuthGuard } from '../shared/auth-guard.service';
 
 const routes: Routes = [
   { path: 'index', component: IndexComponent, canDeactivate: [AuthGuard] },
