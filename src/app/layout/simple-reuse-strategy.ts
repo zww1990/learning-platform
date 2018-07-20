@@ -10,7 +10,7 @@ import {
  */
 export class SimpleReuseStrategy implements RouteReuseStrategy {
   private static handlers: { [key: string]: DetachedRouteHandle } = {};
-  private static excludePaths = ['/login'];
+  private static excludePaths: string[] = ['/login'];
   private static waitDelete: string;
 
   /**
@@ -23,6 +23,16 @@ export class SimpleReuseStrategy implements RouteReuseStrategy {
     } else {
       SimpleReuseStrategy.waitDelete = url;
     }
+  }
+
+  /**
+   * @description 删除所有的路由快照
+   */
+  static deleteAllRouteSnapshot() {
+    Object.keys(SimpleReuseStrategy.handlers).forEach(
+      key => delete SimpleReuseStrategy.handlers[key]
+    );
+    SimpleReuseStrategy.waitDelete = null;
   }
 
   /**

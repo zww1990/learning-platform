@@ -23,7 +23,7 @@
   <nz-form-item>
     <nz-form-label [nzRequired]="true" [nzSpan]="6">多选下拉框</nz-form-label>
     <nz-form-control [nzSpan]="14" nzHasFeedback>
-      <nz-select formControlName="select_multiple" [nzMode]="'multiple'" nzPlaceHolder="至少选择一个项目">
+      <nz-select formControlName="select_multiple" nzMode="multiple" nzPlaceHolder="至少选择一个项目">
         <nz-option *ngFor="let item of select_multiple" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
       </nz-select>
     </nz-form-control>
@@ -87,7 +87,7 @@
   </nz-form-item>
   <nz-form-item>
     <nz-form-control [nzSpan]="12" [nzOffset]="6">
-      <button nz-button [nzType]="'primary'" [disabled]="!validateForm.valid">提交</button>
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
       <button (click)="resetForm($event)" nz-button>重置</button>
     </nz-form-control>
   </nz-form-item>

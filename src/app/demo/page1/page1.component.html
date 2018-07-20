@@ -1,5 +1,5 @@
 <ng-template [ngIf]="this.isShowForm">
-  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" [nzLayout]="'inline'">
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="inline">
     <nz-form-item>
       <nz-form-control>
         <input nz-input formControlName="myID" placeholder="请输入员工编号" [nzAutocomplete]="idAuto" style="width: 200px">
@@ -37,11 +37,11 @@
     员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
   </div>
   <ng-template [ngIf]="this.tableData.length !== 0">
-    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" [nzSize]="'small'" [nzScroll]="{ x: '4050px' }"
+    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" nzSize="small" [nzScroll]="{ x: '4050px' }"
       [nzBordered]="true">
       <thead>
         <tr>
-          <th *ngFor="let item of this.tableHeader" [nzWidth]="'150px'">
+          <th *ngFor="let item of this.tableHeader" nzWidth="150px">
             <span>{{item}}</span>
           </th>
         </tr>
@@ -58,7 +58,7 @@
                       <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
-                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0" [nzPlaceHolder]="'交通费'"></nz-input-number>
+                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0" nzPlaceHolder="交通费"></nz-input-number>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                     <ng-template [ngIf]="!editMoneyCache[row].isTraffic">{{item}}</ng-template>
@@ -70,7 +70,7 @@
                     </ng-template>
                     <ng-template [ngIf]="editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
                       <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
-                        [nzHideDisabledOptions]="true" [nzClearText]="'清除上车时间'"></nz-time-picker>
+                        [nzHideDisabledOptions]="true" nzClearText="清除上车时间"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                   </ng-template>
@@ -81,7 +81,7 @@
                     </ng-template>
                     <ng-template [ngIf]="editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
                       <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
-                        [nzHideDisabledOptions]="true" [nzClearText]="'清除下车时间'"></nz-time-picker>
+                        [nzHideDisabledOptions]="true" nzClearText="清除下车时间"></nz-time-picker>
                       <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
                     </ng-template>
                   </ng-template>
