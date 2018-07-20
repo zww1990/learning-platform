@@ -1,10 +1,10 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+  <nz-sider [nzCollapsible]="true" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
     <div class="logo">
       <img src="/assets/images/logo-nav.png" *ngIf="!isCollapsed">
       <img src="/assets/images/angular.svg" *ngIf="isCollapsed">
     </div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let child of menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
@@ -54,7 +54,7 @@
     </nz-header>
     <nz-content>
       <div style="padding:10px; background: #fff;">
-        <nz-tabset [nzType]="'card'" [(nzSelectedIndex)]="selectedIndex">
+        <nz-tabset nzType="card" [(nzSelectedIndex)]="selectedIndex" [nzTabBarExtraContent]="extraTemplate">
           <nz-tab *ngFor="let tab of tabs;" (nzClick)="selectTab(tab)" [nzTitle]="titleTemplate">
             <ng-template #titleTemplate>
               <div>
@@ -64,6 +64,22 @@
             </ng-template>
           </nz-tab>
         </nz-tabset>
+        <ng-template #extraTemplate>
+          <nz-dropdown nzPlacement="bottomRight">
+            <a nz-dropdown>
+              操作
+              <i class="anticon anticon-down"></i>
+            </a>
+            <ul nz-menu>
+              <li nz-menu-item (click)="closeOtherTabs()">
+                <a>关闭其他</a>
+              </li>
+              <li nz-menu-item (click)="closeAllTabs()">
+                <a>关闭所有</a>
+              </li>
+            </ul>
+          </nz-dropdown>
+        </ng-template>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
