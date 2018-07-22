@@ -22,7 +22,6 @@
 		<spring.version>5.0.3.RELEASE</spring.version>
 		<junit.version>4.12</junit.version>
 		<jackson.version>2.9.4</jackson.version>
-		<javaee.version>8.0</javaee.version>
 		<log4j2.version>2.10.0</log4j2.version>
 		<slf4j.version>1.7.25</slf4j.version>
 		<poi.version>3.17</poi.version>
@@ -106,20 +105,6 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- javaee -->
-		<!-- <dependency>
-		    <groupId>javax</groupId>
-		    <artifactId>javaee-api</artifactId>
-		    <version>${javaee.version}</version>
-		    <scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>javax</groupId>
-		    <artifactId>javaee-web-api</artifactId>
-		    <version>${javaee.version}</version>
-		    <scope>provided</scope>
-		</dependency> -->
 		
 		<!-- log4j -->
 		<dependency>
