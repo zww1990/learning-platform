@@ -24,7 +24,7 @@ public class PoiTest {
 			DataValidationHelper helper = new XSSFDataValidationHelper((XSSFSheet) sheet);
 			DataValidationConstraint constraint = helper
 					.createExplicitListConstraint(new String[] { "11", "21", "31" });
-			CellRangeAddressList addressList = new CellRangeAddressList(0, // 起始行号
+			CellRangeAddressList addressList = new CellRangeAddressList(1, // 起始行号
 					65535, // 终止行号
 					0, // 起始列号
 					0// 终止列号
