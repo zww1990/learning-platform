@@ -27,8 +27,8 @@ public class PoiTest {
 	public void testCreate() {
 		File file = new File("E:\\projects\\test.xlsx");
 		try (Workbook wb = new XSSFWorkbook(); OutputStream stream = new FileOutputStream(file)) {
-			Name name = this.createSheet1(wb);
 			Sheet sheet = wb.createSheet("数据验证");
+			Name name = this.createSheet1(wb);
 			DataValidationHelper helper = new XSSFDataValidationHelper((XSSFSheet) sheet);
 			DataValidationConstraint constraint = helper.createFormulaListConstraint(name.getNameName());
 			CellRangeAddressList addressList = new CellRangeAddressList(1, // 起始行号
@@ -40,7 +40,6 @@ public class PoiTest {
 			validation.setSuppressDropDownArrow(true);
 			validation.setShowErrorBox(true);
 			sheet.addValidationData(validation);
-			wb.setActiveSheet(wb.getSheetIndex(sheet));// 设置活动的sheet页
 			wb.write(stream);
 			System.err.println("OK!");
 		} catch (Exception e) {
