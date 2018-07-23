@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataValidation;
 import org.apache.poi.ss.usermodel.DataValidationConstraint;
@@ -69,7 +68,6 @@ public class PoiTest {
 	public void testCascade2007() {
 		// 查询所有的省名称
 		List<String> provNameList = Arrays.asList("安徽省", "浙江省");
-
 		// 整理数据，放入一个Map中，mapkey存放父地点，value 存放该地点下的子区域
 		Map<String, List<String>> siteMap = new HashMap<String, List<String>>();
 		siteMap.put("浙江省", Arrays.asList("杭州市", "宁波市"));
@@ -79,7 +77,6 @@ public class PoiTest {
 		try (FileOutputStream os = new FileOutputStream("E:/projects/testCascade2007.xlsx");
 				Workbook book = new XSSFWorkbook()) {
 			// 创建一个excel
-
 			// 创建需要用户填写的数据页
 			// 设计表头
 			Sheet sheet1 = book.createSheet("sheet1");
@@ -87,12 +84,10 @@ public class PoiTest {
 			row0.createCell(0).setCellValue("省");
 			row0.createCell(1).setCellValue("市");
 			row0.createCell(2).setCellValue("区");
-
 			// 创建一个专门用来存放地区信息的隐藏sheet页
 			// 因此也不能在现实页之前创建，否则无法隐藏。
 			Sheet hideSheet = book.createSheet("site");
 			book.setSheetHidden(book.getSheetIndex(hideSheet), true);
-
 			int rowId = 0;
 			// 设置第一行，存省的信息
 			Row proviRow = hideSheet.createRow(rowId++);
@@ -103,17 +98,14 @@ public class PoiTest {
 			}
 			// 将具体的数据写入到每一行中，行开头为父级区域，后面是子区域。
 			for (Entry<String, List<String>> en : siteMap.entrySet()) {
-
 				String key = en.getKey();
 				List<String> son = en.getValue();
-
 				Row row = hideSheet.createRow(rowId++);
 				row.createCell(0).setCellValue(key);
 				for (int i = 0; i < son.size(); i++) {
 					Cell cell = row.createCell(i + 1);
 					cell.setCellValue(son.get(i));
 				}
-
 				// 添加名称管理器
 				String range = getRange(1, rowId, son.size());
 				Name name = book.createName();
@@ -121,9 +113,7 @@ public class PoiTest {
 				String formula = "site!" + range;
 				name.setRefersToFormula(formula);
 			}
-
 			XSSFDataValidationHelper dvHelper = new XSSFDataValidationHelper((XSSFSheet) sheet1);
-
 			// 省规则
 			DataValidationConstraint provConstraint = dvHelper
 					.createExplicitListConstraint(provNameList.toArray(new String[] {}));
@@ -132,25 +122,22 @@ public class PoiTest {
 			provinceDataValidation.setShowErrorBox(true);
 			provinceDataValidation.setSuppressDropDownArrow(true);
 			sheet1.addValidationData(provinceDataValidation);
-
 			// 市以规则，此处仅作一个示例
-			// "INDIRECT($A$" + 2 + ")" 表示规则数据会从名称管理器中获取key与单元格 A2 值相同的数据，如果A2是浙江省，那么此处就是
+			// "INDIRECT($A2)" 表示规则数据会从名称管理器中获取key与单元格 A2 值相同的数据，如果A2是浙江省，那么此处就是
 			// 浙江省下的区域信息。
-			DataValidationConstraint formula = dvHelper.createFormulaListConstraint("INDIRECT($A$" + 2 + ")");
+			DataValidationConstraint formula = dvHelper.createFormulaListConstraint("INDIRECT($A2)");
 			CellRangeAddressList rangeAddressList = new CellRangeAddressList(1, 65535, 1, 1);
 			DataValidation cacse = dvHelper.createValidation(formula, rangeAddressList);
 			cacse.setSuppressDropDownArrow(true);
 			cacse.setShowErrorBox(true);
 			sheet1.addValidationData(cacse);
-
 			// 区规则
-			formula = dvHelper.createFormulaListConstraint("INDIRECT($B$" + 2 + ")");
+			formula = dvHelper.createFormulaListConstraint("INDIRECT($B2)");
 			rangeAddressList = new CellRangeAddressList(1, 65535, 2, 2);
 			cacse = dvHelper.createValidation(formula, rangeAddressList);
 			cacse.setSuppressDropDownArrow(true);
 			cacse.setShowErrorBox(true);
 			sheet1.addValidationData(cacse);
-
 			book.write(os);
 			System.err.println("OK!");
 		} catch (Exception e) {
@@ -159,8 +146,8 @@ public class PoiTest {
 	}
 
 	/**
-	 * @param offset   偏移量，如果给0，表示从A列开始，1，就是从B列
-	 * @param rowId    第几行
+	 * @param offset 偏移量，如果给0，表示从A列开始，1，就是从B列
+	 * @param rowId 第几行
 	 * @param colCount 一共多少列
 	 * @return 如果给入参 1,1,10. 表示从B1-K1。最终返回 $B$1:$K$1
 	 */
