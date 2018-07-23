@@ -106,7 +106,7 @@ public class PoiTest {
 					cell.setCellValue(son.get(i));
 				}
 				// 添加名称管理器
-				String range = getRange(1, rowId, son.size());
+				String range = ExcelHelper.getRange(1, rowId, son.size());
 				Name name = book.createName();
 				name.setNameName(key);
 				String formula = "site!" + range;
@@ -141,39 +141,6 @@ public class PoiTest {
 			System.err.println("OK!");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * @param offset 偏移量，如果给0，表示从A列开始，1，就是从B列
-	 * @param rowId 第几行
-	 * @param colCount 一共多少列
-	 * @return 如果给入参 1,1,10. 表示从B1-K1。最终返回 $B$1:$K$1
-	 */
-	private String getRange(int offset, int rowId, int colCount) {
-		char start = (char) ('A' + offset);
-		if (colCount <= 25) {
-			char end = (char) (start + colCount - 1);
-			return "$" + start + "$" + rowId + ":$" + end + "$" + rowId;
-		} else {
-			char endPrefix = 'A';
-			char endSuffix = 'A';
-			if ((colCount - 25) / 26 == 0 || colCount == 51) {// 26-51之间，包括边界（仅两次字母表计算）
-				if ((colCount - 25) % 26 == 0) {// 边界值
-					endSuffix = (char) ('A' + 25);
-				} else {
-					endSuffix = (char) ('A' + (colCount - 25) % 26 - 1);
-				}
-			} else {// 51以上
-				if ((colCount - 25) % 26 == 0) {
-					endSuffix = (char) ('A' + 25);
-					endPrefix = (char) (endPrefix + (colCount - 25) / 26 - 1);
-				} else {
-					endSuffix = (char) ('A' + (colCount - 25) % 26 - 1);
-					endPrefix = (char) (endPrefix + (colCount - 25) / 26);
-				}
-			}
-			return "$" + start + "$" + rowId + ":$" + endPrefix + endSuffix + "$" + rowId;
 		}
 	}
 }
