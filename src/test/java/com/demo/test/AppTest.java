@@ -1,14 +1,16 @@
 package com.demo.test;
 
 import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.demo.config.SpringConfig;
 import com.demo.service.DemoService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
 public class AppTest {
 	@Resource(name = "AServiceImpl")
