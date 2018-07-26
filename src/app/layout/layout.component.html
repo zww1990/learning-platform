@@ -28,7 +28,8 @@
     <nz-header style="background: #fff; padding:0;">
       <div nz-row>
         <div nz-col [nzSpan]="2">
-          <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+          <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"
+            nz-tooltip [nzTitle]="isCollapsed?'展开菜单':'收缩菜单'"></i>
         </div>
         <div nz-col [nzSpan]="18"></div>
         <div nz-col [nzSpan]="2" style="text-align: right">
