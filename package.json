@@ -37,7 +37,7 @@
     "rxjs-compat": "^6.2.2",
     "stream": "0.0.2",
     "three": "^0.94.0",
-    "xlsx": "^0.13.2",
+    "xlsx": "^0.13.3",
     "xml-js": "^1.6.7",
     "zone.js": "^0.8.26"
   },
@@ -59,7 +59,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "less": "^2.7.3",
+    "less": "~2.7.3",
     "protractor": "~5.3.2",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
