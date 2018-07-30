@@ -19,7 +19,8 @@
 			<property name="remarksReporting" value="true"/><!-- 允许读取表、字段注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
-			<property name="forceBigDecimals" value="false"/>
+			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
+			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
 		</javaTypeResolver>
 		<javaModelGenerator targetPackage="com.wiwj.bdm.mq.domain" targetProject="./src/main/java"/>
 		<sqlMapGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java"/>
