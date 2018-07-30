@@ -13,7 +13,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "vue": "^2.5.16",
-    "vue-antd-ui": "^1.0.0",
+    "vue-antd-ui": "^1.0.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
