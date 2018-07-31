@@ -3,6 +3,7 @@ package com.example.demo.config;
 import java.nio.charset.Charset;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimeZone;
 import javax.annotation.Resource;
 import javax.servlet.annotation.MultipartConfig;
 import org.springframework.context.annotation.Bean;
@@ -14,12 +15,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -40,6 +44,9 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 			if (converter instanceof StringHttpMessageConverter) {
 				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
 				shmc.setDefaultCharset(Charset.forName("UTF-8"));
+			} else if (converter instanceof MappingJackson2HttpMessageConverter) {
+				MappingJackson2HttpMessageConverter mjhmc = (MappingJackson2HttpMessageConverter) converter;
+				mjhmc.setObjectMapper(this.jsonObjectMapper());
 			}
 		}
 	}
@@ -61,6 +68,11 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
 	public MultipartResolver multipartResolver() {
 		StandardServletMultipartResolver resolver = new StandardServletMultipartResolver();
 		return resolver;
+	}
+
+	@Bean
+	public ObjectMapper jsonObjectMapper() {
+		return Jackson2ObjectMapperBuilder.json().timeZone(TimeZone.getTimeZone("Asia/Shanghai")).build();
 	}
 
 	@Configuration
