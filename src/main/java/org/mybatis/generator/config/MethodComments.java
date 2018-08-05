@@ -65,6 +65,6 @@ public enum MethodComments {
 	}
 
 	public static MethodComments value(String name) {
-		return Arrays.stream(values()).filter(x -> x.name().equals(name)).findFirst().orElse(null);
+		return Arrays.stream(values()).filter(x -> x.name().equals(name)).findFirst().orElseGet(() -> null);
 	}
 }
