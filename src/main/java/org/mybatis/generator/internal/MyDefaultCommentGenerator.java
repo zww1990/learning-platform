@@ -26,6 +26,13 @@ import org.mybatis.generator.internal.util.StringUtility;
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	private String author;
+	private boolean addSwaggerAnnotations;
+	private FullyQualifiedJavaType apiModelClass;
+	private FullyQualifiedJavaType apiModelPropertyClass;
+
+	public MyDefaultCommentGenerator() {
+		super();
+	}
 
 	@Override
 	public void addComment(XmlElement xmlElement) {
@@ -41,7 +48,16 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		this.addFieldComment(field, introspectedTable, introspectedColumn);
+		String remarks = introspectedColumn.getRemarks();
+		if (!StringUtility.stringHasValue(remarks)) {
+			return;
+		}
+		remarks = trimAllWhitespace(remarks);
+		field.addJavaDocLine(new StringBuilder("/*** ").append(remarks).append(" */").toString());
+		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
+			field.addAnnotation(
+					new StringBuilder("@ApiModelProperty(value = \"").append(remarks).append("\")").toString());
+		}
 	}
 
 	@Override
@@ -96,6 +112,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
 		this.addJavadocTag(topLevelClass, false);
 		topLevelClass.addJavaDocLine(" */");
+		if (this.addSwaggerAnnotations) {
+			topLevelClass.addImportedType(this.apiModelClass);
+			topLevelClass.addImportedType(this.apiModelPropertyClass);
+			topLevelClass.addAnnotation(new StringBuilder("@ApiModel(description = \"")
+					.append(introspectedTable.getRemarks()).append("\")").toString());
+		}
 	}
 
 	@Override
@@ -168,6 +190,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public void addConfigurationProperties(Properties properties) {
 		super.addConfigurationProperties(properties);
 		this.author = properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_AUTHOR);
+		this.addSwaggerAnnotations = Boolean
+				.valueOf(properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_SWAGGER_ANNOTATIONS));
+		if (this.addSwaggerAnnotations) {
+			this.apiModelClass = new FullyQualifiedJavaType("io.swagger.annotations.ApiModel");
+			this.apiModelPropertyClass = new FullyQualifiedJavaType("io.swagger.annotations.ApiModelProperty");
+		}
 	}
 
 	private static String trimAllWhitespace(String str) {

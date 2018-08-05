@@ -24,6 +24,7 @@
 			<property name="addRemarkComments" value="true"/><!-- 添加表、字段注释 -->
 			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/><!-- 格式化时间 -->
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
+			<property name="addSwaggerAnnotations" value="true"/><!-- 添加Swagger注解 -->
 		</commentGenerator>
 		<jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}">
 			<property name="useInformationSchema" value="true"/><!-- 允许读取表注释信息 -->
