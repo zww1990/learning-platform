@@ -24,7 +24,7 @@ public class MyJavaTypeResolverImpl extends JavaTypeResolverDefaultImpl {
 			} else if (column.getLength() > 4) {
 				return new FullyQualifiedJavaType(Integer.class.getName());
 			} else {
-				return new FullyQualifiedJavaType(Short.class.getName());
+				return new FullyQualifiedJavaType(Integer.class.getName());
 			}
 		}
 	}

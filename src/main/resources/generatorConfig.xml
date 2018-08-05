@@ -22,13 +22,16 @@
 			<property name="suppressAllComments" value="false"/><!-- 生成所有文档注释 -->
 			<property name="suppressDate" value="false"/><!-- 生成日期注释 -->
 			<property name="addRemarkComments" value="true"/><!-- 添加表、字段注释 -->
-			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/><!-- 格式化时间 -->
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
 		</commentGenerator>
 		<jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}">
 			<property name="useInformationSchema" value="true"/><!-- 允许读取表注释信息 -->
 		</jdbcConnection>
-		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl"/>
+		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
+			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
+			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
+		</javaTypeResolver>
 		<javaModelGenerator targetPackage="com.demo.model" targetProject="./src/main/java">
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
