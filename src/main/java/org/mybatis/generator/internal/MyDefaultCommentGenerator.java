@@ -1,9 +1,9 @@
 package org.mybatis.generator.internal;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
-
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -29,10 +29,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	private boolean addSwaggerAnnotations;
 	private FullyQualifiedJavaType apiModelClass;
 	private FullyQualifiedJavaType apiModelPropertyClass;
-
-	public MyDefaultCommentGenerator() {
-		super();
-	}
+	private List<String> fields = new ArrayList<>();
 
 	@Override
 	public void addComment(XmlElement xmlElement) {
@@ -48,16 +45,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		String remarks = introspectedColumn.getRemarks();
-		if (!StringUtility.stringHasValue(remarks)) {
-			return;
-		}
-		remarks = trimAllWhitespace(remarks);
-		field.addJavaDocLine(new StringBuilder("/*** ").append(remarks).append(" */").toString());
-		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
-			field.addAnnotation(
-					new StringBuilder("@ApiModelProperty(value = \"").append(remarks).append("\")").toString());
-		}
+		this.addFieldComment(field, introspectedTable, introspectedColumn);
 	}
 
 	@Override
@@ -148,6 +136,14 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 			return;
 		}
 		field.addJavaDocLine(new StringBuilder("/*** ").append(trimAllWhitespace(remarks)).append(" */").toString());
+		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
+			if (this.fields.contains(field.getName())) {
+				return;
+			}
+			this.fields.add(field.getName());
+			field.addAnnotation(
+					new StringBuilder("@ApiModelProperty(value = \"").append(remarks).append("\")").toString());
+		}
 	}
 
 	@Override
