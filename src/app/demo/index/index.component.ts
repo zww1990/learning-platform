@@ -20,15 +20,15 @@ export class IndexComponent implements OnInit, AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    const controller = new window['GIO'].Controller(
-      this.globalArea.nativeElement
-    );
-    this.http
-      .get('/assets/data/sampleData.json')
-      .toPromise()
-      .then(resp => {
-        controller.addData(resp);
-        controller.init();
-      });
+    // const controller = new window['GIO'].Controller(
+    //   this.globalArea.nativeElement
+    // );
+    // this.http
+    //   .get('/assets/data/sampleData.json')
+    //   .toPromise()
+    //   .then(resp => {
+    //     controller.addData(resp);
+    //     controller.init();
+    //   });
   }
 }

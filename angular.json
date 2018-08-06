@@ -50,8 +50,6 @@
               "src/styles.less"
             ],
             "scripts": [
-              "./node_modules/three/build/three.min.js",
-              "./node_modules/giojs/build/gio.min.js"
             ]
           },
           "configurations": {
