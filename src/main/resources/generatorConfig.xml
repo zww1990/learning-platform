@@ -23,13 +23,13 @@
 			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
 			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
 		</javaTypeResolver>
-		<javaModelGenerator targetPackage="com.wiwj.bdm.mq.domain" targetProject="./src/main/java"/>
-		<sqlMapGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java"/>
+		<javaModelGenerator targetPackage="${java.model.package}" targetProject="./src/main/java"/>
+		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/java"/>
 		<!-- ANNOTATEDMAPPER：全注解，
 			XMLMAPPER：全XML文件，
 			MIXEDMAPPER：注解和XML混合 -->
-		<javaClientGenerator targetPackage="com.wiwj.bdm.mq.mapper" targetProject="./src/main/java" type="XMLMAPPER"/>
-		<table tableName="bdm_system_menu" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<javaClientGenerator targetPackage="${java.client.package}" targetProject="./src/main/java" type="XMLMAPPER"/>
+		<table tableName="BDM_USER_ROLE" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<!-- 主键生成策略 -->
 			<!-- <generatedKey column="MODIFY_ID" sqlStatement="select BDM_HR_MODIFY_SEQ.nextval from dual"/> -->
 		</table>
