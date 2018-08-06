@@ -1,5 +1,6 @@
 package org.mybatis.generator.internal;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -28,6 +29,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	private boolean addSwaggerAnnotations;
 	private FullyQualifiedJavaType apiModelClass;
 	private FullyQualifiedJavaType apiModelPropertyClass;
+	private List<String> fields = new ArrayList<>();
 
 	@Override
 	public void addComment(XmlElement xmlElement) {
@@ -43,15 +45,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		if (!StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
-			return;
-		}
-		field.addJavaDocLine(
-				new StringBuilder("/*** ").append(introspectedColumn.getRemarks()).append(" */").toString());
-		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
-			field.addAnnotation(new StringBuilder("@ApiModelProperty(value = \"")
-					.append(introspectedColumn.getRemarks()).append("\")").toString());
-		}
+		this.addFieldComment(field, introspectedTable, introspectedColumn);
 	}
 
 	@Override
@@ -142,6 +136,14 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		}
 		field.addJavaDocLine(
 				new StringBuilder("/** ").append(introspectedColumn.getRemarks()).append(" */").toString());
+		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
+			if (this.fields.contains(field.getName())) {
+				return;
+			}
+			this.fields.add(field.getName());
+			field.addAnnotation(new StringBuilder("@ApiModelProperty(value = \"")
+					.append(introspectedColumn.getRemarks()).append("\")").toString());
+		}
 	}
 
 	@Override
