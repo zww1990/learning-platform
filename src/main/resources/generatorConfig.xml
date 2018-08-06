@@ -12,8 +12,9 @@
 			<property name="suppressAllComments" value="false"/><!-- 生成所有文档注释 -->
 			<property name="suppressDate" value="false"/><!-- 生成日期注释 -->
 			<property name="addRemarkComments" value="true"/><!-- 添加表、字段注释 -->
-			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/><!-- 格式化时间 -->
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
+			<property name="addSwaggerAnnotations" value="true"/><!-- 添加Swagger注解 -->
 		</commentGenerator>
 		<jdbcConnection driverClass="${jdbc.driver.class}" connectionURL="${jdbc.url}" userId="${jdbc.user}" password="${jdbc.password}">
 			<property name="remarksReporting" value="true"/><!-- 允许读取表、字段注释信息 -->

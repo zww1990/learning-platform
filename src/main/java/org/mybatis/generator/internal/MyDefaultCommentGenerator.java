@@ -25,6 +25,9 @@ import org.mybatis.generator.internal.util.StringUtility;
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	private String author;
+	private boolean addSwaggerAnnotations;
+	private FullyQualifiedJavaType apiModelClass;
+	private FullyQualifiedJavaType apiModelPropertyClass;
 
 	@Override
 	public void addComment(XmlElement xmlElement) {
@@ -40,7 +43,15 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> imports) {
-		this.addFieldComment(field, introspectedTable, introspectedColumn);
+		if (!StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+			return;
+		}
+		field.addJavaDocLine(
+				new StringBuilder("/*** ").append(introspectedColumn.getRemarks()).append(" */").toString());
+		if (!field.isFinal() && !field.isStatic() && this.addSwaggerAnnotations) {
+			field.addAnnotation(new StringBuilder("@ApiModelProperty(value = \"")
+					.append(introspectedColumn.getRemarks()).append("\")").toString());
+		}
 	}
 
 	@Override
@@ -95,6 +106,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
 		this.addJavadocTag(topLevelClass, false);
 		topLevelClass.addJavaDocLine(" */");
+		if (this.addSwaggerAnnotations) {
+			topLevelClass.addImportedType(this.apiModelClass);
+			topLevelClass.addImportedType(this.apiModelPropertyClass);
+			topLevelClass.addAnnotation(new StringBuilder("@ApiModel(description = \"")
+					.append(introspectedTable.getRemarks()).append("\")").toString());
+		}
 	}
 
 	@Override
@@ -120,11 +137,11 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addFieldComment(Field field, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
-		String remarks = introspectedColumn.getRemarks();
-		if (!StringUtility.stringHasValue(remarks)) {
+		if (!StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
 			return;
 		}
-		field.addJavaDocLine(new StringBuilder("/** ").append(remarks).append(" */").toString());
+		field.addJavaDocLine(
+				new StringBuilder("/** ").append(introspectedColumn.getRemarks()).append(" */").toString());
 	}
 
 	@Override
@@ -132,11 +149,10 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (ExampleFields.hasField(field.getName())) {
 			return;
 		}
-		String remarks = introspectedTable.getRemarks();
-		if (!StringUtility.stringHasValue(remarks)) {
+		if (!StringUtility.stringHasValue(introspectedTable.getRemarks())) {
 			return;
 		}
-		field.addJavaDocLine(new StringBuilder("/** ").append(remarks).append(" */").toString());
+		field.addJavaDocLine(new StringBuilder("/** ").append(introspectedTable.getRemarks()).append(" */").toString());
 	}
 
 	@Override
@@ -167,5 +183,11 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public void addConfigurationProperties(Properties properties) {
 		super.addConfigurationProperties(properties);
 		this.author = properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_AUTHOR);
+		this.addSwaggerAnnotations = Boolean
+				.valueOf(properties.getProperty(MyPropertyRegistry.COMMENT_GENERATOR_SWAGGER_ANNOTATIONS));
+		if (this.addSwaggerAnnotations) {
+			this.apiModelClass = new FullyQualifiedJavaType("io.swagger.annotations.ApiModel");
+			this.apiModelPropertyClass = new FullyQualifiedJavaType("io.swagger.annotations.ApiModelProperty");
+		}
 	}
 }
