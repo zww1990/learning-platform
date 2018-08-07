@@ -10,6 +10,7 @@ public class Application {
 		context.registerShutdownHook();
 		context.start();
 		System.err.println(context.getBeanDefinitionCount());
+//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 		synchronized (Application.class) {
 			while (true) {
 				try {

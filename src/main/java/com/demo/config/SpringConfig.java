@@ -1,7 +1,8 @@
 package com.demo.config;
 
+import java.util.Properties;
 import javax.sql.DataSource;
-import org.apache.ibatis.plugin.Interceptor;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,6 +14,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
+import com.dangdang.ddframe.job.config.JobCoreConfiguration;
+import com.dangdang.ddframe.job.config.simple.SimpleJobConfiguration;
+import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
+import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
+import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
+import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import com.demo.service.JobAService;
+import com.demo.service.JobBService;
 import com.github.pagehelper.PageInterceptor;
 
 @Configuration
@@ -30,6 +39,7 @@ public class SpringConfig {
 	@Bean
 	public RegistryConfig registryConfig(AppProperties props) {
 		RegistryConfig config = new RegistryConfig();
+		config.setProtocol("zookeeper");
 		config.setAddress(props.getRegistryAddress());
 		return config;
 	}
@@ -53,7 +63,11 @@ public class SpringConfig {
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(dataSource);
-		bean.setPlugins(new Interceptor[] { new PageInterceptor() });
+		PageInterceptor page = new PageInterceptor();
+		Properties props = new Properties();
+		props.put("supportMethodsArguments", true);
+		page.setProperties(props);
+		bean.setPlugins(ArrayUtils.toArray(page));
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
 		config.setCacheEnabled(false);
 		config.setMapUnderscoreToCamelCase(true);
@@ -61,5 +75,30 @@ public class SpringConfig {
 		config.setReturnInstanceForEmptyRow(true);
 		bean.setConfiguration(config);
 		return bean.getObject();
+	}
+
+	@Bean(initMethod = "init", destroyMethod = "close")
+	public ZookeeperRegistryCenter zookeeperRegistryCenter(AppProperties props) {
+		return new ZookeeperRegistryCenter(new ZookeeperConfiguration(props.getRegistryAddress(), props.getAppName()));
+	}
+
+	@Bean(initMethod = "init")
+	public SpringJobScheduler springJobSchedulerA(JobAService jobAService, ZookeeperRegistryCenter regCenter) {
+		String jobName = jobAService.getClass().getName();
+		return new SpringJobScheduler(jobAService, regCenter,
+				LiteJobConfiguration
+						.newBuilder(new SimpleJobConfiguration(
+								JobCoreConfiguration.newBuilder(jobName, "0 0/1 * * * ?", 1).build(), jobName))
+						.overwrite(true).build());
+	}
+
+	@Bean(initMethod = "init")
+	public SpringJobScheduler springJobSchedulerB(JobBService jobBService, ZookeeperRegistryCenter regCenter) {
+		String jobName = jobBService.getClass().getName();
+		return new SpringJobScheduler(jobBService, regCenter,
+				LiteJobConfiguration
+						.newBuilder(new SimpleJobConfiguration(
+								JobCoreConfiguration.newBuilder(jobName, "0 0/1 * * * ?", 1).build(), jobName))
+						.overwrite(true).build());
 	}
 }
