@@ -18,7 +18,7 @@ import com.github.pagehelper.PageInterceptor;
 @Configuration
 @ComponentScan("com.demo")
 @DubboComponentScan("com.demo.service.impl")
-@MapperScan("com.wiwj.bdm.mq.mapper")
+@MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper" })
 public class SpringConfig {
 	@Bean
 	public ApplicationConfig applicationConfig(AppProperties props) {
