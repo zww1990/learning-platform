@@ -1,6 +1,5 @@
 package com.demo;
 
-import java.util.Arrays;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.demo.config.SpringConfig;
 
@@ -11,6 +10,14 @@ public class Application {
 		context.registerShutdownHook();
 		context.start();
 		System.err.println(context.getBeanDefinitionCount());
-		Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+		synchronized (Application.class) {
+			while (true) {
+				try {
+					Application.class.wait();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
