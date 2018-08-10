@@ -2,11 +2,10 @@ package com.demo.test;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
 
+@SuppressWarnings({ "unused" })
 public class CodeTest {
-
 	/**
 	 * 嵌套循环
 	 */
