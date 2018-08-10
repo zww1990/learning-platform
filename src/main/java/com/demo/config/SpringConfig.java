@@ -20,6 +20,8 @@ import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
+import com.demo.config.AppProperties.DubboProperties;
+import com.demo.config.AppProperties.JdbcProperties;
 import com.demo.service.JobAService;
 import com.demo.service.JobBService;
 import com.github.pagehelper.PageInterceptor;
@@ -30,14 +32,14 @@ import com.github.pagehelper.PageInterceptor;
 @MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper" })
 public class SpringConfig {
 	@Bean
-	public ApplicationConfig applicationConfig(AppProperties props) {
+	public ApplicationConfig applicationConfig(DubboProperties props) {
 		ApplicationConfig config = new ApplicationConfig();
 		config.setName(props.getAppName());
 		return config;
 	}
 
 	@Bean
-	public RegistryConfig registryConfig(AppProperties props) {
+	public RegistryConfig registryConfig(DubboProperties props) {
 		RegistryConfig config = new RegistryConfig();
 		config.setProtocol("zookeeper");
 		config.setAddress(props.getRegistryAddress());
@@ -45,12 +47,12 @@ public class SpringConfig {
 	}
 
 	@Bean
-	public DataSource dataSource(AppProperties props) {
+	public DataSource dataSource(JdbcProperties props) {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(props.getJdbcDriverClass());
-		dataSource.setUrl(props.getJdbcUrl());
-		dataSource.setUsername(props.getJdbcUser());
-		dataSource.setPassword(props.getJdbcPassword());
+		dataSource.setDriverClassName(props.getDriverClass());
+		dataSource.setUrl(props.getUrl());
+		dataSource.setUsername(props.getUser());
+		dataSource.setPassword(props.getPassword());
 		return dataSource;
 	}
 
@@ -78,7 +80,7 @@ public class SpringConfig {
 	}
 
 	@Bean(initMethod = "init", destroyMethod = "close")
-	public ZookeeperRegistryCenter zookeeperRegistryCenter(AppProperties props) {
+	public ZookeeperRegistryCenter zookeeperRegistryCenter(DubboProperties props) {
 		return new ZookeeperRegistryCenter(new ZookeeperConfiguration(props.getRegistryAddress(), props.getAppName()));
 	}
 
