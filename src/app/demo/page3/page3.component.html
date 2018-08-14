@@ -12,7 +12,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of editRowTable.data">
-      <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus($event)"></td>
+      <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
       <td>
         <div class="editable-cell">
           <div class="editable-cell-text-wrapper">
