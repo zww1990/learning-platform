@@ -59,7 +59,7 @@ export class Page3Component implements OnInit {
   }
 
   delAllRow(): void {
-    this.dataSet = this.dataSet.filter(x => x.checked === false);
+    this.dataSet = this.dataSet.filter(x => !x.checked);
     this.allChecked = false;
     this.indeterminate = false;
     this.disabledButton = !this.dataSet.some(value => value.checked);
@@ -86,9 +86,9 @@ export class Page3Component implements OnInit {
   }
 
   refreshStatus(): void {
-    this.allChecked = this.dataSet.every(value => value.checked === true);
+    this.allChecked = this.dataSet.every(value => value.checked);
     const allUnChecked = this.dataSet.every(value => !value.checked);
-    this.indeterminate = !this.allChecked && !allUnChecked;
     this.disabledButton = !this.dataSet.some(value => value.checked);
+    this.indeterminate = !this.allChecked && !allUnChecked;
   }
 }
