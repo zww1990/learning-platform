@@ -37,7 +37,7 @@
     员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
   </div>
   <ng-template [ngIf]="this.tableData.length !== 0">
-    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" nzSize="small" [nzScroll]="{ x: '4050px' }"
+    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" nzSize="small" [nzScroll]="{x:'4050px',y:'480px'}"
       [nzBordered]="true">
       <thead>
         <tr>
