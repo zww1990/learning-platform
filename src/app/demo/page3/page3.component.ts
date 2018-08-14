@@ -10,6 +10,7 @@ export class Page3Component implements OnInit {
   editCache = {};
   allChecked = false;
   indeterminate = false;
+  disabledButton = true;
   dataSet = [
     {
       key: 0,
@@ -61,6 +62,7 @@ export class Page3Component implements OnInit {
     this.dataSet = this.dataSet.filter(x => x.checked === false);
     this.allChecked = false;
     this.indeterminate = false;
+    this.disabledButton = !this.dataSet.some(value => value.checked);
   }
 
   addRow(): void {
@@ -87,5 +89,6 @@ export class Page3Component implements OnInit {
     this.allChecked = this.dataSet.every(value => value.checked === true);
     const allUnChecked = this.dataSet.every(value => !value.checked);
     this.indeterminate = !this.allChecked && !allUnChecked;
+    this.disabledButton = !this.dataSet.some(value => value.checked);
   }
 }

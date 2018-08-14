@@ -1,5 +1,5 @@
-<button nz-button (click)="addRow()" class="editable-add-btn">添加</button>
-<button nz-button (click)="delAllRow()" class="editable-add-btn">批量删除</button>
+<button nz-button (click)="addRow()" class="editable-add-btn" nzType="primary">添加</button>&nbsp;
+<button nz-button (click)="delAllRow()" class="editable-add-btn" nzType="danger" [disabled]="disabledButton">批量删除</button>
 <nz-table #editRowTable nzBordered [nzData]="dataSet">
   <thead>
     <tr>
