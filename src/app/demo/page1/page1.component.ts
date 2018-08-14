@@ -198,13 +198,14 @@ export class Page1Component implements OnInit {
             isTraffic: isTraffic
           };
         });
-        setTimeout(() => {
-          const headerStyle = this.element.nativeElement.querySelector(
-            'div.ant-table-header'
-          ).style;
-          headerStyle.marginBottom = '0px';
-          headerStyle.paddingBottom = '0px';
-        }, 1000);
+        // setTimeout(() => {
+        //   const headerStyle = this.element.nativeElement.querySelector(
+        //     'div.ant-table-header'
+        //   ).style;
+        //   headerStyle.marginBottom = '0px';
+        //   headerStyle.paddingBottom = '0px';
+        // }, 1000);
+        this.isShowUpload = false;
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);
