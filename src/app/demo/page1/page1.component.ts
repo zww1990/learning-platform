@@ -7,6 +7,7 @@ import { utils } from 'xlsx';
 import { DateTime } from 'luxon';
 import { Workbook } from './workbook.model';
 import { ExcelConfig, EditCache } from './excel-config.model';
+import { LayoutComponent } from '../../layout/layout.component';
 
 @Component({
   selector: 'app-page1',
@@ -20,7 +21,7 @@ export class Page1Component implements OnInit {
   ];
   rABS = true; // true:readAsBinaryString; false:readAsArrayBuffer;
   tableHeader = [];
-  tableData = [];
+  tableData: any[][] = [];
   validateForm: FormGroup;
   isShowForm = true;
   isShowUpload = true;
@@ -28,12 +29,17 @@ export class Page1Component implements OnInit {
   editMoneyCache: { [key: number]: EditCache } = {};
   editStartTimeCache: { [key: number]: EditCache } = {};
   editEndTimeCache: { [key: number]: EditCache } = {};
+  checkboxCache: { [key: number]: boolean } = {};
+  allChecked = false;
+  indeterminate = false;
+  disabledButton = true;
 
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
     private http: HttpClient,
-    private element: ElementRef
+    private element: ElementRef,
+    private layout: LayoutComponent
   ) {}
 
   /**
@@ -106,39 +112,39 @@ export class Page1Component implements OnInit {
       this.tableHeader = this.config.tableHeader; // 表头行
       const approvalIds = utils
         .sheet_to_json(empSheet, { raw: true, blankrows: false, header: 1 })
-        .filter(x => `${x[this.config.idIndex]}` === this.config.myID)
-        .map(x => `${x[this.config.approvalIndex]}`); // 审批单号数组
+        .filter(v => `${v[this.config.idIndex]}` === this.config.myID)
+        .map(v => `${v[this.config.approvalIndex]}`); // 审批单号数组
       utils
         .sheet_to_json(empSheet, { header: 1, blankrows: false })
-        .filter(x => x[this.config.idIndex] === this.config.myID)
-        .map(x => {
-          this.config.myName = x[this.config.nameIndex];
-          x[this.config.overtimeIndex] = this.formatOverTime(
-            x[this.config.overtimeIndex]
+        .filter(v => v[this.config.idIndex] === this.config.myID)
+        .map(v => {
+          this.config.myName = v[this.config.nameIndex];
+          v[this.config.overtimeIndex] = this.formatOverTime(
+            v[this.config.overtimeIndex]
           );
-          return x;
+          return v;
         })
-        .forEach((x, i) => {
-          if (x[this.config.typeIndex] === this.config.type3) {
-            if (this.isAfterDinnerTime(x[this.config.deadlineIndex])) {
+        .forEach((v, i) => {
+          if (v[this.config.typeIndex] === this.config.type3) {
+            if (this.isAfterDinnerTime(v[this.config.deadlineIndex])) {
               this.tableData.push([
-                x[this.config.deptIndex],
+                v[this.config.deptIndex],
                 approvalIds[i],
-                x[this.config.nameIndex] + '-餐费',
+                v[this.config.nameIndex] + '-餐费',
                 ...this.config.mealFee1,
                 this.config.mealFee,
                 ...this.config.mealFee2,
-                x[this.config.overtimeIndex],
-                x[this.config.deadlineIndex],
+                v[this.config.overtimeIndex],
+                v[this.config.deadlineIndex],
                 ...this.config.mealFee3
               ]);
             }
           } else if (
             [this.config.type1, this.config.type2].includes(
-              x[this.config.typeIndex]
+              v[this.config.typeIndex]
             )
           ) {
-            const duration = +x[this.config.durationIndex];
+            const duration = +v[this.config.durationIndex];
             let mealFee = 0;
             if (
               this.config.duration4 <= duration &&
@@ -150,26 +156,26 @@ export class Page1Component implements OnInit {
             }
             if (mealFee > 0) {
               this.tableData.push([
-                x[this.config.deptIndex],
+                v[this.config.deptIndex],
                 approvalIds[i],
-                x[this.config.nameIndex] + '-餐费',
+                v[this.config.nameIndex] + '-餐费',
                 ...this.config.mealFee1,
                 mealFee,
                 ...this.config.mealFee2,
-                x[this.config.overtimeIndex],
-                x[this.config.deadlineIndex],
+                v[this.config.overtimeIndex],
+                v[this.config.deadlineIndex],
                 ...this.config.mealFee3
               ]);
             }
           }
-          if (this.isAfterTaxiTime(x[this.config.deadlineIndex])) {
+          if (this.isAfterTaxiTime(v[this.config.deadlineIndex])) {
             this.tableData.push([
-              x[this.config.deptIndex],
+              v[this.config.deptIndex],
               approvalIds[i],
-              x[this.config.nameIndex] + '-交通',
+              v[this.config.nameIndex] + '-交通',
               ...this.config.trafficFee1,
-              x[this.config.overtimeIndex],
-              x[this.config.deadlineIndex],
+              v[this.config.overtimeIndex],
+              v[this.config.deadlineIndex],
               ...this.config.trafficFee2,
               this.config.myEndPoint,
               ...this.config.trafficFee3
@@ -179,24 +185,27 @@ export class Page1Component implements OnInit {
       if (!this.tableData.length) {
         this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
       } else {
-        this.tableData.forEach((x, i) => {
+        this.tableData.forEach((v, i) => {
+          const rowId = i + 1;
+          this.tableData[i].push(rowId);
           const isTraffic =
-            x[this.config.moneyTypeIndex] === this.config.trafficFeeType;
-          this.editMoneyCache[i] = {
+            v[this.config.moneyTypeIndex] === this.config.trafficFeeType;
+          this.editMoneyCache[rowId] = {
             edit: false,
-            value: x[this.config.moneyIndex],
+            value: v[this.config.moneyIndex],
             isTraffic: isTraffic
           };
-          this.editStartTimeCache[i] = {
-            edit: false,
-            value: this.defaultOpenValue(),
-            isTraffic: isTraffic
-          };
-          this.editEndTimeCache[i] = {
+          this.editStartTimeCache[rowId] = {
             edit: false,
             value: this.defaultOpenValue(),
             isTraffic: isTraffic
           };
+          this.editEndTimeCache[rowId] = {
+            edit: false,
+            value: this.defaultOpenValue(),
+            isTraffic: isTraffic
+          };
+          this.checkboxCache[rowId] = false;
         });
         // setTimeout(() => {
         //   const headerStyle = this.element.nativeElement.querySelector(
@@ -206,6 +215,7 @@ export class Page1Component implements OnInit {
         //   headerStyle.paddingBottom = '0px';
         // }, 1000);
         this.isShowUpload = false;
+        this.layout.isCollapsed = true;
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);
@@ -220,6 +230,7 @@ export class Page1Component implements OnInit {
       return;
     }
     const wb = new Workbook();
+    this.tableData.forEach(v => v.splice(v.length - 1, 1));
     const ws = utils.json_to_sheet([this.tableHeader, ...this.tableData], {
       skipHeader: true
     });
@@ -287,25 +298,25 @@ export class Page1Component implements OnInit {
   finishEdit(row: number, col: number) {
     if (col === this.config.moneyIndex) {
       this.editMoneyCache[row].edit = false;
-      this.tableData.forEach((x, i) => {
-        if (i === row) {
-          x[col] = this.editMoneyCache[row].value;
+      this.tableData.forEach((v, i) => {
+        if (v[v.length - 1] === row) {
+          v[col] = this.editMoneyCache[row].value;
         }
       });
     } else if (col === this.config.startTimeIndex) {
       this.editStartTimeCache[row].edit = false;
-      this.tableData.forEach((x, i) => {
-        if (i === row) {
-          x[col] = DateTime.fromJSDate(
+      this.tableData.forEach((v, i) => {
+        if (v[v.length - 1] === row) {
+          v[col] = DateTime.fromJSDate(
             this.editStartTimeCache[row].value
           ).toFormat(this.config.shortTimeFormat);
         }
       });
     } else if (col === this.config.endTimeIndex) {
       this.editEndTimeCache[row].edit = false;
-      this.tableData.forEach((x, i) => {
-        if (i === row) {
-          x[col] = DateTime.fromJSDate(
+      this.tableData.forEach((v, i) => {
+        if (v[v.length - 1] === row) {
+          v[col] = DateTime.fromJSDate(
             this.editEndTimeCache[row].value
           ).toFormat(this.config.shortTimeFormat);
         }
@@ -317,10 +328,9 @@ export class Page1Component implements OnInit {
    * @description 禁止选择部分小时
    */
   disabledHours(): number[] {
-    const hours: number[] = [];
-    for (let i = 0; i < 21; i++) {
-      hours.push(i);
-    }
+    const hours = Array(21)
+      .fill(1)
+      .map((v, i) => i);
     return hours;
   }
 
@@ -332,5 +342,48 @@ export class Page1Component implements OnInit {
       this.config.taxiTime,
       this.config.timeFormat
     ).toJSDate(); // 规定打车开始时间
+  }
+
+  /**
+   * @description 全部选择状态
+   * @param value 复选框选中状态
+   */
+  checkAll(value: boolean) {
+    Object.keys(this.checkboxCache).forEach(
+      v => (this.checkboxCache[+v] = value)
+    );
+    this.refreshStatus();
+  }
+
+  /**
+   * @description 刷新复选框状态
+   */
+  refreshStatus() {
+    const keys = Object.keys(this.checkboxCache);
+    this.allChecked = keys.every(v => this.checkboxCache[+v]);
+    const allUnChecked = keys.every(v => !this.checkboxCache[+v]);
+    this.disabledButton = !keys.some(v => this.checkboxCache[+v]);
+    this.indeterminate = !this.allChecked && !allUnChecked;
+  }
+
+  /**
+   * @description 批量删除表格行
+   */
+  batchDelete() {
+    Object.keys(this.checkboxCache)
+      .filter(v => this.checkboxCache[+v])
+      .forEach(rowId => {
+        this.tableData = this.tableData.filter(v => v[v.length - 1] !== +rowId);
+        delete this.checkboxCache[+rowId];
+        delete this.editEndTimeCache[+rowId];
+        delete this.editMoneyCache[+rowId];
+        delete this.editStartTimeCache[+rowId];
+      });
+    Object.keys(this.checkboxCache).forEach(
+      v => (this.checkboxCache[+v] = false)
+    );
+    this.allChecked = false;
+    this.indeterminate = false;
+    this.disabledButton = true;
   }
 }
