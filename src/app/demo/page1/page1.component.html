@@ -29,8 +29,9 @@
     <p class="ant-upload-hint">将文件拖到此处或点击上传，只能上传xls/xlsx文件。</p>
   </nz-upload>
   <div class="table-operations">
-    <button nz-button (click)="goBack()">上一步</button>
-    <button nz-button (click)="this.isShowUpload = !this.isShowUpload">折叠|展开</button>
+    <button nz-button (click)="goBack()">上一步</button>&nbsp;
+    <button nz-button (click)="this.isShowUpload = !this.isShowUpload">折叠|展开</button>&nbsp;
+    <button nz-button (click)="batchDelete()" nzType="danger" [disabled]="disabledButton">批量删除</button>&nbsp;
     <ng-template [ngIf]="this.tableData.length !== 0">
       <button nz-button (click)="exportExcel()">导出Excel文件</button>
     </ng-template>
@@ -41,55 +42,59 @@
       [nzBordered]="true">
       <thead>
         <tr>
+          <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
           <th *ngFor="let item of this.tableHeader" nzWidth="150px">
             <span>{{item}}</span>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of nzTable.data;index as row;even as isEven" [ngStyle]="{'background':isEven?'#fdf5e6':'auto'}">
-          <td *ngFor="let item of data;index as col">
-            <div class="editable-cell">
-              <div class="editable-cell-text-wrapper">
-                <ng-container [ngSwitch]="col">
-                  <ng-template [ngSwitchCase]="config.moneyIndex">
-                    <ng-template [ngIf]="!editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
-                      {{item}}
-                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+        <tr *ngFor="let data of nzTable.data;even as isEven" [ngStyle]="{'background':isEven?'#fdf5e6':'auto'}">
+          <td nzShowCheckbox [(nzChecked)]="checkboxCache[data[data.length-1]]" (nzCheckedChange)="refreshStatus()"></td>
+          <ng-container *ngFor="let item of data;index as col;last as isLast;count as total">
+            <td *ngIf="!isLast">
+              <div class="editable-cell">
+                <div class="editable-cell-text-wrapper">
+                  <ng-container [ngSwitch]="col">
+                    <ng-template [ngSwitchCase]="config.moneyIndex">
+                      <ng-template [ngIf]="!editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
+                        {{item}}
+                        <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                      </ng-template>
+                      <ng-template [ngIf]="editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
+                        <nz-input-number [(ngModel)]="editMoneyCache[data[total-1]].value" [nzStep]="1" [nzMin]="0" nzPlaceHolder="交通费"></nz-input-number>
+                        <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                      </ng-template>
+                      <ng-template [ngIf]="!editMoneyCache[data[total-1]].isTraffic">{{item}}</ng-template>
                     </ng-template>
-                    <ng-template [ngIf]="editMoneyCache[row].edit && editMoneyCache[row].isTraffic">
-                      <nz-input-number [(ngModel)]="editMoneyCache[row].value" [nzStep]="1" [nzMin]="0" nzPlaceHolder="交通费"></nz-input-number>
-                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
+                    <ng-template [ngSwitchCase]="config.startTimeIndex">
+                      <ng-template [ngIf]="!editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
+                        {{item}}
+                        <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                      </ng-template>
+                      <ng-template [ngIf]="editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
+                        <nz-time-picker [(ngModel)]="editStartTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                          [nzHideDisabledOptions]="true" nzClearText="清除上车时间"></nz-time-picker>
+                        <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                      </ng-template>
                     </ng-template>
-                    <ng-template [ngIf]="!editMoneyCache[row].isTraffic">{{item}}</ng-template>
-                  </ng-template>
-                  <ng-template [ngSwitchCase]="config.startTimeIndex">
-                    <ng-template [ngIf]="!editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
-                      {{item}}
-                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
+                    <ng-template [ngSwitchCase]="config.endTimeIndex">
+                      <ng-template [ngIf]="!editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
+                        {{item}}
+                        <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                      </ng-template>
+                      <ng-template [ngIf]="editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
+                        <nz-time-picker [(ngModel)]="editEndTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
+                          [nzHideDisabledOptions]="true" nzClearText="清除下车时间"></nz-time-picker>
+                        <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                      </ng-template>
                     </ng-template>
-                    <ng-template [ngIf]="editStartTimeCache[row].edit && editStartTimeCache[row].isTraffic">
-                      <nz-time-picker [(ngModel)]="editStartTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
-                        [nzHideDisabledOptions]="true" nzClearText="清除上车时间"></nz-time-picker>
-                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
-                    </ng-template>
-                  </ng-template>
-                  <ng-template [ngSwitchCase]="config.endTimeIndex">
-                    <ng-template [ngIf]="!editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
-                      {{item}}
-                      <i class="anticon anticon-edit editable-cell-icon" (click)="startEdit(row,col)"></i>
-                    </ng-template>
-                    <ng-template [ngIf]="editEndTimeCache[row].edit && editEndTimeCache[row].isTraffic">
-                      <nz-time-picker [(ngModel)]="editEndTimeCache[row].value" [nzFormat]="config.shortTimeFormat" [nzDisabledHours]="disabledHours"
-                        [nzHideDisabledOptions]="true" nzClearText="清除下车时间"></nz-time-picker>
-                      <i class="anticon anticon-check editable-cell-icon-check" (click)="finishEdit(row,col)"></i>
-                    </ng-template>
-                  </ng-template>
-                  <ng-template ngSwitchDefault>{{item}}</ng-template>
-                </ng-container>
+                    <ng-template ngSwitchDefault>{{item}}</ng-template>
+                  </ng-container>
+                </div>
               </div>
-            </div>
-          </td>
+            </td>
+          </ng-container>
         </tr>
       </tbody>
     </nz-table>

@@ -14,7 +14,6 @@ import { SimpleReuseStrategy } from '../shared/simple-reuse-strategy';
 })
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
-  isFullscreen = false;
   selectedIndex = 0;
   user: User = null;
   menus: MenuItem[] = [];
