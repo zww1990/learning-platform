@@ -22,8 +22,7 @@ import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperConfiguration;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import com.demo.config.AppProperties.DubboProperties;
 import com.demo.config.AppProperties.JdbcProperties;
-import com.demo.service.JobAService;
-import com.demo.service.JobBService;
+import com.demo.service.JobService;
 import com.github.pagehelper.PageInterceptor;
 
 @Configuration
@@ -85,19 +84,9 @@ public class SpringConfig {
 	}
 
 	@Bean(initMethod = "init")
-	public SpringJobScheduler springJobSchedulerA(JobAService jobAService, ZookeeperRegistryCenter regCenter) {
-		String jobName = jobAService.getClass().getName();
-		return new SpringJobScheduler(jobAService, regCenter,
-				LiteJobConfiguration
-						.newBuilder(new SimpleJobConfiguration(
-								JobCoreConfiguration.newBuilder(jobName, "0 0/1 * * * ?", 1).build(), jobName))
-						.overwrite(true).build());
-	}
-
-	@Bean(initMethod = "init")
-	public SpringJobScheduler springJobSchedulerB(JobBService jobBService, ZookeeperRegistryCenter regCenter) {
-		String jobName = jobBService.getClass().getName();
-		return new SpringJobScheduler(jobBService, regCenter,
+	public SpringJobScheduler springJobSchedulerA(JobService jobService, ZookeeperRegistryCenter regCenter) {
+		String jobName = jobService.getClass().getName();
+		return new SpringJobScheduler(jobService, regCenter,
 				LiteJobConfiguration
 						.newBuilder(new SimpleJobConfiguration(
 								JobCoreConfiguration.newBuilder(jobName, "0 0/1 * * * ?", 1).build(), jobName))
