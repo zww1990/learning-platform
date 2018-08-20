@@ -80,6 +80,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 		<!-- <dependency>
@@ -209,6 +213,12 @@
 		    <groupId>com.dangdang</groupId>
 		    <artifactId>elastic-job-lite-spring</artifactId>
 		    <version>2.1.5</version>
+		</dependency>
+		
+		<!-- java mail -->
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
 		</dependency>
 	</dependencies>
 

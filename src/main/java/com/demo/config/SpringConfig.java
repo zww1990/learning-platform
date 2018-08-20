@@ -11,6 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.context.annotation.DubboComponentScan;
@@ -91,5 +93,17 @@ public class SpringConfig {
 						.newBuilder(new SimpleJobConfiguration(
 								JobCoreConfiguration.newBuilder(jobName, "0 0/1 * * * ?", 1).build(), jobName))
 						.overwrite(true).build());
+	}
+
+	@Bean
+	public JavaMailSender mailSender() {
+		JavaMailSenderImpl ms = new JavaMailSenderImpl();
+		ms.setDefaultEncoding("UTF-8");
+		ms.setProtocol("smtp");
+		ms.setHost("smtp.sohu.com");
+		ms.setPort(25);
+		ms.setUsername("nokia0561861@sohu.com");
+		ms.setPassword("zhangWW@1021");
+		return ms;
 	}
 }
