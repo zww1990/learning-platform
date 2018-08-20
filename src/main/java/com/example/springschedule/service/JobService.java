@@ -1,6 +1,8 @@
 package com.example.springschedule.service;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import org.quartz.DisallowConcurrentExecution;
@@ -24,16 +26,20 @@ public class JobService extends QuartzJobBean {
 		JavaMailSenderImpl jms = (JavaMailSenderImpl) this.mailSender;
 		MimeMessage message = jms.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
-		try {
-			helper.setFrom(jms.getUsername());
-			helper.setTo("1160133573@qq.com");
-			helper.setSubject("这是一段隐藏的内容");
-			helper.setText("<h1 style=\"color: white;\">Fucking you all day and all night!!!</h1>", true);
-			helper.setSentDate(new Date());
-			jms.send(message);
-			log.info("done!!!");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		List<String> toList = Arrays.asList("1160133573@qq.com", "1729852882@qq.com");
+		Date now = new Date();
+		toList.stream().forEach(to -> {
+			try {
+				helper.setFrom(jms.getUsername());
+				helper.setTo(to);
+				helper.setSubject("这是一段隐藏的内容");
+				helper.setText("<h1 style=\"color: white;\">Fucking you all day and all night!!!</h1>", true);
+				helper.setSentDate(now);
+				jms.send(message);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		log.info("done!!!");
 	}
 }
