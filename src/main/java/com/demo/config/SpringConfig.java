@@ -86,7 +86,7 @@ public class SpringConfig {
 	}
 
 	@Bean(initMethod = "init")
-	public SpringJobScheduler springJobSchedulerA(JobService jobService, ZookeeperRegistryCenter regCenter) {
+	public SpringJobScheduler springJobScheduler(JobService jobService, ZookeeperRegistryCenter regCenter) {
 		String jobName = jobService.getClass().getName();
 		return new SpringJobScheduler(jobService, regCenter,
 				LiteJobConfiguration
