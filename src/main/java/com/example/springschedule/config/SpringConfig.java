@@ -1,8 +1,10 @@
 package com.example.springschedule.config;
 
+import java.util.Optional;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.spi.TriggerFiredBundle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -32,10 +34,11 @@ public class SpringConfig {
 	}
 
 	@Bean
-	public SchedulerFactoryBean quartzScheduler(ApplicationContext context, Trigger[] triggers) {
+	public SchedulerFactoryBean quartzScheduler(ApplicationContext context,
+			@Autowired(required = false) Trigger[] triggers) {
 		SchedulerFactoryBean quartzScheduler = new SchedulerFactoryBean();
 		quartzScheduler.setJobFactory(new AutowireCapableBeanJobFactory(context.getAutowireCapableBeanFactory()));
-		quartzScheduler.setTriggers(triggers);
+		Optional.ofNullable(triggers).ifPresent(consumer -> quartzScheduler.setTriggers(consumer));
 		return quartzScheduler;
 	}
 
