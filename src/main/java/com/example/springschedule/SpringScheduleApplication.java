@@ -1,36 +1,27 @@
 package com.example.springschedule;
 
-import org.quartz.CronScheduleBuilder;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import com.example.springschedule.service.JobService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.example.springschedule.config.SpringConfig;
 
-@SpringBootApplication
 public class SpringScheduleApplication {
 	private static final Logger log = LoggerFactory.getLogger(SpringScheduleApplication.class);
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SpringScheduleApplication.class, args);
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+		context.registerShutdownHook();
+		context.start();
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
-	}
-
-	@Bean
-	public JobDetail jobDetail() {
-		Class<JobService> job = JobService.class;
-		return JobBuilder.newJob(job).withIdentity(job.getName()).storeDurably().build();
-	}
-
-	@Bean
-	public Trigger trigger(JobDetail jobDetail) {
-		return TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(JobService.class.getName())
-				.withSchedule(CronScheduleBuilder.cronSchedule("*/30 * * * * ?")).build();
+		synchronized (SpringScheduleApplication.class) {
+			while (true) {
+				try {
+					SpringScheduleApplication.class.wait();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
