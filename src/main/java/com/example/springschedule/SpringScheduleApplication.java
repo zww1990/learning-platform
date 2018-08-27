@@ -30,7 +30,7 @@ public class SpringScheduleApplication {
 
 	@Bean
 	public Trigger trigger(JobDetail jobDetail) {
-		return TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(JobService.class.getName())
+		return TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName())
 				.withSchedule(CronScheduleBuilder.cronSchedule("*/30 * * * * ?")).build();
 	}
 }
