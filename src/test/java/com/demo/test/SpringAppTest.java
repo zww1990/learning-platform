@@ -1,20 +1,14 @@
 package com.demo.test;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import javax.annotation.Resource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.dynamic.sql.SqlBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import com.demo.Application;
-import com.demo.dao.CommonDao;
 import com.demo.dao.UserDao;
 import com.demo.dao.UserDynamicSqlSupport;
 import com.demo.model.User;
@@ -73,23 +67,4 @@ public class SpringAppTest {
 		}
 	}
 
-	@Test
-	public void testSelect() {
-		try {
-			CommonDao dao = this.context.getBean(CommonDao.class);
-			String sql = "SELECT r.id AS role_id,r.NAME AS role_name,r.user_id,u.NAME AS user_name,u.age,u.birthday,u.address,u.resume FROM role r LEFT JOIN USER u ON r.user_id=u.id";
-			List<Map<String, Object>> list = dao.select(sql);
-			if (list.isEmpty()) {
-				return;
-			}
-			List<String> column = list.stream().findFirst().get().entrySet().stream().map(x -> x.getKey())
-					.collect(Collectors.toList());
-			System.err.println(column);
-			for (Map<String, Object> map : list) {
-				System.err.println(map);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
