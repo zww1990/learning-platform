@@ -4,6 +4,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
@@ -72,10 +73,17 @@ public class SpringConfig {
 		page.setProperties(props);
 		bean.setPlugins(ArrayUtils.toArray(page));
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
+		// 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存。
 		config.setCacheEnabled(false);
+		// 是否开启自动驼峰命名规则映射
 		config.setMapUnderscoreToCamelCase(true);
+		// 指定当结果集中值为 null 的时候是否调用映射对象的 setter（map 对象时为 put）方法，
+		// 这对于有 Map.keySet() 依赖或 null 值初始化的时候是有用的。
 		config.setCallSettersOnNulls(true);
+		// 当返回行的所有列都是空时，MyBatis默认返回null。 当开启这个设置时，MyBatis会返回一个空实例。
 		config.setReturnInstanceForEmptyRow(true);
+		// 当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。
+		config.setJdbcTypeForNull(JdbcType.NULL);
 		bean.setConfiguration(config);
 		return bean.getObject();
 	}
