@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  Resolve,
   ActivatedRouteSnapshot,
+  Resolve,
   RouterStateSnapshot
 } from '@angular/router';
-
 import { MenuItem } from './menu-item.model';
 import { MenuService } from './menu.service';
 

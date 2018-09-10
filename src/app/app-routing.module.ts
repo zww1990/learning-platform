@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, RouteReuseStrategy } from '@angular/router';
-
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
-import { SharedModule } from './shared/shared.module';
 import { AuthGuard } from './shared/auth-guard.service';
-import { MenuResolverService } from './shared/menu/menu-resolver.service';
-import { UserService } from './shared/user/user.service';
 import { CasService } from './shared/cas.service';
+import { MenuResolverService } from './shared/menu/menu-resolver.service';
 import { MenuService } from './shared/menu/menu.service';
+import { SharedModule } from './shared/shared.module';
 import { SimpleReuseStrategy } from './shared/simple-reuse-strategy';
+import { UserService } from './shared/user/user.service';
 
 const routes: Routes = [
   // 示例模块采用惰性加载路由配置
