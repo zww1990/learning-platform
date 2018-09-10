@@ -1,14 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { Router } from '@angular/router';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
 
 registerLocaleData(zh); // 注册本地化数据
 

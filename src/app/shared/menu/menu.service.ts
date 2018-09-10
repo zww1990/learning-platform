@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { MenuItem } from './menu-item.model';
+import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { MenuItem } from './menu-item.model';
 
 /**
  * @description 菜单服务

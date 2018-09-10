@@ -1,17 +1,16 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
-  ViewChild,
   ElementRef,
-  AfterViewInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { NzMessageService } from 'ng-zorro-antd';
 import { CasService } from '../shared/cas.service';
-import { User } from '../shared/user/user.model';
 import { SessionKey } from '../shared/session-key.enum';
+import { User } from '../shared/user/user.model';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,8 @@ import { SessionKey } from '../shared/session-key.enum';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   loginForm: FormGroup;
-  @ViewChild('usernameInput') usernameInput: ElementRef;
+  @ViewChild('usernameInput')
+  usernameInput: ElementRef;
 
   constructor(
     private fb: FormBuilder,

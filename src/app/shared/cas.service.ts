@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
 import { xml2js } from 'xml-js';
 import { LoginForm } from '../login/login-form.model';
 
@@ -14,7 +13,7 @@ export class CasResult {
    * @param status 认证结果状态：true成功，false失败
    * @param text 认证结果内容
    */
-  constructor(public status: boolean, public text: any) { }
+  constructor(public status: boolean, public text: any) {}
 }
 
 /**
@@ -27,7 +26,7 @@ export class CasService {
    * @description 构造CAS认证服务
    * @param http http client
    */
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * @description 第一步（1）：创建新的票证授予票证
@@ -129,5 +128,4 @@ export class CasService {
       })
       .toPromise();
   }
-
 }

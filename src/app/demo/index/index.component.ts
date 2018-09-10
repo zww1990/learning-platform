@@ -1,11 +1,11 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  AfterViewInit
-} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'app-index',
@@ -13,7 +13,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./index.component.less']
 })
 export class IndexComponent implements OnInit, AfterViewInit {
-  @ViewChild('globalArea') globalArea: ElementRef;
+  @ViewChild('globalArea')
+  globalArea: ElementRef;
 
   constructor(private http: HttpClient) {}
 

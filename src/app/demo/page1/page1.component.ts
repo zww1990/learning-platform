@@ -1,13 +1,12 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateTime } from 'luxon';
 import { NzMessageService } from 'ng-zorro-antd';
 import { utils } from 'xlsx';
-import { DateTime } from 'luxon';
-import { Workbook } from './workbook.model';
-import { ExcelConfig, EditCache } from './excel-config.model';
 import { LayoutComponent } from '../../layout/layout.component';
+import { EditCache, ExcelConfig } from './excel-config.model';
+import { Workbook } from './workbook.model';
 
 @Component({
   selector: 'app-page1',
@@ -115,7 +114,7 @@ export class Page1Component implements OnInit {
         .filter(v => `${v[this.config.idIndex]}` === this.config.myID)
         .map(v => `${v[this.config.approvalIndex]}`); // 审批单号数组
       utils
-        .sheet_to_json(empSheet, { header: 1, blankrows: false })
+        .sheet_to_json(empSheet, { header: 1, blankrows: false, raw: false })
         .filter(v => v[this.config.idIndex] === this.config.myID)
         .map(v => {
           this.config.myName = v[this.config.nameIndex];

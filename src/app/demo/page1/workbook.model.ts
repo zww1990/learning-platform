@@ -1,5 +1,5 @@
-import { WorkBook, WorkSheet, utils, read, write } from 'xlsx';
 import { saveAs } from 'file-saver';
+import { read, utils, WorkBook, WorkSheet, write } from 'xlsx';
 
 /**
  * @description 工作表数据模型
@@ -54,12 +54,11 @@ export class Workbook implements WorkBook {
    * @param rABS true：readAsBinaryString；false：readAsArrayBuffer；
    */
   static readWorkbook(reader: FileReader, rABS: boolean): WorkBook {
-    let data = reader.result;
+    const data = <ArrayBuffer>reader.result;
     if (!rABS) {
-      data = new Uint8Array(data);
+      return read(new Uint8Array(data), { type: rABS ? 'binary' : 'array' });
     }
-    const wb = read(data, { type: rABS ? 'binary' : 'array' });
-    return wb;
+    return read(data, { type: rABS ? 'binary' : 'array' });
   }
   /**
    * @description 读取文件形式
