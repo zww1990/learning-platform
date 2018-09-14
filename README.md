@@ -22,4 +22,4 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ## Quick links
 [Vue Ant Design](https://vuecomponent.github.io/ant-design-vue/docs/vue/introduce-cn/) |
-[Vue Ant Design](http://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/) |
+[Vue Ant Design](http://tangjinzhou.gitee.io/ant-design-vue/docs/vue/introduce-cn/)
