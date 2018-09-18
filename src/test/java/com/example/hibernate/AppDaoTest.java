@@ -1,6 +1,5 @@
 package com.example.hibernate;
 
-import java.util.Date;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +21,6 @@ public class AppDaoTest {
 			App app = new App();
 			app.setAppid("appid");
 			app.setDatachangeCreatedby("datachangeCreatedby");
-			app.setDatachangeCreatedtime(new Date());
 			app.setName("name");
 			app.setOrgid("orgid");
 			app.setOrgname("orgname");
