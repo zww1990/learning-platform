@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-schema="BDMSIT" match-name="APP"/>
+  <table-filter match-schema="BDMSIT" match-name="APPNAMESPACE"/>
+  <table-filter match-schema="BDMSIT" match-name="COMMIT"/>
+  <table-filter match-schema="BDMSIT" match-name="GRAYRELEASERULE"/>
+  <table-filter match-schema="BDMSIT" match-name="INSTANCE"/>
+  <table-filter match-schema="BDMSIT" match-name="INSTANCECONFIG"/>
+  <table-filter match-schema="BDMSIT" match-name="ITEM"/>
+  <table-filter match-schema="BDMSIT" match-name="NAMESPACE"/>
+  <table-filter match-schema="BDMSIT" match-name="NAMESPACELOCK"/>
+  <table-filter match-schema="BDMSIT" match-name="RELEASE"/>
+  <table-filter match-schema="BDMSIT" match-name="RELEASEHISTORY"/>
+  <table-filter match-schema="BDMSIT" match-name="RELEASEMESSAGE"/>
+  <table-filter match-schema="BDMSIT" match-name="SERVERCONFIG"/>
+  <table-filter match-schema="BDMSIT" match-name="audit"/>
+  <table-filter match-schema="BDMSIT" match-name="cluster"/>
+</hibernate-reverse-engineering>
