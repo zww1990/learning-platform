@@ -11,6 +11,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import com.demo.domain.InstanceConfig;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年9月19日,下午7:48:02
+ * @description Oracle数据库验证通过
+ */
 public interface InstanceConfigRepository extends PagingAndSortingRepository<InstanceConfig, Long> {
 	InstanceConfig findByInstanceIdAndConfigAppIdAndConfigNamespaceName(long instanceId, String configAppId,
 			String configNamespaceName);

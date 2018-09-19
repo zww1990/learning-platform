@@ -47,6 +47,7 @@ public class AppNamespaceRepositoryTest {
 			System.err.println(this.repository.findByAppIdAndIsPublic("appId", true));
 			System.err.println(this.repository.findByAppId("appId"));
 			System.err.println(this.repository.findFirst500ByIdGreaterThanOrderByIdAsc(0));
+			this.repository.delete(this.repository.getOne(1L));
 			System.err.println(this.repository.batchDeleteByAppId("appId", "operator"));
 			System.err.println(this.repository.delete("appId", "name", "operator"));
 		} catch (Exception e) {

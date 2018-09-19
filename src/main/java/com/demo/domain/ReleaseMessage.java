@@ -55,4 +55,12 @@ public class ReleaseMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public Date getDataChangeLastModifiedTime() {
+		return dataChangeLastModifiedTime;
+	}
+
+	public void setDataChangeLastModifiedTime(Date dataChangeLastModifiedTime) {
+		this.dataChangeLastModifiedTime = dataChangeLastModifiedTime;
+	}
 }

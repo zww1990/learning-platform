@@ -2,12 +2,17 @@ package com.demo.repository;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import com.demo.domain.Item;
 
-public interface ItemRepository extends PagingAndSortingRepository<Item, Long> {
+/**
+ * @author ZhangWeiWei
+ * @date 2018年9月19日,下午8:04:06
+ * @description Oracle数据库验证通过
+ */
+public interface ItemRepository extends JpaRepository<Item, Long> {
 	Item findByNamespaceIdAndKey(Long namespaceId, String key);
 
 	List<Item> findByNamespaceIdOrderByLineNumAsc(Long namespaceId);

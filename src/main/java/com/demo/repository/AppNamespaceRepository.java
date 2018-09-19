@@ -7,6 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import com.demo.domain.AppNamespace;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年9月19日,下午4:24:57
+ * @description oracle数据库验证通过
+ */
 public interface AppNamespaceRepository extends JpaRepository<AppNamespace, Long> {
 	AppNamespace findByAppIdAndName(String appId, String namespaceName);
 

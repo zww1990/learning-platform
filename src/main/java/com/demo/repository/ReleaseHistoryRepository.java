@@ -2,15 +2,16 @@ package com.demo.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import com.demo.domain.ReleaseHistory;
 
 /**
+ * Oracle数据库验证通过
  * @author Jason Song(song_s@ctrip.com)
  */
-public interface ReleaseHistoryRepository extends PagingAndSortingRepository<ReleaseHistory, Long> {
+public interface ReleaseHistoryRepository extends JpaRepository<ReleaseHistory, Long> {
 	Page<ReleaseHistory> findByAppIdAndClusterNameAndNamespaceNameOrderByIdDesc(String appId, String clusterName,
 			String namespaceName, Pageable pageable);
 

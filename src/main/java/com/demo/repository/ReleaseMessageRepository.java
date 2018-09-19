@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import com.demo.domain.ReleaseMessage;
 
 /**
+ * Oracle数据库验证通过
  * @author Jason Song(song_s@ctrip.com)
  */
 public interface ReleaseMessageRepository extends PagingAndSortingRepository<ReleaseMessage, Long> {

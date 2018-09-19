@@ -2,12 +2,17 @@ package com.demo.repository;
 
 import java.util.List;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import com.demo.domain.Namespace;
 
-public interface NamespaceRepository extends PagingAndSortingRepository<Namespace, Long> {
+/**
+ * @author ZhangWeiWei
+ * @date 2018年9月19日,下午8:20:02
+ * @description Oracle数据库验证通过
+ */
+public interface NamespaceRepository extends JpaRepository<Namespace, Long> {
 	List<Namespace> findByAppIdAndClusterNameOrderByIdAsc(String appId, String clusterName);
 
 	Namespace findByAppIdAndClusterNameAndNamespaceName(String appId, String clusterName, String namespaceName);

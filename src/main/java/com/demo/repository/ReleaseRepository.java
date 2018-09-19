@@ -3,16 +3,17 @@ package com.demo.repository;
 import java.util.List;
 import java.util.Set;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import com.demo.domain.Release;
 
 /**
+ * Oracle数据库验证通过
  * @author Jason Song(song_s@ctrip.com)
  */
-public interface ReleaseRepository extends PagingAndSortingRepository<Release, Long> {
+public interface ReleaseRepository extends JpaRepository<Release, Long> {
 	Release findFirstByAppIdAndClusterNameAndNamespaceNameAndIsAbandonedFalseOrderByIdDesc(@Param("appId") String appId,
 			@Param("clusterName") String clusterName, @Param("namespaceName") String namespaceName);
 
