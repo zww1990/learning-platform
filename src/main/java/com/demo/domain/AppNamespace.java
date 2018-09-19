@@ -10,28 +10,33 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-/**
- * @author Jason Song(song_s@ctrip.com)
- */
 @Entity
-@Table(name = "cluster")
-@SQLDelete(sql = "Update \"cluster\" set isDeleted = 1 where id = ?")
+@Table(name = "AppNamespace")
+@SQLDelete(sql = "Update AppNamespace set isDeleted = 1 where id = ?")
 @Where(clause = "isDeleted = 0")
-public class Cluster extends BaseEntity implements Comparable<Cluster> {
+public class AppNamespace extends BaseEntity {
 	@Id
 	@Column(name = "Id")
-	@GeneratedValue(generator = "cluster_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "cluster_seq", sequenceName = "cluster_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(generator = "appnamespace_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "appnamespace_seq", sequenceName = "appnamespace_seq", allocationSize = 1, initialValue = 1)
 	private long id;
 	@Column(name = "Name", nullable = false)
 	private String name;
 	@Column(name = "AppId", nullable = false)
 	private String appId;
-	@Column(name = "ParentClusterId", nullable = false)
-	private long parentClusterId;
+	@Column(name = "Format", nullable = false)
+	private String format;
+	@Column(name = "IsPublic")
+	private boolean isPublic = false;
+	@Column(name = "comment")
+	private String comment;
 
 	public String getAppId() {
 		return appId;
+	}
+
+	public String getComment() {
+		return comment;
 	}
 
 	public String getName() {
@@ -42,16 +47,28 @@ public class Cluster extends BaseEntity implements Comparable<Cluster> {
 		this.appId = appId;
 	}
 
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public long getParentClusterId() {
-		return parentClusterId;
+	public boolean isPublic() {
+		return isPublic;
 	}
 
-	public void setParentClusterId(long parentClusterId) {
-		this.parentClusterId = parentClusterId;
+	public void setPublic(boolean aPublic) {
+		isPublic = aPublic;
+	}
+
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format;
 	}
 
 	public long getId() {
@@ -60,16 +77,5 @@ public class Cluster extends BaseEntity implements Comparable<Cluster> {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	@Override
-	public int compareTo(Cluster o) {
-		if (o == null || getId() > o.getId()) {
-			return 1;
-		}
-		if (getId() == o.getId()) {
-			return 0;
-		}
-		return -1;
 	}
 }
