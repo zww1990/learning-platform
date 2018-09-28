@@ -7,7 +7,15 @@ import org.hibernate.tool.ant.Hbm2JavaExporterTask;
 import org.hibernate.tool.ant.HibernateToolTask;
 import org.hibernate.tool.ant.JDBCConfigurationTask;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年9月28日,下午2:24:19
+ * @description java调用hibernate-tools类库反向生成pojo。
+ */
 public class HibernateToolTest {
+	/**
+	 * 主方法
+	 */
 	public static void main(String[] args) {
 		try {
 			Project project = new Project();
