@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
 
 public class DAOExporter extends POJOExporter {
-	private static final String DAO_DAOHOME_FTL = "dao/daohome.ftl";
+	private static final String DAO_DAOHOME_FTL = "org/hibernate/dao/daohome.ftl";
 	private String sessionFactoryName = "SessionFactory";
 
 	public DAOExporter() {
