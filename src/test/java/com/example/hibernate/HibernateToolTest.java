@@ -20,7 +20,7 @@ public class HibernateToolTest {
 			Hbm2JavaExporterTask exporterTask = (Hbm2JavaExporterTask) toolTask.createHbm2Java();
 			exporterTask.setEjb3(true);
 			exporterTask.setJdk5(true);
-			exporterTask.setDestdir(baseDir);
+			exporterTask.setDestdir(new File(baseDir, "src\\main\\java"));
 			toolTask.setProject(project);
 			toolTask.execute();
 			System.exit(0);
