@@ -1,4 +1,4 @@
-${pojo.getPackageDeclaration()}
+${daoPackageName}
 // Generated ${date} by Hibernate Tools ${version}
 
 <#assign classbody>
@@ -7,7 +7,7 @@ ${pojo.getPackageDeclaration()}
  * @see ${pojo.getQualifiedDeclarationName()}
  * @author Hibernate Tools
  */
-public interface ${declarationName}DAO extends ${pojo.importType("org.springframework.data.jpa.repository.JpaRepository")}<${declarationName}, ${c2j.getJavaTypeName(clazz.identifierProperty, jdk5)}> {
+public interface ${declarationName}DAO extends ${pojo.importType("org.springframework.data.jpa.repository.JpaRepository")}<${pojo.getQualifiedDeclarationName()}, ${c2j.getJavaTypeName(clazz.identifierProperty, jdk5)}> {
 }
 </#assign>
 

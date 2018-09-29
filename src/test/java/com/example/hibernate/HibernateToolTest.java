@@ -2,6 +2,7 @@ package com.example.hibernate;
 
 import java.io.File;
 import org.apache.tools.ant.Project;
+import org.apache.tools.ant.types.Environment.Variable;
 import org.apache.tools.ant.types.Path;
 import org.hibernate.tool.ant.Hbm2DAOExporterTask;
 import org.hibernate.tool.ant.Hbm2JavaExporterTask;
@@ -32,11 +33,16 @@ public class HibernateToolTest {
 			javaExporterTask.setDestdir(new File(baseDir, "src\\main\\java"));
 			Hbm2DAOExporterTask daoExporterTask = (Hbm2DAOExporterTask) toolTask.createHbm2DAO();
 			daoExporterTask.setDestdir(new File(baseDir, "src\\main\\java"));
+			Variable property = new Variable();
+			property.setKey("package-name");
+			property.setValue("com.demo.repository");
+			daoExporterTask.addConfiguredProperty(property);
 			toolTask.setProject(project);
 			toolTask.execute();
 			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
 	}
 }
