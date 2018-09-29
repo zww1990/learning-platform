@@ -9,8 +9,6 @@ ${pojo.getPackageDeclaration()}
    
 <#include "PojoPropertyAccessors.ftl"/>
 
-<#include "PojoToString.ftl"/>
-
 <#else>
 <#include "PojoInterfacePropertyAccessors.ftl"/>
 
