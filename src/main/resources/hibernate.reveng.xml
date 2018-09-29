@@ -2,19 +2,7 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-catalog="apolloconfigdb" match-name="app"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="appnamespace"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="audit"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="cluster"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="commit"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="grayreleaserule"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="instance"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="instanceconfig"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="item"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="namespace"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="namespacelock"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="release"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="releasehistory"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="releasemessage"/>
-  <table-filter match-catalog="apolloconfigdb" match-name="serverconfig"/>
+  <table-filter match-catalog="test" match-name="role"/>
+  <table-filter match-catalog="test" match-name="user"/>
+  <table-filter match-catalog="test" match-name="user_role"/>
 </hibernate-reverse-engineering>
