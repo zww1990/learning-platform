@@ -1,5 +1,5 @@
 /**
- * domain model class ${pojo.getDeclarationName()}.
+ * domain model class ${pojo.getDeclarationName()}<#if clazz.table.comment?exists  && clazz.table.comment?trim?length!=0> : ${clazz.table.comment}</#if>
  * @author Hibernate Tools ${version}
  * @date ${date}
  */

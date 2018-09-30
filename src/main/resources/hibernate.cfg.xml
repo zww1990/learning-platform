@@ -4,7 +4,7 @@
 <hibernate-configuration>
  <session-factory name="">
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://123.56.75.138:3306/test?useUnicode=true&amp;characterEncoding=UTF-8</property>
+  <property name="hibernate.connection.url">jdbc:mysql://123.56.75.138:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&amp;useInformationSchema=true</property>
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.connection.password"/>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQL55Dialect</property>

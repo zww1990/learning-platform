@@ -3,7 +3,7 @@ ${daoPackageName}
 <#assign classbody>
 <#assign declarationName = pojo.importType(pojo.getDeclarationName())>
 /**
- * Data Access Object for domain model class ${declarationName}.
+ * Data Access Object for domain model class ${declarationName}<#if clazz.table.comment?exists  && clazz.table.comment?trim?length!=0> : ${clazz.table.comment}</#if>
  * @see ${pojo.getQualifiedDeclarationName()}
  * @author Hibernate Tools ${version}
  * @date ${date}
