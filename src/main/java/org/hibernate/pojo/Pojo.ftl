@@ -1,9 +1,12 @@
 ${pojo.getPackageDeclaration()}
+
 <#assign classbody>
 <#include "PojoTypeDeclaration.ftl"/> {
 <#if !pojo.isInterface()>
 <#include "PojoFields.ftl"/>
+
 <#include "PojoConstructors.ftl"/>
+
 <#include "PojoPropertyAccessors.ftl"/>
 <#else>
 <#include "PojoInterfacePropertyAccessors.ftl"/>

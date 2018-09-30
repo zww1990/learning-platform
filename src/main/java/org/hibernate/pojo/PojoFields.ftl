@@ -1,5 +1,6 @@
-<#foreach field in pojo.getAllPropertiesIterator()>
-<#if pojo.getMetaAttribAsBool(field, "gen-property", true)>
-    ${pojo.getFieldModifiers(field)} ${pojo.getJavaTypeName(field, jdk5)} ${c2j.keyWordCheck(field.name)}<#if pojo.hasFieldInitializor(field, jdk5)> = ${pojo.getFieldInitialization(field, jdk5)}</#if>;
+<#foreach property in pojo.getAllPropertiesIterator()>
+<#if pojo.getMetaAttribAsBool(property, "gen-property", true)>
+<#include "Ejb3PropertyGetAnnotation.ftl"/>
+    ${pojo.getFieldModifiers(property)} ${pojo.getJavaTypeName(property, jdk5)} ${c2j.keyWordCheck(property.name)}<#if pojo.hasFieldInitializor(property, jdk5)> = ${pojo.getFieldInitialization(property, jdk5)}</#if>;
 </#if>
 </#foreach>
