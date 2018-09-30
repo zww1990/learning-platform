@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.Field;
@@ -196,7 +197,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 	private static String trimAllWhitespace(String str) {
 		int len = str.length();
-		StringBuilder sb = new StringBuilder(str.length());
+		StringBuilder sb = new StringBuilder(len);
 		for (int i = 0; i < len; i++) {
 			char c = str.charAt(i);
 			if (!Character.isWhitespace(c)) {
