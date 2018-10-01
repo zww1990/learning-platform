@@ -5,9 +5,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
-        <property name="hibernate.connection.password">wlxfrCXo</property>
         <property name="hibernate.connection.url">jdbc:oracle:thin:@10.2.4.250:1521:ora72</property>
         <property name="hibernate.connection.username">BDMSIT</property>
+        <property name="hibernate.connection.password">wlxfrCXo</property>
         <property name="hibernate.default_schema">BDMSIT</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
     </session-factory>
