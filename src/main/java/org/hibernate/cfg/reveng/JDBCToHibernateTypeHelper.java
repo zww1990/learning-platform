@@ -63,9 +63,19 @@ public final class JDBCToHibernateTypeHelper {
 			}
 		}
 		if (typeHasScaleAndPrecision(sqlType)) {
-			return Double.class.getName();
+			if (precision == 1) {
+				// NUMERIC(1) is a often used idiom for storing boolean thus providing it out of the box.
+				return returnNullable ? Boolean.class.getName() : "boolean";
+			} else if (scale > 0) {
+				return Double.class.getName();
+			} else {
+				return Long.class.getName();
+			}
 		}
-		if (sqlType == Types.CHAR && size > 1) {
+		if ((sqlType == Types.CHAR || sqlType == Types.NCHAR) && size > 1) {
+			return "string";
+		}
+		if (sqlType == Types.CLOB || sqlType == Types.NCLOB) {
 			return "string";
 		}
 		String[] result = PREFERRED_HIBERNATETYPE_FOR_SQLTYPE.get(sqlType);
