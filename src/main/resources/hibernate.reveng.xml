@@ -3,23 +3,93 @@
 
 <hibernate-reverse-engineering>
   <table-filter match-schema="BDMSIT" match-name="APP"/>
-  <table-filter match-schema="BDMSIT" match-name="APPNAMESPACE"/>
-  <table-filter match-schema="BDMSIT" match-name="COMMIT"/>
-  <table-filter match-schema="BDMSIT" match-name="GRAYRELEASERULE"/>
-  <table-filter match-schema="BDMSIT" match-name="INSTANCE"/>
-  <table-filter match-schema="BDMSIT" match-name="INSTANCECONFIG"/>
-  <table-filter match-schema="BDMSIT" match-name="ITEM"/>
-  <table-filter match-schema="BDMSIT" match-name="NAMESPACE"/>
-  <table-filter match-schema="BDMSIT" match-name="NAMESPACELOCK"/>
-  <table-filter match-schema="BDMSIT" match-name="RELEASE"/>
-  <table-filter match-schema="BDMSIT" match-name="RELEASEHISTORY"/>
-  <table-filter match-schema="BDMSIT" match-name="RELEASEMESSAGE"/>
-  <table-filter match-schema="BDMSIT" match-name="SERVERCONFIG"/>
-  <table-filter match-schema="BDMSIT" match-name="audit"/>
-  <table-filter match-schema="BDMSIT" match-name="cluster"/>
   <table name="APP">
   	<primary-key property="id">
   		<generator class="SEQUENCE">APP_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="APPNAMESPACE"/>
+  <table name="APPNAMESPACE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">APPNAMESPACE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="COMMIT"/>
+  <table name="COMMIT">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">COMMIT_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="GRAYRELEASERULE"/>
+  <table name="GRAYRELEASERULE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">GRAYRELEASERULE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="INSTANCE"/>
+  <table name="INSTANCE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">INSTANCE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="INSTANCECONFIG"/>
+  <table name="INSTANCECONFIG">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">INSTANCECONFIG_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="ITEM"/>
+  <table name="ITEM">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">ITEM_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="NAMESPACE"/>
+  <table name="NAMESPACE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">NAMESPACE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="NAMESPACELOCK"/>
+  <table name="NAMESPACELOCK">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">NAMESPACELOCK_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="RELEASE"/>
+  <table name="RELEASE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">RELEASE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="RELEASEHISTORY"/>
+  <table name="RELEASEHISTORY">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">RELEASEHISTORY_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="RELEASEMESSAGE"/>
+  <table name="RELEASEMESSAGE">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">RELEASEMESSAGE_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="SERVERCONFIG"/>
+  <table name="SERVERCONFIG">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">SERVERCONFIG_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="audit"/>
+  <table name="audit">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">AUDIT_SEQ</generator>
+  	</primary-key>
+  </table>
+  <table-filter match-schema="BDMSIT" match-name="cluster"/>
+  <table name="cluster">
+  	<primary-key property="id">
+  		<generator class="SEQUENCE">CLUSTER_SEQ</generator>
   	</primary-key>
   </table>
 </hibernate-reverse-engineering>
