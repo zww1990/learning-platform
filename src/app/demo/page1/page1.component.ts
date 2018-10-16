@@ -129,6 +129,7 @@ export class Page1Component implements OnInit {
               this.tableData.push([
                 v[this.config.deptIndex],
                 approvalIds[i],
+                '',
                 v[this.config.nameIndex] + '-餐费',
                 ...this.config.mealFee1,
                 this.config.mealFee,
@@ -157,6 +158,7 @@ export class Page1Component implements OnInit {
               this.tableData.push([
                 v[this.config.deptIndex],
                 approvalIds[i],
+                '',
                 v[this.config.nameIndex] + '-餐费',
                 ...this.config.mealFee1,
                 mealFee,
@@ -171,6 +173,7 @@ export class Page1Component implements OnInit {
             this.tableData.push([
               v[this.config.deptIndex],
               approvalIds[i],
+              '',
               v[this.config.nameIndex] + '-交通',
               ...this.config.trafficFee1,
               v[this.config.overtimeIndex],
