@@ -8,13 +8,13 @@
       <ng-container *ngFor="let child of menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span>
-            <i class="{{child.menuIcon}}"></i>
+            <i nz-icon [type]="child.menuIcon"></i>
             <span class="nav-text">{{ child.menuName }}</span>
           </span>
         </li>
         <li nz-submenu [(nzOpen)]="child.selected" (nzOpenChange)="openHandler(child)" *ngIf="child.children">
           <span title>
-            <i class="{{child.menuIcon}}"></i>
+            <i nz-icon [type]="child.menuIcon"></i>
             <span class="nav-text">{{ child.menuName }}</span>
           </span>
           <ul *ngFor="let item of child.children">
@@ -28,8 +28,8 @@
     <nz-header style="background: #fff; padding:0;">
       <div nz-row>
         <div nz-col [nzSpan]="2">
-          <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"
-            nz-tooltip [nzTitle]="isCollapsed?'展开菜单':'收缩菜单'"></i>
+          <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed"
+            (click)="isCollapsed=!isCollapsed" nz-tooltip [nzTitle]="isCollapsed?'展开菜单':'收缩菜单'"></i>
         </div>
         <div nz-col [nzSpan]="18"></div>
         <div nz-col [nzSpan]="2" style="text-align: right">
@@ -54,7 +54,8 @@
             <ng-template #titleTemplate>
               <div>
                 {{tab.menuName}}
-                <i class="anticon anticon-cross" style="margin-right: 0px" (click)="closeTab(tab)" *ngIf="tab.allowDelete!==false"></i>
+                <i nz-icon type="close" class="ant-tabs-close-x" style="margin-right: 0px" (click)="closeTab(tab)"
+                  *ngIf="tab.allowDelete!==false"></i>
               </div>
             </ng-template>
           </nz-tab>
