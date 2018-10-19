@@ -14,10 +14,7 @@ import { Workbook } from './workbook.model';
   styleUrls: ['./page1.component.less']
 })
 export class Page1Component implements OnInit {
-  accepts = [
-    'application/vnd.ms-excel',
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-  ];
+  accepts = ['.XLSX', '.XLS'];
   rABS = true; // true:readAsBinaryString; false:readAsArrayBuffer;
   tableHeader = [];
   tableData: any[][] = [];
@@ -81,7 +78,9 @@ export class Page1Component implements OnInit {
    * @description 上传文件之前，对上传的文件进行校验
    */
   beforeUpload = (file: File) => {
-    const isAccept = this.accepts.includes(file.type);
+    let name = file.name;
+    name = name.substring(name.lastIndexOf('.')).toUpperCase();
+    const isAccept = this.accepts.includes(name);
     const isLimit = file.size / 1024 / 1024 < 10;
     if (!isAccept) {
       this.msg.error('只能上传xls/xlsx文件');

@@ -2,7 +2,7 @@
   {
     "menuId": 1,
     "menuName": "加班",
-    "menuIcon": "anticon anticon-appstore",
+    "menuIcon": "appstore",
     "parentMenuId": null
   },
   {
@@ -14,7 +14,7 @@
   {
     "menuId": 2,
     "menuName": "示例2",
-    "menuIcon": "anticon anticon-appstore",
+    "menuIcon": "appstore",
     "parentMenuId": null
   },
   {
