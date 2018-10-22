@@ -5,6 +5,10 @@ import java.util.Properties;
 import org.hibernate.tool.hbm2x.ControllerExporter;
 import org.hibernate.tool.hbm2x.Exporter;
 
+/**
+ * hibernate生成Controller任务
+ * @author honey
+ */
 public class Hbm2ControllerExporterTask extends Hbm2JavaExporterTask {
 
 	private Properties serviceProperties;

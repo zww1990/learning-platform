@@ -16,7 +16,7 @@ import org.hibernate.tool.ant.MyHibernateToolTask;
 /**
  * @author ZhangWeiWei
  * @date 2018年9月28日,下午2:24:19
- * @description java调用hibernate-tools类库反向生成POJO、JPA DAO。
+ * @description java调用hibernate-tools类库反向生成POJO、JPA DAO、Service、Controller。
  */
 public class HibernateToolTest {
 	/**

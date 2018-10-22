@@ -5,6 +5,10 @@ import java.util.Properties;
 import org.hibernate.tool.hbm2x.Exporter;
 import org.hibernate.tool.hbm2x.ServiceImplExporter;
 
+/**
+ * hibernate生成Service实现任务
+ * @author honey
+ */
 public class Hbm2ServiceImplExporterTask extends Hbm2JavaExporterTask {
 
 	private Properties daoProperties;

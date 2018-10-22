@@ -3,6 +3,10 @@ package org.hibernate.tool.ant;
 import org.hibernate.tool.hbm2x.Exporter;
 import org.hibernate.tool.hbm2x.ServiceExporter;
 
+/**
+ * hibernate生成Service接口任务
+ * @author honey
+ */
 public class Hbm2ServiceExporterTask extends Hbm2JavaExporterTask {
 
 	public Hbm2ServiceExporterTask(HibernateToolTask parent) {
