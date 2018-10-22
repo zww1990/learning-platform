@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.mapping.Component;
@@ -119,10 +120,6 @@ public class GenericExporter extends AbstractExporter {
 		TemplateProducer producer = new TemplateProducer(getTemplateHelper(), getArtifactCollector());
 		additionalContext.put("pojo", element);
 		additionalContext.put("clazz", element.getDecoratedObject());
-		if (this instanceof DAOExporter) {
-			additionalContext.put("daoPackageName", this.getPackageDeclaration(
-					super.getProperties().getProperty("package-name", element.getPackageName())));
-		}
 		String filename = resolveFilename(element);
 		if (filename.endsWith(".java") && filename.indexOf('$') >= 0) {
 			log.warn("Filename for " + getClassNameForFile(element)
@@ -143,9 +140,6 @@ public class GenericExporter extends AbstractExporter {
 	protected String resolveFilename(POJOClass element) {
 		String filename = StringHelper.replace(filePattern, "{class-name}", getClassNameForFile(element));
 		String packageName = element.getPackageName();
-		if (this instanceof DAOExporter) {
-			packageName = super.getProperties().getProperty("package-name", packageName);
-		}
 		String packageLocation = StringHelper.replace(packageName, ".", "/");
 		if (StringHelper.isEmpty(packageLocation)) {
 			packageLocation = "."; // done to ensure default package classes doesn't end up in the root of the
