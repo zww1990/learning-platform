@@ -1,9 +1,9 @@
 ${daoPackageName}
-
 <#assign classbody>
 <#assign declarationName = pojo.getDeclarationName()>
 <#assign qualifiedDeclarationName = pojo.getQualifiedDeclarationName()>
 <#assign identifierProperty = c2j.getJavaTypeName(clazz.identifierProperty, jdk5)>
+import org.springframework.data.jpa.repository.JpaRepository;
 import ${qualifiedDeclarationName};
 import ${identifierProperty};
 
@@ -13,7 +13,7 @@ import ${identifierProperty};
  * @author Hibernate Tools ${version}
  * @date ${date}
  */
-public interface ${declarationName}DAO extends ${pojo.importType("org.springframework.data.jpa.repository.JpaRepository")}<${declarationName}, ${pojo.importType(identifierProperty)}> {
+public interface ${declarationName}DAO extends JpaRepository<${declarationName}, ${pojo.importType(identifierProperty)}> {
 }
 </#assign>
 ${pojo.generateImports()}

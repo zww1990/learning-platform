@@ -7,32 +7,34 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
 
-public class DAOExporter extends POJOExporter {
-	private static final String DAO_DAOHOME_FTL = "org/hibernate/dao/daohome.ftl";
+public class ServiceExporter extends POJOExporter {
 
-	public DAOExporter(Configuration cfg, File outputdir) {
+	public ServiceExporter(Configuration cfg, File outputdir) {
 		super(cfg, outputdir);
 	}
 
+	@Override
 	protected void init() {
 		super.init();
-		setTemplateName(DAO_DAOHOME_FTL);
-		setFilePattern("{package-name}/{class-name}DAO.java");
+		super.setTemplateName("org/hibernate/service/servicehome.ftl");
+		super.setFilePattern("{package-name}/{class-name}Service.java");
 	}
 
+	@Override
 	protected void exportComponent(Map<String, Object> additionalContext, POJOClass element) {
 		// noop - we dont want components
 	}
 
+	@Override
 	public String getName() {
-		return "hbm2dao";
+		return "hbm2service";
 	}
 
 	protected void exportPOJO(Map<String, Object> additionalContext, POJOClass element) {
 		TemplateProducer producer = new TemplateProducer(super.getTemplateHelper(), super.getArtifactCollector());
 		additionalContext.put("pojo", element);
 		additionalContext.put("clazz", element.getDecoratedObject());
-		additionalContext.put("daoPackageName", super.getPackageDeclaration(
+		additionalContext.put("servicePackageName", super.getPackageDeclaration(
 				super.getProperties().getProperty("package-name", element.getPackageName())));
 		String filename = this.resolveFilename(element);
 		if (filename.endsWith(".java") && filename.indexOf('$') >= 0) {

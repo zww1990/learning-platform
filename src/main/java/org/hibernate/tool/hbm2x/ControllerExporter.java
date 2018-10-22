@@ -2,37 +2,44 @@ package org.hibernate.tool.hbm2x;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Properties;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
 
-public class DAOExporter extends POJOExporter {
-	private static final String DAO_DAOHOME_FTL = "org/hibernate/dao/daohome.ftl";
+public class ControllerExporter extends POJOExporter {
 
-	public DAOExporter(Configuration cfg, File outputdir) {
+	private String servicePackageName;
+
+	public ControllerExporter(Configuration cfg, File outputdir, Properties serviceProperties) {
 		super(cfg, outputdir);
+		this.servicePackageName = serviceProperties.getProperty("package-name");
 	}
 
+	@Override
 	protected void init() {
 		super.init();
-		setTemplateName(DAO_DAOHOME_FTL);
-		setFilePattern("{package-name}/{class-name}DAO.java");
+		super.setTemplateName("org/hibernate/controller/controllerhome.ftl");
+		super.setFilePattern("{package-name}/{class-name}Controller.java");
 	}
 
+	@Override
 	protected void exportComponent(Map<String, Object> additionalContext, POJOClass element) {
 		// noop - we dont want components
 	}
 
+	@Override
 	public String getName() {
-		return "hbm2dao";
+		return "hbm2controller";
 	}
 
 	protected void exportPOJO(Map<String, Object> additionalContext, POJOClass element) {
 		TemplateProducer producer = new TemplateProducer(super.getTemplateHelper(), super.getArtifactCollector());
 		additionalContext.put("pojo", element);
 		additionalContext.put("clazz", element.getDecoratedObject());
-		additionalContext.put("daoPackageName", super.getPackageDeclaration(
+		additionalContext.put("servicePackageName", this.servicePackageName);
+		additionalContext.put("controllerPackageName", super.getPackageDeclaration(
 				super.getProperties().getProperty("package-name", element.getPackageName())));
 		String filename = this.resolveFilename(element);
 		if (filename.endsWith(".java") && filename.indexOf('$') >= 0) {
@@ -55,5 +62,9 @@ public class DAOExporter extends POJOExporter {
 		}
 		filename = StringHelper.replace(filename, "{package-name}", packageLocation);
 		return filename;
+	}
+
+	public String toCamelCase(String declarationName) {
+		return StringUtils.uncapitalise(declarationName);
 	}
 }
