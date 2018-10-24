@@ -1,7 +1,6 @@
 package com.example.dubbo.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -9,7 +8,6 @@ import org.springframework.context.annotation.PropertySource;
  * @date 2018年4月8日,上午11:23:25
  * @description Rabbit MQ属性配置类
  */
-@Configuration
 @PropertySource("classpath:rabbitmq.properties")
 public class RabbitProperties {
 	@Value("${rabbitmq.host}")

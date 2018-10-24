@@ -13,7 +13,11 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -21,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @date 2018年10月24日,下午6:33:34
  * @description Rabbit MQ配置类
  */
-@Configuration
+@Conditional(RabbitConfig.RabbitCondition.class)
 public class RabbitConfig {
 	private static final Logger logger = LoggerFactory.getLogger(RabbitConfig.class);
 
@@ -100,5 +104,14 @@ public class RabbitConfig {
 	@Bean
 	public Binding binding4() {
 		return BindingBuilder.bind(this.queue4()).to(this.directExchange()).with("rk.demo2");
+	}
+
+	public static class RabbitCondition implements Condition {
+
+		@Override
+		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			return context.getEnvironment().getProperty("rabbitmq.enable", boolean.class, false);
+		}
+
 	}
 }

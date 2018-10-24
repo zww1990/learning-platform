@@ -8,14 +8,17 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * @author ZhangWeiWei
  * @date 2018年10月24日,下午7:57:32
  * @description Rabbit MQ配置类
  */
-@Configuration
+@Conditional(RabbitConfig.RabbitCondition.class)
 @EnableRabbit
 public class RabbitConfig {
 	@Bean
@@ -36,5 +39,14 @@ public class RabbitConfig {
 		containerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
 		containerFactory.setConnectionFactory(connectionFactory);
 		return containerFactory;
+	}
+
+	public static class RabbitCondition implements Condition {
+
+		@Override
+		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			return context.getEnvironment().getProperty("rabbitmq.enable", boolean.class, false);
+		}
+
 	}
 }

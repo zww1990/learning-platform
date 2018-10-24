@@ -1,7 +1,11 @@
 package com.example.dubbo.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
@@ -12,7 +16,7 @@ import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
  * @date 2018年10月24日,下午7:49:31
  * @description Dubbo配置类
  */
-@Configuration
+@Conditional(DubboConfig.DubboCondition.class)
 @EnableDubbo(scanBasePackages = "com.example.dubbo.service.provider")
 public class DubboConfig {
 	@Bean
@@ -28,5 +32,14 @@ public class DubboConfig {
 	@Bean
 	public ProtocolConfig protocolConfig(DubboProperties props) {
 		return new ProtocolConfig(props.getProtocolName(), props.getProtocolPort());
+	}
+
+	public static class DubboCondition implements Condition {
+
+		@Override
+		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			return context.getEnvironment().getProperty("dubbo.enable", boolean.class, false);
+		}
+
 	}
 }
