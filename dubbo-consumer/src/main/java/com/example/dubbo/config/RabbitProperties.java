@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * @author ZhangWeiWei
  * @date 2018年4月8日,上午11:23:25
- * @description MQ配置类
+ * @description Rabbit MQ属性配置类
  */
 @Configuration
 @PropertySource("classpath:rabbitmq.properties")
