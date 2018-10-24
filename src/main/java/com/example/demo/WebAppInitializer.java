@@ -1,10 +1,10 @@
 package com.example.demo;
 
 import java.nio.charset.Charset;
+import java.util.stream.Stream;
 
 import javax.servlet.Filter;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -14,22 +14,22 @@ import com.example.demo.config.ServletConfig;
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return ArrayUtils.<Class<?>>toArray(RootConfig.class);
+		return Stream.of(RootConfig.class).toArray(Class[]::new);
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return ArrayUtils.<Class<?>>toArray(ServletConfig.class);
+		return Stream.of(ServletConfig.class).toArray(Class[]::new);
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		return ArrayUtils.toArray("/");
+		return Stream.of("/").toArray(String[]::new);
 	}
 
 	@Override
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter(Charset.forName("UTF-8").name(), true);
-		return ArrayUtils.toArray(encodingFilter);
+		return Stream.of(encodingFilter).toArray(Filter[]::new);
 	}
 }
