@@ -4,6 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2018年10月24日,下午6:34:12
+ * @description Dubbo属性配置类
+ */
 @Configuration
 @PropertySource("classpath:dubbo.properties")
 public class DubboProperties {
