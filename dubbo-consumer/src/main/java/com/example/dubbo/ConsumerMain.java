@@ -15,7 +15,7 @@ public class ConsumerMain {
 			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
 			log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
 			// Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
-			context.getBean(BarAction.class).exec("5i5j");
+			context.getBean(BarAction.class).exec();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
