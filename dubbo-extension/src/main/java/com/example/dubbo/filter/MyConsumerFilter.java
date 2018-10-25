@@ -1,6 +1,6 @@
 package com.example.dubbo.filter;
 
-import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +19,20 @@ public class MyConsumerFilter implements Filter {
 
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-		log.info("[{}]方法调用前[{}]", Constants.CONSUMER, LocalDateTime.now());
+		log.info("[{}]方法调用前", Constants.CONSUMER);
+		long start = System.currentTimeMillis();
+		log.info("接口类名={}", invoker.getInterface());
+		log.info("方法名={}", invocation.getMethodName());
+		log.info("参数类型列表={}", Arrays.toString(invocation.getParameterTypes()));
+		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
 		// 在服务消费方端设置隐式参数
-		RpcContext.getContext().setAttachment("UUID", UUID.randomUUID().toString());
+		String uuid = UUID.randomUUID().toString();
+		log.info("附加参数UUID={}", uuid);
+		RpcContext.getContext().setAttachment("UUID", uuid);
 		Result result = invoker.invoke(invocation);
-		log.info("[{}]方法调用后[{}]", Constants.CONSUMER, LocalDateTime.now());
+		long elapsed = System.currentTimeMillis() - start;
+		log.info("调用时长={}ms", elapsed);
+		log.info("[{}]方法调用后", Constants.CONSUMER);
 		return result;
 	}
 }

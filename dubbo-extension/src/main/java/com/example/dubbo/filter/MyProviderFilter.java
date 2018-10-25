@@ -1,6 +1,6 @@
 package com.example.dubbo.filter;
 
-import java.time.LocalDateTime;
+import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.dubbo.common.Constants;
@@ -18,11 +18,18 @@ public class MyProviderFilter implements Filter {
 
 	@Override
 	public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-		log.info("[{}]方法调用前[{}]", Constants.PROVIDER, LocalDateTime.now());
+		log.info("[{}]方法调用前", Constants.PROVIDER);
+		long start = System.currentTimeMillis();
+		log.info("接口类名={}", invoker.getInterface());
+		log.info("方法名={}", invocation.getMethodName());
+		log.info("参数类型列表={}", Arrays.toString(invocation.getParameterTypes()));
+		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
 		// 在服务提供方端获取隐式参数
-		log.info("UUID={}", RpcContext.getContext().getAttachment("UUID"));
+		log.info("附加参数UUID={}", RpcContext.getContext().getAttachment("UUID"));
 		Result result = invoker.invoke(invocation);
-		log.info("[{}]方法调用后[{}]", Constants.PROVIDER, LocalDateTime.now());
+		long elapsed = System.currentTimeMillis() - start;
+		log.info("调用时长={}ms", elapsed);
+		log.info("[{}]方法调用后", Constants.PROVIDER);
 		return result;
 	}
 }
