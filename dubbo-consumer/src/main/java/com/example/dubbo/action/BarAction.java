@@ -15,7 +15,7 @@ public class BarAction {
 	private DemoService service;
 
 	public void exec() {
-		// 设置隐式传参
+		// 在服务消费方端设置隐式参数
 		RpcContext.getContext().setAttachment("UUID", UUID.randomUUID().toString());
 		log.info("sayHello={}", this.service.sayHello("5i5j"));
 	}

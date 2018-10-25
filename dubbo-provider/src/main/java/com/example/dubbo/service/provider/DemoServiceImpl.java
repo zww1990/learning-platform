@@ -13,7 +13,7 @@ public class DemoServiceImpl implements DemoService {
 	@Override
 	public String sayHello(String name) {
 		log.info("name={}", name);
-		// 获取隐式参数
+		// 在服务提供方端获取隐式参数
 		log.info("UUID={}", RpcContext.getContext().getAttachment("UUID"));
 		return "Hello " + name;
 	}
