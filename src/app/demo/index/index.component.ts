@@ -1,11 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-index',
@@ -13,23 +6,15 @@ import {
   styleUrls: ['./index.component.less']
 })
 export class IndexComponent implements OnInit, AfterViewInit {
-  @ViewChild('globalArea')
-  globalArea: ElementRef;
+  constructor() {
+    console.log('%c constructor', 'color:red');
+  }
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('%c ngOnInit', 'color:red');
+  }
 
   ngAfterViewInit() {
-    // const controller = new window['GIO'].Controller(
-    //   this.globalArea.nativeElement
-    // );
-    // this.http
-    //   .get('/assets/data/sampleData.json')
-    //   .toPromise()
-    //   .then(resp => {
-    //     controller.addData(resp);
-    //     controller.init();
-    //   });
+    console.log('%c ngAfterViewInit', 'color:red');
   }
 }
