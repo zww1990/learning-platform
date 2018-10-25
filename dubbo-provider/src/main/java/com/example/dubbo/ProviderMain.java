@@ -1,21 +1,22 @@
 package com.example.dubbo;
 
-import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.example.dubbo.config.RootConfig;
 
 public class ProviderMain {
+	private static final Logger log = LoggerFactory.getLogger(ProviderMain.class);
+
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		try {
 			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(RootConfig.class);
+			context.registerShutdownHook();
 			context.start();
-//			RabbitTemplate template = context.getBean(RabbitTemplate.class);
-//			String exchange = "ex.demo";
-//			template.convertAndSend(exchange, "rk.demo1", Arrays.asList("这是来自rk.demo1的消息"));
-//			template.convertAndSend(exchange, "rk.demo2", Arrays.asList("这是来自rk.demo2的消息"));
-//			System.in.read();
-			System.err.println(context.getBeanDefinitionCount());
-			Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+			log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
+			// Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+			System.in.read();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
