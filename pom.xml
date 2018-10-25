@@ -30,6 +30,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.example</groupId>
+				<artifactId>dubbo-extension</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
@@ -134,5 +139,6 @@
 	<modules>
 		<module>dubbo-provider</module>
 		<module>dubbo-consumer</module>
+		<module>dubbo-extension</module>
 	</modules>
 </project>

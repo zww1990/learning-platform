@@ -1,1 +1,2 @@
+myproviderfilter=com.example.dubbo.filter.MyProviderFilter
 myconsumerfilter=com.example.dubbo.filter.MyConsumerFilter
