@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd';
+import * as screenfull from 'screenfull';
 import { MenuItem } from '../shared/menu/menu-item.model';
 import { SimpleReuseStrategy } from '../shared/simple-reuse-strategy';
 import { User } from '../shared/user/user.model';
@@ -13,6 +14,7 @@ import { UserService } from '../shared/user/user.service';
 })
 export class LayoutComponent implements OnInit {
   isCollapsed = false;
+  isFullscreen = false;
   selectedIndex = 0;
   user: User = null;
   menus: MenuItem[] = [];
@@ -149,5 +151,16 @@ export class LayoutComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+  }
+
+  /**
+   * @description 全屏切换
+   */
+  toggleFullscreen() {
+    if (screenfull.enabled) {
+      screenfull.toggle();
+      this.isFullscreen = !this.isFullscreen;
+      this.isCollapsed = !this.isCollapsed;
+    }
   }
 }
