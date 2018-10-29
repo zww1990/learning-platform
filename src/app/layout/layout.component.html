@@ -30,15 +30,14 @@
         <div nz-col [nzSpan]="2">
           <i nz-icon class="trigger" [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
         </div>
-        <div nz-col [nzSpan]="18"></div>
-        <div nz-col [nzSpan]="4" style="text-align: center">
-          <a nz-tooltip nzTitle="当前登录用户：{{user?.userName}}" nzPlacement="bottom">
+        <div nz-col [nzSpan]="22" style="text-align: right">
+          <a nz-tooltip nzTitle="当前登录用户：{{user?.userName}}">
             <nz-avatar [nzText]="user?.userName" style="background-color:#87d068;"></nz-avatar>
           </a>
-          <a (click)="logout()" nz-tooltip nzTitle="退出登录" nzPlacement="bottom">
+          <a (click)="logout()" nz-tooltip nzTitle="退出登录">
             <nz-avatar nzIcon="anticon anticon-logout" style="background-color:#f56a00;"></nz-avatar>
           </a>
-          <a (click)="toggleFullscreen()" nz-tooltip nzTitle="全屏切换" nzPlacement="bottom">
+          <a (click)="toggleFullscreen()" nz-tooltip nzTitle="全屏切换">
             <nz-avatar nzIcon="anticon anticon-fullscreen" style="background-color:#7265e6;" *ngIf="!isFullscreen"></nz-avatar>
             <nz-avatar nzIcon="anticon anticon-fullscreen-exit" style="background-color:#ffbf00;" *ngIf="isFullscreen"></nz-avatar>
           </a>

@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { NzMessageService } from 'ng-zorro-antd';
 import { utils } from 'xlsx';
-import { LayoutComponent } from '../../layout/layout.component';
 import { EditCache, ExcelConfig } from './excel-config.model';
 import { Workbook } from './workbook.model';
 
@@ -33,9 +32,7 @@ export class Page1Component implements OnInit {
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
-    private http: HttpClient,
-    private element: ElementRef,
-    private layout: LayoutComponent
+    private http: HttpClient
   ) {}
 
   /**
@@ -208,15 +205,7 @@ export class Page1Component implements OnInit {
           };
           this.checkboxCache[rowId] = false;
         });
-        // setTimeout(() => {
-        //   const headerStyle = this.element.nativeElement.querySelector(
-        //     'div.ant-table-header'
-        //   ).style;
-        //   headerStyle.marginBottom = '0px';
-        //   headerStyle.paddingBottom = '0px';
-        // }, 1000);
         this.isShowUpload = false;
-        this.layout.isCollapsed = true;
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);

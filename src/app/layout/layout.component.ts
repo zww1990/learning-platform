@@ -13,7 +13,7 @@ import { UserService } from '../shared/user/user.service';
   styleUrls: ['./layout.component.less']
 })
 export class LayoutComponent implements OnInit {
-  isCollapsed = false;
+  isCollapsed = true;
   isFullscreen = false;
   selectedIndex = 0;
   user: User = null;
@@ -160,7 +160,6 @@ export class LayoutComponent implements OnInit {
     if (screenfull.enabled) {
       screenfull.toggle();
       this.isFullscreen = !this.isFullscreen;
-      this.isCollapsed = !this.isCollapsed;
     }
   }
 }
