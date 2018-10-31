@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {
   Form,
   Select,
@@ -17,7 +17,7 @@ import {
 import { FormComponentProps } from 'antd/lib/form';
 
 class Page1 extends React.Component<FormComponentProps> {
-  public handleSubmit = (e: any) => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
@@ -25,7 +25,7 @@ class Page1 extends React.Component<FormComponentProps> {
       }
     });
   };
-  public normFile = (e: any) => {
+  normFile = (e: any) => {
     console.log('上传事件:', e);
     if (Array.isArray(e)) {
       return e;
@@ -33,7 +33,7 @@ class Page1 extends React.Component<FormComponentProps> {
     return e && e.fileList;
   };
 
-  public render() {
+  render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: { span: 6 },

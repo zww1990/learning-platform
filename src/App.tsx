@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Layout, Menu, Icon, Switch } from 'antd';
 import './App.less';
@@ -7,15 +7,14 @@ import Home from './components/Home';
 import Page2 from './components/Page2';
 
 class App extends React.Component {
-  public rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
-  public state = {
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
+  state = {
     collapsed: false,
     openKeys: new Array<string>(),
     theme: true
   };
-
-  public toggle = () => this.setState({ collapsed: !this.state.collapsed });
-  public onOpenChange = (openKeys: any) => {
+  toggle = () => this.setState({ collapsed: !this.state.collapsed });
+  onOpenChange = (openKeys: any) => {
     const latestOpenKey = openKeys.find(
       (key: any) => this.state.openKeys.indexOf(key) === -1
     );
@@ -27,10 +26,9 @@ class App extends React.Component {
       });
     }
   };
-  public currentTheme = () => (this.state.theme ? 'dark' : 'light');
-  public changeTheme = (value: boolean) => this.setState({ theme: value });
-
-  public render() {
+  currentTheme = () => (this.state.theme ? 'dark' : 'light');
+  changeTheme = (value: boolean) => this.setState({ theme: value });
+  render() {
     return (
       <Router>
         <Layout>
