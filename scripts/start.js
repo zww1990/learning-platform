@@ -97,6 +97,7 @@ checkBrowsers(paths.appPath, isInteractive)
       if (isInteractive) {
         clearConsole();
       }
+      // 关闭自动打开浏览器。
       // console.log(chalk.cyan('Starting the development server...\n'));
       // openBrowser(urls.localUrlForBrowser);
     });
