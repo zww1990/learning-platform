@@ -25,7 +25,7 @@ public class MyProviderFilter implements Filter {
 		log.info("参数类型列表={}", Arrays.toString(invocation.getParameterTypes()));
 		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
 		// 在服务提供方端获取隐式参数
-		log.info("附加参数UUID={}", RpcContext.getContext().getAttachment("UUID"));
+		log.info("RequestID={}", RpcContext.getContext().getAttachment("UUID"));
 		Result result = invoker.invoke(invocation);
 		long elapsed = System.currentTimeMillis() - start;
 		log.info("调用时长={}ms", elapsed);

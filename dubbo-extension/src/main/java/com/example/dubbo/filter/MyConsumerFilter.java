@@ -27,7 +27,7 @@ public class MyConsumerFilter implements Filter {
 		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
 		// 在服务消费方端设置隐式参数
 		String uuid = UUID.randomUUID().toString();
-		log.info("附加参数UUID={}", uuid);
+		log.info("RequestID={}", uuid);
 		RpcContext.getContext().setAttachment("UUID", uuid);
 		Result result = invoker.invoke(invocation);
 		long elapsed = System.currentTimeMillis() - start;
