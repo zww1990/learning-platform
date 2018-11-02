@@ -3,7 +3,6 @@ import zh from '@angular/common/locales/zh';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,14 +27,7 @@ registerLocaleData(zh); // 注册本地化数据
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  /**
-   * @description 审查路由器配置，用于debug
-   * @param router 路由器
-   */
-  constructor(router: Router) {
+  constructor() {
     console.log(`当前运行环境[${environment.mode}]`);
-    // if (!environment.production) {
-    //   console.log(JSON.stringify(router.config, null, 2));
-    // }
   }
 }

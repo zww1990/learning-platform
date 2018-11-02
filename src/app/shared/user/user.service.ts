@@ -20,10 +20,10 @@ export class UserService {
    */
   querySessionUser(): User {
     const item = sessionStorage.getItem(SessionKey.CAS_USER);
-    if (!item) {
-      return null;
+    if (item) {
+      return JSON.parse(item);
     }
-    return <User>JSON.parse(item);
+    return null;
   }
 
   /**
