@@ -11,6 +11,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from './user/user.service';
+import { MenuService } from './menu/menu.service';
 
 /**
  * @author zww
@@ -37,8 +38,13 @@ export class AuthGuard
    * @description 构造路由守卫服务
    * @param router 路由器
    * @param userService 用户服务
+   * @param menuService 菜单服务
    */
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private menuService: MenuService
+  ) {}
 
   /**
    * @description 检查路由的访问权限
@@ -46,7 +52,7 @@ export class AuthGuard
    * @param state 即将到达的状态
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.checkLogin();
+    return this.checkLogin(state);
   }
 
   /**
@@ -91,13 +97,18 @@ export class AuthGuard
   }
 
   /**
-   * @description 验证用户是否登录
+   * @description 验证用户是否登录，并且验证用户是否有权限访问菜单。
+   * @param state 即将到达的状态
    */
-  checkLogin() {
+  checkLogin(state?: RouterStateSnapshot) {
     const user = this.userService.querySessionUser();
     if (!user) {
       this.router.navigate(['/login']);
       return false;
+    }
+    if (state) {
+      const included = this.menuService.queryUserMenuUrls().includes(state.url);
+      return included;
     }
     return true;
   }

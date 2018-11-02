@@ -23,8 +23,7 @@ export class UserService {
     if (!item) {
       return null;
     }
-    const user: User = JSON.parse(item);
-    return user;
+    return <User>JSON.parse(item);
   }
 
   /**

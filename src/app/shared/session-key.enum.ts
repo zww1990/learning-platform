@@ -10,5 +10,9 @@ export enum SessionKey {
   /**
    * @description 用户信息
    */
-  CAS_USER = 'CAS-USER'
+  CAS_USER = 'CAS-USER',
+  /**
+   * @description 用户菜单链接
+   */
+  USER_MENU_URL = 'USER-MENU-URL'
 }
