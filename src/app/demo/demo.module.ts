@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../shared/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
 import { IndexComponent } from './index/index.component';
 import { Page1Component } from './page1/page1.component';
@@ -9,7 +8,7 @@ import { Page3Component } from './page3/page3.component';
 import { Page4Component } from './page4/page4.component';
 
 const routes: Routes = [
-  { path: 'index', component: IndexComponent, canDeactivate: [AuthGuard] },
+  { path: 'index', component: IndexComponent },
   { path: 'page1', component: Page1Component },
   { path: 'page2', component: Page2Component },
   { path: 'page3', component: Page3Component },

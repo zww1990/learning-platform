@@ -3,37 +3,20 @@ import {
   ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
-  CanDeactivate,
   CanLoad,
   Route,
   Router,
   RouterStateSnapshot
 } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { UserService } from './user/user.service';
 import { MenuService } from './menu/menu.service';
-
-/**
- * @author zww
- */
-export interface CanComponentDeactivate {
-  /**
-   * @description 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
-   */
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
-}
 
 /**
  * @description 路由守卫服务
  * @author zww
  */
 @Injectable()
-export class AuthGuard
-  implements
-    CanActivate,
-    CanActivateChild,
-    CanLoad,
-    CanDeactivate<CanComponentDeactivate> {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   /**
    * @description 构造路由守卫服务
    * @param router 路由器
@@ -73,41 +56,18 @@ export class AuthGuard
   }
 
   /**
-   * @description 询问是否丢弃未保存的更改，来处理从当前路由离开的情况
-   * @param component 当前组件
-   * @param currentRoute 当前被激活的路由
-   * @param currentState 当前到达的状态
-   * @param nextState 下一个到达的状态
-   */
-  canDeactivate(
-    component: CanComponentDeactivate,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ) {
-    if (nextState.url === '/login') {
-      const user = this.userService.querySessionUser();
-      if (!!user) {
-        this.router.navigate(['']);
-        return false;
-      }
-    }
-    return true;
-    // return component.canDeactivate ? component.canDeactivate() : true;
-  }
-
-  /**
    * @description 验证用户是否登录，并且验证用户是否有权限访问菜单。
    * @param state 即将到达的状态
    */
-  checkLogin(state?: RouterStateSnapshot) {
-    const user = this.userService.querySessionUser();
-    if (!user) {
+  async checkLogin(state?: RouterStateSnapshot) {
+    if (!this.userService.querySessionUser()) {
       this.router.navigate(['/login']);
       return false;
     }
     if (state) {
-      const included = this.menuService.queryUserMenuUrls().includes(state.url);
+      const included = (await this.menuService.queryUserMenuUrls()).includes(
+        state.url
+      );
       return included;
     }
     return true;

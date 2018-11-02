@@ -108,10 +108,10 @@ export class CasService {
     });
     json = json['cas:serviceResponse'];
     const auth = json['cas:authenticationSuccess'];
-    if (!auth) {
-      return new CasResult(false, json['cas:authenticationFailure']['_text']);
+    if (auth) {
+      return new CasResult(true, auth['cas:user']['_text']);
     }
-    return new CasResult(true, auth['cas:user']['_text']);
+    return new CasResult(false, json['cas:authenticationFailure']['_text']);
   }
 
   /**
