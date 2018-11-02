@@ -38,9 +38,6 @@ export class CasService {
       .set('password', form.password);
     return this.http
       .post('/cas/v1/tickets', body, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
         responseType: 'text',
         observe: 'response'
       })
@@ -64,12 +61,7 @@ export class CasService {
   casCreateST(ticket: string): Promise<any> {
     const body = new HttpParams().set('service', location.origin);
     return this.http
-      .post(`/cas/v1/tickets/${ticket}`, body, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        responseType: 'text'
-      })
+      .post(`/cas/v1/tickets/${ticket}`, body, { responseType: 'text' })
       .toPromise();
   }
 
@@ -83,12 +75,7 @@ export class CasService {
       .set('service', location.origin)
       .set('locale', 'zh_CN');
     return this.http
-      .post('/cas/serviceValidate', body, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        responseType: 'text'
-      })
+      .post('/cas/serviceValidate', body, { responseType: 'text' })
       .toPromise();
   }
 
@@ -120,12 +107,7 @@ export class CasService {
    */
   casDeleteTGT(ticket: string): Promise<any> {
     return this.http
-      .delete(`/cas/v1/tickets/${ticket}`, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        responseType: 'text'
-      })
+      .delete(`/cas/v1/tickets/${ticket}`, { responseType: 'text' })
       .toPromise();
   }
 }
