@@ -10,16 +10,18 @@ import org.springframework.context.annotation.PropertySource;
  */
 @PropertySource("classpath:dubbo.properties")
 public class DubboProperties {
-	@Value("${dubbo.annotation.package}")
+	@Value("${dubbo.annotation-package}")
 	private String annotationPackage;
-	@Value("${dubbo.app.name}")
+	@Value("${dubbo.app-name}")
 	private String appName;
-	@Value("${dubbo.registry.address}")
+	@Value("${dubbo.registry-address}")
 	private String registryAddress;
-	@Value("${dubbo.protocol.name}")
+	@Value("${dubbo.protocol-name}")
 	private String protocolName;
-	@Value("${dubbo.protocol.port}")
+	@Value("${dubbo.protocol-port}")
 	private int protocolPort;
+	@Value("${dubbo.provider-filter}")
+	private String providerFilter;
 
 	public String getAnnotationPackage() {
 		return annotationPackage;
@@ -61,4 +63,11 @@ public class DubboProperties {
 		this.protocolPort = protocolPort;
 	}
 
+	public String getProviderFilter() {
+		return providerFilter;
+	}
+
+	public void setProviderFilter(String providerFilter) {
+		this.providerFilter = providerFilter;
+	}
 }

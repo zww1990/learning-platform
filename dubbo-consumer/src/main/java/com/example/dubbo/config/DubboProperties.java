@@ -10,12 +10,14 @@ import org.springframework.context.annotation.PropertySource;
  */
 @PropertySource("classpath:dubbo.properties")
 public class DubboProperties {
-	@Value("${dubbo.annotation.package}")
+	@Value("${dubbo.annotation-package}")
 	private String annotationPackage;
-	@Value("${dubbo.app.name}")
+	@Value("${dubbo.app-name}")
 	private String appName;
-	@Value("${dubbo.registry.address}")
+	@Value("${dubbo.registry-address}")
 	private String registryAddress;
+	@Value("${dubbo.consumer-filter}")
+	private String consumerFilter;
 
 	public String getAnnotationPackage() {
 		return annotationPackage;
@@ -41,4 +43,11 @@ public class DubboProperties {
 		this.registryAddress = registryAddress;
 	}
 
+	public String getConsumerFilter() {
+		return consumerFilter;
+	}
+
+	public void setConsumerFilter(String consumerFilter) {
+		this.consumerFilter = consumerFilter;
+	}
 }
