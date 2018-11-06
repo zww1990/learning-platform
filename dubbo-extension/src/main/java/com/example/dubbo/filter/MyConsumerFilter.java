@@ -23,10 +23,10 @@ public class MyConsumerFilter implements Filter {
 		log.info("方法名={}", invocation.getMethodName());
 		log.info("参数类型列表={}", Arrays.toString(invocation.getParameterTypes()));
 		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
-		// 在服务消费方端设置隐式参数
 		String uuid = UUID.randomUUID().toString();
 		log.info("RequestID={}", uuid);
-		RpcContext.getContext().setAttachment("UUID", uuid);
+		RpcContext.getContext()// 远程方法调用上下文
+				.setAttachment("UUID", uuid);// 在服务消费方端设置隐式参数
 		Result result = invoker.invoke(invocation);
 		long elapsed = System.currentTimeMillis() - start;
 		log.info("调用时长={}ms", elapsed);

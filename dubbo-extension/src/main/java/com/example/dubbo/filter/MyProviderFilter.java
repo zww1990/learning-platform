@@ -22,8 +22,9 @@ public class MyProviderFilter implements Filter {
 		log.info("方法名={}", invocation.getMethodName());
 		log.info("参数类型列表={}", Arrays.toString(invocation.getParameterTypes()));
 		log.info("参数值列表={}", Arrays.toString(invocation.getArguments()));
-		// 在服务提供方端获取隐式参数
-		log.info("RequestID={}", RpcContext.getContext().getAttachment("UUID"));
+		String uuid = RpcContext.getContext()// 远程方法调用上下文
+				.getAttachment("UUID");// 在服务提供方端获取隐式参数
+		log.info("RequestID={}", uuid);
 		Result result = invoker.invoke(invocation);
 		long elapsed = System.currentTimeMillis() - start;
 		log.info("调用时长={}ms", elapsed);
