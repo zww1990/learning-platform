@@ -9,6 +9,7 @@ import { MenuService } from './shared/menu/menu.service';
 import { SharedModule } from './shared/shared.module';
 import { SimpleReuseStrategy } from './shared/simple-reuse-strategy';
 import { UserService } from './shared/user/user.service';
+import { InputAutoFocusDirective } from './shared/input-auto-focus.directive';
 
 const routes: Routes = [
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
     SharedModule
   ],
   exports: [RouterModule],
-  declarations: [LayoutComponent, LoginComponent],
+  declarations: [LayoutComponent, LoginComponent, InputAutoFocusDirective],
   providers: [
     AuthGuard,
     UserService,
