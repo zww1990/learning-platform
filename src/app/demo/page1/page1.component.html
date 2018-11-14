@@ -21,7 +21,7 @@
   </form>
 </ng-template>
 <ng-template [ngIf]="!this.isShowForm">
-  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload" [ngStyle]="{'display':this.isShowUpload?'block':'none'}">
+  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload" *ngIf="this.isShowUpload">
     <p class="ant-upload-drag-icon">
       <i nz-icon type="inbox"></i>
     </p>
