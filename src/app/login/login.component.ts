@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -17,10 +11,8 @@ import { User } from '../shared/user/user.model';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.less']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  @ViewChild('usernameInput')
-  usernameInput: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -34,10 +26,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
     });
-  }
-
-  ngAfterViewInit() {
-    this.usernameInput.nativeElement.focus();
   }
 
   /**
