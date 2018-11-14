@@ -41,7 +41,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       // 使用hash风格的url，已解决整合后端mvc应用时，刷新浏览器导致404问题
-      useHash: true
+      useHash: false
     }),
     SharedModule
   ],
