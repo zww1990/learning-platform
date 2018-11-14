@@ -68,6 +68,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       const included = (await this.menuService.queryUserMenuUrls()).includes(
         state.url
       );
+      if (!included) {
+        this.router.navigate(['']);
+      }
       return included;
     }
     return true;
