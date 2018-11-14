@@ -6,6 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { utils } from 'xlsx';
 import { EditCache, ExcelConfig } from './excel-config.model';
 import { Workbook } from './workbook.model';
+import { LayoutComponent } from '../../layout/layout.component';
 
 @Component({
   selector: 'app-page1',
@@ -32,7 +33,8 @@ export class Page1Component implements OnInit {
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private layout: LayoutComponent
   ) {}
 
   /**
@@ -59,7 +61,8 @@ export class Page1Component implements OnInit {
    * @description 下一步
    */
   submitForm() {
-    this.isShowForm = !this.isShowForm;
+    this.isShowForm = false;
+    this.isShowUpload = true;
     Object.assign(this.config, this.validateForm.value);
   }
 
@@ -67,7 +70,7 @@ export class Page1Component implements OnInit {
    * @description 上一步
    */
   goBack() {
-    this.isShowForm = !this.isShowForm;
+    this.isShowForm = true;
     this.tableData = [];
   }
 
@@ -206,6 +209,7 @@ export class Page1Component implements OnInit {
           this.checkboxCache[rowId] = false;
         });
         this.isShowUpload = false;
+        this.layout.isCollapsed = true;
       }
     };
     Workbook.fileReadAs(this.rABS, reader, file);

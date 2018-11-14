@@ -13,7 +13,7 @@ import { UserService } from '../shared/user/user.service';
   styleUrls: ['./layout.component.less']
 })
 export class LayoutComponent implements OnInit {
-  isCollapsed = true;
+  isCollapsed = false;
   isFullscreen = false;
   selectedIndex = 0;
   user: User = null;
