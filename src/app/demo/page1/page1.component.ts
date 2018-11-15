@@ -224,8 +224,9 @@ export class Page1Component implements OnInit {
       return;
     }
     const wb = new Workbook();
-    this.tableData.forEach(v => v.splice(v.length - 1, 1));
-    const ws = utils.json_to_sheet([this.tableHeader, ...this.tableData], {
+    const tempData = JSON.parse(JSON.stringify(this.tableData));
+    tempData.forEach(v => v.splice(v.length - 1, 1));
+    const ws = utils.json_to_sheet([this.tableHeader, ...tempData], {
       skipHeader: true
     });
     wb.SheetNames.push(this.config.mySheetName);
