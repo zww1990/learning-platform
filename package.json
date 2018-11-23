@@ -30,7 +30,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.0",
-    "luxon": "^1.6.2",
+    "luxon": "^1.7.1",
     "ng-zorro-antd": "^1.8.0",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
