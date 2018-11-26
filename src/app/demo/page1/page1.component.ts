@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { NzMessageService } from 'ng-zorro-antd';
-import { utils } from 'xlsx';
+import { utils, WorkBook } from 'xlsx';
 import { EditCache, ExcelConfig } from './excel-config.model';
-import { Workbook } from './workbook.model';
-import { LayoutComponent } from '../../layout/layout.component';
+import { WorkBookModel } from './workbook.model';
 
 @Component({
   selector: 'app-page1',
@@ -19,8 +18,6 @@ export class Page1Component implements OnInit {
   tableHeader = [];
   tableData: any[][] = [];
   validateForm: FormGroup;
-  isShowForm = true;
-  isShowUpload = true;
   config: ExcelConfig;
   editMoneyCache: { [key: number]: EditCache } = {};
   editStartTimeCache: { [key: number]: EditCache } = {};
@@ -29,12 +26,13 @@ export class Page1Component implements OnInit {
   allChecked = false;
   indeterminate = false;
   disabledButton = true;
+  workbook: WorkBook;
+  visible = false;
 
   constructor(
     private msg: NzMessageService,
     private fb: FormBuilder,
-    private http: HttpClient,
-    private layout: LayoutComponent
+    private http: HttpClient
   ) {}
 
   /**
@@ -58,20 +56,15 @@ export class Page1Component implements OnInit {
   }
 
   /**
-   * @description 下一步
+   * @description 保存
    */
   submitForm() {
-    this.isShowForm = false;
-    this.isShowUpload = true;
     Object.assign(this.config, this.validateForm.value);
-  }
-
-  /**
-   * @description 上一步
-   */
-  goBack() {
-    this.isShowForm = true;
-    this.tableData = [];
+    if (this.workbook) {
+      this.readWorkBook();
+    } else {
+      this.msg.error('对不起，您没有上传文件！');
+    }
   }
 
   /**
@@ -91,128 +84,125 @@ export class Page1Component implements OnInit {
       return false;
     }
     if (isAccept && isLimit) {
-      this.readFile(file);
+      this.config.fileName = file.name;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.workbook = WorkBookModel.readWorkbook(reader, this.rABS);
+      };
+      WorkBookModel.fileReadAs(this.rABS, reader, file);
     }
     return false;
   };
 
   /**
    * @description 读取Excel文件
-   * @param file Excel文件
    */
-  readFile(file: File) {
-    this.config.fileName = file.name;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const wb = Workbook.readWorkbook(reader, this.rABS);
-      const empSheetName = wb.SheetNames[this.config.empPageIndex]; // 员工加班记录明细页索引
-      const empSheet = wb.Sheets[empSheetName];
-      this.tableHeader = this.config.tableHeader; // 表头行
-      const approvalIds = utils
-        .sheet_to_json(empSheet, { raw: true, blankrows: false, header: 1 })
-        .filter(v => `${v[this.config.idIndex]}` === this.config.myID)
-        .map(v => `${v[this.config.approvalIndex]}`); // 审批单号数组
-      utils
-        .sheet_to_json(empSheet, { header: 1, blankrows: false, raw: false })
-        .filter(v => v[this.config.idIndex] === this.config.myID)
-        .map(v => {
-          this.config.myName = v[this.config.nameIndex];
-          v[this.config.overtimeIndex] = this.formatOverTime(
-            v[this.config.overtimeIndex]
-          );
-          return v;
-        })
-        .forEach((v, i) => {
-          if (v[this.config.typeIndex] === this.config.type3) {
-            if (this.isAfterDinnerTime(v[this.config.deadlineIndex])) {
-              this.tableData.push([
-                v[this.config.deptIndex],
-                approvalIds[i],
-                '',
-                v[this.config.nameIndex] + '-餐费',
-                ...this.config.mealFee1,
-                this.config.mealFee,
-                ...this.config.mealFee2,
-                v[this.config.overtimeIndex],
-                v[this.config.deadlineIndex],
-                ...this.config.mealFee3
-              ]);
-            }
-          } else if (
-            [this.config.type1, this.config.type2].includes(
-              v[this.config.typeIndex]
-            )
-          ) {
-            const duration = +v[this.config.durationIndex];
-            let mealFee = 0;
-            if (
-              this.config.duration4 <= duration &&
-              duration < this.config.duration8
-            ) {
-              mealFee = this.config.mealFee;
-            } else if (duration >= this.config.duration8) {
-              mealFee = this.config.mealFee * 2;
-            }
-            if (mealFee > 0) {
-              this.tableData.push([
-                v[this.config.deptIndex],
-                approvalIds[i],
-                '',
-                v[this.config.nameIndex] + '-餐费',
-                ...this.config.mealFee1,
-                mealFee,
-                ...this.config.mealFee2,
-                v[this.config.overtimeIndex],
-                v[this.config.deadlineIndex],
-                ...this.config.mealFee3
-              ]);
-            }
-          }
-          if (this.isAfterTaxiTime(v[this.config.deadlineIndex])) {
+  readWorkBook() {
+    const empSheetName = this.workbook.SheetNames[this.config.empPageIndex]; // 员工加班记录明细页索引
+    const empSheet = this.workbook.Sheets[empSheetName];
+    this.tableHeader = this.config.tableHeader; // 表头行
+    this.tableData = [];
+    const approvalIds = utils
+      .sheet_to_json(empSheet, { raw: true, blankrows: false, header: 1 })
+      .filter(v => `${v[this.config.idIndex]}` === this.config.myID)
+      .map(v => `${v[this.config.approvalIndex]}`); // 审批单号数组
+    utils
+      .sheet_to_json(empSheet, { header: 1, blankrows: false, raw: false })
+      .filter(v => v[this.config.idIndex] === this.config.myID)
+      .map(v => {
+        this.config.myName = v[this.config.nameIndex];
+        v[this.config.overtimeIndex] = this.formatOverTime(
+          v[this.config.overtimeIndex]
+        );
+        return v;
+      })
+      .forEach((v, i) => {
+        if (v[this.config.typeIndex] === this.config.type3) {
+          if (this.isAfterDinnerTime(v[this.config.deadlineIndex])) {
             this.tableData.push([
               v[this.config.deptIndex],
               approvalIds[i],
               '',
-              v[this.config.nameIndex] + '-交通',
-              ...this.config.trafficFee1,
+              v[this.config.nameIndex] + '-餐费',
+              ...this.config.mealFee1,
+              this.config.mealFee,
+              ...this.config.mealFee2,
               v[this.config.overtimeIndex],
               v[this.config.deadlineIndex],
-              ...this.config.trafficFee2,
-              this.config.myEndPoint,
-              ...this.config.trafficFee3
+              ...this.config.mealFee3
             ]);
           }
-        });
-      if (!this.tableData.length) {
-        this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
-      } else {
-        this.tableData.forEach((v, i) => {
-          const rowId = i + 1;
-          this.tableData[i].push(rowId);
-          const isTraffic =
-            v[this.config.moneyTypeIndex] === this.config.trafficFeeType;
-          this.editMoneyCache[rowId] = {
-            edit: false,
-            value: v[this.config.moneyIndex],
-            isTraffic: isTraffic
-          };
-          this.editStartTimeCache[rowId] = {
-            edit: false,
-            value: this.defaultOpenValue(),
-            isTraffic: isTraffic
-          };
-          this.editEndTimeCache[rowId] = {
-            edit: false,
-            value: this.defaultOpenValue(),
-            isTraffic: isTraffic
-          };
-          this.checkboxCache[rowId] = false;
-        });
-        this.isShowUpload = false;
-        this.layout.isCollapsed = true;
-      }
-    };
-    Workbook.fileReadAs(this.rABS, reader, file);
+        } else if (
+          [this.config.type1, this.config.type2].includes(
+            v[this.config.typeIndex]
+          )
+        ) {
+          const duration = +v[this.config.durationIndex];
+          let mealFee = 0;
+          if (
+            this.config.duration4 <= duration &&
+            duration < this.config.duration8
+          ) {
+            mealFee = this.config.mealFee;
+          } else if (duration >= this.config.duration8) {
+            mealFee = this.config.mealFee * 2;
+          }
+          if (mealFee > 0) {
+            this.tableData.push([
+              v[this.config.deptIndex],
+              approvalIds[i],
+              '',
+              v[this.config.nameIndex] + '-餐费',
+              ...this.config.mealFee1,
+              mealFee,
+              ...this.config.mealFee2,
+              v[this.config.overtimeIndex],
+              v[this.config.deadlineIndex],
+              ...this.config.mealFee3
+            ]);
+          }
+        }
+        if (this.isAfterTaxiTime(v[this.config.deadlineIndex])) {
+          this.tableData.push([
+            v[this.config.deptIndex],
+            approvalIds[i],
+            '',
+            v[this.config.nameIndex] + '-交通',
+            ...this.config.trafficFee1,
+            v[this.config.overtimeIndex],
+            v[this.config.deadlineIndex],
+            ...this.config.trafficFee2,
+            this.config.myEndPoint,
+            ...this.config.trafficFee3
+          ]);
+        }
+      });
+    if (!this.tableData.length) {
+      this.msg.error(`没有找到[${this.config.myID}]加班记录。`);
+    } else {
+      this.tableData.forEach((v, i) => {
+        const rowId = i + 1;
+        this.tableData[i].push(rowId);
+        const isTraffic =
+          v[this.config.moneyTypeIndex] === this.config.trafficFeeType;
+        this.editMoneyCache[rowId] = {
+          edit: false,
+          value: v[this.config.moneyIndex],
+          isTraffic: isTraffic
+        };
+        this.editStartTimeCache[rowId] = {
+          edit: false,
+          value: this.defaultOpenValue(),
+          isTraffic: isTraffic
+        };
+        this.editEndTimeCache[rowId] = {
+          edit: false,
+          value: this.defaultOpenValue(),
+          isTraffic: isTraffic
+        };
+        this.checkboxCache[rowId] = false;
+      });
+    }
   }
 
   /**
@@ -223,7 +213,7 @@ export class Page1Component implements OnInit {
       this.msg.error('当前表格没有可用数据');
       return;
     }
-    const wb = new Workbook();
+    const wb = new WorkBookModel();
     const tempData = JSON.parse(JSON.stringify(this.tableData));
     tempData.forEach(v => v.splice(v.length - 1, 1));
     const ws = utils.json_to_sheet([this.tableHeader, ...tempData], {

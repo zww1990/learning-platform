@@ -5,7 +5,7 @@ import { read, utils, WorkBook, WorkSheet, write } from 'xlsx';
  * @description 工作表数据模型
  * @author zww
  */
-export class Workbook implements WorkBook {
+export class WorkBookModel implements WorkBook {
   /**
    * @description 工作表
    */
