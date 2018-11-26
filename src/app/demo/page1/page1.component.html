@@ -1,4 +1,11 @@
-<ng-template [ngIf]="this.isShowForm">
+<nz-drawer [nzClosable]="false" [nzVisible]="visible" nzPlacement="right" nzTitle="基本信息" [nzWidth]="720" (nzOnClose)="this.visible = false">
+  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload">
+    <p class="ant-upload-drag-icon">
+      <i nz-icon type="inbox"></i>
+    </p>
+    <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
+    <p class="ant-upload-hint">将文件拖到此处或点击上传，只能上传xls/xlsx文件。</p>
+  </nz-upload>
   <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" nzLayout="inline">
     <nz-form-item>
       <nz-form-control>
@@ -15,89 +22,77 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" [disabled]="!validateForm.valid">下一步</button>
+        <button nz-button nzType="primary" [disabled]="!validateForm.valid">保存</button>
       </nz-form-control>
     </nz-form-item>
   </form>
-</ng-template>
-<ng-template [ngIf]="!this.isShowForm">
-  <nz-upload nzType="drag" [nzAccept]="accepts.toString()" [nzBeforeUpload]="beforeUpload" *ngIf="this.isShowUpload">
-    <p class="ant-upload-drag-icon">
-      <i nz-icon type="inbox"></i>
-    </p>
-    <p class="ant-upload-text">点击或拖动文件到这个区域上传</p>
-    <p class="ant-upload-hint">将文件拖到此处或点击上传，只能上传xls/xlsx文件。</p>
-  </nz-upload>
-  <div class="table-operations">
-    <button nz-button (click)="goBack()">上一步</button>&nbsp;
-    <button nz-button (click)="this.isShowUpload = !this.isShowUpload">折叠|展开</button>&nbsp;
-    <button nz-button (click)="batchDelete()" nzType="danger" [disabled]="disabledButton">批量删除</button>&nbsp;
-    <ng-template [ngIf]="this.tableData.length !== 0">
-      <button nz-button (click)="exportExcel()">导出Excel文件</button>
-    </ng-template>
-    员工编号：{{config.myID}}， 下车地点：{{config.myEndPoint}}
-  </div>
-  <ng-template [ngIf]="this.tableData.length !== 0">
-    <nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" nzSize="small"
-      [nzScroll]="{x:'4050px',y:'480px'}" [nzBordered]="true">
-      <thead>
-        <tr>
-          <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
-          <th *ngFor="let item of this.tableHeader" nzWidth="150px">
-            <span>{{item}}</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of nzTable.data;even as isEven" [ngStyle]="{'background':isEven?'#fdf5e6':'auto'}">
-          <td nzShowCheckbox [(nzChecked)]="checkboxCache[data[data.length-1]]" (nzCheckedChange)="refreshStatus()"></td>
-          <ng-container *ngFor="let item of data;index as col;last as isLast;count as total">
-            <td *ngIf="!isLast">
-              <div class="editable-cell">
-                <div class="editable-cell-text-wrapper">
-                  <ng-container [ngSwitch]="col">
-                    <ng-template [ngSwitchCase]="config.moneyIndex">
-                      <ng-template [ngIf]="!editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
-                        {{item}}
-                        <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
-                      </ng-template>
-                      <ng-template [ngIf]="editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
-                        <nz-input-number [(ngModel)]="editMoneyCache[data[total-1]].value" [nzStep]="1" [nzMin]="0"
-                          nzPlaceHolder="交通费"></nz-input-number>
-                        <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
-                      </ng-template>
-                      <ng-template [ngIf]="!editMoneyCache[data[total-1]].isTraffic">{{item}}</ng-template>
-                    </ng-template>
-                    <ng-template [ngSwitchCase]="config.startTimeIndex">
-                      <ng-template [ngIf]="!editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
-                        {{item}}
-                        <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
-                      </ng-template>
-                      <ng-template [ngIf]="editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
-                        <nz-time-picker [(ngModel)]="editStartTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat"
-                          [nzDisabledHours]="disabledHours" [nzHideDisabledOptions]="true" nzClearText="清除上车时间"></nz-time-picker>
-                        <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
-                      </ng-template>
-                    </ng-template>
-                    <ng-template [ngSwitchCase]="config.endTimeIndex">
-                      <ng-template [ngIf]="!editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
-                        {{item}}
-                        <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
-                      </ng-template>
-                      <ng-template [ngIf]="editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
-                        <nz-time-picker [(ngModel)]="editEndTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat"
-                          [nzDisabledHours]="disabledHours" [nzHideDisabledOptions]="true" nzClearText="清除下车时间"></nz-time-picker>
-                        <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
-                      </ng-template>
-                    </ng-template>
-                    <ng-template ngSwitchDefault>{{item}}</ng-template>
-                  </ng-container>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </nz-table>
-  </ng-template>
-</ng-template>
+  员工编号：{{config?.myID}}<br>
+  下车地点：{{config?.myEndPoint}}<br>
+  文件名：{{config?.fileName}}
+</nz-drawer>
+<div class="table-operations">
+  <button nz-button nzType="primary" (click)="this.visible = true">点我开始！！！</button>&nbsp;
+  <button nz-button (click)="batchDelete()" nzType="danger" [disabled]="disabledButton">批量删除</button>&nbsp;
+  <button nz-button (click)="exportExcel()" [disabled]="this.tableData.length === 0">导出Excel文件</button>
+</div>
+<nz-table #nzTable [nzData]="this.tableData" [nzFrontPagination]="false" [nzShowPagination]="false" nzSize="small"
+  [nzScroll]="{x:'4050px',y:'480px'}" [nzBordered]="true">
+  <thead>
+    <tr>
+      <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+      <th *ngFor="let item of this.tableHeader" nzWidth="150px">
+        <span>{{item}}</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data;even as isEven" [ngStyle]="{'background':isEven?'#fdf5e6':'auto'}">
+      <td nzShowCheckbox [(nzChecked)]="checkboxCache[data[data.length-1]]" (nzCheckedChange)="refreshStatus()"></td>
+      <ng-container *ngFor="let item of data;index as col;last as isLast;count as total">
+        <td *ngIf="!isLast">
+          <div class="editable-cell">
+            <div class="editable-cell-text-wrapper">
+              <ng-container [ngSwitch]="col">
+                <ng-template [ngSwitchCase]="config.moneyIndex">
+                  <ng-template [ngIf]="!editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
+                    {{item}}
+                    <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                  </ng-template>
+                  <ng-template [ngIf]="editMoneyCache[data[total-1]].edit && editMoneyCache[data[total-1]].isTraffic">
+                    <nz-input-number [(ngModel)]="editMoneyCache[data[total-1]].value" [nzStep]="1" [nzMin]="0"
+                      nzPlaceHolder="交通费"></nz-input-number>
+                    <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                  </ng-template>
+                  <ng-template [ngIf]="!editMoneyCache[data[total-1]].isTraffic">{{item}}</ng-template>
+                </ng-template>
+                <ng-template [ngSwitchCase]="config.startTimeIndex">
+                  <ng-template [ngIf]="!editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
+                    {{item}}
+                    <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                  </ng-template>
+                  <ng-template [ngIf]="editStartTimeCache[data[total-1]].edit && editStartTimeCache[data[total-1]].isTraffic">
+                    <nz-time-picker [(ngModel)]="editStartTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat"
+                      [nzDisabledHours]="disabledHours" [nzHideDisabledOptions]="true" nzClearText="清除上车时间"></nz-time-picker>
+                    <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                  </ng-template>
+                </ng-template>
+                <ng-template [ngSwitchCase]="config.endTimeIndex">
+                  <ng-template [ngIf]="!editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
+                    {{item}}
+                    <i nz-icon type="edit" class="editable-cell-icon" (click)="startEdit(data[total-1],col)"></i>
+                  </ng-template>
+                  <ng-template [ngIf]="editEndTimeCache[data[total-1]].edit && editEndTimeCache[data[total-1]].isTraffic">
+                    <nz-time-picker [(ngModel)]="editEndTimeCache[data[total-1]].value" [nzFormat]="config.shortTimeFormat"
+                      [nzDisabledHours]="disabledHours" [nzHideDisabledOptions]="true" nzClearText="清除下车时间"></nz-time-picker>
+                    <i nz-icon type="check" class="editable-cell-icon-check" (click)="finishEdit(data[total-1],col)"></i>
+                  </ng-template>
+                </ng-template>
+                <ng-template ngSwitchDefault>{{item}}</ng-template>
+              </ng-container>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</nz-table>
