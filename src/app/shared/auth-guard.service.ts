@@ -65,8 +65,10 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return false;
     }
     if (state) {
+      const index = state.url.lastIndexOf('?');
+      const url = index === -1 ? state.url : state.url.substring(0, index);
       const included = (await this.menuService.queryUserMenuUrls()).includes(
-        state.url
+        url
       );
       if (!included) {
         this.router.navigate(['']);
