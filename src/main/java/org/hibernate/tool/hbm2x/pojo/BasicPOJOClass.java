@@ -432,16 +432,16 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 			annotations.append( "@" + importType("javax.persistence.Column") + "(name=\"" ).append( column.getName() ).append( "\"" );
 			
 			appendCommonColumnInfo( annotations, column, insertable, updatable );
-			
-			if (column.getPrecision() != 0) { // the default is actually 0 in spec
-				annotations.append( ", precision=" ).append( column.getPrecision() );
-			}
-			if (column.getScale() != 0) { // default is actually 0 in spec
-				annotations.append( ", scale=" ).append( column.getScale() );
-			}
-			if (column.getLength() != Column.DEFAULT_LENGTH){ 
-				annotations.append( ", length=" ).append( column.getLength() );
-			}
+			//TODO: 不生成precision、scale、length注解属性。
+//			if (column.getPrecision() != 0) { // the default is actually 0 in spec
+//				annotations.append( ", precision=" ).append( column.getPrecision() );
+//			}
+//			if (column.getScale() != 0) { // default is actually 0 in spec
+//				annotations.append( ", scale=" ).append( column.getScale() );
+//			}
+//			if (column.getLength() != Column.DEFAULT_LENGTH){ 
+//				annotations.append( ", length=" ).append( column.getLength() );
+//			}
 			
 					
 					
@@ -452,20 +452,19 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 	}
 
 	protected void appendCommonColumnInfo(StringBuffer annotations, Column column, boolean insertable, boolean updatable) {
-		if(column.isUnique()) {
-				annotations.append( ", unique=" ).append( column.isUnique() );
-		}
-		if(!column.isNullable()) {
-				annotations.append( ", nullable=" ).append( column.isNullable() );
-		}
-		
-		if(!insertable) {
-				annotations.append( ", insertable=" ).append( insertable );
-		}
-		
-		if(!updatable) {
-				annotations.append( ", updatable=" ).append( updatable );
-		}
+		//TODO: 不生成unique、nullable、insertable、updatable注解属性。
+//		if(column.isUnique()) {
+//				annotations.append( ", unique=" ).append( column.isUnique() );
+//		}
+//		if(!column.isNullable()) {
+//				annotations.append( ", nullable=" ).append( column.isNullable() );
+//		}
+//		if(!insertable) {
+//				annotations.append( ", insertable=" ).append( insertable );
+//		}
+//		if(!updatable) {
+//				annotations.append( ", updatable=" ).append( updatable );
+//		}
 		
 		String sqlType = column.getSqlType();
 		if ( StringHelper.isNotEmpty( sqlType ) ) {
