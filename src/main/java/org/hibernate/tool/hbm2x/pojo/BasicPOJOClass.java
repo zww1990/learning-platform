@@ -972,3 +972,4 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 	}	
 	
 }
+ 

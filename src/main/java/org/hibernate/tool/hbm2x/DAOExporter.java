@@ -8,25 +8,28 @@ import org.hibernate.internal.util.StringHelper;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
 
 public class DAOExporter extends POJOExporter {
-	private static final String DAO_DAOHOME_FTL = "org/hibernate/dao/daohome.ftl";
-	private String sessionFactoryName = "SessionFactory";
 
-	public DAOExporter() {
-	}
+    private static final String DAO_DAOHOME_FTL = "org/hibernate/dao/daohome.ftl";
 
+    private String sessionFactoryName = "SessionFactory";
+
+    public DAOExporter() {
+    		super();
+    }
+    
 	public DAOExporter(Configuration cfg, File outputdir) {
 		super(cfg, outputdir);
-	}
-
-	protected void init() {
+    }
+    
+    protected void init() {
 		super.init();
 		setTemplateName(DAO_DAOHOME_FTL);
 		setFilePattern("{package-name}/{class-name}DAO.java");
-	}
-
-	protected void exportComponent(Map<String, Object> additionalContext, POJOClass element) {
-		// noop - we dont want components
-	}
+    }
+    
+    protected void exportComponent(Map<String, Object> additionalContext, POJOClass element) {
+    	// noop - we dont want components
+    }
 
 	public String getSessionFactoryName() {
 		return sessionFactoryName;
@@ -38,9 +41,9 @@ public class DAOExporter extends POJOExporter {
 
 	protected void setupContext() {
 		getProperties().put("sessionFactoryName", getSessionFactoryName());
-		super.setupContext();
+		super.setupContext();		
 	}
-
+	
 	public String getName() {
 		return "hbm2dao";
 	}
