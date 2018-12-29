@@ -1,6 +1,10 @@
 <#foreach property in pojo.getAllPropertiesIterator()>
 	<#if pojo.getMetaAttribAsBool(property, "gen-property", true)>
-		<#if !property.isComposite()>
+		<#if property.isComposite()>
+    /**
+     * @return 联合主键
+     */
+		<#else>
  			<#foreach column in property.getColumnIterator()>    
  				<#if column.comment?exists && column.comment?trim?length!=0>
     /**
@@ -12,7 +16,11 @@
     ${pojo.getPropertyGetModifiers(property)} ${pojo.getJavaTypeName(property, jdk5)} ${pojo.getGetterSignature(property)}() {
         return this.${c2j.keyWordCheck(property.name)};
     }
-		<#if !property.isComposite()>
+		<#if property.isComposite()>
+    /**
+     * @param ${c2j.keyWordCheck(property.name)} 联合主键
+     */
+		<#else>
  			<#foreach column in property.getColumnIterator()>    
  				<#if column.comment?exists && column.comment?trim?length!=0>
     /**
