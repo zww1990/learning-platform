@@ -101,7 +101,7 @@ public class JavaTypeFromValueVisitor extends DefaultValueVisitor {
 				String val = ( (SimpleValue) value ).getTypeName();
 				if(val!=null) return val; // val can be null when type is any 
 			}
-			// TODO: 增加java 8类型支持
+			// TODO: 增加java 8类型支持。
 			if (IS_JDK_8) {
 				if (DateType.INSTANCE.getName().equals(typename)) {
 					return LocalDate.class.getName();
