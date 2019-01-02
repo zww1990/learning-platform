@@ -8,6 +8,8 @@ ${pojo.getPackageDeclaration()}
 <#include "PojoConstructors.ftl"/>
 
 <#include "PojoPropertyAccessors.ftl"/>
+
+<#include "PojoEqualsHashcode.ftl"/>
 <#else>
 <#include "PojoInterfacePropertyAccessors.ftl"/>
 </#if>
