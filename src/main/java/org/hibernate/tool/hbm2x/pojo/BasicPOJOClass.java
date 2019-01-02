@@ -314,17 +314,20 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 	public String generateBasicAnnotation(Property property) {
 		StringBuffer annotations = new StringBuffer( "    " );
 		if(property.getValue() instanceof SimpleValue) {
-			if (hasVersionProperty())
-				if (property.equals(getVersionProperty()))
-						buildVersionAnnotation(annotations);
-			String typeName = ((SimpleValue)property.getValue()).getTypeName();
-			if("date".equals(typeName) || "java.sql.Date".equals(typeName)) {
-				buildTemporalAnnotation( annotations, "DATE" );
-			} else if ("timestamp".equals(typeName) || "java.sql.Timestamp".equals(typeName)) {
-				buildTemporalAnnotation( annotations, "TIMESTAMP" );
-			} else if ("time".equals(typeName) || "java.sql.Time".equals(typeName)) {
-				buildTemporalAnnotation(annotations, "TIME");
-			} //TODO: calendar etc. ?
+			if (hasVersionProperty()) {
+				if (property.equals(getVersionProperty())) {
+					buildVersionAnnotation(annotations);
+				}
+			}
+			// TODO: 不生成@Temporal注解。
+//			String typeName = ((SimpleValue)property.getValue()).getTypeName();
+//			if("date".equals(typeName) || "java.sql.Date".equals(typeName)) {
+//				buildTemporalAnnotation( annotations, "DATE" );
+//			} else if ("timestamp".equals(typeName) || "java.sql.Timestamp".equals(typeName)) {
+//				buildTemporalAnnotation( annotations, "TIMESTAMP" );
+//			} else if ("time".equals(typeName) || "java.sql.Time".equals(typeName)) {
+//				buildTemporalAnnotation(annotations, "TIME");
+//			} //TODO: calendar etc. ?
 
 						
 		}
@@ -332,12 +335,12 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 		return annotations.toString();
 	}
 
-	private StringBuffer buildTemporalAnnotation(StringBuffer annotations, String temporalTypeValue) {
-		String temporal = importType("javax.persistence.Temporal");
-		String temporalType = importType("javax.persistence.TemporalType");
-		
-		return annotations.append( "@" + temporal +"(" + temporalType + "." + temporalTypeValue + ")");
-	}
+//	private StringBuffer buildTemporalAnnotation(StringBuffer annotations, String temporalTypeValue) {
+//		String temporal = importType("javax.persistence.Temporal");
+//		String temporalType = importType("javax.persistence.TemporalType");
+//		
+//		return annotations.append( "@" + temporal +"(" + temporalType + "." + temporalTypeValue + ")");
+//	}
 	
 	private StringBuffer buildVersionAnnotation(StringBuffer annotations) {
 		String version = importType("javax.persistence.Version");
@@ -432,7 +435,7 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 			annotations.append( "@" + importType("javax.persistence.Column") + "(name=\"" ).append( column.getName() ).append( "\"" );
 			
 			appendCommonColumnInfo( annotations, column, insertable, updatable );
-			//TODO: 不生成precision、scale、length注解属性。
+			// TODO: 不生成precision、scale、length注解属性。
 //			if (column.getPrecision() != 0) { // the default is actually 0 in spec
 //				annotations.append( ", precision=" ).append( column.getPrecision() );
 //			}
@@ -452,7 +455,7 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 	}
 
 	protected void appendCommonColumnInfo(StringBuffer annotations, Column column, boolean insertable, boolean updatable) {
-		//TODO: 不生成unique、nullable、insertable、updatable注解属性。
+		// TODO: 不生成unique、nullable、insertable、updatable注解属性。
 //		if(column.isUnique()) {
 //				annotations.append( ", unique=" ).append( column.isUnique() );
 //		}
