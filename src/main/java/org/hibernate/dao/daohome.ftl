@@ -5,7 +5,9 @@ ${daoPackageName}
 <#assign qualifiedDeclarationName = pojo.getQualifiedDeclarationName()>
 <#assign identifierProperty = c2j.getJavaTypeName(clazz.identifierProperty, jdk5)>
 import ${qualifiedDeclarationName};
+	<#if !identifierProperty.startsWith("java.lang.")>
 import ${identifierProperty};
+	</#if>
 
 /**
  * Data Access Object for domain model class ${declarationName}<#if clazz.table.comment?exists  && clazz.table.comment?trim?length!=0> : ${clazz.table.comment}</#if>
