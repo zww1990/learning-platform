@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { SimpleReuseStrategy } from './shared/simple-reuse-strategy';
 import { UserService } from './shared/user/user.service';
 import { InputAutoFocusDirective } from './shared/input-auto-focus.directive';
+import { ToggleFullScreenDirective } from './shared/toggle-full-screen.directive';
 
 const routes: Routes = [
   {
@@ -47,7 +48,12 @@ const routes: Routes = [
     SharedModule
   ],
   exports: [RouterModule],
-  declarations: [LayoutComponent, LoginComponent, InputAutoFocusDirective],
+  declarations: [
+    LayoutComponent,
+    LoginComponent,
+    InputAutoFocusDirective,
+    ToggleFullScreenDirective
+  ],
   providers: [
     AuthGuard,
     UserService,

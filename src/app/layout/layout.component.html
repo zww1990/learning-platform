@@ -37,7 +37,7 @@
           <a (click)="logout()" nz-tooltip nzTitle="退出登录">
             <nz-avatar nzIcon="anticon anticon-logout" style="background-color:#f56a00;"></nz-avatar>
           </a>
-          <a (click)="toggleFullscreen()" nz-tooltip nzTitle="全屏切换">
+          <a appToggleFullScreen nz-tooltip nzTitle="全屏切换">
             <nz-avatar nzIcon="anticon anticon-fullscreen" style="background-color:#7265e6;" *ngIf="!isFullscreen"></nz-avatar>
             <nz-avatar nzIcon="anticon anticon-fullscreen-exit" style="background-color:#ffbf00;" *ngIf="isFullscreen"></nz-avatar>
           </a>
