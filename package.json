@@ -30,15 +30,15 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.2",
     "file-saver": "^2.0.0",
-    "luxon": "^1.9.0",
+    "luxon": "^1.10.0",
     "ng-zorro-antd": "^7.0.0-rc.3",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.3.3",
-    "screenfull": "^3.3.3",
+    "screenfull": "^4.0.0",
     "stream": "0.0.2",
     "xlsx": "^0.14.1",
-    "xml-js": "^1.6.8",
-    "zone.js": "~0.8.26"
+    "xml-js": "^1.6.9",
+    "zone.js": "^0.8.27"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.12.1",

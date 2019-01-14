@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalService } from 'ng-zorro-antd';
-import * as screenfull from 'screenfull';
 import { MenuItem } from '../shared/menu/menu-item.model';
 import { SimpleReuseStrategy } from '../shared/simple-reuse-strategy';
 import { User } from '../shared/user/user.model';
@@ -153,13 +152,4 @@ export class LayoutComponent implements OnInit {
     });
   }
 
-  /**
-   * @description 全屏切换
-   */
-  toggleFullscreen() {
-    if (screenfull.enabled) {
-      screenfull.toggle();
-      this.isFullscreen = !this.isFullscreen;
-    }
-  }
 }
