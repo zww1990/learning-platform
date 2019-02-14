@@ -1,4 +1,4 @@
-package com.demo;
+package com;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +13,6 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
+//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
-
 }
