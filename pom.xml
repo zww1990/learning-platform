@@ -97,6 +97,7 @@
 		</dependency>
 		<!-- ↑hibernate tools需要添加此依赖↑ -->
 		
+		<!-- ↓Java的统一查询。Querydsl紧凑，安全而且易于学习。↓ -->
 		<dependency>
 		  <groupId>com.querydsl</groupId>
 		  <artifactId>querydsl-apt</artifactId>
@@ -106,6 +107,7 @@
 		  <groupId>com.querydsl</groupId>
 		  <artifactId>querydsl-jpa</artifactId>
 		</dependency>
+		<!-- ↑Java的统一查询。Querydsl紧凑，安全而且易于学习。↑ -->
 	</dependencies>
 
 	<build>
@@ -114,6 +116,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- ↓Java的统一查询。Querydsl紧凑，安全而且易于学习。↓ -->
 			<plugin>
 		      <groupId>com.mysema.maven</groupId>
 		      <artifactId>apt-maven-plugin</artifactId>
@@ -130,6 +133,7 @@
 		        </execution>
 		      </executions>
 		    </plugin>
+		    <!-- ↑Java的统一查询。Querydsl紧凑，安全而且易于学习。↑ -->
 		</plugins>
 	</build>
 	
