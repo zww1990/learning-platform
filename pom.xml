@@ -95,6 +95,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-jpamodelgen</artifactId>
+		    <scope>provided</scope>
+		</dependency>
 		<!-- ↑hibernate tools需要添加此依赖↑ -->
 		
 		<!-- ↓Java的统一查询。Querydsl紧凑，安全而且易于学习。↓ -->
@@ -129,6 +134,7 @@
 		          <configuration>
 		            <outputDirectory>target/generated-sources/java</outputDirectory>
 		            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+		            <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
 		          </configuration>
 		        </execution>
 		      </executions>
