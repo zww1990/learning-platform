@@ -121,7 +121,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- ↓Java的统一查询。Querydsl紧凑，安全而且易于学习。↓ -->
 			<plugin>
 		      <groupId>com.mysema.maven</groupId>
 		      <artifactId>apt-maven-plugin</artifactId>
@@ -133,13 +132,16 @@
 		          </goals>
 		          <configuration>
 		            <outputDirectory>target/generated-sources/java</outputDirectory>
-		            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+					<!-- ↓Java的统一查询。Querydsl紧凑，安全而且易于学习。↓ -->
+		            <!-- <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor> -->
+		    		<!-- ↑Java的统一查询。Querydsl紧凑，安全而且易于学习。↑ -->
+		    		<!-- ↓JPA静态元模型生成器↓ -->
 		            <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+		    		<!-- ↑JPA静态元模型生成器↑ -->
 		          </configuration>
 		        </execution>
 		      </executions>
 		    </plugin>
-		    <!-- ↑Java的统一查询。Querydsl紧凑，安全而且易于学习。↑ -->
 		</plugins>
 	</build>
 	
