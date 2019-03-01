@@ -31,7 +31,7 @@
     "core-js": "^2.6.5",
     "file-saver": "^2.0.1",
     "luxon": "^1.11.3",
-    "ng-zorro-antd": "^7.0.0-rc.3",
+    "ng-zorro-antd": "^7.0.0",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0",
     "screenfull": "^4.0.1",
