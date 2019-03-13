@@ -24,7 +24,7 @@
 			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
 		</javaTypeResolver>
 		<javaModelGenerator targetPackage="${java.model.package}" targetProject="./src/main/java"/>
-		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/resources"/>
+		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/java"/>
 		<!-- ANNOTATEDMAPPER：全注解，
 			XMLMAPPER：全XML文件，
 			MIXEDMAPPER：注解和XML混合 -->
