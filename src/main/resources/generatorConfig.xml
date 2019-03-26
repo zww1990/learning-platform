@@ -21,7 +21,7 @@
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
 			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
-			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
+			<property name="useJSR310Types" value="false"/><!-- 使用JSR-310数据类型 -->
 		</javaTypeResolver>
 		<javaModelGenerator targetPackage="${java.model.package}" targetProject="./src/main/java"/>
 		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/java"/>
