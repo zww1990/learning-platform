@@ -5,6 +5,7 @@ target
 .classpath
 .project
 .factorypath
+.springBeans
 
 # Log file
 *.log
