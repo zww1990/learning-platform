@@ -14,10 +14,10 @@
 	</parent>
 	
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.example</groupId>
 			<artifactId>dubbo-extension</artifactId>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<build>

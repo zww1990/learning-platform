@@ -32,7 +32,7 @@ public class DubboConfig {
 	public ConsumerConfig consumerConfig(DubboProperties props) {
 		ConsumerConfig config = new ConsumerConfig();
 		config.setCheck(false);
-		config.setFilter(props.getConsumerFilter());// 注册调用拦截器
+//		config.setFilter(props.getConsumerFilter());// 注册调用拦截器
 		return config;
 	}
 

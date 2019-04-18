@@ -16,8 +16,8 @@ public class DubboProperties {
 	private String appName;
 	@Value("${dubbo.registry-address}")
 	private String registryAddress;
-	@Value("${dubbo.consumer-filter}")
-	private String consumerFilter;
+//	@Value("${dubbo.consumer-filter}")
+//	private String consumerFilter;
 
 	public String getAnnotationPackage() {
 		return annotationPackage;
@@ -43,11 +43,11 @@ public class DubboProperties {
 		this.registryAddress = registryAddress;
 	}
 
-	public String getConsumerFilter() {
-		return consumerFilter;
-	}
+//	public String getConsumerFilter() {
+//		return consumerFilter;
+//	}
 
-	public void setConsumerFilter(String consumerFilter) {
-		this.consumerFilter = consumerFilter;
-	}
+//	public void setConsumerFilter(String consumerFilter) {
+//		this.consumerFilter = consumerFilter;
+//	}
 }
