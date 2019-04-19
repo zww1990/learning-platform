@@ -32,7 +32,7 @@ public class Demo3ConsumerListener implements ChannelAwareMessageListener {
 			channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
-			channel.basicReject(message.getMessageProperties().getDeliveryTag(), false);
+			channel.basicReject(message.getMessageProperties().getDeliveryTag(), true);
 		}
 	}
 }
