@@ -1,7 +1,5 @@
 package com.example.dubbo.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -17,7 +15,6 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.type.AnnotatedTypeMetadata;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -27,7 +24,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Conditional(RabbitConfig.RabbitCondition.class)
 public class RabbitConfig {
-	private static final Logger logger = LoggerFactory.getLogger(RabbitConfig.class);
 
 	@Bean
 	public ConnectionFactory connectionFactory(RabbitProperties props) {
@@ -45,13 +41,6 @@ public class RabbitConfig {
 	public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, ObjectMapper jsonObjectMapper) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter(jsonObjectMapper));
-		rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
-			logger.info("MQ消息发送到exchange: correlationData={},ack={},cause={}", correlationData, ack, cause);
-		});
-		rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
-			logger.info("MQ消息路由到queue: message={},exchange={},routingKey={},replyCode={},replyText={}",
-					new String(message.getBody()), exchange, routingKey, replyCode, replyText);
-		});
 		// rabbitTemplate.setMandatory(true);
 		return rabbitTemplate;
 	}

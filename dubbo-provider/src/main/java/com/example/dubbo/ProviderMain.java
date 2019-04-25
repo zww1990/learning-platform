@@ -15,7 +15,7 @@ public class ProviderMain {
 			context.registerShutdownHook();
 			context.start();
 			log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
-			// Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+//			java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 			System.in.read();
 		} catch (Exception e) {
 			e.printStackTrace();
