@@ -1,6 +1,7 @@
 package com.demo.config;
 
 import java.util.Properties;
+import java.util.stream.Stream;
 import javax.sql.DataSource;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -42,7 +43,7 @@ public class SpringConfig {
 		Properties props = new Properties();
 		props.put("supportMethodsArguments", "true");
 		page.setProperties(props);
-		bean.setPlugins(new Interceptor[] { page });
+		bean.setPlugins(Stream.of(page).toArray(Interceptor[]::new));
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration();
 		// 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存。
 		config.setCacheEnabled(false);
