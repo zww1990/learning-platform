@@ -12,21 +12,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.demo.config.AppProperties.JdbcProperties;
 import com.github.pagehelper.PageInterceptor;
+import oracle.ucp.jdbc.PoolDataSource;
+import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 @Configuration
 @ComponentScan("com.demo")
 @MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper" })
 public class SpringConfig {
 	@Bean
-	public DataSource dataSource(JdbcProperties props) {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(props.getDriverClass());
-		dataSource.setUrl(props.getUrl());
-		dataSource.setUsername(props.getUser());
+	public DataSource dataSource(JdbcProperties props) throws Exception {
+		PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
+		dataSource.setConnectionFactoryClassName(props.getDriverClass());
+		dataSource.setURL(props.getUrl());
+		dataSource.setUser(props.getUser());
 		dataSource.setPassword(props.getPassword());
+		dataSource.setInitialPoolSize(5);
+		dataSource.setMinPoolSize(5);
+		dataSource.setMaxPoolSize(10);
 		return dataSource;
 	}
 
