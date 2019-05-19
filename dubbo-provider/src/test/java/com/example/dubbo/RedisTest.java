@@ -2,6 +2,8 @@ package com.example.dubbo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.Future;
 
 import javax.annotation.Resource;
 
@@ -13,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.dubbo.config.RootConfig;
+import com.example.dubbo.model.CallTask;
 import com.example.dubbo.model.User;
 
 @RunWith(SpringRunner.class)
@@ -38,12 +41,35 @@ public class RedisTest {
 	}
 
 	@Test
-	public void testSelect() {
+	public void testSingleThread() {
 		try {
+			long begin = System.currentTimeMillis();
 			List<User> users = (List<User>) this.redisTemplate.boundValueOps("users").get();
+			List<User> result = new ArrayList<>();
 			for (User user : users) {
-				System.err.println(user.getName());
+				if (user.getName().contains("520")) {
+					result.add(user);
+				}
 			}
+			System.err.println("姓名中包含520的元素总数=" + result.size());
+			long end = System.currentTimeMillis();
+			System.err.println("单线程查询耗时(毫秒)=" + (end - begin));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testMultiThread() {
+		try {
+			long begin = System.currentTimeMillis();
+			List<User> users = (List<User>) this.redisTemplate.boundValueOps("users").get();
+			ForkJoinPool pool = new ForkJoinPool();
+			Future<List<User>> future = pool.submit(new CallTask(users, 0, users.size()));
+			System.err.println("姓名中包含520的元素总数=" + future.get().size());
+			pool.shutdown();
+			long end = System.currentTimeMillis();
+			System.err.println("多线程查询耗时(毫秒)=" + (end - begin));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
