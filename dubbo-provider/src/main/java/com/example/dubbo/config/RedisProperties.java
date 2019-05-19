@@ -21,6 +21,10 @@ public class RedisProperties {
 	private long maxWait;
 	@Value("${redis.pool.min-idle}")
 	private int minIdle;
+	@Value("${redis.host}")
+	private String host;
+	@Value("${redis.port}")
+	private int port;
 
 	public String getSentinelMaster() {
 		return sentinelMaster;
@@ -84,5 +88,21 @@ public class RedisProperties {
 
 	public void setMinIdle(int minIdle) {
 		this.minIdle = minIdle;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
 	}
 }

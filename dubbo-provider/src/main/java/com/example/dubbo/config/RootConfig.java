@@ -1,11 +1,8 @@
 package com.example.dubbo.config;
 
-import java.util.TimeZone;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author ZhangWeiWei
@@ -17,8 +14,4 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Import({ DubboProperties.class, DubboConfig.class, RabbitProperties.class, RabbitConfig.class, RedisProperties.class,
 		RedisConfig.class })
 public class RootConfig {
-	@Bean
-	public ObjectMapper jsonObjectMapper() {
-		return new ObjectMapper().setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-	}
 }
