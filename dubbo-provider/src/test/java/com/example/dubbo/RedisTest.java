@@ -26,11 +26,7 @@ public class RedisTest {
 	public void testRedis() {
 		try {
 			RedisTemplate<String, Object> temp = this.context.getBean(RedisTemplate.class);
-			User a1 = new User();
-			a1.setAge(11);
-			a1.setId(1001);
-			a1.setName("张三");
-			a1.setSex("男");
+			User a1 = new User(1001, "张三", 11, "男");
 			BoundValueOperations<String, Object> ops = temp.boundValueOps("users");
 			System.err.println(ops.get());
 			ops.set(Arrays.asList(a1));
