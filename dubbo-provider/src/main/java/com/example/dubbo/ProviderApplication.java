@@ -12,8 +12,7 @@ public class ProviderApplication {
 
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(ProviderApplication.class, args);
-		context.start();
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
-		System.in.read();
+		Thread.currentThread().join();
 	}
 }

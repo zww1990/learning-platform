@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.ChannelAwareMessageListener;
-import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 
@@ -16,7 +15,6 @@ import com.rabbitmq.client.Channel;
  * @date 2018年1月17日,下午6:42:24
  * @description
  */
-@Component
 @SuppressWarnings("unchecked")
 public class Demo1ConsumerListener implements ChannelAwareMessageListener {
 	private static final Logger logger = LoggerFactory.getLogger(Demo1ConsumerListener.class);
