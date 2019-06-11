@@ -31,52 +31,52 @@ export class LoginComponent implements OnInit {
   /**
    * @description 用户登录
    */
-  submitForm() {
-    const value = this.loginForm.value;
-    if (value.username !== 'hero') {
-      this.message.error('用户名或密码错误！请重新输入！');
-      return;
-    }
-    if (value.password !== 'hero@2019') {
-      this.message.error('用户名或密码错误！请重新输入！');
-      return;
-    }
-    const user = new User(value.username, value.username);
-    sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
-    this.router.navigate(['']);
-  }
   // submitForm() {
-  //   this.cas
-  //     .casCreateTGT(this.loginForm.value)
-  //     .then(res1 => {
-  //       const location = this.cas.parseLocation(res1);
-  //       this.cas
-  //         .casCreateST(location)
-  //         .then(res2 => {
-  //           this.cas.casServiceValidate(res2).then(res3 => {
-  //             const result = this.cas.parseXml(res3);
-  //             if (result.status) {
-  //               const user = new User(
-  //                 result.text,
-  //                 this.loginForm.get('username').value
-  //               );
-  //               sessionStorage.setItem(
-  //                 SessionKey.CAS_USER,
-  //                 JSON.stringify(user)
-  //               );
-  //               sessionStorage.setItem(SessionKey.CAS_TGT, location);
-  //               this.router.navigate(['']);
-  //             } else {
-  //               this.message.error(result.text);
-  //             }
-  //           });
-  //         })
-  //         .catch(err => {
-  //           this.message.error('创建TGT票据失败！');
-  //         });
-  //     })
-  //     .catch(err => {
-  //       this.message.error('用户名或密码错误！');
-  //     });
+  //   const value = this.loginForm.value;
+  //   if (value.username !== 'hero') {
+  //     this.message.error('用户名或密码错误！请重新输入！');
+  //     return;
+  //   }
+  //   if (value.password !== 'hero@2019') {
+  //     this.message.error('用户名或密码错误！请重新输入！');
+  //     return;
+  //   }
+  //   const user = new User(value.username, value.username);
+  //   sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
+  //   this.router.navigate(['']);
   // }
+  submitForm() {
+    this.cas
+      .casCreateTGT(this.loginForm.value)
+      .then(res1 => {
+        const location = this.cas.parseLocation(res1);
+        this.cas
+          .casCreateST(location)
+          .then(res2 => {
+            this.cas.casServiceValidate(res2).then(res3 => {
+              const result = this.cas.parseXml(res3);
+              if (result.status) {
+                const user = new User(
+                  result.text,
+                  this.loginForm.get('username').value
+                );
+                sessionStorage.setItem(
+                  SessionKey.CAS_USER,
+                  JSON.stringify(user)
+                );
+                sessionStorage.setItem(SessionKey.CAS_TGT, location);
+                this.router.navigate(['']);
+              } else {
+                this.message.error(result.text);
+              }
+            });
+          })
+          .catch(err => {
+            this.message.error('创建TGT票据失败！');
+          });
+      })
+      .catch(err => {
+        this.message.error('用户名或密码错误！');
+      });
+  }
 }
