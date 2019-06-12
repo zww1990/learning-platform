@@ -12,7 +12,7 @@ import com.demo.config.SpringConfig;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = SpringConfig.class)
-public class SpringTest {
+public class SpringApplicationTest {
 	@Resource
 	private ApplicationContext context;
 
