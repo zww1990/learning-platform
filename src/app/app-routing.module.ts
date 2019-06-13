@@ -25,7 +25,7 @@ const routes: Routes = [
       // 示例模块采用惰性加载路由配置
       {
         path: 'demo',
-        loadChildren: './demo/demo.module#DemoModule',
+        loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule),
         canLoad: [AuthGuard]
       }
     ]
@@ -64,4 +64,4 @@ const routes: Routes = [
     { provide: RouteReuseStrategy, useClass: SimpleReuseStrategy }
   ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
