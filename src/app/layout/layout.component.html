@@ -7,15 +7,15 @@
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <ng-container *ngFor="let child of menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
-          <span>
-            <i nz-icon [type]="child.menuIcon"></i>
-            <span class="nav-text">{{ child.menuName }}</span>
+          <span title>
+            <i nz-icon [type]="child.menuIcon" *ngIf="child.menuIcon"></i>
+            <span>{{ child.menuName }}</span>
           </span>
         </li>
         <li nz-submenu [(nzOpen)]="child.selected" (nzOpenChange)="openHandler(child)" *ngIf="child.children">
           <span title>
-            <i nz-icon [type]="child.menuIcon"></i>
-            <span class="nav-text">{{ child.menuName }}</span>
+            <i nz-icon [type]="child.menuIcon" *ngIf="child.menuIcon"></i>
+            <span>{{ child.menuName }}</span>
           </span>
           <ul *ngFor="let item of child.children">
             <li nz-menu-item (click)="clickMenu(item)" [nzSelected]="item.selected">{{ item.menuName }}</li>
