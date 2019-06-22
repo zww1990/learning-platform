@@ -35,7 +35,7 @@ public class DemoController {
 
 	@GetMapping("/get")
 	@ApiOperation(value = "查询用户信息", notes = "按id查询用户信息")
-	@ApiImplicitParam(name = "id", value = "用户id", paramType = "query", dataType = "int", required = true)
+	@ApiImplicitParam(name = "id", value = "用户id", paramType = "query", dataType = "Integer", required = true)
 	public UserModel get(@RequestParam Integer id, @ApiIgnore String text) {
 		System.err.println(text);
 		log.info("id：{}", id);
@@ -56,8 +56,8 @@ public class DemoController {
 	@PostMapping("/upload")
 	@ApiOperation(value = "文件上传", notes = "文件上传的请求内容类型必须是multipart/form-data")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "userId", value = "用户ID", paramType = "form", dataType = "int", required = true),
-			@ApiImplicitParam(name = "userName", value = "用户名", paramType = "form", dataType = "string", required = true) })
+			@ApiImplicitParam(name = "userId", value = "用户ID", paramType = "form", dataType = "Integer", required = true),
+			@ApiImplicitParam(name = "userName", value = "用户名", paramType = "form", dataType = "String", required = true) })
 	public List<? extends Object> upload(
 			@ApiParam(name = "file", value = "文件", required = true) @RequestPart MultipartFile file, UserModel user) {
 		log.info("文件参数：{}, {}, {}, {}, {}", file.isEmpty(), file.getContentType(), file.getName(),
@@ -77,7 +77,7 @@ public class DemoController {
 
 	@DeleteMapping("/delete/{id}")
 	@ApiOperation(value = "删除用户信息", notes = "按id删除用户信息，使用路径传递id")
-	@ApiImplicitParam(name = "id", value = "用户id", paramType = "path", dataType = "int", required = true)
+	@ApiImplicitParam(name = "id", value = "用户id", paramType = "path", dataType = "Integer", required = true)
 	public String delete(@PathVariable Integer id) {
 		log.info("id：{}", id);
 		return "done";
