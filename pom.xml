@@ -14,16 +14,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.2.RELEASE</version>
+		<version>2.1.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.test.skip>true</maven.test.skip>
 		<java.version>1.8</java.version>
-		<swagger.version>2.8.0</swagger.version>
+		<swagger.version>2.9.2</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -72,7 +70,7 @@
 		<dependency>
 		    <groupId>io.github.swagger2markup</groupId>
 		    <artifactId>swagger2markup</artifactId>
-		    <version>1.3.2</version>
+		    <version>1.3.3</version>
 		    <scope>test</scope>
 		</dependency>
 
@@ -88,7 +86,7 @@
 			<plugin>
 				<groupId>io.github.swagger2markup</groupId>
 			    <artifactId>swagger2markup-maven-plugin</artifactId>
-			    <version>1.3.4</version>
+			    <version>1.3.7</version>
 			    <configuration>
 					<swaggerInput>http://localhost:8080/v2/api-docs</swaggerInput>
 					<outputDir>src/docs/asciidoc/generated</outputDir>
@@ -100,7 +98,7 @@
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.6</version>
+				<version>1.6.0</version>
 				<configuration>
 					<sourceDirectory>src/docs/asciidoc/generated</sourceDirectory>
 					<outputDirectory>src/docs/asciidoc/html</outputDirectory>
@@ -111,14 +109,6 @@
 					</attributes>
 				</configuration>
 			</plugin>
-            <plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-compiler-plugin</artifactId>
-            	<configuration>
-            		<source>${java.version}</source>
-		            <target>${java.version}</target>
-            	</configuration>
-            </plugin>
 		</plugins>
 	</build>
 	
