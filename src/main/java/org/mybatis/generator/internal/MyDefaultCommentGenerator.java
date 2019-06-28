@@ -6,9 +6,11 @@ import java.util.Properties;
 import java.util.Set;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.InnerClass;
+import org.mybatis.generator.api.dom.java.Interface;
 import org.mybatis.generator.api.dom.java.JavaElement;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
@@ -34,6 +36,19 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addComment(XmlElement xmlElement) {
 		// add no comments by default
+	}
+
+	@Override
+	public void addJavaFileComment(CompilationUnit compilationUnit) {
+		if (compilationUnit.isJavaInterface()) {
+			Interface topLevelClass = (Interface) compilationUnit;
+			topLevelClass.addJavaDocLine("/**");
+			topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
+			topLevelClass.addJavaDocLine(
+					new StringBuilder(" * @description ").append("Data Access Object for domain model").toString());
+			this.addJavadocTag(topLevelClass, false);
+			topLevelClass.addJavaDocLine(" */");
+		}
 	}
 
 	@Override
