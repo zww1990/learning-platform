@@ -10,19 +10,17 @@
     <div class="login-form">
       <form nz-form [formGroup]="loginForm" (ngSubmit)="submitForm()">
         <nz-form-item>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="请输入您的用户名!">
             <nz-input-group [nzPrefix]="prefixUser">
               <input appInputAutoFocus type="text" nz-input formControlName="username" placeholder="用户名">
             </nz-input-group>
-            <nz-form-explain *ngIf="loginForm.get('username').dirty&&loginForm.get('username').errors">请输入您的用户名!</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control>
+          <nz-form-control nzErrorTip="请输入您的密码!">
             <nz-input-group [nzPrefix]="prefixLock">
               <input type="password" nz-input formControlName="password" placeholder="密码">
             </nz-input-group>
-            <nz-form-explain *ngIf="loginForm.get('password').dirty&&loginForm.get('password').errors">请输入您的密码!</nz-form-explain>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -31,8 +29,8 @@
           </nz-form-control>
         </nz-form-item>
       </form>
-      <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
-      <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
+      <ng-template #prefixUser><i nz-icon nzType="user"></i></ng-template>
+      <ng-template #prefixLock><i nz-icon nzType="lock"></i></ng-template>
     </div>
   </div>
 </div>
