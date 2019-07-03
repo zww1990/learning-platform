@@ -8,13 +8,13 @@
       <ng-container *ngFor="let child of menus">
         <li nz-menu-item (click)="clickMenu(child)" [nzSelected]="child.selected" *ngIf="!child.children">
           <span title>
-            <i nz-icon [type]="child.menuIcon" *ngIf="child.menuIcon"></i>
+            <i nz-icon [nzType]="child.menuIcon" *ngIf="child.menuIcon"></i>
             <span>{{ child.menuName }}</span>
           </span>
         </li>
         <li nz-submenu [(nzOpen)]="child.selected" (nzOpenChange)="openHandler(child)" *ngIf="child.children">
           <span title>
-            <i nz-icon [type]="child.menuIcon" *ngIf="child.menuIcon"></i>
+            <i nz-icon [nzType]="child.menuIcon" *ngIf="child.menuIcon"></i>
             <span>{{ child.menuName }}</span>
           </span>
           <ul *ngFor="let item of child.children">
@@ -28,18 +28,18 @@
     <nz-header style="background: #fff; padding:0;">
       <div nz-row>
         <div nz-col [nzSpan]="2">
-          <i nz-icon class="trigger" [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
+          <i nz-icon class="trigger" [nzType]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
         </div>
         <div nz-col [nzSpan]="22" style="text-align: right">
           <a nz-tooltip nzTitle="当前登录用户：{{user?.userName}}">
             <nz-avatar [nzText]="user?.userName" style="background-color:#87d068;"></nz-avatar>
           </a>
           <a (click)="logout()" nz-tooltip nzTitle="退出登录">
-            <nz-avatar nzIcon="anticon anticon-logout" style="background-color:#f56a00;"></nz-avatar>
+            <nz-avatar nzIcon="logout" style="background-color:#f56a00;"></nz-avatar>
           </a>
           <a appToggleFullScreen nz-tooltip nzTitle="全屏切换">
-            <nz-avatar nzIcon="anticon anticon-fullscreen" style="background-color:#7265e6;" *ngIf="!isFullscreen"></nz-avatar>
-            <nz-avatar nzIcon="anticon anticon-fullscreen-exit" style="background-color:#ffbf00;" *ngIf="isFullscreen"></nz-avatar>
+            <nz-avatar nzIcon="fullscreen" style="background-color:#7265e6;" *ngIf="!isFullscreen"></nz-avatar>
+            <nz-avatar nzIcon="fullscreen-exit" style="background-color:#ffbf00;" *ngIf="isFullscreen"></nz-avatar>
           </a>
         </div>
       </div>
@@ -51,18 +51,18 @@
             <ng-template #titleTemplate>
               <div>
                 {{tab.menuName}}
-                <i nz-icon type="close" class="ant-tabs-close-x" style="margin-right: 0px" (click)="closeTab(tab)"
+                <i nz-icon nzType="close" class="ant-tabs-close-x" style="margin-right: 0px" (click)="closeTab(tab)"
                   *ngIf="tab.allowDelete!==false"></i>
               </div>
             </ng-template>
           </nz-tab>
         </nz-tabset>
         <ng-template #extraTemplate>
-          <!-- <nz-dropdown nzPlacement="bottomRight">
-            <a nz-dropdown>
-              操作
-              <i class="anticon anticon-down"></i>
-            </a>
+          <a nz-dropdown [nzDropdownMenu]="dropdownMenu">
+            操作
+            <i nz-icon nzType="down"></i>
+          </a>
+          <nz-dropdown-menu nzPlacement="bottomRight" #dropdownMenu>
             <ul nz-menu>
               <li nz-menu-item (click)="closeOtherTabs()">
                 <a>关闭其他</a>
@@ -71,7 +71,7 @@
                 <a>关闭所有</a>
               </li>
             </ul>
-          </nz-dropdown> -->
+          </nz-dropdown-menu>
         </ng-template>
         <router-outlet></router-outlet>
       </div>
