@@ -1,6 +1,6 @@
 {
   "@class" : "org.jasig.cas.services.RegexRegisteredService",
-  "serviceId" : "^http://.*",
+  "serviceId" : "^(http|https)://.*",
   "name" : "Apereo",
   "theme" : "apereo",
   "id" : 10000002,
