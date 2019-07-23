@@ -175,6 +175,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addGetterComment(Method method, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
+		if (!StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+			return;
+		}
 		method.addJavaDocLine("/**");
 		method.addJavaDocLine(new StringBuilder(" * @return ").append(introspectedColumn.getRemarks()).toString());
 		this.addJavadocTag(method, false);
@@ -184,6 +187,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addSetterComment(Method method, IntrospectedTable introspectedTable,
 			IntrospectedColumn introspectedColumn) {
+		if (!StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+			return;
+		}
 		method.addJavaDocLine("/**");
 		method.addJavaDocLine(new StringBuilder(" * @param ").append(method.getParameters().get(0).getName())
 				.append(" ").append(introspectedColumn.getRemarks()).toString());
