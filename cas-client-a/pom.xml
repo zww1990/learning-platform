@@ -56,36 +56,6 @@
 			<artifactId>cas-client-core</artifactId>
 			<version>${java.cas.client.version}</version>
 		</dependency>
-		<!-- 这种依赖关系提供了对SAML功能的支持 -->
-		<dependency>
-			<groupId>org.jasig.cas.client</groupId>
-			<artifactId>cas-client-support-saml</artifactId>
-			<version>${java.cas.client.version}</version>
-		</dependency>
-		<!-- 这种依赖关系提供了使用Ehcache的分布式代理票据缓存 -->
-		<dependency>
-			<groupId>org.jasig.cas.client</groupId>
-			<artifactId>cas-client-support-distributed-ehcache</artifactId>
-			<version>${java.cas.client.version}</version>
-		</dependency>
-		<!-- 使用Memcached分布式代理票据缓存由此依赖提供 -->
-		<dependency>
-			<groupId>org.jasig.cas.client</groupId>
-			<artifactId>cas-client-support-distributed-memcached</artifactId>
-			<version>${java.cas.client.version}</version>
-		</dependency>
-		<!-- 这种依赖性提供了Atlassian集成 -->
-		<dependency>
-			<groupId>org.jasig.cas.client</groupId>
-			<artifactId>cas-client-integration-atlassian</artifactId>
-			<version>${java.cas.client.version}</version>
-		</dependency>
-		<!-- JBoss集成由此依赖提供 -->
-		<dependency>
-			<groupId>org.jasig.cas.client</groupId>
-			<artifactId>cas-client-integration-jboss</artifactId>
-			<version>${java.cas.client.version}</version>
-		</dependency>
 		<!-- Tomcat 6集成由此依赖提供 -->
 		<dependency>
 			<groupId>org.jasig.cas.client</groupId>
