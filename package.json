@@ -34,7 +34,7 @@
     "screenfull": "4.0.1",
     "stream": "0.0.2",
     "tslib": "^1.9.0",
-    "xlsx": "^0.14.4",
+    "xlsx": "^0.15.0",
     "xml-js": "^1.6.11",
     "zone.js": "~0.9.1"
   },
@@ -57,7 +57,7 @@
     "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
-    "node-notifier": "^5.4.0",
+    "node-notifier": "^5.4.1",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
