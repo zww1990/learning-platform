@@ -30,9 +30,7 @@
       <td>{{data.age}}</td>
       <td>{{data.address}}</td>
       <td>
-        <nz-popconfirm nzTitle="确定要删除吗?" (nzOnConfirm)="deleteRow(data.key)">
-          <a nz-popconfirm>删除</a>
-        </nz-popconfirm>
+        <a nz-popconfirm nzTitle="确定要删除吗?" (nzOnConfirm)="deleteRow(data.key)">删除</a>
       </td>
     </tr>
   </tbody>
