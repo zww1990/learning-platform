@@ -2,8 +2,6 @@ const chalk = require('chalk');
 const proxy = {
   '/cas': {
     target: 'http://sso.bacic5i5j.com/',
-    secure: false,
-    changeOrigin: true,
     pathRewrite: {
       '^/cas': ''
     }
