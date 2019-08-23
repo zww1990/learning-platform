@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-  <table-filter match-schema="BDM" match-name="BDM_HR_COMPANY"/>
+  <table-filter match-catalog=".*" match-schema="BDM" match-name="BDM_HR_COMPANY"/>
   <table name="BDM_HR_COMPANY">
-  	<primary-key property="compId">
+  	<primary-key>
   		<generator class="sequence">
   			<param name="sequence_name">BDM_HR_COMPANY_SEQ</param>
   		</generator>
