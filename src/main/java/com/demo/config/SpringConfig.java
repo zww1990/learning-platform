@@ -19,7 +19,7 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 @Configuration
 @ComponentScan("com.demo")
-@MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper" })
+@MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper", "com.wiwj.bdm.esb.mapper" })
 public class SpringConfig {
 	@Bean
 	public DataSource dataSource(JdbcProperties props) throws Exception {
