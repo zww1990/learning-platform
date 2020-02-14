@@ -7,6 +7,7 @@ import javax.naming.directory.Attributes;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.core.AttributesMapper;
+import org.springframework.ldap.core.ContextMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -23,6 +24,19 @@ public class LdapTemplateTests {
 			filter.and(new EqualsFilter("objectclass", "person"));
 			filter.and(new EqualsFilter("uid", "admin"));
 			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonAttributesMapper());
+			System.err.println(list.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testSearchReturnContextMapper() {
+		try {
+			AndFilter filter = new AndFilter();
+			filter.and(new EqualsFilter("objectclass", "person"));
+			filter.and(new EqualsFilter("uid", "admin"));
+			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonContextMapper());
 			System.err.println(list.size());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,6 +69,14 @@ public class LdapTemplateTests {
 			System.err.println(attributes.get("uid").get());
 			System.err.println(attributes.get("cn").get());
 			return attributes;
+		}
+	}
+
+	private static class PersonContextMapper implements ContextMapper<Object> {
+		@Override
+		public Object mapFromContext(Object ctx) throws NamingException {
+			System.err.println(ctx.getClass());
+			return ctx;
 		}
 	}
 }
