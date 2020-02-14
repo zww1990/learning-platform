@@ -29,6 +29,19 @@ public class LdapTemplateTests {
 		}
 	}
 
+	@Test
+	public void testAuthenticate() {
+		try {
+			AndFilter filter = new AndFilter();
+			filter.and(new EqualsFilter("objectclass", "person"));
+			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
+			boolean result = this.ldapTemplate.authenticate("", filter.encode(), "1q2w3e4r");
+			System.err.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static class PersonAttributesMapper implements AttributesMapper<Object> {
 		@Override
 		public Object mapFromAttributes(Attributes attributes) throws NamingException {
