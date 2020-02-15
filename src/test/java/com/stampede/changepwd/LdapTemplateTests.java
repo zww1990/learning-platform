@@ -77,12 +77,12 @@ public class LdapTemplateTests {
 		@Override
 		public Object mapFromContext(Object ctx) throws NamingException {
 			DirContextAdapter adapter = (DirContextAdapter) ctx;
-			System.err.println(adapter.getObjectAttribute("givenname"));
+			System.err.println(adapter.getObjectAttribute("givenName"));
 			System.err.println(adapter.getObjectAttribute("sn"));
-			byte[] bs = (byte[]) adapter.getObjectAttribute("userpassword");
+			byte[] bs = (byte[]) adapter.getObjectAttribute("userPassword");
 			System.err.println(new String(bs));
-			System.err.println(adapter.getObjectAttribute("uidnumber"));
-			System.err.println(adapter.getObjectAttribute("gidnumber"));
+			System.err.println(adapter.getObjectAttribute("uidNumber"));
+			System.err.println(adapter.getObjectAttribute("gidNumber"));
 			System.err.println(adapter.getObjectAttribute("mail"));
 			System.err.println(adapter.getObjectAttribute("uid"));
 			System.err.println(adapter.getObjectAttribute("cn"));
