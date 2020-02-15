@@ -2,7 +2,6 @@ package com.stampede.changepwd.domain;
 
 import javax.naming.Name;
 import org.springframework.ldap.odm.annotations.Attribute;
-import org.springframework.ldap.odm.annotations.Attribute.Type;
 import org.springframework.ldap.odm.annotations.DnAttribute;
 import org.springframework.ldap.odm.annotations.Entry;
 import org.springframework.ldap.odm.annotations.Id;
@@ -31,7 +30,7 @@ public class Person {
 	private String uidNumber;
 	@Attribute(name = "mail")
 	private String mail;
-	@Attribute(name = "userpassword", type = Type.BINARY)
+	@Attribute(name = "userpassword")
 	private byte[] userPassword;
 
 	/**
