@@ -1,8 +1,5 @@
 package com.stampede.changepwd;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.Base64;
 import java.util.Optional;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Test;
@@ -10,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.query.LdapQueryBuilder;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.repository.PersonRepository;
+import com.stampede.changepwd.util.LdapPasswordUtils;
 
 @SpringBootTest
 public class PersonRepositoryTests {
@@ -42,7 +40,7 @@ public class PersonRepositoryTests {
 					.findOne(LdapQueryBuilder.query().where("uid").is("zhangweiwei1"));
 			if (optional.isPresent()) {
 				Person person = optional.get();
-				person.setUserPassword(md5Password("1q2w3e4r"));
+				person.setUserPassword(LdapPasswordUtils.md5Password("1q2w3e4r"));
 				this.personRepository.save(person);
 			}
 		} catch (Exception e) {
@@ -53,22 +51,9 @@ public class PersonRepositoryTests {
 	@Test
 	public void testMD5() {
 		try {
-			System.err.println(md5Password("1q2w3e4r"));
+			System.err.println(LdapPasswordUtils.md5Password("1q2w3e4r"));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-	}
-
-	private static String md5Password(String text) {
-		try {
-			String algorithm = "MD5";
-			MessageDigest instance = MessageDigest.getInstance(algorithm);
-			byte[] digest = instance.digest(text.getBytes(StandardCharsets.UTF_8));
-			byte[] encode = Base64.getEncoder().encode(digest);
-			String password = String.format("{%s}%s", algorithm, new String(encode, StandardCharsets.UTF_8));
-			return password;
-		} catch (Exception e) {
-			throw new RuntimeException(e);
 		}
 	}
 }
