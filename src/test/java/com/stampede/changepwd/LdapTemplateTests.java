@@ -22,7 +22,7 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "admin"));
+			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
 			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonAttributesMapper());
 			System.err.println(list.size());
 		} catch (Exception e) {
@@ -35,7 +35,7 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "admin"));
+			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
 			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonContextMapper());
 			System.err.println(list.size());
 		} catch (Exception e) {
