@@ -17,7 +17,7 @@ public class Person {
 	@Id
 	private Name id;
 	@Attribute(name = "uid")
-	@DnAttribute(value = "uid", index = 0)
+	@DnAttribute(value = "uid")
 	private String uid;
 	@Attribute(name = "cn")
 	private String cname;
