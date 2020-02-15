@@ -31,7 +31,7 @@ public class Person {
 	@Attribute(name = "mail")
 	private String mail;
 	@Attribute(name = "userpassword")
-	private byte[] userPassword;
+	private String userPassword;
 
 	/**
 	 * @return 此注释将Java字段标记为包含LDAP条目的专有名称。
@@ -92,7 +92,7 @@ public class Person {
 	/**
 	 * @return 密码
 	 */
-	public byte[] getUserPassword() {
+	public String getUserPassword() {
 		return userPassword;
 	}
 
@@ -155,7 +155,7 @@ public class Person {
 	/**
 	 * @param userPassword 密码
 	 */
-	public void setUserPassword(byte[] userPassword) {
+	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
 }
