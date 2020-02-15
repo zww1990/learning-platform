@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.ContextMapper;
+import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -75,7 +76,16 @@ public class LdapTemplateTests {
 	private static class PersonContextMapper implements ContextMapper<Object> {
 		@Override
 		public Object mapFromContext(Object ctx) throws NamingException {
-			System.err.println(ctx.getClass());
+			DirContextAdapter adapter = (DirContextAdapter) ctx;
+			System.err.println(adapter.getObjectAttribute("givenname"));
+			System.err.println(adapter.getObjectAttribute("sn"));
+			byte[] bs = (byte[]) adapter.getObjectAttribute("userpassword");
+			System.err.println(new String(bs));
+			System.err.println(adapter.getObjectAttribute("uidnumber"));
+			System.err.println(adapter.getObjectAttribute("gidnumber"));
+			System.err.println(adapter.getObjectAttribute("mail"));
+			System.err.println(adapter.getObjectAttribute("uid"));
+			System.err.println(adapter.getObjectAttribute("cn"));
 			return ctx;
 		}
 	}
