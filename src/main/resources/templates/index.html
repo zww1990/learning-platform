@@ -1,10 +1,145 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-hello world
-</body>
+	<head>
+		<title>自助密码服务</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/self-service-password.css" />
+		<link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="images/favicon.ico" rel="shortcut icon" />
+		<style type="text/css">
+			html, body {
+	         background: url("images/unsplash-[[${image}]].jpeg") no-repeat center fixed;
+	         background-size: cover;
+	       }
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="panel panel-success">
+				<div class="panel-body">
+				    <div class="navbar-wrapper">
+				        <div class="navbar navbar-default navbar-static-top" role="navigation">
+				          <div class="container-fluid">
+				            <div class="navbar-header">
+				              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				                <span class="sr-only">切换导航</span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				              </button>
+				              <a class="navbar-brand" href="/">
+				              	<i class="fa fa-fw fa-home"></i> 自助密码服务
+				              </a>
+				            </div>
+				            <div class="navbar-collapse collapse">
+				              <ul class="nav navbar-nav">
+				                <li class="">
+				                  <a href="?action=sendtoken" data-toggle="menu-popover" data-content="通过邮件发送密码重置链接">
+				                  	<i class="fa fa-fw fa-envelope"></i> 邮件
+				                  </a>
+				                </li>
+				              </ul>
+				            </div>
+				          </div>
+				        </div>
+				    </div>
+					<a href="/" alt="首页">
+						<img src="images/ltb-logo.png" alt="图标" class="logo img-responsive center-block" />
+					</a>
+					<div class="result alert alert-success">
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 修改您的密码</p>
+					</div>
+					<div class="result alert alert-warning">
+						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> 66666666</p>
+					</div>
+					<div class="help alert alert-warning">
+						<p>
+							<i class="fa fa-fw fa-info-circle"></i> 输入您的旧密码并设置新密码.
+						</p>
+						<p>忘记密码?</p>
+						<ul>
+							<li><a href="?action=sendtoken">通过邮件发送密码重置链接</a></li>
+						</ul>
+					</div>
+					<div class="alert alert-info">
+						<form action="#" method="post" class="form-horizontal">
+						    <div class="form-group">
+						        <label for="login" class="col-sm-4 control-label">用户名</label>
+						        <div class="col-sm-8">
+						            <div class="input-group">
+						                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+						                <input type="text" name="login" id="login" value="" class="form-control" placeholder="用户名" />
+						            </div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+						        <label for="oldpassword" class="col-sm-4 control-label">旧密码</label>
+						        <div class="col-sm-8">
+						            <div class="input-group">
+						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+						                <input type="password" name="oldpassword" id="oldpassword" class="form-control" placeholder="旧密码" />
+						            </div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+						        <label for="newpassword" class="col-sm-4 control-label">新密码</label>
+						        <div class="col-sm-8">
+						            <div class="input-group">
+						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+						                <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="新密码" />
+						            </div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+						        <label for="confirmpassword" class="col-sm-4 control-label">重复输入</label>
+						        <div class="col-sm-8">
+						            <div class="input-group">
+						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+						                <input type="password" name="confirmpassword" id="confirmpassword" class="form-control" placeholder="重复输入" />
+						            </div>
+						        </div>
+						    </div>
+						    <div class="form-group">
+						        <div class="col-sm-offset-4 col-sm-8">
+						            <button type="submit" class="btn btn-success">
+						                <i class="fa fa-fw fa-check-square-o"></i> 提交
+						            </button>
+						        </div>
+						    </div>
+						</form>
+					</div>
+					<div class="help alert alert-warning">
+						<p>您的密码必须符合以下条件:</p>
+						<ul>
+							<li>最小长度:6</li>
+							<li>最大长度:14</li>
+							<li>最少小写字母:1</li>
+							<li>最少大写字母:1</li>
+							<li>最少数字:1</li>
+							<li>最少字符类型:3</li>
+							<li>您的新密码不能与旧密码相同</li>
+							<li>您的新密码不能与您的用户名相同</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		        // 菜单链接弹出窗口
+		        $('[data-toggle="menu-popover"]').popover({
+		            trigger: 'hover',
+		            placement: 'bottom',
+		            container: 'body' // 允许弹出窗口大于菜单按钮
+		        });
+		    });
+		</script>
+	</body>
 </html>
