@@ -71,6 +71,7 @@ public class PersonController {
 		if (!this.personService.checkUserPassword(param)) {
 			return mav.addObject("message", "您输入的用户名或旧密码不正确！");
 		}
+		this.personService.updateUserPassword(param);
 		mav.setViewName("person/success");
 		return mav;
 	}

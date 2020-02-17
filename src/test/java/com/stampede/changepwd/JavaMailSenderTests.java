@@ -18,10 +18,10 @@ public class JavaMailSenderTests {
 	public void testSendMail() {
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom(this.mailProperties.getUsername());
+			message.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
 			message.setTo("zhangweiwei01@5i5j.com");
-			message.setSubject("主题：简单邮件（采用加密传输方式）");
-			message.setText("测试邮件内容（采用加密传输方式）");
+			message.setSubject("您的密码已修改");
+			message.setText(String.format("%s 您好，\n\n您的密码已修改。\n\n如果您没有修改密码，请立即联系您的管理员。", "张维维"));
 			this.javaMailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
