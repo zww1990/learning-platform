@@ -12,12 +12,23 @@ import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguratio
 import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * @author ZhangWeiWei
+ * @date 2020年2月17日,下午1:50:33
+ * @description 程序启动类
+ */
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
 		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class })
 public class ChangepwdApplication {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
+	/**
+	 * 程序主入口
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午1:49:50
+	 * @param args 启动参数
+	 */
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(ChangepwdApplication.class, args);
 		log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
