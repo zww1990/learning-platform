@@ -58,4 +58,24 @@ public abstract class LdapPasswordUtils {
 	public static long countDigit(String text) {
 		return text.chars().filter(Character::isDigit).count();
 	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午6:22:17
+	 * @param text 明文密码
+	 * @return 统计字符串的字符种类个数
+	 */
+	public static int countCharacterType(String text) {
+		int count = 0;
+		if (text.chars().anyMatch(Character::isDigit)) {
+			count++;
+		}
+		if (text.chars().anyMatch(Character::isLowerCase)) {
+			count++;
+		}
+		if (text.chars().anyMatch(Character::isUpperCase)) {
+			count++;
+		}
+		return count;
+	}
 }
