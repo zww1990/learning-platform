@@ -48,14 +48,11 @@
 				          </div>
 				        </div>
 				    </div>
-					<a th:href="@{/}" alt="首页">
+					<!-- <a th:href="@{/}" alt="首页">
 						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
-					</a>
+					</a> -->
 					<div class="result alert alert-success">
 						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 修改您的密码</p>
-					</div>
-					<div class="result alert alert-warning" th:if="${message!=null}">
-						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
 					</div>
 					<div class="help alert alert-warning">
 						<p>
@@ -66,66 +63,81 @@
 							<li><a th:href="@{/person/sendemail}">通过邮件发送密码重置链接</a></li>
 						</ul>
 					</div>
-					<div class="alert alert-info">
-						<form th:action="@{/person/update}" method="post" class="form-horizontal">
-						    <div class="form-group">
-						        <label for="username" class="col-sm-4 control-label">用户名</label>
-						        <div class="col-sm-8">
-						            <div class="input-group">
-						                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-						                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off"/>
-						            </div>
-						        </div>
-						    </div>
-						    <div class="form-group">
-						        <label for="password" class="col-sm-4 control-label">旧密码</label>
-						        <div class="col-sm-8">
-						            <div class="input-group">
-						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off"/>
-						            </div>
-						        </div>
-						    </div>
-						    <div class="form-group">
-						        <label for="newpassword" class="col-sm-4 control-label">新密码</label>
-						        <div class="col-sm-8">
-						            <div class="input-group">
-						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off"/>
-						            </div>
-						        </div>
-						    </div>
-						    <div class="form-group">
-						        <label for="repassword" class="col-sm-4 control-label">确认密码</label>
-						        <div class="col-sm-8">
-						            <div class="input-group">
-						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off"/>
-						            </div>
-						        </div>
-						    </div>
-						    <div class="form-group">
-						        <div class="col-sm-offset-4 col-sm-8">
-						            <button type="submit" class="btn btn-success">
-						                <i class="fa fa-fw fa-check-square-o"></i> 提交
-						            </button>
-						        </div>
-						    </div>
-						</form>
+					<div class="result alert alert-warning" th:if="${message!=null}">
+						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
 					</div>
-					<div class="help alert alert-warning">
-						<p>您的新密码必须符合以下条件:</p>
-						<ul>
-							<li>最小长度:6</li>
-							<li>最大长度:14</li>
-							<li>最少小写字母:1</li>
-							<li>最少大写字母:1</li>
-							<li>最少数字:1</li>
-							<li>最少字符类型:3</li>
-							<li>您的新密码不能与旧密码相同</li>
-							<li>您的新密码不能与您的用户名相同</li>
-						</ul>
-					</div>
+					<table style="width: 100%;">
+						<tbody>
+							<tr>
+								<td width="35%">
+									<div class="help alert alert-warning">
+										<p>您的新密码必须符合以下条件:</p>
+										<ul>
+											<li>最小长度:6</li>
+											<li>最大长度:14</li>
+											<li>最少小写字母:1</li>
+											<li>最少大写字母:1</li>
+											<li>最少数字:1</li>
+											<li>最少字符类型:3</li>
+											<li>您的新密码不能与旧密码相同</li>
+											<li>您的新密码不能与您的用户名相同</li>
+											<li></li>
+											<li></li>
+										</ul>
+									</div>
+								</td>
+								<td>
+									<div class="alert alert-info">
+										<form th:action="@{/person/update}" method="post" class="form-horizontal">
+										    <div class="form-group">
+										        <label for="username" class="col-sm-4 control-label">用户名</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="password" class="col-sm-4 control-label">旧密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="newpassword" class="col-sm-4 control-label">新密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="repassword" class="col-sm-4 control-label">确认密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="col-sm-offset-4 col-sm-8">
+										            <button type="submit" class="btn btn-success">
+										                <i class="fa fa-fw fa-check-square-o"></i> 提交
+										            </button>
+										        </div>
+										    </div>
+										</form>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
