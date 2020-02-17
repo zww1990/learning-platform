@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.service.PersonService;
+import com.stampede.changepwd.util.LdapPasswordUtils;
 
 /**
  * @author ZhangWeiWei
@@ -48,6 +49,18 @@ public class PersonController {
 		}
 		if (param.getNewpassword().length() > 14) {
 			return mav.addObject("message", "您的新密码太长！");
+		}
+		if (LdapPasswordUtils.countLowerCase(param.getNewpassword()) < 1) {
+			return mav.addObject("message", "您的新密码没有包含足够的小写字母！");
+		}
+		if (LdapPasswordUtils.countUpperCase(param.getNewpassword()) < 1) {
+			return mav.addObject("message", "您的新密码没有包含足够的大写字母！");
+		}
+		if (LdapPasswordUtils.countDigit(param.getNewpassword()) < 1) {
+			return mav.addObject("message", "您的新密码没有包含足够的数字！");
+		}
+		if (LdapPasswordUtils.countCharacterType(param.getNewpassword()) < 3) {
+			return mav.addObject("message", "您的新密码没有包含足够的字符类型！");
 		}
 		if (param.getNewpassword().equals(param.getPassword())) {
 			return mav.addObject("message", "您的新密码与旧密码相同！");
