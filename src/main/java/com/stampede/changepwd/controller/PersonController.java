@@ -49,13 +49,15 @@ public class PersonController {
 		if (param.getNewpassword().length()>14) {
 			return mav.addObject("message", "您的新密码太长！");
 		}
+		if (param.getNewpassword().equals(param.getPassword())) {
+			return mav.addObject("message", "您的新密码与旧密码相同！");
+		}
+		if (param.getNewpassword().equals(param.getUsername())) {
+			return mav.addObject("message", "您的新密码与您的用户名相同！");
+		}
 		if (!this.personService.checkUserPassword(param)) {
 			return mav.addObject("message", "您输入的用户名或旧密码不正确！");
 		}
-		System.err.println(param.getUsername());
-		System.err.println(param.getPassword());
-		System.err.println(param.getNewpassword());
-		System.err.println(param.getRepassword());
 		mav.setViewName("person/success");
 		return mav;
 	}
