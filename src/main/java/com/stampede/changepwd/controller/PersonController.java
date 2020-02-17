@@ -43,10 +43,10 @@ public class PersonController {
 		if (!StringUtils.hasText(param.getRepassword())) {
 			return mav.addObject("message", "请输入确认密码！");
 		}
-		if (param.getNewpassword().length()<6) {
+		if (param.getNewpassword().length() < 6) {
 			return mav.addObject("message", "您的新密码太短！");
 		}
-		if (param.getNewpassword().length()>14) {
+		if (param.getNewpassword().length() > 14) {
 			return mav.addObject("message", "您的新密码太长！");
 		}
 		if (param.getNewpassword().equals(param.getPassword())) {
