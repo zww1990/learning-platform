@@ -3,6 +3,7 @@ package com.stampede.changepwd.controller;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class PersonController {
 	 * @return 更新人员密码
 	 */
 	@PostMapping("/update")
-	public ModelAndView update(@ModelAttribute PersonParam param) {
+	public Object update(@ModelAttribute PersonParam param) {
 		ModelAndView mav = new ModelAndView("index").addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
@@ -68,11 +69,23 @@ public class PersonController {
 		if (param.getNewpassword().equals(param.getUsername())) {
 			return mav.addObject("message", "您的新密码与您的用户名相同！");
 		}
+		if (!param.getNewpassword().equals(param.getRepassword())) {
+			return mav.addObject("message", "请确认您的新密码！");
+		}
 		if (!this.personService.checkUserPassword(param)) {
 			return mav.addObject("message", "您输入的用户名或旧密码不正确！");
 		}
 		this.personService.updateUserPassword(param);
-		mav.setViewName("person/success");
-		return mav;
+		return "redirect:/person/updatesuccess";
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午8:21:27
+	 * @return 更新成功页面
+	 */
+	@GetMapping("/updatesuccess")
+	public Object updateSuccess() {
+		return new ModelAndView("person/success").addObject("image", Constants.randomImage());
 	}
 }
