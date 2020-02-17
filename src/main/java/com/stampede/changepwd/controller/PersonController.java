@@ -85,7 +85,17 @@ public class PersonController {
 	 * @return 更新成功页面
 	 */
 	@GetMapping("/updatesuccess")
-	public Object updateSuccess() {
-		return new ModelAndView("person/success").addObject("image", Constants.randomImage());
+	public ModelAndView updateSuccess() {
+		return new ModelAndView("person/updatesuccess").addObject("image", Constants.randomImage());
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午10:43:04
+	 * @return 忘记密码-邮件页面
+	 */
+	@GetMapping("/emailpage")
+	public ModelAndView emailPage() {
+		return new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
 	}
 }
