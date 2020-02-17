@@ -28,4 +28,34 @@ public abstract class LdapPasswordUtils {
 			throw new RuntimeException(e);
 		}
 	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午6:04:43
+	 * @param text 明文密码
+	 * @return 统计字符串包含小写字母个数
+	 */
+	public static long countLowerCase(String text) {
+		return text.chars().filter(Character::isLowerCase).count();
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午6:05:44
+	 * @param text 明文密码
+	 * @return 统计字符串包含大写字母个数
+	 */
+	public static long countUpperCase(String text) {
+		return text.chars().filter(Character::isUpperCase).count();
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月17日,下午6:06:12
+	 * @param text 明文密码
+	 * @return 统计字符串包含数字个数
+	 */
+	public static long countDigit(String text) {
+		return text.chars().filter(Character::isDigit).count();
+	}
 }
