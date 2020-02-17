@@ -5,15 +5,15 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/self-service-password.css" />
-		<link href="images/favicon.ico" rel="icon" type="image/x-icon" />
-		<link href="images/favicon.ico" rel="shortcut icon" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/self-service-password.css}" />
+		<link th:href="@{/images/favicon.ico}" rel="icon" type="image/x-icon" />
+		<link th:href="@{/images/favicon.ico}" rel="shortcut icon" />
 		<style type="text/css">
 			html, body {
-	         background: url("images/unsplash-[[${image}]].jpeg") no-repeat center fixed;
+	         background: url("[[${#request.contextPath}]]/images/unsplash-[[${image}]].jpeg") no-repeat center fixed;
 	         background-size: cover;
 	       }
 		</style>
@@ -32,14 +32,14 @@
 				                <span class="icon-bar"></span>
 				                <span class="icon-bar"></span>
 				              </button>
-				              <a class="navbar-brand" href="/">
+				              <a class="navbar-brand" th:href="@{/}">
 				              	<i class="fa fa-fw fa-home"></i> 自助密码服务
 				              </a>
 				            </div>
 				            <div class="navbar-collapse collapse">
 				              <ul class="nav navbar-nav">
 				                <li class="">
-				                  <a href="person/sendemail" data-toggle="menu-popover" data-content="通过邮件发送密码重置链接">
+				                  <a th:href="@{/person/sendemail}" data-toggle="menu-popover" data-content="通过邮件发送密码重置链接">
 				                  	<i class="fa fa-fw fa-envelope"></i> 邮件
 				                  </a>
 				                </li>
@@ -48,14 +48,14 @@
 				          </div>
 				        </div>
 				    </div>
-					<a href="/" alt="首页">
-						<img src="images/ltb-logo.png" alt="图标" class="logo img-responsive center-block" />
+					<a th:href="@{/}" alt="首页">
+						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
 					</a>
 					<div class="result alert alert-success">
 						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 修改您的密码</p>
 					</div>
-					<div class="result alert alert-warning">
-						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> 66666666</p>
+					<div class="result alert alert-warning" th:if="${message!=null}">
+						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
 					</div>
 					<div class="help alert alert-warning">
 						<p>
@@ -63,17 +63,17 @@
 						</p>
 						<p>忘记密码?</p>
 						<ul>
-							<li><a href="person/sendemail">通过邮件发送密码重置链接</a></li>
+							<li><a th:href="@{/person/sendemail}">通过邮件发送密码重置链接</a></li>
 						</ul>
 					</div>
 					<div class="alert alert-info">
-						<form action="person/update" method="post" class="form-horizontal">
+						<form th:action="@{/person/update}" method="post" class="form-horizontal">
 						    <div class="form-group">
 						        <label for="username" class="col-sm-4 control-label">用户名</label>
 						        <div class="col-sm-8">
 						            <div class="input-group">
 						                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-						                <input type="text" name="username" id="username" value="" class="form-control" placeholder="用户名" autocomplete="off"/>
+						                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off"/>
 						            </div>
 						        </div>
 						    </div>
@@ -82,7 +82,7 @@
 						        <div class="col-sm-8">
 						            <div class="input-group">
 						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="password" id="password" class="form-control" placeholder="旧密码" autocomplete="off"/>
+						                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off"/>
 						            </div>
 						        </div>
 						    </div>
@@ -91,7 +91,7 @@
 						        <div class="col-sm-8">
 						            <div class="input-group">
 						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="newpassword" id="newpassword" class="form-control" placeholder="新密码" autocomplete="off"/>
+						                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off"/>
 						            </div>
 						        </div>
 						    </div>
@@ -100,7 +100,7 @@
 						        <div class="col-sm-8">
 						            <div class="input-group">
 						                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-						                <input type="password" name="repassword" id="repassword" class="form-control" placeholder="确认密码" autocomplete="off"/>
+						                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off"/>
 						            </div>
 						        </div>
 						    </div>
@@ -114,7 +114,7 @@
 						</form>
 					</div>
 					<div class="help alert alert-warning">
-						<p>您的密码必须符合以下条件:</p>
+						<p>您的新密码必须符合以下条件:</p>
 						<ul>
 							<li>最小长度:6</li>
 							<li>最大长度:14</li>
@@ -129,8 +129,8 @@
 				</div>
 			</div>
 		</div>
-		<script src="js/jquery-3.3.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
 		<script type="text/javascript">
 		    $(document).ready(function(){
 		        // 菜单链接弹出窗口
