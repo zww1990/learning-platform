@@ -1,5 +1,6 @@
 package com.stampede.changepwd.service;
 
+import java.util.Optional;
 import javax.annotation.Resource;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.ldap.core.LdapTemplate;
@@ -9,6 +10,7 @@ import org.springframework.ldap.query.LdapQueryBuilder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.repository.PersonRepository;
 import com.stampede.changepwd.util.LdapPasswordUtils;
@@ -59,5 +61,24 @@ public class PersonService {
 			m.setText(String.format("%s 您好，\n\n您的密码已修改。\n\n如果您没有修改密码，请立即联系您的管理员。", p.getGivenName()));
 			this.javaMailSender.send(m);
 		});
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月18日,上午9:48:44
+	 * @param param 用户密码参数类
+	 * @return 按用户名查询
+	 */
+	public Optional<Person> findByUsername(PersonParam param) {
+		return this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is(param.getUsername()));
+	}
+
+	/**
+	 * 发送邮件
+	 * @author ZhangWeiWei
+	 * @date 2020年2月18日,上午10:25:25
+	 * @param person 人员数据模型
+	 */
+	public void sendMail(Person person) {
 	}
 }
