@@ -1,5 +1,6 @@
 package com.stampede.changepwd.controller;
 
+import java.util.Optional;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.stampede.changepwd.constant.Constants;
+import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.service.PersonService;
 import com.stampede.changepwd.util.LdapPasswordUtils;
@@ -97,5 +99,27 @@ public class PersonController {
 	@GetMapping("/emailpage")
 	public ModelAndView emailPage() {
 		return new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月18日,上午9:42:17
+	 * @param param 用户密码参数类
+	 * @return 忘记密码-发送邮件
+	 */
+	@PostMapping("/sendmail")
+	public Object sendMail(@ModelAttribute PersonParam param) {
+		ModelAndView mav = new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
+		if (!StringUtils.hasText(param.getUsername())) {
+			return mav.addObject("message", "请输入用户名！");
+		}
+		Optional<Person> optional = this.personService.findByUsername(param);
+		if (!optional.isPresent()) {
+			return mav.addObject("message", "您输入的用户名不存在！");
+		}
+		Person person = optional.get();
+		this.personService.sendMail(person);
+		mav.setViewName("person/sendsuccess");
+		return mav.addObject("email", person.getMail());
 	}
 }
