@@ -51,6 +51,7 @@ public class JavaMailSenderTests {
 			helper.setText(
 					String.format("%s 您好，\n\n点击以下链接重置您的密码:\n%s\n\n如果您没有请求修改密码，请忽略该邮件。", person.getGivenName(), url),
 					true);
+			helper.setPriority(1);
 			this.javaMailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
