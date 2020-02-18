@@ -88,7 +88,7 @@ public abstract class LdapPasswordUtils {
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,下午5:47:17
 	 * @param username 用户名
-	 * @param timeout 有效期
+	 * @param timeout 有效期：毫秒
 	 * @return 采用JWT方式进行字符串编码
 	 */
 	public static String jwtEncode(String username, long timeout) {
