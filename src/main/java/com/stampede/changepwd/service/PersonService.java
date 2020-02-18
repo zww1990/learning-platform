@@ -9,7 +9,6 @@ import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.query.LdapQueryBuilder;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -57,12 +56,19 @@ public class PersonService {
 		this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is(param.getUsername())).ifPresent(p -> {
 			p.setUserPassword(LdapPasswordUtils.md5Password(param.getNewpassword()));
 			this.personRepository.save(p);
-			SimpleMailMessage m = new SimpleMailMessage();
-			m.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
-			m.setTo(p.getMail());
-			m.setSubject("您的密码已修改");
-			m.setText(String.format("%s 您好，\n\n您的密码已修改。\n\n如果您没有修改密码，请立即联系您的管理员。", p.getGivenName()));
-			this.javaMailSender.send(m);
+			MimeMessage message = this.javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+			try {
+				helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+				helper.setTo(p.getMail());
+				helper.setSubject("您的密码已修改");
+				helper.setText(String.format("%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。", p.getGivenName()),
+						true);
+				helper.setPriority(1);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			this.javaMailSender.send(message);
 		});
 	}
 
@@ -96,6 +102,7 @@ public class PersonService {
 			helper.setText(String.format(
 					"%s 您好，<br><br>点击以下链接重置您的密码，该链接%s分钟后失效：<br><br><a href=\"%s\" target=\"_blank\">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。",
 					person.getGivenName(), min, url, url), true);
+			helper.setPriority(1);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
