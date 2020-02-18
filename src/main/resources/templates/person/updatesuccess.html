@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head th:replace="@{/common/header} :: head"></head>
+	<head th:replace="~{common/header :: head}"></head>
 	<body>
 		<div class="container">
 			<div class="panel panel-success">
 				<div class="panel-body">
-				    <div th:replace="@{/common/banner} :: navbar"></div>
+				    <div th:replace="~{common/banner :: navbar}"></div>
 					<a th:href="@{/}" alt="首页">
 						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
 					</a>
@@ -15,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-		<span th:replace="@{/common/script} :: jquery"></span>
+		<span th:replace="~{common/script :: jquery}"></span>
 		<script type="text/javascript">
 		    $(document).ready(function(){
 		        // 菜单链接弹出窗口
