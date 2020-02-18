@@ -2,6 +2,7 @@ package com.stampede.changepwd.controller;
 
 import java.util.Optional;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -105,10 +106,11 @@ public class PersonController {
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,上午9:42:17
 	 * @param param 用户密码参数类
+	 * @param request HTTP请求
 	 * @return 忘记密码-发送邮件
 	 */
 	@PostMapping("/sendmail")
-	public Object sendMail(@ModelAttribute PersonParam param) {
+	public Object sendMail(@ModelAttribute PersonParam param, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
@@ -118,7 +120,8 @@ public class PersonController {
 			return mav.addObject("message", "您输入的用户名不存在！");
 		}
 		Person person = optional.get();
-		this.personService.sendMail(person);
+		this.personService.sendMail(person, String.format("%s://%s:%s%s/person/reset?token=%s", request.getScheme(), request.getServerName(),
+				request.getServerPort(), request.getContextPath()));
 		mav.setViewName("person/sendsuccess");
 		return mav.addObject("email", person.getMail());
 	}
