@@ -120,10 +120,8 @@ public class PersonController {
 			return mav.addObject("message", "您输入的用户名不存在！");
 		}
 		Person person = optional.get();
-		this.personService.sendMail(person,
-				String.format("%s://%s:%s%s/person/reset?token=%s", request.getScheme(), request.getServerName(),
-						request.getServerPort(), request.getContextPath(),
-						LdapPasswordUtils.jwtEncode(person.getUid(), 5 * 60 * 1000)));
+		this.personService.sendMail(person, String.format("%s://%s:%s%s/person/reset", request.getScheme(),
+				request.getServerName(), request.getServerPort(), request.getContextPath()));
 		mav.setViewName("person/sendsuccess");
 		return mav.addObject("email", person.getMail());
 	}
