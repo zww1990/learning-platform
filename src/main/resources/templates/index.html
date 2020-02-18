@@ -52,7 +52,7 @@
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-										                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off"/>
+										                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
@@ -61,7 +61,7 @@
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-										                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off"/>
+										                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
@@ -70,7 +70,7 @@
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-										                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off"/>
+										                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
@@ -79,7 +79,7 @@
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-										                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off"/>
+										                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
