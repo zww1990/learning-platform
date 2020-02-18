@@ -84,6 +84,9 @@ public class PersonService {
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMail(Person person, String webPath) {
+		int min = 5;
+		String url = String.format("%s?token=%s", webPath,
+				LdapPasswordUtils.jwtEncode(person.getUid(), min * 60 * 1000));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 		try {
@@ -91,8 +94,8 @@ public class PersonService {
 			helper.setTo(person.getMail());
 			helper.setSubject("重置您的密码");
 			helper.setText(String.format(
-					"%s 您好，\n\n点击以下链接重置您的密码:\n<a href=\"%s\" target=\"_blank\">%s</a>\n\n如果您没有请求修改密码，请忽略该邮件。",
-					person.getGivenName(), webPath, webPath), true);
+					"%s 您好，<br><br>点击以下链接重置您的密码，该链接%s分钟后失效：<br><br><a href=\"%s\" target=\"_blank\">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。",
+					person.getGivenName(), min, url, url), true);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
