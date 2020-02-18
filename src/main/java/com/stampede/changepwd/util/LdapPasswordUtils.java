@@ -3,6 +3,11 @@ package com.stampede.changepwd.util;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.Date;
+import java.util.UUID;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
  * @author ZhangWeiWei
@@ -77,5 +82,28 @@ public abstract class LdapPasswordUtils {
 			count++;
 		}
 		return count;
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月18日,下午5:47:17
+	 * @param username 用户名
+	 * @param timeout 有效期
+	 * @return 采用JWT方式进行字符串编码
+	 */
+	public static String jwtEncode(String username, long timeout) {
+		long current = System.currentTimeMillis();
+		return Jwts.builder().setId(UUID.randomUUID().toString()).setSubject(username).setIssuedAt(new Date(current))
+				.setExpiration(new Date(current + timeout)).signWith(SignatureAlgorithm.HS256, "helloworld").compact();
+	}
+
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月18日,下午5:53:47
+	 * @param token JWT编码
+	 * @return 采用JWT方式进行解码
+	 */
+	public static Claims jwtDecode(String token) {
+		return Jwts.parser().setSigningKey("helloworld").parseClaimsJws(token).getBody();
 	}
 }
