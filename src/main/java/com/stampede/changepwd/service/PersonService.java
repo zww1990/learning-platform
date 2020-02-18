@@ -1,7 +1,9 @@
 package com.stampede.changepwd.service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
@@ -9,6 +11,7 @@ import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.query.LdapQueryBuilder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
@@ -78,7 +81,21 @@ public class PersonService {
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,上午10:25:25
 	 * @param person 人员数据模型
+	 * @param webPath web应用访问路径
 	 */
-	public void sendMail(Person person) {
+	public void sendMail(Person person, String webPath) {
+		MimeMessage message = this.javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+		try {
+			helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+			helper.setTo(person.getMail());
+			helper.setSubject("重置您的密码");
+			helper.setText(String.format(
+					"%s 您好，\n\n点击以下链接重置您的密码:\n<a href=\"%s\" target=\"_blank\">%s</a>\n\n如果您没有请求修改密码，请忽略该邮件。",
+					person.getGivenName(), webPath, webPath), true);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		this.javaMailSender.send(message);
 	}
 }
