@@ -11,6 +11,7 @@
 	<groupId>com.stampede</groupId>
 	<artifactId>changepwd</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>changepwd</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -41,6 +42,11 @@
 					<artifactId>hibernate-validator</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
