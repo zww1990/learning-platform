@@ -13,32 +13,4 @@ JAVA_OPTS="$JAVA_OPTS -Dspring.mail.port=465"
 JAVA_OPTS="$JAVA_OPTS -Dspring.mail.username=siqianwen@5i5j.com"
 JAVA_OPTS="$JAVA_OPTS -Dspring.mail.password=DcAfBAJsxCvAt6NA"
 
-tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ]; then
-echo 'Stop Process...'
-kill -15 $tpid
-fi
-sleep 5
-tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ]; then
-echo 'Kill Process!!!'
-kill -9 $tpid
-else
-echo 'Stop Success!!!'
-fi
-
-tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ]; then
-    echo 'App is running...'
-else
-    echo 'App is NOT running...'
-fi
-
-rm -f tpid
-if [ ! -n "$MY_POD_NAME" ]; then
-    java $JAVA_OPTS -jar `dirname $0`/$APP_FILE > /dev/null &
-else
-    java $JAVA_OPTS -jar `dirname $0`/$APP_FILE 2>&1
-fi
-echo $! > tpid
-echo 'Start Success!!!'
+nohup java $JAVA_OPTS -jar $APP_FILE &
