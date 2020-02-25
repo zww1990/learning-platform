@@ -1,7 +1,7 @@
-# Getting Started
+# 入门
 
-### Reference Documentation
-For further reference, please consider the following sections:
+### 参考文件
+供进一步参考, 请考虑以下部分:
 
 * [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
 * [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/maven-plugin/)
@@ -12,8 +12,8 @@ For further reference, please consider the following sections:
 * [Thymeleaf](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-spring-mvc-template-engines)
 * [Java Mail Sender](https://docs.spring.io/spring-boot/docs/2.2.4.RELEASE/reference/htmlsingle/#boot-features-email)
 
-### Guides
-The following guides illustrate how to use some features concretely:
+### 指南
+以下指南说明了如何具体使用某些功能:
 
 * [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)

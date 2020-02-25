@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -20,7 +22,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
 		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class })
-public class ChangepwdApplication {
+public class ChangepwdApplication extends SpringBootServletInitializer {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
 	/**
@@ -33,5 +35,10 @@ public class ChangepwdApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(ChangepwdApplication.class, args);
 		log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(ChangepwdApplication.class);
 	}
 }
