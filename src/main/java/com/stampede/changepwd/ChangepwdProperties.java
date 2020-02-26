@@ -9,26 +9,35 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "changepwd")
 public class ChangepwdProperties {
-	private Reset reset;
-	private Update update;
+	private FromSubjectText create;
+	private FromSubjectText reset;
+	private FromSubjectText update;
 
-	public Reset getReset() {
+	public FromSubjectText getCreate() {
+		return create;
+	}
+
+	public FromSubjectText getReset() {
 		return reset;
 	}
 
-	public Update getUpdate() {
+	public FromSubjectText getUpdate() {
 		return update;
 	}
 
-	public void setReset(Reset reset) {
+	public void setCreate(FromSubjectText create) {
+		this.create = create;
+	}
+
+	public void setReset(FromSubjectText reset) {
 		this.reset = reset;
 	}
 
-	public void setUpdate(Update update) {
+	public void setUpdate(FromSubjectText update) {
 		this.update = update;
 	}
 
-	public static class Reset {
+	public static class FromSubjectText {
 		private int expiration;
 		private String from;
 		private String subject;
@@ -52,36 +61,6 @@ public class ChangepwdProperties {
 
 		public void setExpiration(int expiration) {
 			this.expiration = expiration;
-		}
-
-		public void setFrom(String from) {
-			this.from = from;
-		}
-
-		public void setSubject(String subject) {
-			this.subject = subject;
-		}
-
-		public void setText(String text) {
-			this.text = text;
-		}
-	}
-
-	public static class Update {
-		private String from;
-		private String subject;
-		private String text;
-
-		public String getFrom() {
-			return from;
-		}
-
-		public String getSubject() {
-			return subject;
-		}
-
-		public String getText() {
-			return text;
 		}
 
 		public void setFrom(String from) {
