@@ -14,6 +14,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author ZhangWeiWei
@@ -24,7 +27,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
 		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class })
 @EnableConfigurationProperties(ChangepwdProperties.class)
-public class ChangepwdApplication extends SpringBootServletInitializer {
+public class ChangepwdApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
 	/**
@@ -42,5 +45,15 @@ public class ChangepwdApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(ChangepwdApplication.class);
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(this.loginHandlerInterceptor()).addPathPatterns("/admin/**");
+	}
+
+	@Bean
+	public LoginHandlerInterceptor loginHandlerInterceptor() {
+		return new LoginHandlerInterceptor();
 	}
 }
