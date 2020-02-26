@@ -9,8 +9,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "changepwd")
 public class ChangepwdProperties {
+	/** 创建密码 */
 	private FromSubjectText create;
+	/** 重置密码 */
 	private FromSubjectText reset;
+	/** 修改密码 */
 	private FromSubjectText update;
 
 	public FromSubjectText getCreate() {
@@ -37,10 +40,19 @@ public class ChangepwdProperties {
 		this.update = update;
 	}
 
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020年2月26日,下午7:27:31
+	 * @description 发件人、主题、正文
+	 */
 	public static class FromSubjectText {
+		/** 有效期 */
 		private int expiration;
+		/** 发件人 */
 		private String from;
+		/** 主题 */
 		private String subject;
+		/** 正文 */
 		private String text;
 
 		public int getExpiration() {
