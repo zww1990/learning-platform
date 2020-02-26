@@ -50,6 +50,16 @@ spring:
     check-template: false
     check-template-location: false
 changepwd:
+    #创建密码
+    create:
+      #链接有效期（单位：分钟）
+      expiration: 1440
+      #发件人（${}是占位符，请谨慎修改）
+      from: 配置中心账号创建<${spring.mail.username}>
+      #邮件主题
+      subject: 配置中心账号创建通知
+      #邮件内容（%s是占位符，请谨慎修改）
+      text: '%s，您好：<br><br>您的配置中心账号已创建，适用系统（SVN/GIT/JIRA/WIKI/JENKINS）。用户名：%s，请点击下方链接重置密码。<br><br><a href="%s" target="_blank">%s</a>'
     #重置密码
     reset:
       #链接有效期（单位：分钟）
