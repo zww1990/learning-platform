@@ -54,17 +54,17 @@ changepwd:
     reset:
       #链接有效期（单位：分钟）
       expiration: 5
-      #发件人（${}是占位符，请不要随意修改）
+      #发件人（${}是占位符，请谨慎修改）
       from: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<${spring.mail.username}>
       #邮件主题
       subject: 重置您的密码
-      #邮件内容（%s是占位符，请不要随意修改）
+      #邮件内容（%s是占位符，请谨慎修改）
       text: '%s 您好，<br><br>点击以下链接重置您的密码，该链接${changepwd.reset.expiration}分钟后失效：<br><br><a href="%s" target="_blank">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。'
     #修改密码
     update:
-      #发件人（${}是占位符，请不要随意修改）
+      #发件人（${}是占位符，请谨慎修改）
       from: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<${spring.mail.username}>
       #邮件主题
       subject: 您的密码已修改
-      #邮件内容（%s是占位符，请不要随意修改）
+      #邮件内容（%s是占位符，请谨慎修改）
       text: '%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。'
