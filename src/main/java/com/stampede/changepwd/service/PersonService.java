@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
-import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -12,6 +11,7 @@ import org.springframework.ldap.query.LdapQueryBuilder;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.repository.PersonRepository;
@@ -31,7 +31,7 @@ public class PersonService {
 	@Resource
 	private JavaMailSender javaMailSender;
 	@Resource
-	private MailProperties mailProperties;
+	private ChangepwdProperties properties;
 
 	/**
 	 * @author ZhangWeiWei
@@ -59,11 +59,10 @@ public class PersonService {
 			MimeMessage message = this.javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 			try {
-				helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+				helper.setFrom(this.properties.getUpdate().getFrom());
 				helper.setTo(p.getMail());
-				helper.setSubject("您的密码已修改");
-				helper.setText(String.format("%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。", p.getGivenName()),
-						true);
+				helper.setSubject(this.properties.getUpdate().getSubject());
+				helper.setText(String.format(this.properties.getUpdate().getText(), p.getGivenName()), true);
 				helper.setPriority(1);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
@@ -90,18 +89,15 @@ public class PersonService {
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMail(Person person, String webPath) {
-		int min = 5;
 		String url = String.format("%s?token=%s", webPath,
-				LdapPasswordUtils.jwtEncode(person.getUid(), min * 60 * 1000));
+				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getReset().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
 		try {
-			helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+			helper.setFrom(this.properties.getReset().getFrom());
 			helper.setTo(person.getMail());
-			helper.setSubject("重置您的密码");
-			helper.setText(String.format(
-					"%s 您好，<br><br>点击以下链接重置您的密码，该链接%s分钟后失效：<br><br><a href=\"%s\" target=\"_blank\">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。",
-					person.getGivenName(), min, url, url), true);
+			helper.setSubject(this.properties.getReset().getSubject());
+			helper.setText(String.format(this.properties.getReset().getText(), person.getGivenName(), url, url), true);
 			helper.setPriority(1);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
