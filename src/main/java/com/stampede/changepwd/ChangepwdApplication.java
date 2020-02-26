@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.O
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -22,6 +23,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
 		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class })
+@EnableConfigurationProperties(ChangepwdProperties.class)
 public class ChangepwdApplication extends SpringBootServletInitializer {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
