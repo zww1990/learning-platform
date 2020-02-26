@@ -22,6 +22,11 @@
 	                  	<i class="fa fa-fw fa-envelope"></i> 邮件
 	                  </a>
 	                </li>
+	                <li class="" th:if="${session.admin != null}">
+	                  <a th:href="@{/admin}" data-toggle="menu-popover" data-content="只有管理员才能访问的页面">
+	                  	<i class="fa fa-fw fa-lock"></i> 管理员页面
+	                  </a>
+	                </li>
 	              </ul>
 	            </div>
 	          </div>
