@@ -10,7 +10,7 @@
 						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
 					</a> -->
 					<div class="result alert alert-success">
-						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 找回您的密码</p>
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 管理员发送邮件</p>
 					</div>
 					<div class="result alert alert-warning" th:if="${message != null}">
 						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
@@ -20,7 +20,7 @@
 							<tr>
 								<td width="35%">
 									<div class="help alert alert-warning">
-										<p>输入您的用户名重置您的密码。收到邮件后，点击链接完成重置密码。</p>
+										<p>输入用户名重置密码。收到邮件后，点击链接完成重置密码。</p>
 										<ul style="list-style: none;">
 											<li>&nbsp;</li>
 											<li>&nbsp;</li>
@@ -30,7 +30,7 @@
 								</td>
 								<td>
 									<div class="alert alert-info">
-										<form th:action="@{/person/sendmail}" method="post" class="form-horizontal">
+										<form th:action="@{/admin/sendmail}" method="post" class="form-horizontal">
 										    <div class="form-group">
 										        <label for="username" class="col-sm-4 control-label">用户名</label>
 										        <div class="col-sm-8">

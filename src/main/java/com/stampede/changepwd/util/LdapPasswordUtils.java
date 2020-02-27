@@ -88,13 +88,14 @@ public abstract class LdapPasswordUtils {
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,下午5:47:17
 	 * @param username 用户名
-	 * @param timeout 有效期：毫秒
+	 * @param timeout 有效期：分钟
 	 * @return 采用JWT方式进行字符串编码
 	 */
 	public static String jwtEncode(String username, long timeout) {
 		long current = System.currentTimeMillis();
 		return Jwts.builder().setId(UUID.randomUUID().toString()).setSubject(username).setIssuedAt(new Date(current))
-				.setExpiration(new Date(current + timeout)).signWith(SignatureAlgorithm.HS256, "helloworld").compact();
+				.setExpiration(new Date(current + timeout * 60 * 1000)).signWith(SignatureAlgorithm.HS256, "helloworld")
+				.compact();
 	}
 
 	/**

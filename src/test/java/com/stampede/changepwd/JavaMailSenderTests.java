@@ -16,7 +16,7 @@ public class JavaMailSenderTests {
 	@Resource
 	private JavaMailSender javaMailSender;
 	@Resource
-	private MailProperties mailProperties;
+	private MailProperties properties;
 
 	@Test
 	public void testSendMail() {
@@ -26,7 +26,7 @@ public class JavaMailSenderTests {
 			person.setGivenName("张维维");
 			String url = "<a href=\"http://localhost:8080/\" target=\"_blank\">http://localhost:8080/</a>";
 			SimpleMailMessage m = new SimpleMailMessage();
-			m.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+			m.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.properties.getUsername()));
 			m.setTo(person.getMail());
 			m.setSubject("重置您的密码");
 			m.setText(String.format("%s 您好，\n\n点击以下链接重置您的密码:\n%s\n\n如果您没有请求修改密码，请忽略该邮件。", person.getGivenName(), url));
@@ -45,7 +45,7 @@ public class JavaMailSenderTests {
 			String url = "<a href=\"http://localhost:8080/\" target=\"_blank\">http://localhost:8080/</a>";
 			MimeMessage message = this.javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
-			helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.mailProperties.getUsername()));
+			helper.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.properties.getUsername()));
 			helper.setTo(person.getMail());
 			helper.setSubject("重置您的密码");
 			helper.setText(

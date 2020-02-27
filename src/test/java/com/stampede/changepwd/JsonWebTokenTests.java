@@ -7,7 +7,7 @@ public class JsonWebTokenTests {
 	@Test
 	public void testEncode() {
 		try {
-			System.err.println(LdapPasswordUtils.jwtEncode("zhangweiwei1", 1000 * 60 * 5));
+			System.err.println(LdapPasswordUtils.jwtEncode("zhangweiwei1", 5));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
