@@ -17,11 +17,11 @@
 	            </div>
 	            <div class="navbar-collapse collapse">
 	              <ul class="nav navbar-nav">
-	                <li class="">
+	                <!-- <li class="">
 	                  <a th:href="@{/person/emailpage}" data-toggle="menu-popover" data-content="通过邮件发送密码重置链接">
 	                  	<i class="fa fa-fw fa-envelope"></i> 邮件
 	                  </a>
-	                </li>
+	                </li> -->
 	                <li class="" th:if="${session.admin != null}">
 	                  <a th:href="@{/admin}" data-toggle="menu-popover" data-content="只有管理员才能访问的页面">
 	                  	<i class="fa fa-fw fa-lock"></i> 管理员页面
