@@ -104,4 +104,29 @@ public class PersonService {
 		}
 		this.javaMailSender.send(message);
 	}
+
+	/**
+	 * 管理员发送邮件
+	 * @author ZhangWeiWei
+	 * @date 2020年2月27日,上午10:04:57
+	 * @param person 人员数据模型
+	 * @param webPath web应用访问路径
+	 */
+	public void sendMailForAdmin(Person person, String webPath) {
+		String url = String.format("%s?token=%s", webPath,
+				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
+		MimeMessage message = this.javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
+		try {
+			helper.setFrom(this.properties.getCreate().getFrom());
+			helper.setTo(person.getMail());
+			helper.setSubject(this.properties.getCreate().getSubject());
+			helper.setText(String.format(this.properties.getCreate().getText(), person.getGivenName(), person.getUid(),
+					url, url), true);
+			helper.setPriority(1);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		this.javaMailSender.send(message);
+	}
 }
