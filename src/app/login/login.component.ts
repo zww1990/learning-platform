@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.message.error('用户名或密码错误！请重新输入！');
       return;
     }
-    if (value.password !== 'hero@2019') {
+    if (value.password !== 'hero@2020') {
       this.message.error('用户名或密码错误！请重新输入！');
       return;
     }
