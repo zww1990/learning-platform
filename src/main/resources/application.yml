@@ -30,9 +30,9 @@ spring:
     #SMTP邮箱端口（建议使用安全协议的端口号）
     port: 465
     #SMTP邮箱用户名
-    username: siqianwen@5i5j.com
+    username: cm@5i5j.com
     #SMTP邮箱密码
-    password: DcAfBAJsxCvAt6NA
+    password: CMadmin123
     properties:
       mail:
         smtp:
