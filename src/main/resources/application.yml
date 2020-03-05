@@ -55,7 +55,7 @@ changepwd:
       #链接有效期（单位：分钟）
       expiration: 1440
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心账号创建通知<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心账号创建通知（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
@@ -65,7 +65,7 @@ changepwd:
       #链接有效期（单位：分钟）
       expiration: 5
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心密码重置<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
@@ -73,7 +73,7 @@ changepwd:
     #修改密码
     update:
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心密码修改<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心密码修改（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
