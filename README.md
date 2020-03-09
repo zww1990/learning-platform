@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Thanks
 
+<img src="/jetbrains-logos/jetbrains.png" width="100px" height="100px"><br>
 [JetBrains](https://www.jetbrains.com/?from=my-angular)
-<img src="/jetbrains-logos/jetbrains.png" width="100px" height="100px">
 
 ## Development server
 
