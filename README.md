@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Thanks
 
 [JetBrains](https://www.jetbrains.com/?from=my-angular)
+![JetBrains](/jetbrains-logos/jetbrains.png)
 
 ## Development server
 
