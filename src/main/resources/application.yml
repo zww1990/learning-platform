@@ -30,9 +30,9 @@ spring:
     #SMTP邮箱端口（建议使用安全协议的端口号）
     port: 465
     #SMTP邮箱用户名
-    username: siqianwen@5i5j.com
+    username: cm@5i5j.com
     #SMTP邮箱密码
-    password: DcAfBAJsxCvAt6NA
+    password: CMadmin123
     properties:
       mail:
         smtp:
@@ -55,7 +55,7 @@ changepwd:
       #链接有效期（单位：分钟）
       expiration: 1440
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心账号创建通知<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心账号创建通知（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
@@ -65,7 +65,7 @@ changepwd:
       #链接有效期（单位：分钟）
       expiration: 5
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心密码重置<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
@@ -73,7 +73,7 @@ changepwd:
     #修改密码
     update:
       #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心密码修改<${spring.mail.username}>
+      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
       subject: 配置中心密码修改（涉及SVN、GIT、JIRA、WIKI、Jenkins）
       #邮件内容（%s是占位符，请谨慎修改）
