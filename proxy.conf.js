@@ -4,7 +4,8 @@ const proxy = {
     target: 'http://sso.bacic5i5j.com/',
     pathRewrite: {
       '^/cas': ''
-    }
+    },
+	secure: false
   }
 };
 
