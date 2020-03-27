@@ -5,7 +5,7 @@ const proxy = {
     pathRewrite: {
       '^/cas': ''
     },
-	secure: false
+    secure: false
   }
 };
 
