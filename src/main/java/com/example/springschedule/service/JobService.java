@@ -33,7 +33,7 @@ public class JobService extends QuartzJobBean {
 				helper.setFrom(jms.getUsername());
 				helper.setTo(to);
 				helper.setSubject("这是一段隐藏的内容");
-				helper.setText("<h1 style=\"color: white;\">Fucking you all day and all night!!!</h1>", true);
+				helper.setText("<h1 style=\"color: white;\">hello world!!!</h1>", true);
 				helper.setSentDate(now);
 				jms.send(message);
 			} catch (Exception e) {
