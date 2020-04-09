@@ -10,8 +10,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -21,24 +19,13 @@ import com.example.springschedule.service.JobService;
 @Configuration
 @ComponentScan("com.example.springschedule")
 public class SpringConfig {
-	@Bean
-	public JavaMailSender mailSender() {
-		JavaMailSenderImpl ms = new JavaMailSenderImpl();
-		ms.setDefaultEncoding("UTF-8");
-		ms.setProtocol("smtp");
-		ms.setHost("smtp.sohu.com");
-		ms.setPort(25);
-		ms.setUsername("nokia0561861@sohu.com");
-		ms.setPassword("zhangWW@1021");
-		return ms;
-	}
 
 	@Bean
 	public SchedulerFactoryBean quartzScheduler(ApplicationContext context,
 			@Autowired(required = false) Trigger[] triggers) {
 		SchedulerFactoryBean quartzScheduler = new SchedulerFactoryBean();
 		quartzScheduler.setJobFactory(new AutowireCapableBeanJobFactory(context.getAutowireCapableBeanFactory()));
-		Optional.ofNullable(triggers).ifPresent(consumer -> quartzScheduler.setTriggers(consumer));
+		Optional.ofNullable(triggers).ifPresent(quartzScheduler::setTriggers);
 		return quartzScheduler;
 	}
 

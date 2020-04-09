@@ -9,19 +9,11 @@ public class SpringScheduleApplication {
 	private static final Logger log = LoggerFactory.getLogger(SpringScheduleApplication.class);
 
 	@SuppressWarnings("resource")
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
 		context.registerShutdownHook();
 		context.start();
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
-		synchronized (SpringScheduleApplication.class) {
-			while (true) {
-				try {
-					SpringScheduleApplication.class.wait();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		Thread.currentThread().join();
 	}
 }
