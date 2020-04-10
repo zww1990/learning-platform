@@ -1,5 +1,6 @@
 package com.example.springschedule;
 
+import java.util.Arrays;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -19,18 +20,19 @@ public class SpringScheduleApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(SpringScheduleApplication.class, args);
+		Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 	}
 
-	@Bean
-	public JobDetail jobDetail() {
-		Class<JobService> job = JobService.class;
-		return JobBuilder.newJob(job).withIdentity(job.getName()).storeDurably().build();
-	}
+//	@Bean
+//	public JobDetail jobDetail() {
+//		Class<JobService> job = JobService.class;
+//		return JobBuilder.newJob(job).withIdentity(job.getName()).storeDurably().build();
+//	}
 
-	@Bean
-	public Trigger trigger(JobDetail jobDetail) {
-		return TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName())
-				.withSchedule(CronScheduleBuilder.cronSchedule("*/30 * * * * ?")).build();
-	}
+//	@Bean
+//	public Trigger trigger(JobDetail jobDetail) {
+//		return TriggerBuilder.newTrigger().forJob(jobDetail).withIdentity(jobDetail.getKey().getName())
+//				.withSchedule(CronScheduleBuilder.cronSchedule("*/30 * * * * ?")).build();
+//	}
 }
