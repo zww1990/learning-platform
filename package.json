@@ -27,7 +27,7 @@
     "@angular/service-worker": "~9.0.7",
     "file-saver": "~2.0.2",
     "hammerjs": "~2.0.8",
-    "luxon": "~1.22.2",
+    "luxon": "^1.23.0",
     "ng-zorro-antd": "~8.5.2",
     "rxjs": "^6.5.5",
     "screenfull": "4.0.1",
