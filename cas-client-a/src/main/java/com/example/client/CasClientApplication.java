@@ -1,5 +1,6 @@
 package com.example.client;
 
+import org.jasig.cas.client.boot.configuration.EnableCasClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.validation.ValidationAutoConfigura
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
+@EnableCasClient
 @SpringBootApplication(exclude = { ProjectInfoAutoConfiguration.class, ValidationAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, RedisReactiveAutoConfiguration.class,
 		MultipartAutoConfiguration.class, SpringDataWebAutoConfiguration.class,

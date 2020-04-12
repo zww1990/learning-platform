@@ -64,42 +64,48 @@
 			<artifactId>cas-client-core</artifactId>
 			<version>${java.cas.client.version}</version>
 		</dependency>
+		
 		<!-- Tomcat 6集成由此依赖提供 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-integration-tomcat-v6</artifactId>
 			<version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
+		
 		<!-- Tomcat 7由此依赖提供 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.jasig.cas.client</groupId>
 			<artifactId>cas-client-integration-tomcat-v7</artifactId>
 			<version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
+		
 		<!-- Tomcat 8.0.x由此依赖提供 -->
-		<dependency>
+		<!-- <dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-integration-tomcat-v8</artifactId>
 		   <version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
+		
 		<!-- Tomcat 8.5.x由此依赖关系提供 -->
-		<dependency>
+		<!-- <dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-integration-tomcat-v85</artifactId>
 		   <version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
+		
 		<!-- Tomcat 9.0.x 由此依赖项提供 -->
 		<dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-integration-tomcat-v90</artifactId>
 		   <version>${java.cas.client.version}</version>
 		</dependency>
-		<!-- Spring Boot AutoConfiguration由此依赖项提供 -->
-		<!-- <dependency>
+		
+		<!-- Spring Boot 由此依赖项提供 -->
+		<dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-support-springboot</artifactId>
 		   <version>${java.cas.client.version}</version>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
