@@ -146,8 +146,27 @@
         </entry>
     </util:map>
 
-    <bean id="serviceRegistryDao" class="org.jasig.cas.services.JsonServiceRegistryDao"
-          c:configDirectory="${service.registry.config.location:classpath:services}" />
+    <!-- <bean id="serviceRegistryDao" class="org.jasig.cas.services.JsonServiceRegistryDao"
+          c:configDirectory="${service.registry.config.location:classpath:services}" /> -->
+          <bean id="serviceRegistryDao" class="org.jasig.cas.services.InMemoryServiceRegistryDaoImpl">
+          	<property name="registeredServices">
+          		<list>
+          			<bean class="org.jasig.cas.support.oauth.services.OAuthCallbackAuthorizeService"
+          			p:id="0"
+          			p:name="HTTP"
+          			p:description="oauth wrapper callback url"
+          			p:serviceId="${server.prefix}/oauth2.0/callbackAuthorize"/>
+          			<bean class="org.jasig.cas.support.oauth.services.OAuthRegisteredService"
+          			p:id="1"
+          			p:name="serviceName"
+          			p:description="Service Description"
+          			p:serviceId="^(http|https)://.*"
+          			p:bypassApprovalPrompt="false"
+          			p:clientId="key"
+          			p:clientSecret="secret"/>
+          		</list>
+          	</property>
+          </bean>
 
     <bean id="auditTrailManager" class="org.jasig.inspektr.audit.support.Slf4jLoggingAuditTrailManager" />
 

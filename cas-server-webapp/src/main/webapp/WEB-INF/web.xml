@@ -240,6 +240,12 @@
         <url-pattern>/samlValidate</url-pattern>
     </servlet-mapping>
     -->
+    
+    <!-- OAuth support if cas-server-support-oauth is included -->
+    <servlet-mapping>
+	  <servlet-name>cas</servlet-name>
+	  <url-pattern>/oauth2.0/*</url-pattern>
+	</servlet-mapping>
 
     <session-config>
         <!-- Default to 5 minute session timeouts -->
