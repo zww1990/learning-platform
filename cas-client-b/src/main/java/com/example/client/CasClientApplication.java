@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
@@ -15,11 +16,10 @@ import org.springframework.boot.autoconfigure.validation.ValidationAutoConfigura
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
-@EnableCasClient
 @SpringBootApplication(exclude = { ProjectInfoAutoConfiguration.class, ValidationAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, RedisReactiveAutoConfiguration.class,
-		MultipartAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
-		TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class })
+		MultipartAutoConfiguration.class, SpringDataWebAutoConfiguration.class, TaskExecutionAutoConfiguration.class,
+		TaskSchedulingAutoConfiguration.class })
 public class CasClientApplication {
 	private static final Logger log = LoggerFactory.getLogger(CasClientApplication.class);
 
@@ -27,5 +27,10 @@ public class CasClientApplication {
 		ApplicationContext context = SpringApplication.run(CasClientApplication.class, args);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+	}
+
+	@EnableCasClient
+	@ConditionalOnProperty(name = "cas-env-mode", havingValue = "prod")
+	public static class CasClientAutoConfig {
 	}
 }
