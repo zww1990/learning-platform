@@ -22,6 +22,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.test.skip>true</maven.test.skip>
 		<java.version>1.8</java.version>
+		<ojdbc.version>19.3.0.0</ojdbc.version>
 	</properties>
 
 	<dependencies>
@@ -34,18 +35,38 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- ↓从Oracle Maven存储库获取Oracle JDBC驱动程序和UCP（不使用IDE）↓ -->
 		<dependency>
-		    <groupId>com.oracle.jdbc</groupId>
-		    <artifactId>ojdbc8</artifactId>
-		    <version>19.3.0.0</version>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+        	<version>${ojdbc.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>simplefan</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>osdt_core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>osdt_cert</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>oraclepki</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.oracle.ojdbc</groupId>
+					<artifactId>ons</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-		    <groupId>com.oracle.jdbc</groupId>
-		    <artifactId>orai18n</artifactId>
-		    <version>19.3.0.0</version>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>orai18n</artifactId>
+        	<version>${ojdbc.version}</version>
 		</dependency>
-		<!-- ↑从Oracle Maven存储库获取Oracle JDBC驱动程序和UCP（不使用IDE）↑ -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -158,32 +179,4 @@
 		    </plugin>
 		</plugins>
 	</build>
-	
-	<!-- ↓从Oracle Maven存储库获取Oracle JDBC驱动程序和UCP（不使用IDE）↓ -->
-	<repositories>
-		<repository>
-			<id>maven.oracle.com</id>
-			<name>oracle-maven-repo</name>
-			<url>https://maven.oracle.com</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>maven.oracle.com</id>
-			<name>oracle-maven-repo</name> 
-			<url>https://maven.oracle.com</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
-	<!-- ↑从Oracle Maven存储库获取Oracle JDBC驱动程序和UCP（不使用IDE）↑ -->
 </project>
