@@ -31,13 +31,13 @@
           <i nz-icon class="trigger" [nzType]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
         </div>
         <div nz-col [nzSpan]="22" style="text-align: right">
-          <a nz-tooltip nzTitle="当前登录用户：{{user?.userName}}">
+          <a nz-tooltip nzTooltipTitle="当前登录用户：{{user?.userName}}">
             <nz-avatar [nzText]="user?.userName" style="background-color:#87d068;"></nz-avatar>
           </a>
-          <a (click)="logout()" nz-tooltip nzTitle="退出登录">
+          <a (click)="logout()" nz-tooltip nzTooltipTitle="退出登录">
             <nz-avatar nzIcon="logout" style="background-color:#f56a00;"></nz-avatar>
           </a>
-          <a appToggleFullScreen nz-tooltip nzTitle="全屏切换">
+          <a appToggleFullScreen nz-tooltip nzTooltipTitle="全屏切换">
             <nz-avatar nzIcon="fullscreen" style="background-color:#7265e6;" *ngIf="!isFullscreen"></nz-avatar>
             <nz-avatar nzIcon="fullscreen-exit" style="background-color:#ffbf00;" *ngIf="isFullscreen"></nz-avatar>
           </a>
