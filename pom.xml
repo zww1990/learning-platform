@@ -129,12 +129,12 @@
 			<version>3.7</version>
 		</dependency> -->
 		
-		<dependency>
+		<!-- <dependency>
 		    <groupId>io.github.swagger2markup</groupId>
 		    <artifactId>swagger2markup</artifactId>
 		    <version>1.3.2</version>
 		    <scope>test</scope>
-		</dependency>
+		</dependency> -->
 		
 	</dependencies>
 
@@ -148,7 +148,7 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>io.github.swagger2markup</groupId>
 			    <artifactId>swagger2markup-maven-plugin</artifactId>
 			    <version>1.3.4</version>
@@ -173,7 +173,7 @@
 						<toc>left</toc>
 					</attributes>
 				</configuration>
-			</plugin>
+			</plugin> -->
             <plugin>
     			<groupId>org.apache.maven.plugins</groupId>
             	<artifactId>maven-compiler-plugin</artifactId>
@@ -185,7 +185,7 @@
 		</plugins>
 	</build>
 	
-	<repositories>
+	<!-- <repositories>
 		<repository>
 			<snapshots>
 				<enabled>false</enabled>
@@ -194,6 +194,6 @@
 			<name>jcenter</name>
 			<url>http://jcenter.bintray.com</url>
 		</repository>
-	</repositories>
+	</repositories> -->
 
 </project>
