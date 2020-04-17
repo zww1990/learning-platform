@@ -1,18 +1,15 @@
 package com.example.demo.web.config;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
@@ -24,9 +21,9 @@ public class DispatcherConfig implements WebMvcConfigurer {
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		for (HttpMessageConverter<?> converter : converters) {
-			if (converter instanceof StringHttpMessageConverter) {
-				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
-				shmc.setDefaultCharset(Charset.forName("UTF-8"));
+			if (converter instanceof AbstractHttpMessageConverter) {
+				AbstractHttpMessageConverter<?> hmc = (AbstractHttpMessageConverter<?>) converter;
+				hmc.setDefaultCharset(StandardCharsets.UTF_8);
 			}
 		}
 	}
@@ -41,5 +38,4 @@ public class DispatcherConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
-
 }
