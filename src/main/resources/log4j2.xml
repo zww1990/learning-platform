@@ -9,5 +9,8 @@
 		<Root level="info">
 			<AppenderRef ref="Console" />
 		</Root>
+		<Logger name="io.swagger.models.parameters" level="error">
+			<AppenderRef ref="Console"/>
+		</Logger>
 	</Loggers>
 </Configuration>
