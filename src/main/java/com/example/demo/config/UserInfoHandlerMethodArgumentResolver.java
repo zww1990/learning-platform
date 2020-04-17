@@ -11,13 +11,17 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
 import com.example.demo.model.UserModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	private static final Logger log = LoggerFactory.getLogger(UserInfoHandlerMethodArgumentResolver.class);
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
+
+	public UserInfoHandlerMethodArgumentResolver(ObjectMapper mapper) {
+		super();
+		this.mapper = mapper;
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -58,5 +62,4 @@ public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgum
 			throw new ServletRequestBindingException("请求头[" + headerName + "]参数无效", e);
 		}
 	}
-
 }
