@@ -1,6 +1,6 @@
 package com.stampede.changepwd;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import com.stampede.changepwd.util.LdapPasswordUtils;
 
 public class JsonWebTokenTests {
