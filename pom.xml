@@ -29,7 +29,33 @@
 		<dependency>
 	      <groupId>com.oracle.ojdbc</groupId>
 	      <artifactId>ojdbc8</artifactId>
-	    </dependency>
+	      <exclusions>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>simplefan</artifactId>
+	      	</exclusion>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>oraclepki</artifactId>
+	      	</exclusion>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>osdt_cert</artifactId>
+	      	</exclusion>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>osdt_core</artifactId>
+	      	</exclusion>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>ons</artifactId>
+	      	</exclusion>
+	      	<exclusion>
+	      		<groupId>com.oracle.ojdbc</groupId>
+	      		<artifactId>ucp</artifactId>
+	      	</exclusion>
+	      </exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -63,6 +89,25 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.jupiter</groupId>
+					<artifactId>junit-jupiter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-junit-jupiter</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
