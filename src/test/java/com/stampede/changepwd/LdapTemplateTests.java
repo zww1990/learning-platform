@@ -1,6 +1,5 @@
 package com.stampede.changepwd;
 
-import java.util.List;
 import javax.annotation.Resource;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
@@ -27,8 +26,7 @@ public class LdapTemplateTests {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
 			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
-			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonAttributesMapper());
-			System.err.println(list.size());
+			this.ldapTemplate.search("", filter.encode(), new PersonAttributesMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,9 +37,8 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
-			List<Object> list = this.ldapTemplate.search("", filter.encode(), new PersonContextMapper());
-			System.err.println(list.size());
+			filter.and(new EqualsFilter("uid", "zhaochenyu"));
+			this.ldapTemplate.search("", filter.encode(), new PersonContextMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
