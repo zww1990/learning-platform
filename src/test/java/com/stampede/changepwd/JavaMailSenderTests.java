@@ -25,8 +25,8 @@ public class JavaMailSenderTests {
 	public void testSendMail() {
 		try {
 			Person person = new Person();
-			person.setMail("zhangweiwei01@5i5j.com");
-			person.setGivenName("张维维");
+			person.setMail("");
+			person.setGivenName("");
 			String url = "<a href=\"http://localhost:8080/\" target=\"_blank\">http://localhost:8080/</a>";
 			SimpleMailMessage m = new SimpleMailMessage();
 			m.setFrom(String.format("配置中心密码重置（涉及SVN、GIT、JIRA、WIKI）<%s>", this.properties.getUsername()));
@@ -43,8 +43,8 @@ public class JavaMailSenderTests {
 	public void testMimeMessage() {
 		try {
 			Person person = new Person();
-			person.setMail("zhangweiwei01@5i5j.com");
-			person.setGivenName("张维维");
+			person.setMail("");
+			person.setGivenName("");
 			String url = "<a href=\"http://localhost:8080/\" target=\"_blank\">http://localhost:8080/</a>";
 			MimeMessage message = this.javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());

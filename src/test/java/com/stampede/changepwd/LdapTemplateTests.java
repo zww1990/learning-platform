@@ -25,7 +25,7 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
+			filter.and(new EqualsFilter("uid", ""));
 			this.ldapTemplate.search("", filter.encode(), new PersonAttributesMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -37,7 +37,7 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "zhaochenyu"));
+			filter.and(new EqualsFilter("uid", ""));
 			this.ldapTemplate.search("", filter.encode(), new PersonContextMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,8 +49,8 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "zhangweiwei1"));
-			boolean result = this.ldapTemplate.authenticate("", filter.encode(), "1q2w3e4r");
+			filter.and(new EqualsFilter("uid", ""));
+			boolean result = this.ldapTemplate.authenticate("", filter.encode(), "");
 			System.err.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();

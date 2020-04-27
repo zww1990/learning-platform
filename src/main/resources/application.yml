@@ -17,7 +17,7 @@ spring:
     time-zone: GMT+8
   ldap:
     #LDAP连接
-    urls: ldap://10.2.1.114:389
+    urls: ldap://localhost:389
     #LDAP节点
     base: dc=bacic5i5j,dc=com
     #LDAP用户名
@@ -30,7 +30,7 @@ spring:
     #SMTP邮箱端口（建议使用安全协议的端口号）
     port: 465
     #SMTP邮箱用户名
-    username: cm@5i5j.com
+    username: cm@qq.com
     #SMTP邮箱密码
     password: CMadmin123
     properties:
