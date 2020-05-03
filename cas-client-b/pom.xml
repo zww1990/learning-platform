@@ -77,11 +77,11 @@
 		</dependency> -->
 		
 		<!-- Tomcat 9.0.x 由此依赖项提供 -->
-		<dependency>
+		<!-- <dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-integration-tomcat-v90</artifactId>
 		   <version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- Spring Framework -->
 		<dependency>
@@ -110,18 +110,6 @@
 		<dependency>
 		    <groupId>org.apache.logging.log4j</groupId>
 		    <artifactId>log4j-jcl</artifactId>
-		</dependency>
-		
-		<!-- JSON -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		</dependency>
-		
-		<!-- apache commons -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		
 		<!-- junit -->
