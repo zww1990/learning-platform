@@ -10,6 +10,11 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Spring MVC配置类
+ * 
+ * @author home
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.example.client.web")

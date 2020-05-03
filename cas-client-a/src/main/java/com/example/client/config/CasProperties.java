@@ -1,10 +1,13 @@
 package com.example.client.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-@Configuration
+/**
+ * CAS客户端属性类
+ * 
+ * @author home
+ */
 @PropertySource("classpath:cas.properties")
 public class CasProperties {
 	@Value("${cas.server-url-prefix}")
@@ -13,14 +16,24 @@ public class CasProperties {
 	private String casServerLoginUrl;
 	@Value("${cas.client-host-url}")
 	private String casClientHostUrl;
-	@Value("${cas-env-mode}")
-	private String casEnvMode;
+	@Value("${cas-env-mode:PROD}")
+	private CasEnvMode casEnvMode;
+	@Value("${cas-ignore-patterns:}")
+	private String casIgnorePatterns;
 
-	public String getCasEnvMode() {
+	public String getCasIgnorePatterns() {
+		return casIgnorePatterns;
+	}
+
+	public void setCasIgnorePatterns(String casIgnorePatterns) {
+		this.casIgnorePatterns = casIgnorePatterns;
+	}
+
+	public CasEnvMode getCasEnvMode() {
 		return casEnvMode;
 	}
 
-	public void setCasEnvMode(String casEnvMode) {
+	public void setCasEnvMode(CasEnvMode casEnvMode) {
 		this.casEnvMode = casEnvMode;
 	}
 
@@ -48,4 +61,15 @@ public class CasProperties {
 		this.casClientHostUrl = casClientHostUrl;
 	}
 
+	/**
+	 * CAS客户端枚举类
+	 * 
+	 * @author home
+	 */
+	public enum CasEnvMode {
+		/** 生产模式 */
+		PROD,
+		/** 开发模式 */
+		DEV
+	}
 }
