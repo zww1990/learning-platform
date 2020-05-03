@@ -1,25 +1,25 @@
 package com.example.client.config;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.example.client.web")
-public class ServletConfig extends WebMvcConfigurerAdapter {
+public class ServletConfig implements WebMvcConfigurer {
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
 		for (HttpMessageConverter<?> converter : converters) {
-			if (converter instanceof StringHttpMessageConverter) {
-				StringHttpMessageConverter shmc = (StringHttpMessageConverter) converter;
-				shmc.setDefaultCharset(Charset.forName("UTF-8"));
+			if (converter instanceof AbstractHttpMessageConverter) {
+				AbstractHttpMessageConverter<?> hmc = (AbstractHttpMessageConverter<?>) converter;
+				hmc.setDefaultCharset(StandardCharsets.UTF_8);
 			}
 		}
 	}

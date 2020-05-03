@@ -7,21 +7,21 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:cas.properties")
 public class CasProperties {
-	@Value("${cas.server.url}")
+	@Value("${cas.server-url-prefix}")
 	private String casServerUrlPrefix;
-	@Value("${cas.server.login.url}")
+	@Value("${cas.server-login-url}")
 	private String casServerLoginUrl;
-	@Value("${cas.client.url}")
-	private String casClientUrl;
-	@Value("${cas.mode}")
-	private String casMode;
+	@Value("${cas.client-host-url}")
+	private String casClientHostUrl;
+	@Value("${cas-env-mode}")
+	private String casEnvMode;
 
-	public String getCasMode() {
-		return casMode;
+	public String getCasEnvMode() {
+		return casEnvMode;
 	}
 
-	public void setCasMode(String casMode) {
-		this.casMode = casMode;
+	public void setCasEnvMode(String casEnvMode) {
+		this.casEnvMode = casEnvMode;
 	}
 
 	public String getCasServerUrlPrefix() {
@@ -40,20 +40,12 @@ public class CasProperties {
 		this.casServerLoginUrl = casServerLoginUrl;
 	}
 
-	public String getCasClientUrl() {
-		return casClientUrl;
+	public String getCasClientHostUrl() {
+		return casClientHostUrl;
 	}
 
-	public void setCasClientUrl(String casClientUrl) {
-		this.casClientUrl = casClientUrl;
+	public void setCasClientHostUrl(String casClientHostUrl) {
+		this.casClientHostUrl = casClientHostUrl;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("[casServerUrlPrefix=").append(casServerUrlPrefix).append(", casServerLoginUrl=")
-				.append(casServerLoginUrl).append(", casClientUrl=").append(casClientUrl).append(", casMode=")
-				.append(casMode).append("]");
-		return builder.toString();
-	}
 }

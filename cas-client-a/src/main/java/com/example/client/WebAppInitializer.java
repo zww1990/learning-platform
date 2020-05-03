@@ -1,6 +1,6 @@
 package com.example.client;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
@@ -46,10 +46,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		registration.addMapping("/");
 		registration.setAsyncSupported(DEFAULT_ASYNC_SUPPORTED);
 		// 为给定的编码创建一个CharacterEncodingFilter。
-		this.registerServletFilter(servletContext, new CharacterEncodingFilter(Charset.forName("UTF-8").name(), true));
+		this.registerServletFilter(servletContext, new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true));
 		CasProperties casProps = rootAppContext.getBean(CasProperties.class);
-		if (CasCondition.CAS_MODE.equalsIgnoreCase(casProps.getCasMode())) {
-			log.info("DisplayName={}, CasMode={}", rootAppContext.getDisplayName(), casProps.getCasMode());
+		if (CasCondition.CAS_ENV_MODE.equalsIgnoreCase(casProps.getCasEnvMode())) {
+			log.info("DisplayName={}, CasEnvMode={}", rootAppContext.getDisplayName(), casProps.getCasEnvMode());
 			// CAS中的Single Sign Out支持包括配置一个SingleSignOutFilter和一个ContextListener。
 			// 侦听器，用于检测HTTP会话何时被销毁，并将其从管理会话的映射中删除。 还允许程序性地删除会话。启用CAS单一登出功能。
 			servletContext.addListener(new SingleSignOutHttpSessionListener());
