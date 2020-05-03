@@ -21,7 +21,7 @@
 <jsp:directive.include file="includes/top.jsp" />
 
 <c:if test="${not pageContext.request.secure}">
-    <div id="msg" class="errors">
+    <div id="msg" class="errors" style="display: none;">
         <h2><spring:message code="screen.nonsecure.title" /></h2>
         <p><spring:message code="screen.nonsecure.message" /></p>
     </div>

@@ -123,6 +123,7 @@
         <prop key="/validate">legacyValidateController</prop>
         <prop key="/proxy">proxyController</prop>
         <prop key="/authorizationFailure.html">passThroughController</prop>
+        <prop key="/oauth2.0/*">oauth20WrapperController</prop>
       </util:properties>
     </property>
     <!--
@@ -226,6 +227,14 @@
         <ref bean="internalViewResolver"/>
       </util:list>
     </property>
+  </bean>
+  
+  <!-- OAuth 2.0 Protocol validation -->
+  <bean id="oauth20WrapperController" class="org.jasig.cas.support.oauth.web.OAuth20WrapperController">
+  	<property name="loginUrl" value="${server.prefix}"/>
+  	<property name="servicesManager" ref="servicesManager"/>
+  	<property name="ticketRegistry" ref="ticketRegistry"/>
+  	<property name="timeout" value="30000"/>
   </bean>
 
   <!--  CAS 2 Protocol service/proxy validation -->     
