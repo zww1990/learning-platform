@@ -20,11 +20,11 @@ import org.springframework.context.ApplicationContext;
 		PersistenceExceptionTranslationAutoConfiguration.class, RedisReactiveAutoConfiguration.class,
 		MultipartAutoConfiguration.class, SpringDataWebAutoConfiguration.class, TaskExecutionAutoConfiguration.class,
 		TaskSchedulingAutoConfiguration.class })
-public class CasClientApplication {
-	private static final Logger log = LoggerFactory.getLogger(CasClientApplication.class);
+public class CasBClientApplication {
+	private static final Logger log = LoggerFactory.getLogger(CasBClientApplication.class);
 
 	public static void main(String[] args) throws Exception {
-		ApplicationContext context = SpringApplication.run(CasClientApplication.class, args);
+		ApplicationContext context = SpringApplication.run(CasBClientApplication.class, args);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
