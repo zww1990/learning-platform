@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
@@ -30,7 +31,8 @@ public class CasAClientApplication {
 	}
 
 	@EnableCasClient
-	@ConditionalOnProperty(name = "cas-env-mode", havingValue = "prod")
+	@ConditionalOnProperty(prefix = "cas", name = { "server-url-prefix", "server-login-url", "client-host-url" })
+	@ConditionalOnWebApplication
 	public static class CasClientAutoConfig {
 	}
 }

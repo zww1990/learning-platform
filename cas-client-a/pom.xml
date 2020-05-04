@@ -49,6 +49,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-indexer</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- 核心功能，包括CAS认证/验证过滤器。 -->
 		<dependency>
@@ -86,11 +91,11 @@
 		</dependency> -->
 		
 		<!-- Tomcat 9.0.x 由此依赖项提供 -->
-		<dependency>
+		<!-- <dependency>
 		   <groupId>org.jasig.cas.client</groupId>
 		   <artifactId>cas-client-integration-tomcat-v90</artifactId>
 		   <version>${java.cas.client.version}</version>
-		</dependency>
+		</dependency> -->
 		
 		<!-- Spring Boot 由此依赖项提供 -->
 		<dependency>
