@@ -2,22 +2,16 @@ package com.stampede.changepwd;
 
 import org.junit.Test;
 import com.stampede.changepwd.util.LdapPasswordUtils;
+import io.jsonwebtoken.Claims;
 
 public class JsonWebTokenTests {
 	@Test
-	public void testEncode() {
+	public void testJwt() {
 		try {
-			System.err.println(LdapPasswordUtils.jwtEncode("", 5));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	public void testDecode() {
-		try {
-			String string = "";
-			System.err.println(LdapPasswordUtils.jwtDecode(string));
+			String jwt = LdapPasswordUtils.jwtEncode("zhangweiwei", 5);
+			System.err.println(jwt);
+			Claims ret = LdapPasswordUtils.jwtDecode(jwt);
+			System.err.println(ret);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,6 +1,7 @@
 package com.stampede.changepwd.util;
 
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 /**
  * @author ZhangWeiWei
@@ -15,6 +17,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @description LDAP密码操作辅助类
  */
 public abstract class LdapPasswordUtils {
+	private static final Key KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月17日,下午1:43:38
@@ -93,8 +97,11 @@ public abstract class LdapPasswordUtils {
 	 */
 	public static String jwtEncode(String username, long timeout) {
 		long current = System.currentTimeMillis();
-		return Jwts.builder().setId(UUID.randomUUID().toString()).setSubject(username).setIssuedAt(new Date(current))
-				.setExpiration(new Date(current + timeout * 60 * 1000)).signWith(SignatureAlgorithm.HS256, "helloworld")
+		return Jwts.builder().setId(UUID.randomUUID().toString())// 主键
+				.setSubject(username)// 主题
+				.setIssuedAt(new Date(current))// 签发时间
+				.setExpiration(new Date(current + timeout * 60 * 1000))// 到期时间
+				.signWith(KEY)// 签名算法密钥
 				.compact();
 	}
 
@@ -105,6 +112,8 @@ public abstract class LdapPasswordUtils {
 	 * @return 采用JWT方式进行解码
 	 */
 	public static Claims jwtDecode(String token) {
-		return Jwts.parser().setSigningKey("helloworld").parseClaimsJws(token).getBody();
+		return Jwts.parserBuilder().setSigningKey(KEY)// 签名算法密钥
+				.build().parseClaimsJws(token)// 解析JWT字符串
+				.getBody();
 	}
 }

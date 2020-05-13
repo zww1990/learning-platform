@@ -53,7 +53,7 @@ changepwd:
     #创建密码
     create:
       #链接有效期（单位：分钟）
-      expiration: 1440
+      expiration: 5
       #发件人（${}是占位符，请谨慎修改）
       from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
       #邮件主题
