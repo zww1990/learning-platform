@@ -13,7 +13,7 @@ export class UserService {
    * @description 构造用户服务
    * @param cas CAS认证服务
    */
-  constructor(private cas: CasService) {}
+  constructor(private cas: CasService) { }
 
   /**
    * @description 查询session中的用户
@@ -32,10 +32,7 @@ export class UserService {
   removeSessionUser() {
     const item = sessionStorage.getItem(SessionKey.CAS_TGT);
     if (item) {
-      this.cas
-        .casDeleteTGT(item)
-        .then(res => {})
-        .catch(err => {});
+      this.cas.casDeleteTGT(item).then(res => { }).catch(err => { });
     }
     sessionStorage.clear();
   }
