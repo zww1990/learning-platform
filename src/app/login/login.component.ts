@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private message: NzMessageService,
     private cas: CasService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -49,38 +49,21 @@ export class LoginComponent implements OnInit {
   /**
    * @description CAS用户登录
    */
-  submitFormForCas() {
-    this.cas
-      .casCreateTGT(this.loginForm.value)
-      .then(res1 => {
-        const location = this.cas.parseLocation(res1);
-        this.cas
-          .casCreateST(location)
-          .then(res2 => {
-            this.cas.casServiceValidate(res2).then(res3 => {
-              const result = this.cas.parseXml(res3);
-              if (result.status) {
-                const user = new User(
-                  result.text,
-                  this.loginForm.get('username').value
-                );
-                sessionStorage.setItem(
-                  SessionKey.CAS_USER,
-                  JSON.stringify(user)
-                );
-                sessionStorage.setItem(SessionKey.CAS_TGT, location);
-                this.router.navigate(['']);
-              } else {
-                this.message.error(result.text);
-              }
-            });
-          })
-          .catch(err => {
-            this.message.error('创建TGT票据失败！');
-          });
-      })
-      .catch(err => {
-        this.message.error('用户名或密码错误！');
-      });
+  async submitFormForCas() {
+    try {
+      const tgt = await this.cas.casCreateTGT(this.loginForm.value);
+      const st = await this.cas.casCreateST(tgt);
+      const result = await this.cas.casServiceValidate(st);
+      if (result.status) {
+        const user = new User(result.text, this.loginForm.get('username').value);
+        sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
+        sessionStorage.setItem(SessionKey.CAS_TGT, tgt);
+        this.router.navigate(['']);
+      } else {
+        this.message.error(result.text);
+      }
+    } catch (error) {
+      this.message.error('用户名或密码错误！');
+    }
   }
 }

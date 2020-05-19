@@ -13,7 +13,7 @@ export class CasResult {
    * @param status 认证结果状态：true成功，false失败
    * @param text 认证结果内容
    */
-  constructor(public status: boolean, public text: any) {}
+  constructor(public status: boolean, public text: any) { }
 }
 
 /**
@@ -26,30 +26,24 @@ export class CasService {
    * @description 构造CAS认证服务
    * @param http http client
    */
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * @description 第一步（1）：创建新的票证授予票证
    * @param form 登录表单数据
    */
-  casCreateTGT(form: LoginForm): Promise<any> {
-    const body = new HttpParams()
-      .set('username', form.username)
-      .set('password', form.password);
-    return this.http
-      .post('/cas/v1/tickets', body, {
-        responseType: 'text',
-        observe: 'response'
-      })
-      .toPromise();
+  async casCreateTGT(form: LoginForm): Promise<any> {
+    const body = new HttpParams().set('username', form.username).set('password', form.password).set('locale', 'zh_CN');
+    const response = await this.http.post('/cas/v1/tickets', body, { responseType: 'text', observe: 'response' }).toPromise();
+    return this.parseLocation(response);
   }
 
   /**
    * @description 第一步（2）：解析响应头location参数
    * @param response http response
    */
-  parseLocation(response: HttpResponse<any>): string {
-    let location: string = response.headers.get('location');
+  private parseLocation(response: HttpResponse<any>): string {
+    let location = response.headers.get('location');
     location = location.substring(location.lastIndexOf('/') + 1);
     return location;
   }
@@ -59,31 +53,25 @@ export class CasService {
    * @param ticket TGT票据
    */
   casCreateST(ticket: string): Promise<any> {
-    const body = new HttpParams().set('service', location.origin);
-    return this.http
-      .post(`/cas/v1/tickets/${ticket}`, body, { responseType: 'text' })
-      .toPromise();
+    const body = new HttpParams().set('service', location.origin).set('locale', 'zh_CN');
+    return this.http.post(`/cas/v1/tickets/${ticket}`, body, { responseType: 'text' }).toPromise();
   }
 
   /**
    * @description 第三步（1）：CAS验证服务
    * @param ticket ST票据
    */
-  casServiceValidate(ticket: string): Promise<any> {
-    const body = new HttpParams()
-      .set('ticket', ticket)
-      .set('service', location.origin)
-      .set('locale', 'zh_CN');
-    return this.http
-      .post('/cas/serviceValidate', body, { responseType: 'text' })
-      .toPromise();
+  async casServiceValidate(ticket: string): Promise<any> {
+    const body = new HttpParams().set('ticket', ticket).set('service', location.origin).set('locale', 'zh_CN');
+    const response = await this.http.post('/cas/serviceValidate', body, { responseType: 'text' }).toPromise();
+    return this.parseXml(response);
   }
 
   /**
    * @description 第三步（2）：解析xml文档，并返回认证结果
    * @param xml xml文档
    */
-  parseXml(xml: string): CasResult {
+  private parseXml(xml: string): CasResult {
     xml = xml.trim();
     let json = xml2js(xml, {
       compact: true, // 简化
@@ -106,8 +94,6 @@ export class CasService {
    * @param ticket TGT票据
    */
   casDeleteTGT(ticket: string): Promise<any> {
-    return this.http
-      .delete(`/cas/v1/tickets/${ticket}`, { responseType: 'text' })
-      .toPromise();
+    return this.http.delete(`/cas/v1/tickets/${ticket}`, { responseType: 'text' }).toPromise();
   }
 }

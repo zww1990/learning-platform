@@ -20,9 +20,7 @@ registerLocaleData(zh); // 注册本地化数据
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production
-    })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   bootstrap: [AppComponent]
 })

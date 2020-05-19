@@ -24,7 +24,7 @@ export class LayoutComponent implements OnInit {
     private route: ActivatedRoute,
     private confirm: NzModalService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.user = this.userService.querySessionUser();
@@ -44,13 +44,7 @@ export class LayoutComponent implements OnInit {
    * @description 打开默认的标签
    */
   openDefaultTab() {
-    this.tabs = [
-      {
-        menuName: '首页',
-        menuUrl: '',
-        allowDelete: false
-      }
-    ];
+    this.tabs = [{ menuName: '首页', menuUrl: '', allowDelete: false }];
   }
 
   /**
@@ -77,9 +71,7 @@ export class LayoutComponent implements OnInit {
     this.menus.forEach(child => {
       child.selected = child.menuId === menu.parentMenuId && !this.isCollapsed;
       if (child.children && child.children.length) {
-        child.children.forEach(item => {
-          item.selected = item.menuId === menu.menuId;
-        });
+        child.children.forEach(item => item.selected = item.menuId === menu.menuId);
       }
     });
   }
