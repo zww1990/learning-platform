@@ -19,12 +19,7 @@ export class LayoutComponent implements OnInit {
   menus: MenuItem[] = [];
   tabs: MenuItem[] = [];
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private confirm: NzModalService,
-    private userService: UserService
-  ) { }
+  constructor(private router: Router, private route: ActivatedRoute, private confirm: NzModalService, private userService: UserService) { }
 
   ngOnInit() {
     this.user = this.userService.querySessionUser();

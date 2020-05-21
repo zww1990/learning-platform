@@ -20,13 +20,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
     ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
   ],
   declarations: [],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgZorroAntdModule
-  ],
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, NgZorroAntdModule],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
-export class SharedModule {}
+export class SharedModule { }

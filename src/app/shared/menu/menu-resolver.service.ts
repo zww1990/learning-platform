@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { MenuItem } from './menu-item.model';
 import { MenuService } from './menu.service';
 
@@ -17,7 +13,7 @@ export class MenuResolverService implements Resolve<MenuItem[]> {
    * @description 构造菜单解析器
    * @param menuService 菜单服务
    */
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService) { }
 
   /**
    * @description 导航前预先加载菜单列表，再将菜单链接存入浏览器sessionStorage中。
