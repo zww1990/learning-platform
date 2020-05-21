@@ -14,12 +14,7 @@ import { User } from '../shared/user/user.model';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private message: NzMessageService,
-    private cas: CasService
-  ) { }
+  constructor(private fb: FormBuilder, private router: Router, private message: NzMessageService, private cas: CasService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({

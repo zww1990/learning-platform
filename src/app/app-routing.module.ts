@@ -48,12 +48,7 @@ const routes: Routes = [
     SharedModule
   ],
   exports: [RouterModule],
-  declarations: [
-    LayoutComponent,
-    LoginComponent,
-    InputAutoFocusDirective,
-    ToggleFullScreenDirective
-  ],
+  declarations: [LayoutComponent, LoginComponent, InputAutoFocusDirective, ToggleFullScreenDirective],
   providers: [
     AuthGuard,
     UserService,

@@ -1,8 +1,4 @@
-import {
-  ActivatedRouteSnapshot,
-  DetachedRouteHandle,
-  RouteReuseStrategy
-} from '@angular/router';
+import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
 
 /**
  * @description 路由重用策略，当多tab标签切换时，保留上次操作的数据。
