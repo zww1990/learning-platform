@@ -6,6 +6,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * 控制器
+ * 
+ * @author home
+ */
 @Controller
 public class IndexController {
 	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
