@@ -6,8 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -29,12 +27,4 @@ public class SpringSecurityApplicationTests {
 		}
 	}
 
-	public static void main(String[] args) {
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		System.err.println(encoder.encode("admin"));
-		System.err.println(encoder.encode("guest1"));
-		System.err.println(encoder.encode("guest2"));
-		System.err.println(encoder.encode("guest3"));
-		System.err.println(encoder.encode("guest4"));
-	}
 }
