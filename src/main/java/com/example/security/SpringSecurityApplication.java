@@ -16,6 +16,11 @@ import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfigura
 import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * Spring Security应用启动类
+ * 
+ * @author home
+ */
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		ProjectInfoAutoConfiguration.class, ValidationAutoConfiguration.class, AopAutoConfiguration.class,
 		MultipartAutoConfiguration.class, PersistenceExceptionTranslationAutoConfiguration.class,
