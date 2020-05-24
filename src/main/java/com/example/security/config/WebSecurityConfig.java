@@ -18,10 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.withUser("admin")// 允许将用户添加到正在创建的UserDetailsManager。 可以多次调用此方法来添加多个用户。
 				.password("admin")// 填充密码。 该属性是必需的。
 				.roles("ADMIN")// 填充角色。 此方法是调用authorities(String)的快捷方式，但会自动为每个条目添加“ROLE_”。
-				.and()// 返回方法链接的UserDetailsManagerConfigurer（即添加另一个用户）
-				.withUser("guest")//
-				.password("guest")//
-				.roles("GUEST")//
+				// 返回方法链接的UserDetailsManagerConfigurer（即添加另一个用户）
+				.and().withUser("guest1").password("guest1").roles("GUEST").accountExpired(true)// 帐户是否过期。 默认为false。
+				.and().withUser("guest2").password("guest2").roles("GUEST").accountLocked(true)// 帐户是否被锁定。 默认为false。
+				.and().withUser("guest3").password("guest3").roles("GUEST").credentialsExpired(true)// 凭据是否过期。 默认为false。
+				.and().withUser("guest4").password("guest4").roles("GUEST").disabled(true)// 是否禁用帐户。默认为false。
 		;
 	}
 
