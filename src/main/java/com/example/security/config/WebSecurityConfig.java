@@ -2,11 +2,15 @@ package com.example.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.example.security.support.PlaintextPasswordEncoder;
 
@@ -17,23 +21,27 @@ import com.example.security.support.PlaintextPasswordEncoder;
  */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	/**
+	 * 加载用户特定数据的核心接口。
+	 */
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()// 将内存认证添加到AuthenticationManagerBuilder中，并返回一个InMemoryUserDetailsManagerConfigurer来允许自定义内存认证。
-				.withUser("admin")// 允许将用户添加到正在创建的UserDetailsManager。 可以多次调用此方法来添加多个用户。
-				.password("admin")// 填充密码。 该属性是必需的。
-				.roles("ADMIN")// 填充角色。 此方法是调用authorities(String)的快捷方式，但会自动为每个条目添加“ROLE_”。
-				// 返回方法链接的UserDetailsManagerConfigurer（即添加另一个用户）
-				.and().withUser("guest1").password("guest1").roles("GUEST").accountExpired(true)// 帐户是否过期。 默认为false。
-				.and().withUser("guest2").password("guest2").roles("GUEST").accountLocked(true)// 帐户是否被锁定。 默认为false。
-				.and().withUser("guest3").password("guest3").roles("GUEST").credentialsExpired(true)// 凭据是否过期。 默认为false。
-				.and().withUser("guest4").password("guest4").roles("GUEST").disabled(true)// 是否禁用帐户。默认为false。
-		;
+	@Bean
+	protected UserDetailsService userDetailsService() {
+		// 将内存认证添加到AuthenticationManagerBuilder中，并返回一个InMemoryUserDetailsManagerConfigurer来允许自定义内存认证。
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		// 允许将用户添加到正在创建的UserDetailsManager。 可以多次调用此方法来添加多个用户。
+		manager.createUser(User.withUsername("admin").password("admin").roles("ADMIN").build());
+		manager.createUser(User.withUsername("guest").password("guest").roles("GUEST").build());
+		return manager;
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()// 允许基于HttpServletRequest使用限制访问
+				.antMatchers("/admin/**")// 创建未指定HttpMethod的AntPathRequestMatcher实例列表。
+				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
+				.antMatchers("/guest/**")//
+				.hasRole("GUEST")//
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
@@ -56,8 +64,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		;
 	}
 
+	/**
+	 * @return 用于编码密码的服务接口。首选实现是BCryptPasswordEncoder。
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new PlaintextPasswordEncoder();
+	}
+
+	/**
+	 * @return 角色层次结构的简单接口。
+	 */
+	@Bean
+	public RoleHierarchy roleHierarchy() {
+		RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
+		hierarchy.setHierarchy("ROLE_ADMIN > ROLE_GUEST");
+		return hierarchy;
 	}
 }
