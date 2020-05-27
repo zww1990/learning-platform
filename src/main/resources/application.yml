@@ -31,3 +31,11 @@ spring:
     check-template-location: false
   messages:
     basename: org.springframework.security.messages
+  datasource:
+    #数据库用户名
+    username: navicat
+    #数据库密码
+    password: testnavicat
+    #数据库连接
+    url: jdbc:mysql://server1.navicat.com:4406/test
+    initialization-mode: never
