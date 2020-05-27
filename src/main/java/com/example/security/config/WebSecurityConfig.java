@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -16,7 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import com.example.security.support.PlaintextPasswordEncoder;
 
@@ -27,6 +30,9 @@ import com.example.security.support.PlaintextPasswordEncoder;
  */
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Resource
+	private DataSource dataSource;
+
 	/**
 	 * 加载用户特定数据的核心接口。
 	 */
@@ -34,10 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	protected UserDetailsService userDetailsService() {
 		// 将内存认证添加到AuthenticationManagerBuilder中，并返回一个InMemoryUserDetailsManagerConfigurer来允许自定义内存认证。
-		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+		// Jdbc用户管理服务，基于与其父类JdbcDaoImpl相同的表结构。
+		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
 		// 允许将用户添加到正在创建的UserDetailsManager。 可以多次调用此方法来添加多个用户。
-		manager.createUser(User.withUsername("admin").password("admin").roles("ADMIN").build());
-		manager.createUser(User.withUsername("guest").password("guest").roles("GUEST").build());
+		if (!manager.userExists("admin")) {
+			manager.createUser(User.withUsername("admin").password("admin")
+					.passwordEncoder(this.passwordEncoder()::encode).roles("ADMIN").build());
+		}
+		if (!manager.userExists("guest")) {
+			manager.createUser(User.withUsername("guest").password("guest")
+					.passwordEncoder(this.passwordEncoder()::encode).roles("GUEST").build());
+		}
 		return manager;
 	}
 
