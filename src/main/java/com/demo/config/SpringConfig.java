@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import com.demo.config.AppProperties.JdbcProperties;
 import com.github.pagehelper.PageInterceptor;
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
@@ -22,7 +21,7 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 @MapperScan({ "com.wiwj.bdm.mq.mapper", "com.wiwj.bdm.base.mapper", "com.wiwj.bdm.esb.mapper" })
 public class SpringConfig {
 	@Bean
-	public DataSource dataSource(JdbcProperties props) throws Exception {
+	public DataSource dataSource(AppProperties props) throws Exception {
 		PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
 		dataSource.setConnectionFactoryClassName(props.getDriverClass());
 		dataSource.setURL(props.getUrl());

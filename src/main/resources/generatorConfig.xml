@@ -21,7 +21,7 @@
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
 			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
-			<property name="useJSR310Types" value="true"/><!-- 使用JSR-310数据类型 -->
+			<property name="useJSR310Types" value="false"/><!-- 使用JSR-310数据类型 -->
 		</javaTypeResolver>
 		<javaModelGenerator targetPackage="${java.model.package}" targetProject="./src/main/java"/>
 		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/java"/>
@@ -29,9 +29,9 @@
 			XMLMAPPER：全XML文件，
 			MIXEDMAPPER：注解和XML混合 -->
 		<javaClientGenerator targetPackage="${java.client.package}" targetProject="./src/main/java" type="XMLMAPPER"/>
-		<table tableName="BDM_USER_BROKER" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+		<table tableName="BDM_TRAFFIC" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
 			<!-- 主键生成策略 -->
-			<!-- <generatedKey column="ID" sqlStatement="select BDM_SYNC_TASK_DETAIL_SEQ.nextval from dual"/> -->
+			<!-- <generatedKey column="SHOP_ID" sqlStatement="select BDM_SHOPS_SEQ.nextval from dual"/> -->
 		</table>
 	</context>
 </generatorConfiguration>
