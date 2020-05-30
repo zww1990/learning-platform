@@ -1,3 +1,6 @@
+drop table t_user_authority;
+drop table t_user;
+drop table t_authority;
 
 create table t_authority (
 auth_id integer not null auto_increment comment '权限主键', 
