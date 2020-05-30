@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -13,7 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
  * @author home
  */
 @SuppressWarnings("serial")
-@Entity(name = "authorities")
+@Entity
+@Table(name = "t_authority")
 public class Authority implements GrantedAuthority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
