@@ -18,8 +18,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.security.service.UserService;
+import com.example.security.support.VerificationCodeFilter;
 
 /**
  * Spring Security配置类
@@ -40,6 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 允许在已知的一个过滤器类之前添加过滤器。
+		http.addFilterBefore(this.verificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.authorizeRequests()// 允许基于HttpServletRequest使用限制访问
 				.antMatchers("/admin/**")// 创建未指定HttpMethod的AntPathRequestMatcher实例列表。
 				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
@@ -59,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.debug(true)// 控制对Spring Security的调试支持。
+		web.debug(false)// 控制对Spring Security的调试支持。
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
 							// Spring Security提供的Web Security（包括SecurityContext）在匹配的HttpServletRequest上将不可用。
 							// 通常，注册的请求应该仅是静态资源的请求。 对于动态请求，请考虑映射请求以允许所有用户使用。
@@ -89,5 +93,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		roleMap.put("ROLE_ADMIN", Arrays.asList("ROLE_GUEST"));
 		hierarchy.setHierarchy(RoleHierarchyUtils.roleHierarchyFromMap(roleMap));
 		return hierarchy;
+	}
+
+	/**
+	 * @return 验证码过滤器
+	 */
+	@Bean
+	public VerificationCodeFilter verificationCodeFilter() {
+		return new VerificationCodeFilter();
 	}
 }
