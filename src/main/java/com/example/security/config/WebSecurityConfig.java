@@ -63,8 +63,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
 							// Spring Security提供的Web Security（包括SecurityContext）在匹配的HttpServletRequest上将不可用。
 							// 通常，注册的请求应该仅是静态资源的请求。 对于动态请求，请考虑映射请求以允许所有用户使用。
-				.antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**")//
-		;
+				.antMatchers("/css/**"// 样式文件
+						, "/fonts/**"// 字体文件
+						, "/images/**"// 图片文件
+						, "/js/**"// 脚本文件
+						, "/verifycode"// 验证码
+				);
 	}
 
 	/**
