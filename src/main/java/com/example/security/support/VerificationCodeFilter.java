@@ -31,9 +31,11 @@ public class VerificationCodeFilter extends GenericFilterBean {
 	private MessageSource messageSource;
 
 	public VerificationCodeFilter() {
+		super();
 	}
 
 	public VerificationCodeFilter(String filterProcessesUrl) {
+		super();
 		this.filterProcessesUrl = filterProcessesUrl;
 	}
 
