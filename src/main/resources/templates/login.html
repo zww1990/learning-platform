@@ -23,8 +23,18 @@
          			<label for="password" class="sr-only">密码</label>
          			<input type="password" id="password" name="password" class="form-control" placeholder="密码" required autocomplete="off">
        			</p>
+       			<p style="display: flex;align-items: center;">
+         			<label for="verifycode" class="sr-only">验证码</label>
+         			<input type="text" id="verifycode" name="verifycode" class="form-control" placeholder="验证码" required autocomplete="off" style="width: 170px;margin-right: 20px;">
+         			<img id="verifycodeimg" alt="图片验证码" th:src="@{/verifycode}" title="点我重新生成验证码" style="cursor: pointer;">
+       			</p>
        			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
      		</form>
 		</div>
 	</body>
+	<script type="text/javascript">
+		document.getElementById('verifycodeimg').onclick=function(){
+			this.src='[[${#request.contextPath}]]/verifycode?x='+Math.random();
+		}
+	</script>
 </html>
