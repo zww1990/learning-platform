@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.security.support.VerificationCode;
+import com.example.security.support.CaptchaBean;
 
 /**
  * 控制器
@@ -37,9 +37,9 @@ public class IndexController {
 		return "login";
 	}
 
-	@GetMapping("/verifycode")
-	public void verifyCode(HttpSession session, HttpServletResponse response) throws IOException {
-		VerificationCode code = new VerificationCode();
-		session.setAttribute(VerificationCode.VERIFICATION_CODE_KEY, code.output(response.getOutputStream()));
+	@GetMapping("/captcha")
+	public void captcha(HttpSession session, HttpServletResponse response) throws IOException {
+		CaptchaBean bean = new CaptchaBean();
+		session.setAttribute(CaptchaBean.CAPTCHA_KEY, bean.output(response.getOutputStream()));
 	}
 }
