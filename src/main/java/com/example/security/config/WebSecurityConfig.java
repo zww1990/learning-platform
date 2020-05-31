@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.security.service.UserService;
-import com.example.security.support.VerificationCodeFilter;
+import com.example.security.support.CaptchaFilter;
 
 /**
  * Spring Security配置类
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// 允许在已知的一个过滤器类之前添加过滤器。
-		http.addFilterBefore(this.verificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class);
 		http.authorizeRequests()// 允许基于HttpServletRequest使用限制访问
 				.antMatchers("/admin/**")// 创建未指定HttpMethod的AntPathRequestMatcher实例列表。
 				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						, "/fonts/**"// 字体文件
 						, "/images/**"// 图片文件
 						, "/js/**"// 脚本文件
-						, "/verifycode"// 验证码
+						, "/captcha"// 验证码
 				);
 	}
 
@@ -99,7 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return 验证码过滤器
 	 */
 	@Bean
-	public VerificationCodeFilter verificationCodeFilter() {
-		return new VerificationCodeFilter();
+	public CaptchaFilter captchaFilter() {
+		return new CaptchaFilter();
 	}
 }
