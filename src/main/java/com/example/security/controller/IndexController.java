@@ -1,10 +1,17 @@
 package com.example.security.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.security.support.VerificationCode;
 
 /**
  * 控制器
@@ -30,4 +37,9 @@ public class IndexController {
 		return "login";
 	}
 
+	@GetMapping("/verifycode")
+	public void verifyCode(HttpSession session, HttpServletResponse response) throws IOException {
+		VerificationCode code = new VerificationCode();
+		session.setAttribute(VerificationCode.VERIFICATION_CODE_KEY, code.output(response.getOutputStream()));
+	}
 }
