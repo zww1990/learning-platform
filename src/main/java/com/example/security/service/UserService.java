@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return this.userRepository.findUserByUsername(username)
-				.orElseThrow(() -> new UsernameNotFoundException(this.messageSource.getMessage("JdbcDaoImpl.notFound",
+				.orElseThrow(() -> new UsernameNotFoundException(this.messageSource.getMessage("UserService.notFound",
 						Stream.of(username).toArray(String[]::new), LocaleContextHolder.getLocale())));
 	}
 
