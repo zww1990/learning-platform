@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -25,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.security.model.User;
 import com.example.security.service.UserService;
+import com.example.security.support.CaptchaBean;
 import com.example.security.support.LoginFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -114,6 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setFilterProcessesUrl("/login");// 设置确定是否需要身份验证的URL
 		// 用于处理成功的用户身份验证的策略。
 		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
+			request.getSession().removeAttribute(CaptchaBean.CAPTCHA_KEY);// 登录成功后删除验证码
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 			try (PrintWriter out = response.getWriter()) {
@@ -126,6 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setAuthenticationFailureHandler((request, response, exception) -> {
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 			try (PrintWriter out = response.getWriter()) {
 				out.write(this.objectMapper.writeValueAsString(Arrays.asList(exception.toString())));
 			}
