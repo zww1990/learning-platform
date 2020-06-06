@@ -39,6 +39,22 @@ public class User implements UserDetails {
 	@JoinTable(name = "t_user_authority", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
 	private List<Authority> authorities;
 
+	public User() {
+		super();
+	}
+
+	public User(String username, String password, boolean accountNonExpired, boolean accountNonLocked,
+			boolean credentialsNonExpired, boolean enabled, List<Authority> authorities) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.accountNonExpired = accountNonExpired;
+		this.accountNonLocked = accountNonLocked;
+		this.credentialsNonExpired = credentialsNonExpired;
+		this.enabled = enabled;
+		this.authorities = authorities;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.authorities;
