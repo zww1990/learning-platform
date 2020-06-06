@@ -25,8 +25,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.example.security.model.User;
+import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
 import com.example.security.support.CaptchaBean;
 import com.example.security.support.CaptchaFilter;
@@ -80,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()// 禁用CSRF
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
+				.tokenRepository(this.tokenRepository())// 指定要使用的PersistentTokenRepository实例。
 		;
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -89,7 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.debug(true)// 控制对Spring Security的调试支持。
+		web.debug(false)// 控制对Spring Security的调试支持。
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
 							// Spring Security提供的Web Security（包括SecurityContext）在匹配的HttpServletRequest上将不可用。
 							// 通常，注册的请求应该仅是静态资源的请求。 对于动态请求，请考虑映射请求以允许所有用户使用。
@@ -160,5 +163,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			}
 		});
 		return filter;
+	}
+
+	/**
+	 * @return 用于存储用户的持久登录令牌的实现。
+	 */
+	@Bean
+	public PersistentTokenRepository tokenRepository() {
+		return new RememberMeService();
 	}
 }
