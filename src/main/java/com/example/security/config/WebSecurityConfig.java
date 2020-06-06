@@ -1,6 +1,8 @@
 package com.example.security.config;
 
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.example.security.model.User;
 import com.example.security.service.UserService;
 import com.example.security.support.CaptchaBean;
+import com.example.security.support.CaptchaFilter;
 import com.example.security.support.LoginFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -41,6 +44,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	@Resource
 	private ObjectMapper objectMapper;
+
+	private String getByInetAddress() throws Exception {
+		byte[] bytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
+		StringBuilder sb = new StringBuilder();
+		for (byte bt : bytes) {
+			sb.append(Integer.toHexString(bt & 0xff)).append('-');
+		}
+		sb.delete(sb.length() - 1, sb.length());
+		return sb.toString();
+	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -59,15 +72,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
-//				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
-//				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
-//				.permitAll()// 授予访问URL的权限为true
-//				.and()//
+				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
+				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
+				.permitAll()// 授予访问URL的权限为true
+				.and()//
 				.csrf()// 添加了CSRF支持。
 				.disable()// 禁用CSRF
+				.rememberMe()// 允许配置“记住我”身份验证。
+				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
 		;
 		// 将过滤器添加到指定过滤器类的位置。
-		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
+//		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
+		// 允许在已知的一个过滤器类之前添加过滤器。
+		http.addFilterBefore(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -105,10 +122,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
+	 * @return 验证码过滤器
+	 */
+	@Bean
+	public CaptchaFilter captchaFilter() {
+		return new CaptchaFilter();
+	}
+
+	/**
 	 * @return 登录过滤器
 	 * @throws Exception
 	 */
-	@Bean
+//	@Bean
 	@SuppressWarnings("deprecation")
 	public LoginFilter loginFilter() throws Exception {
 		LoginFilter filter = new LoginFilter();
