@@ -23,6 +23,16 @@ public class Authority implements GrantedAuthority {
 	private String authName;
 	private String authority;
 
+	public Authority() {
+		super();
+	}
+
+	public Authority(String authName, String authority) {
+		super();
+		this.authName = authName;
+		this.authority = authority;
+	}
+
 	@Override
 	public String getAuthority() {
 		return this.authority;
