@@ -83,6 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
 				.tokenRepository(this.tokenRepository())// 指定要使用的PersistentTokenRepository实例。
+				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
 		;
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
