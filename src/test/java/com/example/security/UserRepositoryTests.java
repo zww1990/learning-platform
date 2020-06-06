@@ -25,32 +25,14 @@ public class UserRepositoryTests {
 	@Test
 	public void testSave() {
 		try {
-			Authority a1 = new Authority();
-			a1.setAuthName("超级管理员");
-			a1.setAuthority("ROLE_ADMIN");
+			Authority a1 = new Authority("超级管理员", "ROLE_ADMIN");
 
-			Authority a2 = new Authority();
-			a2.setAuthName("访客");
-			a2.setAuthority("ROLE_GUEST");
+			Authority a2 = new Authority("访客", "ROLE_GUEST");
 
-			User u1 = new User();
-			u1.setAccountNonExpired(true);
-			u1.setAccountNonLocked(true);
-			u1.setCredentialsNonExpired(true);
-			u1.setEnabled(true);
-			u1.setPassword(this.encoder.encode("admin"));
-			u1.setUsername("admin");
-			u1.setAuthorities(Arrays.asList(a1));
+			User u1 = new User("admin", this.encoder.encode("admin"), true, true, true, true, Arrays.asList(a1));
 			this.userdao.save(u1);
 
-			User u2 = new User();
-			u2.setAccountNonExpired(true);
-			u2.setAccountNonLocked(true);
-			u2.setCredentialsNonExpired(true);
-			u2.setEnabled(true);
-			u2.setPassword(this.encoder.encode("guest"));
-			u2.setUsername("guest");
-			u2.setAuthorities(Arrays.asList(a2));
+			User u2 = new User("guest", this.encoder.encode("guest"), true, true, true, true, Arrays.asList(a2));
 			this.userdao.save(u2);
 
 		} catch (Exception e) {
