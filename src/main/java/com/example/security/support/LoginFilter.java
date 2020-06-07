@@ -26,6 +26,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.code.kaptcha.Constants;
 
 /**
  * 登录过滤器：<br>
@@ -55,7 +56,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 					Stream.of(request.getMethod()).toArray(String[]::new), LocaleContextHolder.getLocale()));
 		}
 		HttpSession session = request.getSession();
-		String sessionCaptcha = (String) session.getAttribute(CaptchaBean.CAPTCHA_KEY);
+		String sessionCaptcha = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 		if (MediaType.APPLICATION_JSON_UTF8_VALUE.contains(request.getContentType())) {
 			Map<String, String> postData = Collections.emptyMap();
 			try {
