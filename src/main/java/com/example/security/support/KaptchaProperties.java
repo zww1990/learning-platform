@@ -2,7 +2,6 @@ package com.example.security.support;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.impl.DefaultBackground;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.impl.DefaultNoise;
@@ -25,29 +24,6 @@ public class KaptchaProperties {
 	private Word word = new Word();
 	private Background background = new Background();
 	private Image image = new Image();
-
-	public static class Session {
-		/** 允许覆盖存储在用户HttpSession中的密钥名称。 */
-		private String key = Constants.KAPTCHA_SESSION_KEY;
-		/** 允许覆盖存储在用户HttpSession中的日期名称。 */
-		private String date = Constants.KAPTCHA_SESSION_DATE;
-
-		public String getKey() {
-			return key;
-		}
-
-		public String getDate() {
-			return date;
-		}
-
-		public void setKey(String key) {
-			this.key = key;
-		}
-
-		public void setDate(String date) {
-			this.date = date;
-		}
-	}
 
 	public static class Border {
 		public enum Enabled {
