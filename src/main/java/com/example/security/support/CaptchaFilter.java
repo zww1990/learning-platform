@@ -19,6 +19,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.google.code.kaptcha.Constants;
+
 /**
  * 验证码过滤器
  * 
@@ -47,7 +49,7 @@ public class CaptchaFilter extends GenericFilterBean {
 				&& this.filterProcessesUrl.equals(request.getServletPath())) {
 			String requestCaptcha = this.obtainCaptcha(request);
 			HttpSession session = request.getSession();
-			String sessionCaptcha = (String) session.getAttribute(CaptchaBean.CAPTCHA_KEY);
+			String sessionCaptcha = (String) session.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 			if (StringUtils.isEmpty(requestCaptcha) || StringUtils.isEmpty(sessionCaptcha)
 					|| !requestCaptcha.equalsIgnoreCase(sessionCaptcha)) {
 				AuthenticationServiceException exception = new AuthenticationServiceException(this.messageSource
