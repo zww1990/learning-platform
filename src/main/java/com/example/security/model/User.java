@@ -2,6 +2,7 @@ package com.example.security.model;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -126,4 +127,18 @@ public class User implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		User user = (User) o;
+		return Objects.equals(username, user.username);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(username);
+	}
 }
