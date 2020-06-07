@@ -20,19 +20,20 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.example.security.model.User;
 import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
-import com.example.security.support.CaptchaFilter;
+import com.example.security.support.CaptchaAuthenticationProvider;
 import com.example.security.support.KaptchaProperties;
 import com.example.security.support.LoginFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -94,8 +95,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		;
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
-		// 允许在已知的一个过滤器类之前添加过滤器。
-		http.addFilterBefore(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -110,6 +109,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						, "/js/**"// 脚本文件
 						, "/captcha"// 验证码
 				);
+	}
+
+	@Override
+	@Bean
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return new ProviderManager(Arrays.asList(this.captchaAuthenticationProvider()));
 	}
 
 	/**
@@ -133,11 +138,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * @return 验证码过滤器
+	 * @return 验证码认证提供者
 	 */
 	@Bean
-	public CaptchaFilter captchaFilter() {
-		return new CaptchaFilter();
+	public CaptchaAuthenticationProvider captchaAuthenticationProvider() {
+		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
+		provider.setPasswordEncoder(this.passwordEncoder());
+		provider.setUserDetailsService(this.userService);
+		return provider;
 	}
 
 	/**
