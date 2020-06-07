@@ -95,6 +95,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
 				.tokenRepository(this.tokenRepository())// 指定要使用的PersistentTokenRepository实例。
 				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
+				.and()//
+				.sessionManagement()// 允许配置会话管理。
+				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
 		;
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
