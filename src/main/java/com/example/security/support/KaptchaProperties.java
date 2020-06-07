@@ -17,7 +17,6 @@ import com.google.code.kaptcha.text.impl.DefaultWordRenderer;
  */
 @ConfigurationProperties(prefix = "kaptcha")
 public class KaptchaProperties {
-	private Session session = new Session();
 	private Border border = new Border();
 	private Noise noise = new Noise();
 	private Obscurificator obscurificator = new Obscurificator();
@@ -307,10 +306,6 @@ public class KaptchaProperties {
 		}
 	}
 
-	public Session getSession() {
-		return session;
-	}
-
 	public Border getBorder() {
 		return border;
 	}
@@ -341,10 +336,6 @@ public class KaptchaProperties {
 
 	public Image getImage() {
 		return image;
-	}
-
-	public void setSession(Session session) {
-		this.session = session;
 	}
 
 	public void setBorder(Border border) {
