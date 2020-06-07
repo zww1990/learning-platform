@@ -46,3 +46,10 @@ spring:
     open-in-view: false
     properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
 
+kaptcha:
+  image:
+    width: 150
+    height: 50
+  textproducer:
+    char-string: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    char-length: 4
