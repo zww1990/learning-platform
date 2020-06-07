@@ -20,8 +20,8 @@ public class CaptchaBean {
 	private static final String[] fontNames = { "宋体", "楷体", "隶书", "微软雅黑" };
 	private static final String codes = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	public static final String CAPTCHA_KEY = "CAPTCHA";
-	private static final int width = 100;// 生成验证码图片的宽度
-	private static final int height = 30;// 生成验证码图片的高度
+	private static final int width = 150;// 生成验证码图片的宽度
+	private static final int height = 50;// 生成验证码图片的高度
 	private static final Color bgColor = new Color(255, 255, 255);// 定义验证码图片的背景颜色为白色
 	private Random random = new Random();
 	private String text;// 记录随机字符串
