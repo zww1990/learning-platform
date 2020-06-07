@@ -8,9 +8,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -30,10 +32,14 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import com.example.security.model.User;
 import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
-import com.example.security.support.CaptchaBean;
 import com.example.security.support.CaptchaFilter;
+import com.example.security.support.KaptchaProperties;
 import com.example.security.support.LoginFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.code.kaptcha.Constants;
+import com.google.code.kaptcha.Producer;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
+import com.google.code.kaptcha.util.Config;
 
 /**
  * Spring Security配置类
@@ -41,6 +47,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author home
  */
 @Configuration
+@EnableConfigurationProperties(KaptchaProperties.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Resource
 	private UserService userService;
@@ -93,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.debug(false)// 控制对Spring Security的调试支持。
+		web.debug(true)// 控制对Spring Security的调试支持。
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
 							// Spring Security提供的Web Security（包括SecurityContext）在匹配的HttpServletRequest上将不可用。
 							// 通常，注册的请求应该仅是静态资源的请求。 对于动态请求，请考虑映射请求以允许所有用户使用。
@@ -145,7 +152,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		filter.setFilterProcessesUrl("/login");// 设置确定是否需要身份验证的URL
 		// 用于处理成功的用户身份验证的策略。
 		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-			request.getSession().removeAttribute(CaptchaBean.CAPTCHA_KEY);// 登录成功后删除验证码
+			request.getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);// 登录成功后删除验证码
 			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
 			try (PrintWriter out = response.getWriter()) {
@@ -172,5 +179,37 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PersistentTokenRepository tokenRepository() {
 		return new RememberMeService();
+	}
+
+	/**
+	 * @param kp
+	 * @return 图片验证码
+	 */
+	@Bean
+	public Producer defaultKaptcha(KaptchaProperties kp) {
+		DefaultKaptcha kaptcha = new DefaultKaptcha();
+		Properties props = new Properties();
+		props.put(Constants.KAPTCHA_BORDER, kp.getBorder().getEnabled().name());
+		props.put(Constants.KAPTCHA_BORDER_COLOR, kp.getBorder().getColor());
+		props.put(Constants.KAPTCHA_BORDER_THICKNESS, kp.getBorder().getThickness());
+		props.put(Constants.KAPTCHA_NOISE_COLOR, kp.getNoise().getColor());
+		props.put(Constants.KAPTCHA_NOISE_IMPL, kp.getNoise().getImpl());
+		props.put(Constants.KAPTCHA_OBSCURIFICATOR_IMPL, kp.getObscurificator().getImpl());
+		props.put(Constants.KAPTCHA_PRODUCER_IMPL, kp.getProducer().getImpl());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_IMPL, kp.getTextproducer().getImpl());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_STRING, kp.getTextproducer().getCharString());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, kp.getTextproducer().getCharLength());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_SPACE, kp.getTextproducer().getCharSpace());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, kp.getTextproducer().getFont().getNames());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, kp.getTextproducer().getFont().getColor());
+		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, kp.getTextproducer().getFont().getSize());
+		props.put(Constants.KAPTCHA_WORDRENDERER_IMPL, kp.getWord().getImpl());
+		props.put(Constants.KAPTCHA_BACKGROUND_IMPL, kp.getBackground().getImpl());
+		props.put(Constants.KAPTCHA_BACKGROUND_CLR_FROM, kp.getBackground().getClear().getFrom());
+		props.put(Constants.KAPTCHA_BACKGROUND_CLR_TO, kp.getBackground().getClear().getTo());
+		props.put(Constants.KAPTCHA_IMAGE_WIDTH, kp.getImage().getWidth());
+		props.put(Constants.KAPTCHA_IMAGE_HEIGHT, kp.getImage().getHeight());
+		kaptcha.setConfig(new Config(props));
+		return kaptcha;
 	}
 }
