@@ -21,6 +21,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,6 +34,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import com.example.security.model.User;
 import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
+import com.example.security.support.CaptchaAuthenticationDetailsSource;
 import com.example.security.support.CaptchaAuthenticationProvider;
 import com.example.security.support.KaptchaProperties;
 import com.example.security.support.LoginFilter;
@@ -84,6 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
 				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
 				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
+				.authenticationDetailsSource(this.authenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
 				.permitAll()// 授予访问URL的权限为true
 				.and()//
 				.csrf()// 添加了CSRF支持。
@@ -114,7 +117,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
-		return new ProviderManager(Arrays.asList(this.captchaAuthenticationProvider()));
+		return new ProviderManager(Arrays.asList(this.authenticationProvider()));
+	}
+
+	/**
+	 * @return 验证码认证提供者
+	 */
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
+		provider.setPasswordEncoder(this.passwordEncoder());
+		provider.setUserDetailsService(this.userService);
+		return provider;
+	}
+
+	/**
+	 * @return 验证码身份验证详细信息源
+	 */
+	@Bean
+	public CaptchaAuthenticationDetailsSource authenticationDetailsSource() {
+		return new CaptchaAuthenticationDetailsSource();
 	}
 
 	/**
@@ -135,17 +157,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		roleMap.put("ROLE_ADMIN", Arrays.asList("ROLE_GUEST"));
 		hierarchy.setHierarchy(RoleHierarchyUtils.roleHierarchyFromMap(roleMap));
 		return hierarchy;
-	}
-
-	/**
-	 * @return 验证码认证提供者
-	 */
-	@Bean
-	public CaptchaAuthenticationProvider captchaAuthenticationProvider() {
-		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
-		provider.setPasswordEncoder(this.passwordEncoder());
-		provider.setUserDetailsService(this.userService);
-		return provider;
 	}
 
 	/**
@@ -220,4 +231,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		kaptcha.setConfig(new Config(props));
 		return kaptcha;
 	}
+
 }
