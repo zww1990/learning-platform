@@ -10,7 +10,7 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 import com.google.code.kaptcha.text.impl.DefaultWordRenderer;
 
 /**
- * kaptcha配置属性类
+ * 验证码配置属性类
  * 
  * @author home
  */
