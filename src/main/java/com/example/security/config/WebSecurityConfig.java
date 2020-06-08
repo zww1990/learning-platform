@@ -1,22 +1,16 @@
 package com.example.security.config;
 
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.annotation.Resource;
-
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
@@ -27,18 +21,21 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import com.example.security.model.User;
 import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
 import com.example.security.support.CaptchaAuthenticationDetailsSource;
 import com.example.security.support.CaptchaAuthenticationProvider;
+import com.example.security.support.JsonAuthenticationFailureHandler;
+import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.KaptchaProperties;
 import com.example.security.support.LoginFilter;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.security.support.ResponseBodySessionInformationExpiredStrategy;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -52,10 +49,6 @@ import com.google.code.kaptcha.util.Config;
 @Configuration
 @EnableConfigurationProperties(KaptchaProperties.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Resource
-	private UserService userService;
-	@Resource
-	private ObjectMapper objectMapper;
 
 	private String getByInetAddress() throws Exception {
 		byte[] bytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
@@ -69,8 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userService)// 根据传入的自定义UserDetailsService添加身份验证。
-													// 然后，它返回DaoAuthenticationConfigurer以允许自定义身份验证。
+		auth.userDetailsService(this.userDetailsService())// 根据传入的自定义UserDetailsService添加身份验证。
+		// 然后，它返回DaoAuthenticationConfigurer以允许自定义身份验证。
 		;
 	}
 
@@ -93,12 +86,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()// 禁用CSRF
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
-				.tokenRepository(this.tokenRepository())// 指定要使用的PersistentTokenRepository实例。
+				.tokenRepository(this.rememberMeService())// 指定要使用的PersistentTokenRepository实例。
 				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
 				.and()//
 				.sessionManagement()// 允许配置会话管理。
 				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
-		;
+				.expiredSessionStrategy(new ResponseBodySessionInformationExpiredStrategy());// 确定检测到过期会话时的行为。
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
@@ -117,8 +110,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				);
 	}
 
-	@Override
 	@Bean
+	@Override
+	protected UserDetailsService userDetailsService() {
+		return new UserService();
+	}
+
+	@Bean
+	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return new ProviderManager(Arrays.asList(this.authenticationProvider()));
 	}
@@ -130,7 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationProvider authenticationProvider() {
 		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
 		provider.setPasswordEncoder(this.passwordEncoder());
-		provider.setUserDetailsService(this.userService);
+		provider.setUserDetailsService(this.userDetailsService());
 		return provider;
 	}
 
@@ -163,44 +162,41 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
+	 * @return 用于存储用户的持久登录令牌的实现。
+	 */
+	@Bean
+	public RememberMeService rememberMeService() {
+		return new RememberMeService();
+	}
+
+	/**
 	 * @return 登录过滤器
 	 * @throws Exception
 	 */
 //	@Bean
-	@SuppressWarnings("deprecation")
 	public LoginFilter loginFilter() throws Exception {
 		LoginFilter filter = new LoginFilter();
 		filter.setAuthenticationManager(super.authenticationManager());
 		filter.setFilterProcessesUrl("/login");// 设置确定是否需要身份验证的URL
-		// 用于处理成功的用户身份验证的策略。
-		filter.setAuthenticationSuccessHandler((request, response, authentication) -> {
-			request.getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);// 登录成功后删除验证码
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-			try (PrintWriter out = response.getWriter()) {
-				User user = (User) authentication.getPrincipal();
-				user.setPassword(null);
-				out.write(this.objectMapper.writeValueAsString(user));
-			}
-		});
-		// 用于处理失败的身份验证尝试的策略。
-		filter.setAuthenticationFailureHandler((request, response, exception) -> {
-			response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-			response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-			try (PrintWriter out = response.getWriter()) {
-				out.write(this.objectMapper.writeValueAsString(Arrays.asList(exception.toString())));
-			}
-		});
+		filter.setAuthenticationSuccessHandler(this.authenticationSuccessHandler());
+		filter.setAuthenticationFailureHandler(this.authenticationFailureHandler());
 		return filter;
 	}
 
 	/**
-	 * @return 用于存储用户的持久登录令牌的实现。
+	 * @return 用于处理成功的用户身份验证的策略。
 	 */
-	@Bean
-	public PersistentTokenRepository tokenRepository() {
-		return new RememberMeService();
+//	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new JsonAuthenticationSuccessHandler();
+	}
+
+	/**
+	 * @return 用于处理失败的身份验证尝试的策略。
+	 */
+//	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		return new JsonAuthenticationFailureHandler();
 	}
 
 	/**
