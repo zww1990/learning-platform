@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.stereotype.Service;
 
 import com.example.security.model.RememberMe;
 import com.example.security.repository.RememberMeRepository;
@@ -17,7 +16,6 @@ import com.example.security.repository.RememberMeRepository;
  * 
  * @author home
  */
-@Service
 @Transactional
 public class RememberMeService implements PersistentTokenRepository {
 	@Resource
