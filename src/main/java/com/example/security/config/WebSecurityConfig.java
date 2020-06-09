@@ -14,23 +14,23 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.session.ConcurrentSessionFilter;
 
 import com.example.security.service.RememberMeService;
 import com.example.security.service.UserService;
-import com.example.security.support.CaptchaAuthenticationDetailsSource;
-import com.example.security.support.CaptchaAuthenticationProvider;
 import com.example.security.support.JsonAuthenticationFailureHandler;
 import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.KaptchaProperties;
@@ -77,11 +77,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
-				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
-				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
-				.authenticationDetailsSource(this.authenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
-				.permitAll()// 授予访问URL的权限为true
-				.and()//
+//				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
+//				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
+//				.authenticationDetailsSource(new CaptchaAuthenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
+//				.permitAll()// 授予访问URL的权限为true
+//				.and()//
 				.csrf()// 添加了CSRF支持。
 				.disable()// 禁用CSRF
 				.rememberMe()// 允许配置“记住我”身份验证。
@@ -89,11 +89,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.tokenRepository(this.rememberMeService())// 指定要使用的PersistentTokenRepository实例。
 				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
 				.and()//
-				.sessionManagement()// 允许配置会话管理。
-				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
-				.expiredSessionStrategy(new ResponseBodySessionInformationExpiredStrategy());// 确定检测到过期会话时的行为。
+//				.sessionManagement()// 允许配置会话管理。
+//				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
+//				.expiredSessionStrategy(new ResponseBodySessionInformationExpiredStrategy())// 确定检测到过期会话时的行为。
+		;
 		// 将过滤器添加到指定过滤器类的位置。
-//		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterAt(new ConcurrentSessionFilter(this.sessionRegistry(),
+				new ResponseBodySessionInformationExpiredStrategy()), ConcurrentSessionFilter.class);
+		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -116,30 +119,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new UserService();
 	}
 
-	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return new ProviderManager(Arrays.asList(this.authenticationProvider()));
-	}
-
-	/**
-	 * @return 验证码认证提供者
-	 */
-	@Bean
-	public AuthenticationProvider authenticationProvider() {
-		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
-		provider.setPasswordEncoder(this.passwordEncoder());
-		provider.setUserDetailsService(this.userDetailsService());
-		return provider;
-	}
-
-	/**
-	 * @return 验证码身份验证详细信息源
-	 */
-	@Bean
-	public CaptchaAuthenticationDetailsSource authenticationDetailsSource() {
-		return new CaptchaAuthenticationDetailsSource();
-	}
+//	@Bean
+//	@Override
+//	protected AuthenticationManager authenticationManager() throws Exception {
+//		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
+//		provider.setPasswordEncoder(this.passwordEncoder());
+//		provider.setUserDetailsService(this.userDetailsService());
+//		return new ProviderManager(Arrays.asList(provider));
+//	}
 
 	/**
 	 * @return 用于编码密码的服务接口。首选实现是BCryptPasswordEncoder。
@@ -173,20 +160,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return 登录过滤器
 	 * @throws Exception
 	 */
-//	@Bean
+	@Bean
 	public LoginFilter loginFilter() throws Exception {
 		LoginFilter filter = new LoginFilter();
 		filter.setAuthenticationManager(super.authenticationManager());
 		filter.setFilterProcessesUrl("/login");// 设置确定是否需要身份验证的URL
 		filter.setAuthenticationSuccessHandler(this.authenticationSuccessHandler());
 		filter.setAuthenticationFailureHandler(this.authenticationFailureHandler());
+		ConcurrentSessionControlAuthenticationStrategy sessionStrategy = new ConcurrentSessionControlAuthenticationStrategy(
+				this.sessionRegistry());
+		sessionStrategy.setMaximumSessions(1);// 设置maxSessions属性。 默认值为1。对无限会话使用-1。
+		filter.setSessionAuthenticationStrategy(sessionStrategy);
 		return filter;
 	}
 
 	/**
 	 * @return 用于处理成功的用户身份验证的策略。
 	 */
-//	@Bean
+	@Bean
 	public AuthenticationSuccessHandler authenticationSuccessHandler() {
 		return new JsonAuthenticationSuccessHandler();
 	}
@@ -194,9 +185,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * @return 用于处理失败的身份验证尝试的策略。
 	 */
-//	@Bean
+	@Bean
 	public AuthenticationFailureHandler authenticationFailureHandler() {
 		return new JsonAuthenticationFailureHandler();
+	}
+
+	/**
+	 * @return 维护SessionInformation实例的注册表。
+	 */
+	@Bean
+	public SessionRegistry sessionRegistry() {
+		return new SessionRegistryImpl();
 	}
 
 	/**
