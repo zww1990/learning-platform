@@ -3,7 +3,7 @@
 		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 	<properties resource="./application.properties"/>
-	<classPathEntry location="E:\.m2\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
+	<classPathEntry location="D:\.m2\repository\mysql\mysql-connector-java\8.0.19\mysql-connector-java-8.0.19.jar"/>
 	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3DynamicSql">
 		<!-- 实体类序列化 -->
@@ -24,9 +24,13 @@
 			<property name="addRemarkComments" value="true"/><!-- 添加表、字段注释 -->
 			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/><!-- 格式化时间 -->
 			<property name="author" value="zhangweiwei"/><!-- 作者 -->
-			<property name="addSwaggerAnnotations" value="true"/><!-- 添加Swagger注解 -->
+			<property name="addSwaggerAnnotations" value="false"/><!-- 添加Swagger注解 -->
 		</commentGenerator>
-		<jdbcConnection driverClass="${spring.datasource.driver-class-name}" connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}" password="${spring.datasource.password}">
+		<jdbcConnection 
+			driverClass="${spring.datasource.driver-class-name}" 
+			connectionURL="${spring.datasource.url}" 
+			userId="${spring.datasource.username}" 
+			password="${spring.datasource.password}">
 			<property name="useInformationSchema" value="true"/><!-- 允许读取表注释信息 -->
 		</jdbcConnection>
 		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
@@ -41,7 +45,7 @@
 			XMLMAPPER：全XML文件，
 			MIXEDMAPPER：注解和XML混合 -->
 		<javaClientGenerator targetPackage="com.demo.dao" targetProject="./src/main/java" type="ANNOTATEDMAPPER"/>
-		<table tableName="user">
+		<table tableName="t_student">
 			<!-- 主键生成策略 -->
 			<generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true"/>
 		</table>
