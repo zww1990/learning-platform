@@ -20,11 +20,13 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.security.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.code.kaptcha.Constants;
 
@@ -42,6 +44,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	private MessageSource messageSource;
 	@Resource
 	private ObjectMapper objectMapper;
+	@Resource
+	private SessionRegistry sessionRegistry;
 
 	public LoginFilter() {
 		super();
@@ -73,6 +77,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 			UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,
 					password);
 			super.setDetails(request, authRequest);
+			User principal = new User();
+			principal.setUsername(username);
+			this.sessionRegistry.registerNewSession(session.getId(), principal);
 			return super.getAuthenticationManager().authenticate(authRequest);
 		} else {
 			String requestCaptcha = this.obtainCaptcha(request);
