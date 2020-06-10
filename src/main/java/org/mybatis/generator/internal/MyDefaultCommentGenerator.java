@@ -40,7 +40,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 	@Override
 	public void addJavaFileComment(CompilationUnit compilationUnit) {
-		if (compilationUnit.isJavaInterface()) {
+		if (compilationUnit instanceof Interface) {
 			Interface topLevelClass = (Interface) compilationUnit;
 			topLevelClass.addJavaDocLine("/**");
 			topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
