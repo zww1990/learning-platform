@@ -21,6 +21,10 @@ public class RememberMeService implements PersistentTokenRepository {
 	@Resource
 	private RememberMeRepository rememberMeRepository;
 
+	public RememberMeService() {
+		super();
+	}
+
 	@Override
 	public void createNewToken(PersistentRememberMeToken token) {
 		RememberMe me = new RememberMe(token.getSeries(), token.getUsername(), token.getTokenValue(), token.getDate());
