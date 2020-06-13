@@ -15,6 +15,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -125,10 +126,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
+		return new ProviderManager(Arrays.asList(this.authenticationProvider()));
+	}
+
+	/**
+	 * @return 验证码认证提供者
+	 */
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
 		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
 		provider.setPasswordEncoder(this.passwordEncoder());
 		provider.setUserDetailsService(this.userDetailsService());
-		return new ProviderManager(Arrays.asList(provider));
+		return provider;
 	}
 
 	/**
