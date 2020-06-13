@@ -26,6 +26,10 @@ public class JsonSessionInformationExpiredStrategy implements SessionInformation
 	@Resource
 	private ObjectMapper objectMapper;
 
+	public JsonSessionInformationExpiredStrategy() {
+		super();
+	}
+
 	@Override
 	public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
 		HttpServletResponse response = event.getResponse();
