@@ -25,6 +25,10 @@ public class UserService implements UserDetailsService {
 	@Resource
 	private MessageSource messageSource;
 
+	public UserService() {
+		super();
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		return this.userRepository.findUserByUsername(username)
