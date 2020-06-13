@@ -12,6 +12,10 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
 public class CaptchaAuthenticationDetailsSource
 		implements AuthenticationDetailsSource<HttpServletRequest, CaptchaAuthenticationDetails> {
 
+	public CaptchaAuthenticationDetailsSource() {
+		super();
+	}
+
 	@Override
 	public CaptchaAuthenticationDetails buildDetails(HttpServletRequest context) {
 		return new CaptchaAuthenticationDetails(context);
