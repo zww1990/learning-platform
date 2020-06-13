@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public class CaptchaAuthenticationProvider extends DaoAuthenticationProvider {
 
+	public CaptchaAuthenticationProvider() {
+		super();
+	}
+
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
