@@ -27,6 +27,10 @@ public class JsonAuthenticationFailureHandler implements AuthenticationFailureHa
 	@Resource
 	private ObjectMapper objectMapper;
 
+	public JsonAuthenticationFailureHandler() {
+		super();
+	}
+
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
