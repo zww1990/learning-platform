@@ -1,5 +1,9 @@
 package com.example.security.support;
 
+import javax.annotation.Resource;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author home
  */
 public class CaptchaAuthenticationProvider extends DaoAuthenticationProvider {
+	@Resource
+	private MessageSource messageSource;
 
 	public CaptchaAuthenticationProvider() {
 		super();
@@ -21,8 +27,8 @@ public class CaptchaAuthenticationProvider extends DaoAuthenticationProvider {
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 		if (!((CaptchaAuthenticationDetails) authentication.getDetails()).isCheckPassed()) {
-			throw new AuthenticationServiceException(
-					super.messages.getMessage("CaptchaAuthenticationProvider.notMatched"));
+			throw new AuthenticationServiceException(this.messageSource
+					.getMessage("CaptchaAuthenticationProvider.notMatched", null, LocaleContextHolder.getLocale()));
 		}
 		super.additionalAuthenticationChecks(userDetails, authentication);
 	}
