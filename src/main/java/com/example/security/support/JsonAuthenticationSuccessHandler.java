@@ -27,6 +27,10 @@ public class JsonAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	@Resource
 	private ObjectMapper objectMapper;
 
+	public JsonAuthenticationSuccessHandler() {
+		super();
+	}
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
