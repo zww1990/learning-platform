@@ -9,6 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class PlaintextPasswordEncoder implements PasswordEncoder {
 
+	public PlaintextPasswordEncoder() {
+		super();
+	}
+
 	@Override
 	public String encode(CharSequence rawPassword) {
 		return rawPassword.toString();
