@@ -1,7 +1,7 @@
 drop table t_user_authority;
 drop table t_user;
 drop table t_authority;
-drop table t_remember_me;
+drop table t_user_token;
 
 create table t_authority (
 auth_id integer not null auto_increment comment '权限主键', 
@@ -28,7 +28,7 @@ foreign key (user_id) references t_user (user_id),
 foreign key (auth_id) references t_authority (auth_id)
 ) engine=InnoDB comment='用户权限表';
 
-create table t_remember_me (
+create table t_user_token (
 series varchar(64) primary key comment '系列号', 
 username varchar(255) not null comment '用户名', 
 token varchar(64) not null comment '自动登录访问令牌', 
@@ -38,4 +38,4 @@ last_used timestamp not null comment '最后一次使用自动登录的时间'
 select * from t_authority;
 select * from t_user;
 select * from t_user_authority;
-select * from t_remember_me;
+select * from t_user_token;
