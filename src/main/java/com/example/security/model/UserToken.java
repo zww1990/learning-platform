@@ -12,19 +12,19 @@ import javax.persistence.Table;
  * @author home
  */
 @Entity
-@Table(name = "t_remember_me")
-public class RememberMe {
+@Table(name = "t_user_token")
+public class UserToken {
 	@Id
 	private String series;
 	private String username;
 	private String token;
 	private Date lastUsed;
 
-	public RememberMe() {
+	public UserToken() {
 		super();
 	}
 
-	public RememberMe(String series, String username, String token, Date lastUsed) {
+	public UserToken(String series, String username, String token, Date lastUsed) {
 		super();
 		this.series = series;
 		this.username = username;
