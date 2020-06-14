@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslatio
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
+import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
@@ -21,8 +23,8 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author home
  */
 @SpringBootApplication(exclude = { //
-//		TaskExecutionAutoConfiguration.class, // 任务执行自动配置
-//		TaskSchedulingAutoConfiguration.class, // 任务计划自动配置
+		TaskExecutionAutoConfiguration.class, // 任务执行自动配置
+		TaskSchedulingAutoConfiguration.class, // 任务计划自动配置
 		ProjectInfoAutoConfiguration.class, // 项目信息自动配置
 		ValidationAutoConfiguration.class, // 验证自动配置
 		AopAutoConfiguration.class, // AOP自动配置
