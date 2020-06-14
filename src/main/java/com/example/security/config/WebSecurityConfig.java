@@ -28,7 +28,6 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
@@ -91,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.disable()// 禁用CSRF
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
-				.tokenRepository(this.tokenRepository())// 指定要使用的PersistentTokenRepository实例。
+				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
 				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
 				.and()//
 				.sessionManagement()// 允许配置会话管理。
@@ -165,7 +164,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return 用于存储用户的持久登录令牌的实现。
 	 */
 	@Bean
-	public PersistentTokenRepository tokenRepository() {
+	public UserTokenService userTokenService() {
 		return new UserTokenService();
 	}
 
