@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
-import com.example.security.model.RememberMe;
-import com.example.security.repository.RememberMeRepository;
+import com.example.security.model.UserToken;
+import com.example.security.repository.UserTokenRepository;
 
 /**
  * 用于存储用户的持久登录令牌的实现。
@@ -17,23 +17,23 @@ import com.example.security.repository.RememberMeRepository;
  * @author home
  */
 @Transactional
-public class RememberMeService implements PersistentTokenRepository {
+public class UserTokenService implements PersistentTokenRepository {
 	@Resource
-	private RememberMeRepository rememberMeRepository;
+	private UserTokenRepository tokenRepository;
 
-	public RememberMeService() {
+	public UserTokenService() {
 		super();
 	}
 
 	@Override
 	public void createNewToken(PersistentRememberMeToken token) {
-		RememberMe me = new RememberMe(token.getSeries(), token.getUsername(), token.getTokenValue(), token.getDate());
-		this.rememberMeRepository.save(me);
+		UserToken user = new UserToken(token.getSeries(), token.getUsername(), token.getTokenValue(), token.getDate());
+		this.tokenRepository.save(user);
 	}
 
 	@Override
 	public void updateToken(String series, String tokenValue, Date lastUsed) {
-		this.rememberMeRepository.findById(series).ifPresent(c -> {
+		this.tokenRepository.findById(series).ifPresent(c -> {
 			c.setLastUsed(lastUsed);
 			c.setToken(tokenValue);
 		});
@@ -41,14 +41,14 @@ public class RememberMeService implements PersistentTokenRepository {
 
 	@Override
 	public PersistentRememberMeToken getTokenForSeries(String seriesId) {
-		return this.rememberMeRepository.findById(seriesId)
+		return this.tokenRepository.findById(seriesId)
 				.map(m -> new PersistentRememberMeToken(m.getUsername(), m.getSeries(), m.getToken(), m.getLastUsed()))
 				.orElse(null);
 	}
 
 	@Override
 	public void removeUserTokens(String username) {
-		this.rememberMeRepository.deleteByUsername(username);
+		this.tokenRepository.deleteByUsername(username);
 	}
 
 }
