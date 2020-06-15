@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.annotation.Resource;
+
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +24,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,6 +31,9 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.session.FindByIndexNameSessionRepository;
+import org.springframework.session.Session;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 import com.example.security.service.UserService;
 import com.example.security.service.UserTokenService;
@@ -53,6 +57,8 @@ import com.google.code.kaptcha.util.Config;
 @Configuration
 @EnableConfigurationProperties(KaptchaProperties.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Resource
+	private FindByIndexNameSessionRepository<Session> sessionRepository;
 
 	private String getByInetAddress() throws Exception {
 		byte[] bytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
@@ -96,6 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement()// 允许配置会话管理。
 				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
 				.expiredSessionStrategy(this.sessionInformationExpiredStrategy())// 确定检测到过期会话时的行为。
+				.sessionRegistry(this.sessionRegistry())// 控制使用的SessionRegistry实现。
 		;
 		// 将过滤器添加到指定过滤器类的位置。
 //		http.addFilterAt(new ConcurrentSessionFilter(this.sessionRegistry(),
@@ -213,9 +220,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * @return 维护SessionInformation实例的注册表。
 	 */
-//	@Bean
+	@Bean
 	public SessionRegistry sessionRegistry() {
-		return new SessionRegistryImpl();
+		return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
 	}
 
 	/**
