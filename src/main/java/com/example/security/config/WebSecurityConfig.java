@@ -92,8 +92,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationDetailsSource(new CaptchaAuthenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
 				.permitAll()// 授予访问URL的权限为true
 				.and()//
-				.csrf()// 添加了CSRF支持。
-				.disable()// 禁用CSRF
+//				.csrf()// 添加了CSRF支持。
+//				.disable()// 禁用CSRF
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
 				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
