@@ -44,6 +44,11 @@ public class IndexController {
 		return "login";
 	}
 
+	@GetMapping("/logout")
+	public String logout() {
+		return "logout";
+	}
+
 	@GetMapping("/captcha")
 	public void captcha(HttpSession session, HttpServletResponse response) throws IOException {
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
