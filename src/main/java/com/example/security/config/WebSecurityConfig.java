@@ -87,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/guest/**")//
 				.hasRole("GUEST")//
 				.antMatchers("/ajax")//
-				.anonymous()// 指定匿名用户允许使用URL。
+				.permitAll()//
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
