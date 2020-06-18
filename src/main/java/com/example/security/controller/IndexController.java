@@ -58,4 +58,9 @@ public class IndexController {
 			ImageIO.write(this.producer.createImage(text), "jpg", out);
 		}
 	}
+
+	@GetMapping("/ajax")
+	public String ajax() {
+		return "ajax";
+	}
 }
