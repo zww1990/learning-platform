@@ -30,6 +30,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.LazyCsrfTokenRepository;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
@@ -84,6 +86,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
 				.antMatchers("/guest/**")//
 				.hasRole("GUEST")//
+				.antMatchers("/ajax")//
+				.anonymous()// 指定匿名用户允许使用URL。
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
@@ -92,8 +96,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationDetailsSource(new CaptchaAuthenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
 				.permitAll()// 授予访问URL的权限为true
 				.and()//
-//				.csrf()// 添加了CSRF支持。
+				.csrf()// 添加了CSRF支持。
+				.csrfTokenRepository(new LazyCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))// 指定要使用的CsrfTokenRepository。
 //				.disable()// 禁用CSRF
+				.and()//
 				.rememberMe()// 允许配置“记住我”身份验证。
 				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
 				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
