@@ -25,7 +25,7 @@
        			<p style="display: flex;align-items: center;">
          			<label for="captcha" class="sr-only">验证码</label>
          			<input type="text" id="captcha" name="captcha" class="form-control" placeholder="验证码" required autocomplete="off" style="width: 170px;margin-right: 20px;">
-         			<img id="captchaimg" alt="图片验证码" th:src="@{/captcha}" title="点我重新生成验证码" style="cursor: pointer;">
+         			<img id="captcha_img" alt="图片验证码" th:src="@{/captcha}" title="点我重新生成验证码" style="cursor: pointer;">
        			</p>
        			<p>
        				<input type="checkbox" name="remember-me" id="remember-me"/>
@@ -36,7 +36,7 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-		document.getElementById('captchaimg').onclick=function(){
+		document.getElementById('captcha_img').onclick=function(){
 			this.src='[[${#request.contextPath}]]/captcha?x='+Math.random();
 		}
 	</script>
