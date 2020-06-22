@@ -3,9 +3,9 @@
     <div class="top">
       <div class="head">
         <img class="logo" src="./assets/images/angular.svg">
-        <span class="title">ngular</span>
+        <span class="title">ngular {{version.major}}</span>
       </div>
-      <div class="desc">欢迎使用Angular</div>
+      <div class="desc">欢迎使用Angular {{version.full}}</div>
     </div>
     <div class="login-form">
       <form nz-form [formGroup]="loginForm" (ngSubmit)="submitForm()">

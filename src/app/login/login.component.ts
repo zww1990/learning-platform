@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -13,6 +13,7 @@ import { User } from '../shared/user/user.model';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  version = VERSION;
 
   constructor(private fb: FormBuilder, private router: Router, private message: NzMessageService, private cas: CasService) { }
 
@@ -48,15 +49,11 @@ export class LoginComponent implements OnInit {
     try {
       const tgt = await this.cas.casCreateTGT(this.loginForm.value);
       const st = await this.cas.casCreateST(tgt);
-      const result = await this.cas.casServiceValidate(st);
-      if (result.status) {
-        const user = new User(result.text, this.loginForm.get('username').value);
-        sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
-        sessionStorage.setItem(SessionKey.CAS_TGT, tgt);
-        this.router.navigate(['']);
-      } else {
-        this.message.error(result.text);
-      }
+      const username = this.loginForm.get('username').value;
+      const user = new User(username, username);
+      sessionStorage.setItem(SessionKey.CAS_USER, JSON.stringify(user));
+      sessionStorage.setItem(SessionKey.CAS_TGT, tgt);
+      this.router.navigate(['']);
     } catch (error) {
       this.message.error('用户名或密码错误！');
     }

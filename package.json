@@ -34,7 +34,6 @@
     "stream": "0.0.2",
     "tslib": "~1.10.0",
     "xlsx": "^0.16.2",
-    "xml-js": "~1.6.11",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
