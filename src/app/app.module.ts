@@ -1,6 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { NgModule } from '@angular/core';
+import { NgModule, VERSION } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -26,6 +26,6 @@ registerLocaleData(zh); // 注册本地化数据
 })
 export class AppModule {
   constructor() {
-    console.log(`当前运行环境[${environment.mode}]`);
+    console.log('当前运行环境[%s], Angular版本[%s]', environment.mode, VERSION.full);
   }
 }
