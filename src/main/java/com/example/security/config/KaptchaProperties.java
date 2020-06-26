@@ -262,7 +262,6 @@ public class KaptchaProperties {
 				this.size = size;
 			}
 		}
-
 	}
 
 	public static class Word {
@@ -322,7 +321,6 @@ public class KaptchaProperties {
 				this.to = to;
 			}
 		}
-
 	}
 
 	public static class Image {
@@ -347,5 +345,4 @@ public class KaptchaProperties {
 			this.height = height;
 		}
 	}
-
 }
