@@ -51,10 +51,13 @@ spring:
       initialize-schema: never
       table-name: T_USER_SESSION
 
-kaptcha:
-  image:
-    width: 150
-    height: 50
-  textproducer:
-    char-string: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
-    char-length: 4
+cas:
+  server:
+    prefix: http://localhost:8080/cas
+    login: ${cas.server.prefix}/login
+    logout: ${cas.server.prefix}/logout
+  client:
+    prefix: http://localhost:${server.port}
+    login: ${cas.client.prefix}${server.servlet.context-path}/login/cas
+    logout-relative: /logout/cas
+    logout: ${cas.client.prefix}${cas.client.logout-relative}

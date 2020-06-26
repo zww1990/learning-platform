@@ -6,19 +6,26 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.jasig.cas.client.session.SingleSignOutFilter;
+import org.jasig.cas.client.validation.Cas30ProxyTicketValidator;
+import org.jasig.cas.client.validation.TicketValidator;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.cas.ServiceProperties;
+import org.springframework.security.cas.authentication.CasAuthenticationProvider;
+import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
+import org.springframework.security.cas.web.CasAuthenticationFilter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -27,8 +34,11 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.LazyCsrfTokenRepository;
@@ -39,16 +49,10 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 import com.example.security.service.UserService;
 import com.example.security.service.UserTokenService;
-import com.example.security.support.CaptchaAuthenticationDetailsSource;
-import com.example.security.support.CaptchaAuthenticationProvider;
 import com.example.security.support.JsonAuthenticationFailureHandler;
 import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.JsonSessionInformationExpiredStrategy;
 import com.example.security.support.LoginFilter;
-import com.google.code.kaptcha.Constants;
-import com.google.code.kaptcha.Producer;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.google.code.kaptcha.util.Config;
 
 /**
  * Spring Security配置类
@@ -56,10 +60,12 @@ import com.google.code.kaptcha.util.Config;
  * @author home
  */
 @Configuration
-@EnableConfigurationProperties(KaptchaProperties.class)
+@ConfigurationPropertiesScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Resource
 	private FindByIndexNameSessionRepository<Session> sessionRepository;
+	@Resource
+	private CasProperties casProperties;
 
 	private String getByInetAddress() throws Exception {
 		byte[] bytes = NetworkInterface.getByInetAddress(InetAddress.getLocalHost()).getHardwareAddress();
@@ -73,9 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userDetailsService())// 根据传入的自定义UserDetailsService添加身份验证。
-		// 然后，它返回DaoAuthenticationConfigurer以允许自定义身份验证。
-		;
+		auth.authenticationProvider(this.authenticationProvider());
 	}
 
 	@Override
@@ -85,25 +89,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
 				.antMatchers("/guest/**")//
 				.hasRole("GUEST")//
-				.antMatchers("/ajax")//
+				.antMatchers("/login/cas")//
 				.permitAll()//
 				.anyRequest()// 映射任何请求。
 				.authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
-				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
-				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
-				.authenticationDetailsSource(new CaptchaAuthenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
-				.permitAll()// 授予访问URL的权限为true
+				.exceptionHandling()//
+				.authenticationEntryPoint(this.authenticationEntryPoint())//
 				.and()//
 				.csrf()// 添加了CSRF支持。
 				.csrfTokenRepository(new LazyCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))// 指定要使用的CsrfTokenRepository。
 //				.disable()// 禁用CSRF
 				.and()//
-				.rememberMe()// 允许配置“记住我”身份验证。
-				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
-				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
-				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
-				.and()//
+//				.rememberMe()// 允许配置“记住我”身份验证。
+//				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
+//				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
+//				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
+//				.and()//
+				.logout()//
+				.disable()//
+				.addFilter(this.casAuthenticationFilter())//
+				.addFilterBefore(this.singleSignOutFilter(), CasAuthenticationFilter.class)//
+				.addFilterAt(this.logoutFilter(), LogoutFilter.class)//
 				.sessionManagement()// 允许配置会话管理。
 				.maximumSessions(1)// 控制用户的最大会话数。 默认值为允许任意数量的用户。
 				.expiredSessionStrategy(this.sessionInformationExpiredStrategy())// 确定检测到过期会话时的行为。
@@ -145,10 +152,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return 验证码认证提供者
 	 */
 	@Bean
-	public AuthenticationProvider authenticationProvider() {
-		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
-		provider.setPasswordEncoder(this.passwordEncoder());
+	public AuthenticationProvider authenticationProvider() throws Exception {
+		CasAuthenticationProvider provider = new CasAuthenticationProvider();
 		provider.setUserDetailsService(this.userDetailsService());
+		provider.setServiceProperties(this.serviceProperties());
+		provider.setTicketValidator(this.ticketValidator());
+		provider.setKey(this.getByInetAddress());
 		return provider;
 	}
 
@@ -230,36 +239,47 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new SpringSessionBackedSessionRegistry<>(this.sessionRepository);
 	}
 
-	/**
-	 * @param kp
-	 * @return 图片验证码
-	 */
 	@Bean
-	public Producer defaultKaptcha(KaptchaProperties kp) {
-		DefaultKaptcha kaptcha = new DefaultKaptcha();
-		Properties props = new Properties();
-		props.put(Constants.KAPTCHA_BORDER, kp.getBorder().getEnabled().name());
-		props.put(Constants.KAPTCHA_BORDER_COLOR, kp.getBorder().getColor());
-		props.put(Constants.KAPTCHA_BORDER_THICKNESS, kp.getBorder().getThickness());
-		props.put(Constants.KAPTCHA_NOISE_COLOR, kp.getNoise().getColor());
-		props.put(Constants.KAPTCHA_NOISE_IMPL, kp.getNoise().getImpl());
-		props.put(Constants.KAPTCHA_OBSCURIFICATOR_IMPL, kp.getObscurificator().getImpl());
-		props.put(Constants.KAPTCHA_PRODUCER_IMPL, kp.getProducer().getImpl());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_IMPL, kp.getTextproducer().getImpl());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_STRING, kp.getTextproducer().getCharString());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, kp.getTextproducer().getCharLength());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_CHAR_SPACE, kp.getTextproducer().getCharSpace());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_NAMES, kp.getTextproducer().getFont().getNames());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, kp.getTextproducer().getFont().getColor());
-		props.put(Constants.KAPTCHA_TEXTPRODUCER_FONT_SIZE, kp.getTextproducer().getFont().getSize());
-		props.put(Constants.KAPTCHA_WORDRENDERER_IMPL, kp.getWord().getImpl());
-		props.put(Constants.KAPTCHA_BACKGROUND_IMPL, kp.getBackground().getImpl());
-		props.put(Constants.KAPTCHA_BACKGROUND_CLR_FROM, kp.getBackground().getClear().getFrom());
-		props.put(Constants.KAPTCHA_BACKGROUND_CLR_TO, kp.getBackground().getClear().getTo());
-		props.put(Constants.KAPTCHA_IMAGE_WIDTH, kp.getImage().getWidth());
-		props.put(Constants.KAPTCHA_IMAGE_HEIGHT, kp.getImage().getHeight());
-		kaptcha.setConfig(new Config(props));
-		return kaptcha;
+	public ServiceProperties serviceProperties() {
+		ServiceProperties service = new ServiceProperties();
+		service.setService(this.casProperties.getClient().getLogin());
+		return service;
 	}
 
+	@Bean
+	@Primary
+	public AuthenticationEntryPoint authenticationEntryPoint() {
+		CasAuthenticationEntryPoint point = new CasAuthenticationEntryPoint();
+		point.setLoginUrl(this.casProperties.getServer().getLogin());
+		point.setServiceProperties(this.serviceProperties());
+		return point;
+	}
+
+	@Bean
+	public TicketValidator ticketValidator() {
+		return new Cas30ProxyTicketValidator(this.casProperties.getServer().getPrefix());
+	}
+
+	@Bean
+	public CasAuthenticationFilter casAuthenticationFilter() throws Exception {
+		CasAuthenticationFilter filter = new CasAuthenticationFilter();
+		filter.setServiceProperties(this.serviceProperties());
+		filter.setAuthenticationManager(this.authenticationManager());
+		return filter;
+	}
+
+	@Bean
+	public SingleSignOutFilter singleSignOutFilter() {
+		SingleSignOutFilter filter = new SingleSignOutFilter();
+		filter.setIgnoreInitConfiguration(true);
+		return filter;
+	}
+
+	@Bean
+	public LogoutFilter logoutFilter() {
+		LogoutFilter filter = new LogoutFilter(this.casProperties.getServer().getLogout(),
+				new SecurityContextLogoutHandler());
+		filter.setFilterProcessesUrl(this.casProperties.getClient().getLogoutRelative());
+		return filter;
+	}
 }
