@@ -284,6 +284,22 @@ public class KaptchaProperties {
 		/** 背景颜色渐变 */
 		private Clear clear = new Clear();
 
+		public String getImpl() {
+			return impl;
+		}
+
+		public Clear getClear() {
+			return clear;
+		}
+
+		public void setImpl(String impl) {
+			this.impl = impl;
+		}
+
+		public void setClear(Clear clear) {
+			this.clear = clear;
+		}
+
 		public static class Clear {
 			/** 背景颜色渐变，开始颜色 */
 			private String from = "LIGHT_GRAY";
@@ -307,21 +323,6 @@ public class KaptchaProperties {
 			}
 		}
 
-		public String getImpl() {
-			return impl;
-		}
-
-		public Clear getClear() {
-			return clear;
-		}
-
-		public void setImpl(String impl) {
-			this.impl = impl;
-		}
-
-		public void setClear(Clear clear) {
-			this.clear = clear;
-		}
 	}
 
 	public static class Image {
