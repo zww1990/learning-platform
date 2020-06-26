@@ -59,5 +59,4 @@ cas:
   client:
     prefix: http://localhost:${server.port}
     login: ${cas.client.prefix}${server.servlet.context-path}/login/cas
-    logout-relative: /logout/cas
-    logout: ${cas.client.prefix}${cas.client.logout-relative}
+    logout: /logout/cas
