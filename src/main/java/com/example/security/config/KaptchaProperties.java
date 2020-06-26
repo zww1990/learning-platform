@@ -1,4 +1,4 @@
-package com.example.security.support;
+package com.example.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -24,6 +24,70 @@ public class KaptchaProperties {
 	private Word word = new Word();
 	private Background background = new Background();
 	private Image image = new Image();
+
+	public Border getBorder() {
+		return border;
+	}
+
+	public Noise getNoise() {
+		return noise;
+	}
+
+	public Obscurificator getObscurificator() {
+		return obscurificator;
+	}
+
+	public Producer getProducer() {
+		return producer;
+	}
+
+	public Textproducer getTextproducer() {
+		return textproducer;
+	}
+
+	public Word getWord() {
+		return word;
+	}
+
+	public Background getBackground() {
+		return background;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setBorder(Border border) {
+		this.border = border;
+	}
+
+	public void setNoise(Noise noise) {
+		this.noise = noise;
+	}
+
+	public void setObscurificator(Obscurificator obscurificator) {
+		this.obscurificator = obscurificator;
+	}
+
+	public void setProducer(Producer producer) {
+		this.producer = producer;
+	}
+
+	public void setTextproducer(Textproducer textproducer) {
+		this.textproducer = textproducer;
+	}
+
+	public void setWord(Word word) {
+		this.word = word;
+	}
+
+	public void setBackground(Background background) {
+		this.background = background;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 	public static class Border {
 		public enum Enabled {
@@ -282,67 +346,4 @@ public class KaptchaProperties {
 		}
 	}
 
-	public Border getBorder() {
-		return border;
-	}
-
-	public Noise getNoise() {
-		return noise;
-	}
-
-	public Obscurificator getObscurificator() {
-		return obscurificator;
-	}
-
-	public Producer getProducer() {
-		return producer;
-	}
-
-	public Textproducer getTextproducer() {
-		return textproducer;
-	}
-
-	public Word getWord() {
-		return word;
-	}
-
-	public Background getBackground() {
-		return background;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public void setBorder(Border border) {
-		this.border = border;
-	}
-
-	public void setNoise(Noise noise) {
-		this.noise = noise;
-	}
-
-	public void setObscurificator(Obscurificator obscurificator) {
-		this.obscurificator = obscurificator;
-	}
-
-	public void setProducer(Producer producer) {
-		this.producer = producer;
-	}
-
-	public void setTextproducer(Textproducer textproducer) {
-		this.textproducer = textproducer;
-	}
-
-	public void setWord(Word word) {
-		this.word = word;
-	}
-
-	public void setBackground(Background background) {
-		this.background = background;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
-	}
 }
