@@ -190,39 +190,6 @@ public class KaptchaProperties {
 		/** 字体 */
 		private Font font = new Font();
 
-		public static class Font {
-			/** 字体名称 */
-			private String names = "Arial,Courier";
-			/** 字体颜色 */
-			private String color = "BLACK";
-			/** 字体大小 */
-			private String size = "40";
-
-			public String getNames() {
-				return names;
-			}
-
-			public String getColor() {
-				return color;
-			}
-
-			public String getSize() {
-				return size;
-			}
-
-			public void setNames(String names) {
-				this.names = names;
-			}
-
-			public void setColor(String color) {
-				this.color = color;
-			}
-
-			public void setSize(String size) {
-				this.size = size;
-			}
-		}
-
 		public String getImpl() {
 			return impl;
 		}
@@ -262,6 +229,40 @@ public class KaptchaProperties {
 		public void setFont(Font font) {
 			this.font = font;
 		}
+
+		public static class Font {
+			/** 字体名称 */
+			private String names = "Arial,Courier";
+			/** 字体颜色 */
+			private String color = "BLACK";
+			/** 字体大小 */
+			private String size = "40";
+
+			public String getNames() {
+				return names;
+			}
+
+			public String getColor() {
+				return color;
+			}
+
+			public String getSize() {
+				return size;
+			}
+
+			public void setNames(String names) {
+				this.names = names;
+			}
+
+			public void setColor(String color) {
+				this.color = color;
+			}
+
+			public void setSize(String size) {
+				this.size = size;
+			}
+		}
+
 	}
 
 	public static class Word {
