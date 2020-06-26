@@ -15,7 +15,6 @@ import org.jasig.cas.client.validation.TicketValidator;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
@@ -257,7 +256,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * @return 异常转换过滤器用于通过JA-SIG中央身份验证服务（CAS）开始身份验证。
 	 */
 	@Bean
-	@Primary
 	public AuthenticationEntryPoint authenticationEntryPoint() {
 		CasAuthenticationEntryPoint point = new CasAuthenticationEntryPoint();
 		point.setLoginUrl(this.casProperties.getServer().getLogin());
