@@ -184,7 +184,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	/**
 	 * @return 用于存储用户的持久登录令牌的实现。
 	 */
-	@Bean
+//	@Bean
 	public UserTokenService userTokenService() {
 		return new UserTokenService();
 	}
@@ -279,7 +279,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public LogoutFilter logoutFilter() {
 		LogoutFilter filter = new LogoutFilter(this.casProperties.getServer().getLogout(),
 				new SecurityContextLogoutHandler());
-		filter.setFilterProcessesUrl(this.casProperties.getClient().getLogoutRelative());
+		filter.setFilterProcessesUrl(this.casProperties.getClient().getLogout());
 		return filter;
 	}
 }
