@@ -59,7 +59,6 @@ public class CasProperties {
 	public static class Client {
 		private String prefix;
 		private String login;
-		private String logoutRelative;
 		private String logout;
 
 		public String getPrefix() {
@@ -68,10 +67,6 @@ public class CasProperties {
 
 		public String getLogin() {
 			return login;
-		}
-
-		public String getLogoutRelative() {
-			return logoutRelative;
 		}
 
 		public String getLogout() {
@@ -84,10 +79,6 @@ public class CasProperties {
 
 		public void setLogin(String login) {
 			this.login = login;
-		}
-
-		public void setLogoutRelative(String logoutRelative) {
-			this.logoutRelative = logoutRelative;
 		}
 
 		public void setLogout(String logout) {
