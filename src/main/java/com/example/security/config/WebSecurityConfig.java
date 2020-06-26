@@ -44,7 +44,6 @@ import com.example.security.support.CaptchaAuthenticationProvider;
 import com.example.security.support.JsonAuthenticationFailureHandler;
 import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.JsonSessionInformationExpiredStrategy;
-import com.example.security.support.KaptchaProperties;
 import com.example.security.support.LoginFilter;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
