@@ -1,6 +1,7 @@
 package com.example.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import com.google.code.kaptcha.impl.DefaultBackground;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -16,13 +17,21 @@ import com.google.code.kaptcha.text.impl.DefaultWordRenderer;
  */
 @ConfigurationProperties(prefix = "kaptcha")
 public class KaptchaProperties {
+	@NestedConfigurationProperty
 	private Border border = new Border();
+	@NestedConfigurationProperty
 	private Noise noise = new Noise();
+	@NestedConfigurationProperty
 	private Obscurificator obscurificator = new Obscurificator();
+	@NestedConfigurationProperty
 	private Producer producer = new Producer();
+	@NestedConfigurationProperty
 	private Textproducer textproducer = new Textproducer();
+	@NestedConfigurationProperty
 	private Word word = new Word();
+	@NestedConfigurationProperty
 	private Background background = new Background();
+	@NestedConfigurationProperty
 	private Image image = new Image();
 
 	public Border getBorder() {
@@ -188,6 +197,7 @@ public class KaptchaProperties {
 		/** 文字间隔 */
 		private String charSpace = "2";
 		/** 字体 */
+		@NestedConfigurationProperty
 		private Font font = new Font();
 
 		public String getImpl() {
@@ -281,6 +291,7 @@ public class KaptchaProperties {
 		/** 背景实现类 */
 		private String impl = DefaultBackground.class.getName();
 		/** 背景颜色渐变 */
+		@NestedConfigurationProperty
 		private Clear clear = new Clear();
 
 		public String getImpl() {
