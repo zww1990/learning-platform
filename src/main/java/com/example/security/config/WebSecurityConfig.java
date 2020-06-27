@@ -10,7 +10,7 @@ import java.util.Properties;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -56,7 +56,7 @@ import com.google.code.kaptcha.util.Config;
  * @author home
  */
 @Configuration
-@EnableConfigurationProperties(KaptchaProperties.class)
+@ConfigurationPropertiesScan
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Resource
 	private FindByIndexNameSessionRepository<Session> sessionRepository;
