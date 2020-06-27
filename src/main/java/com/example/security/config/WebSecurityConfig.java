@@ -34,11 +34,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.LazyCsrfTokenRepository;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
@@ -47,11 +44,7 @@ import org.springframework.session.Session;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 import com.example.security.service.UserService;
-import com.example.security.service.UserTokenService;
-import com.example.security.support.JsonAuthenticationFailureHandler;
-import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.JsonSessionInformationExpiredStrategy;
-import com.example.security.support.LoginFilter;
 
 /**
  * Spring Security配置类
@@ -89,30 +82,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()// 允许基于HttpServletRequest使用限制访问
-				.antMatchers("/admin/**")// 创建未指定HttpMethod的AntPathRequestMatcher实例列表。
-				.hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
-				.antMatchers("/guest/**")//
-				.hasRole("GUEST")//
-				.antMatchers("/login/cas")//
-				.permitAll()// 指定任何人都可以允许URL。
-				.anyRequest()// 映射任何请求。
-				.authenticated()// 指定任何经过身份验证的用户允许的URL。
+		http.authorizeRequests()// 允许使用RequestMatcher实现（即通过URL模式）基于HttpServletRequest限制访问。
+				.antMatchers("/admin/**").hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
+				.antMatchers("/guest/**").hasRole("GUEST")//
+				.antMatchers("/login/cas").permitAll()// 指定任何人都可以允许URL。
+				.anyRequest().authenticated()// 指定任何经过身份验证的用户允许的URL。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
 				.exceptionHandling()// 允许配置异常处理。当使用 WebSecurityCongurerAdapter时，会自动应用此功能。
 				.authenticationEntryPoint(this.authenticationEntryPoint())// 设置要使用的身份验证输入点。
 				.and()//
 				.csrf()// 添加了CSRF支持。
 				.csrfTokenRepository(new LazyCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))// 指定要使用的CsrfTokenRepository。
-//				.disable()// 禁用CSRF
 				.and()//
-//				.rememberMe()// 允许配置“记住我”身份验证。
-//				.key(this.getByInetAddress())// 设置密钥以识别为记住我身份验证而创建的令牌。 默认值是安全随机生成的密钥。
-//				.tokenRepository(this.userTokenService())// 指定要使用的PersistentTokenRepository实例。
-//				.tokenValiditySeconds(60 * 60 * 24)// 允许指定令牌有效的时间（以秒为单位）
-//				.and()//
-				.logout()// 提供注销支持。
-				.disable()// 禁用注销
+				.logout().disable()// 禁用注销
 				.addFilter(this.casAuthenticationFilter())// 添加过滤器
 				.addFilterBefore(this.singleSignOutFilter(), CasAuthenticationFilter.class)// 允许在一个已知过滤器类之前添加过滤器。
 				.addFilterAt(this.logoutFilter(), LogoutFilter.class)// 将过滤器添加到指定过滤器类的位置。
@@ -121,22 +103,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.expiredSessionStrategy(this.sessionInformationExpiredStrategy())// 确定检测到过期会话时的行为。
 				.sessionRegistry(this.sessionRegistry())// 控制使用的SessionRegistry实现。
 		;
-		// 将过滤器添加到指定过滤器类的位置。
-//		http.addFilterAt(new ConcurrentSessionFilter(this.sessionRegistry(),
-//				this.sessionInformationExpiredStrategy()), ConcurrentSessionFilter.class);
-//		http.addFilterAt(this.loginFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.debug(true)// 控制对Spring Security的调试支持。
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
-				.antMatchers("/css/**"// 样式文件
-						, "/fonts/**"// 字体文件
-						, "/images/**"// 图片文件
-						, "/js/**"// 脚本文件
-						, "/captcha"// 验证码
-				);
+				.antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/captcha");
 	}
 
 	@Bean
@@ -185,53 +158,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * @return 用于存储用户的持久登录令牌的实现。
-	 */
-//	@Bean
-	public UserTokenService userTokenService() {
-		return new UserTokenService();
-	}
-
-	/**
 	 * @return 会话信息过期策略，它将错误消息写入响应正文。
 	 */
 	@Bean
 	public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
 		return new JsonSessionInformationExpiredStrategy();
-	}
-
-	/**
-	 * @return 登录过滤器
-	 * @throws Exception
-	 */
-//	@Bean
-	public LoginFilter loginFilter() throws Exception {
-		LoginFilter filter = new LoginFilter();
-		filter.setAuthenticationManager(super.authenticationManager());
-		filter.setFilterProcessesUrl("/login");// 设置确定是否需要身份验证的URL
-		filter.setAuthenticationSuccessHandler(this.authenticationSuccessHandler());
-		filter.setAuthenticationFailureHandler(this.authenticationFailureHandler());
-		ConcurrentSessionControlAuthenticationStrategy sessionStrategy = new ConcurrentSessionControlAuthenticationStrategy(
-				this.sessionRegistry());
-		sessionStrategy.setMaximumSessions(1);// 设置maxSessions属性。 默认值为1。对无限会话使用-1。
-		filter.setSessionAuthenticationStrategy(sessionStrategy);
-		return filter;
-	}
-
-	/**
-	 * @return 用于处理成功的用户身份验证的策略。
-	 */
-//	@Bean
-	public AuthenticationSuccessHandler authenticationSuccessHandler() {
-		return new JsonAuthenticationSuccessHandler();
-	}
-
-	/**
-	 * @return 用于处理失败的身份验证尝试的策略。
-	 */
-//	@Bean
-	public AuthenticationFailureHandler authenticationFailureHandler() {
-		return new JsonAuthenticationFailureHandler();
 	}
 
 	/**
