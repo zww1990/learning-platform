@@ -55,7 +55,8 @@
             "styles": [
               "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [],
+			"allowedCommonJsDependencies": ["hammerjs", "@angular/common/locales/zh", "file-saver", "xlsx", "@ant-design/colors"]
           },
           "configurations": {
             "production": {
