@@ -1,39 +1,58 @@
 drop table t_user_authority;
+drop table t_menu_authority;
 drop table t_user;
+drop table t_menu;
 drop table t_authority;
 drop table t_user_token;
 DROP TABLE T_USER_SESSION_ATTRIBUTES;
 DROP TABLE T_USER_SESSION;
 
 create table t_authority (
-auth_id integer not null auto_increment comment '权限主键', 
-auth_name varchar(255) not null comment '权限中文名称', 
-authority varchar(255) not null comment '权限编码', 
+auth_id integer not null auto_increment comment '权限主键',
+auth_name varchar(255) not null comment '权限中文名称',
+authority varchar(255) not null comment '权限编码',
 primary key (auth_id)
 ) engine=InnoDB comment='权限表';
 
 create table t_user (
-user_id integer not null auto_increment comment '用户主键', 
-account_non_expired bit not null comment '帐户是否过期', 
-account_non_locked bit not null comment '帐户是否锁定', 
-credentials_non_expired bit not null comment '密码是否过期', 
-enabled bit not null comment '帐户是否启用', 
-password varchar(255) not null comment '密码', 
-username varchar(255) not null comment '用户名', 
+user_id integer not null auto_increment comment '用户主键',
+account_non_expired bit not null comment '帐户是否过期',
+account_non_locked bit not null comment '帐户是否锁定',
+credentials_non_expired bit not null comment '密码是否过期',
+enabled bit not null comment '帐户是否启用',
+password varchar(255) not null comment '密码',
+username varchar(255) not null comment '用户名',
 primary key (user_id)
 ) engine=InnoDB comment='用户表';
 
+create table t_menu (
+menu_id integer not null auto_increment comment '菜单主键',
+menu_name varchar(255) not null comment '菜单中文名称',
+pattern_url varchar(255) not null comment '模式URL',
+parent_menu_id integer comment '上级菜单主键',
+enabled bit not null comment '菜单是否启用',
+primary key (menu_id),
+foreign key (parent_menu_id) references t_menu (menu_id)
+) engine=InnoDB comment='菜单表';
+
 create table t_user_authority (
-user_id integer not null comment '用户主键', 
+user_id integer not null comment '用户主键',
 auth_id integer not null comment '权限主键',
 foreign key (user_id) references t_user (user_id) ON DELETE CASCADE,
 foreign key (auth_id) references t_authority (auth_id) ON DELETE CASCADE
 ) engine=InnoDB comment='用户权限表';
 
+create table t_menu_authority (
+menu_id integer not null comment '菜单主键',
+auth_id integer not null comment '权限主键',
+foreign key (menu_id) references t_menu (menu_id) ON DELETE CASCADE,
+foreign key (auth_id) references t_authority (auth_id) ON DELETE CASCADE
+) engine=InnoDB comment='菜单权限表';
+
 create table t_user_token (
-series varchar(64) not null comment '系列号', 
-username varchar(255) not null comment '用户名', 
-token varchar(64) not null comment '自动登录访问令牌', 
+series varchar(64) not null comment '系列号',
+username varchar(255) not null comment '用户名',
+token varchar(64) not null comment '自动登录访问令牌',
 last_used timestamp not null comment '最后一次使用自动登录的时间',
 primary key (series)
 ) engine=InnoDB comment='自动登录表';
@@ -63,6 +82,8 @@ CREATE TABLE T_USER_SESSION_ATTRIBUTES (
 select * from t_authority;
 select * from t_user;
 select * from t_user_authority;
+select * from t_menu;
+select * from t_menu_authority;
 select * from t_user_token;
 select * from t_user_session;
 select * from t_user_session_attributes;
