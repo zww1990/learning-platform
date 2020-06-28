@@ -23,9 +23,9 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  * @author home
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "t_user")
+@SuppressWarnings("serial")
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
