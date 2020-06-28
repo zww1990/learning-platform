@@ -1,6 +1,6 @@
 {
   "name": "my-angular",
-  "version": "9.1.11",
+  "version": "10.0.1",
   "license": "MIT",
   "description": "A Angular project",
   "author": "zhangweiwei",
@@ -28,7 +28,7 @@
     "file-saver": "~2.0.2",
     "hammerjs": "~2.0.8",
     "luxon": "^1.24.1",
-    "ng-zorro-antd": "^9.2.1",
+    "ng-zorro-antd": "^9.2.2",
     "rxjs": "^6.5.5",
     "screenfull": "4.0.1",
     "stream": "0.0.2",
