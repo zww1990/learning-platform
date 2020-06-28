@@ -26,8 +26,8 @@ primary key (user_id)
 create table t_user_authority (
 user_id integer not null comment '用户主键', 
 auth_id integer not null comment '权限主键',
-foreign key (user_id) references t_user (user_id),
-foreign key (auth_id) references t_authority (auth_id)
+foreign key (user_id) references t_user (user_id) ON DELETE CASCADE,
+foreign key (auth_id) references t_authority (auth_id) ON DELETE CASCADE
 ) engine=InnoDB comment='用户权限表';
 
 create table t_user_token (
