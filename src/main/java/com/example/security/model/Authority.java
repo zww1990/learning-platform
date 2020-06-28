@@ -13,9 +13,9 @@ import org.springframework.security.core.GrantedAuthority;
  * 
  * @author home
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "t_authority")
+@SuppressWarnings("serial")
 public class Authority implements GrantedAuthority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
