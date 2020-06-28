@@ -5,4 +5,6 @@
   <table-filter match-catalog="test" match-name="t_authority"/>
   <table-filter match-catalog="test" match-name="t_user"/>
   <table-filter match-catalog="test" match-name="t_user_authority"/>
+  <table-filter match-catalog="test" match-name="t_menu"/>
+  <table-filter match-catalog="test" match-name="t_menu_authority"/>
 </hibernate-reverse-engineering>
