@@ -1,9 +1,11 @@
 import { ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy } from '@angular/router';
+import { Injectable } from "@angular/core";
 
 /**
  * @description 路由重用策略，当多tab标签切换时，保留上次操作的数据。
  * @author zww
  */
+@Injectable()
 export class SimpleReuseStrategy implements RouteReuseStrategy {
   private static handlers: { [key: string]: DetachedRouteHandle } = {};
   private static excludePaths: string[] = ['/login'];
