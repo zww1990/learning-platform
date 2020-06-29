@@ -3,9 +3,6 @@ package com.example.security.config;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -13,12 +10,11 @@ import javax.annotation.Resource;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyUtils;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -27,6 +23,8 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
@@ -41,6 +39,8 @@ import com.example.security.service.UserService;
 import com.example.security.service.UserTokenService;
 import com.example.security.support.CaptchaAuthenticationDetailsSource;
 import com.example.security.support.CaptchaAuthenticationProvider;
+import com.example.security.support.DaoAccessDecisionManager;
+import com.example.security.support.DaoFilterInvocationSecurityMetadataSource;
 import com.example.security.support.JsonAuthenticationFailureHandler;
 import com.example.security.support.JsonAuthenticationSuccessHandler;
 import com.example.security.support.JsonSessionInformationExpiredStrategy;
@@ -84,10 +84,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()// 允许使用RequestMatcher实现（即通过URL模式）基于HttpServletRequest限制访问。
-				.antMatchers("/admin/**").hasRole("ADMIN")// 指定URL的快捷方式需要特定的角色。
-				.antMatchers("/guest/**").hasRole("GUEST")//
-				.antMatchers("/ajax").permitAll()// 指定任何人都可以允许URL。
-				.anyRequest().authenticated()// 指定任何经过身份验证的用户允许的URL。
+				.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+					@Override
+					public <O extends FilterSecurityInterceptor> O postProcess(O object) {
+						object.setAccessDecisionManager(accessDecisionManager());
+						object.setSecurityMetadataSource(securityMetadataSource());
+						return object;
+					}
+				})// 允许对象的初始化。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
 				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
 				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
@@ -150,18 +154,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
-
-	/**
-	 * @return 角色层次结构的简单接口。
-	 */
-	@Bean
-	public RoleHierarchy roleHierarchy() {
-		RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
-		Map<String, List<String>> roleMap = new HashMap<>();
-		roleMap.put("ROLE_ADMIN", Arrays.asList("ROLE_GUEST"));
-		hierarchy.setHierarchy(RoleHierarchyUtils.roleHierarchyFromMap(roleMap));
-		return hierarchy;
 	}
 
 	/**
@@ -254,4 +246,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return kaptcha;
 	}
 
+	/**
+	 * @return 安全元数据源实现标记接口，旨在执行过滤器调用上键对的查找。
+	 */
+	@Bean
+	public FilterInvocationSecurityMetadataSource securityMetadataSource() {
+		return new DaoFilterInvocationSecurityMetadataSource();
+	}
+
+	/**
+	 * @return 做出最终访问控制（授权）决策。
+	 */
+	@Bean
+	public AccessDecisionManager accessDecisionManager() {
+		return new DaoAccessDecisionManager();
+	}
 }
