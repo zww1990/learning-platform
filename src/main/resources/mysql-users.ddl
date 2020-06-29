@@ -87,3 +87,11 @@ select * from t_menu_authority;
 select * from t_user_token;
 select * from t_user_session;
 select * from t_user_session_attributes;
+
+
+select a.auth_id, a.auth_name, a.authority, b.user_id, b.username, d.menu_id, d.menu_name, d.pattern_url
+from t_authority a, t_user b, t_user_authority c, t_menu d, t_menu_authority e
+where a.auth_id = c.auth_id
+and a.auth_id = e.auth_id
+and b.user_id = c.user_id
+and d.menu_id = e.menu_id;
