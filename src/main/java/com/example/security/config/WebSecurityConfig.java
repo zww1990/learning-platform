@@ -2,7 +2,6 @@ package com.example.security.config;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.util.Arrays;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -11,9 +10,6 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +23,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.LazyCsrfTokenRepository;
@@ -37,8 +34,7 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 import com.example.security.service.UserService;
 import com.example.security.service.UserTokenService;
-import com.example.security.support.CaptchaAuthenticationDetailsSource;
-import com.example.security.support.CaptchaAuthenticationProvider;
+import com.example.security.support.CaptchaFilter;
 import com.example.security.support.DaoAccessDecisionManager;
 import com.example.security.support.DaoFilterInvocationSecurityMetadataSource;
 import com.example.security.support.JsonAuthenticationFailureHandler;
@@ -93,9 +89,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					}
 				})// 允许对象的初始化。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
+				.addFilterAt(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class)//
 				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
 				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
-				.authenticationDetailsSource(new CaptchaAuthenticationDetailsSource())// 指定自定义AuthenticationDetailsSource。
 				.permitAll()// 授予访问URL的权限为true
 				.and()//
 				.csrf()// 添加了CSRF支持。
@@ -129,23 +125,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected UserDetailsService userDetailsService() {
 		return new UserService();
-	}
-
-	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return new ProviderManager(Arrays.asList(this.authenticationProvider()));
-	}
-
-	/**
-	 * @return 验证码认证提供者
-	 */
-	@Bean
-	public AuthenticationProvider authenticationProvider() {
-		CaptchaAuthenticationProvider provider = new CaptchaAuthenticationProvider();
-		provider.setPasswordEncoder(this.passwordEncoder());
-		provider.setUserDetailsService(this.userDetailsService());
-		return provider;
 	}
 
 	/**
@@ -260,5 +239,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public AccessDecisionManager accessDecisionManager() {
 		return new DaoAccessDecisionManager();
+	}
+
+	/**
+	 * @return 验证码过滤器
+	 */
+	@Bean
+	public CaptchaFilter captchaFilter() {
+		return new CaptchaFilter();
 	}
 }
