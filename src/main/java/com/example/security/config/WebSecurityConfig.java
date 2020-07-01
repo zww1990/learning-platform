@@ -89,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					}
 				})// 允许对象的初始化。
 				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
-				.addFilterAt(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class)//
+				.addFilterAt(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class)// 将过滤器添加到指定过滤器类的位置。
 				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
 				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
 				.permitAll()// 授予访问URL的权限为true
