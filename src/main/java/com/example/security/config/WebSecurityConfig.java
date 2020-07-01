@@ -116,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.debug(true)// 控制对Spring Security的调试支持。
+		web.debug(false)// 控制对Spring Security的调试支持。
 				.ignoring()// 允许添加Spring Security应该忽略的RequestMatcher实例。
 				.antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/captcha");
 	}
