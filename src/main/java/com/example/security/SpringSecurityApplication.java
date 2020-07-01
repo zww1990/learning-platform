@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.validation.ValidationAutoConfigura
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
 import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -35,6 +36,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 		WebSocketServletAutoConfiguration.class, // WebSocket自动配置
 		SpringDataWebAutoConfiguration.class,// Spring Data Web自动配置
 })
+@EnableCaching
 public class SpringSecurityApplication {
 	private static final Logger log = LoggerFactory.getLogger(SpringSecurityApplication.class);
 
