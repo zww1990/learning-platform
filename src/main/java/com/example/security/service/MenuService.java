@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
@@ -28,11 +30,13 @@ public interface MenuService {
 	 * @author home
 	 */
 	@Service
+	@CacheConfig(cacheNames = "menus_cache")
 	class MenuServiceImpl implements MenuService {
 		@Resource
 		private MenuRepository menuRepository;
 
 		@Override
+		@Cacheable
 		public List<Menu> queryMenus() {
 			return this.menuRepository.findAll(Sort.by(Order.asc("menuId")));
 		}
