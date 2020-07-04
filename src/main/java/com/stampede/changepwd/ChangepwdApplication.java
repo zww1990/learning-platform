@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
+import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,13 +25,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
-		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class })
-@EnableConfigurationProperties(ChangepwdProperties.class)
-public class ChangepwdApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
+		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class,
+		WebSocketServletAutoConfiguration.class, RestTemplateAutoConfiguration.class })
+@ConfigurationPropertiesScan
+public class ChangepwdApplication implements WebMvcConfigurer {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
 	/**
 	 * 程序主入口
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020年2月17日,下午1:49:50
 	 * @param args 启动参数
@@ -40,11 +42,6 @@ public class ChangepwdApplication extends SpringBootServletInitializer implement
 		ConfigurableApplicationContext context = SpringApplication.run(ChangepwdApplication.class, args);
 		log.info("工厂中定义的bean数量={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
-	}
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(ChangepwdApplication.class);
 	}
 
 	@Override

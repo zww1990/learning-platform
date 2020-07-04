@@ -1,6 +1,7 @@
 package com.stampede.changepwd;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 /**
  * @author ZhangWeiWei
@@ -10,10 +11,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "changepwd")
 public class ChangepwdProperties {
 	/** 创建密码 */
+	@NestedConfigurationProperty
 	private FromSubjectText create;
 	/** 重置密码 */
+	@NestedConfigurationProperty
 	private FromSubjectText reset;
 	/** 修改密码 */
+	@NestedConfigurationProperty
 	private FromSubjectText update;
 
 	public FromSubjectText getCreate() {
