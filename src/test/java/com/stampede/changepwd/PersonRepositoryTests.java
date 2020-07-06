@@ -20,7 +20,7 @@ public class PersonRepositoryTests {
 	@Test
 	public void testFindOne() {
 		try {
-			this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is("zhangweiwei1")).ifPresent(c -> {
+			this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is("alienware")).ifPresent(c -> {
 				System.err.println(c.getCname());
 				System.err.println(c.getGidNumber());
 				System.err.println(c.getGivenName());
@@ -40,11 +40,12 @@ public class PersonRepositoryTests {
 	public void testSave() {
 		try {
 			Optional<Person> optional = this.personRepository
-					.findOne(LdapQueryBuilder.query().where("uid").is("zhangweiwei1"));
+					.findOne(LdapQueryBuilder.query().where("uid").is("alienware"));
 			if (optional.isPresent()) {
 				Person person = optional.get();
-				person.setUserPassword(LdapPasswordUtils.md5Password("1q2w3e4r"));
+				person.setUserPassword(LdapPasswordUtils.md5Password("hello"));
 				this.personRepository.save(person);
+				System.err.println("well done...");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
