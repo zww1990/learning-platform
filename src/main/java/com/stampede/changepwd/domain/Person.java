@@ -4,6 +4,8 @@ import javax.naming.Name;
 import org.springframework.ldap.odm.annotations.Attribute;
 import org.springframework.ldap.odm.annotations.Entry;
 import org.springframework.ldap.odm.annotations.Id;
+import org.springframework.ldap.odm.annotations.Transient;
+import org.springframework.util.StringUtils;
 
 /**
  * @author ZhangWeiWei
@@ -30,6 +32,19 @@ public class Person {
 	private String mail;
 	@Attribute(name = "userpassword")
 	private String userPassword;
+	@Transient
+	private String homeDirectory = "/home/users/";
+
+	public String getHomeDirectory() {
+		if (StringUtils.hasText(this.uid)) {
+			homeDirectory += this.uid;
+		}
+		return homeDirectory;
+	}
+
+	public void setHomeDirectory(String homeDirectory) {
+		this.homeDirectory = homeDirectory;
+	}
 
 	/**
 	 * @return 此注释将Java字段标记为包含LDAP条目的专有名称。

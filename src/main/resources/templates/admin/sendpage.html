@@ -10,7 +10,7 @@
 						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
 					</a> -->
 					<div class="result alert alert-success">
-						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 管理员发送邮件</p>
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 管理员创建账号</p>
 					</div>
 					<div class="result alert alert-warning" th:if="${message != null}">
 						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
@@ -20,11 +20,22 @@
 							<tr>
 								<td width="35%">
 									<div class="help alert alert-warning">
-										<p>输入用户名重置密码。收到邮件后，点击链接完成重置密码。</p>
-										<ul style="list-style: none;">
-											<li>&nbsp;</li>
-											<li>&nbsp;</li>
-											<li>&nbsp;</li>
+										<p>您的新密码必须符合以下条件:</p>
+										<ul>
+											<li>最小长度:6</li>
+											<li>最大长度:14</li>
+											<li>最少小写字母:1</li>
+											<li>最少大写字母:1</li>
+											<li>最少数字:1</li>
+											<li>最少字符类型:3</li>
+											<li>您的新密码不能与您的用户名相同</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
 										</ul>
 									</div>
 								</td>
@@ -32,15 +43,58 @@
 									<div class="alert alert-info">
 										<form th:action="@{/admin/sendmail}" method="post" class="form-horizontal">
 										    <div class="form-group">
-										        <label for="username" class="col-sm-4 control-label">用户名</label>
+										        <label for="uid" class="col-sm-4 control-label">uid</label>
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-										                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off" required="required"/>
+										                <input type="text" name="uid" id="uid" th:value="${param.uid}" class="form-control" placeholder="唯一标识符" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
 										    <div class="form-group">
+										        <label for="mail" class="col-sm-4 control-label">email</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+										                <input type="email" name="mail" id="mail" th:value="${param.mail}" class="form-control" placeholder="电子邮箱地址" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="gidNumber" class="col-sm-4 control-label">gidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="gidNumber" id="gidNumber" th:value="${param.gidNumber?:501}" class="form-control" placeholder="组编号，默认501" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="uidNumber" class="col-sm-4 control-label">uidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="uidNumber" id="uidNumber" th:value="${param.uidNumber}" class="form-control" placeholder="HR系统员工编号" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="givenName" class="col-sm-4 control-label">givenName</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="text" name="givenName" id="givenName" th:value="${param.givenName}" class="form-control" placeholder="中文姓名" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="userPassword" class="col-sm-4 control-label">userPassword</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="userPassword" id="userPassword" th:value="${param.userPassword}" class="form-control" placeholder="密码" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
 										    </div>
 										    <div class="form-group">
 										        <div class="col-sm-offset-4 col-sm-8">

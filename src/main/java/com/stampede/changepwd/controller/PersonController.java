@@ -118,7 +118,7 @@ public class PersonController {
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
 		}
-		Optional<Person> optional = this.personService.findByUsername(param);
+		Optional<Person> optional = this.personService.findByUsername(param.getUsername());
 		if (!optional.isPresent()) {
 			return mav.addObject("message", "您输入的用户名不存在！");
 		}

@@ -4,10 +4,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
+import javax.naming.Name;
+import javax.naming.directory.Attributes;
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.query.LdapQueryBuilder;
+import org.springframework.ldap.support.LdapUtils;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -77,8 +82,12 @@ public class PersonService {
 	 * @param param 用户密码参数类
 	 * @return 按用户名查询
 	 */
-	public Optional<Person> findByUsername(PersonParam param) {
-		return this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is(param.getUsername()));
+	public Optional<Person> findByUsername(String param) {
+		return this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is(param));
+	}
+
+	public Optional<Person> findByUidNumber(String param) {
+		return this.personRepository.findOne(LdapQueryBuilder.query().where("uidNumber").is(param));
 	}
 
 	/**
@@ -113,6 +122,23 @@ public class PersonService {
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMailForAdmin(Person person, String webPath) {
+		Name dn = LdapUtils.newLdapName(String.format("uid=%s,ou=People", person.getUid()));
+		BasicAttribute ba = new BasicAttribute("objectClass");
+		ba.add("inetOrgPerson");
+		ba.add("posixAccount");
+		ba.add("top");
+		Attributes attr = new BasicAttributes();
+		attr.put(ba);
+		attr.put("cn", person.getUid());
+		attr.put("sn", person.getUid());
+		attr.put("uid", person.getUid());
+		attr.put("mail", person.getMail());
+		attr.put("givenName", person.getGivenName());
+		attr.put("uidNumber", person.getUidNumber());
+		attr.put("gidNumber", person.getGidNumber());
+		attr.put("homeDirectory", person.getHomeDirectory());
+		attr.put("userPassword", LdapPasswordUtils.md5Password(person.getUserPassword()));
+		this.ldapTemplate.bind(dn, null, attr);
 		String url = String.format("%s?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
