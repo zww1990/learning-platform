@@ -121,6 +121,18 @@
 		            placement: 'bottom',
 		            container: 'body' // 允许弹出窗口大于菜单按钮
 		        });
+		        $('#uid').blur(function(){
+		        	let _this=this;
+		        	let uid=this.value;
+		        	if(uid.length>0){
+		        		$.get('[[${#request.contextPath}]]/admin/checkuid',{uid:uid},function(data){
+		        			alert(data.message);
+		        			if (data.status) {
+								$(_this).focus();
+							}
+		        		});
+		        	}
+		        });
 		    });
 		</script>
 	</body>

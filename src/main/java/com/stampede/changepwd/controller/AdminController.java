@@ -1,5 +1,8 @@
 package com.stampede.changepwd.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
@@ -33,6 +38,21 @@ public class AdminController {
 	@GetMapping
 	public ModelAndView admin() {
 		return new ModelAndView("admin/sendpage").addObject("image", Constants.randomImage());
+	}
+
+	@GetMapping("/checkuid")
+	@ResponseBody
+	public Object checkUid(@RequestParam String uid) {
+		Optional<Person> opt = this.personService.findByUsername(uid);
+		Map<String, Object> data = new HashMap<>();
+		if (opt.isPresent()) {
+			data.put("status", true);
+			data.put("message", String.format("该[%s]已存在，请重新输入。", uid));
+		} else {
+			data.put("status", false);
+			data.put("message", String.format("该[%s]不存在，请放心使用。", uid));
+		}
+		return data;
 	}
 
 	/**
