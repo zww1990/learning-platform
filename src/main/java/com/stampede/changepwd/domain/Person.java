@@ -34,6 +34,26 @@ public class Person {
 	private String userPassword;
 	@Transient
 	private String homeDirectory = "/home/users/";
+	@Transient
+	private String mailPrefix;
+	@Transient
+	private String mailSuffix;
+
+	public String getMailPrefix() {
+		return mailPrefix;
+	}
+
+	public String getMailSuffix() {
+		return mailSuffix;
+	}
+
+	public void setMailPrefix(String mailPrefix) {
+		this.mailPrefix = mailPrefix;
+	}
+
+	public void setMailSuffix(String mailSuffix) {
+		this.mailSuffix = mailSuffix;
+	}
 
 	public String getHomeDirectory() {
 		if (StringUtils.hasText(this.uid)) {

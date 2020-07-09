@@ -78,8 +78,11 @@ public class AdminController {
 		if (this.personService.findByUsername(param.getUid()).isPresent()) {
 			return mav.addObject("message", "您输入的uid已存在！");
 		}
-		if (!StringUtils.hasText(param.getMail())) {
-			return mav.addObject("message", "请输入email！");
+		if (!StringUtils.hasText(param.getMailPrefix())) {
+			return mav.addObject("message", "请输入email前缀！");
+		}
+		if (!StringUtils.hasText(param.getMailSuffix())) {
+			return mav.addObject("message", "请输入email后缀！");
 		}
 		if (!StringUtils.hasText(param.getGidNumber())) {
 			return mav.addObject("message", "请输入gidNumber！");
@@ -93,6 +96,7 @@ public class AdminController {
 		if (!StringUtils.hasText(param.getGivenName())) {
 			return mav.addObject("message", "请输入givenName！");
 		}
+		param.setMail(param.getMailPrefix() + param.getMailSuffix());
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s/person/resetpage", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
 		redirectAttributes.addFlashAttribute("email", param.getMail());

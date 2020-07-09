@@ -50,11 +50,12 @@
 										        </div>
 										    </div>
 										    <div class="form-group">
-										        <label for="mail" class="col-sm-4 control-label">email</label>
+										        <label for="mailPrefix" class="col-sm-4 control-label">email</label>
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
-										                <input type="email" name="mail" id="mail" th:value="${param.mail}" class="form-control" placeholder="电子邮箱地址" autocomplete="off" required="required"/>
+										                <input type="text" name="mailPrefix" id="mailPrefix" th:value="${param.mailPrefix}" class="form-control" placeholder="电子邮箱地址前缀" autocomplete="off" required="required" style="width: 255px"/>
+										                <input type="text" name="mailSuffix" id="mailSuffix" th:value="${param.mailSuffix?:'@5i5j.com'}" class="form-control" placeholder="电子邮箱地址后缀" autocomplete="off" required="required" style="width: 150px"/>
 										            </div>
 										        </div>
 										    </div>
