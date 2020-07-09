@@ -20,15 +20,13 @@
 							<tr>
 								<td width="35%">
 									<div class="help alert alert-warning">
-										<p>您的新密码必须符合以下条件:</p>
+										<p>创建账号必须符合以下条件:</p>
 										<ul>
-											<li>最小长度:6</li>
-											<li>最大长度:14</li>
-											<li>最少小写字母:1</li>
-											<li>最少大写字母:1</li>
-											<li>最少数字:1</li>
-											<li>最少字符类型:3</li>
-											<li>您的新密码不能与您的用户名相同</li>
+											<li>uid不能为空</li>
+											<li>email不能为空</li>
+											<li>gidNumber不能为空</li>
+											<li>uidNumber不能为空</li>
+											<li>givenName不能为空</li>
 											<li style="list-style: none;">&nbsp;</li>
 											<li style="list-style: none;">&nbsp;</li>
 											<li style="list-style: none;">&nbsp;</li>
@@ -84,15 +82,6 @@
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
 										                <input type="text" name="givenName" id="givenName" th:value="${param.givenName}" class="form-control" placeholder="中文姓名" autocomplete="off" required="required"/>
-										            </div>
-										        </div>
-										    </div>
-										    <div class="form-group">
-										        <label for="userPassword" class="col-sm-4 control-label">userPassword</label>
-										        <div class="col-sm-8">
-										            <div class="input-group">
-										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-										                <input type="password" name="userPassword" id="userPassword" th:value="${param.userPassword}" class="form-control" placeholder="密码" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>

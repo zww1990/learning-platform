@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.service.PersonService;
-import com.stampede.changepwd.util.LdapPasswordUtils;
 
 /**
  * @author ZhangWeiWei
@@ -85,39 +84,6 @@ public class AdminController {
 		}
 		if (!StringUtils.hasText(param.getGivenName())) {
 			return mav.addObject("message", "请输入givenName！");
-		}
-		if (!StringUtils.hasText(param.getUserPassword())) {
-			return mav.addObject("message", "请输入userPassword！");
-		}
-		if (param.getUserPassword().length() < 6) {
-			return mav.addObject("message", "您的userPassword太短！");
-		}
-		if (param.getUserPassword().length() > 14) {
-			return mav.addObject("message", "您的userPassword太长！");
-		}
-		if (LdapPasswordUtils.countLowerCase(param.getUserPassword()) < 1) {
-			return mav.addObject("message", "您的userPassword没有包含足够的小写字母！");
-		}
-		if (LdapPasswordUtils.countUpperCase(param.getUserPassword()) < 1) {
-			return mav.addObject("message", "您的userPassword没有包含足够的大写字母！");
-		}
-		if (LdapPasswordUtils.countDigit(param.getUserPassword()) < 1) {
-			return mav.addObject("message", "您的userPassword没有包含足够的数字！");
-		}
-		if (LdapPasswordUtils.countCharacterType(param.getUserPassword()) < 3) {
-			return mav.addObject("message", "您的userPassword没有包含足够的字符类型！");
-		}
-		if (param.getUserPassword().equals(param.getUid())) {
-			return mav.addObject("message", "您的userPassword与uid相同！");
-		}
-		if (param.getUserPassword().equals(param.getGidNumber())) {
-			return mav.addObject("message", "您的userPassword与您的gidNumber相同！");
-		}
-		if (param.getUserPassword().equals(param.getUidNumber())) {
-			return mav.addObject("message", "您的userPassword与您的uidNumber相同！");
-		}
-		if (param.getUserPassword().equals(param.getGivenName())) {
-			return mav.addObject("message", "您的userPassword与您的givenName相同！");
 		}
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s/person/resetpage", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));

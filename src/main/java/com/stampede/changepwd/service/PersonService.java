@@ -137,7 +137,7 @@ public class PersonService {
 		attr.put("uidNumber", person.getUidNumber());
 		attr.put("gidNumber", person.getGidNumber());
 		attr.put("homeDirectory", person.getHomeDirectory());
-		attr.put("userPassword", LdapPasswordUtils.md5Password(person.getUserPassword()));
+		attr.put("userPassword", "[none]");
 		this.ldapTemplate.bind(dn, null, attr);
 		String url = String.format("%s?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
