@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.service.PersonService;
@@ -39,6 +40,11 @@ public class AdminController {
 		return new ModelAndView("admin/sendpage").addObject("image", Constants.randomImage());
 	}
 
+	@GetMapping("/sendsuccess")
+	public ModelAndView sendSuccess() {
+		return new ModelAndView("admin/sendsuccess").addObject("image", Constants.randomImage());
+	}
+
 	@GetMapping("/checkuid")
 	@ResponseBody
 	public Object checkUid(@RequestParam String uid) {
@@ -62,7 +68,8 @@ public class AdminController {
 	 * @return 管理员发送邮件
 	 */
 	@PostMapping("/sendmail")
-	public ModelAndView sendMail(@ModelAttribute Person param, HttpServletRequest request) {
+	public Object sendMail(@ModelAttribute Person param, HttpServletRequest request,
+			RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView("admin/sendpage").addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUid())) {
 			return mav.addObject("message", "请输入uid！");
@@ -87,7 +94,7 @@ public class AdminController {
 		}
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s/person/resetpage", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
-		mav.setViewName("admin/sendsuccess");
-		return mav.addObject("email", param.getMail());
+		redirectAttributes.addFlashAttribute("email", param.getMail());
+		return "redirect:/admin/sendsuccess";
 	}
 }
