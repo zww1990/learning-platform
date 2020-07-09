@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
@@ -82,7 +83,7 @@ public class PersonController {
 			return mav.addObject("message", "您输入的用户名或旧密码不正确！");
 		}
 		this.personService.updateUserPassword(param);
-		return "redirect:/person/updatesuccess";
+		return new RedirectView("updatesuccess");
 	}
 
 	/**
@@ -189,6 +190,6 @@ public class PersonController {
 			return mav.addObject("message", "请确认您的新密码！");
 		}
 		this.personService.updateUserPassword(param);
-		return "redirect:/person/updatesuccess";
+		return new RedirectView("updatesuccess");
 	}
 }

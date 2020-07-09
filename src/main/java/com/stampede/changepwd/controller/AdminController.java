@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.service.PersonService;
@@ -95,6 +96,6 @@ public class AdminController {
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s/person/resetpage", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
 		redirectAttributes.addFlashAttribute("email", param.getMail());
-		return "redirect:/admin/sendsuccess";
+		return new RedirectView("sendsuccess");
 	}
 }
