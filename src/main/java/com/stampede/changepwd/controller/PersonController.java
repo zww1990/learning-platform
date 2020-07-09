@@ -1,8 +1,10 @@
 package com.stampede.changepwd.controller;
 
 import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.service.PersonService;
 import com.stampede.changepwd.util.LdapPasswordUtils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -82,7 +87,7 @@ public class PersonController {
 			return mav.addObject("message", "您输入的用户名或旧密码不正确！");
 		}
 		this.personService.updateUserPassword(param);
-		return "redirect:/person/updatesuccess";
+		return new RedirectView("updatesuccess");
 	}
 
 	/**
@@ -108,7 +113,7 @@ public class PersonController {
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,上午9:42:17
-	 * @param param 用户密码参数类
+	 * @param param   用户密码参数类
 	 * @param request HTTP请求
 	 * @return 忘记密码-发送邮件
 	 */
@@ -189,6 +194,6 @@ public class PersonController {
 			return mav.addObject("message", "请确认您的新密码！");
 		}
 		this.personService.updateUserPassword(param);
-		return "redirect:/person/updatesuccess";
+		return new RedirectView("updatesuccess");
 	}
 }
