@@ -1,6 +1,8 @@
 package com.stampede.changepwd.service;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
@@ -8,6 +10,8 @@ import javax.naming.Name;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -37,6 +41,8 @@ public class PersonService {
 	private JavaMailSender javaMailSender;
 	@Resource
 	private ChangepwdProperties properties;
+	@Resource
+	private JdbcTemplate jdbcTemplate;
 
 	/**
 	 * @author ZhangWeiWei
@@ -154,5 +160,14 @@ public class PersonService {
 			throw new RuntimeException(e);
 		}
 		this.javaMailSender.send(message);
+	}
+
+	public Map<String, Object> queryForUserMap(String userId) {
+		try {
+			String sql = "SELECT user_name, comp_email FROM bdm_user WHERE user_id = ? and comp_email is not null";
+			return this.jdbcTemplate.queryForMap(sql, userId);
+		} catch (IncorrectResultSizeDataAccessException e) {
+			return new HashMap<>();
+		}
 	}
 }

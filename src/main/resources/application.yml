@@ -6,6 +6,7 @@ server:
       registered: false
   ssl:
     enabled: false
+
 spring:
   aop:
     auto: false
@@ -49,6 +50,17 @@ spring:
 #    cache: false
     check-template: false
     check-template-location: false
+  datasource:
+    #数据库连接
+    url: jdbc:oracle:thin:@10.2.4.251:1521:cbssit2
+    #数据库用户名
+    username: BDM
+    #数据库密码
+    password: BDM
+    initialization-mode: never
+  jmx:
+    enabled: false
+
 changepwd:
     #创建密码
     create:

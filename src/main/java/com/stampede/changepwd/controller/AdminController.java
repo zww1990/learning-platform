@@ -61,6 +61,14 @@ public class AdminController {
 		return data;
 	}
 
+	@GetMapping("/queryuser")
+	@ResponseBody
+	public Object queryUser(@RequestParam String userId) {
+		Map<String, Object> data = this.personService.queryForUserMap(userId);
+		data.put("status", !data.isEmpty());
+		return data;
+	}
+
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月27日,上午9:57:42

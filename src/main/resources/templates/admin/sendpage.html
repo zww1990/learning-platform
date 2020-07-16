@@ -41,6 +41,15 @@
 									<div class="alert alert-info">
 										<form th:action="@{/admin/sendmail}" method="post" class="form-horizontal">
 										    <div class="form-group">
+										        <label for="uidNumber" class="col-sm-4 control-label">uidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="uidNumber" id="uidNumber" th:value="${param.uidNumber}" class="form-control" placeholder="HR系统员工编号" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
 										        <label for="uid" class="col-sm-4 control-label">uid</label>
 										        <div class="col-sm-8">
 										            <div class="input-group">
@@ -61,29 +70,20 @@
 										        </div>
 										    </div>
 										    <div class="form-group">
-										        <label for="gidNumber" class="col-sm-4 control-label">gidNumber</label>
-										        <div class="col-sm-8">
-										            <div class="input-group">
-										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-										                <input type="number" min="1" name="gidNumber" id="gidNumber" th:value="${param.gidNumber?:501}" class="form-control" placeholder="组编号，默认501" autocomplete="off" required="required"/>
-										            </div>
-										        </div>
-										    </div>
-										    <div class="form-group">
-										        <label for="uidNumber" class="col-sm-4 control-label">uidNumber</label>
-										        <div class="col-sm-8">
-										            <div class="input-group">
-										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
-										                <input type="number" min="1" name="uidNumber" id="uidNumber" th:value="${param.uidNumber}" class="form-control" placeholder="HR系统员工编号" autocomplete="off" required="required"/>
-										            </div>
-										        </div>
-										    </div>
-										    <div class="form-group">
 										        <label for="givenName" class="col-sm-4 control-label">givenName</label>
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
 										                <input type="text" name="givenName" id="givenName" th:value="${param.givenName}" class="form-control" placeholder="中文姓名" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="gidNumber" class="col-sm-4 control-label">gidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="gidNumber" id="gidNumber" th:value="${param.gidNumber?:501}" class="form-control" placeholder="组编号，默认501" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
@@ -123,6 +123,26 @@
 							}
 		        		});
 		        	}
+		        });
+		        $('#uidNumber').blur(function(){
+		        	let uidNumber=this.value;
+		        	if (uidNumber.length>0) {
+						$.get('[[${#request.contextPath}]]/admin/queryuser',{userId:uidNumber},function(data){
+							if (data.status) {
+								let COMP_EMAIL=data.COMP_EMAIL.split('@');
+								$('#givenName').val(data.USER_NAME);
+								$('#uid').val(COMP_EMAIL[0]);
+								$('#mailPrefix').val(COMP_EMAIL[0]);
+								$('#mailSuffix').val(COMP_EMAIL[1]);
+								$('#uid').blur();
+							}else {
+								$('#givenName').val('');
+								$('#uid').val('');
+								$('#mailPrefix').val('');
+								$('#mailSuffix').val('5i5j.com');
+							}
+		        		});
+					}
 		        });
 		    });
 		</script>
