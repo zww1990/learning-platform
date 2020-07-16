@@ -10,7 +10,7 @@
 						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
 					</a> -->
 					<div class="result alert alert-success">
-						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 管理员创建账号</p>
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> LDAP创建查询平台</p>
 					</div>
 					<div class="result alert alert-warning" th:if="${message != null}">
 						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
@@ -22,11 +22,11 @@
 									<div class="help alert alert-warning">
 										<p>创建账号必须符合以下条件:</p>
 										<ul>
+											<li>uidNumber不能为空</li>
 											<li>uid不能为空</li>
 											<li>email不能为空</li>
-											<li>gidNumber不能为空</li>
-											<li>uidNumber不能为空</li>
 											<li>givenName不能为空</li>
+											<li>gidNumber不能为空</li>
 											<li style="list-style: none;">&nbsp;</li>
 											<li style="list-style: none;">&nbsp;</li>
 											<li style="list-style: none;">&nbsp;</li>
@@ -112,19 +112,15 @@
 		            placement: 'bottom',
 		            container: 'body' // 允许弹出窗口大于菜单按钮
 		        });
-		        $('#uid').blur(function(){
-		        	let _this=this;
+		        $('#uid').on('input propertychange',$.debounce(500,function(){
 		        	let uid=this.value;
 		        	if(uid.length>0){
 		        		$.get('[[${#request.contextPath}]]/admin/checkuid',{uid:uid},function(data){
 		        			alert(data.message);
-		        			if (data.status) {
-								$(_this).focus();
-							}
 		        		});
 		        	}
-		        });
-		        $('#uidNumber').blur(function(){
+		        }));
+		        $('#uidNumber').on('input propertychange',$.debounce(500,function(){
 		        	let uidNumber=this.value;
 		        	if (uidNumber.length>0) {
 						$.get('[[${#request.contextPath}]]/admin/queryuser',{userId:uidNumber},function(data){
@@ -134,7 +130,6 @@
 								$('#uid').val(COMP_EMAIL[0]);
 								$('#mailPrefix').val(COMP_EMAIL[0]);
 								$('#mailSuffix').val(COMP_EMAIL[1]);
-								$('#uid').blur();
 							}else {
 								$('#givenName').val('');
 								$('#uid').val('');
@@ -143,7 +138,7 @@
 							}
 		        		});
 					}
-		        });
+		        }));
 		    });
 		</script>
 	</body>
