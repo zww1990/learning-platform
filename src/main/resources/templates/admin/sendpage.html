@@ -128,19 +128,21 @@
 		        	}
 		        }
 		        function queryuser(){
+		        	let _this=$('#uid');
 		        	let uidNumber=$('#uidNumber').val();
 		        	if (uidNumber.length>0) {
 						$.get('[[${#request.contextPath}]]/admin/queryuser',{userId:uidNumber},function(data){
 							if (data.status) {
 								let COMP_EMAIL=data.COMP_EMAIL.split('@');
 								$('#givenName').val(data.USER_NAME);
-								$('#uid').val(COMP_EMAIL[0]);
+								_this.val(COMP_EMAIL[0]);
 								$('#mailPrefix').val(COMP_EMAIL[0]);
 								$('#mailSuffix').val(COMP_EMAIL[1]);
 								checkuid();
 							}else {
 								$('#givenName').val('');
-								$('#uid').val('');
+								_this.val('');
+					        	_this.parent().nextAll().remove();
 								$('#mailPrefix').val('');
 								$('#mailSuffix').val('5i5j.com');
 							}
