@@ -10,12 +10,15 @@ import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.O
 import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration;
+import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
 		ProjectInfoAutoConfiguration.class, ValidationAutoConfiguration.class, AopAutoConfiguration.class,
-		OAuth2ResourceServerAutoConfiguration.class, MultipartAutoConfiguration.class })
+		OAuth2ResourceServerAutoConfiguration.class, MultipartAutoConfiguration.class,
+		WebSocketServletAutoConfiguration.class, RestTemplateAutoConfiguration.class })
 public class SpringSwaggerApplication {
 	private static final Logger log = LoggerFactory.getLogger(SpringSwaggerApplication.class);
 
