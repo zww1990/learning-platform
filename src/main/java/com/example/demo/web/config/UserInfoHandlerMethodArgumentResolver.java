@@ -1,5 +1,7 @@
 package com.example.demo.web.config;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
@@ -17,10 +19,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 	private static final Logger log = LoggerFactory.getLogger(UserInfoHandlerMethodArgumentResolver.class);
-	private ObjectMapper mapper;
+	@Resource
+	private ObjectMapper objectMapper;
 
-	public UserInfoHandlerMethodArgumentResolver(ObjectMapper mapper) {
-		this.mapper = mapper;
+	public UserInfoHandlerMethodArgumentResolver() {
+		super();
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgum
 		headerValue = new String(Base64Utils.decodeFromString(headerValue));
 		log.info("解析用户信息>>>headerName={}, headerValue={}", headerName, headerValue);
 		try {
-			UserModel value = this.mapper.readValue(headerValue, UserModel.class);
+			UserModel value = this.objectMapper.readValue(headerValue, UserModel.class);
 			return value;
 		} catch (Exception e) {
 			throw new ServletRequestBindingException("请求头[" + headerName + "]参数无效", e);
