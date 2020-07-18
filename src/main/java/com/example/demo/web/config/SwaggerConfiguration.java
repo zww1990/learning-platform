@@ -23,14 +23,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfiguration {
 	@Bean
 	public Docket api(SwaggerProperties props) {
-		return new Docket(DocumentationType.OAS_30).select()
-				.apis(RequestHandlerSelectors.basePackage(props.getBasePackage())).build().apiInfo(this.apiInfo(props));
-	}
-
-	private ApiInfo apiInfo(SwaggerProperties props) {
 		Contact contact = new Contact(props.getName(), props.getUrl(), props.getEmail());
-		return new ApiInfo(props.getTitle(), props.getDescription(), props.getVersion(), props.getTermsOfServiceUrl(),
-				contact, props.getLicense(), props.getLicenseUrl(), Collections.emptyList());
+		ApiInfo apiInfo = new ApiInfo(props.getTitle(), props.getDescription(), props.getVersion(),
+				props.getTermsOfServiceUrl(), contact, props.getLicense(), props.getLicenseUrl(),
+				Collections.emptyList());
+		return new Docket(DocumentationType.OAS_30).select()
+				.apis(RequestHandlerSelectors.basePackage(props.getBasePackage())).build().apiInfo(apiInfo);
 	}
 
 }
