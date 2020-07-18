@@ -2,6 +2,7 @@ package com.example.demo.web.config;
 
 import java.util.Collections;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 @EnableOpenApi
 @ConditionalOnWebApplication
+@ConditionalOnProperty(name = "springfox.documentation.enabled", havingValue = "true")
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfiguration {
 	@Bean
