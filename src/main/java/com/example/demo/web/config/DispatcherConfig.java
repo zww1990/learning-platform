@@ -3,8 +3,7 @@ package com.example.demo.web.config;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -12,13 +11,9 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Configuration
 @EnableWebMvc
 public class DispatcherConfig implements WebMvcConfigurer {
-	@Resource
-	private ObjectMapper objectMapper;
 
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -32,7 +27,11 @@ public class DispatcherConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(new UserInfoHandlerMethodArgumentResolver(this.objectMapper));
+		argumentResolvers.add(this.userInfoHandlerMethodArgumentResolver());
 	}
 
+	@Bean
+	public UserInfoHandlerMethodArgumentResolver userInfoHandlerMethodArgumentResolver() {
+		return new UserInfoHandlerMethodArgumentResolver();
+	}
 }
