@@ -177,6 +177,6 @@ public class PersonService {
 		return this.ldapTemplate
 				.search("", filter.encode(), (Attributes attributes) -> attributes.get("uidnumber").get().toString())
 				.stream().filter(p -> p.startsWith("100")).mapToLong(Long::parseLong).max()
-				.orElse(System.currentTimeMillis());
+				.orElse(System.currentTimeMillis()) + 1;
 	}
 }
