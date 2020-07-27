@@ -170,4 +170,13 @@ public class PersonService {
 			return new HashMap<>();
 		}
 	}
+
+	public long queryWaibaoId() {
+		AndFilter filter = new AndFilter();
+		filter.and(new EqualsFilter("objectclass", "person"));
+		return this.ldapTemplate
+				.search("", filter.encode(), (Attributes attributes) -> attributes.get("uidnumber").get().toString())
+				.stream().filter(p -> p.startsWith("100")).mapToLong(Long::parseLong).max()
+				.orElse(System.currentTimeMillis());
+	}
 }

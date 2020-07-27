@@ -69,6 +69,15 @@ public class AdminController {
 		return data;
 	}
 
+	@GetMapping("/querywaibao")
+	@ResponseBody
+	public Object queryWaibao() {
+		long waibaoId = this.personService.queryWaibaoId();
+		Map<String, Long> data = new HashMap<>();
+		data.put("waibaoId", waibaoId);
+		return data;
+	}
+
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月27日,上午9:57:42

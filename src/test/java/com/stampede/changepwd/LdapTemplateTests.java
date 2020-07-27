@@ -27,19 +27,25 @@ public class LdapTemplateTests {
 		try {
 			AndFilter filter = new AndFilter();
 			filter.and(new EqualsFilter("objectclass", "person"));
-			filter.and(new EqualsFilter("uid", "alienware"));
-			this.ldapTemplate.search("", filter.encode(), (Attributes attributes) -> {
-				System.err.println(attributes.get("givenname").get());
-				System.err.println(attributes.get("sn").get());
-				byte[] bs = (byte[]) attributes.get("userpassword").get();
-				System.err.println(new String(bs));
-				System.err.println(attributes.get("uidnumber").get());
-				System.err.println(attributes.get("gidnumber").get());
-				System.err.println(attributes.get("mail").get());
-				System.err.println(attributes.get("uid").get());
-				System.err.println(attributes.get("cn").get());
-				return attributes;
-			});
+			// filter.and(new EqualsFilter("uid", "alienware"));
+			// this.ldapTemplate.search("", filter.encode(), (Attributes attributes) -> {
+			// System.err.println(attributes.get("givenname").get());
+			// System.err.println(attributes.get("sn").get());
+			// byte[] bs = (byte[]) attributes.get("userpassword").get();
+			// System.err.println(new String(bs));
+			// System.err.println(attributes.get("uidnumber").get());
+			// System.err.println(attributes.get("gidnumber").get());
+			// System.err.println(attributes.get("mail").get());
+			// System.err.println(attributes.get("uid").get());
+			// System.err.println(attributes.get("cn").get());
+			// return attributes;
+			// });
+			long size = this.ldapTemplate
+					.search("", filter.encode(),
+							(Attributes attributes) -> attributes.get("uidnumber").get().toString())
+					.stream().filter(p -> p.startsWith("100")).mapToLong(Long::parseLong).max()
+					.orElse(System.currentTimeMillis());
+			System.err.println(size);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
