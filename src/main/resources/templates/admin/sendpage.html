@@ -153,8 +153,14 @@
 		        $('#uid').on('input propertychange',$.debounce(500,checkuid));
 		        $('#uidNumber').on('input propertychange',$.debounce(500,queryuser));
 		        $('#querywaibao').click(function(){
+		        	let _this=$('#uid');
 		        	$.get('[[${#request.contextPath}]]/admin/querywaibao',{},function(data){
 		        		$('#uidNumber').val(data.waibaoId);
+						$('#givenName').val('');
+						$('#mailPrefix').val('');
+						$('#mailSuffix').val('');
+						_this.val('');
+			        	_this.parent().nextAll().remove();
 		        	});
 		        });
 		    });
