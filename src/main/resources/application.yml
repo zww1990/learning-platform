@@ -90,3 +90,14 @@ changepwd:
     subject: 配置中心密码修改（涉及SVN、GIT、JIRA、WIKI、Jenkins）
     #邮件内容（%s是占位符，请谨慎修改）
     text: '%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。'
+  job:
+#    cron: 59 59 11,19,23 * * ?
+    cron: 0 0/1 * * * ?
+    pattern: HH:mm:ss
+    times:
+    - begin: '00:00:00'
+      end: '11:59:59'
+    - begin: '12:00:00'
+      end: '19:59:59'
+    - begin: '20:00:00'
+      end: '23:59:59'

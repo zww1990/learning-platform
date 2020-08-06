@@ -1,5 +1,7 @@
 package com.stampede.changepwd;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -12,13 +14,15 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 public class ChangepwdProperties {
 	/** 创建密码 */
 	@NestedConfigurationProperty
-	private FromSubjectText create;
+	private FromSubjectText create = new FromSubjectText();
 	/** 重置密码 */
 	@NestedConfigurationProperty
-	private FromSubjectText reset;
+	private FromSubjectText reset = new FromSubjectText();
 	/** 修改密码 */
 	@NestedConfigurationProperty
-	private FromSubjectText update;
+	private FromSubjectText update = new FromSubjectText();
+	@NestedConfigurationProperty
+	private PersonJob job = new PersonJob();
 
 	public FromSubjectText getCreate() {
 		return create;
@@ -42,6 +46,14 @@ public class ChangepwdProperties {
 
 	public void setUpdate(FromSubjectText update) {
 		this.update = update;
+	}
+
+	public PersonJob getJob() {
+		return job;
+	}
+
+	public void setJob(PersonJob job) {
+		this.job = job;
 	}
 
 	/**
@@ -89,6 +101,62 @@ public class ChangepwdProperties {
 
 		public void setText(String text) {
 			this.text = text;
+		}
+	}
+
+	public static class PersonJob {
+		/** 定时任务时间表达式 */
+		private String cron;
+		/** 时间格式 */
+		private String pattern;
+		/** 定时任务执行时间段 */
+		private List<Time> times = new ArrayList<>();
+
+		public String getCron() {
+			return cron;
+		}
+
+		public String getPattern() {
+			return pattern;
+		}
+
+		public List<Time> getTimes() {
+			return times;
+		}
+
+		public void setCron(String cron) {
+			this.cron = cron;
+		}
+
+		public void setPattern(String pattern) {
+			this.pattern = pattern;
+		}
+
+		public void setTimes(List<Time> times) {
+			this.times = times;
+		}
+
+		public static class Time {
+			/** 开始时间 */
+			private String begin;
+			/** 结束时间 */
+			private String end;
+
+			public String getBegin() {
+				return begin;
+			}
+
+			public String getEnd() {
+				return end;
+			}
+
+			public void setBegin(String begin) {
+				this.begin = begin;
+			}
+
+			public void setEnd(String end) {
+				this.end = end;
+			}
 		}
 	}
 }

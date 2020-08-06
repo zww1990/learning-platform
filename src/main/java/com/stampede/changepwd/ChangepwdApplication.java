@@ -4,30 +4,32 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration;
-import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
-import org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import com.stampede.changepwd.service.PersonJobService;
 
 /**
  * @author ZhangWeiWei
  * @date 2020年2月17日,下午1:50:33
  * @description 程序启动类
  */
-@SpringBootApplication(exclude = { TaskExecutionAutoConfiguration.class, TaskSchedulingAutoConfiguration.class,
-		PersistenceExceptionTranslationAutoConfiguration.class, SpringDataWebAutoConfiguration.class,
-		OAuth2ResourceServerAutoConfiguration.class, ProjectInfoAutoConfiguration.class,
-		WebSocketServletAutoConfiguration.class, RestTemplateAutoConfiguration.class })
+@SpringBootApplication(exclude = { PersistenceExceptionTranslationAutoConfiguration.class,
+		SpringDataWebAutoConfiguration.class, OAuth2ResourceServerAutoConfiguration.class,
+		ProjectInfoAutoConfiguration.class, WebSocketServletAutoConfiguration.class,
+		RestTemplateAutoConfiguration.class })
 @ConfigurationPropertiesScan
+@EnableScheduling
 public class ChangepwdApplication implements WebMvcConfigurer {
 	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
@@ -51,5 +53,11 @@ public class ChangepwdApplication implements WebMvcConfigurer {
 	@Bean
 	public LoginHandlerInterceptor loginHandlerInterceptor() {
 		return new LoginHandlerInterceptor();
+	}
+
+	@Bean
+	@ConditionalOnProperty("changepwd.job.cron")
+	public PersonJobService personJobService() {
+		return new PersonJobService();
 	}
 }
