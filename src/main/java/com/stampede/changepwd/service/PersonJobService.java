@@ -1,10 +1,10 @@
 package com.stampede.changepwd.service;
 
-import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.NetworkInterface;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -34,14 +34,27 @@ public class PersonJobService {
 		String hhmmss = now.format(DateTimeFormatter.ofPattern(job.getPattern()));
 		String yymmdd = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		log.info("{} {}", yymmdd, hhmmss);
+		StringBuilder sb = new StringBuilder();
 		try {
-			InetAddress ip4 = Inet4Address.getLocalHost();
-			System.err.println("------------------");
-			System.err.println(ip4.getHostAddress());
-			System.err.println("------------------");
-		} catch (UnknownHostException e) {
+			Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();// 获取本地所有网络接口
+			while (en.hasMoreElements()) {// 遍历枚举中的每一个元素
+				NetworkInterface ni = (NetworkInterface) en.nextElement();
+				Enumeration<InetAddress> enumInetAddr = ni.getInetAddresses();
+				while (enumInetAddr.hasMoreElements()) {
+					InetAddress inetAddress = (InetAddress) enumInetAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress()
+							&& inetAddress.isSiteLocalAddress()) {
+						sb.append("name:" + inetAddress.getHostName().toString() + "\n");
+						sb.append("ip:" + inetAddress.getHostAddress().toString() + "\n");
+					}
+				}
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.err.println("------------------------------");
+		System.err.println(sb.toString());
+		System.err.println("------------------------------");
 		// 查询控股公司、主职、有效、入职、存在公司邮箱、当天的员工记录。
 		String sql = "SELECT to_char(u.user_id) AS user_id, u.user_name, u.comp_email FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 1 AND j.action = 'HIR' AND u.comp_email IS NOT NULL AND j.create_time BETWEEN ? AND ?";
 		job.getTimes().stream().forEach(time -> {
