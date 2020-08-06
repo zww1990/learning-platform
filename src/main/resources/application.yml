@@ -62,31 +62,31 @@ spring:
     enabled: false
 
 changepwd:
-    #创建密码
-    create:
-      #链接有效期（单位：分钟）
-      expiration: 4320
-      #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
-      #邮件主题
-      subject: 配置中心账号创建通知（涉及SVN、GIT、JIRA、WIKI、Jenkins）
-      #邮件内容（%s是占位符，请谨慎修改）
-      text: '%s，您好：<br><br>您的配置中心账号已创建，适用系统（SVN、GIT、JIRA、WIKI、Jenkins）。用户名：%s，请点击下方链接重置密码。<br><br><a href="%s" target="_blank">%s</a>'
-    #重置密码
-    reset:
-      #链接有效期（单位：分钟）
-      expiration: 5
-      #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
-      #邮件主题
-      subject: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI、Jenkins）
-      #邮件内容（%s是占位符，请谨慎修改）
-      text: '%s 您好，<br><br>点击以下链接重置您的密码，该链接${changepwd.reset.expiration}分钟后失效：<br><br><a href="%s" target="_blank">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。'
-    #修改密码
-    update:
-      #发件人（${}是占位符，请谨慎修改）
-      from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
-      #邮件主题
-      subject: 配置中心密码修改（涉及SVN、GIT、JIRA、WIKI、Jenkins）
-      #邮件内容（%s是占位符，请谨慎修改）
-      text: '%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。'
+  #创建密码
+  create:
+    #链接有效期（单位：分钟）
+    expiration: 4320
+    #发件人（${}是占位符，请谨慎修改）
+    from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
+    #邮件主题
+    subject: 配置中心账号创建通知（涉及SVN、GIT、JIRA、WIKI、Jenkins）
+    #邮件内容（%s是占位符，请谨慎修改）
+    text: '%s，您好：<br><br>您的配置中心账号已创建，适用系统（SVN、GIT、JIRA、WIKI、Jenkins）。用户名：%s，请点击下方链接重置密码。<br><br><a href="%s" target="_blank">%s</a>'
+  #重置密码
+  reset:
+    #链接有效期（单位：分钟）
+    expiration: 5
+    #发件人（${}是占位符，请谨慎修改）
+    from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
+    #邮件主题
+    subject: 配置中心密码重置（涉及SVN、GIT、JIRA、WIKI、Jenkins）
+    #邮件内容（%s是占位符，请谨慎修改）
+    text: '%s 您好，<br><br>点击以下链接重置您的密码，该链接${changepwd.reset.expiration}分钟后失效：<br><br><a href="%s" target="_blank">%s</a><br><br>如果您没有请求修改密码，请忽略该邮件。'
+  #修改密码
+  update:
+    #发件人（${}是占位符，请谨慎修改）
+    from: 配置中心邮箱（请勿回复）<${spring.mail.username}>
+    #邮件主题
+    subject: 配置中心密码修改（涉及SVN、GIT、JIRA、WIKI、Jenkins）
+    #邮件内容（%s是占位符，请谨慎修改）
+    text: '%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。'
