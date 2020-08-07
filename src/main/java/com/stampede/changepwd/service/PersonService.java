@@ -104,7 +104,7 @@ public class PersonService {
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMail(Person person, String webPath) {
-		String url = String.format("%s?token=%s", webPath,
+		String url = String.format("%s/person/resetpage?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getReset().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());
@@ -145,7 +145,7 @@ public class PersonService {
 		attr.put("homeDirectory", person.getHomeDirectory());
 		attr.put("userPassword", "[none]");
 		this.ldapTemplate.bind(dn, null, attr);
-		String url = String.format("%s?token=%s", webPath,
+		String url = String.format("%s/person/resetpage?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, StandardCharsets.UTF_8.name());

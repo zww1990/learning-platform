@@ -114,7 +114,7 @@ public class AdminController {
 			return mav.addObject("message", "请输入givenName！");
 		}
 		param.setMail(String.format("%s@%s", param.getMailPrefix(), param.getMailSuffix()));
-		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s/person/resetpage", request.getScheme(),
+		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
 		redirectAttributes.addFlashAttribute("email", param.getMail());
 		return new RedirectView("sendsuccess");
