@@ -39,6 +39,19 @@ public class Person {
 	@Transient
 	private String mailSuffix;
 
+	public Person() {
+		super();
+	}
+
+	public Person(String uid, String givenName, String gidNumber, String uidNumber, String mail) {
+		super();
+		this.uid = uid;
+		this.givenName = givenName;
+		this.gidNumber = gidNumber;
+		this.uidNumber = uidNumber;
+		this.mail = mail;
+	}
+
 	public String getMailPrefix() {
 		return mailPrefix;
 	}
