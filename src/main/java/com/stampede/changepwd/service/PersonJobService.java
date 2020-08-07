@@ -31,6 +31,11 @@ public class PersonJobService {
 	@Resource
 	private ServerProperties server;
 
+	public PersonJobService() {
+		super();
+		log.info("<<<自动创建LDAP账号定时任务已注册>>>");
+	}
+
 	@Scheduled(cron = "${changepwd.job.cron}", zone = "${spring.jackson.time-zone}")
 	public void createLdapAccountAndSendMail() {
 		LocalDateTime now = LocalDateTime.now();
