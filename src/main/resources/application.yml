@@ -20,9 +20,9 @@ spring:
     #LDAP连接
     urls: ldap://10.2.1.114:389
     #LDAP节点
-    base: dc=bacic5i5j,dc=com
+    base: 'dc=bacic5i5j,dc=com'
     #LDAP用户名
-    username: cn=admin,dc=bacic5i5j,dc=com
+    username: 'cn=admin,dc=bacic5i5j,dc=com'
     #LDAP密码
     password: 1q2w3e4r
   mail:
@@ -91,8 +91,8 @@ changepwd:
     #邮件内容（%s是占位符，请谨慎修改）
     text: '%s 您好，<br><br>您的密码已修改。<br><br>如果您没有修改密码，请立即联系您的管理员。'
   job:
-#    cron: 59 59 11,19,23 * * ?
-    cron: 0 0/1 * * * ?
+#    cron: '59 59 11,19,23 * * ?'
+    cron: '0 0/1 * * * ?'
     pattern: HH:mm:ss
     times:
     - begin: '00:00:00'
