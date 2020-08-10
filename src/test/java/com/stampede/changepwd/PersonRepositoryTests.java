@@ -60,4 +60,16 @@ public class PersonRepositoryTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testDelete() {
+		try {
+			this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is("jiratest")).ifPresent(c -> {
+				this.personRepository.delete(c);
+				System.err.println("well done...");
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

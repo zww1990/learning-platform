@@ -48,26 +48,26 @@ public class PersonJobService {
 		String sql = "SELECT to_char(u.user_id) AS user_id, u.user_name, u.comp_email FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 1 AND j.action = 'HIR' AND u.comp_email IS NOT NULL AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
 		job.getTimes().stream().forEach(time -> {
 			if (time.getEnd().equals(hhmmss)) {
+				String begin = String.format("%s %s", yymmdd, time.getBegin());
+				String end = String.format("%s %s", yymmdd, time.getEnd());
+				log.info("开始时间={}, 结束时间={}", begin, end);
+				this.jdbcTemplate.queryForList(sql, begin, end).stream().forEach(map -> {
+					log.info("{}", map);
+					String uidNumber = map.get("USER_ID").toString();
+					String givenName = map.get("USER_NAME").toString();
+					String mail = map.get("COMP_EMAIL").toString();
+					String uid = mail.substring(0, mail.indexOf("@"));
+					if (this.personService.findByUsername(uid).isPresent()) {
+						log.warn("该uid={}已存在！", uid);
+					} else if (this.personService.findByUidNumber(uidNumber).isPresent()) {
+						log.warn("该uidNumber={}已存在！", uidNumber);
+					} else {
+						Person p = new Person(uid, givenName, "501", uidNumber, mail);
+						this.personService.sendMailForAdmin(p, webPath);
+						log.info("账号[{}]已创建，邮件已发至邮箱[{}]", uid, mail);
+					}
+				});
 			}
-			String begin = String.format("%s %s", yymmdd, time.getBegin());
-			String end = String.format("%s %s", yymmdd, time.getEnd());
-			log.info("开始时间={}, 结束时间={}", begin, end);
-			this.jdbcTemplate.queryForList(sql, begin, end).stream().forEach(map -> {
-				log.info("{}", map);
-				String uidNumber = map.get("USER_ID").toString();
-				String givenName = map.get("USER_NAME").toString();
-				String mail = map.get("COMP_EMAIL").toString();
-				String uid = mail.substring(0, mail.indexOf("@"));
-				if (this.personService.findByUsername(uid).isPresent()) {
-					log.warn("该uid={}已存在！", uid);
-				} else if (this.personService.findByUidNumber(uidNumber).isPresent()) {
-					log.warn("该uidNumber={}已存在！", uidNumber);
-				} else {
-					Person p = new Person(uid, givenName, "501", uidNumber, mail);
-					this.personService.sendMailForAdmin(p, webPath);
-					log.info("账号[{}]已创建，邮件已发至邮箱[{}]", uid, mail);
-				}
-			});
 		});
 	}
 
