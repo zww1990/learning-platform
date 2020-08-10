@@ -92,8 +92,24 @@ public class PersonService {
 		return this.personRepository.findOne(LdapQueryBuilder.query().where("uid").is(param));
 	}
 
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020-8-10,14:06:57
+	 * @param param 人员编号
+	 * @return 按人员编号查询
+	 */
 	public Optional<Person> findByUidNumber(String param) {
 		return this.personRepository.findOne(LdapQueryBuilder.query().where("uidNumber").is(param));
+	}
+
+	/**
+	 * 删除人员数据
+	 * @author ZhangWeiWei
+	 * @date 2020-8-10,14:07:32
+	 * @param p 人员数据模型
+	 */
+	public void delete(Person p) {
+		this.personRepository.delete(p);
 	}
 
 	/**
@@ -162,6 +178,12 @@ public class PersonService {
 		this.javaMailSender.send(message);
 	}
 
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020-8-10,14:05:41
+	 * @param userId 员工编号
+	 * @return 按员工编号查询员工姓名、公司邮箱
+	 */
 	public Map<String, Object> queryForUserMap(String userId) {
 		try {
 			String sql = "SELECT user_name, comp_email FROM bdm_user WHERE user_id = ? and comp_email is not null";
@@ -171,6 +193,11 @@ public class PersonService {
 		}
 	}
 
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020-8-10,14:05:13
+	 * @return 查询外包人员可用编号
+	 */
 	public long queryWaibaoId() {
 		AndFilter filter = new AndFilter();
 		filter.and(new EqualsFilter("objectclass", "person"));

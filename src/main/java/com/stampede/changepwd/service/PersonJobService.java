@@ -5,6 +5,7 @@ import java.net.NetworkInterface;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
+import java.util.List;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.ChangepwdProperties.PersonJob;
+import com.stampede.changepwd.ChangepwdProperties.PersonJob.Time;
 import com.stampede.changepwd.domain.Person;
 
 /**
@@ -46,7 +48,8 @@ public class PersonJobService {
 				this.server.getServlet().getContextPath());
 		// 查询控股公司、主职、有效、入职、存在公司邮箱、当天的员工记录。
 		String sql = "SELECT to_char(u.user_id) AS user_id, u.user_name, u.comp_email FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 1 AND j.action = 'HIR' AND u.comp_email IS NOT NULL AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
-		job.getTimes().stream().forEach(time -> {
+		List<Time> times = job.getTimes();
+		times.stream().forEach(time -> {
 			if (time.getEnd().equals(hhmmss)) {
 				String begin = String.format("%s %s", yymmdd, time.getBegin());
 				String end = String.format("%s %s", yymmdd, time.getEnd());
@@ -69,8 +72,26 @@ public class PersonJobService {
 				});
 			}
 		});
+		Time last = times.get(times.size() - 1);
+		if (last.getEnd().equals(hhmmss)) {
+			String begin = String.format("%s %s", yymmdd, times.get(0).getBegin());
+			String end = String.format("%s %s", yymmdd, last.getEnd());
+			log.info("开始时间={}, 结束时间={}", begin, end);
+			// 查询控股公司、主职、无效、离职、存在公司邮箱、当天的员工记录。
+			String sql2 = "SELECT to_char(u.user_id) AS user_id FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 0 AND j.action = 'TER' AND u.comp_email IS NOT NULL AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
+			this.jdbcTemplate.queryForList(sql2, String.class, begin, end).stream()
+					.forEach(uid -> this.personService.findByUidNumber(uid).ifPresent(p -> {
+						this.personService.delete(p);
+						log.info("员工[{}]已离职，LDAP账号[{}]已删除", p.getUidNumber(), p.getUid());
+					}));
+		}
 	}
 
+	/**
+	 * @author ZhangWeiWei
+	 * @date 2020-8-10,14:09:48
+	 * @return 获取机器所在网络中的IP
+	 */
 	private static String getHostAddress() {
 		try {
 			Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();// 获取本地所有网络接口
