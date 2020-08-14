@@ -77,8 +77,8 @@ public class PersonJobService {
 			String begin = String.format("%s %s", yymmdd, times.get(0).getBegin());
 			String end = String.format("%s %s", yymmdd, last.getEnd());
 			log.info("开始时间={}, 结束时间={}", begin, end);
-			// 查询控股公司、主职、无效、离职、存在公司邮箱、当天的员工记录。
-			String sql2 = "SELECT to_char(u.user_id) AS user_id FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 0 AND j.action = 'TER' AND u.comp_email IS NOT NULL AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
+			// 查询控股公司、主职、无效、离职、当天的员工记录。
+			String sql2 = "SELECT to_char(u.user_id) AS user_id FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 0 AND j.action = 'TER' AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
 			this.jdbcTemplate.queryForList(sql2, String.class, begin, end).stream()
 					.forEach(uid -> this.personService.findByUidNumber(uid).ifPresent(p -> {
 						this.personService.delete(p);
