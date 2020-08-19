@@ -19,5 +19,5 @@
 	<!-- 日志中打印请求路径列表 -->
 	<!-- <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace"/> -->
 	<!-- 日志中打印SQL -->
-	<!-- <logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/> -->
+	<logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>
 </configuration>

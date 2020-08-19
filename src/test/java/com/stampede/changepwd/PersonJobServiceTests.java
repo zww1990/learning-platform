@@ -16,7 +16,9 @@ public class PersonJobServiceTests {
 	@Test
 	public void testCreateLdapAccountAndSendMail() {
 		try {
-			this.jobService.createLdapAccountAndSendMail();
+			this.jobService.firstCreateLdapAccountAndSendMail();
+			this.jobService.secondCreateLdapAccountAndSendMail();
+			this.jobService.thirdCreateLdapAccountAndSendMail();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

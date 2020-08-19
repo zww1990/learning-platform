@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
@@ -56,7 +55,6 @@ public class ChangepwdApplication implements WebMvcConfigurer {
 	}
 
 	@Bean
-	@ConditionalOnProperty("changepwd.job.cron")
 	public PersonJobService personJobService() {
 		return new PersonJobService();
 	}

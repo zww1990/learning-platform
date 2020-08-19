@@ -1,7 +1,5 @@
 package com.stampede.changepwd;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
@@ -22,7 +20,11 @@ public class ChangepwdProperties {
 	@NestedConfigurationProperty
 	private FromSubjectText update = new FromSubjectText();
 	@NestedConfigurationProperty
-	private PersonJob job = new PersonJob();
+	private PersonJob first = new PersonJob();
+	@NestedConfigurationProperty
+	private PersonJob second = new PersonJob();
+	@NestedConfigurationProperty
+	private PersonJob third = new PersonJob();
 
 	public FromSubjectText getCreate() {
 		return create;
@@ -48,12 +50,28 @@ public class ChangepwdProperties {
 		this.update = update;
 	}
 
-	public PersonJob getJob() {
-		return job;
+	public PersonJob getFirst() {
+		return first;
 	}
 
-	public void setJob(PersonJob job) {
-		this.job = job;
+	public PersonJob getSecond() {
+		return second;
+	}
+
+	public PersonJob getThird() {
+		return third;
+	}
+
+	public void setFirst(PersonJob first) {
+		this.first = first;
+	}
+
+	public void setSecond(PersonJob second) {
+		this.second = second;
+	}
+
+	public void setThird(PersonJob third) {
+		this.third = third;
 	}
 
 	/**
@@ -107,56 +125,33 @@ public class ChangepwdProperties {
 	public static class PersonJob {
 		/** 定时任务时间表达式 */
 		private String cron;
-		/** 时间格式 */
-		private String pattern;
-		/** 定时任务执行时间段 */
-		private List<Time> times = new ArrayList<>();
+		/** 开始时间 */
+		private String begin;
+		/** 结束时间 */
+		private String end;
 
 		public String getCron() {
 			return cron;
 		}
 
-		public String getPattern() {
-			return pattern;
+		public String getBegin() {
+			return begin;
 		}
 
-		public List<Time> getTimes() {
-			return times;
+		public String getEnd() {
+			return end;
 		}
 
 		public void setCron(String cron) {
 			this.cron = cron;
 		}
 
-		public void setPattern(String pattern) {
-			this.pattern = pattern;
+		public void setBegin(String begin) {
+			this.begin = begin;
 		}
 
-		public void setTimes(List<Time> times) {
-			this.times = times;
-		}
-
-		public static class Time {
-			/** 开始时间 */
-			private String begin;
-			/** 结束时间 */
-			private String end;
-
-			public String getBegin() {
-				return begin;
-			}
-
-			public String getEnd() {
-				return end;
-			}
-
-			public void setBegin(String begin) {
-				this.begin = begin;
-			}
-
-			public void setEnd(String end) {
-				this.end = end;
-			}
+		public void setEnd(String end) {
+			this.end = end;
 		}
 	}
 }
