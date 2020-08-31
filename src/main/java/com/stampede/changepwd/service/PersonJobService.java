@@ -38,23 +38,23 @@ public class PersonJobService {
 		log.info("<<<自动创建LDAP账号定时任务已注册>>>");
 	}
 
-	@Scheduled(cron = "${changepwd.first.cron}", zone = "${spring.jackson.time-zone}")
-	public void firstCreateLdapAccountAndSendMail() {
-		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		this.createLdapAccountAndSendMail(yymmdd, this.properties.getFirst());
-	}
+//	@Scheduled(cron = "${changepwd.first.cron}", zone = "${spring.jackson.time-zone}")
+//	public void firstCreateLdapAccountAndSendMail() {
+//		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//		this.createLdapAccountAndSendMail(yymmdd, this.properties.getFirst());
+//	}
 
-	@Scheduled(cron = "${changepwd.second.cron}", zone = "${spring.jackson.time-zone}")
-	public void secondCreateLdapAccountAndSendMail() {
-		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		this.createLdapAccountAndSendMail(yymmdd, this.properties.getSecond());
-	}
+//	@Scheduled(cron = "${changepwd.second.cron}", zone = "${spring.jackson.time-zone}")
+//	public void secondCreateLdapAccountAndSendMail() {
+//		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//		this.createLdapAccountAndSendMail(yymmdd, this.properties.getSecond());
+//	}
 
 	@Scheduled(cron = "${changepwd.third.cron}", zone = "${spring.jackson.time-zone}")
 	public void thirdCreateLdapAccountAndSendMail() {
 		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		this.createLdapAccountAndSendMail(yymmdd, this.properties.getThird());
-		this.delete(yymmdd);
+		this.delete(yymmdd, this.properties.getThird());
 	}
 
 	private void createLdapAccountAndSendMail(String yymmdd, PersonJob job) {
@@ -88,9 +88,9 @@ public class PersonJobService {
 		});
 	}
 
-	private void delete(String yymmdd) {
-		String begin = String.format("%s %s", yymmdd, this.properties.getFirst().getBegin());
-		String end = String.format("%s %s", yymmdd, this.properties.getThird().getEnd());
+	private void delete(String yymmdd, PersonJob job) {
+		String begin = String.format("%s %s", yymmdd, job.getBegin());
+		String end = String.format("%s %s", yymmdd, job.getEnd());
 		log.info("开始时间={}, 结束时间={}", begin, end);
 		// 查询控股公司、主职、无效、离职、当天的员工记录。
 		String sql = "SELECT to_char(u.user_id) AS user_id FROM bdm_hr_user_job j INNER JOIN bdm_hr_user u ON j.user_id = u.user_id AND j.comp_id = u.comp_id WHERE j.comp_id = 26 AND j.post_rcd = 0 AND j.status = 0 AND j.action = 'TER' AND j.create_time BETWEEN to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss') AND to_timestamp(?, 'yyyy-mm-dd hh24:mi:ss')";
