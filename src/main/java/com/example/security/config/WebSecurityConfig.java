@@ -7,6 +7,7 @@ import java.util.Properties;
 import javax.annotation.Resource;
 
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.UrlAuthorizationConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -79,7 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()// 允许使用RequestMatcher实现（即通过URL模式）基于HttpServletRequest限制访问。
+		http.apply(new UrlAuthorizationConfigurer<>(http.getSharedObject(ApplicationContext.class)))
 				.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 					@Override
 					public <O extends FilterSecurityInterceptor> O postProcess(O object) {
@@ -87,12 +89,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						object.setSecurityMetadataSource(securityMetadataSource());
 						return object;
 					}
-				})// 允许对象的初始化。
-				.and()// 使用SecurityConfigurer完成后返回SecurityBuilder。这对于方法链接很有用。
-				.addFilterAt(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class)// 将过滤器添加到指定过滤器类的位置。
+				});
+		http.addFilterAt(this.captchaFilter(), UsernamePasswordAuthenticationFilter.class)// 将过滤器添加到指定过滤器类的位置。
 				.formLogin()// 指定支持基于表单的身份验证。 如果没有指定，将会生成一个默认的登录页面。
 				.loginPage("/login")// 如果需要登录，指定发送用户的URL。 则在未指定此属性时将会生成默认登录页面。
-				.permitAll()// 授予访问URL的权限为true
 				.and()//
 				.csrf()// 添加了CSRF支持。
 				.csrfTokenRepository(new LazyCsrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))// 指定要使用的CsrfTokenRepository。
