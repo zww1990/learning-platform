@@ -11,18 +11,6 @@ import { SimpleReuseStrategy } from './shared/simple-reuse-strategy';
 import { UserService } from './shared/user/user.service';
 import { InputAutoFocusDirective } from './shared/input-auto-focus.directive';
 import { ToggleFullScreenDirective } from './shared/toggle-full-screen.directive';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzCalendarModule } from 'ng-zorro-antd/calendar';
-import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { NzMessageModule } from 'ng-zorro-antd/message';
-import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const routes: Routes = [
   {
@@ -58,18 +46,6 @@ const routes: Routes = [
       useHash: false
     }),
     SharedModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzIconModule,
-    NzAvatarModule,
-    NzTabsModule,
-    NzFormModule,
-    NzInputModule,
-    NzCalendarModule,
-    NzToolTipModule,
-    NzMessageModule,
-    NzModalModule,
-    NzButtonModule
   ],
   exports: [RouterModule],
   declarations: [
