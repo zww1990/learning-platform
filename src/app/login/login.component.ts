@@ -1,7 +1,7 @@
 import { Component, OnInit, VERSION } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { CasService } from '../shared/cas.service';
 import { SessionKey } from '../shared/session-key.enum';
 import { User } from '../shared/user/user.model';
@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   version = VERSION;
 
-  constructor(private fb: FormBuilder, private router: Router, private message: NzMessageService, private cas: CasService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private message: NzMessageService,
+    private cas: CasService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
