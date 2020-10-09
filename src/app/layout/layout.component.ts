@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { MenuItem } from '../shared/menu/menu-item.model';
 import { SimpleReuseStrategy } from '../shared/simple-reuse-strategy';
 import { User } from '../shared/user/user.model';
@@ -19,7 +19,12 @@ export class LayoutComponent implements OnInit {
   menus: MenuItem[] = [];
   tabs: MenuItem[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute, private confirm: NzModalService, private userService: UserService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private confirm: NzModalService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() {
     this.user = this.userService.querySessionUser();
