@@ -38,18 +38,6 @@ public class PersonJobService {
 		log.info("<<<自动创建LDAP账号定时任务已注册>>>");
 	}
 
-//	@Scheduled(cron = "${changepwd.first.cron}", zone = "${spring.jackson.time-zone}")
-//	public void firstCreateLdapAccountAndSendMail() {
-//		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//		this.createLdapAccountAndSendMail(yymmdd, this.properties.getFirst());
-//	}
-
-//	@Scheduled(cron = "${changepwd.second.cron}", zone = "${spring.jackson.time-zone}")
-//	public void secondCreateLdapAccountAndSendMail() {
-//		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-//		this.createLdapAccountAndSendMail(yymmdd, this.properties.getSecond());
-//	}
-
 	@Scheduled(cron = "${changepwd.third.cron}", zone = "${spring.jackson.time-zone}")
 	public void thirdCreateLdapAccountAndSendMail() {
 		String yymmdd = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -83,7 +71,7 @@ public class PersonJobService {
 			} else {
 				Person p = new Person(uid, givenName, "501", uidNumber, mail);
 				this.personService.sendMailForAdmin(p, webPath);
-				log.info("账号[{}]已创建，邮件已发至邮箱[{}]", uid, mail);
+				log.info("定时任务>>>账号[{}]已创建，邮件已发至邮箱[{}]", uid, mail);
 			}
 		});
 	}

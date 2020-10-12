@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,7 @@ import com.stampede.changepwd.service.PersonService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 	@Resource
 	private PersonService personService;
 
@@ -116,6 +119,7 @@ public class AdminController {
 		param.setMail(String.format("%s@%s", param.getMailPrefix(), param.getMailSuffix()));
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
+		log.info("管理页面>>>账号[{}]已创建，邮件已发至邮箱[{}]", param.getUid(), param.getMail());
 		redirectAttributes.addFlashAttribute("email", param.getMail());
 		return new RedirectView("sendsuccess");
 	}
