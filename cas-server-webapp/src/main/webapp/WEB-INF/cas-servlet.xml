@@ -162,7 +162,7 @@
   <bean name="loginFlowExecutionFactory" class="org.springframework.webflow.engine.impl.FlowExecutionImplFactory"
         p:executionKeyFactory-ref="loginFlowExecutionRepository"/>
   
-  <bean id="loginFlowExecutionRepository" class=" org.jasig.spring.webflow.plugin.ClientFlowExecutionRepository"
+  <bean id="loginFlowExecutionRepository" class="org.jasig.spring.webflow.plugin.ClientFlowExecutionRepository"
         c:flowExecutionFactory-ref="loginFlowExecutionFactory"
         c:flowDefinitionLocator-ref="loginFlowRegistry"
         c:transcoder-ref="loginFlowStateTranscoder" />
