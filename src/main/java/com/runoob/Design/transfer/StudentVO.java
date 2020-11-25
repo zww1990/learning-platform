@@ -1,4 +1,4 @@
-package com.runoob.Design.Transfer;
+package com.runoob.Design.transfer;
 
 public class StudentVO {
 	private String name;

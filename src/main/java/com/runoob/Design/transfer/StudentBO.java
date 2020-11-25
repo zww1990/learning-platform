@@ -1,4 +1,4 @@
-package com.runoob.Design.Transfer;
+package com.runoob.Design.transfer;
 
 import java.util.ArrayList;
 import java.util.List;
