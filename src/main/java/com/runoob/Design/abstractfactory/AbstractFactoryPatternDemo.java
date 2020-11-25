@@ -1,4 +1,4 @@
-package com.runoob.Design.AbstractFactory;
+package com.runoob.Design.abstractfactory;
 
 /**
  * @author Alienware <br>

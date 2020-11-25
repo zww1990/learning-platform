@@ -1,4 +1,4 @@
-package com.runoob.Design.AbstractFactory;
+package com.runoob.Design.abstractfactory;
 
 public class Rectangle implements Shape {
 
