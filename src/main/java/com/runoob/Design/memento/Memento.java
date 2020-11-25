@@ -1,4 +1,4 @@
-package com.runoob.Design.Memento;
+package com.runoob.Design.memento;
 
 public class Memento {
 	private String state;
