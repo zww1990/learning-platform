@@ -1,4 +1,4 @@
-package com.runoob.Design.Singleton;
+package com.runoob.Design.singleton;
 
 /**
  * @author Alienware <br>
