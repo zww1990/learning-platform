@@ -1,4 +1,4 @@
-package com.runoob.Design.Builder;
+package com.runoob.Design.builder;
 
 public class MealBuilder {
 	public Meal prepareVegMeal() {

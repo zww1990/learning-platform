@@ -1,4 +1,4 @@
-package com.runoob.Design.Builder;
+package com.runoob.Design.builder;
 
 /**
  * @author Alienware <br>
