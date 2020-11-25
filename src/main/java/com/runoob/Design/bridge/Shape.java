@@ -1,4 +1,4 @@
-package com.runoob.Design.Bridge;
+package com.runoob.Design.bridge;
 
 public abstract class Shape {
 	protected DrawAPI drawAPI;
