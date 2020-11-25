@@ -1,4 +1,4 @@
-package com.runoob.Design.Business;
+package com.runoob.Design.business;
 
 public interface BusinessService {
 	public void doProcessing();

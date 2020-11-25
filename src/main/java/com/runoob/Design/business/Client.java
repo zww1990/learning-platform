@@ -1,4 +1,4 @@
-package com.runoob.Design.Business;
+package com.runoob.Design.business;
 
 public class Client {
 	BusinessDelegate businessService;
