@@ -1,4 +1,4 @@
-package com.runoob.Design.Observer;
+package com.runoob.Design.observer;
 
 /**
  * @author Alienware <br>

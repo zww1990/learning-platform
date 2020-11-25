@@ -1,4 +1,4 @@
-package com.runoob.Design.Observer;
+package com.runoob.Design.observer;
 
 public abstract class Observer {
 	protected Subject subject;
