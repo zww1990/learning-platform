@@ -1,4 +1,4 @@
-package com.runoob.Design.CompositeEntity;
+package com.runoob.Design.compositeentity;
 
 import java.util.Arrays;
 

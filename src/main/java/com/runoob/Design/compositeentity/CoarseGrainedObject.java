@@ -1,4 +1,4 @@
-package com.runoob.Design.CompositeEntity;
+package com.runoob.Design.compositeentity;
 
 public class CoarseGrainedObject {
 	DependentObject1 do1 = new DependentObject1();

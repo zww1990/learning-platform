@@ -1,4 +1,4 @@
-package com.runoob.Design.CompositeEntity;
+package com.runoob.Design.compositeentity;
 
 public class DependentObject1 {
 	private String data;
