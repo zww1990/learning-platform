@@ -1,4 +1,4 @@
-package com.runoob.Design.Front;
+package com.runoob.Design.front;
 
 public class StudentView {
 	public void show() {
