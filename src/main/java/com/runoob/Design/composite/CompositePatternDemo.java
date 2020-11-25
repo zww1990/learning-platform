@@ -1,4 +1,4 @@
-package com.runoob.Design.Composite;
+package com.runoob.Design.composite;
 
 /**
  * @author Alienware <br>

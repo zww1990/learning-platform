@@ -1,4 +1,4 @@
-package com.runoob.Design.Composite;
+package com.runoob.Design.composite;
 
 import java.util.ArrayList;
 import java.util.List;
