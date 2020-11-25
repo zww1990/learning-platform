@@ -1,4 +1,4 @@
-package com.runoob.Design.Adapter;
+package com.runoob.Design.adapter;
 
 public class Mp4Player implements AdvancedMediaPlayer {
 

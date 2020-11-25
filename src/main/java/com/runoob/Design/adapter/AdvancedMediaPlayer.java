@@ -1,4 +1,4 @@
-package com.runoob.Design.Adapter;
+package com.runoob.Design.adapter;
 
 public interface AdvancedMediaPlayer {
 	public void playVlc(String fileName);
