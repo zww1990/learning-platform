@@ -1,4 +1,4 @@
-package com.runoob.Design.DAO;
+package com.runoob.Design.dao;
 
 import java.util.ArrayList;
 import java.util.List;
