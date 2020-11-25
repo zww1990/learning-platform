@@ -28,7 +28,7 @@ public class Test {
 		fly4.action(3);
 
 		Flyweight fly5 = FlyweightFactory.getFlyweight("d");
-		fly4.action(4);
+		fly5.action(4);
 
 		System.out.println(FlyweightFactory.getSize());
 	}
