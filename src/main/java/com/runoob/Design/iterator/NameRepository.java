@@ -1,4 +1,4 @@
-package com.runoob.Design.Iterator;
+package com.runoob.Design.iterator;
 
 public class NameRepository implements Container {
 	public String names[] = { "Robert", "John", "Julie", "Lora" };

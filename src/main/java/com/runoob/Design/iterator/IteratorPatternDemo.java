@@ -1,4 +1,4 @@
-package com.runoob.Design.Iterator;
+package com.runoob.Design.iterator;
 
 /**
  * @author Alienware <br>

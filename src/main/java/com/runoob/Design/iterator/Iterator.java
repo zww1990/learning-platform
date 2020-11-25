@@ -1,4 +1,4 @@
-package com.runoob.Design.Iterator;
+package com.runoob.Design.iterator;
 
 public interface Iterator {
 	public boolean hasNext();
