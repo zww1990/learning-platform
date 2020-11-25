@@ -1,4 +1,4 @@
-package com.runoob.Design.Filter;
+package com.runoob.Design.filter;
 
 import java.util.List;
 

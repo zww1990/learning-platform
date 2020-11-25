@@ -1,4 +1,4 @@
-package com.runoob.Design.Filter;
+package com.runoob.Design.filter;
 
 public class Person {
 	private String name;
