@@ -1,4 +1,4 @@
-package com.runoob.Design.Prototype;
+package com.runoob.Design.prototype;
 
 public class Rectangle extends Shape {
 	public Rectangle() {
