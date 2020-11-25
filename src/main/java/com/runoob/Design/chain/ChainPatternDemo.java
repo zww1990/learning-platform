@@ -1,4 +1,4 @@
-package com.runoob.Design.Chain;
+package com.runoob.Design.chain;
 
 /**
  * @author Alienware <br>

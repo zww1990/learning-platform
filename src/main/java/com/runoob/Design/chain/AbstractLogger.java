@@ -1,4 +1,4 @@
-package com.runoob.Design.Chain;
+package com.runoob.Design.chain;
 
 public abstract class AbstractLogger {
 	public static int INFO = 1;
