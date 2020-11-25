@@ -1,4 +1,4 @@
-package com.runoob.Design.Decorator;
+package com.runoob.Design.decorator;
 
 public class Circle implements Shape {
 

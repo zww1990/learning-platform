@@ -1,4 +1,4 @@
-package com.runoob.Design.Decorator;
+package com.runoob.Design.decorator;
 
 public abstract class ShapeDecorator implements Shape {
 	protected Shape decoratedShape;
