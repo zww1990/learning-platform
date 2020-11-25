@@ -1,4 +1,4 @@
-package com.runoob.Design.Intercepting;
+package com.runoob.Design.intercepting;
 
 /**
  * @author Alienware <br>
