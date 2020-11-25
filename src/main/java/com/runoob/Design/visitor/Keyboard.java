@@ -1,6 +1,6 @@
-package com.runoob.Design.Visitor;
+package com.runoob.Design.visitor;
 
-public class Mouse implements ComputerPart {
+public class Keyboard implements ComputerPart {
 
 	@Override
 	public void accept(ComputerPartVisitor computerPartVisitor) {

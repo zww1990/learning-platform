@@ -1,4 +1,4 @@
-package com.runoob.Design.Visitor;
+package com.runoob.Design.visitor;
 
 public class ComputerPartDisplayVisitor implements ComputerPartVisitor {
 
