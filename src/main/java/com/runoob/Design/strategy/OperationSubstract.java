@@ -1,4 +1,4 @@
-package com.runoob.Design.Strategy;
+package com.runoob.Design.strategy;
 
 public class OperationSubstract implements Strategy {
 
