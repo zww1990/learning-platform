@@ -1,4 +1,4 @@
-package com.runoob.Design.Factory;
+package com.runoob.Design.factory;
 
 public interface Shape {
 	void draw();

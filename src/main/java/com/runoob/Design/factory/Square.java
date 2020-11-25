@@ -1,4 +1,4 @@
-package com.runoob.Design.Factory;
+package com.runoob.Design.factory;
 
 public class Square implements Shape {
 
