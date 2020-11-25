@@ -1,4 +1,4 @@
-package com.runoob.Design.ServiceLocator;
+package com.runoob.Design.servicelocator;
 
 public class InitialContext {
 	public Object lookup(String jndiName) {

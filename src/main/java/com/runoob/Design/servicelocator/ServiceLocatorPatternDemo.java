@@ -1,4 +1,4 @@
-package com.runoob.Design.ServiceLocator;
+package com.runoob.Design.servicelocator;
 
 /**
  * @author Alienware <br>

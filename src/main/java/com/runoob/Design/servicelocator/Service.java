@@ -1,4 +1,4 @@
-package com.runoob.Design.ServiceLocator;
+package com.runoob.Design.servicelocator;
 
 public interface Service {
 	public String getName();
