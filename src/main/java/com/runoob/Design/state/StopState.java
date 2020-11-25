@@ -1,4 +1,4 @@
-package com.runoob.Design.State;
+package com.runoob.Design.state;
 
 public class StopState implements State {
 
