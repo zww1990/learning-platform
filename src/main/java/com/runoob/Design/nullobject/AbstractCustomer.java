@@ -1,4 +1,4 @@
-package com.runoob.Design.NullObject;
+package com.runoob.Design.nullobject;
 
 public abstract class AbstractCustomer {
 	protected String name;

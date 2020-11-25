@@ -1,4 +1,4 @@
-package com.runoob.Design.NullObject;
+package com.runoob.Design.nullobject;
 
 /**
  * @author Alienware <br>

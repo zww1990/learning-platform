@@ -1,4 +1,4 @@
-package com.runoob.Design.NullObject;
+package com.runoob.Design.nullobject;
 
 public class RealCustomer extends AbstractCustomer {
 	public RealCustomer(String name) {

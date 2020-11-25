@@ -1,4 +1,4 @@
-package com.runoob.Design.NullObject;
+package com.runoob.Design.nullobject;
 
 public class CustomerFactory {
 	public static final String[] names = { "Rob", "Joe", "Julie" };
