@@ -1,4 +1,4 @@
-package com.runoob.Design.MVC;
+package com.runoob.Design.mvc;
 
 /**
  * @author Alienware <br>

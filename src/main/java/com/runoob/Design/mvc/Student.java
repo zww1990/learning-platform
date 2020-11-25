@@ -1,4 +1,4 @@
-package com.runoob.Design.MVC;
+package com.runoob.Design.mvc;
 
 public class Student {
 	private String rollNo;
