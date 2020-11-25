@@ -1,4 +1,4 @@
-package com.runoob.Design.Proxy;
+package com.runoob.Design.proxy;
 
 public class ProxyImage implements Image {
 	private RealImage realImage;

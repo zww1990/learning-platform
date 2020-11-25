@@ -1,4 +1,4 @@
-package com.runoob.Design.Proxy;
+package com.runoob.Design.proxy;
 
 public class RealImage implements Image {
 	private String fileName;

@@ -1,4 +1,4 @@
-package com.runoob.Design.Proxy;
+package com.runoob.Design.proxy;
 
 /**
  * @author Alienware <br>
