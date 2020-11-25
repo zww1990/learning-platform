@@ -1,4 +1,4 @@
-package com.runoob.Design.Template;
+package com.runoob.Design.template;
 
 public abstract class Game {
 	public abstract void initialize();
