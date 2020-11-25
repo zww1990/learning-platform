@@ -1,4 +1,4 @@
-package com.runoob.Design.Command;
+package com.runoob.Design.command;
 
 public class BuyStock implements Order {
 	private Stock abcStock;
