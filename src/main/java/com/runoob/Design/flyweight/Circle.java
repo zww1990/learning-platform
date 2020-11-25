@@ -1,4 +1,4 @@
-package com.runoob.Design.Flyweight;
+package com.runoob.Design.flyweight;
 
 public class Circle implements Shape {
 	private String color;

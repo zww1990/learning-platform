@@ -1,4 +1,4 @@
-package com.runoob.Design.Flyweight;
+package com.runoob.Design.flyweight;
 
 import java.util.HashMap;
 
