@@ -1,4 +1,4 @@
-package com.runoob.Design.Mediator;
+package com.runoob.Design.mediator;
 
 public class User {
 	private String name;

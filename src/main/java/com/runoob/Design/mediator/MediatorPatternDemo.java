@@ -1,4 +1,4 @@
-package com.runoob.Design.Mediator;
+package com.runoob.Design.mediator;
 
 /**
  * @author Alienware <br>
