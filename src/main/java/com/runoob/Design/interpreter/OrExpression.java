@@ -1,4 +1,4 @@
-package com.runoob.Design.Interpreter;
+package com.runoob.Design.interpreter;
 
 public class OrExpression implements Expression {
 	private Expression expr1 = null;

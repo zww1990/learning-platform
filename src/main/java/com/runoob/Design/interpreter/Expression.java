@@ -1,4 +1,4 @@
-package com.runoob.Design.Interpreter;
+package com.runoob.Design.interpreter;
 
 public interface Expression {
 	public boolean interpret(String context);

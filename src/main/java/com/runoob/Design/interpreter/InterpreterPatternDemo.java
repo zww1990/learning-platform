@@ -1,4 +1,4 @@
-package com.runoob.Design.Interpreter;
+package com.runoob.Design.interpreter;
 
 /**
  * @author Alienware <br>
