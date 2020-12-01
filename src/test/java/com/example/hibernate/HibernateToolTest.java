@@ -26,8 +26,6 @@ public class HibernateToolTest {
 			JDBCConfigurationTask configurationTask = toolTask.createJDBCConfiguration();
 			// 设置POJO的包名
 			configurationTask.setPackageName("com.demo.domain");
-			// 设置hibernate的配置文件
-			configurationTask.setConfigurationFile(new File(baseDir, "src\\main\\resources\\hibernate.cfg.xml"));
 			// 设置hibernate的反向工程配置文件
 			configurationTask.setRevEngFile(new Path(project, "src\\main\\resources\\hibernate.reveng.xml"));
 			Hbm2JavaExporterTask javaExporterTask = (Hbm2JavaExporterTask) toolTask.createHbm2Java();

@@ -32,13 +32,10 @@ public class BasicColumnProcessor {
 			log.debug("Finding columns for " + qualify );
 			progress.startSubTask("Finding columns for " + qualify);
 			columnIterator = metaDataDialect.getColumns(getCatalogForDBLookup(table.getCatalog(), defaultCatalog), getSchemaForDBLookup(table.getSchema(), defaultSchema), table.getName(), null);
-			//dumpHeader(columnRs);
 			while (columnIterator.hasNext() ) {
-				//dumpRow(columnRs);
 				columnRs = (Map<?, ?>) columnIterator.next();
 				String tableName = (String) columnRs.get("TABLE_NAME");
 				int sqlType = ((Integer)columnRs.get("DATA_TYPE")).intValue();
-				//String sqlTypeName = (String) columnRs.get("TYPE_NAME");
 				String columnName = (String) columnRs.get("COLUMN_NAME");
 				String comment = (String) columnRs.get("REMARKS");
 				
@@ -52,7 +49,6 @@ public class BasicColumnProcessor {
 					continue;
 				}
 				
-				//String columnDefaultValue = columnRs.getString("COLUMN_DEF"); TODO: only read if have a way to avoid issues with clobs/lobs and similar
 				int dbNullability = ((Integer)columnRs.get("NULLABLE")).intValue();
 				boolean isNullable = true;
 				switch (dbNullability) {
@@ -78,23 +74,11 @@ public class BasicColumnProcessor {
 					throw new JDBCBinderException(column + " already exists in " + qualify);
 				}
 								
-				//TODO: column.setSqlType(sqlTypeName); //this does not work 'cos the precision/scale/length are not retured in TYPE_NAME
-				//column.setSqlType(sqlTypeName);
 				column.setComment(comment);
 				column.setSqlTypeCode(sqlType );
-//                if(intBounds(size) ) {
-//                	if(JDBCToHibernateTypeHelper.typeHasLength(sqlType) ) {
-                		column.setLength(size);
-//                	} 
-//                	if(JDBCToHibernateTypeHelper.typeHasScaleAndPrecision(sqlType) ) {
-                		column.setPrecision(size); 
-//                	}
-//				} 
-//                if(intBounds(decimalDigits) ) {
-//                	if(JDBCToHibernateTypeHelper.typeHasScaleAndPrecision(sqlType) ) {
-                		column.setScale(decimalDigits);
-//                	}
-//				}
+        		column.setLength(size);
+        		column.setPrecision(size); 
+        		column.setScale(decimalDigits);
 				
 				column.setNullable(isNullable);
 
@@ -127,9 +111,6 @@ public class BasicColumnProcessor {
 		return schema==null?defaultSchema:schema;
 	}
 
-//    private static boolean intBounds(int size) {
-//        return size>=0 && size!=Integer.MAX_VALUE;
-//    }
 
 	private static String quote(String columnName, MetaDataDialect metaDataDialect) {
 		   if(columnName==null) return columnName;

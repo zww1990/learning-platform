@@ -108,7 +108,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 		if ( interfaces.size() > 0 ) {
 			StringBuffer sbuf = new StringBuffer();
 			for ( Iterator<String> iter = interfaces.iterator(); iter.hasNext() ; ) {
-				//sbuf.append(JavaTool.shortenType(iter.next().toString(), pc.getImports() ) );
 				sbuf.append( iter.next() );
 				if ( iter.hasNext() ) sbuf.append( "," );
 			}
@@ -137,13 +136,9 @@ public class EntityPOJOClass extends BasicPOJOClass {
 				Component embeddedComponent = (Component) pc.getIdentifier();
 				iterators.add( embeddedComponent.getPropertyIterator() );
 			}
-			/*if(clazz.isVersioned() ) { // version is already in property set
-				properties.add(clazz.getVersion() );
-			}*/
 		}
 
 
-		//		iterators.add( pc.getPropertyIterator() );
 		// Need to skip <properties> element which are defined via "embedded" components
 		// Best if we could return an intelligent iterator, but for now we just iterate explicitly.
 		Iterator<Property> pit = pc.getPropertyIterator();
@@ -278,7 +273,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 					.addQuotedAttribute( "strategy", strategy);
 
 				List<AnnotationBuilder> params = new ArrayList<AnnotationBuilder>();
-				//wholeString.append( "parameters = {  " );
 				if ( properties != null ) {
 					Enumeration<?> propNames = properties.propertyNames();
 					while ( propNames.hasMoreElements() ) {
@@ -303,12 +297,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 		AnnotationBuilder builder = AnnotationBuilder.createAnnotation( importType("javax.persistence.TableGenerator") );
 		builder.addQuotedAttribute( "name", clazz.getClassName()+"IdGenerator" );
 		builder.addQuotedAttribute( "table", properties.getProperty( "generatorTableName", "hibernate_sequences" ) );
-//		if ( ! isPropertyDefault( PersistentIdentifierGenerator.CATALOG, properties ) ) {
-//			builder.addQuotedAttribute( "catalog", properties.getProperty( PersistentIdentifierGenerator.CATALOG, "") );
-//		}
-//		if ( ! isPropertyDefault( PersistentIdentifierGenerator.SCHEMA, properties ) ) {
-//			builder.addQuotedAttribute( "schema", properties.getProperty( PersistentIdentifierGenerator.SCHEMA, "") );
-//		}
 		if (! isPropertyDefault( TableGenerator.SEGMENT_VALUE_PARAM, properties ) ) {
 			builder.addQuotedAttribute( "pkColumnValue", properties.getProperty( TableGenerator.SEGMENT_VALUE_PARAM, "") );
 		}
@@ -386,7 +374,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 
 			if ( selectable.isFormula() ) {
 				//TODO formula in multicolumns not supported by annotations
-				//annotations.append("/* TODO formula in multicolumns not supported by annotations */");
 			}
 			else {
 				annotations.append( "\n        " );
@@ -599,12 +586,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 
 					annotation.append( table.getName() );
 					annotation.append( "\"" );
-//					if ( StringHelper.isNotEmpty( table.getSchema() ) ) {
-//						annotation.append(", schema=\"").append( table.getSchema() ).append("\"");
-//					}
-//					if ( StringHelper.isNotEmpty( table.getCatalog() ) ) {
-//						annotation.append(", catalog=\"").append( table.getCatalog() ).append("\"");
-//					}
 					String uniqueConstraint = generateAnnTableUniqueConstraint(table);
 					if ( uniqueConstraint.length() > 0 ) {
 						annotation.append(", uniqueConstraints=").append(uniqueConstraint);
@@ -778,7 +759,6 @@ public class EntityPOJOClass extends BasicPOJOClass {
 
 		for ( Iterator<Property> myFields = getAllPropertiesIterator(pc); myFields.hasNext() ; ) {
 			Property field = (Property) myFields.next();
-			// TODO: if(!field.isGenerated() ) ) {
 			if(field.equals(pc.getIdentifierProperty()) && !isAssignedIdentifier(pc, field)) {
 				continue; // dont add non assigned identifiers
 			} else if(field.equals(pc.getVersion())) {

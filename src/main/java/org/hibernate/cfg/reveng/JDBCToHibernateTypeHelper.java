@@ -40,11 +40,6 @@ public final class JDBCToHibernateTypeHelper {
 		PREFERRED_HIBERNATETYPE_FOR_SQLTYPE.put(Types.TIMESTAMP, new String[] { "timestamp", "timestamp" });
 		PREFERRED_HIBERNATETYPE_FOR_SQLTYPE.put(Types.CLOB, new String[] { "clob", "clob" });
 		PREFERRED_HIBERNATETYPE_FOR_SQLTYPE.put(Types.BLOB, new String[] { "blob", "blob" });
-		// Hibernate does not have any built-in Type for these:
-		// preferredJavaTypeForSqlType.put(new Integer(Types.ARRAY), "java.sql.Array");
-		// preferredJavaTypeForSqlType.put(new Integer(Types.REF), "java.sql.Ref");
-		// preferredJavaTypeForSqlType.put(new Integer(Types.STRUCT), "java.lang.Object");
-		// preferredJavaTypeForSqlType.put(new Integer(Types.JAVA_OBJECT), "java.lang.Object");
 	}
 
 	public static String getPreferredHibernateType(int sqlType, int size, int precision, int scale, boolean nullable,

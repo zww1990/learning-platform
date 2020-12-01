@@ -370,7 +370,6 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 	
 					if ( selectable.isFormula() ) {
 						//TODO formula in multicolumns not supported by annotations
-						//annotations.append("/* TODO formula in multicolumns not supported by annotations */");
 					}
 					else {
 						annotations.append( "\n        " );
@@ -682,12 +681,10 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 		String propertyHashVarName = property.getName() + "Hashcode";
 		String propertyArrayName = property.getName() + "Property";
 
-//		int propertyHash = 0;
 		buf.append( "int ")
 		.append( propertyHashVarName )
 		.append( " = 0;\n" );
 
-//		type[] proterty = getProperty();
 		buf.append( "         " )
 		.append( javaTypeName )
 		.append( " " )
@@ -698,38 +695,32 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 		.append( getGetterSignature( property ) )
 		.append( "();\n");
 
-//		if(property != null) {
 		buf.append( "         if(" )
 		.append( propertyArrayName )
 		.append( " != null) {\n" );
 
-//		propertyHash = 1;
 		buf.append( "             " )
 		.append( propertyHashVarName )
 		.append( " = 1;\n" );
 
-//		for (int i=0; i<property.length; i++)
 		javaTypeName.replaceAll("\\[\\]", "");
 		buf.append( "             for (int i=0; i<" )
 		.append( propertyArrayName )
 		.append( ".length; i++) {\n" );
 
 		if(javaTypeName.startsWith("long")) {
-//			int elementHash = (int)(propertyArray[i] ^ (propertyArray[i] >>> 32));
 			buf.append( "                 int elementHash = (int)(" )
 			.append( propertyArrayName )
 			.append( "[i] ^ (" )
 			.append( propertyArrayName )
 			.append( "[i] >>> 32));\n" );
 
-//			propertyHash = 37 * propertyHash + elementHash;
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
 			.append( propertyHashVarName )
 			.append( " + elementHash;\n" );
 		} else if(javaTypeName.startsWith("boolean")) {
-//			propertyHash = 37 * propertyHash + (propertyArray[i] ? 1231 : 1237);
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
@@ -738,7 +729,6 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 			.append( propertyArrayName )
 			.append( "[i] ? 1231 : 1237);\n" );
 		} else if(javaTypeName.startsWith("float")) {
-//			propertyHash = 37 * propertyHash + Float.floatToIntBits(propertyArray[i]);
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
@@ -747,12 +737,10 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 			.append( propertyArrayName )
 			.append( "[i]);\n" );
 		} else if(javaTypeName.startsWith("double")) {
-//			long bits = Double.doubleToLongBits(propertyArray[i]);
 			buf.append( "                 long bits = Double.doubleToLongBits(" )
 			.append( propertyArrayName )
 			.append( "[i]);\n" );
 
-//			propertyHash = 37 * propertyHash + (int)(bits ^ (bits >>> 32));
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
@@ -762,7 +750,6 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 				|| javaTypeName.startsWith("short")
 				|| javaTypeName.startsWith("char")
 				|| javaTypeName.startsWith("byte")) {
-//			propertyHash = 37 * propertyHash + propertyArray[i];
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
@@ -771,7 +758,6 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 			.append( propertyArrayName )
 			.append( "[i];\n" );
 		} else {// Object[]
-//			propertyHash = 37 * propertyHash + propertyArray[i].hashCode();
 			buf.append( "                 " )
 			.append( propertyHashVarName )
 			.append( " = 37 * " )
@@ -784,7 +770,6 @@ abstract public class BasicPOJOClass implements POJOClass, MetaAttributeConstant
 		buf.append( "             }\n" );
 		buf.append( "         }\n\n" );
 
-//		result = 37 * result + arrayHashcode;
 		buf.append( "         " )
 		.append( result )
 		.append( " = 37 * " )

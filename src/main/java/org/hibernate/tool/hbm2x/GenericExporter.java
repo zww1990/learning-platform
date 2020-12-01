@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.mapping.Component;
 import org.hibernate.tool.hbm2x.pojo.ComponentPOJOClass;
@@ -55,10 +54,6 @@ public class GenericExporter extends AbstractExporter {
 	private String templateName;
 	private String filePattern;
 	private String forEach;
-
-	public GenericExporter(Configuration cfg, File outputdir) {
-		super(cfg, outputdir);
-	}
 
 	public GenericExporter() {
 	}

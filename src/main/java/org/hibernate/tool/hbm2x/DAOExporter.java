@@ -3,7 +3,6 @@ package org.hibernate.tool.hbm2x;
 import java.io.File;
 import java.util.Map;
 
-import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
 
@@ -12,10 +11,6 @@ public class DAOExporter extends POJOExporter {
 	private String sessionFactoryName = "SessionFactory";
 
 	public DAOExporter() {
-	}
-
-	public DAOExporter(Configuration cfg, File outputdir) {
-		super(cfg, outputdir);
 	}
 
 	protected void init() {
