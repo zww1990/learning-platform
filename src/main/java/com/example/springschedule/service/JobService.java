@@ -1,18 +1,23 @@
 package com.example.springschedule.service;
 
-import org.quartz.DisallowConcurrentExecution;
+import java.time.LocalDateTime;
+
+import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.quartz.QuartzJobBean;
 
-@DisallowConcurrentExecution
-public class JobService extends QuartzJobBean {
+public class JobService implements Job {
 	private static final Logger log = LoggerFactory.getLogger(JobService.class);
 
 	@Override
-	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		log.info("done!!!");
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		try {
+			log.info("{} -- {}", context.getScheduler().getSchedulerInstanceId(), LocalDateTime.now());
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
 	}
 }
