@@ -8,6 +8,11 @@ spring:
     job-store-type: jdbc
     jdbc:
       initialize-schema: never
+    scheduler-name: QuartzScheduler
+    properties:
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.jobStore.isClustered: true
+      org.quartz.threadPool.class: org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
