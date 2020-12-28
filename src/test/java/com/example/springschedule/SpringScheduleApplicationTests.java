@@ -13,13 +13,9 @@ public class SpringScheduleApplicationTests {
 
 	@Test
 	public void contextLoads() {
-		try {
-			String[] names = this.context.getBeanDefinitionNames();
-			for (int i = 0, len = names.length; i < len; i++) {
-				System.err.println((i + 1) + "\t" + names[i]);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		String[] names = this.context.getBeanDefinitionNames();
+		for (int i = 0, len = names.length; i < len; i++) {
+			System.err.println((i + 1) + "\t" + names[i]);
 		}
 	}
 }
