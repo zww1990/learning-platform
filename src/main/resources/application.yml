@@ -18,6 +18,9 @@ spring:
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
     - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
     - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
 
 jasypt:
   encryptor:
