@@ -9,7 +9,6 @@ delete from QRTZ_BLOB_TRIGGERS;
 delete from QRTZ_TRIGGERS;
 delete from QRTZ_JOB_DETAILS;
 delete from QRTZ_CALENDARS;
-commit;
 
 select count(*) from QRTZ_FIRED_TRIGGERS;
 select count(*) from QRTZ_PAUSED_TRIGGER_GRPS;
