@@ -46,6 +46,7 @@
 		</div>
 	</body>
 	<script src="vue/vue.js"></script>
+	<script src="axios/axios.js"></script>
 	<script src="element/index.js"></script>
 	<script type="text/javascript">
 		new Vue({
@@ -70,36 +71,25 @@
 				onSubmit() {
 					this.$refs['dataform'].validate((valid) => {
 			          if (valid) {
-						let _this=this;
-						let init={
-								headers: {
-							      'Content-Type': this.form.contentType
-							    },
-							    method: this.form.methodType,
-							    mode: 'no-cors'
+						let config={
+								url: this.form.url,
+								method: this.form.methodType,
+								headers: {'Content-Type': this.form.contentType},
 							};
-						if(this.form.methodType==='post'||this.form.methodType==='put'){
-							init={...init,body: this.form.requestBody};
+						if(this.form.requestBody.length>0){
+							config={...config, data: this.form.requestBody};
 						}
-						console.log(init)
-						fetch(this.form.url,init)
-						.then(res=>{
-							if(res.headers.get("content-type") === "application/json") {
-						    	return res.json();
-						  	}
-							return res.text();
-						})
-						.then(data=>{
+						let _this=this;
+						axios(config).then(res=>{
 							_this.$message({ message: '恭喜你，创建成功了。', type: 'success' });
-							if(typeof data === 'string'){
-								_this.form.responseBody=data;
+							if(typeof res.data === 'string'){
+								_this.form.responseBody=res.data;
 							}else{
-								_this.form.responseBody=JSON.stringify(data);
+								_this.form.responseBody=JSON.stringify(res.data);
 							}
-						})
-						.catch(err=>{
+						}).catch(err=>{
 							_this.$message({ message: '创建失败了。', type: 'error' });
-							console.log(err)
+							console.log(err);
 						});
 			          } else {
 			            return false;
