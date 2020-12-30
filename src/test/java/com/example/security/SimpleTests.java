@@ -3,7 +3,7 @@ package com.example.security;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
