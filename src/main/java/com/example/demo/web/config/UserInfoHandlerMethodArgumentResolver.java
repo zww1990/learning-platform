@@ -47,10 +47,8 @@ public class UserInfoHandlerMethodArgumentResolver implements HandlerMethodArgum
 		// 获取请求头参数值，参数值是经过base64编码的
 		String headerValue = webRequest.getHeader(headerName);
 		boolean hasValue = StringUtils.hasText(headerValue);
-		if (required) {
-			if (!hasValue) {
-				throw new MissingServletRequestParameterException(headerName, "request header");
-			}
+		if (required && !hasValue) {
+			throw new MissingServletRequestParameterException(headerName, "request header");
 		}
 		if (!hasValue) {
 			return null;
