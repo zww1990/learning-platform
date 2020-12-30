@@ -1,15 +1,17 @@
 package com.example.demo.config;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
 import java.util.TimeZone;
-import javax.annotation.Resource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -18,21 +20,24 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import springfox.documentation.builders.ApiInfoBuilder;
+
+import springfox.boot.starter.autoconfigure.SwaggerUiWebMvcConfiguration;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
+import springfox.documentation.oas.configuration.OpenApiDocumentationConfiguration;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.example.demo.controller")
 public class ServletConfig implements WebMvcConfigurer {
-	@Resource
-	private SwaggerProperties swaggerProps;
 
 	@Override
 	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -53,14 +58,6 @@ public class ServletConfig implements WebMvcConfigurer {
 		argumentResolvers.add(new UserInfoHandlerMethodArgumentResolver(this.objectMapper()));
 	}
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		if (this.swaggerProps.isEnable()) {
-			registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-			registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-		}
-	}
-
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
@@ -74,16 +71,19 @@ public class ServletConfig implements WebMvcConfigurer {
 	}
 
 	@Configuration
-	@EnableSwagger2
+	@EnableOpenApi
+	@Import({ OpenApiDocumentationConfiguration.class, Swagger2DocumentationConfiguration.class,
+			SwaggerUiWebMvcConfiguration.class })
 	@Conditional(SwaggerCondition.class)
 	public static class SwaggerAutoConfig {
 		@Bean
-		public Docket createRestApi(SwaggerProperties props) {
-			Docket docket = new Docket(DocumentationType.SWAGGER_2);
-			ApiInfoBuilder builder = new ApiInfoBuilder().title(props.getTitle()).description(props.getDescription())
-					.contact(new Contact(props.getName(), props.getUrl(), props.getEmail()))
-					.version(props.getVersion());
-			return docket.apiInfo(builder.build()).groupName(props.getTitle());
+		public Docket api(SwaggerProperties props) {
+			Contact contact = new Contact(props.getName(), props.getUrl(), props.getEmail());
+			ApiInfo apiInfo = new ApiInfo(props.getTitle(), props.getDescription(), props.getVersion(),
+					props.getTermsOfServiceUrl(), contact, props.getLicense(), props.getLicenseUrl(),
+					Collections.emptyList());
+			return new Docket(DocumentationType.OAS_30).select()
+					.apis(RequestHandlerSelectors.basePackage(props.getBasePackage())).build().apiInfo(apiInfo);
 		}
 	}
 
