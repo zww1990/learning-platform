@@ -4,11 +4,9 @@ import java.util.Arrays;
 
 import javax.annotation.Resource;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.security.model.Authority;
 import com.example.security.model.Menu;
@@ -17,7 +15,6 @@ import com.example.security.repository.AuthorityRepository;
 import com.example.security.repository.MenuRepository;
 import com.example.security.repository.UserRepository;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryTests {
 	@Resource
