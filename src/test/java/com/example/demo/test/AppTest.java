@@ -1,9 +1,8 @@
 package com.example.demo.test;
 
-import javax.annotation.Resource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,7 +15,7 @@ import com.example.demo.config.ServletConfig;
 @ContextConfiguration(classes = { RootConfig.class, ServletConfig.class })
 @WebAppConfiguration
 public class AppTest {
-	@Resource
+	@Autowired
 	private ApplicationContext context;
 
 	@Test
