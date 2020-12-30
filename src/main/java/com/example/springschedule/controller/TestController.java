@@ -112,7 +112,7 @@ public class TestController {
 		return HttpStatus.OK;
 	}
 
-	@GetMapping("")
+	@GetMapping
 	public Object index() {
 		return Arrays.asList("hello", "world");
 	}
