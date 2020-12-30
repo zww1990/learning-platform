@@ -18,7 +18,7 @@ public class QuartzModelTests {
 	 *   "jobName" : "myjob",
 	 *   "groupName" : "mygroup",
 	 *   "jobClass" : "myclass",
-	 *   "cronExpression" : "0/5 * * * * ?",
+	 *   "cronExpression" : "0/10 * * * * ?",
 	 *   "param" : {
 	 *     "key" : "value"
 	 *   }
