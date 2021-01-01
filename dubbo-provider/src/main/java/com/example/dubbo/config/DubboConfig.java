@@ -37,7 +37,6 @@ public class DubboConfig {
 	@Bean
 	public ProviderConfig providerConfig(DubboProperties props) {
 		ProviderConfig config = new ProviderConfig();
-//		config.setFilter(props.getProviderFilter());// 注册调用拦截器
 		return config;
 	}
 
