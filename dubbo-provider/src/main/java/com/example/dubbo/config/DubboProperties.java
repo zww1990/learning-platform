@@ -20,8 +20,6 @@ public class DubboProperties {
 	private String protocolName;
 	@Value("${dubbo.protocol-port}")
 	private int protocolPort;
-//	@Value("${dubbo.provider-filter}")
-//	private String providerFilter;
 
 	public String getAnnotationPackage() {
 		return annotationPackage;
@@ -63,11 +61,4 @@ public class DubboProperties {
 		this.protocolPort = protocolPort;
 	}
 
-//	public String getProviderFilter() {
-//		return providerFilter;
-//	}
-
-//	public void setProviderFilter(String providerFilter) {
-//		this.providerFilter = providerFilter;
-//	}
 }
