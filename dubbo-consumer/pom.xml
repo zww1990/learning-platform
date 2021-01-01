@@ -14,10 +14,6 @@
 	</parent>
 	
 	<dependencies>
-		<!-- <dependency>
-			<groupId>com.example</groupId>
-			<artifactId>dubbo-extension</artifactId>
-		</dependency> -->
 	</dependencies>
 
 	<build>
