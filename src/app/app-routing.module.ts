@@ -1,42 +1,51 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutModule } from '@angular/cdk/layout';
 
-import { LayoutComponent } from './layout/layout.component';
+import { AddressFormComponent } from './address-form/address-form.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DragDropComponent } from './drag-drop/drag-drop.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { TableComponent } from './table/table.component';
+import { TreeComponent } from './tree/tree.component';
 import { MaterialModule } from './material/material.module';
-import { MyNavComponent } from './my-nav/my-nav.component';
-import { MyDashboardComponent } from './my-dashboard/my-dashboard.component';
-import { MyTableComponent } from './my-table/my-table.component';
 
 const routes: Routes = [
-  {
-    path: 'demo',
-    component: MyNavComponent,
-    children: [
-      { path: 'dashboard', component: MyDashboardComponent },
-      { path: 'table', component: MyTableComponent },
-      { path: 'layout', component: LayoutComponent }
-    ]
-  },
-  { path: '', redirectTo: '/demo/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: '/demo/dashboard' }
+	{
+		path:'address',
+		component:AddressFormComponent
+	},
+	{
+		path:'dashboard',
+		component:DashboardComponent
+	},
+	{
+		path:'drag',
+		component:DragDropComponent
+	},
+	{
+		path:'navigation',
+		component:NavigationComponent
+	},
+	{
+		path:'table',
+		component:TableComponent
+	},
+	{
+		path:'tree',
+		component:TreeComponent
+	}
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    LayoutModule
-  ],
-  exports: [RouterModule],
   declarations: [
-    MyNavComponent,
-    MyDashboardComponent,
-    MyTableComponent,
-    LayoutComponent
-  ]
+    AddressFormComponent,
+    NavigationComponent,
+    TableComponent,
+    DashboardComponent,
+    TreeComponent,
+    DragDropComponent
+  ],
+  imports: [RouterModule.forRoot(routes),MaterialModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

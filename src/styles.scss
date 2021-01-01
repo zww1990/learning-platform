@@ -1,26 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
-// @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
-// @import '~@angular/material/prebuilt-themes/purple-green.css';
 
-body {
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  scrollbar-arrow-color: #3f51b5;
-  scrollbar-face-color: #3f51b5;
-  scrollbar-highlight-color: #fff;
-  scrollbar-shadow-color: #fff;
-  scrollbar-track-color: #fff;
-}
+//@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+//@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+//@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+//@import '~@angular/material/prebuilt-themes/purple-green.css';
 
-*::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #3f51b5;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
