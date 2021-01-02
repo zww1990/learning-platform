@@ -3,25 +3,27 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>菜单</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item routerLink="/address">地址表格</a>
+      <a mat-list-item routerLink="/dashboard">仪表板</a>
+      <a mat-list-item routerLink="/drag">拖放</a>
+      <a mat-list-item routerLink="/table">表</a>
+      <a mat-list-item routerLink="/tree">树</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
         type="button"
-        aria-label="Toggle sidenav"
+        aria-label="切换侧面导航"
         mat-icon-button
         (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="侧面导航切换图标">menu</mat-icon>
       </button>
-      <span>my-angular</span>
+      <span>我的App</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

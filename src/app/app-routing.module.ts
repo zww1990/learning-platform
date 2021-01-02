@@ -10,30 +10,17 @@ import { TreeComponent } from './tree/tree.component';
 import { MaterialModule } from './material/material.module';
 
 const routes: Routes = [
-	{
-		path:'address',
-		component:AddressFormComponent
-	},
-	{
-		path:'dashboard',
-		component:DashboardComponent
-	},
-	{
-		path:'drag',
-		component:DragDropComponent
-	},
-	{
-		path:'navigation',
-		component:NavigationComponent
-	},
-	{
-		path:'table',
-		component:TableComponent
-	},
-	{
-		path:'tree',
-		component:TreeComponent
-	}
+  {
+    path: '',
+    component: NavigationComponent,
+    children: [
+      { path: 'address', component: AddressFormComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'drag', component: DragDropComponent },
+      { path: 'table', component: TableComponent },
+      { path: 'tree', component: TreeComponent }
+    ]
+  },
 ];
 
 @NgModule({
@@ -45,7 +32,7 @@ const routes: Routes = [
     TreeComponent,
     DragDropComponent
   ],
-  imports: [RouterModule.forRoot(routes),MaterialModule],
+  imports: [RouterModule.forRoot(routes), MaterialModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
