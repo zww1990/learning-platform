@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-address-form',
@@ -93,6 +89,9 @@ export class AddressFormComponent {
   constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) { }
 
   onSubmit() {
+    if(!this.addressForm.valid){
+      return;
+    }
     this._snackBar.open('干得漂亮！！！', '', {
       duration: 3000,
       horizontalPosition: 'center',
