@@ -18,6 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -43,7 +44,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatTreeModule,
     LayoutModule,
     DragDropModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBadgeModule,
   ],
   exports: [
     CommonModule,
@@ -65,7 +67,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatTreeModule,
     LayoutModule,
     DragDropModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatBadgeModule,
   ]
 })
 export class MaterialModule { }
