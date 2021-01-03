@@ -6,10 +6,11 @@
     "my-angular": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:class": {
+        "@schematics/angular:component": {
+          "style": "less",
           "skipTests": true
         },
-        "@schematics/angular:component": {
+        "@schematics/angular:class": {
           "skipTests": true
         },
         "@schematics/angular:directive": {
@@ -49,7 +50,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.less"
             ],
             "scripts": []
           },
@@ -86,8 +87,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-angular:build",
-            "proxyConfig": "proxy.conf.js"
+            "browserTarget": "my-angular:build"
           },
           "configurations": {
             "production": {
@@ -113,7 +113,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.less"
             ],
             "scripts": []
           }
@@ -144,6 +144,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "my-angular"
 }
