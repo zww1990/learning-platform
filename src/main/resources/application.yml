@@ -75,7 +75,7 @@ changepwd:
   #重置密码
   reset:
     #链接有效期（单位：分钟）
-    expiration: 5
+    expiration: 30
     #发件人（${}是占位符，请谨慎修改）
     from: Admin（请勿回复）<${spring.mail.username}>
     #邮件主题
