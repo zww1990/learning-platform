@@ -1,13 +1,19 @@
 package com.example.demoprovider;
 
+import javax.annotation.Resource;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
-class DemoProviderApplicationTests {
+public class DemoProviderApplicationTests {
+	@Resource
+	private ApplicationContext context;
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	public void contextLoads() {
+		System.err.println(this.context.getBeanDefinitionCount());
+	}
 
 }
