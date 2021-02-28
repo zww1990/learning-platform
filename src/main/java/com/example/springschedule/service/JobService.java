@@ -53,7 +53,8 @@ public class JobService extends QuartzJobBean {
 					Arrays.asList(content), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
 			git.add().addFilepattern(RESOURCES_FOLDER).call();
 			Status status = git.status().call();
-			log.info("Git Change: {}", status.getChanged());
+			log.info("Git Added: {}", status.getAdded());
+			log.info("Git Changed: {}", status.getChanged());
 			log.info("Git Modified: {}", status.getModified());
 			log.info("Git UncommittedChanges: {}", status.getUncommittedChanges());
 			log.info("Git Untracked: {}", status.getUntracked());
