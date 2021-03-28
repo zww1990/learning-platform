@@ -19,8 +19,8 @@
 
     <springProperty scope="context" name="logPath" source="nacos.logs.path" defaultValue="${nacos.home}/logs"/>
     <property name="LOG_HOME" value="${logPath}"/>
-
-    <!-- <appender name="cmdb-main"
+<!-- 
+    <appender name="cmdb-main"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${nacos.home}/logs/cmdb-main.log</file>
         <append>true</append>
@@ -35,16 +35,16 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-
+    </appender>
+ -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-
-    <!-- <appender name="naming-server"
+<!-- 
+    <appender name="naming-server"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-server.log</file>
         <append>true</append>
@@ -59,16 +59,16 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="async-naming-server" class="ch.qos.logback.classic.AsyncAppender">
+    <appender name="async-naming-server" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>1024</queueSize>
         <neverBlock>true</neverBlock>
         <appender-ref ref="naming-server"/>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="naming-raft"
+    <appender name="naming-raft"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-raft.log</file>
         <append>true</append>
@@ -83,17 +83,17 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="async-naming-raft" class="ch.qos.logback.classic.AsyncAppender">
+    <appender name="async-naming-raft" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>1024</queueSize>
         <neverBlock>true</neverBlock>
         <appender-ref ref="naming-raft"/>
-    </appender> -->
+    </appender>
 
 
-    <!-- <appender name="naming-distro"
+    <appender name="naming-distro"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-distro.log</file>
         <append>true</append>
@@ -108,16 +108,16 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="async-naming-distro" class="ch.qos.logback.classic.AsyncAppender">
+    <appender name="async-naming-distro" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>1024</queueSize>
         <neverBlock>true</neverBlock>
         <appender-ref ref="naming-distro"/>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="naming-event"
+    <appender name="naming-event"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-event.log</file>
         <append>true</append>
@@ -132,16 +132,16 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="async-naming-event" class="ch.qos.logback.classic.AsyncAppender">
+    <appender name="async-naming-event" class="ch.qos.logback.classic.AsyncAppender">
         <discardingThreshold>0</discardingThreshold>
         <queueSize>1024</queueSize>
         <neverBlock>true</neverBlock>
         <appender-ref ref="naming-event"/>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="naming-push"
+    <appender name="naming-push"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-push.log</file>
         <append>true</append>
@@ -156,8 +156,8 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-    <!-- <appender name="naming-rt"
+    </appender>
+    <appender name="naming-rt"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-rt.log</file>
         <append>true</append>
@@ -172,9 +172,9 @@
             <Pattern>%msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="naming-performance"
+    <appender name="naming-performance"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/naming-performance.log</file>
         <append>true</append>
@@ -189,10 +189,10 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!--config module logback config-->
-    <!-- <appender name="dumpFile"
+
+    <appender name="dumpFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-dump.log</file>
         <append>true</append>
@@ -207,8 +207,8 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-    <!-- <appender name="pullFile"
+    </appender>
+    <appender name="pullFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-pull.log</file>
         <append>true</append>
@@ -223,8 +223,8 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-    <!-- <appender name="fatalFile"
+    </appender>
+    <appender name="fatalFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-fatal.log</file>
         <append>true</append>
@@ -239,8 +239,8 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-    <!-- <appender name="memoryFile"
+    </appender>
+    <appender name="memoryFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-memory.log</file>
         <append>true</append>
@@ -255,8 +255,8 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
-    <!-- <appender name="pullCheckFile"
+    </appender>
+    <appender name="pullCheckFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-pull-check.log</file>
         <append>true</append>
@@ -271,9 +271,9 @@
             <Pattern>%msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="clientLog"
+    <appender name="clientLog"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-client-request.log</file>
         <append>true</append>
@@ -288,9 +288,9 @@
             <Pattern>%date|%msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="traceLog"
+    <appender name="traceLog"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-trace.log</file>
         <append>true</append>
@@ -305,9 +305,9 @@
             <Pattern>%date|%msg%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="notifyLog"
+    <appender name="notifyLog"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-notify.log</file>
         <append>true</append>
@@ -322,9 +322,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="startLog"
+    <appender name="startLog"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/config-server.log</file>
         <append>true</append>
@@ -339,9 +339,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="rootFile"
+    <appender name="rootFile"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/nacos.log</file>
         <append>true</append>
@@ -356,9 +356,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="nacos-address"
+    <appender name="nacos-address"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/nacos-address.log</file>
         <append>true</append>
@@ -373,9 +373,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="istio-main"
+    <appender name="istio-main"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/istio-main.log</file>
         <append>true</append>
@@ -390,9 +390,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="core-auth"
+    <appender name="core-auth"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/core-auth.log</file>
         <append>true</append>
@@ -407,9 +407,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="protocol-raft"
+    <appender name="protocol-raft"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/protocol-raft.log</file>
         <append>true</append>
@@ -424,9 +424,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="protocol-distro"
+    <appender name="protocol-distro"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/protocol-distro.log</file>
         <append>true</append>
@@ -441,9 +441,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="nacos-cluster"
+    <appender name="nacos-cluster"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/nacos-cluster.log</file>
         <append>true</append>
@@ -458,9 +458,9 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
 
-    <!-- <appender name="alipay-jraft"
+    <appender name="alipay-jraft"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_HOME}/alipay-jraft.log</file>
         <append>true</append>
@@ -475,118 +475,254 @@
             <Pattern>%date %level %msg%n%n</Pattern>
             <charset>UTF-8</charset>
         </encoder>
-    </appender> -->
+    </appender>
+    
+    
 
+    <appender name="tps-control"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/tps-control.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/tps-control.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <appender name="tps-control-digest"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/tps-control-digest.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/tps-control-digest.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <appender name="tps-control-detail"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/tps-control-detail.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/tps-control-detail.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    
+    <appender name="remote"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/remote.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/remote.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <appender name="remote-digest"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/remote-digest.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/remote-digest.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <appender name="remote-push"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/remote-push.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/remote-push.log.%d{yyyy-MM-dd}.%i</fileNamePattern>
+            <maxFileSize>2GB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>7GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%date %level %msg%n%n</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+ -->    
+<!-- 
     <logger name="com.alibaba.nacos.address.main" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="nacos-address"/> -->
+        <appender-ref ref="nacos-address"/>
     </logger>
 
     <logger name="com.alibaba.nacos.cmdb.main" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="cmdb-main"/> -->
+        <appender-ref ref="cmdb-main"/>
     </logger>
+    
+    <logger name="com.alibaba.nacos.core.remote" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="remote"/>
+    </logger>
+    <logger name="com.alibaba.nacos.core.remote.push" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="remote-push"/>
+    </logger>
+    
+    <logger name="com.alibaba.nacos.core.remote.digest" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="remote-digest"/>
+    </logger>
+    
 
+    <logger name="com.alibaba.nacos.core.remote.control.digest" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="tps-control-digest"/>
+    </logger>
+    
+    <logger name="com.alibaba.nacos.core.remote.control.detail" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="tps-control-detail"/>
+    </logger>
+    
+    <logger name="com.alibaba.nacos.core.remote.control" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="tps-control"/>
+    </logger>
+    
     <logger name="com.alibaba.nacos.naming.main" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="async-naming-server"/> -->
+        <appender-ref ref="async-naming-server"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.raft" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="async-naming-raft"/> -->
+        <appender-ref ref="async-naming-raft"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.distro" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="async-naming-distro"/> -->
+        <appender-ref ref="async-naming-distro"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.event" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="async-naming-event"/> -->
+        <appender-ref ref="async-naming-event"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.push" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="naming-push"/> -->
+        <appender-ref ref="naming-push"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.rt" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="naming-rt"/> -->
+        <appender-ref ref="naming-rt"/>
     </logger>
     <logger name="com.alibaba.nacos.naming.performance" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="naming-performance"/> -->
+        <appender-ref ref="naming-performance"/>
     </logger>
 
     <logger name="com.alibaba.nacos.config.dumpLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="dumpFile"/> -->
+        <appender-ref ref="dumpFile"/>
     </logger>
     <logger name="com.alibaba.nacos.config.pullLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="pullFile"/> -->
+        <appender-ref ref="pullFile"/>
     </logger>
     <logger name="com.alibaba.nacos.config.pullCheckLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="pullCheckFile"/> -->
+        <appender-ref ref="pullCheckFile"/>
     </logger>
     <logger name="com.alibaba.nacos.config.fatal" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="fatalFile"/> -->
+        <appender-ref ref="fatalFile"/>
     </logger>
     <logger name="com.alibaba.nacos.config.monitorLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="memoryFile"/> -->
+        <appender-ref ref="memoryFile"/>
     </logger>
 
     <logger name="com.alibaba.nacos.config.clientLog" additivity="false">
         <level value="info"/>
-        <!-- <appender-ref ref="clientLog"/> -->
+        <appender-ref ref="clientLog"/>
     </logger>
 
     <logger name="com.alibaba.nacos.config.notifyLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="notifyLog"/> -->
+        <appender-ref ref="notifyLog"/>
     </logger>
 
     <logger name="com.alibaba.nacos.config.traceLog" additivity="false">
         <level value="info"/>
-        <!-- <appender-ref ref="traceLog"/> -->
+        <appender-ref ref="traceLog"/>
     </logger>
 
     <logger name="com.alibaba.nacos.config.startLog" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="startLog"/> -->
+        <appender-ref ref="startLog"/>
     </logger>
 
     <logger name="com.alibaba.nacos.istio.main" additivity="false">
         <level value="DEBUG"/>
-        <!-- <appender-ref ref="istio-main"/> -->
+        <appender-ref ref="istio-main"/>
     </logger>
 
     <logger name="com.alibaba.nacos.core.auth" additivity="false">
         <level value="DEBUG"/>
-        <!-- <appender-ref ref="core-auth"/> -->
+        <appender-ref ref="core-auth"/>
     </logger>
 
     <logger name="com.alibaba.nacos.core.protocol.raft" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="protocol-raft"/> -->
+        <appender-ref ref="protocol-raft"/>
     </logger>
 
     <logger name="com.alipay.sofa.jraft" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="alipay-jraft"/> -->
+        <appender-ref ref="alipay-jraft"/>
     </logger>
 
     <logger name="com.alibaba.nacos.core.protocol.distro" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="protocol-distro"/> -->
+        <appender-ref ref="protocol-distro"/>
     </logger>
 
     <logger name="com.alibaba.nacos.core.cluster" additivity="false">
         <level value="INFO"/>
-        <!-- <appender-ref ref="nacos-cluster"/> -->
+        <appender-ref ref="nacos-cluster"/>
     </logger>
-
+ -->
     <springProfile name="standalone">
         <logger name="org.springframework">
             <appender-ref ref="CONSOLE"/>

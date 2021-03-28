@@ -1,13 +1,15 @@
-# spring-nacos
 
-#### 介绍
+## 快速开始
+开始第一个项目非常容易。
 
-#### 软件架构
+#### 启动服务器
 
-#### 安装教程
+在 **Linux/Unix/Mac** 平台上，运行以下命令以独立模式启动服务器：
+```
+sh startup.sh -m standalone
+```
 
-#### 使用说明
-
-#### 参与贡献
-
-#### 特技
+在 **Windows** 平台上，运行以下命令以独立模式启动服务器。或者，您也可以双击 `startup.cmd` 以运行 NacosServer。
+```
+startup.cmd -m standalone
+```
