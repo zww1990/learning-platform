@@ -38,7 +38,7 @@ springfox:
     license: MIT License
     license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
     base-package: com.example.demo.web.controller
-    group-name: spring-swagger
+    group-name: spring-swagger-knife4j
   documentation:
     enabled: true
     swagger-ui:
