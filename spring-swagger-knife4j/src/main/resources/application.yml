@@ -25,6 +25,7 @@ server:
       registered: false
   ssl:
     enabled: false
+  port: 8082
 springfox:
   swagger:
     title: 神奇的网站
