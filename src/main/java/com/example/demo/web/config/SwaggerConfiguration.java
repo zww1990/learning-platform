@@ -21,7 +21,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 public class SwaggerConfiguration {
 	@Bean
 	public Docket api(SwaggerProperties props) {
-		return new Docket(DocumentationType.SWAGGER_2).groupName("spring-swagger").select()
+		return new Docket(DocumentationType.SWAGGER_2).groupName(props.getGroupName()).select()
 				.apis(RequestHandlerSelectors.basePackage(props.getBasePackage())).build()
 				.apiInfo(new ApiInfoBuilder().contact(new Contact(props.getName(), props.getUrl(), props.getEmail()))
 						.title(props.getTitle()).description(props.getDescription()).version(props.getVersion())

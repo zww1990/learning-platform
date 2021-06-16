@@ -37,6 +37,7 @@ springfox:
     license: MIT License
     license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
     base-package: com.example.demo.web.controller
+    group-name: spring-swagger
   documentation:
     enabled: true
     swagger-ui:
