@@ -26,7 +26,7 @@ server:
   ssl:
     enabled: false
   port: 8083
-springfox:
+springdoc:
   swagger:
     title: 神奇的网站
     description: 这是一个神奇的网站
@@ -39,6 +39,5 @@ springfox:
     license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
     base-package: com.example.demo.web.controller
     group-name: spring-swagger-v3
-springdoc:
-  packages-to-scan:
-  - com.example.demo.web.controller
+  api-docs:
+    enabled: true
