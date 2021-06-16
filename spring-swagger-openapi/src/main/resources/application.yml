@@ -38,6 +38,6 @@ springdoc:
     license: MIT License
     license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
     base-package: com.example.demo.web.controller
-    group-name: spring-swagger-v3
+    group-name: spring-swagger-openapi
   api-docs:
     enabled: true

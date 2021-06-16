@@ -15,11 +15,11 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 
 @SpringBootApplication
-public class SpringSwaggerV3Application implements CommandLineRunner {
-	private static final Logger log = LoggerFactory.getLogger(SpringSwaggerV3Application.class);
+public class SpringSwaggerOpenApiApplication implements CommandLineRunner {
+	private static final Logger log = LoggerFactory.getLogger(SpringSwaggerOpenApiApplication.class);
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(SpringSwaggerV3Application.class, args);
+		ApplicationContext context = SpringApplication.run(SpringSwaggerOpenApiApplication.class, args);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
