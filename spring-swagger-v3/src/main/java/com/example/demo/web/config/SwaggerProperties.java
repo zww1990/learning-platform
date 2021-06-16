@@ -2,7 +2,7 @@ package com.example.demo.web.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "springfox.swagger")
+@ConfigurationProperties(prefix = "springdoc.swagger")
 public class SwaggerProperties {
 	private String title;
 	private String description;
