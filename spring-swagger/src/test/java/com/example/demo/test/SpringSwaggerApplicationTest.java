@@ -7,12 +7,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
-public class AppTest {
+public class SpringSwaggerApplicationTest {
 	@Resource
 	private ApplicationContext context;
 
 	@Test
-	public void contextLoads() {
+	public void testContextLoads() {
 		try {
 			String[] names = this.context.getBeanDefinitionNames();
 			for (int i = 0; i < names.length; i++) {

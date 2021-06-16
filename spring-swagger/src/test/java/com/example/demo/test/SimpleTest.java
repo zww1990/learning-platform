@@ -2,8 +2,11 @@ package com.example.demo.test;
 
 import java.util.TimeZone;
 
-public class MainTest {
-	public static void main(String[] args) {
+import org.junit.jupiter.api.Test;
+
+public class SimpleTest {
+	@Test
+	public void testTimeZone() {
 		System.err.println(TimeZone.getDefault());
 	}
 }
