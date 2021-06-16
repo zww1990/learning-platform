@@ -9,7 +9,7 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 
 @SpringBootTest
-public class SpringSwaggerV3ApplicationTest {
+public class SpringSwaggerOpenApiApplicationTest {
 	@Resource
 	private ApplicationContext context;
 
