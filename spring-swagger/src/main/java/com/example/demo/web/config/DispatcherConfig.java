@@ -16,17 +16,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DispatcherConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/")
+		registry.addResourceHandler("/swagger-ui/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
 				.resourceChain(false);
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/")
+		registry.addResourceHandler("/favicon-32x32.png")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
 				.resourceChain(false);
-		registry.addResourceHandler("favicon-32x32.png")
-				.addResourceLocations("classpath:/META-INF/resources/img/icons/").resourceChain(false);
 	}
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("favicon.ico", "favicon-32x32.png");
+		registry.addRedirectViewController("/favicon.ico", "/favicon-32x32.png");
+		registry.addRedirectViewController("/swagger-ui", "/swagger-ui/index.html");
 	}
 
 	@Override
