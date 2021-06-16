@@ -3,12 +3,15 @@ package com.example.demo.web.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -33,8 +37,9 @@ public class DemoController {
 
 	@GetMapping("/get")
 	@ApiOperation(value = "查询用户信息", notes = "按id查询用户信息")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户id"), //
-			@ApiImplicitParam(name = "token", value = "密钥"),//
+	@ApiImplicitParams({ // NOSONAR
+			@ApiImplicitParam(name = "id", value = "用户id"), // NOSONAR
+			@ApiImplicitParam(name = "token", value = "密钥"),// NOSONAR
 	})
 	public UserModel get(@RequestParam Integer id, @ApiIgnore String text, @RequestHeader String token) {
 		log.info("text：{}", text);
@@ -47,11 +52,12 @@ public class DemoController {
 	}
 
 	@PostMapping("/upload")
-	@ApiOperation(value = "文件上传", notes = "文件上传的请求内容类型必须是multipart/form-data")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "file", value = "文件", paramType = "form", required = true), //
-			@ApiImplicitParam(name = "token", value = "密钥"),//
-	})
-	public List<Object> upload(@RequestPart MultipartFile file, UserModel user, @RequestHeader String token) {
+	@ApiOperation(value = "文件上传", notes = "上传多媒体文件")
+	public List<Object> upload(// NOSONAR
+			@ApiParam(value = "文件", required = true) @RequestPart MultipartFile file, // NOSONAR
+			@Valid UserModel user, // NOSONAR
+			@ApiParam(value = "密钥", required = true) @RequestHeader String token// NOSONAR
+	) {
 		log.info("文件参数：{}, {}, {}, {}, {}", file.isEmpty(), file.getContentType(), file.getName(),
 				file.getOriginalFilename(), file.getSize());
 		log.info("用户ID：{}，用户名：{}", user.getUserId(), user.getUserName());
@@ -60,20 +66,22 @@ public class DemoController {
 				file.getSize(), user.getUserId(), user.getUserName());
 	}
 
-	@PostMapping("/json")
-	@ApiOperation(value = "提交json格式数据", notes = "提交json格式数据时，请求内容类型必须是application/json")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "token", value = "密钥"),//
+	@PutMapping("/update")
+	@ApiOperation(value = "更新用户信息", notes = "按id更新用户信息")
+	@ApiImplicitParams({ // NOSONAR
+			@ApiImplicitParam(name = "token", value = "密钥"),// NOSONAR
 	})
-	public UserModel json(@RequestBody UserModel user, @RequestHeader String token) {
+	public UserModel update(@Valid @RequestBody UserModel user, @RequestHeader String token) {
 		log.info("用户ID：{}，用户名：{}", user.getUserId(), user.getUserName());
 		log.info("token: {}", token);
 		return user;
 	}
 
 	@DeleteMapping("/delete/{id}")
-	@ApiOperation(value = "删除用户信息", notes = "按id删除用户信息，使用路径传递id")
-	@ApiImplicitParams({ @ApiImplicitParam(name = "id", value = "用户ID"), //
-			@ApiImplicitParam(name = "token", value = "密钥"),//
+	@ApiOperation(value = "删除用户信息", notes = "按id删除用户信息")
+	@ApiImplicitParams({ // NOSONAR
+			@ApiImplicitParam(name = "id", value = "用户ID"), // NOSONAR
+			@ApiImplicitParam(name = "token", value = "密钥"),// NOSONAR
 	})
 	public String delete(@PathVariable Integer id, @RequestHeader String token) {
 		log.info("id：{}", id);
