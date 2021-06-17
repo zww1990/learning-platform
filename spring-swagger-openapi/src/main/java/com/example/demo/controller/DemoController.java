@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.example.demo.model.UserModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -49,8 +51,12 @@ public class DemoController {
 		return user;
 	}
 
-	@PostMapping("/upload")
+	@PostMapping(path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "文件上传", description = "上传多媒体文件")
+	@Parameters({ // NOSONAR
+			@Parameter(name = "userId", description = "用户ID", required = true, in = ParameterIn.QUERY), // NOSONAR
+			@Parameter(name = "userName", description = "用户名", required = true, in = ParameterIn.QUERY),// NOSONAR
+	})
 	public List<Object> upload(// NOSONAR
 			@Parameter(description = "文件", required = true) @RequestPart MultipartFile file, // NOSONAR
 			@Valid UserModel user, // NOSONAR
