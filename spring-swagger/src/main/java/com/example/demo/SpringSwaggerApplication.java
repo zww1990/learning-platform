@@ -13,7 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.retry.annotation.EnableRetry;
 
+@EnableRetry
 @SpringBootApplication
 public class SpringSwaggerApplication implements CommandLineRunner {
 	private static final Logger log = LoggerFactory.getLogger(SpringSwaggerApplication.class);
