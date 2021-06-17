@@ -1,4 +1,4 @@
-package com.example.demo.web.config;
+package com.example.demo.config;
 
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
