@@ -37,7 +37,8 @@ springdoc:
     email: zww1990@foxmail.com
     license: MIT License
     license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
-    base-package: com.example.demo.controller
-    group-name: spring-swagger-openapi
+  swagger-ui:    path: /swagger-ui
+  group-configs:  - group: spring-swagger-openapi
+    packages-to-scan: com.example.demo.controller
   api-docs:
     enabled: true
