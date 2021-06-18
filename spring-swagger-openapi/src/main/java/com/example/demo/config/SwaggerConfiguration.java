@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-import org.springdoc.core.GroupedOpenApi;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -30,8 +29,4 @@ public class SwaggerConfiguration {
 				.externalDocs(new ExternalDocumentation().description(props.getDescription()).url(props.getUrl()));
 	}
 
-	@Bean
-	public GroupedOpenApi groupedOpenApi(SwaggerProperties props) {
-		return GroupedOpenApi.builder().group(props.getGroupName()).packagesToScan(props.getBasePackage()).build();
-	}
 }

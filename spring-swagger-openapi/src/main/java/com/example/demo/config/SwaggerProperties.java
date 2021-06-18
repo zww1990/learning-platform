@@ -13,8 +13,6 @@ public class SwaggerProperties {
 	private String email;
 	private String license;
 	private String licenseUrl;
-	private String basePackage;
-	private String groupName;
 
 	public String getTitle() {
 		return title;
@@ -52,14 +50,6 @@ public class SwaggerProperties {
 		return licenseUrl;
 	}
 
-	public String getBasePackage() {
-		return basePackage;
-	}
-
-	public String getGroupName() {
-		return groupName;
-	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -94,14 +84,6 @@ public class SwaggerProperties {
 
 	public void setLicenseUrl(String licenseUrl) {
 		this.licenseUrl = licenseUrl;
-	}
-
-	public void setBasePackage(String basePackage) {
-		this.basePackage = basePackage;
-	}
-
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
 	}
 
 }
