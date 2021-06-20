@@ -1,0 +1,21 @@
+<configuration scan="true">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+	<root level="INFO">
+		<appender-ref ref="STDOUT"/>
+	</root>
+	<logger name="org.jboss.logging" level="INFO"/>
+	<logger name="org.hibernate.type" level="INFO"/>
+	<logger name="org.hibernate.id.factory.internal" level="INFO"/>
+	<logger name="org.hibernate.engine.jdbc.env.internal" level="INFO"/>
+	<logger name="org.hibernate.integrator.internal" level="INFO"/>
+	<logger name="org.hibernate.boot" level="INFO"/>
+	<logger name="org.hibernate.service.spi" level="INFO"/>
+	<logger name="org.hibernate.cache.internal" level="INFO"/>
+</configuration>
