@@ -99,7 +99,7 @@
             <span id="capslock-on" style="display:none;"><p><img src="images/warning.png" valign="top"> <spring:message code="screen.capslock.on" /></p></span>
         </section>
 
-        <!--
+        <%--
         <section class="row check">
             <p>
                 <input id="warn" name="warn" value="true" tabindex="3" accesskey="<spring:message code="screen.welcome.label.warn.accesskey" />" type="checkbox" />
@@ -112,7 +112,7 @@
                 <label for="rememberMe"><spring:message code="screen.rememberme.checkbox.title" /></label>
             </p>
         </section>
-        -->
+        --%>
 
         <section class="row btn-row">
             <input type="hidden" name="lt" value="${loginTicket}" />

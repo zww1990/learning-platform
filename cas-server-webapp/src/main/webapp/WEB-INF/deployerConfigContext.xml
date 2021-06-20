@@ -161,7 +161,7 @@
           			<bean class="org.jasig.cas.support.oauth.services.OAuthCallbackAuthorizeService"
           			p:id="0"
           			p:name="HTTP"
-          			p:description="Oauth Wrapper Callback Url"
+          			p:description="oauth wrapper callback url"
           			p:serviceId="${server.prefix}/oauth2.0/callbackAuthorize"/>
           			<bean class="org.jasig.cas.support.oauth.services.OAuthRegisteredService"
           			p:id="1"

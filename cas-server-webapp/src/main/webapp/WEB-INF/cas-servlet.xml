@@ -234,7 +234,7 @@
   	<property name="loginUrl" value="${server.prefix}"/>
   	<property name="servicesManager" ref="servicesManager"/>
   	<property name="ticketRegistry" ref="ticketRegistry"/>
-  	<property name="timeout" value="30000"/>
+  	<property name="timeout" value="7200"/>
   </bean>
 
   <!--  CAS 2 Protocol service/proxy validation -->     
