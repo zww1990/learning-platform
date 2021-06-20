@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>spring-swagger</artifactId>
+	<artifactId>spring-swagger-non-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>spring-swagger</name>
+	<name>spring-swagger-non-boot</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
