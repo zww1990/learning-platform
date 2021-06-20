@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>dubbo-parent</artifactId>
+	<artifactId>spring-dubbo-non-boot-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>dubbo-parent</name>
+	<name>spring-dubbo-non-boot-parent</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -132,7 +132,7 @@
 	</dependencies>
 
 	<modules>
-		<module>dubbo-provider</module>
-		<module>dubbo-consumer</module>
+		<module>spring-dubbo-provider</module>
+		<module>spring-dubbo-consumer</module>
 	</modules>
 </project>
