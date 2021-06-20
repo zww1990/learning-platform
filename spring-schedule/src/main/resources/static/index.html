@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>index</title>
+		<link rel="stylesheet" href="element/theme-chalk/index.css">
+	</head>
+	<body>
+		<div id="app">
+			<el-form ref="dataform" :model="form" :rules="rules" label-width="80px">
+			  <el-form-item label="请求方式" prop="methodType" required>
+			    <el-select v-model="form.methodType" placeholder="请选择请求方式">
+			      <el-option
+				      v-for="item in methodTypes"
+				      :key="item"
+				      :label="item"
+				      :value="item">
+				    </el-option>
+			    </el-select>
+			  </el-form-item>
+			  <el-form-item label="请求地址" prop="url" required>
+			    <el-input v-model="form.url" placeholder="请输入请求地址"></el-input>
+			  </el-form-item>
+			  <el-form-item label="内容类型" prop="contentType" required>
+			    <el-select v-model="form.contentType" placeholder="请选择内容类型">
+			      <el-option
+				      v-for="item in contentTypes"
+				      :key="item"
+				      :label="item"
+				      :value="item">
+				    </el-option>
+			    </el-select>
+			  </el-form-item>
+			  <el-form-item label="请求体">
+			    <el-input type="textarea" v-model="form.requestBody" placeholder="请输入内容" rows="10"></el-input>
+			  </el-form-item>
+			  <el-form-item label="响应体">
+			    <el-input type="textarea" v-model="form.responseBody" readonly rows="10"></el-input>
+			  </el-form-item>
+			  <el-form-item>
+			    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+			    <el-button @click="resetForm">重置</el-button>
+			  </el-form-item>
+			</el-form>
+		</div>
+	</body>
+	<script src="vue/vue.js"></script>
+	<script src="axios/axios.js"></script>
+	<script src="element/index.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el:'#app',
+			data:{
+				methodTypes:['get','post','put','delete'],
+				contentTypes:['application/xml','application/json','application/x-www-form-urlencoded'],
+				form: {
+					url: '',
+					methodType: '',
+					contentType: '',
+					requestBody: '',
+					responseBody: ''
+				},
+				rules:{
+					url:[{ required: true, message: '请输入请求地址', trigger: 'blur' }],
+					methodType:[{ required: true, message: '请选择请求方式', trigger: 'change' }],
+					contentType:[{ required: true, message: '请选择内容类型', trigger: 'change' }]
+				}
+			},
+			methods:{
+				onSubmit() {
+					this.$refs['dataform'].validate((valid) => {
+			          if (valid) {
+						let config={
+								url: this.form.url,
+								method: this.form.methodType,
+								headers: {'Content-Type': this.form.contentType},
+							};
+						if(this.form.requestBody.length>0){
+							config={...config, data: this.form.requestBody};
+						}
+						let _this=this;
+						axios(config).then(res=>{
+							_this.$message({ message: '恭喜你，创建成功了。', type: 'success' });
+							if(typeof res.data === 'string'){
+								_this.form.responseBody=res.data;
+							}else{
+								_this.form.responseBody=JSON.stringify(res.data);
+							}
+						}).catch(err=>{
+							_this.$message({ message: '创建失败了。', type: 'error' });
+							console.log(err);
+						});
+			          } else {
+			            return false;
+			          }
+			        });
+				},
+				resetForm() {
+			    	this.$refs['dataform'].resetFields();
+			    }
+			}
+		})
+	</script>
+</html>
