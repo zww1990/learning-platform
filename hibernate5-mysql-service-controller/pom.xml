@@ -10,11 +10,11 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>hibernate5</artifactId>
+	<artifactId>hibernate5-mysql-service-controller</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>hibernate5</name>
+	<name>hibernate5-mysql-service-controller</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
