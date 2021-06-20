@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>spring-schedule</artifactId>
+	<artifactId>spring-schedule-non-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-schedule</name>
+	<name>spring-schedule-non-boot</name>
 	<description>Demo project for Spring Boot</description>
 
 	<dependencyManagement>
