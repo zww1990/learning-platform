@@ -12,23 +12,10 @@
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzOpen nzTitle="仪表盘" nzIcon="dashboard">
+        <li nz-submenu *ngFor="let menu of menus" [nzOpen]="menu.open" [nzTitle]="menu.title" [nzIcon]="menu.icon">
           <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a routerLink="/welcome">欢迎</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>监控</a>
-            </li>
-            <li nz-menu-item nzMatchRouter>
-              <a>工作空间</a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="表单" nzIcon="form">
-          <ul>
-            <li nz-menu-item nzMatchRouter>
-              <a>基础表单</a>
+            <li nz-menu-item *ngFor="let item of menu.items" [nzMatchRouter]="item.match">
+              <a [routerLink]="item.link">{{item.title}}</a>
             </li>
           </ul>
         </li>
