@@ -14,13 +14,14 @@
 	<name>test</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<!-- ↓添加代码质量检查↓ -->
     	<sonar.login>5ee826f5ce1f3d352aa6bf8fc885fadf3cbdfca0</sonar.login>
     	<sonar.host.url>http://192.168.32.52:9000/</sonar.host.url>
 		<!-- ↑添加代码质量检查↑ -->
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<org.mapstruct.extensions.spring.version>0.0.3</org.mapstruct.extensions.spring.version>
+		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -98,23 +99,6 @@
 	        		<skip>true</skip>
 	        	</configuration>
 	        </plugin>
-	        <!-- <plugin>
-	        	<artifactId>maven-compiler-plugin</artifactId>
-	        	<configuration>
-	        		<annotationProcessorPaths>
-	        			<annotationProcessorPath>
-		        			<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-        					<version>${lombok.version}</version>
-	        			</annotationProcessorPath>
-	        			<annotationProcessorPath>
-		        			<groupId>org.mapstruct</groupId>
-	                        <artifactId>mapstruct-processor</artifactId>
-	                        <version>${org.mapstruct.version}</version>
-	        			</annotationProcessorPath>
-	        		</annotationProcessorPaths>
-	        	</configuration>
-	        </plugin> -->
 			<plugin>
 			    <groupId>com.mysema.maven</groupId>
 			    <artifactId>apt-maven-plugin</artifactId>
