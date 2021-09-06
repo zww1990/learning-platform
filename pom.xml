@@ -20,7 +20,6 @@
     	<sonar.host.url>http://192.168.32.52:9000/</sonar.host.url>
 		<!-- ↑添加代码质量检查↑ -->
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-		<org.mapstruct.extensions.spring.version>0.0.3</org.mapstruct.extensions.spring.version>
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
