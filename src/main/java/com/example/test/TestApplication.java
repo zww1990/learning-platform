@@ -1,9 +1,16 @@
 package com.example.test;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import com.example.test.model.ApplicationProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @EnableRetry
 @SpringBootApplication
 @Slf4j
+@EnableWebMvc
+@EnableAutoConfiguration
+@EnableConfigurationProperties(ApplicationProperties.class)
 public class TestApplication {
 
 	/**
@@ -28,4 +38,8 @@ public class TestApplication {
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 	}
 
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
 }
