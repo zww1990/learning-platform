@@ -1,1 +1,11 @@
+server:
+  servlet:
+    jsp:
+      registered: false
+spring:
+  main:
+    web-application-type: servlet
 
+app:
+  user-login-url: http://192.168.32.38:8081/oauth/user/login
+  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
