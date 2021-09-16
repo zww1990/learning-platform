@@ -44,18 +44,16 @@ public class HelloController {
 	@Resource
 	private ApplicationProperties properties;
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping("/userLoginAndStaffClock")
 	public ResponseBody userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		ResponseEntity<Map> userLoginResponse = this.restTemplate.postForEntity(this.properties.getUserLoginUrl(),
-				new HttpEntity<>(userLogin, headers), Map.class);
+		ResponseEntity<ResponseBody> userLoginResponse = this.restTemplate.postForEntity(
+				this.properties.getUserLoginUrl(), new HttpEntity<>(userLogin, headers), ResponseBody.class);
 		List<String> tokens = userLoginResponse.getHeaders().get("token");
 		if (CollectionUtils.isEmpty(tokens)) {
-			return new ResponseBody().setCode(HttpStatus.UNAUTHORIZED.value()).setStatus(0)
-					.setMessage(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+			return userLoginResponse.getBody();
 		}
 		String token = tokens.get(0);
 		log.info("token={}", token);
@@ -80,6 +78,9 @@ public class HelloController {
 				this.properties.getStaffClockUrl(), new HttpEntity<>(staffClock, headers), ResponseBody.class);
 		ResponseBody body = staffClockResponse.getBody();
 		log.info("{}", body);
+		if (body.getStatus() == 1) {
+			body.setMessage("打卡成功");
+		}
 		return body;
 	}
 }
