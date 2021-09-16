@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import cn.net.yzl.oa.util.AESUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,7 +34,7 @@ public class AppStaffClockVO {
 
 	private String remark;
 
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@JsonFormat(pattern = AESUtil.FORMAT, timezone = AESUtil.TIMEZONE)
 	private Date clockTime;
 	private String address;
 

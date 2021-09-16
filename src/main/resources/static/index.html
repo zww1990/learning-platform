@@ -14,13 +14,16 @@
 			<v-app>
 			  <v-main>
 				<v-container>
-				  <v-row>
-			          <template v-for="(user, i) in users">
-			            <v-col :key="i" class="mt-2" cols="12">
-			              <v-btn depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
-			            </v-col>
-			          </template>
-		          </v-row>
+		          <template v-for="(user, i) in users">
+					  <v-row>
+				            <v-col class="mt-2" cols="1">
+				              <v-btn large depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
+				            </v-col>
+				            <v-col md="2" cols="1" v-if="user.type != null">
+				              <v-alert :type="user.type">{{user.message}} , {{user.data}}</v-alert>
+				            </v-col>
+			          </v-row>
+		          </template>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -36,12 +39,12 @@
 			}),
 			data:{
 				users: [
-					{userNo:'100230',password:'123456',username:'张维维'},
-					{userNo:'100245',password:'123456',username:'王哲'},
-					{userNo:'100232',password:'123456',username:'李米盛'},
-					{userNo:'100627',password:'123456',username:'关晓鹏'},
-					{userNo:'100226',password:'123456',username:'刘常富'},
-					{userNo:'100246',password:'123456',username:'李贺彦'},
+					{userNo:'100230',password:'123456',username:'张维维',type:null,message:'',data:''},
+					{userNo:'100245',password:'123456',username:'王哲',type:null,message:'',data:''},
+					{userNo:'100232',password:'123456',username:'李米盛',type:null,message:'',data:''},
+					{userNo:'100627',password:'123456',username:'关晓鹏',type:null,message:'',data:''},
+					{userNo:'100226',password:'123456',username:'刘常富',type:null,message:'',data:''},
+					{userNo:'100246',password:'123456',username:'李贺彦',type:null,message:'',data:''},
 				],
 			},
 			methods: {
@@ -56,11 +59,15 @@
 						}).then(res => res.json())
 						.catch(err => {
 							console.error('Error:', err);
-							alert(err.message);
+							user.type='error';
+							user.message=err.message;
+							user.data='';
 						})
 						.then(res => {
 							console.log('Success:', res);
-							alert(res.message);
+							user.type='success';
+							user.message=res.message;
+							user.data=res.data;
 						});
 				}
 		    }

@@ -28,6 +28,7 @@ public class AESUtil {
 
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
+	public static final String TIMEZONE = "GMT+8";
 	private static final Pattern pattern = Pattern.compile("&");
 	private static final String key = "yzl_staff&oa#514";
 

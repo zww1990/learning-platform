@@ -1,6 +1,5 @@
 package com.example.test.controller;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +46,12 @@ public class HelloController {
 
 	@PostMapping("/userLoginAndStaffClock")
 	public ResponseBody userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
+		if (!StringUtils.hasText(userLogin.getUserNo())) {
+			return new ResponseBody().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getPassword())) {
+			return new ResponseBody().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[password]不能为空");
+		}
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -60,10 +66,10 @@ public class HelloController {
 		headers.set("token", token);
 		Map<String, String> staffClock = new HashMap<>();
 		LocalDateTime now = LocalDateTime.now()
-		//.minusMinutes(1)
+		// .minusMinutes(1)
 		;
-		AppStaffClockVO vo = new AppStaffClockVO().setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)")
-				.setLatitude(BigDecimal.valueOf(39.9803540)).setLongitude(BigDecimal.valueOf(116.3689370))
+		AppStaffClockVO vo = new AppStaffClockVO().setAddress(this.properties.getAddress())
+				.setLatitude(this.properties.getLatitude()).setLongitude(this.properties.getLongitude())
 				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
 						now.format(DateTimeFormatter.ofPattern(AESUtil.FORMAT)))))
 				.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
