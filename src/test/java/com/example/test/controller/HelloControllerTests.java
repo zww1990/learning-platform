@@ -13,18 +13,20 @@ public class HelloControllerTests {
 	private HelloController controller;
 
 	@Test
-	public void testIndex() {
+	public void testUserLoginAndStaffClock() {
 		try {
-			System.err.println(this.controller.index(new UserLogin().setUserNo("6666").setPassword("123456")));
+			System.err.println(
+					this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("6666").setPassword("123456")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Test
-	public void testIndex2() {
+	public void testUserLoginAndStaffClock2() {
 		try {
-			System.err.println(this.controller.index(new UserLogin().setUserNo("9999").setPassword("123456")));
+			System.err.println(
+					this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("9999").setPassword("123456")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
