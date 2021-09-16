@@ -14,11 +14,13 @@
 			<v-app>
 			  <v-main>
 				<v-container>
-				  <v-carousel cycle interval="3000" height="100%" hide-delimiter-background hide-delimiters show-arrows-on-hover progress>
-					<v-carousel-item v-for="(slide, i) in slides" :key="i">
-					  <v-img :src="slide" aspect-ratio="1.7" contain></v-img>
-					</v-carousel-item>
-				  </v-carousel>
+				  <v-row>
+			          <template v-for="(user, i) in users">
+			            <v-col :key="i" class="mt-2" cols="12">
+			              <v-btn depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
+			            </v-col>
+			          </template>
+		          </v-row>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -27,24 +29,39 @@
 	<script src="vue/vue.min.js"></script>
 	<script src="vuetify/vuetify.min.js"></script>
 	<script type="text/javascript">
-		document.getElementById('mojito').play();
-		document.addEventListener("WeixinJSBridgeReady", function () { 
-			document.getElementById('mojito').play();
-		}, false);
 		new Vue({
 			el:'#app',
 			vuetify: new Vuetify({
 				theme: { dark: true },
 			}),
 			data:{
-				slides: [
+				users: [
+					{userNo:'100230',password:'123456',username:'张维维'},
+					{userNo:'100245',password:'123456',username:'王哲'},
+					{userNo:'100232',password:'123456',username:'李米盛'},
+					{userNo:'100627',password:'123456',username:'关晓鹏'},
+					{userNo:'100226',password:'123456',username:'刘常富'},
+					{userNo:'100246',password:'123456',username:'李贺彦'},
 				],
-				transitions:[
-				]
 			},
 			methods: {
-				getTransition () {
-				  return this.transitions[Math.random() * this.transitions.length | 0];
+				clickme(index){
+					let user=this.users[index];
+					fetch('/hello/userLoginAndStaffClock', {
+						  method: 'POST',
+						  body: JSON.stringify(user),
+						  headers: new Headers({
+						    'Content-Type': 'application/json'
+						  })
+						}).then(res => res.json())
+						.catch(err => {
+							console.error('Error:', err);
+							alert(err.message);
+						})
+						.then(res => {
+							console.log('Success:', res);
+							alert(res.message);
+						});
 				}
 		    }
 		})
