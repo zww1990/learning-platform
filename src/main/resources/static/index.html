@@ -65,7 +65,7 @@
 						})
 						.then(res => {
 							console.log('Success:', res);
-							user.type='success';
+							user.type = res.status === 1 ? 'success' : 'error';
 							user.message=res.message;
 							user.data=res.data;
 						});
