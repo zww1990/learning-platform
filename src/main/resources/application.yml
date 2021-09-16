@@ -12,8 +12,8 @@ app:
 #  user-login-url: http://192.168.32.38:8081/oauth/user/login
 #  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
 #  生产环境
-  user-login-url: http://10.128.8.10:38081/oauth/user/login
-  staff-clock-url: http://10.128.8.69:19080/appStaffClockLog/staffClock
+  user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
+  staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
   address: 北京市海淀区花园东路11号
   longitude: 116.3690760
   latitude: 39.9802720

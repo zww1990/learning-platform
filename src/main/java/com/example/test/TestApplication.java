@@ -1,5 +1,8 @@
 package com.example.test;
 
+import javax.annotation.Resource;
+
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @EnableAutoConfiguration
 @EnableConfigurationProperties(ApplicationProperties.class)
-public class TestApplication {
+public class TestApplication implements CommandLineRunner {
 
 	/**
 	 * @param args
@@ -39,5 +42,13 @@ public class TestApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+
+	@Resource
+	private ApplicationProperties properties;
+
+	@Override
+	public void run(String... args) throws Exception {
+		log.info("{}", this.properties);
 	}
 }
