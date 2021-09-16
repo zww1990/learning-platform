@@ -59,7 +59,9 @@ public class HelloController {
 		log.info("token={}", token);
 		headers.set("token", token);
 		Map<String, String> staffClock = new HashMap<>();
-		LocalDateTime now = LocalDateTime.now().minusMinutes(1);
+		LocalDateTime now = LocalDateTime.now()
+		//.minusMinutes(1)
+		;
 		AppStaffClockVO vo = new AppStaffClockVO().setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)")
 				.setLatitude(BigDecimal.valueOf(39.9803540)).setLongitude(BigDecimal.valueOf(116.3689370))
 				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
