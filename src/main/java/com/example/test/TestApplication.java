@@ -8,7 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.example.test.model.ApplicationProperties;
 
@@ -23,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 @EnableRetry
 @SpringBootApplication
 @Slf4j
-@EnableWebMvc
 @EnableAutoConfiguration
 @EnableConfigurationProperties(ApplicationProperties.class)
 public class TestApplication {

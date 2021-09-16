@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -33,6 +34,7 @@ import cn.net.yzl.oa.util.AESUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@RequestMapping("/hello")
 @Slf4j
 public class HelloController {
 	@Resource
@@ -43,8 +45,8 @@ public class HelloController {
 	private ApplicationProperties properties;
 
 	@SuppressWarnings("rawtypes")
-	@PostMapping({ "", "/" })
-	public ResponseBody index(@RequestBody UserLogin userLogin) {
+	@PostMapping("/userLoginAndStaffClock")
+	public ResponseBody userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
