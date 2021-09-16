@@ -1,4 +1,5 @@
 server:
+  port: 8080
   servlet:
     jsp:
       registered: false
@@ -7,5 +8,9 @@ spring:
     web-application-type: servlet
 
 app:
-  user-login-url: http://192.168.32.38:8081/oauth/user/login
-  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
+#  测试环境
+#  user-login-url: http://192.168.32.38:8081/oauth/user/login
+#  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
+#  生产环境
+  user-login-url: http://10.128.8.10:38081/oauth/user/login
+  staff-clock-url: http://10.128.8.69:19080/appStaffClockLog/staffClock
