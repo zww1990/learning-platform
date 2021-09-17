@@ -4,12 +4,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.naming.Name;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
+
+import org.gitlab4j.api.GitLabApi;
+import org.gitlab4j.api.GitLabApiException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ldap.core.LdapTemplate;
@@ -20,6 +26,7 @@ import org.springframework.ldap.support.LdapUtils;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
 import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
@@ -33,6 +40,7 @@ import com.stampede.changepwd.util.LdapPasswordUtils;
  */
 @Service
 public class PersonService {
+	private static final Logger log = LoggerFactory.getLogger(PersonService.class);
 	@Resource
 	private PersonRepository personRepository;
 	@Resource
@@ -59,6 +67,7 @@ public class PersonService {
 
 	/**
 	 * 更新用户密码，并向用户发送邮件。
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020年2月17日,下午7:15:18
 	 * @param param 用户密码参数类
@@ -104,6 +113,7 @@ public class PersonService {
 
 	/**
 	 * 删除人员数据
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020-8-10,14:07:32
 	 * @param p 人员数据模型
@@ -114,9 +124,10 @@ public class PersonService {
 
 	/**
 	 * 发送邮件
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,上午10:25:25
-	 * @param person 人员数据模型
+	 * @param person  人员数据模型
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMail(Person person, String webPath) {
@@ -138,9 +149,10 @@ public class PersonService {
 
 	/**
 	 * 管理员发送邮件
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020年2月27日,上午10:04:57
-	 * @param person 人员数据模型
+	 * @param person  人员数据模型
 	 * @param webPath web应用访问路径
 	 */
 	public void sendMailForAdmin(Person person, String webPath) {
@@ -160,12 +172,13 @@ public class PersonService {
 		attr.put("gidNumber", person.getGidNumber());
 		attr.put("homeDirectory", person.getHomeDirectory());
 		attr.put("userPassword", this.properties.getDefaultPassword());
-		//存储到ldap中
+		// 存储到ldap中
 		this.ldapTemplate.bind(dn, null, attr);
-		
-		//登录jira进行账户激活
-		//登录gitlab进行账户激活
-		
+
+		// 登录jira进行账户激活
+		// 登录gitlab进行账户激活
+		this.activateGitlabAccount(person);
+
 		String url = String.format("%s/person/resetpage?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();
@@ -181,6 +194,30 @@ public class PersonService {
 			throw new RuntimeException(e);
 		}
 		this.javaMailSender.send(message);
+	}
+
+	/**
+	 * 登录gitlab进行账户激活
+	 * 
+	 * @param person {@link Person}
+	 */
+	private void activateGitlabAccount(Person person) {
+		try {
+			GitLabApi api = GitLabApi.oauth2Login(this.properties.getGitlabUrl(), person.getUid(),
+					this.properties.getDefaultPassword());
+			Optional.ofNullable(api).map(GitLabApi::getUserApi).map(m -> {
+				try {
+					return m.getCurrentUser();
+				} catch (GitLabApiException e) {
+					log.error("激活gitlab账号失败", e);
+					return null;
+				}
+			}).ifPresent(c -> {
+				log.info("成功激活gitlab账号>>>{}", c);
+			});
+		} catch (GitLabApiException e) {
+			log.error("激活gitlab账号失败", e);
+		}
 	}
 
 	/**
