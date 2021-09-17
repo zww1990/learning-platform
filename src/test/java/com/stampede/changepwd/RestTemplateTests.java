@@ -32,4 +32,27 @@ public class RestTemplateTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testLogin() {
+		try {
+			RestTemplate template = new RestTemplate();
+			String url = "http://jira.bacic5i5j.com/login.jsp";
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+			MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+			String username = "siqianwen";
+			String password = "ainilaoma1234A";
+			String csrfparam = "atl_token";
+			String csrftoken = "BQGQ-TC3R-4ZZG-69BY|7d44d70346b552696d6866cd754a9c22867005e7|lin";
+			data.add("os_username", username);
+			data.add("os_password", password);
+			data.add(csrfparam, csrftoken);
+			HttpEntity<Object> request = new HttpEntity<Object>(data, headers);
+			ResponseEntity<String> post = template.postForEntity(url, request, String.class);
+			System.err.println(post);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

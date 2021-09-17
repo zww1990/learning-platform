@@ -108,3 +108,5 @@ changepwd:
   default-password: 20210915
   #gitlab地址
   gitlab-url: http://gitlab.it.5i5j.com/
+  #jira地址
+  jira-url: http://jira.bacic5i5j.com/

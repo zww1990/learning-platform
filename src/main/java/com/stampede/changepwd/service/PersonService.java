@@ -1,5 +1,6 @@
 package com.stampede.changepwd.service;
 
+import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +14,8 @@ import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
 
 import org.gitlab4j.api.GitLabApi;
-import org.gitlab4j.api.GitLabApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
@@ -27,6 +26,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.atlassian.jira.rest.client.api.JiraRestClient;
+import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
+import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
 import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
@@ -176,6 +178,7 @@ public class PersonService {
 		this.ldapTemplate.bind(dn, null, attr);
 
 		// 登录jira进行账户激活
+		this.activateJiraAccount(person);
 		// 登录gitlab进行账户激活
 		this.activateGitlabAccount(person);
 
@@ -197,25 +200,39 @@ public class PersonService {
 	}
 
 	/**
+	 * 登录jira进行账户激活
+	 * 
+	 * @param person {@link Person}
+	 */
+	private void activateJiraAccount(Person person) {
+		JiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
+		try (JiraRestClient client = factory.createWithBasicHttpAuthentication(URI.create(this.properties.getJiraUrl()),
+				person.getUid(), this.properties.getDefaultPassword())) {
+			log.info("成功激活jira账号>>>{}", client.getUserClient().getUser(person.getUid()).get());
+		} catch (Exception e) {
+			log.error("激活jira账号失败", e);
+		}
+	}
+
+	/**
 	 * 登录gitlab进行账户激活
 	 * 
 	 * @param person {@link Person}
 	 */
 	private void activateGitlabAccount(Person person) {
-		try {
-			GitLabApi api = GitLabApi.oauth2Login(this.properties.getGitlabUrl(), person.getUid(),
-					this.properties.getDefaultPassword());
+		try (GitLabApi api = GitLabApi.oauth2Login(this.properties.getGitlabUrl(), person.getUid(),
+				this.properties.getDefaultPassword())) {
 			Optional.ofNullable(api).map(GitLabApi::getUserApi).map(m -> {
 				try {
 					return m.getCurrentUser();
-				} catch (GitLabApiException e) {
+				} catch (Exception e) {
 					log.error("激活gitlab账号失败", e);
 					return null;
 				}
 			}).ifPresent(c -> {
 				log.info("成功激活gitlab账号>>>{}", c);
 			});
-		} catch (GitLabApiException e) {
+		} catch (Exception e) {
 			log.error("激活gitlab账号失败", e);
 		}
 	}
@@ -230,7 +247,8 @@ public class PersonService {
 		try {
 			String sql = "SELECT user_name, comp_email FROM bdm_user WHERE user_id = ? and comp_email is not null";
 			return this.jdbcTemplate.queryForMap(sql, userId);
-		} catch (IncorrectResultSizeDataAccessException e) {
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
 			return new HashMap<>();
 		}
 	}

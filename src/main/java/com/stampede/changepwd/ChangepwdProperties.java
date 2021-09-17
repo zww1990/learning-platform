@@ -33,6 +33,18 @@ public class ChangepwdProperties {
 	 * gitlab地址
 	 */
 	private String gitlabUrl = "http://gitlab.it.5i5j.com/";
+	/**
+	 * jira地址
+	 */
+	private String jiraUrl = "http://jira.bacic5i5j.com/";
+
+	public String getJiraUrl() {
+		return jiraUrl;
+	}
+
+	public void setJiraUrl(String jiraUrl) {
+		this.jiraUrl = jiraUrl;
+	}
 
 	public String getGitlabUrl() {
 		return gitlabUrl;
