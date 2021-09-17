@@ -159,8 +159,13 @@ public class PersonService {
 		attr.put("uidNumber", person.getUidNumber());
 		attr.put("gidNumber", person.getGidNumber());
 		attr.put("homeDirectory", person.getHomeDirectory());
-		attr.put("userPassword", "[none]");
+		attr.put("userPassword", this.properties.getDefaultPassword());
+		//存储到ldap中
 		this.ldapTemplate.bind(dn, null, attr);
+		
+		//登录jira进行账户激活
+		//登录gitlab进行账户激活
+		
 		String url = String.format("%s/person/resetpage?token=%s", webPath,
 				LdapPasswordUtils.jwtEncode(person.getUid(), this.properties.getCreate().getExpiration()));
 		MimeMessage message = this.javaMailSender.createMimeMessage();

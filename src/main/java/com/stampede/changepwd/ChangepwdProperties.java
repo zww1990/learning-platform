@@ -25,6 +25,18 @@ public class ChangepwdProperties {
 	private PersonJob second = new PersonJob();
 	@NestedConfigurationProperty
 	private PersonJob third = new PersonJob();
+	/**
+	 * 初始化默认密码
+	 */
+	private String defaultPassword = "[none]";
+
+	public String getDefaultPassword() {
+		return defaultPassword;
+	}
+
+	public void setDefaultPassword(String defaultPassword) {
+		this.defaultPassword = defaultPassword;
+	}
 
 	public FromSubjectText getCreate() {
 		return create;
