@@ -29,6 +29,18 @@ public class ChangepwdProperties {
 	 * 初始化默认密码
 	 */
 	private String defaultPassword = "[none]";
+	/**
+	 * gitlab地址
+	 */
+	private String gitlabUrl = "http://gitlab.it.5i5j.com/";
+
+	public String getGitlabUrl() {
+		return gitlabUrl;
+	}
+
+	public void setGitlabUrl(String gitlabUrl) {
+		this.gitlabUrl = gitlabUrl;
+	}
 
 	public String getDefaultPassword() {
 		return defaultPassword;
