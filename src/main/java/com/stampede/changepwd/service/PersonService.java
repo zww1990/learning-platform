@@ -26,9 +26,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.atlassian.httpclient.api.Response;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
-import com.atlassian.jira.rest.client.api.JiraRestClientFactory;
+import com.atlassian.jira.rest.client.auth.BasicHttpAuthenticationHandler;
+import com.atlassian.jira.rest.client.internal.async.AsynchronousHttpClientFactory;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
+import com.atlassian.jira.rest.client.internal.async.DisposableHttpClient;
 import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
@@ -205,10 +208,33 @@ public class PersonService {
 	 * @param person {@link Person}
 	 */
 	private void activateJiraAccount(Person person) {
-		JiraRestClientFactory factory = new AsynchronousJiraRestClientFactory();
-		try (JiraRestClient client = factory.createWithBasicHttpAuthentication(URI.create(this.properties.getJiraUrl()),
-				person.getUid(), this.properties.getDefaultPassword())) {
-			log.info("成功激活jira账号>>>{}", client.getUserClient().getUser(person.getUid()).get());
+		// 在登录jira之前，需要进行ldap同步到jira中
+		DisposableHttpClient dhClient = null;
+		try {
+			dhClient = new AsynchronousHttpClientFactory().createClient(URI.create(this.properties.getJiraUrl()),
+					new BasicHttpAuthenticationHandler(this.properties.getJiraAdminUsername(),
+							this.properties.getJiraAdminPassword()));
+			Response response = dhClient.newRequest(this.properties.getJiraSyncUrl()).get().get();
+			if (response.isError()) {
+				log.error("用户目录[ldap ==>> jira]同步失败 >>> {}", response.getStatusText());
+				return;
+			}
+			log.info("用户目录[ldap ==>> jira]同步成功 >>> {}", response.getStatusText());
+		} catch (Exception e) {
+			log.error("用户目录[ldap ==>> jira]同步失败", e);
+		} finally {
+			Optional.ofNullable(dhClient).ifPresent(c -> {
+				try {
+					c.destroy();
+				} catch (Exception e) {
+					log.error("对象[dhClient]不能正常释放资源", e);
+				}
+			});
+		}
+		// 账号同步之后，再进行登录激活
+		try (JiraRestClient jrClient = new AsynchronousJiraRestClientFactory().createWithBasicHttpAuthentication(
+				URI.create(this.properties.getJiraUrl()), person.getUid(), this.properties.getDefaultPassword())) {
+			log.info("成功激活jira账号>>>{}", jrClient.getUserClient().getUser(person.getUid()).get());
 		} catch (Exception e) {
 			log.error("激活jira账号失败", e);
 		}

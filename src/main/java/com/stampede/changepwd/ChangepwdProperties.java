@@ -37,29 +37,65 @@ public class ChangepwdProperties {
 	 * jira地址
 	 */
 	private String jiraUrl = "http://jira.bacic5i5j.com/";
+	/**
+	 * jira管理员用户
+	 */
+	private String jiraAdminUsername = "siqianwen";
+	/**
+	 * jira管理员密码
+	 */
+	private String jiraAdminPassword = "ainilaoma1234A";
+	/**
+	 * jira用户目录同步地址
+	 */
+	private String jiraSyncUrl = this.jiraUrl + "rest/crowd/1/directory/10000";
 
-	public String getJiraUrl() {
-		return jiraUrl;
-	}
-
-	public void setJiraUrl(String jiraUrl) {
-		this.jiraUrl = jiraUrl;
+	public String getDefaultPassword() {
+		return defaultPassword;
 	}
 
 	public String getGitlabUrl() {
 		return gitlabUrl;
 	}
 
-	public void setGitlabUrl(String gitlabUrl) {
-		this.gitlabUrl = gitlabUrl;
+	public String getJiraUrl() {
+		return jiraUrl;
 	}
 
-	public String getDefaultPassword() {
-		return defaultPassword;
+	public String getJiraAdminUsername() {
+		return jiraAdminUsername;
+	}
+
+	public String getJiraAdminPassword() {
+		return jiraAdminPassword;
+	}
+
+	public String getJiraSyncUrl() {
+		return jiraSyncUrl;
 	}
 
 	public void setDefaultPassword(String defaultPassword) {
 		this.defaultPassword = defaultPassword;
+	}
+
+	public void setGitlabUrl(String gitlabUrl) {
+		this.gitlabUrl = gitlabUrl;
+	}
+
+	public void setJiraUrl(String jiraUrl) {
+		this.jiraUrl = jiraUrl;
+	}
+
+	public void setJiraAdminUsername(String jiraAdminUsername) {
+		this.jiraAdminUsername = jiraAdminUsername;
+	}
+
+	public void setJiraAdminPassword(String jiraAdminPassword) {
+		this.jiraAdminPassword = jiraAdminPassword;
+	}
+
+	public void setJiraSyncUrl(String jiraSyncUrl) {
+		this.jiraSyncUrl = jiraSyncUrl;
 	}
 
 	public FromSubjectText getCreate() {
