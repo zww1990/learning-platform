@@ -5,18 +5,17 @@ import javax.naming.Name;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.support.LdapUtils;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import com.stampede.changepwd.util.LdapPasswordUtils;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class LdapTemplateTests {
 	@Resource
