@@ -147,8 +147,8 @@
 		        $('#uidNumber').on('input propertychange',$.debounce(500,queryuser));
 		        $('#querywaibao').click(function(){
 		        	let _this=$('#uid');
-		        	$.get('[[${#request.contextPath}]]/admin/querywaibao',{},function(data){
-		        		$('#uidNumber').val(data.waibaoId);
+		        	$.get('[[${#request.contextPath}]]/admin/querywaibao',{},function(resp){
+		        		$('#uidNumber').val(resp.data);
 						$('#givenName').val('');
 						$('#mail').val('');
 						_this.val('');
