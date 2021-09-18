@@ -43,12 +43,14 @@ public class AdminController {
 	 */
 	@GetMapping
 	public ModelAndView admin() {
-		return new ModelAndView("admin/sendpage").addObject("image", Constants.randomImage());
+		return new ModelAndView("admin/sendpage")//
+				.addObject("image", Constants.randomImage());
 	}
 
 	@GetMapping("/sendsuccess")
 	public ModelAndView sendSuccess() {
-		return new ModelAndView("admin/sendsuccess").addObject("image", Constants.randomImage());
+		return new ModelAndView("admin/sendsuccess")//
+				.addObject("image", Constants.randomImage());
 	}
 
 	@GetMapping("/checkuid")
@@ -87,7 +89,8 @@ public class AdminController {
 	@PostMapping("/sendmail")
 	public Object sendMail(@ModelAttribute Person param, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		ModelAndView mav = new ModelAndView("admin/sendpage").addObject("image", Constants.randomImage());
+		ModelAndView mav = new ModelAndView("admin/sendpage")//
+				.addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUid())) {
 			return mav.addObject("message", "请输入uid！");
 		}
