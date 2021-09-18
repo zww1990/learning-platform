@@ -7,23 +7,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+
 import com.stampede.changepwd.ChangepwdProperties;
 import com.stampede.changepwd.ChangepwdProperties.PersonJob;
 import com.stampede.changepwd.domain.Person;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhangWeiWei
  * @date 2020-8-6,13:42:13
  * @description 针对控股入职的员工，创建LDAP账号，并发送邮件通知。
  */
+@Slf4j
 public class PersonJobService {
-	private static final Logger log = LoggerFactory.getLogger(PersonJobService.class);
 	@Resource
 	private ChangepwdProperties properties;
 	@Resource
@@ -58,7 +61,7 @@ public class PersonJobService {
 			log.info("没有查询到符合条件的记录。");
 			return;
 		}
-		list.stream().forEach(map -> {
+		list.forEach(map -> {
 			log.info("{}", map);
 			String uidNumber = map.get("USER_ID").toString();
 			String givenName = map.get("USER_NAME").toString();
@@ -69,7 +72,12 @@ public class PersonJobService {
 			} else if (this.personService.findByUidNumber(uidNumber).isPresent()) {
 				log.warn("该uidNumber={}已存在！", uidNumber);
 			} else {
-				Person p = new Person(uid, givenName, "501", uidNumber, mail);
+				Person p = new Person()//
+						.setUid(uid)//
+						.setGivenName(givenName)//
+						.setGidNumber("501")//
+						.setUidNumber(uidNumber)//
+						.setMail(mail);
 				this.personService.sendMailForAdmin(p, webPath);
 				log.info("定时任务>>>账号[{}]已创建，邮件已发至邮箱[{}]", uid, mail);
 			}
@@ -87,7 +95,7 @@ public class PersonJobService {
 			log.info("没有查询到符合条件的记录。");
 			return;
 		}
-		list.stream().forEach(uid -> this.personService.findByUidNumber(uid).ifPresent(p -> {
+		list.forEach(uid -> this.personService.findByUidNumber(uid).ifPresent(p -> {
 			this.personService.delete(p);
 			log.info("员工[{}]已离职，LDAP账号[{}]已删除", p.getUidNumber(), p.getUid());
 		}));
