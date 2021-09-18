@@ -1,8 +1,10 @@
 package com.stampede.changepwd.controller;
 
 import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.service.PersonService;
 import com.stampede.changepwd.util.LdapPasswordUtils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -39,7 +43,8 @@ public class PersonController {
 	 */
 	@PostMapping("/update")
 	public Object update(@ModelAttribute PersonParam param) {
-		ModelAndView mav = new ModelAndView("index").addObject("image", Constants.randomImage());
+		ModelAndView mav = new ModelAndView("index")//
+				.addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
 		}
@@ -93,7 +98,8 @@ public class PersonController {
 	 */
 	@GetMapping("/updatesuccess")
 	public ModelAndView updateSuccess() {
-		return new ModelAndView("person/updatesuccess").addObject("image", Constants.randomImage());
+		return new ModelAndView("person/updatesuccess")//
+				.addObject("image", Constants.randomImage());
 	}
 
 	/**
@@ -103,19 +109,21 @@ public class PersonController {
 	 */
 	@GetMapping("/emailpage")
 	public ModelAndView emailPage() {
-		return new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
+		return new ModelAndView("person/emailpage")//
+				.addObject("image", Constants.randomImage());
 	}
 
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,上午9:42:17
-	 * @param param 用户密码参数类
+	 * @param param   用户密码参数类
 	 * @param request HTTP请求
 	 * @return 忘记密码-发送邮件
 	 */
 	@PostMapping("/sendmail")
 	public ModelAndView sendMail(@ModelAttribute PersonParam param, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("person/emailpage").addObject("image", Constants.randomImage());
+		ModelAndView mav = new ModelAndView("person/emailpage")//
+				.addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
 		}
@@ -140,7 +148,8 @@ public class PersonController {
 	public ModelAndView resetPage(@RequestParam String token) {
 		try {
 			Claims body = LdapPasswordUtils.jwtDecode(token);
-			return new ModelAndView("person/resetpage").addObject("image", Constants.randomImage())
+			return new ModelAndView("person/resetpage")//
+					.addObject("image", Constants.randomImage())//
 					.addObject("username", body.getSubject());
 		} catch (ExpiredJwtException e) {
 			throw new RuntimeException("密码重置链接已失效！");
@@ -155,7 +164,8 @@ public class PersonController {
 	 */
 	@PostMapping("/reset")
 	public Object reset(@ModelAttribute PersonParam param) {
-		ModelAndView mav = new ModelAndView("person/resetpage").addObject("image", Constants.randomImage());
+		ModelAndView mav = new ModelAndView("person/resetpage")//
+				.addObject("image", Constants.randomImage());
 		if (!StringUtils.hasText(param.getUsername())) {
 			return mav.addObject("message", "请输入用户名！");
 		}
