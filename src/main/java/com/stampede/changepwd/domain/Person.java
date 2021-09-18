@@ -1,11 +1,17 @@
 package com.stampede.changepwd.domain;
 
 import javax.naming.Name;
+
 import org.springframework.ldap.odm.annotations.Attribute;
 import org.springframework.ldap.odm.annotations.Entry;
 import org.springframework.ldap.odm.annotations.Id;
 import org.springframework.ldap.odm.annotations.Transient;
 import org.springframework.util.StringUtils;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * @author ZhangWeiWei
@@ -13,195 +19,120 @@ import org.springframework.util.StringUtils;
  * @description 人员数据模型
  */
 @Entry(objectClasses = { "inetOrgPerson", "posixAccount", "top" })
+@ToString
+@Setter
+@Getter
+@Accessors(chain = true)
 public class Person {
+	/**
+	 * 此注释将Java字段标记为包含LDAP条目的专有名称。
+	 */
 	@Id
 	private Name id;
+	/**
+	 * 主键
+	 */
 	@Attribute(name = "uid")
 	private String uid;
+	/**
+	 * 主键
+	 */
 	@Attribute(name = "cn")
 	private String cname;
+	/**
+	 * 主键
+	 */
 	@Attribute(name = "sn")
 	private String sname;
+	/**
+	 * 中文名称
+	 */
 	@Attribute(name = "givenname")
 	private String givenName;
+	/**
+	 * 数字序列
+	 */
 	@Attribute(name = "gidnumber")
 	private String gidNumber;
+	/**
+	 * HR系统员工编号
+	 */
 	@Attribute(name = "uidnumber")
 	private String uidNumber;
+	/**
+	 * 电子邮箱
+	 */
 	@Attribute(name = "mail")
 	private String mail;
+	/**
+	 * 密码
+	 */
 	@Attribute(name = "userpassword")
 	private String userPassword;
 	@Transient
 	private String homeDirectory = "/home/users/";
-	@Transient
-	private String mailPrefix;
-	@Transient
-	private String mailSuffix;
-
-	public Person() {
-		super();
-	}
-
-	public Person(String uid, String givenName, String gidNumber, String uidNumber, String mail) {
-		super();
-		this.uid = uid;
-		this.givenName = givenName;
-		this.gidNumber = gidNumber;
-		this.uidNumber = uidNumber;
-		this.mail = mail;
-	}
-
-	public String getMailPrefix() {
-		return mailPrefix;
-	}
-
-	public String getMailSuffix() {
-		return mailSuffix;
-	}
-
-	public void setMailPrefix(String mailPrefix) {
-		this.mailPrefix = mailPrefix;
-	}
-
-	public void setMailSuffix(String mailSuffix) {
-		this.mailSuffix = mailSuffix;
-	}
 
 	public String getHomeDirectory() {
-		if (StringUtils.hasText(this.uid)) {
-			homeDirectory += this.uid;
+		if (StringUtils.hasText(this.getUid())) {
+			homeDirectory += this.getUid();
 		}
 		return homeDirectory;
-	}
-
-	public void setHomeDirectory(String homeDirectory) {
-		this.homeDirectory = homeDirectory;
-	}
-
-	/**
-	 * @return 此注释将Java字段标记为包含LDAP条目的专有名称。
-	 */
-	public Name getId() {
-		return id;
 	}
 
 	/**
 	 * @return 主键
 	 */
 	public String getUid() {
-		return uid;
+		return uid.trim();
 	}
 
 	/**
 	 * @see #getUid()
 	 */
 	public String getCname() {
-		return cname;
+		return cname.trim();
 	}
 
 	/**
 	 * @see #getUid()
 	 */
 	public String getSname() {
-		return sname;
+		return sname.trim();
 	}
 
 	/**
 	 * @return 中文名称
 	 */
 	public String getGivenName() {
-		return givenName;
+		return givenName.trim();
 	}
 
 	/**
 	 * @return 数字序列
 	 */
 	public String getGidNumber() {
-		return gidNumber;
+		return gidNumber.trim();
 	}
 
 	/**
 	 * @return HR系统员工编号
 	 */
 	public String getUidNumber() {
-		return uidNumber;
+		return uidNumber.trim();
 	}
 
 	/**
 	 * @return 电子邮箱
 	 */
 	public String getMail() {
-		return mail;
+		return mail.trim();
 	}
 
 	/**
 	 * @return 密码
 	 */
 	public String getUserPassword() {
-		return userPassword;
+		return userPassword.trim();
 	}
 
-	/**
-	 * @param id 此注释将Java字段标记为包含LDAP条目的专有名称。
-	 */
-	public void setId(Name id) {
-		this.id = id;
-	}
-
-	/**
-	 * @param uid 主键
-	 */
-	public void setUid(String uid) {
-		this.uid = uid;
-	}
-
-	/**
-	 * @see #setUid(String)
-	 */
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
-	/**
-	 * @see #setUid(String)
-	 */
-	public void setSname(String sname) {
-		this.sname = sname;
-	}
-
-	/**
-	 * @param givenName 中文名称
-	 */
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
-	}
-
-	/**
-	 * @param gidNumber 数字序列
-	 */
-	public void setGidNumber(String gidNumber) {
-		this.gidNumber = gidNumber;
-	}
-
-	/**
-	 * @param uidNumber HR系统员工编号
-	 */
-	public void setUidNumber(String uidNumber) {
-		this.uidNumber = uidNumber;
-	}
-
-	/**
-	 * @param mail 电子邮箱
-	 */
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	/**
-	 * @param userPassword 密码
-	 */
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
 }
