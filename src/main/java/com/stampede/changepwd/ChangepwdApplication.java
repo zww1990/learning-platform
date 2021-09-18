@@ -1,7 +1,5 @@
 package com.stampede.changepwd;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration;
@@ -16,24 +14,31 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import com.stampede.changepwd.service.PersonJobService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhangWeiWei
  * @date 2020年2月17日,下午1:50:33
  * @description 程序启动类
  */
-@SpringBootApplication(exclude = { PersistenceExceptionTranslationAutoConfiguration.class,
-		SpringDataWebAutoConfiguration.class, OAuth2ResourceServerAutoConfiguration.class,
-		ProjectInfoAutoConfiguration.class, WebSocketServletAutoConfiguration.class,
+@SpringBootApplication(exclude = { //
+		PersistenceExceptionTranslationAutoConfiguration.class, //
+		SpringDataWebAutoConfiguration.class, //
+		OAuth2ResourceServerAutoConfiguration.class, //
+		ProjectInfoAutoConfiguration.class, //
+		WebSocketServletAutoConfiguration.class, //
 		RestTemplateAutoConfiguration.class })
 @ConfigurationPropertiesScan
 @EnableScheduling
+@Slf4j
 public class ChangepwdApplication implements WebMvcConfigurer {
-	private static final Logger log = LoggerFactory.getLogger(ChangepwdApplication.class);
 
 	/**
 	 * 程序主入口
+	 * 
 	 * @author ZhangWeiWei
 	 * @date 2020年2月17日,下午1:49:50
 	 * @param args 启动参数
@@ -46,7 +51,8 @@ public class ChangepwdApplication implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(this.loginHandlerInterceptor()).addPathPatterns("/admin/**");
+		registry.addInterceptor(this.loginHandlerInterceptor())//
+				.addPathPatterns("/admin/**");
 	}
 
 	@Bean
