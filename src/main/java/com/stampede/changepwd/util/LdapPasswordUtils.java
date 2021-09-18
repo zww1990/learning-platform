@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -14,7 +15,15 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @date 2020年2月17日,下午1:43:12
  * @description LDAP密码操作辅助类
  */
-public abstract class LdapPasswordUtils {
+public class LdapPasswordUtils {
+
+	/**
+	 * 禁止被外部实例化
+	 */
+	private LdapPasswordUtils() {
+		super();
+	}
+
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月17日,下午1:43:38
@@ -88,13 +97,17 @@ public abstract class LdapPasswordUtils {
 	 * @author ZhangWeiWei
 	 * @date 2020年2月18日,下午5:47:17
 	 * @param username 用户名
-	 * @param timeout 有效期：分钟
+	 * @param timeout  有效期：分钟
 	 * @return 采用JWT方式进行字符串编码
 	 */
 	public static String jwtEncode(String username, long timeout) {
 		long current = System.currentTimeMillis();
-		return Jwts.builder().setId(UUID.randomUUID().toString()).setSubject(username).setIssuedAt(new Date(current))
-				.setExpiration(new Date(current + timeout * 60 * 1000)).signWith(SignatureAlgorithm.HS256, "helloworld")
+		return Jwts.builder()//
+				.setId(UUID.randomUUID().toString())//
+				.setSubject(username)//
+				.setIssuedAt(new Date(current))//
+				.setExpiration(new Date(current + timeout * 60 * 1000))//
+				.signWith(SignatureAlgorithm.HS256, "helloworld")//
 				.compact();
 	}
 
@@ -105,6 +118,9 @@ public abstract class LdapPasswordUtils {
 	 * @return 采用JWT方式进行解码
 	 */
 	public static Claims jwtDecode(String token) {
-		return Jwts.parser().setSigningKey("helloworld").parseClaimsJws(token).getBody();
+		return Jwts.parser()//
+				.setSigningKey("helloworld")//
+				.parseClaimsJws(token)//
+				.getBody();
 	}
 }
