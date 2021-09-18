@@ -2,7 +2,7 @@ package com.stampede.changepwd.service;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -14,8 +14,6 @@ import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
 
 import org.gitlab4j.api.GitLabApi;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
@@ -38,14 +36,16 @@ import com.stampede.changepwd.domain.PersonParam;
 import com.stampede.changepwd.repository.PersonRepository;
 import com.stampede.changepwd.util.LdapPasswordUtils;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author ZhangWeiWei
  * @date 2020年2月17日,下午1:36:20
  * @description 人员服务实现类
  */
 @Service
+@Slf4j
 public class PersonService {
-	private static final Logger log = LoggerFactory.getLogger(PersonService.class);
 	@Resource
 	private PersonRepository personRepository;
 	@Resource
@@ -275,7 +275,7 @@ public class PersonService {
 			return this.jdbcTemplate.queryForMap(sql, userId);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
-			return new HashMap<>();
+			return Collections.emptyMap();
 		}
 	}
 
