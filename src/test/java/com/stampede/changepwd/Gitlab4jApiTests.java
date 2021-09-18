@@ -1,14 +1,14 @@
 package com.stampede.changepwd;
 
 import org.gitlab4j.api.GitLabApi;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Gitlab4jApiTests {
 	@Test
 	public void testGitlab4jApi() {
-		String url = "http://gitlab.it.5i5j.com/";
-		String username = "siqianwen";
-		String password = "ainilaoma1234A";
+		String url = "http://10.2.4.174/";
+		String username = "wudi03";
+		String password = "20210915";
 		try (GitLabApi api = GitLabApi.oauth2Login(url, username, password)) {
 			System.err.println(api.getAuthToken());
 			System.err.println(api.getGitLabServerUrl());
