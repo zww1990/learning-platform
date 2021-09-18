@@ -1,14 +1,10 @@
 package com.stampede.changepwd.controller;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +19,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
+import com.stampede.changepwd.domain.ResponseModel;
 import com.stampede.changepwd.service.PersonService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author ZhangWeiWei
@@ -32,8 +31,8 @@ import com.stampede.changepwd.service.PersonService;
  */
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class AdminController {
-	private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 	@Resource
 	private PersonService personService;
 
@@ -54,40 +53,34 @@ public class AdminController {
 
 	@GetMapping("/checkuid")
 	@ResponseBody
-	public Object checkUid(@RequestParam String uid) {
-		Optional<Person> opt = this.personService.findByUsername(uid);
-		Map<String, Object> data = new HashMap<>();
-		if (opt.isPresent()) {
-			data.put("status", true);
-			data.put("message", String.format("该[%s]已存在，请重新输入。", uid));
-		} else {
-			data.put("status", false);
-			data.put("message", String.format("该[%s]不存在，请放心使用。", uid));
-		}
-		return data;
+	public ResponseModel checkUid(@RequestParam String uid) {
+		return this.personService.findByUsername(uid)//
+				.map(m -> new ResponseModel()//
+						.setStatus(true)//
+						.setMessage(String.format("该[%s]已存在，请重新输入。", uid)))//
+				.orElseGet(() -> new ResponseModel()//
+						.setStatus(false)//
+						.setMessage(String.format("该[%s]不存在，请放心使用。", uid)));
 	}
 
 	@GetMapping("/queryuser")
 	@ResponseBody
-	public Object queryUser(@RequestParam String userId) {
+	public ResponseModel queryUser(@RequestParam String userId) {
 		Map<String, Object> data = this.personService.queryForUserMap(userId);
-		data.put("status", !data.isEmpty());
-		return data;
+		return new ResponseModel().setStatus(!data.isEmpty());
 	}
 
 	@GetMapping("/querywaibao")
 	@ResponseBody
-	public Object queryWaibao() {
+	public ResponseModel queryWaibao() {
 		long waibaoId = this.personService.queryWaibaoId();
-		Map<String, Long> data = new HashMap<>();
-		data.put("waibaoId", waibaoId);
-		return data;
+		return new ResponseModel().setData(waibaoId);
 	}
 
 	/**
 	 * @author ZhangWeiWei
 	 * @date 2020年2月27日,上午9:57:42
-	 * @param param 用户密码参数类
+	 * @param param   用户密码参数类
 	 * @param request HTTP请求
 	 * @return 管理员发送邮件
 	 */
