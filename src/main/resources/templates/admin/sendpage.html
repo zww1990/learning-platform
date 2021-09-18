@@ -57,13 +57,11 @@
 										        </div>
 										    </div>
 										    <div class="form-group">
-										        <label for="mailPrefix" class="col-sm-4 control-label">email</label>
+										        <label for="mail" class="col-sm-4 control-label">email</label>
 										        <div class="col-sm-8">
 										            <div class="input-group">
 										                <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
-										                <input type="text" name="mailPrefix" id="mailPrefix" th:value="${param.mailPrefix}" class="form-control" placeholder="电子邮箱地址前缀" autocomplete="off" required="required" style="width: 235px"/>
-										                <span style="float: left;padding-top: 5px;margin-left: 5px;margin-right: 5px;">@</span>
-										                <input type="text" name="mailSuffix" id="mailSuffix" th:value="${param.mailSuffix?:'5i5j.com'}" class="form-control" placeholder="电子邮箱地址后缀" autocomplete="off" required="required" style="width: 140px"/>
+										                <input type="text" name="mail" id="mail" th:value="${param.mail}" class="form-control" placeholder="电子邮箱地址" autocomplete="off" required="required"/>
 										            </div>
 										        </div>
 										    </div>
@@ -134,15 +132,13 @@
 								let COMP_EMAIL=data.COMP_EMAIL.split('@');
 								$('#givenName').val(data.USER_NAME);
 								_this.val(COMP_EMAIL[0]);
-								$('#mailPrefix').val(COMP_EMAIL[0]);
-								$('#mailSuffix').val(COMP_EMAIL[1]);
+								$('#mail').val(data.COMP_EMAIL);
 								checkuid();
 							}else {
 								$('#givenName').val('');
 								_this.val('');
 					        	_this.parent().nextAll().remove();
-								$('#mailPrefix').val('');
-								$('#mailSuffix').val('5i5j.com');
+								$('#mail').val('');
 							}
 		        		});
 					}
@@ -154,8 +150,7 @@
 		        	$.get('[[${#request.contextPath}]]/admin/querywaibao',{},function(data){
 		        		$('#uidNumber').val(data.waibaoId);
 						$('#givenName').val('');
-						$('#mailPrefix').val('');
-						$('#mailSuffix').val('');
+						$('#mail').val('');
 						_this.val('');
 			        	_this.parent().nextAll().remove();
 		        	});
