@@ -1,17 +1,17 @@
 package com.stampede.changepwd;
 
 import java.util.Optional;
+
 import javax.annotation.Resource;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.query.LdapQueryBuilder;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.repository.PersonRepository;
 import com.stampede.changepwd.util.LdapPasswordUtils;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class PersonRepositoryTests {
 	@Resource
