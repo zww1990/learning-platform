@@ -3,7 +3,7 @@ package com.stampede.changepwd;
 import java.net.URI;
 import java.util.Optional;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.atlassian.httpclient.api.Response;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
