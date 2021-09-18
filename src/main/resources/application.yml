@@ -107,11 +107,11 @@ changepwd:
   #新用户默认密码
   default-password: 20210915
   #gitlab地址
-  gitlab-url: http://gitlab.it.5i5j.com/
+  gitlab-url: http://10.2.4.174/
   #jira地址
-  jira-url: http://jira.bacic5i5j.com/
+  jira-url: http://10.2.2.113/
   #jira用户目录同步地址
-  jira-sync-url: http://jira.bacic5i5j.com/rest/crowd/1/directory/10000
+  jira-sync-url: http://10.2.2.113/rest/crowd/1/directory/10000
   #jira管理员用户
   jira-admin-username: siqianwen
   #jira管理员密码
