@@ -3,8 +3,10 @@ package com.stampede.changepwd.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+
 import com.stampede.changepwd.constant.Constants;
 import com.stampede.changepwd.domain.Person;
 import com.stampede.changepwd.service.PersonService;
@@ -98,11 +101,8 @@ public class AdminController {
 		if (this.personService.findByUsername(param.getUid()).isPresent()) {
 			return mav.addObject("message", "您输入的uid已存在！");
 		}
-		if (!StringUtils.hasText(param.getMailPrefix())) {
-			return mav.addObject("message", "请输入email前缀！");
-		}
-		if (!StringUtils.hasText(param.getMailSuffix())) {
-			return mav.addObject("message", "请输入email后缀！");
+		if (!StringUtils.hasText(param.getMail())) {
+			return mav.addObject("message", "请输入email！");
 		}
 		if (!StringUtils.hasText(param.getGidNumber())) {
 			return mav.addObject("message", "请输入gidNumber！");
@@ -116,7 +116,6 @@ public class AdminController {
 		if (!StringUtils.hasText(param.getGivenName())) {
 			return mav.addObject("message", "请输入givenName！");
 		}
-		param.setMail(String.format("%s@%s", param.getMailPrefix(), param.getMailSuffix()));
 		this.personService.sendMailForAdmin(param, String.format("%s://%s:%s%s", request.getScheme(),
 				request.getServerName(), request.getServerPort(), request.getContextPath()));
 		log.info("管理页面>>>账号[{}]已创建，邮件已发至邮箱[{}]", param.getUid(), param.getMail());
