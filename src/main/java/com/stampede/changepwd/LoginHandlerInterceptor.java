@@ -1,24 +1,26 @@
 package com.stampede.changepwd;
 
 import java.util.Base64;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.autoconfigure.ldap.LdapProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author ZhangWeiWei
  * @date 2020年2月26日,下午8:31:37
  * @description 管理员登录拦截器
  */
+@Slf4j
 public class LoginHandlerInterceptor implements HandlerInterceptor {
-	private static final Logger log = LoggerFactory.getLogger(LoginHandlerInterceptor.class);
 	@Resource
 	private LdapProperties properties;
 
@@ -34,7 +36,8 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 			if (authorizations.length == 2) {
 				String username = authorizations[0];
 				String password = authorizations[1];
-				if (this.properties.getUsername().equals(username) && this.properties.getPassword().equals(password)) {
+				if (this.properties.getUsername().equals(username) //
+						&& this.properties.getPassword().equals(password)) {
 					request.getSession().setAttribute("admin", username);
 					log.info("管理员[{}]登录成功！", username);
 					return true;
