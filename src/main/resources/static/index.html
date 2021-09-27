@@ -19,9 +19,11 @@
 				            <v-col class="mt-2" cols="1">
 				              <v-btn large depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
 				            </v-col>
-				            <v-col md="2" cols="1" v-if="user.type != null">
-				              <v-alert :type="user.type">{{user.message}} , {{user.data}}</v-alert>
+				            <v-col  v-if="user.type != null">
+				              <v-alert :type="user.type"><span v-html="user.message"></span></v-alert>
 				            </v-col>
+				            <v-col></v-col>
+				            <v-col></v-col>
 			          </v-row>
 		          </template>
 				</v-container>
@@ -39,36 +41,64 @@
 			}),
 			data:{
 				users: [
-					{userNo:'100230',password:'123456',username:'张维维',type:null,message:'',data:''},
-					{userNo:'100245',password:'123456',username:'王哲',type:null,message:'',data:''},
-					{userNo:'100232',password:'123456',username:'李米盛',type:null,message:'',data:''},
-					{userNo:'100627',password:'123456',username:'关晓鹏',type:null,message:'',data:''},
-					{userNo:'100226',password:'123456',username:'刘常富',type:null,message:'',data:''},
-					{userNo:'100246',password:'123456',username:'李贺彦',type:null,message:'',data:''},
+					{userNo:'100245',password:'123456',username:'王哲',type:null,message:''},
+					{userNo:'100232',password:'123456',username:'李米盛',type:null,message:''},
+					{userNo:'100226',password:'123456',username:'刘常富',type:null,message:''},
+					{userNo:'100246',password:'123456',username:'李贺彦',type:null,message:''},
+					{userNo:'100627',password:'123456',username:'关晓鹏',type:null,message:''},
+					{userNo:'100230',password:'123456',username:'张维维',type:null,message:''},
+					{userNo:'100261',password:'123456',username:'张东丽',type:null,message:''},
 				],
+			},
+			created: function(){
+			},
+			mounted: function(){
+				this.users.forEach(user => {
+					fetch('/hello/initStaffClock',{
+						  method: 'POST',
+						  body: JSON.stringify(user),
+						  headers: new Headers({
+						    'Content-Type': 'application/json'
+						  })
+					})
+					.then(res => res.json())
+					.then(res => {
+						console.log('Success:', res);
+						user.type = res.status === 1 ? 'info' : 'error';
+						user.message = res.status !== 1 ? res.message : 
+							`地点：${res.data.address}<br>
+							经度：${res.data.longitude}<br>
+							纬度：${res.data.latitude}<br>
+							上班打卡时间：${res.data.clockTimeMin || ''}<br>
+							上班打卡状态：${res.data.clockWorkOnStatusName || ''}<br>
+							下班打卡时间：${res.data.clockTimeMax || ''}<br>
+							下班打卡状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+					});
+				});
 			},
 			methods: {
 				clickme(index){
-					let user=this.users[index];
+					let user = this.users[index];
 					fetch('/hello/userLoginAndStaffClock', {
 						  method: 'POST',
 						  body: JSON.stringify(user),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
-						}).then(res => res.json())
-						.catch(err => {
-							console.error('Error:', err);
-							user.type='error';
-							user.message=err.message;
-							user.data='';
-						})
-						.then(res => {
-							console.log('Success:', res);
-							user.type = res.status === 1 ? 'success' : 'error';
-							user.message=res.message;
-							user.data=res.data;
-						});
+					})
+					.then(res => res.json())
+					.then(res => {
+						console.log('Success:', res);
+						user.type = res.status === 1 ? 'success' : 'error';
+						user.message = res.status !== 1 ? res.message : 
+							`地点：${res.data.address}<br>
+							经度：${res.data.longitude}<br>
+							纬度：${res.data.latitude}<br>
+							上班打卡时间：${res.data.clockTimeMin || ''}<br>
+							上班打卡状态：${res.data.clockWorkOnStatusName || ''}<br>
+							下班打卡时间：${res.data.clockTimeMax || ''}<br>
+							下班打卡状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+					});
 				}
 		    }
 		})

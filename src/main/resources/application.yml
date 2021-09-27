@@ -11,9 +11,11 @@ app:
 #  测试环境
 #  user-login-url: http://192.168.32.38:8081/oauth/user/login
 #  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
+#  init-staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/initStaffClock?staffNo=
 #  生产环境
   user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
   staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
+  init-staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/initStaffClock?staffNo=
   address: 北京市海淀区花园东路11号
   longitude: 116.3690760
   latitude: 39.9802720

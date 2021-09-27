@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ import com.example.test.model.UserLogin;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 import cn.net.yzl.oa.util.AESUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -44,13 +46,61 @@ public class HelloController {
 	@Resource
 	private ApplicationProperties properties;
 
-	@PostMapping("/userLoginAndStaffClock")
-	public ResponseBody userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/initStaffClock")
+	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
+			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getPassword())) {
-			return new ResponseBody().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[password]不能为空");
+			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0)
+					.setMessage("[password]不能为空");
+		}
+		log.info("{}", userLogin);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		ResponseEntity<ResponseBody> userLoginResponse = this.restTemplate.postForEntity(
+				this.properties.getUserLoginUrl(), new HttpEntity<>(userLogin, headers), ResponseBody.class);
+		List<String> tokens = userLoginResponse.getHeaders().get("token");
+		if (CollectionUtils.isEmpty(tokens)) {
+			return userLoginResponse.getBody();
+		}
+		String token = tokens.get(0);
+		log.info("token={}", token);
+		headers.set("token", token);
+		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
+				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
+		log.info("{}", json);
+		try {
+			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
+					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
+			if (resp.getData() != null) {
+				if (!StringUtils.hasText(resp.getData().getAddress())) {
+					resp.getData().setAddress(this.properties.getAddress());
+				}
+				if (resp.getData().getLatitude() == null) {
+					resp.getData().setLatitude(this.properties.getLatitude());
+				}
+				if (resp.getData().getLongitude() == null) {
+					resp.getData().setLongitude(this.properties.getLongitude());
+				}
+			}
+			return resp;
+		} catch (JsonProcessingException e) {
+			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	@PostMapping("/userLoginAndStaffClock")
+	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
+		if (!StringUtils.hasText(userLogin.getUserNo())) {
+			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getPassword())) {
+			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0)
+					.setMessage("[password]不能为空");
 		}
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
@@ -65,9 +115,7 @@ public class HelloController {
 		log.info("token={}", token);
 		headers.set("token", token);
 		Map<String, String> staffClock = new HashMap<>();
-		LocalDateTime now = LocalDateTime.now()
-		// .minusMinutes(1)
-		;
+		LocalDateTime now = LocalDateTime.now();
 		AppStaffClockVO vo = new AppStaffClockVO().setAddress(this.properties.getAddress())
 				.setLatitude(this.properties.getLatitude()).setLongitude(this.properties.getLongitude())
 				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
@@ -78,17 +126,33 @@ public class HelloController {
 			log.info("{}", json);
 			staffClock.put("data", AESUtil.encryptAES(json));
 		} catch (JsonProcessingException e) {
-			return new ResponseBody().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 		log.info("{}", staffClock);
-		ResponseEntity<ResponseBody> staffClockResponse = this.restTemplate.postForEntity(
-				this.properties.getStaffClockUrl(), new HttpEntity<>(staffClock, headers), ResponseBody.class);
-		ResponseBody body = staffClockResponse.getBody();
+		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
+				new HttpEntity<>(staffClock, headers), ResponseBody.class).getBody();
 		log.info("{}", body);
-		if (body.getStatus() == 1) {
-			body.setMessage("打卡成功");
+		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
+				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
+		try {
+			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
+					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
+			if (resp.getData() != null) {
+				if (!StringUtils.hasText(resp.getData().getAddress())) {
+					resp.getData().setAddress(this.properties.getAddress());
+				}
+				if (resp.getData().getLatitude() == null) {
+					resp.getData().setLatitude(this.properties.getLatitude());
+				}
+				if (resp.getData().getLongitude() == null) {
+					resp.getData().setLongitude(this.properties.getLongitude());
+				}
+			}
+			return resp;
+		} catch (JsonProcessingException e) {
+			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
-		return body;
 	}
 }
