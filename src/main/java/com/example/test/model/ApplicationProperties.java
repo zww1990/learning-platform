@@ -15,6 +15,8 @@ import lombok.ToString;
 public class ApplicationProperties {
 	private String userLoginUrl;
 	private String staffClockUrl;
+	private String initStaffClockUrl;
+	private String mobileLoginDeviceRecordUrl;
 	private String address;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
