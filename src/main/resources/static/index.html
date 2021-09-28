@@ -16,14 +16,16 @@
 				<v-container>
 		          <template v-for="(user, i) in users">
 					  <v-row>
-				            <v-col class="mt-2" cols="1">
-				              <v-btn large depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
-				            </v-col>
-				            <v-col  v-if="user.type != null">
-				              <v-alert :type="user.type"><span v-html="user.message"></span></v-alert>
-				            </v-col>
-				            <v-col></v-col>
-				            <v-col></v-col>
+			            <v-col class="mt-2" cols="2">
+			              <v-select v-model="user.addr" :items="addresses" item-text="address" item-value="id" label="公司地址"
+			               return-object></v-select>
+			              <v-btn large depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
+			            </v-col>
+			            <v-col v-if="user.type != null">
+			              <v-alert :type="user.type"><span v-html="user.message"></span></v-alert>
+			            </v-col>
+			            <v-col></v-col>
+			            <v-col></v-col>
 			          </v-row>
 		          </template>
 				</v-container>
@@ -41,22 +43,27 @@
 			}),
 			data:{
 				users: [
-					{userNo:'100245',password:'123456',username:'王哲',type:null,message:''},
-					{userNo:'100232',password:'123456',username:'李米盛',type:null,message:''},
-					{userNo:'100226',password:'123456',username:'刘常富',type:null,message:''},
-					{userNo:'100246',password:'123456',username:'李贺彦',type:null,message:''},
-					{userNo:'100627',password:'123456',username:'关晓鹏',type:null,message:''},
-					{userNo:'100230',password:'123456',username:'张维维',type:null,message:''},
-					{userNo:'100261',password:'123456',username:'张东丽',type:null,message:''},
+					{userNo:'100245', password:'123456', username:'王哲',  type:null, message:'', addr:{ id:1 }},
+					{userNo:'100232', password:'123456', username:'李米盛', type:null, message:'', addr:{ id:1 }},
+					{userNo:'100226', password:'123456', username:'刘常富', type:null, message:'', addr:{ id:1 }},
+					{userNo:'100246', password:'123456', username:'李贺彦', type:null, message:'', addr:{ id:1 }},
+					{userNo:'100627', password:'123456', username:'关晓鹏', type:null, message:'', addr:{ id:1 }},
+					{userNo:'100230', password:'123456', username:'张维维', type:null, message:'', addr:{ id:1 }},
+					{userNo:'100261', password:'123456', username:'张东丽', type:null, message:'', addr:{ id:1 }},
 				],
+				addresses:[
+					{id:1, address:'北京市海淀区花园东路11号', longitude:"116.3690760", latitude:"39.9802720"},
+					{id:2, address:'石家庄海河道168号',     longitude:"114.6222430", latitude:"38.0476450"},
+				]
 			},
 			created: function(){
 			},
 			mounted: function(){
 				this.users.forEach(user => {
+					let addr = this.addresses.find(ad => user.addr.id === ad.id);
 					fetch('/hello/initStaffClock',{
 						  method: 'POST',
-						  body: JSON.stringify(user),
+						  body: JSON.stringify({...user, ...addr}),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
@@ -79,9 +86,10 @@
 			methods: {
 				clickme(index){
 					let user = this.users[index];
+					let addr = this.addresses.find(ad => user.addr.id === ad.id);
 					fetch('/hello/userLoginAndStaffClock', {
 						  method: 'POST',
-						  body: JSON.stringify(user),
+						  body: JSON.stringify({...user, ...addr}),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
