@@ -50,10 +50,15 @@ public class HelloController {
 	@PostMapping("/initStaffClock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getPassword())) {
-			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0)
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
 					.setMessage("[password]不能为空");
 		}
 		log.info("{}", userLogin);
@@ -74,20 +79,11 @@ public class HelloController {
 		try {
 			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
 					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
-			if (resp.getData() != null) {
-				if (!StringUtils.hasText(resp.getData().getAddress())) {
-					resp.getData().setAddress(this.properties.getAddress());
-				}
-				if (resp.getData().getLatitude() == null) {
-					resp.getData().setLatitude(this.properties.getLatitude());
-				}
-				if (resp.getData().getLongitude() == null) {
-					resp.getData().setLongitude(this.properties.getLongitude());
-				}
-			}
 			return resp;
 		} catch (JsonProcessingException e) {
-			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
+					.setStatus(0)//
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 	}
@@ -96,11 +92,34 @@ public class HelloController {
 	@PostMapping("/userLoginAndStaffClock")
 	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0).setMessage("[userNo]不能为空");
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getPassword())) {
-			return new ResponseBody<>().setCode(HttpStatus.BAD_REQUEST.value()).setStatus(0)
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
 					.setMessage("[password]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getAddress())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[address]不能为空");
+		}
+		if (userLogin.getLatitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[latitude]不能为空");
+		}
+		if (userLogin.getLongitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[longitude]不能为空");
 		}
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
@@ -116,8 +135,10 @@ public class HelloController {
 		headers.set("token", token);
 		Map<String, String> staffClock = new HashMap<>();
 		LocalDateTime now = LocalDateTime.now();
-		AppStaffClockVO vo = new AppStaffClockVO().setAddress(this.properties.getAddress())
-				.setLatitude(this.properties.getLatitude()).setLongitude(this.properties.getLongitude())
+		AppStaffClockVO vo = new AppStaffClockVO()//
+				.setAddress(userLogin.getAddress())//
+				.setLatitude(userLogin.getLatitude())//
+				.setLongitude(userLogin.getLongitude())//
 				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
 						now.format(DateTimeFormatter.ofPattern(AESUtil.FORMAT)))))
 				.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
@@ -126,7 +147,9 @@ public class HelloController {
 			log.info("{}", json);
 			staffClock.put("data", AESUtil.encryptAES(json));
 		} catch (JsonProcessingException e) {
-			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
+					.setStatus(0)//
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 		log.info("{}", staffClock);
@@ -140,18 +163,20 @@ public class HelloController {
 					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
 			if (resp.getData() != null) {
 				if (!StringUtils.hasText(resp.getData().getAddress())) {
-					resp.getData().setAddress(this.properties.getAddress());
+					resp.getData().setAddress(userLogin.getAddress());
 				}
 				if (resp.getData().getLatitude() == null) {
-					resp.getData().setLatitude(this.properties.getLatitude());
+					resp.getData().setLatitude(userLogin.getLatitude());
 				}
 				if (resp.getData().getLongitude() == null) {
-					resp.getData().setLongitude(this.properties.getLongitude());
+					resp.getData().setLongitude(userLogin.getLongitude());
 				}
 			}
 			return resp;
 		} catch (JsonProcessingException e) {
-			return new ResponseBody<>().setCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).setStatus(0)
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
+					.setStatus(0)//
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 	}

@@ -1,7 +1,5 @@
 package com.example.test.model;
 
-import java.math.BigDecimal;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Getter;
@@ -17,7 +15,4 @@ public class ApplicationProperties {
 	private String staffClockUrl;
 	private String initStaffClockUrl;
 	private String mobileLoginDeviceRecordUrl;
-	private String address;
-	private BigDecimal longitude;
-	private BigDecimal latitude;
 }

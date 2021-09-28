@@ -16,7 +16,4 @@ app:
   user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
   staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
   init-staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/initStaffClock?staffNo=
-  address: 北京市海淀区花园东路11号
-  longitude: 116.3690760
-  latitude: 39.9802720
 
