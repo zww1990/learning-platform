@@ -14,5 +14,4 @@ public class ApplicationProperties {
 	private String userLoginUrl;
 	private String staffClockUrl;
 	private String initStaffClockUrl;
-	private String mobileLoginDeviceRecordUrl;
 }
