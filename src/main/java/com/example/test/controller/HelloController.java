@@ -75,7 +75,7 @@ public class HelloController {
 		headers.set("token", token);
 		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
-		log.info("{}", json);
+//		log.info("{}", json);
 		try {
 			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
 					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));

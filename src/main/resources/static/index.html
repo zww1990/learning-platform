@@ -14,20 +14,18 @@
 			<v-app>
 			  <v-main>
 				<v-container>
-		          <template v-for="(user, i) in users">
-					  <v-row>
-			            <v-col class="mt-2" cols="2">
+				  <v-row>
+					  <template v-for="user in users" :key="user.userNo">
+			            <v-col>
 			              <v-select v-model="user.addr" :items="addresses" item-text="address" item-value="id" label="公司地址"
 			               return-object></v-select>
-			              <v-btn large depressed color="primary" @click="clickme(i)">{{user.username}}</v-btn>
+			              <v-btn large color="warning" @click="clickme(user)">{{user.username}}</v-btn>
 			            </v-col>
-			            <v-col v-if="user.type != null">
+			            <v-col>
 			              <v-alert :type="user.type"><span v-html="user.message"></span></v-alert>
 			            </v-col>
-			            <v-col></v-col>
-			            <v-col></v-col>
-			          </v-row>
-		          </template>
+					  </template>
+		          </v-row>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -73,19 +71,15 @@
 						console.log('Success:', res);
 						user.type = res.status === 1 ? 'info' : 'error';
 						user.message = res.status !== 1 ? res.message : 
-							`地点：${res.data.address}<br>
-							经度：${res.data.longitude}<br>
-							纬度：${res.data.latitude}<br>
-							上班打卡时间：${res.data.clockTimeMin || ''}<br>
-							上班打卡状态：${res.data.clockWorkOnStatusName || ''}<br>
-							下班打卡时间：${res.data.clockTimeMax || ''}<br>
-							下班打卡状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+							`上班时间：${res.data.clockTimeMin || ''}<br>
+							上班状态：${res.data.clockWorkOnStatusName || ''}<br>
+							下班时间：${res.data.clockTimeMax || ''}<br>
+							下班状态：${res.data.clockWorkOffStatusName || ''}<br>`;
 					});
 				});
 			},
 			methods: {
-				clickme(index){
-					let user = this.users[index];
+				clickme(user){
 					let addr = this.addresses.find(ad => user.addr.id === ad.id);
 					fetch('/hello/userLoginAndStaffClock', {
 						  method: 'POST',
@@ -99,13 +93,10 @@
 						console.log('Success:', res);
 						user.type = res.status === 1 ? 'success' : 'error';
 						user.message = res.status !== 1 ? res.message : 
-							`地点：${res.data.address}<br>
-							经度：${res.data.longitude}<br>
-							纬度：${res.data.latitude}<br>
-							上班打卡时间：${res.data.clockTimeMin || ''}<br>
-							上班打卡状态：${res.data.clockWorkOnStatusName || ''}<br>
-							下班打卡时间：${res.data.clockTimeMax || ''}<br>
-							下班打卡状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+							`上班时间：${res.data.clockTimeMin || ''}<br>
+							上班状态：${res.data.clockWorkOnStatusName || ''}<br>
+							下班时间：${res.data.clockTimeMax || ''}<br>
+							下班状态：${res.data.clockWorkOffStatusName || ''}<br>`;
 					});
 				}
 		    }
