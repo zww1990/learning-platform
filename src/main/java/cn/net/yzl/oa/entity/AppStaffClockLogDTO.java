@@ -1,7 +1,5 @@
 package cn.net.yzl.oa.entity;
 
-import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -14,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class AppStaffClockLogDTO {
 	/** 打卡地址 */
-	private String address;
+//	private String address;
 	/** 打卡日期 */
 //	private String clockDate;
 	/** 一天打卡的开始时间 */
@@ -40,21 +38,21 @@ public class AppStaffClockLogDTO {
 	/** 是否空的规则 */
 //	private Boolean emptyRule;
 	/** 纬度 */
-	private BigDecimal latitude;
+//	private BigDecimal latitude;
 	/** 经度 */
-	private BigDecimal longitude;
+//	private BigDecimal longitude;
 	/** 是否非职能（只有职能可以打卡） */
 //	private Boolean notFunction;
 	/** 范围 */
-	private Integer rangeRadius;
+//	private Integer rangeRadius;
 	/** 午休时间 */
-	private String restTime;
+//	private String restTime;
 	/** 是否允许4G打卡 1：允许 0：不允许 */
 //	private Integer switch4g;
 	/** 上班开始时间 */
-	private String workBeginTime;
+//	private String workBeginTime;
 	/** 下班开始时间 */
-	private String workEndTime;
+//	private String workEndTime;
 
 	public void setClockWorkOffStatus(Integer clockWorkOffStatus) {
 		this.clockWorkOffStatus = clockWorkOffStatus;
