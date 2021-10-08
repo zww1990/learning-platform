@@ -161,17 +161,6 @@ public class HelloController {
 		try {
 			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
 					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
-			if (resp.getData() != null) {
-				if (!StringUtils.hasText(resp.getData().getAddress())) {
-					resp.getData().setAddress(userLogin.getAddress());
-				}
-				if (resp.getData().getLatitude() == null) {
-					resp.getData().setLatitude(userLogin.getLatitude());
-				}
-				if (resp.getData().getLongitude() == null) {
-					resp.getData().setLongitude(userLogin.getLongitude());
-				}
-			}
 			return resp;
 		} catch (JsonProcessingException e) {
 			return new ResponseBody<>()//
