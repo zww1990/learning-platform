@@ -1,1 +1,53 @@
-<button nz-button nzType="primary">click me</button>
+<button nz-button (click)="addRow()" nzType="primary">添加</button>
+<br/>
+<br/>
+<nz-table #basicTable [nzData]="users" [nzFrontPagination]="false" [nzShowPagination]="false">
+  <thead>
+  <tr>
+    <th>员工编号</th>
+    <th>员工姓名</th>
+    <th>员工密码</th>
+    <th>公司地址</th>
+    <th>上班时间/上班状态</th>
+    <th>下班时间/下班状态</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>
+      <input nz-input placeholder="请输入员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
+      <ng-template #userno>{{data.userNo}}</ng-template>
+    </td>
+    <td>
+      <input nz-input placeholder="请输入员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
+      <ng-template #username>{{data.username}}</ng-template>
+    </td>
+    <td>
+      <input nz-input placeholder="请输入员工密码" [(ngModel)]="data.password" *ngIf="data.edited; else password"/>
+      <ng-template #password>******</ng-template>
+    </td>
+    <td>
+      <nz-select [(ngModel)]="data.addr" [nzDropdownMatchSelectWidth]="false" [compareWith]="compareFn">
+        <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
+      </nz-select>
+    </td>
+    <td>
+      {{data?.staffClock?.clockTimeMin|defaultValue}}
+      /
+      {{data?.staffClock?.clockWorkOnStatusName|defaultValue}}
+    </td>
+    <td>
+      {{data?.staffClock?.clockTimeMax|defaultValue}}
+      /
+      {{data?.staffClock?.clockWorkOffStatusName|defaultValue}}
+    </td>
+    <td>
+      <button nz-button (click)="gotoWork(data)" nzType="primary" *ngIf="data.status === 1; else elseBlock">打卡</button>
+      <ng-template #elseBlock>
+        <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
+      </ng-template>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

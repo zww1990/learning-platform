@@ -18,15 +18,15 @@ export class LayoutComponent implements OnInit {
       {
         title: '仪表盘', icon: 'dashboard', open: false, items: [
           {title: '欢迎', link: '/welcome', match: false},
-          {title: '监控', link: '/welcome', match: false},
-          {title: '工作空间', link: '/welcome', match: false},
+          // {title: '监控', link: '/welcome', match: false},
+          // {title: '工作空间', link: '/welcome', match: false},
         ]
       },
-      {
-        title: '表单', icon: 'form', open: false, items: [
-          {title: '基础表单', link: '/welcome', match: false}
-        ]
-      },
+      // {
+      //   title: '表单', icon: 'form', open: false, items: [
+      //     {title: '基础表单', link: '/welcome', match: false}
+      //   ]
+      // },
     ];
   }
 
