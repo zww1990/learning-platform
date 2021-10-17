@@ -165,6 +165,7 @@
 						user.status = res.status;
 						user.message = res.message;
 						user.staffClock = res.data;
+						user.edited = user.status === 0;
 					});
 				},
 				addRow(){
@@ -174,7 +175,8 @@
 						username: null, 
 						addr: this.addresses[0], 
 						status: 1, 
-						edited: true
+						edited: true,
+						staffClock: null
 					});
 				}
 		    }
