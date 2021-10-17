@@ -15,16 +15,77 @@
 			  <v-main>
 				<v-container>
 				  <v-row>
-					  <template v-for="user in users" :key="user.userNo">
-			            <v-col>
-			              <v-select v-model="user.addr" :items="addresses" item-text="address" item-value="id" label="公司地址"
-			               return-object></v-select>
-			              <v-btn large color="warning" @click="clickme(user)">{{user.username}}</v-btn>
-			            </v-col>
-			            <v-col>
-			              <v-alert :type="user.type"><span v-html="user.message"></span></v-alert>
-			            </v-col>
-					  </template>
+					  <v-col>
+					  	<v-btn color="primary" @click="addRow()">添加</v-btn>
+					  </v-col>
+				  </v-row>
+				  <v-row>
+					  <v-col>
+						  <v-simple-table>
+						    <template v-slot:default>
+						      <thead>
+						        <tr>
+						          <th class="text-left" style="width: 200px;">员工编号</th>
+						          <th class="text-left" style="width: 200px;">员工姓名</th>
+						          <th class="text-left" style="width: 200px;">员工密码</th>
+						          <th class="text-left" style="width: 300px;">公司地址</th>
+						          <th class="text-left" style="width: 200px;">上班时间/上班状态</th>
+						          <th class="text-left" style="width: 200px;">下班时间/下班状态</th>
+						          <th class="text-left" style="width: 200px;">操作</th>
+						        </tr>
+						      </thead>
+						      <tbody>
+						        <tr v-for="(user, index) in users" :key="index">
+						          <td>
+						          	<v-text-field 
+							          	label="员工编号" 
+							          	placeholder="请输入员工编号" 
+							          	v-model="user.userNo" 
+							          	v-if="user.edited"
+							          	clearable>
+						          	</v-text-field>
+						          	<span v-else>{{ user.userNo }}</span>
+						          </td>
+						          <td>
+						          	<v-text-field 
+							          	label="员工姓名" 
+							          	placeholder="请输入员工姓名" 
+							          	v-model="user.username" 
+							          	v-if="user.edited"
+							          	clearable>
+						          	</v-text-field>
+						          	<span v-else>{{ user.username }}</span>
+						          </td>
+						          <td>
+						          	<v-text-field 
+							          	label="员工密码" 
+							          	placeholder="请输入员工密码" 
+							          	v-model="user.password" 
+							          	v-if="user.edited"
+							          	clearable>
+						          	</v-text-field>
+						          	<span v-else>******</span>
+						          </td>
+						          <td>
+						              <v-select 
+							              v-model="user.addr" 
+							              :items="addresses" 
+							              item-text="address" 
+							              item-value="id" 
+							              return-object>
+						              </v-select>
+						          </td>
+						          <td>{{user?.staffClock?.clockTimeMin||'无'}}/{{user?.staffClock?.clockWorkOnStatusName||'无'}}</td>
+						          <td>{{user?.staffClock?.clockTimeMax||'无'}}/{{user?.staffClock?.clockWorkOffStatusName||'无'}}</td>
+						          <td>
+						          	<v-btn color="success" @click="gotoWork(user)" v-if="user.status === 1">打卡</v-btn>
+						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
+						          </td>
+						        </tr>
+						      </tbody>
+						    </template>
+						  </v-simple-table>
+					  </v-col>
 		          </v-row>
 				</v-container>
 			  </v-main>
@@ -33,6 +94,7 @@
 	</body>
 	<script src="vue/vue.min.js"></script>
 	<script src="vuetify/vuetify.min.js"></script>
+	<script src="vuetify-toast-snackbar-ng/package/dist/index.umd.min.js"></script>
 	<script type="text/javascript">
 		new Vue({
 			el:'#app',
@@ -40,65 +102,79 @@
 				theme: { dark: true },
 			}),
 			data:{
-				users: [
-					{userNo:'100245', password:'123456', username:'王哲',  type:null, message:'', addr:{ id:1 }},
-					{userNo:'100232', password:'123456', username:'李米盛', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100226', password:'123456', username:'刘常富', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100246', password:'123456', username:'李贺彦', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100627', password:'123456', username:'关晓鹏', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100230', password:'123456', username:'张维维', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100261', password:'123456', username:'张东丽', type:null, message:'', addr:{ id:1 }},
-					{userNo:'100266', password:'123456', username:'曹志敏', type:null, message:'', addr:{ id:1 }},
-				],
-				addresses:[
+				users: [],
+				addresses: []
+			},
+			created(){
+				this.addresses = [
 					{id:1, address:'北京市海淀区花园东路11号', longitude:"116.3690760", latitude:"39.9802720"},
 					{id:2, address:'石家庄海河道168号',     	longitude:"114.6222430", latitude:"38.0476450"},
 					{id:3, address:'石家庄桥西区物联网大厦c座',	longitude:"114.4414380", latitude:"38.0165270"},
-				]
+				];
+				this.users = [
+					{userNo:'100245', password:'123456', username:'王哲',  status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100232', password:'123456', username:'李米盛', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100226', password:'123456', username:'刘常富', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100246', password:'123456', username:'李贺彦', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100627', password:'123456', username:'关晓鹏', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100230', password:'123456', username:'张维维', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100261', password:'123456', username:'张东丽', status:null, message:null, addr:this.addresses[0], staffClock:null},
+					{userNo:'100266', password:'123456', username:'曹志敏', status:null, message:null, addr:this.addresses[0], staffClock:null},
+				];
 			},
-			created: function(){
-			},
-			mounted: function(){
+			mounted(){
 				this.users.forEach(user => {
-					let addr = this.addresses.find(ad => user.addr.id === ad.id);
 					fetch('/hello/initStaffClock',{
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...addr}),
+						  body: JSON.stringify({...user, ...user.addr}),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
 					})
 					.then(res => res.json())
 					.then(res => {
-						console.log('Success:', res);
-						user.type = res.status === 1 ? 'info' : 'error';
-						user.message = res.status !== 1 ? res.message : 
-							`上班时间：${res.data.clockTimeMin || ''}<br>
-							上班状态：${res.data.clockWorkOnStatusName || ''}<br>
-							下班时间：${res.data.clockTimeMax || ''}<br>
-							下班状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+						user.status = res.status;
+						user.message = res.message;
+						user.staffClock = res.data;
 					});
 				});
 			},
 			methods: {
-				clickme(user){
-					let addr = this.addresses.find(ad => user.addr.id === ad.id);
+				gotoWork(user){
+				  if (user.userNo === null || user.userNo.length === 0) {
+					this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
+			        return;
+			      }
+			      if (user.username === null || user.username.length === 0) {
+					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
+			        return;
+			      }
+			      if (user.password === null || user.password.length === 0) {
+					this.$toast.error('请输入员工密码', {x: 'center', y: 'top'});
+			        return;
+			      }
 					fetch('/hello/userLoginAndStaffClock', {
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...addr}),
+						  body: JSON.stringify({...user, ...user.addr}),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
 					})
 					.then(res => res.json())
 					.then(res => {
-						console.log('Success:', res);
-						user.type = res.status === 1 ? 'success' : 'error';
-						user.message = res.status !== 1 ? res.message : 
-							`上班时间：${res.data.clockTimeMin || ''}<br>
-							上班状态：${res.data.clockWorkOnStatusName || ''}<br>
-							下班时间：${res.data.clockTimeMax || ''}<br>
-							下班状态：${res.data.clockWorkOffStatusName || ''}<br>`;
+						user.status = res.status;
+						user.message = res.message;
+						user.staffClock = res.data;
+					});
+				},
+				addRow(){
+					this.users.push({
+						userNo: null, 
+						password: null, 
+						username: null, 
+						addr: this.addresses[0], 
+						status: 1, 
+						edited: true
 					});
 				}
 		    }
