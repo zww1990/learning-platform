@@ -27,7 +27,7 @@ public enum ClockWorkStatus {
 						.filter(p -> p.code.equals(m))// NOSONAR
 						.findFirst()// NOSONAR
 						.map(ClockWorkStatus::getName)// NOSONAR
-						.orElseGet(String::new))// NOSONAR
-				.orElseGet(String::new);
+						.orElse(null))// NOSONAR
+				.orElse(null);
 	}
 }
