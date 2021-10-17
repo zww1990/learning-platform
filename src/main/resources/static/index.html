@@ -44,7 +44,9 @@
 							          	v-if="user.edited"
 							          	clearable>
 						          	</v-text-field>
-						          	<span v-else>{{ user.userNo }}</span>
+						          	<span v-else>
+						          		<a @click="showList(user)">{{ user.userNo }}</a>
+						          	</span>
 						          </td>
 						          <td>
 						          	<v-text-field 
@@ -87,6 +89,47 @@
 						  </v-simple-table>
 					  </v-col>
 		          </v-row>
+			      <v-dialog transition="dialog-bottom-transition" v-model="dialog">
+			          <v-card>
+			            <v-toolbar color="purple">
+			            	{{user?.username}}打卡记录{{logList.length}}条
+			            	<v-spacer></v-spacer>
+			            	<v-btn icon @click="dialog = false">
+			            		<v-icon>mdi-close</v-icon>
+			            	</v-btn>
+			            </v-toolbar>
+			            <v-card-text>
+						  <v-simple-table dense fixed-header height="500px">
+						    <template v-slot:default>
+						      <thead>
+						        <tr>
+						          <th class="text-left">主键</th>
+						          <th class="text-left">员工编号</th>
+						          <th class="text-left">打卡时间</th>
+						          <th class="text-left">经度</th>
+						          <th class="text-left">维度</th>
+						          <th class="text-left">打卡地址</th>
+						          <th class="text-left">打卡类型</th>
+						          <th class="text-left">创建时间</th>
+						        </tr>
+						      </thead>
+						      <tbody>
+						        <tr v-for="(log, index) in logList" :key="index">
+						          <td>{{log.id}}</td>
+						          <td>{{log.staff_no}}</td>
+						          <td>{{log.clock_time}}</td>
+						          <td>{{log.longitude}}</td>
+						          <td>{{log.latitude}}</td>
+						          <td>{{log.address}}</td>
+						          <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
+						          <td>{{log.create_time}}</td>
+						        </tr>
+						      </tbody>
+						    </template>
+						  </v-simple-table>
+			            </v-card-text>
+			          </v-card>
+			      </v-dialog>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -103,7 +146,10 @@
 			}),
 			data:{
 				users: [],
-				addresses: []
+				user: null,
+				addresses: [],
+				logList: [],
+				dialog: false,
 			},
 			created(){
 				this.addresses = [
@@ -177,6 +223,21 @@
 						status: 1, 
 						edited: true,
 						staffClock: null
+					});
+				},
+				showList(user){
+					fetch('/hello/selectAppStaffClockLogList',{
+						  method: 'POST',
+						  body: JSON.stringify(user),
+						  headers: new Headers({
+						    'Content-Type': 'application/json'
+						  })
+					})
+					.then(res => res.json())
+					.then(res => {
+						this.logList = res.data;
+						this.user = user;
+						this.dialog = true;
 					});
 				}
 		    }
