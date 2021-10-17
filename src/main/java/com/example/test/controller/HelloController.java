@@ -31,6 +31,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
+import cn.net.yzl.oa.entity.SqlExecQueryDTO;
 import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 import cn.net.yzl.oa.util.AESUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/hello")
 @Slf4j
+@SuppressWarnings("rawtypes")
 public class HelloController {
 	@Resource
 	private RestTemplate restTemplate;
@@ -46,7 +48,6 @@ public class HelloController {
 	@Resource
 	private ApplicationProperties properties;
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping("/initStaffClock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
@@ -75,7 +76,6 @@ public class HelloController {
 		headers.set("token", token);
 		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
-//		log.info("{}", json);
 		try {
 			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
 					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
@@ -88,7 +88,6 @@ public class HelloController {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	@PostMapping("/userLoginAndStaffClock")
 	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
@@ -168,5 +167,39 @@ public class HelloController {
 					.setStatus(0)//
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
+	}
+
+	@PostMapping("/selectAppStaffClockLogList")
+	public ResponseBody<?> selectAppStaffClockLogList(@RequestBody UserLogin userLogin) {
+		if (!StringUtils.hasText(userLogin.getUserNo())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[userNo]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getPassword())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[password]不能为空");
+		}
+		log.info("{}", userLogin);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		ResponseEntity<ResponseBody> userLoginResponse = this.restTemplate.postForEntity(
+				this.properties.getUserLoginUrl(), new HttpEntity<>(userLogin, headers), ResponseBody.class);
+		List<String> tokens = userLoginResponse.getHeaders().get("token");
+		if (CollectionUtils.isEmpty(tokens)) {
+			return userLoginResponse.getBody();
+		}
+		String token = tokens.get(0);
+		log.info("token={}", token);
+		headers.set("token", token);
+		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId())
+				.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo()));
+		log.info("{}", sqlExecQuery);
+		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
+				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
+		return body;
 	}
 }
