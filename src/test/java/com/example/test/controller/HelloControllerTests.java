@@ -38,7 +38,8 @@ public class HelloControllerTests {
 	@Test
 	public void testInitStaffClock() {
 		try {
-			System.err.println(this.controller.initStaffClock(new UserLogin().setUserNo("60123").setPassword("123456")));
+			System.err
+					.println(this.controller.initStaffClock(new UserLogin().setUserNo("60123").setPassword("123456")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,6 +59,16 @@ public class HelloControllerTests {
 		try {
 			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(
 					this.controller.initStaffClock(new UserLogin().setUserNo("100230").setPassword("123456"))));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testSelectAppStaffClockLogList() {
+		try {
+			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(
+					controller.selectAppStaffClockLogList(new UserLogin().setUserNo("100230").setPassword("123456"))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
