@@ -28,6 +28,7 @@ import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzAlertModule} from "ng-zorro-antd/alert";
+import {NzNotificationModule} from "ng-zorro-antd/notification";
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 
 import {IconsProviderModule} from './icons-provider.module';
@@ -66,6 +67,7 @@ import {DefaultValuePipe} from "./default-value.pipe";
     NzPopconfirmModule,
     NzDividerModule,
     NzAlertModule,
+    NzNotificationModule,
     IconsProviderModule,
   ],
   exports: [
@@ -99,6 +101,7 @@ import {DefaultValuePipe} from "./default-value.pipe";
     NzPopconfirmModule,
     NzDividerModule,
     NzAlertModule,
+    NzNotificationModule,
     IconsProviderModule,
     DefaultValuePipe,
   ],

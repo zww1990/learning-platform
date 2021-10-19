@@ -4,20 +4,22 @@
 <nz-table #basicTable [nzData]="users" [nzFrontPagination]="false" [nzShowPagination]="false">
   <thead>
   <tr>
-    <th>员工编号</th>
-    <th>员工姓名</th>
-    <th>员工密码</th>
-    <th>公司地址</th>
-    <th>上班时间/上班状态</th>
-    <th>下班时间/下班状态</th>
-    <th>操作</th>
+    <th nzWidth="200px">员工编号</th>
+    <th nzWidth="200px">员工姓名</th>
+    <th nzWidth="200px">员工密码</th>
+    <th nzWidth="200px">公司地址</th>
+    <th nzWidth="200px">上班时间/上班状态</th>
+    <th nzWidth="200px">下班时间/下班状态</th>
+    <th nzWidth="200px">操作</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
     <td>
       <input nz-input placeholder="请输入员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
-      <ng-template #userno>{{data.userNo}}</ng-template>
+      <ng-template #userno>
+        <a (click)="showList(data)">{{data.userNo}}</a>
+      </ng-template>
     </td>
     <td>
       <input nz-input placeholder="请输入员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
@@ -43,7 +45,7 @@
       {{data?.staffClock?.clockWorkOffStatusName|defaultValue}}
     </td>
     <td>
-      <button nz-button (click)="gotoWork(data)" nzType="primary" *ngIf="data.status === 1; else elseBlock">打卡</button>
+      <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger *ngIf="data.status === 1; else elseBlock">打卡</button>
       <ng-template #elseBlock>
         <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
       </ng-template>
@@ -51,3 +53,33 @@
   </tr>
   </tbody>
 </nz-table>
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzWidth="1440px">
+  <ng-container *nzModalContent>
+    <nz-table #basicTable [nzData]="logList" nzSize="small" [nzScroll]="{ y: '600px' }" nzShowPagination nzShowQuickJumper nzShowSizeChanger>
+      <thead>
+      <tr>
+        <th nzWidth="100px">主键</th>
+        <th nzWidth="100px">员工编号</th>
+        <th nzWidth="200px">打卡时间</th>
+        <th nzWidth="100px">经度</th>
+        <th nzWidth="100px">维度</th>
+        <th>打卡地址</th>
+        <th nzWidth="100px">打卡类型</th>
+        <th nzWidth="200px">创建时间</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let log of basicTable.data">
+        <td>{{log.id}}</td>
+        <td>{{log.staff_no}}</td>
+        <td>{{log.clock_time}}</td>
+        <td>{{log.longitude}}</td>
+        <td>{{log.latitude}}</td>
+        <td>{{log.address}}</td>
+        <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
+        <td>{{log.create_time}}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-modal>

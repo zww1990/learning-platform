@@ -21,4 +21,12 @@ export class AppStaffClockLog {
   clockTimeMin?: string;
   clockWorkOffStatusName?: string;
   clockWorkOnStatusName?: string;
+  id: number;
+  staff_no: string;
+  clock_time: string;
+  longitude: number;
+  latitude: number;
+  address: string;
+  clock_type: number;
+  create_time: string;
 }

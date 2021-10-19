@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const proxy = {
   '/hello': {
-    target: 'http://192.168.34.156:8080/',
+    target: 'http://192.168.34.156:9999/',
     secure: false
   }
 };
