@@ -1,5 +1,8 @@
 package com.example.test.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import lombok.Getter;
@@ -17,4 +20,15 @@ public class ApplicationProperties {
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
 	private String selectAppStaffClockLogSql;
+	private List<Address> addresses = new ArrayList<>();
+
+	@Getter
+	@Setter
+	@ToString
+	public static class Address {
+		private Integer id;
+		private String address;
+		private String longitude;
+		private String latitude;
+	}
 }

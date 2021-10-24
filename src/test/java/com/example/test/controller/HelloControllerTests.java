@@ -73,4 +73,13 @@ public class HelloControllerTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testGetAddresses() {
+		try {
+			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(controller.getAddresses()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
