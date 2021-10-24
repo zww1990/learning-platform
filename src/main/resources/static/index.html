@@ -89,7 +89,7 @@
 						  </v-simple-table>
 					  </v-col>
 		          </v-row>
-			      <v-dialog transition="dialog-bottom-transition" v-model="dialog">
+			      <v-dialog transition="dialog-bottom-transition" v-model="dialog" v-if="dialog">
 			          <v-card>
 			            <v-toolbar color="purple">
 			            	{{user?.username}}打卡记录{{logList.length}}条
@@ -151,12 +151,10 @@
 				logList: [],
 				dialog: false,
 			},
-			created(){
-				this.addresses = [
-					{id:1, address:'北京市海淀区花园东路11号', longitude:"116.3690760", latitude:"39.9802720"},
-					{id:2, address:'石家庄海河道168号',     	longitude:"114.6222430", latitude:"38.0476450"},
-					{id:3, address:'石家庄桥西区物联网大厦c座',	longitude:"114.4414380", latitude:"38.0165270"},
-				];
+			async mounted(){
+				let response = await fetch('/hello/addresses');
+				let json = await response.json();
+				this.addresses = json.data;
 				this.users = [
 					{userNo:'100245', password:'123456', username:'王哲',  status:null, message:null, addr:this.addresses[0], staffClock:null},
 					{userNo:'100232', password:'123456', username:'李米盛', status:null, message:null, addr:this.addresses[0], staffClock:null},
@@ -167,8 +165,6 @@
 					{userNo:'100261', password:'123456', username:'张东丽', status:null, message:null, addr:this.addresses[0], staffClock:null},
 					{userNo:'100266', password:'123456', username:'曹志敏', status:null, message:null, addr:this.addresses[0], staffClock:null},
 				];
-			},
-			mounted(){
 				this.users.forEach(user => {
 					fetch('/hello/initStaffClock',{
 						  method: 'POST',

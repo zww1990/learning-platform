@@ -1,5 +1,10 @@
 package com.example.test.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +23,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.test.model.ApplicationProperties;
+import com.example.test.model.ApplicationProperties.Address;
 import com.example.test.model.ResponseBody;
 import com.example.test.model.UserLogin;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,6 +54,43 @@ public class HelloController {
 	private ObjectMapper objectMapper;
 	@Resource
 	private ApplicationProperties properties;
+
+	@GetMapping("/addresses")
+	public ResponseBody<List<Address>> getAddresses() {
+		Path path = Paths.get("addresses.json");
+		if (Files.isReadable(path)) {
+			try {
+				List<Address> list = this.objectMapper.readValue(Files.newInputStream(path),
+						this.objectMapper.getTypeFactory().constructParametricType(List.class, Address.class));
+				log.info("从本地磁盘中加载配置成功==>>{}", path);
+				if (list.isEmpty()) {
+					list = this.properties.getAddresses();
+					Files.write(path, this.objectMapper.writeValueAsBytes(list), StandardOpenOption.WRITE);
+				}
+				return new ResponseBody<List<Address>>()//
+						.setCode(HttpStatus.OK.value())//
+						.setStatus(1)//
+						.setData(list);
+			} catch (IOException e) {
+				log.warn("从本地磁盘中加载配置失败==>>{}", path);
+				return new ResponseBody<List<Address>>()//
+						.setCode(HttpStatus.OK.value())//
+						.setStatus(1)//
+						.setData(this.properties.getAddresses());
+			}
+		}
+		log.info("从当前应用中加载配置成功");
+		try {
+			Files.write(path, this.objectMapper.writeValueAsBytes(this.properties.getAddresses()),
+					StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			log.warn(e.getLocalizedMessage(), e);
+		}
+		return new ResponseBody<List<Address>>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(1)//
+				.setData(this.properties.getAddresses());
+	}
 
 	@PostMapping("/initStaffClock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {

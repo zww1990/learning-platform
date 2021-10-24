@@ -21,4 +21,17 @@ app:
   bi-sql-exec-url: http://server.yuzhilin.net.cn/bisearchecharts/bisql/exec
   bi-sql-source-id: 5
   select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' ORDER BY create_time DESC"
+  addresses:
+  - id: 1
+    address: 北京市海淀区花园东路11号
+    longitude: '116.3690760'
+    latitude: '39.9802720'
+  - id: 2
+    address: 石家庄海河道168号
+    longitude: '114.6222430'
+    latitude: '38.0476450'
+  - id: 3
+    address: 石家庄桥西区物联网大厦c座
+    longitude: '114.4414380'
+    latitude: '38.0165270'
 
