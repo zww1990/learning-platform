@@ -34,4 +34,29 @@ app:
     address: 石家庄桥西区物联网大厦c座
     longitude: '114.4414380'
     latitude: '38.0165270'
+  users:
+  - user-no: 100245
+    username: 王哲
+    password: 123456
+  - user-no: 100232
+    username: 李米盛
+    password: 123456
+  - user-no: 100226
+    username: 刘常富
+    password: 123456
+  - user-no: 100246
+    username: 李贺彦
+    password: 123456
+  - user-no: 100627
+    username: 关晓鹏
+    password: 123456
+  - user-no: 100230
+    username: 张维维
+    password: 123456
+  - user-no: 100261
+    username: 张东丽
+    password: 123456
+  - user-no: 100266
+    username: 曹志敏
+    password: 123456
 

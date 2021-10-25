@@ -32,6 +32,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.test.model.ApplicationProperties;
 import com.example.test.model.ApplicationProperties.Address;
+import com.example.test.model.ApplicationProperties.UserInfo;
 import com.example.test.model.ResponseBody;
 import com.example.test.model.UserLogin;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -54,6 +55,36 @@ public class HelloController {
 	private ObjectMapper objectMapper;
 	@Resource
 	private ApplicationProperties properties;
+
+	@GetMapping("/users")
+	public ResponseBody<List<UserInfo>> getUsers() {
+		Path path = Paths.get("users.json");
+		if (Files.isReadable(path)) {
+			try {
+				List<UserInfo> list = this.objectMapper.readValue(Files.newInputStream(path),
+						this.objectMapper.getTypeFactory().constructParametricType(List.class, UserInfo.class));
+				log.info("从本地磁盘中加载配置成功==>>{}", path);
+				if (list.isEmpty()) {
+					list = this.properties.getUsers();
+				}
+				return new ResponseBody<List<UserInfo>>()//
+						.setCode(HttpStatus.OK.value())//
+						.setStatus(1)//
+						.setData(list);
+			} catch (IOException e) {
+				log.warn("从本地磁盘中加载配置失败==>>{}", path);
+				return new ResponseBody<List<UserInfo>>()//
+						.setCode(HttpStatus.OK.value())//
+						.setStatus(1)//
+						.setData(this.properties.getUsers());
+			}
+		}
+		log.info("从当前应用中加载配置成功");
+		return new ResponseBody<List<UserInfo>>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(1)//
+				.setData(this.properties.getUsers());
+	}
 
 	@GetMapping("/addresses")
 	public ResponseBody<List<Address>> getAddresses() {
