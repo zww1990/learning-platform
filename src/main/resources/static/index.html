@@ -152,23 +152,15 @@
 				dialog: false,
 			},
 			async mounted(){
-				let response = await fetch('/hello/addresses');
-				let json = await response.json();
-				this.addresses = json.data;
-				this.users = [
-					{userNo:'100245', password:'123456', username:'王哲',  status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100232', password:'123456', username:'李米盛', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100226', password:'123456', username:'刘常富', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100246', password:'123456', username:'李贺彦', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100627', password:'123456', username:'关晓鹏', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100230', password:'123456', username:'张维维', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100261', password:'123456', username:'张东丽', status:null, message:null, addr:this.addresses[0], staffClock:null},
-					{userNo:'100266', password:'123456', username:'曹志敏', status:null, message:null, addr:this.addresses[0], staffClock:null},
-				];
+				let json1 = await (await fetch('/hello/addresses')).json();
+				this.addresses = json1.data;
+				let json2 = await (await fetch('/hello/users')).json();
+				this.users = json2.data;
+				let addr = this.addresses[0];
 				this.users.forEach(user => {
 					fetch('/hello/initStaffClock',{
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...user.addr}),
+						  body: JSON.stringify({...user, ...addr}),
 						  headers: new Headers({
 						    'Content-Type': 'application/json'
 						  })
@@ -178,6 +170,7 @@
 						user.status = res.status;
 						user.message = res.message;
 						user.staffClock = res.data;
+						user.addr = addr;
 					});
 				});
 			},

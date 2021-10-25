@@ -82,4 +82,14 @@ public class HelloControllerTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testGetUsers() {
+		try {
+			System.err
+					.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(controller.getUsers().getData()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
