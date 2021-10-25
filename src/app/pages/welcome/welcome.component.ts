@@ -22,28 +22,16 @@ export class WelcomeComponent implements OnInit {
               private notificationService: NzNotificationService) {
   }
 
-  ngOnInit() {
-    this.addresses = [
-      {id: 1, address: '北京市海淀区花园东路11号', longitude: "116.3690760", latitude: "39.9802720"},
-      {id: 2, address: '石家庄海河道168号', longitude: "114.6222430", latitude: "38.0476450"},
-      {id: 3, address: '石家庄桥西区物联网大厦c座', longitude: "114.4414380", latitude: "38.0165270"},
-    ];
-    this.users = [
-      {userNo: '100245', password: '123456', username: '王哲', addr: this.addresses[0]},
-      {userNo: '100232', password: '123456', username: '李米盛', addr: this.addresses[0]},
-      {userNo: '100226', password: '123456', username: '刘常富', addr: this.addresses[0]},
-      {userNo: '100246', password: '123456', username: '李贺彦', addr: this.addresses[0]},
-      {userNo: '100627', password: '123456', username: '关晓鹏', addr: this.addresses[0]},
-      {userNo: '100230', password: '123456', username: '张维维', addr: this.addresses[0]},
-      {userNo: '100261', password: '123456', username: '张东丽', addr: this.addresses[0]},
-      {userNo: '100266', password: '123456', username: '曹志敏', addr: this.addresses[0]},
-    ];
+  async ngOnInit() {
+    this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
+    this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
     this.users.forEach(user => {
       this.http.post('/hello/initStaffClock', user)
         .subscribe((response: ResponseBody<AppStaffClockLog>) => {
           user.message = response.message;
           user.status = response.status;
           user.staffClock = response.data;
+          user.addr = this.addresses[0];
         })
     })
   }
