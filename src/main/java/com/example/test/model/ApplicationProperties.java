@@ -1,5 +1,6 @@
 package com.example.test.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,8 @@ public class ApplicationProperties {
 	public static class Address {
 		private Integer id;
 		private String address;
-		private String longitude;
-		private String latitude;
+		private BigDecimal longitude;
+		private BigDecimal latitude;
 	}
 
 	@Getter
