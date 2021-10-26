@@ -89,7 +89,7 @@ public class HelloController {
 	@GetMapping("/addresses")
 	public ResponseBody<List<Address>> getAddresses() {
 		Path path = Paths.get("addresses.json");
-		if (Files.isReadable(path)) {
+		if (Files.isReadable(path) && Files.isWritable(path)) {
 			try {
 				List<Address> list = this.objectMapper.readValue(Files.newInputStream(path),
 						this.objectMapper.getTypeFactory().constructParametricType(List.class, Address.class));
@@ -97,6 +97,8 @@ public class HelloController {
 				if (list.isEmpty()) {
 					list = this.properties.getAddresses();
 					Files.write(path, this.objectMapper.writeValueAsBytes(list), StandardOpenOption.WRITE);
+				} else {
+					this.properties.setAddresses(list);
 				}
 				return new ResponseBody<List<Address>>()//
 						.setCode(HttpStatus.OK.value())//
@@ -111,16 +113,51 @@ public class HelloController {
 			}
 		}
 		log.info("从当前应用中加载配置成功");
-		try {
-			Files.write(path, this.objectMapper.writeValueAsBytes(this.properties.getAddresses()),
-					StandardOpenOption.CREATE);
-		} catch (IOException e) {
-			log.warn(e.getLocalizedMessage(), e);
-		}
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(1)//
 				.setData(this.properties.getAddresses());
+	}
+
+	@PostMapping("/saveaddress")
+	public ResponseBody<?> saveAddress(@RequestBody Address address) {
+		if (!StringUtils.hasText(address.getAddress())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[address]不能为空");
+		}
+		if (address.getLatitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[latitude]不能为空");
+		}
+		if (address.getLongitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[longitude]不能为空");
+		}
+		if (address.getId() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[id]不能为空");
+		}
+		log.info("{}", address);
+		this.properties.getAddresses().add(address);
+		Path path = Paths.get("addresses.json");
+		try {
+			Files.write(path, this.objectMapper.writeValueAsBytes(this.properties.getAddresses()),
+					StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+			log.info("写入文件成功==>>{}", path);
+		} catch (IOException e) {
+			log.warn("写入文件失败==>>{}", path);
+		}
+		return new ResponseBody<List<Address>>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(1);
 	}
 
 	@PostMapping("/initStaffClock")

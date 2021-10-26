@@ -16,7 +16,8 @@
 				<v-container>
 				  <v-row>
 					  <v-col>
-					  	<v-btn color="primary" @click="addRow()">添加</v-btn>
+					  	<v-btn color="primary" @click="addRow()">添加员工</v-btn>
+					  	<v-btn color="primary" @click="open()">添加地址</v-btn>
 					  </v-col>
 				  </v-row>
 				  <v-row>
@@ -44,9 +45,10 @@
 							          	v-if="user.edited"
 							          	clearable>
 						          	</v-text-field>
-						          	<span v-else>
+						          	<span v-else-if="user.status === 1">
 						          		<a @click="showList(user)">{{ user.userNo }}</a>
 						          	</span>
+						          	<span v-else>{{ user.userNo }}</span>
 						          </td>
 						          <td>
 						          	<v-text-field 
@@ -77,8 +79,12 @@
 							              return-object>
 						              </v-select>
 						          </td>
-						          <td>{{user?.staffClock?.clockTimeMin||'无'}}/{{user?.staffClock?.clockWorkOnStatusName||'无'}}</td>
-						          <td>{{user?.staffClock?.clockTimeMax||'无'}}/{{user?.staffClock?.clockWorkOffStatusName||'无'}}</td>
+						          <td>
+						          	{{user?.staffClock?.clockTimeMin||'无'}}/{{user?.staffClock?.clockWorkOnStatusName||'无'}}
+						          </td>
+						          <td>
+						          	{{user?.staffClock?.clockTimeMax||'无'}}/{{user?.staffClock?.clockWorkOffStatusName||'无'}}
+						          </td>
 						          <td>
 						          	<v-btn color="success" @click="gotoWork(user)" v-if="user.status === 1">打卡</v-btn>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
@@ -92,7 +98,7 @@
 			      <v-dialog transition="dialog-bottom-transition" v-model="dialog">
 			          <v-card>
 			            <v-toolbar color="purple">
-			            	{{user?.username}}打卡记录{{logList.length}}条
+			            	{{user?.username}}打卡记录{{logList?.length}}条
 			            	<v-spacer></v-spacer>
 			            	<v-btn icon @click="dialog = false">
 			            		<v-icon>mdi-close</v-icon>
@@ -107,7 +113,7 @@
 						          <th class="text-left">员工编号</th>
 						          <th class="text-left">打卡时间</th>
 						          <th class="text-left">经度</th>
-						          <th class="text-left">维度</th>
+						          <th class="text-left">纬度</th>
 						          <th class="text-left">打卡地址</th>
 						          <th class="text-left">打卡类型</th>
 						          <th class="text-left">创建时间</th>
@@ -130,6 +136,53 @@
 			            </v-card-text>
 			          </v-card>
 			      </v-dialog>
+				    <v-dialog v-model="addrDialog" persistent max-width="400px" transition="dialog-top-transition">
+				      <v-card>
+				      	<v-form ref="form" lazy-validation>
+					        <v-toolbar color="purple">
+					          <span class="text-h5">公司地址</span>
+					        </v-toolbar>
+					        <v-card-text>
+					          <v-container>
+					            <v-row>
+					              <v-col cols="12">
+					                <v-text-field 
+						                label="经度*" 
+						                required 
+						                v-model="addr.longitude" 
+						                :rules="validation.longitudeRules"
+						                clearable>
+					                </v-text-field>
+					              </v-col>
+					              <v-col cols="12">
+					                <v-text-field 
+						                label="纬度*" 
+						                required 
+						                v-model="addr.latitude" 
+						                :rules="validation.latitudeRules"
+						                clearable>
+					                </v-text-field>
+					              </v-col>
+					              <v-col cols="12">
+					                <v-text-field 
+						                label="地址*" 
+						                required 
+						                v-model="addr.address" 
+						                :rules="validation.addressRules"
+						                clearable>
+					                </v-text-field>
+					              </v-col>
+					            </v-row>
+					          </v-container>
+					        </v-card-text>
+					        <v-card-actions>
+					          <v-spacer></v-spacer>
+					          <v-btn color="green darken-1" text @click="close()">关闭</v-btn>
+					          <v-btn color="green darken-1" text @click="save()">保存</v-btn>
+					        </v-card-actions>
+				        </v-form>
+				      </v-card>
+				    </v-dialog>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -148,8 +201,20 @@
 				users: [],
 				user: null,
 				addresses: [],
+				addr: {
+					id: null,
+					address: null,
+					longitude: null,
+					latitude: null,
+				},
+				validation: {
+					longitudeRules: [v => !!v || '经度必须填'],
+					latitudeRules: [v => !!v || '纬度必须填'],
+					addressRules: [v => !!v || '地址必须填'],
+				},
 				logList: [],
 				dialog: false,
+				addrDialog: false,
 			},
 			async mounted(){
 				let json1 = await (await fetch('/hello/addresses')).json();
@@ -161,9 +226,7 @@
 					fetch('/hello/initStaffClock',{
 						  method: 'POST',
 						  body: JSON.stringify({...user, ...addr}),
-						  headers: new Headers({
-						    'Content-Type': 'application/json'
-						  })
+						  headers: new Headers({'Content-Type': 'application/json'})
 					})
 					.then(res => res.json())
 					.then(res => {
@@ -191,9 +254,7 @@
 					fetch('/hello/userLoginAndStaffClock', {
 						  method: 'POST',
 						  body: JSON.stringify({...user, ...user.addr}),
-						  headers: new Headers({
-						    'Content-Type': 'application/json'
-						  })
+						  headers: new Headers({'Content-Type': 'application/json'})
 					})
 					.then(res => res.json())
 					.then(res => {
@@ -214,17 +275,38 @@
 						staffClock: null
 					});
 				},
+				open(){
+					this.addrDialog = true;
+				},
+				close(){
+					this.addrDialog = false;
+			        this.$refs.form.reset();
+				},
+				save() {
+					if(this.$refs.form.validate()){
+						this.addr.id = this.addresses.length + 1;
+						fetch('/hello/saveaddress',{
+							  method: 'POST',
+							  body: JSON.stringify(this.addr),
+							  headers: new Headers({'Content-Type': 'application/json'})
+						})
+						.then(res => res.json())
+						.then(res => {
+							console.log(res);
+						});
+						this.addresses.push({...this.addr});
+						this.close();
+					}
+		        },
 				showList(user){
 					fetch('/hello/selectAppStaffClockLogList',{
 						  method: 'POST',
 						  body: JSON.stringify(user),
-						  headers: new Headers({
-						    'Content-Type': 'application/json'
-						  })
+						  headers: new Headers({'Content-Type': 'application/json'})
 					})
 					.then(res => res.json())
 					.then(res => {
-						this.logList = res.data;
+						this.logList = res.data || [];
 						this.user = user;
 						this.dialog = true;
 					});
