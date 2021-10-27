@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Address, AppStaffClockLog, User} from "./user";
 import {HttpClient} from "@angular/common/http";
-import {ResponseBody} from "../../shared/response-body";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzNotificationService} from "ng-zorro-antd/notification";
+import {Address, AppStaffClockLog, User} from "./user";
+import {ResponseBody} from "../../shared/response-body";
 
 @Component({
   selector: 'app-welcome',
@@ -14,12 +15,21 @@ export class WelcomeComponent implements OnInit {
   users: User[];
   addresses: Address[];
   isVisible = false;
+  isAddrVisible = false;
   title: string;
   logList: AppStaffClockLog[];
+  validateForm: FormGroup;
 
   constructor(private http: HttpClient,
               private messageService: NzMessageService,
-              private notificationService: NzNotificationService) {
+              private notificationService: NzNotificationService,
+              private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      address: [null, [Validators.required]],
+      longitude: [null, [Validators.required]],
+      latitude: [null, [Validators.required]],
+      id: null
+    });
   }
 
   async ngOnInit() {
@@ -73,7 +83,7 @@ export class WelcomeComponent implements OnInit {
   showList(user: User) {
     this.http.post('/hello/selectAppStaffClockLogList', user)
       .subscribe((response: ResponseBody<AppStaffClockLog[]>) => {
-        this.logList = response.data;
+        this.logList = response.data || [];
         this.title = `${user.username}打卡记录${this.logList.length}条`;
         this.isVisible = true;
       })
@@ -85,5 +95,34 @@ export class WelcomeComponent implements OnInit {
 
   handleOk() {
     this.isVisible = false;
+  }
+
+  open() {
+    this.isAddrVisible = true;
+  }
+
+  submitForm(value: Address) {
+    for (const key in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(key)) {
+        this.validateForm.controls[key].markAsDirty();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+    }
+    if (this.validateForm.valid) {
+      value.id = this.addresses.length + 1;
+      this.addresses.push(value);
+      this.isAddrVisible = false;
+    }
+  }
+
+  resetForm() {
+    this.isAddrVisible = false;
+    this.validateForm.reset();
+    for (const key in this.validateForm.controls) {
+      if (this.validateForm.controls.hasOwnProperty(key)) {
+        this.validateForm.controls[key].markAsPristine();
+        this.validateForm.controls[key].updateValueAndValidity();
+      }
+    }
   }
 }

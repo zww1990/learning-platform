@@ -12,8 +12,8 @@ export class User {
 export class Address {
   id: number;
   address: string;
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
 }
 
 export class AppStaffClockLog {
