@@ -96,7 +96,8 @@ public class HelloController {
 				log.info("从本地磁盘中加载配置成功==>>{}", path);
 				if (list.isEmpty()) {
 					list = this.properties.getAddresses();
-					Files.write(path, this.objectMapper.writeValueAsBytes(list), StandardOpenOption.WRITE);
+					Files.write(path, this.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(list),
+							StandardOpenOption.WRITE);
 				} else {
 					this.properties.setAddresses(list);
 				}
@@ -149,7 +150,9 @@ public class HelloController {
 		this.properties.getAddresses().add(address);
 		Path path = Paths.get("addresses.json");
 		try {
-			Files.write(path, this.objectMapper.writeValueAsBytes(this.properties.getAddresses()),
+			Files.write(path,
+					this.objectMapper.writerWithDefaultPrettyPrinter()
+							.writeValueAsBytes(this.properties.getAddresses()),
 					StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 			log.info("写入文件成功==>>{}", path);
 		} catch (IOException e) {
