@@ -10,19 +10,31 @@
 	</head>
 	<body>
 		<div id="app">
+			<br>
 			<van-row gutter="20" justify="center">
 			  <van-col span="8">
-				<van-button type="primary" @click="addRow()">添加员工</van-button>
+				<van-button type="primary" @click="openStaffDialog()">添加员工</van-button>
 			  </van-col>
 			  <van-col span="8">
-				<van-button type="primary" @click="open()">添加地址</van-button>
+				<van-button type="primary" @click="openAddressDialog()">添加地址</van-button>
 			  </van-col>
 			</van-row>
-			<van-dialog v-model:show="show" title="添加员工" show-cancel-button theme="round-button">
-			  <van-form @submit="onSubmit">
+			<van-dialog 
+				v-model:show="showStaffDialog" 
+				title="添加员工" 
+				show-cancel-button 
+				theme="round-button"
+				@confirm="staffDialogConfirm()"
+				@cancel="staffDialogCancel()"
+				:before-close="staffDialogClose">
+			  <van-form 
+				  ref="staffForm"
+				  @submit="staffFormSubmit" 
+				  @failed="staffFormFailed">
 				  <van-cell-group inset style="height: 68px;">
 				    <van-field
 				      v-model="user.userNo"
+				      name="userNo"
 				      label="员工编号"
 				      placeholder="请输入员工编号"
 				      :rules="[{ required: true, message: '请输入员工编号' }]"
@@ -34,6 +46,7 @@
 				  <van-cell-group inset style="height: 68px;">
 				    <van-field
 				      v-model="user.username"
+				      name="username"
 				      label="员工姓名"
 				      placeholder="请输入员工姓名"
 				      :rules="[{ required: true, message: '请输入员工姓名' }]"
@@ -45,10 +58,63 @@
 				  <van-cell-group inset style="height: 68px;">
 				    <van-field
 				      v-model="user.password"
+				      name="password"
 				      type="password"
 				      label="员工密码"
 				      placeholder="请输入员工密码"
 				      :rules="[{ required: true, message: '请输入员工密码' }]"
+				      required
+				      colon
+				      clearable
+				    />
+				  </van-cell-group>
+			  </van-form>
+			</van-dialog>
+			<van-dialog 
+				v-model:show="showAddressDialog" 
+				title="添加地址" 
+				show-cancel-button 
+				theme="round-button"
+				@confirm="addressDialogConfirm()"
+				@cancel="addressDialogCancel()"
+				:before-close="addressDialogClose">
+			  <van-form 
+				  ref="addressForm" 
+				  @submit="addressFormSubmit" 
+				  @failed="addressFormFailed">
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.longitude"
+				      name="longitude"
+				      label="经度"
+				      placeholder="请输入经度"
+				      :rules="[{ required: true, message: '请输入经度' }]"
+				      required
+				      colon
+				      clearable
+				      type="number"
+				    />
+				  </van-cell-group>
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.latitude"
+				      name="latitude"
+				      label="纬度"
+				      placeholder="请输入纬度"
+				      :rules="[{ required: true, message: '请输入纬度' }]"
+				      required
+				      colon
+				      clearable
+				      type="number"
+				    />
+				  </van-cell-group>
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.address"
+				      name="address"
+				      label="地址"
+				      placeholder="请输入地址"
+				      :rules="[{ required: true, message: '请输入地址' }]"
 				      required
 				      colon
 				      clearable
@@ -65,19 +131,79 @@
 		Vue.createApp({
 		  data() {
 		    return {
-		    	show: false,
+		    	showStaffDialog: false,
+		    	showAddressDialog: false,
 		    	user: {},
+		    	addr: {},
 		    }
 		  },
 		  mounted() {
 		  },
 		  methods:{
-			  addRow(){
-				  this.show = true;
+			  //打开员工对话框
+			  openStaffDialog(){
+				  this.showStaffDialog = true;
 			  },
-			  open(){
-				  this.show = true;
-			  }
+			  //员工对话框确认按钮
+			  staffDialogConfirm(){
+				  //员工表单提交
+				  this.$refs.staffForm.submit();
+			  },
+			  //员工对话框取消按钮
+			  staffDialogCancel(){
+				  //员工表单重置验证
+				  this.$refs.staffForm.resetValidation();
+				  this.user = {};
+			  },
+			  //员工表单验证通过
+			  staffFormSubmit(values){
+				  console.log(values);
+				  //关闭员工对话框
+				  this.showStaffDialog = false;
+			  },
+			  //员工表单验证不通过
+			  staffFormFailed(errorInfo){
+				  console.log(errorInfo);
+				  //显示员工对话框
+				  this.showStaffDialog = true;
+			  },
+			  //员工对话框关闭之前
+			  staffDialogClose(action){
+				  //如果是取消按钮,始终允许关闭
+				  return action === 'cancel' ? true : !this.showStaffDialog;
+			  },
+			  //打开地址对话框
+			  openAddressDialog(){
+				  this.showAddressDialog = true;
+			  },
+			  //地址对话框确认按钮
+			  addressDialogConfirm(){
+				  //地址表单提交
+				  this.$refs.addressForm.submit();
+			  },
+			  //地址对话框取消按钮
+			  addressDialogCancel(){
+				  //地址表单重置验证
+				  this.$refs.addressForm.resetValidation();
+				  this.addr = {};
+			  },
+			  //地址表单验证通过
+			  addressFormSubmit(values){
+				  console.log(values);
+				  //关闭地址对话框
+				  this.showAddressDialog = false;
+			  },
+			  //地址表单验证不通过
+			  addressFormFailed(errorInfo){
+				  console.log(errorInfo);
+				  //显示地址对话框
+				  this.showAddressDialog = true;
+			  },
+			  //地址对话框关闭之前
+			  addressDialogClose(action){
+				  //如果是取消按钮,始终允许关闭
+				  return action === 'cancel' ? true : !this.showAddressDialog;
+			  },
 		  }
 		})
 		.use(vant)
