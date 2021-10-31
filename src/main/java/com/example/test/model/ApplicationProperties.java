@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,9 +41,5 @@ public class ApplicationProperties {
 		private String userNo;
 		private String password;
 		private String username;
-		private Integer status;
-		private String message;
-		private Address addr;
-		private AppStaffClockLogDTO staffClock;
 	}
 }
