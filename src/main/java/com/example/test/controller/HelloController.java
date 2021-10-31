@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -47,7 +48,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/hello")
 @Slf4j
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class HelloController {
 	@Resource
 	private RestTemplate restTemplate;
@@ -313,8 +314,13 @@ public class HelloController {
 		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId())
 				.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo()));
 		log.info("{}", sqlExecQuery);
-		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
-				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
+		ResponseBody<List<Map<String, Object>>> body = this.restTemplate
+				.postForEntity(this.properties.getBiSqlExecUrl(), new HttpEntity<>(sqlExecQuery, headers),
+						ResponseBody.class)
+				.getBody();
+		Optional.ofNullable(body)//
+				.map(ResponseBody::getData)//
+				.ifPresent(c -> c.forEach(m -> m.put("username", userLogin.getUsername())));
 		return body;
 	}
 }

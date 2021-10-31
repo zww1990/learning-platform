@@ -67,8 +67,9 @@ public class HelloControllerTests {
 	@Test
 	public void testSelectAppStaffClockLogList() {
 		try {
-			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(
-					controller.selectAppStaffClockLogList(new UserLogin().setUserNo("100230").setPassword("123456"))));
+			System.err.println(
+					json.writerWithDefaultPrettyPrinter().writeValueAsString(controller.selectAppStaffClockLogList(
+							new UserLogin().setUserNo("100230").setPassword("123456").setUsername("zww"))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
