@@ -26,12 +26,14 @@
 						    <template v-slot:default>
 						      <thead>
 						        <tr>
-						          <th class="text-left" style="width: 200px;">员工编号</th>
-						          <th class="text-left" style="width: 200px;">员工姓名</th>
-						          <th class="text-left" style="width: 200px;">员工密码</th>
+						          <th class="text-left" style="width: 100px;">员工编号</th>
+						          <th class="text-left" style="width: 100px;">员工姓名</th>
+						          <th class="text-left" style="width: 100px;">员工密码</th>
 						          <th class="text-left" style="width: 300px;">公司地址</th>
-						          <th class="text-left" style="width: 200px;">上班时间/上班状态</th>
-						          <th class="text-left" style="width: 200px;">下班时间/下班状态</th>
+						          <th class="text-left" style="width: 150px;">上班时间</th>
+						          <th class="text-left" style="width: 100px;">上班状态</th>
+						          <th class="text-left" style="width: 150px;">下班时间</th>
+						          <th class="text-left" style="width: 100px;">下班状态</th>
 						          <th class="text-left" style="width: 200px;">操作</th>
 						        </tr>
 						      </thead>
@@ -40,7 +42,7 @@
 						          <td>
 						          	<v-text-field 
 							          	label="员工编号" 
-							          	placeholder="请输入员工编号" 
+							          	placeholder="员工编号" 
 							          	v-model="user.userNo" 
 							          	v-if="user.edited"
 							          	clearable>
@@ -53,7 +55,7 @@
 						          <td>
 						          	<v-text-field 
 							          	label="员工姓名" 
-							          	placeholder="请输入员工姓名" 
+							          	placeholder="员工姓名" 
 							          	v-model="user.username" 
 							          	v-if="user.edited"
 							          	clearable>
@@ -63,7 +65,7 @@
 						          <td>
 						          	<v-text-field 
 							          	label="员工密码" 
-							          	placeholder="请输入员工密码" 
+							          	placeholder="员工密码" 
 							          	v-model="user.password" 
 							          	v-if="user.edited"
 							          	clearable>
@@ -79,12 +81,10 @@
 							              return-object>
 						              </v-select>
 						          </td>
-						          <td>
-						          	{{user?.staffClock?.clockTimeMin||'无'}}/{{user?.staffClock?.clockWorkOnStatusName||'无'}}
-						          </td>
-						          <td>
-						          	{{user?.staffClock?.clockTimeMax||'无'}}/{{user?.staffClock?.clockWorkOffStatusName||'无'}}
-						          </td>
+						          <td>{{user?.staffClock?.clockTimeMin}}</td>
+						          <td>{{user?.staffClock?.clockWorkOnStatusName}}</td>
+						          <td>{{user?.staffClock?.clockTimeMax}}</td>
+						          <td>{{user?.staffClock?.clockWorkOffStatusName}}</td>
 						          <td>
 						          	<v-btn color="success" @click="gotoWork(user)" v-if="user.status === 1">打卡</v-btn>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
