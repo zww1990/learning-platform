@@ -151,7 +151,9 @@
 						                required 
 						                v-model="addr.longitude" 
 						                :rules="validation.longitudeRules"
-						                clearable>
+						                clearable
+						                type="number"
+						                min="0">
 					                </v-text-field>
 					              </v-col>
 					              <v-col cols="12">
@@ -160,7 +162,9 @@
 						                required 
 						                v-model="addr.latitude" 
 						                :rules="validation.latitudeRules"
-						                clearable>
+						                clearable
+						                type="number"
+						                min="0">
 					                </v-text-field>
 					              </v-col>
 					              <v-col cols="12">
@@ -190,7 +194,7 @@
 	</body>
 	<script src="vue/vue.min.js"></script>
 	<script src="vuetify/vuetify.min.js"></script>
-	<script src="vuetify-toast-snackbar-ng/package/dist/index.umd.min.js"></script>
+	<script src="vuetify-toast-snackbar-ng/index.umd.min.js"></script>
 	<script type="text/javascript">
 		new Vue({
 			el:'#app',
