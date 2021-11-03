@@ -48,26 +48,13 @@
 					  	</template>
 					    <van-form @submit="gotoWork(index)">
 						  <van-cell-group inset>
-						    <van-field
-						      v-model="temp.userNo"
-						      name="userNo"
-						      label="员工编号"
-						      readonly/>
+						    <van-field v-model="temp.userNo" name="userNo" label="员工编号" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      v-model="temp.username"
-						      name="username"
-						      label="员工姓名"
-						      readonly/>
+						    <van-field v-model="temp.username" name="username" label="员工姓名" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      v-model="temp.password"
-						      type="password"
-						      name="password"
-						      label="员工密码"
-						      readonly/>
+						    <van-field v-model="temp.password" type="password" name="password" label="员工密码" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
 						    <van-field
@@ -80,49 +67,30 @@
 							  @click="openPicker(index)"/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      :model-value="temp.staffClock?.clockTimeMin"
-						      label="上班时间"
-						      readonly/>
+						    <van-field :model-value="temp.staffClock?.clockTimeMin" label="上班时间" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      :model-value="temp.staffClock?.clockWorkOnStatusName"
-						      label="上班状态"
-						      readonly/>
+						    <van-field :model-value="temp.staffClock?.clockWorkOnStatusName" label="上班状态" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      :model-value="temp.staffClock?.clockTimeMax"
-						      label="下班时间"
-						      readonly/>
+						    <van-field :model-value="temp.staffClock?.clockTimeMax" label="下班时间" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field
-						      :model-value="temp.staffClock?.clockWorkOffStatusName"
-						      label="下班状态"
-						      readonly/>
+						    <van-field :model-value="temp.staffClock?.clockWorkOffStatusName" label="下班状态" readonly/>
 						  </van-cell-group>
 						  <div style="margin: 16px;" v-if="temp.status === 1">
-						    <van-button 
-							    round 
-							    block 
-							    type="primary" 
-							    native-type="submit">打卡</van-button>
-							    <br>
-						    <van-button 
-							    round 
-							    block 
-							    type="success" 
-							    native-type="button"
-							    @click="showList(index)">打卡记录</van-button>
+						    <van-button round block type="primary" native-type="submit">打卡</van-button>
+							<br>
+						    <van-button round block type="success" native-type="button" @click="showList(index)">
+						    	打卡记录
+						    </van-button>
 						  </div>
 						</van-form>
 					  </van-tab>
 					</van-tabs>
 				</van-col>
 			</van-row>
-			<van-popup v-model:show="showPicker" position="bottom" round>
+			<van-popup v-model:show="showPicker" position="bottom" round :lazy-render="false">
 			  <van-picker
 			    :columns="pickerColumns"
 			    @confirm="pickerConfirm"
@@ -152,10 +120,7 @@
 				@confirm="staffDialogConfirm()"
 				@cancel="staffDialogCancel()"
 				:before-close="staffDialogClose">
-			  <van-form 
-				  ref="staffForm"
-				  @submit="staffFormSubmit" 
-				  @failed="staffFormFailed">
+			  <van-form ref="staffForm" @submit="staffFormSubmit" @failed="staffFormFailed">
 				  <van-cell-group inset style="height: 68px;">
 				    <van-field
 				      v-model="user.userNo"
@@ -200,10 +165,7 @@
 				@confirm="addressDialogConfirm()"
 				@cancel="addressDialogCancel()"
 				:before-close="addressDialogClose">
-			  <van-form 
-				  ref="addressForm" 
-				  @submit="addressFormSubmit" 
-				  @failed="addressFormFailed">
+			  <van-form ref="addressForm" @submit="addressFormSubmit" @failed="addressFormFailed">
 				  <van-cell-group inset style="height: 68px;">
 				    <van-field
 				      v-model="addr.longitude"
