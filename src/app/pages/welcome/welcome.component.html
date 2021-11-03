@@ -9,43 +9,47 @@
           [nzShowPagination]="false">
   <thead>
   <tr>
-    <th nzWidth="200px">员工编号</th>
-    <th nzWidth="200px">员工姓名</th>
-    <th nzWidth="200px">员工密码</th>
+    <th nzWidth="100px">员工编号</th>
+    <th nzWidth="100px">员工姓名</th>
+    <th nzWidth="100px">员工密码</th>
     <th nzWidth="200px">公司地址</th>
-    <th nzWidth="200px">上班时间/上班状态</th>
-    <th nzWidth="200px">下班时间/下班状态</th>
+    <th nzWidth="150px">上班时间</th>
+    <th nzWidth="100px">上班状态</th>
+    <th nzWidth="150px">下班时间</th>
+    <th nzWidth="100px">下班状态</th>
     <th nzWidth="200px">操作</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of basicTable.data">
     <td>
-      <input nz-input placeholder="请输入员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
+      <input nz-input placeholder="员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
       <ng-template #userno>
         <a (click)="showList(data)" *ngIf="data.status === 1; else elseBlockChild">{{data.userNo}}</a>
         <ng-template #elseBlockChild>{{data.userNo}}</ng-template>
       </ng-template>
     </td>
     <td>
-      <input nz-input placeholder="请输入员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
+      <input nz-input placeholder="员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
       <ng-template #username>{{data.username}}</ng-template>
     </td>
     <td>
-      <input nz-input placeholder="请输入员工密码" [(ngModel)]="data.password" *ngIf="data.edited; else password"/>
+      <input nz-input placeholder="员工密码" [(ngModel)]="data.password" *ngIf="data.edited; else password"/>
       <ng-template #password>******</ng-template>
     </td>
     <td>
-      <nz-select [(ngModel)]="data.addr" [nzDropdownMatchSelectWidth]="false" [compareWith]="compareFn">
+      <nz-select
+        [(ngModel)]="data.addr"
+        [nzDropdownMatchSelectWidth]="false"
+        [compareWith]="compareFn"
+        style="width: 200px">
         <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
       </nz-select>
     </td>
-    <td>
-      {{data?.staffClock?.clockTimeMin|defaultValue}}/{{data?.staffClock?.clockWorkOnStatusName|defaultValue}}
-    </td>
-    <td>
-      {{data?.staffClock?.clockTimeMax|defaultValue}}/{{data?.staffClock?.clockWorkOffStatusName|defaultValue}}
-    </td>
+    <td>{{data?.staffClock?.clockTimeMin}}</td>
+    <td>{{data?.staffClock?.clockWorkOnStatusName}}</td>
+    <td>{{data?.staffClock?.clockTimeMax}}</td>
+    <td>{{data?.staffClock?.clockWorkOffStatusName}}</td>
     <td>
       <button
         nz-button
