@@ -20,7 +20,9 @@ export class AppStaffClockLog {
   clockTimeMax?: string;
   clockTimeMin?: string;
   clockWorkOffStatusName?: string;
+  clockWorkOffStatus?: number;
   clockWorkOnStatusName?: string;
+  clockWorkOnStatus?: number;
   id: number;
   staff_no: string;
   clock_time: string;
