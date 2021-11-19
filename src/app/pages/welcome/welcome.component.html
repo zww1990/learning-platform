@@ -47,9 +47,31 @@
       </nz-select>
     </td>
     <td>{{data?.staffClock?.clockTimeMin}}</td>
-    <td>{{data?.staffClock?.clockWorkOnStatusName}}</td>
+    <td>
+      <span *ngIf="data?.staffClock?.clockWorkOnStatus === null; else clockworkonstatus"></span>
+      <ng-template #clockworkonstatus>
+        <nz-avatar
+          [nzText]="data?.staffClock?.clockWorkOnStatusName"
+          *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild"
+          style="background-color: green;"></nz-avatar>
+        <ng-template #clockworkonstatusChild>
+          <nz-avatar [nzText]="data?.staffClock?.clockWorkOnStatusName" style="background-color: red;"></nz-avatar>
+        </ng-template>
+      </ng-template>
+    </td>
     <td>{{data?.staffClock?.clockTimeMax}}</td>
-    <td>{{data?.staffClock?.clockWorkOffStatusName}}</td>
+    <td>
+      <span *ngIf="data?.staffClock?.clockWorkOffStatus === null; else clockworkoffstatus"></span>
+      <ng-template #clockworkoffstatus>
+        <nz-avatar
+          [nzText]="data?.staffClock?.clockWorkOffStatusName"
+          *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild"
+          style="background-color: green;"></nz-avatar>
+        <ng-template #clockworkoffstatusChild>
+          <nz-avatar [nzText]="data?.staffClock?.clockWorkOffStatusName" style="background-color: red;"></nz-avatar>
+        </ng-template>
+      </ng-template>
+    </td>
     <td>
       <button
         nz-button
