@@ -82,9 +82,25 @@
 						              </v-select>
 						          </td>
 						          <td>{{user?.staffClock?.clockTimeMin}}</td>
-						          <td>{{user?.staffClock?.clockWorkOnStatusName}}</td>
+						          <td>
+						          	<span v-if="user?.staffClock?.clockWorkOnStatus == null"></span>
+						          	<v-avatar color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
+						          		{{user?.staffClock?.clockWorkOnStatusName}}
+								    </v-avatar>
+						          	<v-avatar color="red" v-else>
+						          		{{user?.staffClock?.clockWorkOnStatusName}}
+								    </v-avatar>
+						          </td>
 						          <td>{{user?.staffClock?.clockTimeMax}}</td>
-						          <td>{{user?.staffClock?.clockWorkOffStatusName}}</td>
+						          <td>
+						          	<span v-if="user?.staffClock?.clockWorkOffStatus == null"></span>
+						          	<v-avatar color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
+						          		{{user?.staffClock?.clockWorkOffStatusName}}
+								    </v-avatar>
+						          	<v-avatar color="red" v-else>
+						          		{{user?.staffClock?.clockWorkOffStatusName}}
+								    </v-avatar>
+						          </td>
 						          <td>
 						          	<v-btn color="success" @click="gotoWork(user)" v-if="user.status === 1">打卡</v-btn>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
