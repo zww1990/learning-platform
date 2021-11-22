@@ -4,8 +4,21 @@ server:
     jsp:
       registered: false
 spring:
+  aop:
+    auto: false
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
   main:
     web-application-type: servlet
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
 
 app:
 #  测试环境
@@ -55,8 +68,5 @@ app:
     password: 123456
   - user-no: 100261
     username: 张东丽
-    password: 123456
-  - user-no: 100266
-    username: 曹志敏
     password: 123456
 
