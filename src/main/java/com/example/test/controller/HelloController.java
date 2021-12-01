@@ -192,10 +192,15 @@ public class HelloController {
 		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
 		try {
-			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
-					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
-			return resp;
+			ResponseBody<Object> body = this.objectMapper.readValue(json, ResponseBody.class);
+			if (StringUtils.hasText(String.valueOf(body.getData()))) {
+				AppStaffClockLogDTO resp = this.objectMapper
+						.readValue(AESUtil.decryptAES(String.valueOf(body.getData())), AppStaffClockLogDTO.class);
+				return body.setData(resp);
+			}
+			return body;
 		} catch (JsonProcessingException e) {
+			log.error(e.getLocalizedMessage(), e);
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
 					.setStatus(0)//
@@ -261,22 +266,28 @@ public class HelloController {
 			log.info("{}", json);
 			staffClock.put("data", AESUtil.encryptAES(json));
 		} catch (JsonProcessingException e) {
+			log.error(e.getLocalizedMessage(), e);
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
 					.setStatus(0)//
 					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
 		}
 		log.info("{}", staffClock);
-		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
+		ResponseBody<Object> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
 				new HttpEntity<>(staffClock, headers), ResponseBody.class).getBody();
 		log.info("{}", body);
 		String json = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody();
 		try {
-			ResponseBody<AppStaffClockLogDTO> resp = this.objectMapper.readValue(json, this.objectMapper
-					.getTypeFactory().constructParametricType(ResponseBody.class, AppStaffClockLogDTO.class));
-			return resp;
+			body = this.objectMapper.readValue(json, ResponseBody.class);
+			if (StringUtils.hasText(String.valueOf(body.getData()))) {
+				AppStaffClockLogDTO resp = this.objectMapper
+						.readValue(AESUtil.decryptAES(String.valueOf(body.getData())), AppStaffClockLogDTO.class);
+				return body.setData(resp);
+			}
+			return body;
 		} catch (JsonProcessingException e) {
+			log.error(e.getLocalizedMessage(), e);
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
 					.setStatus(0)//
