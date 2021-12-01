@@ -47,7 +47,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/hello")
 @Slf4j
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class HelloController {
 	@Resource
 	private RestTemplate restTemplate;
