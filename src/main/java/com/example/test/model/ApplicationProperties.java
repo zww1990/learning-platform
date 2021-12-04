@@ -19,6 +19,8 @@ public class ApplicationProperties {
 	private String userLoginUrl;
 	private String staffClockUrl;
 	private String initStaffClockUrl;
+	private String deviceListUrl;
+	private String resetBindDeviceIdUrl;
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
 	private String selectAppStaffClockLogSql;

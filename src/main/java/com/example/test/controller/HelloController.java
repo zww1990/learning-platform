@@ -22,11 +22,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -163,7 +166,7 @@ public class HelloController {
 				.setStatus(1);
 	}
 
-	@PostMapping("/initStaffClock")
+	@PostMapping("/initstaffclock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
@@ -208,7 +211,7 @@ public class HelloController {
 		}
 	}
 
-	@PostMapping("/userLoginAndStaffClock")
+	@PostMapping("/userloginandstaffclock")
 	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
@@ -295,7 +298,7 @@ public class HelloController {
 		}
 	}
 
-	@PostMapping("/selectAppStaffClockLogList")
+	@PostMapping("/selectappstaffclockloglist")
 	public ResponseBody<?> selectAppStaffClockLogList(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
@@ -327,5 +330,38 @@ public class HelloController {
 		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
 				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
 		return body;
+	}
+
+	@PostMapping("/selectdevicelist")
+	public ResponseBody<?> selectDeviceList(@RequestBody UserLogin userLogin) {
+		if (!StringUtils.hasText(userLogin.getUserNo())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[userNo]不能为空");
+		}
+		log.info("{}", userLogin);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("appid", "crm");
+		ResponseBody body = this.restTemplate.exchange(this.properties.getDeviceListUrl() + userLogin.getUserNo(),
+				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
+		return body;
+	}
+
+	@PostMapping("/resetbinddevice")
+	public ResponseBody<?> resetBindDevice(@RequestParam String staffNo, @RequestParam Integer id) {
+		log.info("staffNo={}, id={}", staffNo, id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("appid", "crm");
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+		params.add("staffNo", staffNo);
+		params.add("id", id);
+		ResponseBody body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
+				new HttpEntity<>(params, headers), ResponseBody.class);
+		if (body.getStatus() != 1) {
+			return body;
+		}
+		return this.selectDeviceList(new UserLogin().setUserNo(staffNo));
 	}
 }

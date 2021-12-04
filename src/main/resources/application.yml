@@ -25,14 +25,18 @@ app:
 #  user-login-url: http://192.168.32.38:8081/oauth/user/login
 #  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
 #  init-staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/initStaffClock?staffNo=
+#  device-list-url: http://192.168.32.95:38080/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo=
+#  reset-bind-device-id-url: http://192.168.32.95:38080/appDeviceRecord/resetBindDeviceId
 #  bi-sql-exec-url: http://192.168.32.36:18077/bisql/exec
-#  bi-sql-source-id: 22
+  bi-sql-source-id: 22
 #  生产环境
   user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
   staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
   init-staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/initStaffClock?staffNo=
+  device-list-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo=
+  reset-bind-device-id-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/resetBindDeviceId
   bi-sql-exec-url: http://server.yuzhilin.net.cn/bisearchecharts/bisql/exec
-  bi-sql-source-id: 5
+#  bi-sql-source-id: 5
   select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' ORDER BY create_time DESC"
   addresses:
   - id: 1
