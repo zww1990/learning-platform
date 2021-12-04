@@ -92,4 +92,24 @@ public class HelloControllerTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testSelectDeviceList() {
+		try {
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(controller.selectDeviceList(new UserLogin().setUserNo("100222")).getData()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testResetBindDevice() {
+		try {
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(controller.resetBindDevice("100222", 157)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

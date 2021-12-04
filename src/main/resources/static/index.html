@@ -48,7 +48,7 @@
 							          	clearable>
 						          	</v-text-field>
 						          	<span v-else-if="user.status === 1">
-						          		<a @click="showList(user)">{{ user.userNo }}</a>
+						          		<a @click="showLogList(user)">{{ user.userNo }}</a>
 						          	</span>
 						          	<span v-else>{{ user.userNo }}</span>
 						          </td>
@@ -102,7 +102,10 @@
 								    </v-avatar>
 						          </td>
 						          <td>
-						          	<v-btn color="success" @click="gotoWork(user)" v-if="user.status === 1">打卡</v-btn>
+						          	<div v-if="user.status === 1">
+						          		<v-btn color="success" @click="gotoWork(user)">打卡</v-btn>
+						          		<v-btn color="success" @click="showDeviceList(user)">查看设备绑定</v-btn>
+						          	</div>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
 						          </td>
 						        </tr>
@@ -111,12 +114,12 @@
 						  </v-simple-table>
 					  </v-col>
 		          </v-row>
-			      <v-dialog transition="dialog-bottom-transition" v-model="dialog" max-width="1024px">
+			      <v-dialog transition="dialog-bottom-transition" v-model="logDialog" max-width="1024px">
 			          <v-card>
 			            <v-toolbar color="purple">
 			            	{{user?.username}}打卡记录{{logList?.length}}条
 			            	<v-spacer></v-spacer>
-			            	<v-btn icon @click="dialog = false">
+			            	<v-btn icon @click="logDialog = false">
 			            		<v-icon>mdi-close</v-icon>
 			            	</v-btn>
 			            </v-toolbar>
@@ -203,6 +206,55 @@
 				        </v-form>
 				      </v-card>
 				    </v-dialog>
+			      <v-dialog transition="dialog-bottom-transition" v-model="deviceDialog" max-width="1440px">
+			          <v-card>
+			            <v-toolbar color="purple">
+			            	{{user?.username}}设备绑定记录{{deviceList?.length}}条
+			            	<v-spacer></v-spacer>
+			            	<v-btn icon @click="deviceDialog = false">
+			            		<v-icon>mdi-close</v-icon>
+			            	</v-btn>
+			            </v-toolbar>
+			            <v-card-text>
+						  <v-simple-table dense fixed-header height="500px">
+						    <template v-slot:default>
+						      <thead>
+						        <tr>
+						          <th class="text-left">ID</th>
+						          <th class="text-left">绑定设备标识</th>
+						          <th class="text-left">手机唯一标识</th>
+						          <th class="text-left" style="width: 100px">机型</th>
+						          <th class="text-left" style="width: 100px">OS</th>
+						          <th class="text-left" style="width: 100px">OS版本</th>
+						          <th class="text-left" style="width: 100px">分辨率</th>
+						          <th class="text-left" style="width: 100px">设备推送ID</th>
+						          <th class="text-left">创建时间</th>
+						          <th class="text-left">更新时间</th>
+						          <th class="text-left">操作</th>
+						        </tr>
+						      </thead>
+						      <tbody>
+						        <tr v-for="(dev, index) in deviceList" :key="index">
+						          <td>{{dev.id}}</td>
+						          <td>{{dev.bindDeviceId}}</td>
+						          <td>{{dev.deviceId}}</td>
+						          <td>{{dev.model}}</td>
+						          <td>{{dev.systemName}}</td>
+						          <td>{{dev.systemVersion}}</td>
+						          <td>{{dev.resolution}}</td>
+						          <td>{{dev.pushId}}</td>
+						          <td>{{dev.createTime}}</td>
+						          <td>{{dev.updateTime}}</td>
+						          <td>
+						          	<v-btn color="success" @click="resetBindDevice(dev)" small>重绑</v-btn>
+						          </td>
+						        </tr>
+						      </tbody>
+						    </template>
+						  </v-simple-table>
+			            </v-card-text>
+			          </v-card>
+			      </v-dialog>
 				</v-container>
 			  </v-main>
 			</v-app>
@@ -233,8 +285,10 @@
 					addressRules: [v => !!v || '地址必须填'],
 				},
 				logList: [],
-				dialog: false,
+				logDialog: false,
 				addrDialog: false,
+				deviceList: [],
+				deviceDialog: false,
 			},
 			async mounted(){
 				let json1 = await (await fetch('/hello/addresses')).json();
@@ -243,10 +297,10 @@
 				this.users = json2.data;
 				let addr = this.addresses[0];
 				this.users.forEach(user => {
-					fetch('/hello/initStaffClock',{
+					fetch('/hello/initstaffclock',{
 						  method: 'POST',
 						  body: JSON.stringify({...user, ...addr}),
-						  headers: new Headers({'Content-Type': 'application/json'})
+						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
 					.then(res => {
@@ -271,10 +325,10 @@
 					this.$toast.error('请输入员工密码', {x: 'center', y: 'top'});
 			        return;
 			      }
-					fetch('/hello/userLoginAndStaffClock', {
+					fetch('/hello/userloginandstaffclock', {
 						  method: 'POST',
 						  body: JSON.stringify({...user, ...user.addr}),
-						  headers: new Headers({'Content-Type': 'application/json'})
+						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
 					.then(res => {
@@ -308,7 +362,7 @@
 						fetch('/hello/saveaddress',{
 							  method: 'POST',
 							  body: JSON.stringify(this.addr),
-							  headers: new Headers({'Content-Type': 'application/json'})
+							  headers: {'Content-Type': 'application/json'}
 						})
 						.then(res => res.json())
 						.then(res => {
@@ -318,17 +372,46 @@
 						this.close();
 					}
 		        },
-				showList(user){
-					fetch('/hello/selectAppStaffClockLogList',{
+				showLogList(user){
+					fetch('/hello/selectappstaffclockloglist',{
 						  method: 'POST',
 						  body: JSON.stringify(user),
-						  headers: new Headers({'Content-Type': 'application/json'})
+						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
 					.then(res => {
 						this.logList = res.data || [];
 						this.user = user;
-						this.dialog = true;
+						this.logDialog = true;
+					});
+				},
+				showDeviceList(user){
+				    if (user.userNo === null || user.userNo.length === 0) {
+					  this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
+			          return;
+			        }
+					fetch('/hello/selectdevicelist',{
+						  method: 'POST',
+						  body: JSON.stringify(user),
+						  headers: {'Content-Type': 'application/json'}
+					})
+					.then(res => res.json())
+					.then(res => {
+						this.deviceList = res.data.items || [];
+						this.user = user;
+						this.deviceDialog = true;
+					});
+				},
+				resetBindDevice(dev){
+					let formData = `staffNo=${dev.staffNo}&id=${dev.id}`;
+					fetch('/hello/resetbinddevice',{
+						  method: 'POST',
+						  body: formData,
+						  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+					})
+					.then(res => res.json())
+					.then(res => {
+						this.deviceList = res.data.items || [];
 					});
 				}
 		    }
