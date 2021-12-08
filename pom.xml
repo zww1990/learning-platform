@@ -54,6 +54,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 	        <groupId>org.mapstruct</groupId>
 	        <artifactId>mapstruct</artifactId>
@@ -64,6 +65,7 @@
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
+		
 		<dependency>
 		    <groupId>cn.hutool</groupId>
 		    <artifactId>hutool-all</artifactId>
