@@ -19,42 +19,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>org.springframework.boot</groupId>
-            		<artifactId>spring-boot-starter-logging</artifactId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>com.alibaba.nacos</groupId>
-            		<artifactId>nacos-client</artifactId>
-            	</exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <exclusions>
-            	<exclusion>
-            		<groupId>com.alibaba.nacos</groupId>
-            		<artifactId>nacos-client</artifactId>
-            	</exclusion>
-            </exclusions>
         </dependency>
-		<dependency>
-		    <groupId>com.alibaba.nacos</groupId>
-		    <artifactId>nacos-client</artifactId>
-		</dependency>
         
         <dependency>
             <groupId>org.springframework.cloud</groupId>

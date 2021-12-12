@@ -23,6 +23,7 @@
         <spring-boot.version>2.6.1</spring-boot.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
+		<nacos.client.version>2.0.0</nacos.client.version>
     </properties>
 
     <dependencyManagement>
@@ -51,7 +52,7 @@
 			<dependency>
 			    <groupId>com.alibaba.nacos</groupId>
 			    <artifactId>nacos-client</artifactId>
-			    <version>2.0.0</version>
+			    <version>${nacos.client.version}</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
