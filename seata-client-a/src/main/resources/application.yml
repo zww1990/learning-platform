@@ -4,4 +4,6 @@ server:
 spring:
   application:
     name: seata-client-a
+  main:
+    allow-circular-references: true
 
