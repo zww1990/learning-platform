@@ -10,6 +10,17 @@ spring:
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
 
 mybatis:
   configuration:
