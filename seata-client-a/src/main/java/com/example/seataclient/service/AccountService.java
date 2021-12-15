@@ -3,11 +3,12 @@ package com.example.seataclient.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.seataclient.domain.Account;
 import com.example.seataclient.domain.Food;
 import com.example.seataclient.mapper.AccountMapper;
+
+import io.seata.spring.annotation.GlobalTransactional;
 
 public interface AccountService {
 	int insert(Account account);
@@ -41,7 +42,7 @@ public interface AccountService {
 		}
 
 		@Override
-		@Transactional(rollbackFor = Exception.class)
+		@GlobalTransactional(rollbackFor = Exception.class)
 		public void save(Account account, Food food) {
 			this.accountMapper.update(account);
 			this.foodService.update(food);

@@ -22,6 +22,6 @@ public class AccountController {
 		Account acc = new Account(1, "张三", 11D);
 		Food food = new Food(1, "干脆面", 1L);
 		this.accountService.save(acc, food);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("well done!!!");
 	}
 }
