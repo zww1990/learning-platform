@@ -28,7 +28,6 @@ public class FoodController {
 	public ResponseEntity<?> update(@RequestBody Food food) {
 		log.info("客户端B-->>update-->>{}", food);
 		int row = this.foodMapper.update(food);
-		System.err.println(1/0);
 		return ResponseEntity.ok(row);
 	}
 }
