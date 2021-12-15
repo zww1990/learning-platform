@@ -45,6 +45,8 @@ public interface AccountService {
 		public void save(Account account, Food food) {
 			this.accountMapper.update(account);
 			this.foodService.update(food);
+			// 故意制造异常，用于验证seata是否有效
+			System.err.println(1 / 0);
 		}
 
 	}
