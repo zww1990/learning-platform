@@ -13,7 +13,7 @@ public interface AccountMapper {
 	@Insert("insert into account (user_name, balance) values (#{userName}, #{balance})")
 	int insert(Account account);
 
-	@Update("update account set user_name=#{userName}, balance=#{balance} where user_id=#{userId}")
+	@Update("update account set user_name=#{userName}, balance=balance - #{balance} where user_id=#{userId}")
 	int update(Account account);
 
 	@Select("select * from account where user_id=#{userId}")
