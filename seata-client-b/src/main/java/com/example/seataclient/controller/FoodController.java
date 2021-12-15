@@ -28,6 +28,8 @@ public class FoodController {
 	public ResponseEntity<?> update(@RequestBody Food food) {
 		log.info("客户端B-->>update-->>{}", food);
 		int row = this.foodMapper.update(food);
+		// 故意制造异常，用于验证seata是否有效
+//		System.err.println(1 / 0);
 		return ResponseEntity.ok(row);
 	}
 }
