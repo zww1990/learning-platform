@@ -13,7 +13,7 @@ public interface FoodMapper {
 	@Insert("insert into food (food_name, stock) values (#{foodName}, #{stock})")
 	int insert(Food food);
 
-	@Update("update food set food_name=#{foodName}, stock=#{stock} where food_id=#{foodId}")
+	@Update("update food set food_name=#{foodName}, stock=stock - #{stock} where food_id=#{foodId}")
 	int update(Food food);
 
 	@Select("select * from food where food_id=#{foodId}")
