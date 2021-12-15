@@ -21,28 +21,28 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.1</spring-boot.version>
-        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2021.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
 		<nacos.client.version>2.0.3</nacos.client.version>
     	<seata.version>1.4.2</seata.version>
+    	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.27</mysql.version>
     	<mybatis.version>2.2.0</mybatis.version>
-    	<druid.version>1.2.8</druid.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -64,25 +64,25 @@
 				<version>${seata.version}</version>
 			</dependency>
 			<dependency>
-		      <groupId>org.mybatis.spring.boot</groupId>
-		      <artifactId>mybatis-spring-boot-starter</artifactId>
-		      <version>${mybatis.version}</version>
-		      <exclusions>
-		      	<exclusion>
-		      		<groupId>com.zaxxer</groupId>
-		      		<artifactId>HikariCP</artifactId>
-		      	</exclusion>
-		      </exclusions>
-		    </dependency>
-			<dependency>
-			  <groupId>mysql</groupId>
-			  <artifactId>mysql-connector-java</artifactId>
-			  <version>${mysql.version}</version>
-			</dependency>
-			<dependency>
 			    <groupId>com.alibaba</groupId>
 			    <artifactId>druid-spring-boot-starter</artifactId>
 			    <version>${druid.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.zaxxer</groupId>
+						<artifactId>HikariCP</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
         </dependencies>
     </dependencyManagement>
