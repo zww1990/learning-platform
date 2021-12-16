@@ -18,10 +18,15 @@ public class ApplicationProperties {
 	private String userLoginUrl;
 	private String staffClockUrl;
 	private String initStaffClockUrl;
+	private String deviceListUrl;
+	private String resetBindDeviceIdUrl;
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
+	@ToString.Exclude
 	private String selectAppStaffClockLogSql;
+	@ToString.Exclude
 	private List<Address> addresses = new ArrayList<>();
+	@ToString.Exclude
 	private List<UserInfo> users = new ArrayList<>();
 
 	@Getter
