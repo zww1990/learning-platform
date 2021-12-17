@@ -28,10 +28,12 @@
     	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.27</mysql.version>
     	<mybatis.version>2.2.0</mybatis.version>
+    	<log4j2.version>2.16.0</log4j2.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+        	<!-- 导入spring boot依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -39,6 +41,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- 导入spring cloud依赖 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -46,6 +49,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- 导入alibaba cloud依赖 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -53,26 +57,31 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- nacos客户端 -->
 			<dependency>
 			    <groupId>com.alibaba.nacos</groupId>
 			    <artifactId>nacos-client</artifactId>
 			    <version>${nacos.client.version}</version>
 			</dependency>
+			<!-- seata客户端 -->
 			<dependency>
 				<groupId>io.seata</groupId>
 				<artifactId>seata-spring-boot-starter</artifactId>
 				<version>${seata.version}</version>
 			</dependency>
+			<!-- druid连接池 -->
 			<dependency>
 			    <groupId>com.alibaba</groupId>
 			    <artifactId>druid-spring-boot-starter</artifactId>
 			    <version>${druid.version}</version>
 			</dependency>
+			<!-- mysql驱动 -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
 			</dependency>
+			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -83,6 +92,17 @@
 						<artifactId>HikariCP</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<!-- log4j -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-to-slf4j</artifactId>
+				<version>${log4j2.version}</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
