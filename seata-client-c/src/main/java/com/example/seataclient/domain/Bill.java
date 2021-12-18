@@ -2,6 +2,8 @@ package com.example.seataclient.domain;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,6 +26,7 @@ public class Bill {
 	/** 食品主键 */
 	private Integer foodId;
 	/** 下单时间 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private LocalDateTime orderTime;
 	/** 金额 */
 	private Double amount;
