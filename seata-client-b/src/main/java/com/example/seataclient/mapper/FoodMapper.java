@@ -2,6 +2,7 @@ package com.example.seataclient.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -10,6 +11,7 @@ import com.example.seataclient.domain.Food;
 
 @Mapper
 public interface FoodMapper {
+	@Options(useGeneratedKeys = true, keyProperty = "foodId")
 	@Insert("insert into food (food_name, stock) values (#{foodName}, #{stock})")
 	int insert(Food food);
 
