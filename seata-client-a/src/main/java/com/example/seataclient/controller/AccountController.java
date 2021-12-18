@@ -19,8 +19,14 @@ public class AccountController {
 
 	@GetMapping("/submit")
 	public ResponseEntity<?> submit() {
-		Account acc = new Account(1, "张三", 11D);
-		Food food = new Food(1, "干脆面", 1L);
+		Account acc = new Account()//
+				.setUserId(1)//
+				.setUserName("张三")//
+				.setBalance(20D);
+		Food food = new Food()//
+				.setFoodId(1)//
+				.setFoodName("干脆面")//
+				.setStock(5L);
 		this.accountService.save(acc, food);
 		return ResponseEntity.ok("well done!!!");
 	}

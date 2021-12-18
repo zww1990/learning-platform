@@ -1,55 +1,23 @@
 package com.example.seataclient.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
 /**
  * 账户
  */
+@Getter
+@Setter
+@ToString
+@Accessors(chain = true)
 public class Account {
+	/** 主键 */
 	private Integer userId;
+	/** 姓名 */
 	private String userName;
+	/** 余额 */
 	private Double balance;
 
-	public Account() {
-		super();
-	}
-
-	/**
-	 * @param userId   主键
-	 * @param userName 姓名
-	 * @param balance  余额
-	 */
-	public Account(Integer userId, String userName, Double balance) {
-		super();
-		this.userId = userId;
-		this.userName = userName;
-		this.balance = balance;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public Double getBalance() {
-		return balance;
-	}
-
-	public void setBalance(Double balance) {
-		this.balance = balance;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("Account [userId=%s, userName=%s, balance=%s]", userId, userName, balance);
-	}
 }
