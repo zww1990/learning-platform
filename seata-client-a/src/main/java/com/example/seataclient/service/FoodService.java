@@ -10,5 +10,5 @@ import com.example.seataclient.domain.Food;
 @FeignClient(name = "seata-client-b", path = "/food")
 public interface FoodService {
 	@PutMapping("/update")
-	ResponseEntity<?> update(@RequestBody Food food);
+	ResponseEntity<Integer> update(@RequestBody Food food);
 }
