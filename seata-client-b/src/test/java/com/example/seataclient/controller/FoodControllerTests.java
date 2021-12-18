@@ -15,7 +15,11 @@ public class FoodControllerTests {
 	@Test
 	public void testUpdate() {
 		try {
-			System.err.println(this.controller.update(new Food(2, "玉芝琳变通", 123L)));
+			Food food = new Food()//
+					.setFoodId(2)//
+					.setFoodName("玉芝琳变通")//
+					.setStock(123L);
+			System.err.println(this.controller.update(food));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
