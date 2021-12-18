@@ -15,7 +15,11 @@ public class FoodServiceTests {
 	@Test
 	public void testUpdate() {
 		try {
-			System.err.println(this.service.update(new Food(2, "玉芝琳变通胶囊", 666L)));
+			Food food = new Food()//
+					.setFoodId(2)//
+					.setFoodName("玉芝琳变通胶囊")//
+					.setStock(666L);
+			System.err.println(this.service.update(food));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
