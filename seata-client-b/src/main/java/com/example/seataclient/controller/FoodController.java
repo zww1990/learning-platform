@@ -24,7 +24,7 @@ public class FoodController {
 
 	@PutMapping("/update")
 	@Transactional(rollbackFor = Exception.class)
-	public ResponseEntity<?> update(@RequestBody Food food) {
+	public ResponseEntity<Integer> update(@RequestBody Food food) {
 		log.info("客户端B-->>update-->>{}", food);
 		int row = this.foodMapper.update(food);
 		// 故意制造异常，用于验证seata是否有效
