@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.example.seataclient.domain.Account;
+import com.example.seataclient.domain.Bill;
 import com.example.seataclient.domain.Food;
 import com.example.seataclient.mapper.AccountMapper;
 
@@ -17,7 +18,7 @@ public interface AccountService {
 
 	Account selectByUserId(Integer userId);
 
-	void save(Account account, Food food);
+	void save(Account account, Food food, Bill bill);
 
 	@Service
 	public static class AccountServiceImpl implements AccountService {
@@ -25,6 +26,8 @@ public interface AccountService {
 		private AccountMapper accountMapper;
 		@Resource
 		private FoodService foodService;
+		@Resource
+		private BillService billService;
 
 		@Override
 		public int insert(Account account) {
@@ -42,10 +45,13 @@ public interface AccountService {
 		}
 
 		@Override
-		@GlobalTransactional(rollbackFor = Exception.class)
-		public void save(Account account, Food food) {
+		@GlobalTransactional(rollbackFor = Exception.class) // 使用该注解开启分布式事务
+		public void save(Account account, Food food, Bill bill) {
+			// 更新本地数据库
 			this.accountMapper.update(account);
+			// 调用微服务
 			this.foodService.update(food);
+			this.billService.create(bill);
 			// 故意制造异常，用于验证seata是否有效
 			System.err.println(1 / 0);
 		}
