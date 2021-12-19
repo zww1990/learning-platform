@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 /**
  * 账户
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午4:54:38
  */
 @Getter
 @Setter

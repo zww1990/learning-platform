@@ -7,6 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Account;
 
+/**
+ * AccountMapperTests
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午4:59:09
+ */
 @SpringBootTest
 public class AccountMapperTests {
 	@Resource
