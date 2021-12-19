@@ -4,8 +4,8 @@ server:
 spring:
   application:
     name: seata-client-c
-  main:
-    allow-circular-references: true
+#  main:
+#    allow-circular-references: true
   profiles:
     active: local
 
