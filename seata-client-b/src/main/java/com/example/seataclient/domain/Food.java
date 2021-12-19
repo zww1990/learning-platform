@@ -7,6 +7,9 @@ import lombok.experimental.Accessors;
 
 /**
  * 食品
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午5:06:12
  */
 @Getter
 @Setter

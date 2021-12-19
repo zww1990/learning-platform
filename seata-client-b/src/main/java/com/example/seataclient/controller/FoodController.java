@@ -14,6 +14,12 @@ import com.example.seataclient.mapper.FoodMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 食品控制器
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午5:02:37
+ */
 @RestController
 @RequestMapping("/food")
 @Slf4j
@@ -22,6 +28,14 @@ public class FoodController {
 	@Resource
 	private FoodMapper foodMapper;
 
+	/**
+	 * 更新食品
+	 * 
+	 * @author zww1990@foxmail.com
+	 * @since 2021年12月19日,下午5:02:44
+	 * @param food 食品
+	 * @return
+	 */
 	@PutMapping("/update")
 	@Transactional(rollbackFor = Exception.class)
 	public ResponseEntity<Integer> update(@RequestBody Food food) {
