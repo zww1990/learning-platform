@@ -26,6 +26,8 @@
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
 		<nacos.client.version>2.0.3</nacos.client.version>
     	<seata.version>1.4.2</seata.version>
+        <kryo.version>4.0.2</kryo.version>
+        <kryo-serializers.version>0.45</kryo-serializers.version>
     	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.27</mysql.version>
     	<mybatis.version>2.2.0</mybatis.version>
@@ -70,6 +72,17 @@
 				<artifactId>seata-spring-boot-starter</artifactId>
 				<version>${seata.version}</version>
 			</dependency>
+			<!-- kryo序列化 -->
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>${kryo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.javakaffee</groupId>
+                <artifactId>kryo-serializers</artifactId>
+                <version>${kryo-serializers.version}</version>
+            </dependency>
 			<!-- druid连接池 -->
 			<dependency>
 			    <groupId>com.alibaba</groupId>
