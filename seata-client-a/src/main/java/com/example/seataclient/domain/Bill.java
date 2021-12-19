@@ -11,6 +11,9 @@ import lombok.experimental.Accessors;
 
 /**
  * 账单
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午4:55:23
  */
 @Getter
 @ToString
