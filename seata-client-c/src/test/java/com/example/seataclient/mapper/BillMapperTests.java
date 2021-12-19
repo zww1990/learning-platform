@@ -10,6 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Bill;
 
+/**
+ * BillMapperTests
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午5:11:18
+ */
 @SpringBootTest
 public class BillMapperTests {
 	@Resource

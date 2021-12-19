@@ -17,6 +17,12 @@ import com.example.seataclient.mapper.BillMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 账单控制器
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午5:09:20
+ */
 @RestController
 @RequestMapping("/bill")
 @Slf4j
@@ -24,6 +30,14 @@ public class BillController {
 	@Resource
 	private BillMapper billMapper;
 
+	/**
+	 * 创建账单
+	 * 
+	 * @author zww1990@foxmail.com
+	 * @since 2021年12月19日,下午5:09:32
+	 * @param bill 账单
+	 * @return
+	 */
 	@PostMapping("/create")
 	@Transactional(rollbackFor = Exception.class)
 	public ResponseEntity<Bill> create(@RequestBody Bill bill) {
