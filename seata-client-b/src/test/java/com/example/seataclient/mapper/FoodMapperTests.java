@@ -7,6 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Food;
 
+/**
+ * FoodMapperTests
+ * @author zww1990@foxmail.com
+ * @since 2021年12月19日,下午5:06:47
+ */
 @SpringBootTest
 public class FoodMapperTests {
 	@Resource
