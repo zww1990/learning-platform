@@ -156,7 +156,6 @@
             		<verbose>true</verbose>
             		<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
             		<generateGitPropertiesFile>true</generateGitPropertiesFile>
-            		<format>json</format>
             		<useNativeGit>true</useNativeGit>
             	</configuration>
             </plugin>
