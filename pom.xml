@@ -31,6 +31,8 @@
     	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.27</mysql.version>
     	<mybatis.version>2.2.0</mybatis.version>
+    	<log4j2.version>2.17.1</log4j2.version>
+    	<logback.version>1.2.10</logback.version>
     </properties>
 
     <dependencyManagement>
@@ -105,6 +107,28 @@
 						<artifactId>HikariCP</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<!-- log4j -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-to-slf4j</artifactId>
+				<version>${log4j2.version}</version>
+			</dependency>
+			<!-- logback -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
