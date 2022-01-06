@@ -30,7 +30,7 @@
         <kryo-serializers.version>0.45</kryo-serializers.version>
     	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.27</mysql.version>
-    	<mybatis.version>2.2.0</mybatis.version>
+    	<mybatis.version>2.2.1</mybatis.version>
     	<log4j2.version>2.17.1</log4j2.version>
     	<logback.version>1.2.10</logback.version>
     </properties>
