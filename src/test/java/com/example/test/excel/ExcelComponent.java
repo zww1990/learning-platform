@@ -47,8 +47,9 @@ public interface ExcelComponent {
 		DataValidationConstraint constraint = helper.createExplicitListConstraint(data);
 		CellRangeAddressList addressList = new CellRangeAddressList(1, 65535, index, index);
 		DataValidation validation = helper.createValidation(constraint, addressList);
-		validation.setSuppressDropDownArrow(true);// 设置单元格下拉箭头
-		validation.setShowErrorBox(true);// 设置错误提示框
+		validation.setSuppressDropDownArrow(true);// 提供下拉箭头
+		validation.setShowErrorBox(true);// 输入无效数据时显示出错警告
+		validation.setShowPromptBox(true);// 选定单元格时显示输入信息
 		sheet.addValidationData(validation);
 	}
 
@@ -66,8 +67,9 @@ public interface ExcelComponent {
 		DataValidationConstraint constraint = helper.createFormulaListConstraint(listFormula);
 		CellRangeAddressList addressList = new CellRangeAddressList(1, 65535, index, index);
 		DataValidation validation = helper.createValidation(constraint, addressList);
-		validation.setSuppressDropDownArrow(true);// 设置单元格下拉箭头
-		validation.setShowErrorBox(true);// 设置错误提示框
+		validation.setSuppressDropDownArrow(true);// 提供下拉箭头
+		validation.setShowErrorBox(true);// 输入无效数据时显示出错警告
+		validation.setShowPromptBox(true);// 选定单元格时显示输入信息
 		sheet.addValidationData(validation);
 	}
 
