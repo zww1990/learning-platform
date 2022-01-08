@@ -88,8 +88,8 @@ public interface ExcelComponent {
 		style.setFillForegroundColor(IndexedColors.ROYAL_BLUE.index);// 设置填充前景色
 		style.setFillPattern(FillPatternType.SOLID_FOREGROUND);// 设置填充图案
 		Font font = wb.createFont();
-		font.setFontHeightInPoints((short) 11);// 设置字体大小
-		font.setFontName("微软雅黑");// 设置字体名称
+		font.setFontHeightInPoints((short) 12);// 设置字体大小
+		font.setFontName("Microsoft YaHei UI");// 设置字体名称
 		font.setColor(IndexedColors.WHITE.index);// 设置字体颜色
 		font.setBold(true);// 设置是否加粗
 		style.setFont(font);
@@ -98,7 +98,7 @@ public interface ExcelComponent {
 			Cell cell = row.createCell(i);
 			cell.setCellValue(header);
 			cell.setCellStyle(style);// 设置单元格样式
-			sheet.setColumnWidth(i, header.getBytes().length * 256);// 设置单元格宽度
+			sheet.setColumnWidth(i, header.getBytes().length * 256 * 2);// 设置单元格宽度
 		}
 	}
 
