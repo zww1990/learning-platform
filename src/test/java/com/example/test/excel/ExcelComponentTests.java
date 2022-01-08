@@ -11,7 +11,7 @@ public class ExcelComponentTests {
 	@Test
 	public void testWrite() {
 		try {
-			this.areaExcelComponent.write(new FileOutputStream(Paths.get("e:", "test3.xlsx").toFile()));
+			this.areaExcelComponent.write(new FileOutputStream(Paths.get("e:", "test.xlsx").toFile()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
