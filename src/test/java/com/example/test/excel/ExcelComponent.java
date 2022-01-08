@@ -19,25 +19,29 @@ import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 /**
- * @author ZhangWeiWei
- * @description Excel组件
+ * ExcelComponent
+ * 
+ * @author zww1990@foxmail.com
+ * @since 2022年1月8日,下午11:06:00
  */
 public interface ExcelComponent {
 	/**
 	 * 写入Excel
 	 * 
-	 * @author ZhangWeiWei
 	 * @param os 输出流
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午11:06:09
 	 */
 	void write(OutputStream os);
 
 	/**
 	 * 添加简单验证数据
 	 * 
-	 * @author ZhangWeiWei
 	 * @param sheet sheet页
 	 * @param data  验证数据
 	 * @param index 第几列，从0开始
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午11:06:45
 	 */
 	default void addSimpleValidationData(XSSFSheet sheet, String[] data, int index) {
 		DataValidationHelper helper = new XSSFDataValidationHelper(sheet);
@@ -53,10 +57,11 @@ public interface ExcelComponent {
 	/**
 	 * 添加公式列表验证数据
 	 * 
-	 * @author ZhangWeiWei
 	 * @param sheet       sheet页
 	 * @param listFormula 列表公式
 	 * @param index       第几列，从0开始
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午11:07:08
 	 */
 	default void addFormulaListValidationData(XSSFSheet sheet, String listFormula, int index) {
 		DataValidationHelper helper = new XSSFDataValidationHelper(sheet);
@@ -72,10 +77,11 @@ public interface ExcelComponent {
 	/**
 	 * 创建表头行
 	 * 
-	 * @author ZhangWeiWei
 	 * @param wb      工作簿
 	 * @param sheet   sheet页
 	 * @param headers 表头行数据
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午11:07:26
 	 */
 	default void createHeaderRow(Workbook wb, XSSFSheet sheet, String[] headers) {
 		Row row = sheet.createRow(0);
@@ -102,11 +108,12 @@ public interface ExcelComponent {
 	/**
 	 * 计算范围
 	 * 
-	 * @author ZhangWeiWei
 	 * @param offset   偏移量，如果给0，表示从A列开始，1，就是从B列
 	 * @param rowId    第几行
 	 * @param colCount 一共多少列
 	 * @return 如果给入参 1,1,10. 表示从B1-K1。最终返回 $B$1:$K$1
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午11:07:39
 	 */
 	default String calcRange(int offset, int rowId, int colCount) {
 		char start = (char) ('A' + offset);
