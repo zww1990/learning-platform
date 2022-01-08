@@ -85,12 +85,12 @@ public class AreaExcelComponent implements ExcelComponent {
 			Sheet provinceSheet = wb.createSheet(province.getCellValue());
 			for (int i = 0; i < cityList.size(); i++) {
 				ExcelData city = cityList.get(i);
+				Row row = provinceSheet.createRow(i);
+				row.createCell(0).setCellValue(city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
 				if (CollectionUtils.isEmpty(districtList)) {
 					continue;
 				}
-				Row row = provinceSheet.createRow(i);
-				row.createCell(0).setCellValue(city.getCellValue());
 				for (int j = 0; j < districtList.size(); j++) {
 					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
 				}
