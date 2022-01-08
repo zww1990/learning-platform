@@ -20,7 +20,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 /**
  * @author ZhangWeiWei
- * @date 2018年7月25日,下午1:30:04
  * @description Excel组件
  */
 public interface ExcelComponent {
@@ -28,7 +27,6 @@ public interface ExcelComponent {
 	 * 写入Excel
 	 * 
 	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,下午1:30:44
 	 * @param os 输出流
 	 */
 	void write(OutputStream os);
@@ -37,7 +35,6 @@ public interface ExcelComponent {
 	 * 添加简单验证数据
 	 * 
 	 * @author ZhangWeiWei
-	 * @date 2018年7月23日,下午9:14:35
 	 * @param sheet sheet页
 	 * @param data  验证数据
 	 * @param index 第几列，从0开始
@@ -57,7 +54,6 @@ public interface ExcelComponent {
 	 * 添加公式列表验证数据
 	 * 
 	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,下午2:00:56
 	 * @param sheet       sheet页
 	 * @param listFormula 列表公式
 	 * @param index       第几列，从0开始
@@ -77,7 +73,6 @@ public interface ExcelComponent {
 	 * 创建表头行
 	 * 
 	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,下午1:38:56
 	 * @param wb      工作簿
 	 * @param sheet   sheet页
 	 * @param headers 表头行数据
@@ -108,7 +103,6 @@ public interface ExcelComponent {
 	 * 计算范围
 	 * 
 	 * @author ZhangWeiWei
-	 * @date 2018年7月23日,下午6:38:59
 	 * @param offset   偏移量，如果给0，表示从A列开始，1，就是从B列
 	 * @param rowId    第几行
 	 * @param colCount 一共多少列
