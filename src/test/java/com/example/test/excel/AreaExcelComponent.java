@@ -19,104 +19,129 @@ public class AreaExcelComponent implements ExcelComponent {
 	@Override
 	public void write(OutputStream os) {
 		try (Workbook wb = new XSSFWorkbook()) {
-			XSSFSheet sheet = (XSSFSheet) wb.createSheet("商圈信息");
-			String[] headers = { "*商圈类型", "*所在城市", "*所属区域" };
+			XSSFSheet sheet = (XSSFSheet) wb.createSheet("省份-城市-区县");
+			String[] headers = { "省份", "城市", "区县" };
 			this.createHeaderRow(wb, sheet, headers);
-			this.createCityAndDistrictSheet(wb, sheet);
-			this.createAreaTypeSheet(wb, sheet);
-			this.addDistrictValidationData(sheet);
+			this.createProvinceSheet(wb, sheet);
+			this.createCityDistrictSheet(wb, sheet);
+			this.addFormulaListValidationData(sheet, "全国省份", 0);
+			this.addFormulaListValidationData(sheet, "INDIRECT($A2)", 1);
+			this.addFormulaListValidationData(sheet, "INDIRECT($A2&\"_\"&$B2)", 2);
 			wb.write(os);
-			log.info("{}写入Excel完成!", sheet.getSheetName());
+			log.info("成功写入工作簿中电子表格的数量: {}", wb.getNumberOfSheets());
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 		}
 	}
 
-	/**
-	 * 区域
-	 * 
-	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,上午11:27:16
-	 * @param sheet
-	 */
-	private void addDistrictValidationData(XSSFSheet sheet) {
-		this.addFormulaListValidationData(sheet, "INDIRECT($B2)", 2);
-	}
-
-	/**
-	 * 商圈类型
-	 * 
-	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,下午1:23:39
-	 * @param wb
-	 * @param sheet
-	 */
-	private void createAreaTypeSheet(Workbook wb, XSSFSheet sheet) {
-		Sheet sheet2 = wb.createSheet("商圈类型");
-		List<ExcelData> values = this.selectAreaType();
-		for (int i = 0; i < values.size(); i++) {
-			sheet2.createRow(i).createCell(0).setCellValue(values.get(i).getCellValue());
+	private void createProvinceSheet(Workbook wb, XSSFSheet sheet) {
+		Sheet provinceSheet = wb.createSheet("全国省份");
+		List<ExcelData> provinceList = this.findProvinceCityDistrictList();
+		for (int i = 0; i < provinceList.size(); i++) {
+			provinceSheet.createRow(i).createCell(0).setCellValue(provinceList.get(i).getCellValue());
 		}
-		Name name = wb.createName();
-		name.setNameName(sheet2.getSheetName());
-		name.setRefersToFormula(sheet2.getSheetName() + "!$A$1:$A$" + values.size());
-		this.addFormulaListValidationData(sheet, name.getNameName(), 0);
-		wb.setSheetHidden(wb.getSheetIndex(sheet2), true);// 设置隐藏的sheet页
+		Name provinceName = wb.createName();
+		provinceName.setNameName(provinceSheet.getSheetName());
+		provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + provinceList.size());
+		// 设置隐藏的sheet页
+		wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 	}
 
-	private List<ExcelData> selectAreaType() {
-		return Arrays.asList(//
-				new ExcelData().setCellValue("河北省"), //
-				new ExcelData().setCellValue("山西省"), //
-				new ExcelData().setCellValue("安徽省"));
-	}
-
-	/**
-	 * 城市区域规划
-	 * 
-	 * @author ZhangWeiWei
-	 * @date 2018年7月25日,下午1:23:48
-	 * @param wb
-	 * @param sheet
-	 */
-	private void createCityAndDistrictSheet(Workbook wb, XSSFSheet sheet) {
-		Sheet sheet2 = wb.createSheet("城市区域规划");
-		List<ExcelData> cityList = this.selectCityAndDistrict();
-		for (int i = 0; i < cityList.size(); i++) {
-			Row row = sheet2.createRow(i);
-			ExcelData city = cityList.get(i);
-			row.createCell(0).setCellValue(city.getCellValue());
-			List<ExcelData> distList = city.getChildrens();
-			for (int j = 0; j < distList.size(); j++) {
-				row.createCell(j + 1).setCellValue(distList.get(j).getCellValue());
+	private void createCityDistrictSheet(Workbook wb, XSSFSheet sheet) {
+		List<ExcelData> provinceList = this.findProvinceCityDistrictList();
+		// 为每个省份创建一个单独的sheet页
+		for (ExcelData province : provinceList) {
+			Sheet provinceSheet = wb.createSheet(province.getCellValue());
+			List<ExcelData> cityList = province.getChildrens();
+			for (int i = 0; i < cityList.size(); i++) {
+				Row row = provinceSheet.createRow(i);
+				ExcelData city = cityList.get(i);
+				row.createCell(0).setCellValue(city.getCellValue());
+				List<ExcelData> districtList = city.getChildrens();
+				for (int j = 0; j < districtList.size(); j++) {
+					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
+				}
+				Name cityName = wb.createName();
+				cityName.setNameName(String.join("_", province.getCellValue(), city.getCellValue()));
+				cityName.setRefersToFormula(
+						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtList.size()));
 			}
-			Name name = wb.createName();
-			name.setNameName(city.getCellValue());
-			name.setRefersToFormula(sheet2.getSheetName() + '!' + this.calcRange(1, i + 1, distList.size()));
+			Name provinceName = wb.createName();
+			provinceName.setNameName(provinceSheet.getSheetName());
+			provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + cityList.size());
+			// 设置隐藏的sheet页
+			wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 		}
-		Name name = wb.createName();
-		name.setNameName("城市");
-		name.setRefersToFormula(sheet2.getSheetName() + "!$A$1:$A$" + cityList.size());
-		this.addFormulaListValidationData(sheet, name.getNameName(), 1);
-		wb.setSheetHidden(wb.getSheetIndex(sheet2), true);// 设置隐藏的sheet页
 	}
 
-	private List<ExcelData> selectCityAndDistrict() {
+	/**
+	 * 模拟数据
+	 * 
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午8:22:54
+	 * @return
+	 */
+	private List<ExcelData> findProvinceCityDistrictList() {
 		return Arrays.asList(//
 				new ExcelData().setCellValue("河北省").setChildrens(//
 						Arrays.asList(//
-								new ExcelData().setCellValue("石家庄市"), //
-								new ExcelData().setCellValue("唐山市"), //
-								new ExcelData().setCellValue("秦皇岛市"))),
+								new ExcelData().setCellValue("石家庄市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("长安区"), //
+												new ExcelData().setCellValue("桥西区"), //
+												new ExcelData().setCellValue("新华区"), //
+												new ExcelData().setCellValue("井陉矿区"))),
+								new ExcelData().setCellValue("唐山市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("路南区"), //
+												new ExcelData().setCellValue("路北区"), //
+												new ExcelData().setCellValue("古冶区"), //
+												new ExcelData().setCellValue("开平区"))),
+								new ExcelData().setCellValue("秦皇岛市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("海港区"), //
+												new ExcelData().setCellValue("山海关区"), //
+												new ExcelData().setCellValue("北戴河区"), //
+												new ExcelData().setCellValue("抚宁区"))))),
 				new ExcelData().setCellValue("山西省").setChildrens(//
 						Arrays.asList(//
-								new ExcelData().setCellValue("太原市"), //
-								new ExcelData().setCellValue("大同市"), //
-								new ExcelData().setCellValue("阳泉市"))),
+								new ExcelData().setCellValue("太原市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("小店区"), //
+												new ExcelData().setCellValue("迎泽区"), //
+												new ExcelData().setCellValue("杏花岭区"), //
+												new ExcelData().setCellValue("尖草坪区"))),
+								new ExcelData().setCellValue("大同市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("新荣区"), //
+												new ExcelData().setCellValue("平城区"), //
+												new ExcelData().setCellValue("云冈区"), //
+												new ExcelData().setCellValue("云州区"))),
+								new ExcelData().setCellValue("阳泉市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("城区"), //
+												new ExcelData().setCellValue("矿区"), //
+												new ExcelData().setCellValue("郊区"), //
+												new ExcelData().setCellValue("平定县"))))),
 				new ExcelData().setCellValue("安徽省").setChildrens(//
 						Arrays.asList(//
-								new ExcelData().setCellValue("合肥市"), //
-								new ExcelData().setCellValue("芜湖市"), //
-								new ExcelData().setCellValue("蚌埠市"))));
+								new ExcelData().setCellValue("合肥市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("瑶海区"), //
+												new ExcelData().setCellValue("庐阳区"), //
+												new ExcelData().setCellValue("蜀山区"), //
+												new ExcelData().setCellValue("包河区"))),
+								new ExcelData().setCellValue("芜湖市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("镜湖区"), //
+												new ExcelData().setCellValue("鸠江区"), //
+												new ExcelData().setCellValue("弋江区"), //
+												new ExcelData().setCellValue("湾沚区"))),
+								new ExcelData().setCellValue("蚌埠市").setChildrens(//
+										Arrays.asList(//
+												new ExcelData().setCellValue("龙子湖区"), //
+												new ExcelData().setCellValue("蚌山区"), //
+												new ExcelData().setCellValue("禹会区"), //
+												new ExcelData().setCellValue("淮上区"))))));
 	}
 }
