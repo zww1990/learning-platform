@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,9 +31,6 @@ public class AreaExcelComponent implements ExcelComponent {
 			this.createHeaderRow(wb, sheet, headers);
 			this.createProvinceSheet(wb, sheet);
 			this.createCityDistrictSheet(wb, sheet);
-			this.addFormulaListValidationData(sheet, "全国省份", 0);
-			this.addFormulaListValidationData(sheet, "INDIRECT($A2)", 1);
-			this.addFormulaListValidationData(sheet, "INDIRECT($A2&\"_\"&$B2)", 2);
 			wb.write(os);
 			log.info("成功写入工作簿中电子表格的数量: {}", wb.getNumberOfSheets());
 		} catch (Exception e) {
@@ -49,14 +47,18 @@ public class AreaExcelComponent implements ExcelComponent {
 	 * @param sheet
 	 */
 	private void createProvinceSheet(Workbook wb, XSSFSheet sheet) {
-		Sheet provinceSheet = wb.createSheet("全国省份");
 		List<ExcelData> provinceList = this.findProvinceCityDistrictList();
+		if (CollectionUtils.isEmpty(provinceList)) {
+			return;
+		}
+		Sheet provinceSheet = wb.createSheet("全国省份");
 		for (int i = 0; i < provinceList.size(); i++) {
 			provinceSheet.createRow(i).createCell(0).setCellValue(provinceList.get(i).getCellValue());
 		}
 		Name provinceName = wb.createName();
 		provinceName.setNameName(provinceSheet.getSheetName());
 		provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + provinceList.size());
+		this.addFormulaListValidationData(sheet, provinceName.getNameName(), 0);
 		// 设置隐藏的sheet页
 		wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 	}
@@ -71,15 +73,24 @@ public class AreaExcelComponent implements ExcelComponent {
 	 */
 	private void createCityDistrictSheet(Workbook wb, XSSFSheet sheet) {
 		List<ExcelData> provinceList = this.findProvinceCityDistrictList();
+		if (CollectionUtils.isEmpty(provinceList)) {
+			return;
+		}
 		// 为每个省份创建一个单独的sheet页
 		for (ExcelData province : provinceList) {
-			Sheet provinceSheet = wb.createSheet(province.getCellValue());
 			List<ExcelData> cityList = province.getChildrens();
+			if (CollectionUtils.isEmpty(cityList)) {
+				continue;
+			}
+			Sheet provinceSheet = wb.createSheet(province.getCellValue());
 			for (int i = 0; i < cityList.size(); i++) {
-				Row row = provinceSheet.createRow(i);
 				ExcelData city = cityList.get(i);
-				row.createCell(0).setCellValue(city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
+				if (CollectionUtils.isEmpty(districtList)) {
+					continue;
+				}
+				Row row = provinceSheet.createRow(i);
+				row.createCell(0).setCellValue(city.getCellValue());
 				for (int j = 0; j < districtList.size(); j++) {
 					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
 				}
@@ -94,6 +105,8 @@ public class AreaExcelComponent implements ExcelComponent {
 			// 设置隐藏的sheet页
 			wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 		}
+		this.addFormulaListValidationData(sheet, "INDIRECT($A2)", 1);
+		this.addFormulaListValidationData(sheet, "INDIRECT($A2&\"_\"&$B2)", 2);
 	}
 
 	/**
