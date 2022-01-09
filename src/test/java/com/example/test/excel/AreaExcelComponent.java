@@ -88,16 +88,19 @@ public class AreaExcelComponent implements ExcelComponent {
 				Row row = provinceSheet.createRow(i);
 				row.createCell(0).setCellValue(city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
+				int districtSize;
 				if (CollectionUtils.isEmpty(districtList)) {
-					continue;
-				}
-				for (int j = 0; j < districtList.size(); j++) {
-					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
+					districtSize = 10;
+				} else {
+					districtSize = districtList.size();
+					for (int j = 0; j < districtSize; j++) {
+						row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
+					}
 				}
 				Name cityName = wb.createName();
 				cityName.setNameName(String.join("_", province.getCellValue(), city.getCellValue()));
 				cityName.setRefersToFormula(
-						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtList.size()));
+						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtSize));
 			}
 			Name provinceName = wb.createName();
 			provinceName.setNameName(provinceSheet.getSheetName());
