@@ -128,7 +128,38 @@ public class AreaExcelComponent implements ExcelComponent {
 	}
 
 	/**
-	 * 模拟数据
+	 * 模拟数据：
+	 * 
+	 * <pre>
+	 *	[
+	 *	  {
+	 *	    "cellValue": "河北省",
+	 *	    "childrens": [
+	 *	      {
+	 *	        "cellValue": "石家庄市",
+	 *	        "childrens": [ { "cellValue": "长安区" }, { "cellValue": "桥西区" } ]
+	 *	      },
+	 *	      {
+	 *	        "cellValue": "唐山市",
+	 *	        "childrens": [ { "cellValue": "路南区" }, { "cellValue": "路北区" } ]
+	 *	      }
+	 *	    ]
+	 *	  },
+	 *	  {
+	 *	    "cellValue": "山西省",
+	 *	    "childrens": [
+	 *	      {
+	 *	        "cellValue": "太原市",
+	 *	        "childrens": [ { "cellValue": "小店区" }, { "cellValue": "迎泽区" } ]
+	 *	      },
+	 *	      {
+	 *	        "cellValue": "大同市",
+	 *	        "childrens": [ { "cellValue": "新荣区" }, { "cellValue": "平城区" } ]
+	 *	      }
+	 *	    ]
+	 *	  }
+	 *	]
+	 * </pre>
 	 * 
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午8:22:54
