@@ -39,7 +39,8 @@ public class AreaExcelComponent implements ExcelComponent {
 	}
 
 	/**
-	 * createProvinceSheet
+	 * 创建省份sheet页；<br>
+	 * 每行的第一个单元格写入省份；
 	 * 
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:18
@@ -53,18 +54,23 @@ public class AreaExcelComponent implements ExcelComponent {
 		}
 		Sheet provinceSheet = wb.createSheet("全国省份");
 		for (int i = 0; i < provinceList.size(); i++) {
+			// 每行的第一个单元格写入省份
 			provinceSheet.createRow(i).createCell(0).setCellValue(provinceList.get(i).getCellValue());
 		}
 		Name provinceName = wb.createName();
 		provinceName.setNameName(provinceSheet.getSheetName());
 		provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + provinceList.size());
+		// 在第一列添加数据验证
 		this.addFormulaListValidationData(sheet, provinceName.getNameName(), 0);
-		// 设置隐藏的sheet页
+		// 将该sheet页隐藏
 		wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 	}
 
 	/**
-	 * createCityDistrictSheet
+	 * 为每个省份创建一个单独的sheet页；<br>
+	 * 将省份做为sheet页的名称；<br>
+	 * 每行的第一个单元格写入城市；<br>
+	 * 每行从第二个单元格开始写入区县；
 	 * 
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:22
@@ -80,35 +86,44 @@ public class AreaExcelComponent implements ExcelComponent {
 		for (ExcelData province : provinceList) {
 			List<ExcelData> cityList = province.getChildrens();
 			if (CollectionUtils.isEmpty(cityList)) {
+				// 如果该省份没有城市，不创建sheet页
 				continue;
 			}
+			// 将省份做为sheet页的名称
 			Sheet provinceSheet = wb.createSheet(province.getCellValue());
 			for (int i = 0; i < cityList.size(); i++) {
 				ExcelData city = cityList.get(i);
 				Row row = provinceSheet.createRow(i);
+				// 每行的第一个单元格写入城市
 				row.createCell(0).setCellValue(city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
 				int districtSize;
 				if (CollectionUtils.isEmpty(districtList)) {
+					// 如果没有区县，默认10空单元格
 					districtSize = 10;
 				} else {
 					districtSize = districtList.size();
 					for (int j = 0; j < districtSize; j++) {
+						// 每行从第二个单元格开始写入区县
 						row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
 					}
 				}
 				Name cityName = wb.createName();
+				// 名称格式：省份_城市
 				cityName.setNameName(String.join("_", province.getCellValue(), city.getCellValue()));
 				cityName.setRefersToFormula(
 						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtSize));
 			}
 			Name provinceName = wb.createName();
+			// 将省份做为名称管理器
 			provinceName.setNameName(provinceSheet.getSheetName());
 			provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + cityList.size());
-			// 设置隐藏的sheet页
+			// 将该sheet页隐藏
 			wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
 		}
+		// 在第二列添加数据验证
 		this.addFormulaListValidationData(sheet, "INDIRECT($A2)", 1);
+		// 在第三列添加数据验证
 		this.addFormulaListValidationData(sheet, "INDIRECT($A2&\"_\"&$B2)", 2);
 	}
 
