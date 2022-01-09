@@ -1,6 +1,7 @@
 package com.example.test.excel;
 
 import java.io.OutputStream;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -17,6 +18,11 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * ExcelComponent
@@ -159,4 +165,20 @@ public interface ExcelComponent {
 				.append(rowId)//
 				.toString();
 	}
+
+	/**
+	 * ExcelData
+	 * 
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月8日,下午4:51:46
+	 */
+	@Getter
+	@Setter
+	@ToString
+	@Accessors(chain = true)
+	class ExcelData {
+		private String cellValue;
+		private List<ExcelData> childrens;
+	}
+
 }
