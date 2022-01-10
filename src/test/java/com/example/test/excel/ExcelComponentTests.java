@@ -9,12 +9,24 @@ import org.junit.jupiter.api.Test;
 
 public class ExcelComponentTests {
 	private AreaExcelComponent areaExcelComponent = new AreaExcelComponent();
+	private MenuExcelComponent menuExcelComponent = new MenuExcelComponent();
 
 	@Test
-	public void testWrite() {
+	public void testAreaWrite() {
 		try {
 			this.areaExcelComponent.write(new FileOutputStream(Paths.get("e:", String
-					.join(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()), "test-", ".xlsx"))
+					.join(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()), "area-", ".xlsx"))
+					.toFile()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testMenuWrite() {
+		try {
+			this.menuExcelComponent.write(new FileOutputStream(Paths.get("e:", String
+					.join(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()), "menu-", ".xlsx"))
 					.toFile()));
 		} catch (Exception e) {
 			e.printStackTrace();
