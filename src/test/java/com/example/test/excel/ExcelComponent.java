@@ -126,14 +126,8 @@ public interface ExcelComponent {
 		if (colCount <= 25) {
 			char end = (char) (start + colCount - 1);
 			return new StringBuilder()//
-					.append('$')//
-					.append(start)//
-					.append('$')//
-					.append(rowId)//
-					.append(":$")//
-					.append(end)//
-					.append('$')//
-					.append(rowId)//
+					.append('$').append(start).append('$').append(rowId)//
+					.append(":$").append(end).append('$').append(rowId)//
 					.toString();
 		}
 		char endPrefix = 'A';
@@ -154,15 +148,8 @@ public interface ExcelComponent {
 			}
 		}
 		return new StringBuilder()//
-				.append('$')//
-				.append(start)//
-				.append('$')//
-				.append(rowId)//
-				.append(":$")//
-				.append(endPrefix)//
-				.append(endSuffix)//
-				.append('$')//
-				.append(rowId)//
+				.append('$').append(start).append('$').append(rowId)//
+				.append(":$").append(endPrefix).append(endSuffix).append('$').append(rowId)//
 				.toString();
 	}
 
