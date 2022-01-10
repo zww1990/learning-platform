@@ -4,6 +4,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
@@ -31,12 +35,16 @@ public class MenuExcelComponent implements ExcelComponent {
 	@Override
 	public void write(OutputStream os) {
 		try (Workbook wb = new XSSFWorkbook()) {
-			XSSFSheet sheet = (XSSFSheet) wb.createSheet("省份-城市-区县");
-			String[] headers = { "省份", "城市", "区县" };
+			XSSFSheet sheet = (XSSFSheet) wb.createSheet("系统菜单");
+			String[] headers = { "一级菜单", "二级菜单", "三级菜单" };
 			this.createHeaderRow(wb, sheet, headers);
 			List<MenuData> provinceList = this.findMenuList();
-			this.createProvinceSheet(wb, sheet, provinceList);
-			this.createCityDistrictSheet(wb, sheet, provinceList);
+			if (!CollectionUtils.isEmpty(provinceList)) {
+				Map<String, List<MenuData>> menuMap = provinceList.stream()
+						.collect(Collectors.groupingBy(MenuData::getComponent));
+				this.createMenuSheet(wb, sheet, menuMap);
+				this.createSubMenuSheet(wb, sheet, menuMap);
+			}
 			wb.write(os);
 			log.info("成功写入工作簿中电子表格的数量: {}", wb.getNumberOfSheets());
 		} catch (Exception e) {
@@ -53,22 +61,20 @@ public class MenuExcelComponent implements ExcelComponent {
 	 * @param wb
 	 * @param sheet
 	 */
-	private void createProvinceSheet(Workbook wb, XSSFSheet sheet, List<MenuData> provinceList) {
-		if (CollectionUtils.isEmpty(provinceList)) {
-			return;
-		}
-		Sheet provinceSheet = wb.createSheet("全国省份");
-		for (int i = 0; i < provinceList.size(); i++) {
+	private void createMenuSheet(Workbook wb, XSSFSheet sheet, Map<String, List<MenuData>> menuMap) {
+		Sheet menuSheet = wb.createSheet("所有系统");
+		List<String> menuList = menuMap.keySet().stream().collect(Collectors.toList());
+		for (int i = 0; i < menuList.size(); i++) {
 			// 每行的第一个单元格写入省份
-			provinceSheet.createRow(i).createCell(0).setCellValue(provinceList.get(i).getMenuName());
+			menuSheet.createRow(i).createCell(0).setCellValue(menuList.get(i));
 		}
-		Name provinceName = wb.createName();
-		provinceName.setNameName(provinceSheet.getSheetName());
-		provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + provinceList.size());
+		Name menuName = wb.createName();
+		menuName.setNameName(menuSheet.getSheetName());
+		menuName.setRefersToFormula(menuSheet.getSheetName() + "!$A$1:$A$" + menuList.size());
 		// 在第一列添加数据验证
-		this.addFormulaListValidationData(sheet, provinceName.getNameName(), 0);
+		this.addFormulaListValidationData(sheet, menuName.getNameName(), 0);
 		// 将该sheet页隐藏
-		wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
+		wb.setSheetHidden(wb.getSheetIndex(menuSheet), true);
 	}
 
 	/**
@@ -82,48 +88,45 @@ public class MenuExcelComponent implements ExcelComponent {
 	 * @param wb
 	 * @param sheet
 	 */
-	private void createCityDistrictSheet(Workbook wb, XSSFSheet sheet, List<MenuData> provinceList) {
-		if (CollectionUtils.isEmpty(provinceList)) {
-			return;
-		}
+	private void createSubMenuSheet(Workbook wb, XSSFSheet sheet, Map<String, List<MenuData>> menuMap) {
+		Set<Entry<String, List<MenuData>>> menuEntrySet = menuMap.entrySet();
 		// 为每个省份创建一个单独的sheet页
-		for (MenuData province : provinceList) {
-			List<MenuData> cityList = province.getChildrens();
-			if (CollectionUtils.isEmpty(cityList)) {
+		for (Entry<String, List<MenuData>> entry : menuEntrySet) {
+			List<MenuData> menuList = entry.getValue();
+			if (CollectionUtils.isEmpty(menuList)) {
 				// 如果该省份没有城市，不创建sheet页
 				continue;
 			}
 			// 将省份做为sheet页的名称
-			Sheet provinceSheet = wb.createSheet(province.getMenuName());
-			for (int i = 0; i < cityList.size(); i++) {
-				MenuData city = cityList.get(i);
-				Row row = provinceSheet.createRow(i);
+			Sheet menuSheet = wb.createSheet(entry.getKey());
+			for (int i = 0; i < menuList.size(); i++) {
+				MenuData menu = menuList.get(i);
+				Row row = menuSheet.createRow(i);
 				// 每行的第一个单元格写入城市
-				row.createCell(0).setCellValue(city.getMenuName());
-				List<MenuData> districtList = city.getChildrens();
-				int districtSize;
-				if (CollectionUtils.isEmpty(districtList)) {
+				row.createCell(0).setCellValue(menu.getMenuName());
+				List<MenuData> subMenuList = menu.getChildrens();
+				int subMenuSize;
+				if (CollectionUtils.isEmpty(subMenuList)) {
 					// 如果没有区县，默认10空单元格
-					districtSize = 10;
+					subMenuSize = 10;
 				} else {
-					districtSize = districtList.size();
-					for (int j = 0; j < districtSize; j++) {
+					subMenuSize = subMenuList.size();
+					for (int j = 0; j < subMenuSize; j++) {
 						// 每行从第二个单元格开始写入区县
-						row.createCell(j + 1).setCellValue(districtList.get(j).getMenuName());
+						row.createCell(j + 1).setCellValue(subMenuList.get(j).getMenuName());
 					}
 				}
-				Name cityName = wb.createName();
+				Name menuName = wb.createName();
 				// 名称格式：省份_城市
-				cityName.setNameName(String.join("_", province.getMenuName(), city.getMenuName()));
-				cityName.setRefersToFormula(
-						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtSize));
+				menuName.setNameName(String.join("_", entry.getKey(), menu.getMenuName()));
+				menuName.setRefersToFormula(menuSheet.getSheetName() + '!' + this.calcRange(1, i + 1, subMenuSize));
 			}
-			Name provinceName = wb.createName();
+			Name menuName = wb.createName();
 			// 将省份做为名称管理器
-			provinceName.setNameName(provinceSheet.getSheetName());
-			provinceName.setRefersToFormula(provinceSheet.getSheetName() + "!$A$1:$A$" + cityList.size());
+			menuName.setNameName(menuSheet.getSheetName());
+			menuName.setRefersToFormula(menuSheet.getSheetName() + "!$A$1:$A$" + menuList.size());
 			// 将该sheet页隐藏
-			wb.setSheetHidden(wb.getSheetIndex(provinceSheet), true);
+			wb.setSheetHidden(wb.getSheetIndex(menuSheet), true);
 		}
 		// 在第二列添加数据验证
 		this.addFormulaListValidationData(sheet, "INDIRECT($A2)", 1);
