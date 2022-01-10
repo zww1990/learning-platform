@@ -1,0 +1,170 @@
+[
+	{
+		"cellValue": "河北省", "childrens": 
+		[
+			{
+				"cellValue": "石家庄市", "childrens": 
+				[
+					{
+						"cellValue": "长安区", "childrens": null
+					}, 
+					{
+						"cellValue": "桥西区", "childrens": null
+					}, 
+					{
+						"cellValue": "新华区", "childrens": null
+					}, 
+					{
+						"cellValue": "井陉矿区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "唐山市", "childrens": 
+				[
+					{
+						"cellValue": "路南区", "childrens": null
+					}, 
+					{
+						"cellValue": "路北区", "childrens": null
+					}, 
+					{
+						"cellValue": "古冶区", "childrens": null
+					}, 
+					{
+						"cellValue": "开平区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "秦皇岛市", "childrens": 
+				[
+					{
+						"cellValue": "海港区", "childrens": null
+					}, 
+					{
+						"cellValue": "山海关区", "childrens": null
+					}, 
+					{
+						"cellValue": "北戴河区", "childrens": null
+					}, 
+					{
+						"cellValue": "抚宁区", "childrens": null
+					}
+				]
+			}
+		]
+	}, 
+	{
+		"cellValue": "山西省", "childrens": 
+		[
+			{
+				"cellValue": "太原市", "childrens": 
+				[
+					{
+						"cellValue": "小店区", "childrens": null
+					}, 
+					{
+						"cellValue": "迎泽区", "childrens": null
+					}, 
+					{
+						"cellValue": "杏花岭区", "childrens": null
+					}, 
+					{
+						"cellValue": "尖草坪区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "大同市", "childrens": 
+				[
+					{
+						"cellValue": "新荣区", "childrens": null
+					}, 
+					{
+						"cellValue": "平城区", "childrens": null
+					}, 
+					{
+						"cellValue": "云冈区", "childrens": null
+					}, 
+					{
+						"cellValue": "云州区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "阳泉市", "childrens": 
+				[
+					{
+						"cellValue": "城区", "childrens": null
+					}, 
+					{
+						"cellValue": "矿区", "childrens": null
+					}, 
+					{
+						"cellValue": "郊区", "childrens": null
+					}, 
+					{
+						"cellValue": "平定县", "childrens": null
+					}
+				]
+			}
+		]
+	}, 
+	{
+		"cellValue": "安徽省", "childrens": 
+		[
+			{
+				"cellValue": "合肥市", "childrens": 
+				[
+					{
+						"cellValue": "瑶海区", "childrens": null
+					}, 
+					{
+						"cellValue": "庐阳区", "childrens": null
+					}, 
+					{
+						"cellValue": "蜀山区", "childrens": null
+					}, 
+					{
+						"cellValue": "包河区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "芜湖市", "childrens": 
+				[
+					{
+						"cellValue": "镜湖区", "childrens": null
+					}, 
+					{
+						"cellValue": "鸠江区", "childrens": null
+					}, 
+					{
+						"cellValue": "弋江区", "childrens": null
+					}, 
+					{
+						"cellValue": "湾沚区", "childrens": null
+					}
+				]
+			}, 
+			{
+				"cellValue": "蚌埠市", "childrens": 
+				[
+					{
+						"cellValue": "龙子湖区", "childrens": null
+					}, 
+					{
+						"cellValue": "蚌山区", "childrens": null
+					}, 
+					{
+						"cellValue": "禹会区", "childrens": null
+					}, 
+					{
+						"cellValue": "淮上区", "childrens": null
+					}
+				]
+			}
+		]
+	}
+]
