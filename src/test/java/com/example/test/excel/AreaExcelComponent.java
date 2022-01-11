@@ -59,8 +59,11 @@ public class AreaExcelComponent implements ExcelComponent {
 	private void createProvinceSheet(Workbook wb, XSSFSheet sheet, List<ExcelData> provinceList) {
 		Sheet provinceSheet = wb.createSheet("全国省份");
 		for (int i = 0; i < provinceList.size(); i++) {
+			String value = provinceList.get(i).getCellValue();
 			// 每行的第一个单元格写入省份
-			provinceSheet.createRow(i).createCell(0).setCellValue(provinceList.get(i).getCellValue());
+			provinceSheet.createRow(i).createCell(0).setCellValue(value);
+			// 设置单元格宽度
+			this.setCellWidth(provinceSheet, i, value);
 		}
 		Name provinceName = wb.createName();
 		provinceName.setNameName(provinceSheet.getSheetName());
@@ -98,14 +101,19 @@ public class AreaExcelComponent implements ExcelComponent {
 				Row row = provinceSheet.createRow(i);
 				// 每行的第一个单元格写入城市
 				row.createCell(0).setCellValue(city.getCellValue());
+				// 设置单元格宽度
+				this.setCellWidth(provinceSheet, i, city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
 				if (CollectionUtils.isEmpty(districtList)) {
 					// 如果没有区县，直接跳过
 					continue;
 				}
 				for (int j = 0; j < districtList.size(); j++) {
+					String value = districtList.get(j).getCellValue();
 					// 每行从第二个单元格开始写入区县
-					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
+					row.createCell(j + 1).setCellValue(value);
+					// 设置单元格宽度
+					this.setCellWidth(provinceSheet, j + 1, value);
 				}
 				Name cityName = wb.createName();
 				// 名称格式：省份_城市

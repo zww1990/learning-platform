@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddressList;
@@ -83,7 +84,7 @@ public interface ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:07:26
 	 */
-	default void createHeaderRow(Workbook wb, XSSFSheet sheet, String[] headers) {
+	default void createHeaderRow(Workbook wb, Sheet sheet, String[] headers) {
 		Row row = sheet.createRow(0);
 		CellStyle style = wb.createCellStyle();
 		style.setAlignment(HorizontalAlignment.CENTER);// 设置水平对齐
@@ -101,8 +102,13 @@ public interface ExcelComponent {
 			Cell cell = row.createCell(i);
 			cell.setCellValue(header);
 			cell.setCellStyle(style);// 设置单元格样式
-			sheet.setColumnWidth(i, header.getBytes().length * 256 * 2);// 设置单元格宽度
+			this.setCellWidth(sheet, i, header);
 		}
+	}
+
+	default void setCellWidth(Sheet sheet, int index, String value) {
+		// 设置单元格宽度
+		sheet.setColumnWidth(index, (value.getBytes().length + 4) * 256);
 	}
 
 	/**
