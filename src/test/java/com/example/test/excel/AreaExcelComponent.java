@@ -35,8 +35,10 @@ public class AreaExcelComponent implements ExcelComponent {
 			String[] headers = { "省份", "城市", "区县" };
 			this.createHeaderRow(wb, sheet, headers);
 			List<ExcelData> provinceList = this.findProvinceCityDistrictList();
-			this.createProvinceSheet(wb, sheet, provinceList);
-			this.createCityDistrictSheet(wb, sheet, provinceList);
+			if (!CollectionUtils.isEmpty(provinceList)) {
+				this.createProvinceSheet(wb, sheet, provinceList);
+				this.createCityDistrictSheet(wb, sheet, provinceList);
+			}
 			wb.write(os);
 			log.info("成功写入工作簿中电子表格的数量: {}", wb.getNumberOfSheets());
 		} catch (Exception e) {
@@ -55,9 +57,6 @@ public class AreaExcelComponent implements ExcelComponent {
 	 * @param provinceList {@link ExcelData}
 	 */
 	private void createProvinceSheet(Workbook wb, XSSFSheet sheet, List<ExcelData> provinceList) {
-		if (CollectionUtils.isEmpty(provinceList)) {
-			return;
-		}
 		Sheet provinceSheet = wb.createSheet("全国省份");
 		for (int i = 0; i < provinceList.size(); i++) {
 			// 每行的第一个单元格写入省份
@@ -85,9 +84,6 @@ public class AreaExcelComponent implements ExcelComponent {
 	 * @param provinceList {@link ExcelData}
 	 */
 	private void createCityDistrictSheet(Workbook wb, XSSFSheet sheet, List<ExcelData> provinceList) {
-		if (CollectionUtils.isEmpty(provinceList)) {
-			return;
-		}
 		// 为每个省份创建一个单独的sheet页
 		for (ExcelData province : provinceList) {
 			List<ExcelData> cityList = province.getChildrens();
@@ -103,22 +99,19 @@ public class AreaExcelComponent implements ExcelComponent {
 				// 每行的第一个单元格写入城市
 				row.createCell(0).setCellValue(city.getCellValue());
 				List<ExcelData> districtList = city.getChildrens();
-				int districtSize;
 				if (CollectionUtils.isEmpty(districtList)) {
-					// 如果没有区县，默认10空单元格
-					districtSize = 10;
-				} else {
-					districtSize = districtList.size();
-					for (int j = 0; j < districtSize; j++) {
-						// 每行从第二个单元格开始写入区县
-						row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
-					}
+					// 如果没有区县，直接跳过
+					continue;
+				}
+				for (int j = 0; j < districtList.size(); j++) {
+					// 每行从第二个单元格开始写入区县
+					row.createCell(j + 1).setCellValue(districtList.get(j).getCellValue());
 				}
 				Name cityName = wb.createName();
 				// 名称格式：省份_城市
 				cityName.setNameName(String.join("_", province.getCellValue(), city.getCellValue()));
 				cityName.setRefersToFormula(
-						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtSize));
+						provinceSheet.getSheetName() + '!' + this.calcRange(1, i + 1, districtList.size()));
 			}
 			Name provinceName = wb.createName();
 			// 将省份做为名称管理器
