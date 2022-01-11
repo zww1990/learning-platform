@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 public class ExcelComponentTests {
 	private AreaExcelComponent areaExcelComponent = new AreaExcelComponent();
 	private MenuExcelComponent menuExcelComponent = new MenuExcelComponent();
+	private DemoExcelComponent demoExcelComponent = new DemoExcelComponent();
 
 	@Test
 	public void testAreaWrite() {
@@ -27,6 +28,17 @@ public class ExcelComponentTests {
 		try {
 			this.menuExcelComponent.write(new FileOutputStream(Paths.get("e:", String
 					.join(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()), "menu-", ".xlsx"))
+					.toFile()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testDemoWrite() {
+		try {
+			this.demoExcelComponent.write(new FileOutputStream(Paths.get("e:", String
+					.join(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()), "demo-", ".xlsx"))
 					.toFile()));
 		} catch (Exception e) {
 			e.printStackTrace();
