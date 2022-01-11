@@ -105,21 +105,19 @@ public class MenuExcelComponent implements ExcelComponent {
 				// 每行的第一个单元格写入城市
 				row.createCell(0).setCellValue(menu.getMenuName());
 				List<MenuData> subMenuList = menu.getChildrens();
-				int subMenuSize;
 				if (CollectionUtils.isEmpty(subMenuList)) {
-					// 如果没有区县，默认10空单元格
-					subMenuSize = 10;
-				} else {
-					subMenuSize = subMenuList.size();
-					for (int j = 0; j < subMenuSize; j++) {
-						// 每行从第二个单元格开始写入区县
-						row.createCell(j + 1).setCellValue(subMenuList.get(j).getMenuName());
-					}
+					// 如果没有区县，直接跳过
+					continue;
+				}
+				for (int j = 0; j < subMenuList.size(); j++) {
+					// 每行从第二个单元格开始写入区县
+					row.createCell(j + 1).setCellValue(subMenuList.get(j).getMenuName());
 				}
 				Name menuName = wb.createName();
 				// 名称格式：省份_城市
 				menuName.setNameName(String.join("_", entry.getKey(), menu.getMenuName()));
-				menuName.setRefersToFormula(menuSheet.getSheetName() + '!' + this.calcRange(1, i + 1, subMenuSize));
+				menuName.setRefersToFormula(
+						menuSheet.getSheetName() + '!' + this.calcRange(1, i + 1, subMenuList.size()));
 			}
 			Name menuName = wb.createName();
 			// 将省份做为名称管理器
