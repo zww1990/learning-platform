@@ -1,1322 +1,1281 @@
-[
+[ {
+		"menuName": "首页",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "热线",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "回访",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "热线经理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "回访经理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "回访总监",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 63, "menuName": "首页", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "顾客管理",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "客诉处理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 64, "menuName": "热线", "parentId": 63, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "顾客资源池",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 65, "menuName": "回访", "parentId": 63, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "顾客标记管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 66, "menuName": "热线经理", "parentId": 63, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "顾客分配管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 67, "menuName": "回访经理", "parentId": 63, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "合并顾客",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 255, "menuName": "回访总监", "parentId": 63, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "会员级别调整",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "会员级别和资产调整",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "发放红包",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "发放优惠券",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "调查问卷",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "用户反馈表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "我的热线顾客",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "热线顾客管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "今日调线管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "我的回访顾客",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "回访顾客管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "待领取顾客池(热线)",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "待领取顾客池(回访)",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "顾客数据分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "服务规则配置",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "咨询来电管理(回访)",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "咨询来电管理(热线)",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "顾客上交审核",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "标记顾客投诉",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 68, "menuName": "顾客管理", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "顾客活动管理",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "活动会员管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 270, "menuName": "客诉处理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "会员活动分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 69, "menuName": "顾客资源池", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "当天建档率",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 254, "menuName": "顾客标记管理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "活动管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 88, "menuName": "顾客分配管理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "活动会员筛选",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 269, "menuName": "合并顾客", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 272, "menuName": "会员级别调整", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 273, "menuName": "会员级别和资产调整", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 275, "menuName": "发放红包", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 276, "menuName": "发放优惠券", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 162, "menuName": "调查问卷", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 163, "menuName": "用户反馈表", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 92, "menuName": "我的热线顾客", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 90, "menuName": "热线顾客管理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 169, "menuName": "今日调线管理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 93, "menuName": "我的回访顾客", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 91, "menuName": "回访顾客管理", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 234, "menuName": "待领取顾客池(热线)", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 94, "menuName": "待领取顾客池(回访)", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 70, "menuName": "顾客数据分析", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 95, "menuName": "服务规则配置", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 244, "menuName": "咨询来电管理(回访)", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 245, "menuName": "咨询来电管理(热线)", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 247, "menuName": "顾客上交审核", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 248, "menuName": "标记顾客投诉", "parentId": 68, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "活动会员筛选(一线)",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 252, "menuName": "顾客活动管理", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "商品管理",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "特殊商品",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 256, "menuName": "活动会员管理", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "商品列表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 253, "menuName": "会员活动分析", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "类目管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 258, "menuName": "当天建档率", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "套餐管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 278, "menuName": "活动管理", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "病症管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 262, "menuName": "活动会员筛选", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "品牌管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 271, "menuName": "活动会员筛选(一线)", "parentId": 252, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "商品图谱",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "准则库",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "商品营销看板",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 71, "menuName": "商品管理", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "员工管理",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "员工列表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 166, "menuName": "特殊商品", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工排班",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 72, "menuName": "商品列表", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的画像",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 73, "menuName": "类目管理", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工统计分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 74, "menuName": "套餐管理", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 75, "menuName": "病症管理", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 76, "menuName": "品牌管理", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 77, "menuName": "商品图谱", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 168, "menuName": "准则库", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 78, "menuName": "商品营销看板", "parentId": 71, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "员工休假管理",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 79, "menuName": "员工管理", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "智能派单",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "顾客人群圈选",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 80, "menuName": "员工列表", "parentId": 79, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工人群圈选",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 81, "menuName": "员工排班", "parentId": 79, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 82, "menuName": "我的画像", "parentId": 79, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 83, "menuName": "员工统计分析", "parentId": 79, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 285, "menuName": "员工休假管理", "parentId": 79, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "智能分线管理",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 84, "menuName": "智能派单", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "质检管理",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "质检管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 85, "menuName": "顾客人群圈选", "parentId": 84, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 86, "menuName": "员工人群圈选", "parentId": 84, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 87, "menuName": "智能分线管理", "parentId": 84, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "员工通话信息",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 96, "menuName": "质检管理", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "订单中心",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "订单分仓规则",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 97, "menuName": "质检管理", "parentId": 96, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "订单出库预警",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 268, "menuName": "员工通话信息", "parentId": 96, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "新建订单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "我的订单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单下发",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单列表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单审核",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "售后单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "拒收单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单审核设置",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单拆分",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 98, "menuName": "订单中心", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "仓储中心",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "供应商档案",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 99, "menuName": "订单分仓规则", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "仓库管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 100, "menuName": "订单出库预警", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "库位档案管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 101, "menuName": "新建订单", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "库位属性设置",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 102, "menuName": "我的订单", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "商品采购预警",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 243, "menuName": "订单下发", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "采购单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 267, "menuName": "订单列表", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "采购单审核",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 103, "menuName": "订单审核", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "采购退货单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 104, "menuName": "售后单管理", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "盘点管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 105, "menuName": "拒收单管理", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "库存流水",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 106, "menuName": "订单审核设置", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "库存余量",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 284, "menuName": "订单拆分", "parentId": 98, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "订单分配快递",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "生成拣货单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "拣货单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "退货入库单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "面单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "出库制单",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "出库单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "发货人管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "扫码出单",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 107, "menuName": "仓储中心", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "物流中心",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "快递公司档案",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 108, "menuName": "供应商档案", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "快递运单查询",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 109, "menuName": "仓库管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "运单异常登记",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 110, "menuName": "库位档案管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "挽留单提醒",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 111, "menuName": "库位属性设置", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 112, "menuName": "商品采购预警", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 113, "menuName": "采购单管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 114, "menuName": "采购单审核", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 115, "menuName": "采购退货单", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 116, "menuName": "盘点管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 117, "menuName": "库存流水", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 118, "menuName": "库存余量", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 119, "menuName": "订单分配快递", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 229, "menuName": "生成拣货单", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 230, "menuName": "拣货单管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 120, "menuName": "退货入库单", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 231, "menuName": "面单管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 121, "menuName": "出库制单", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 122, "menuName": "出库单管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 123, "menuName": "发货人管理", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 124, "menuName": "扫码出单", "parentId": 107, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "物流分单统计",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 125, "menuName": "物流中心", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "结算中心",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "客户返券明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 126, "menuName": "快递公司档案", "parentId": 125, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "退款申请管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 127, "menuName": "快递运单查询", "parentId": 125, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "对账订单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 128, "menuName": "运单异常登记", "parentId": 125, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "财务处理列表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 261, "menuName": "挽留单提醒", "parentId": 125, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "发货销售汇总",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 260, "menuName": "物流分单统计", "parentId": 125, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "对账运费订单管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "确认收款管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "结算运费订单查询",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "运费结算明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "商品结算明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "在途商品汇总",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "客户积分明细表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "客户优惠券明细表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "客户红包明细表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单发票列表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "订单发票申请表",
+				"component": "CRM",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "账户余额明细",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 129, "menuName": "结算中心", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "单据报表",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "仓库发货统计",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 167, "menuName": "客户返券明细", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "仓库退货统计",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 130, "menuName": "退款申请管理", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "库存成本统计",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 131, "menuName": "对账订单管理", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "销售明细统计",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 249, "menuName": "财务处理列表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "订单销售明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 250, "menuName": "发货销售汇总", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "客诉退货明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 132, "menuName": "对账运费订单管理", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "出入库查询",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 133, "menuName": "确认收款管理", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "成单分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 135, "menuName": "结算运费订单查询", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "各营成单分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 136, "menuName": "运费结算明细", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "成单排名",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 137, "menuName": "商品结算明细", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工成交统计",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 138, "menuName": "在途商品汇总", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "产品成交明细",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 139, "menuName": "客户积分明细表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "热线成单分析",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 140, "menuName": "客户优惠券明细表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 141, "menuName": "客户红包明细表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 142, "menuName": "订单发票列表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 143, "menuName": "订单发票申请表", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 144, "menuName": "账户余额明细", "parentId": 129, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "员工核单/追单汇总表",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 145, "menuName": "单据报表", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "积分商城",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "商城首页",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 241, "menuName": "仓库发货统计", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "积分获取规则",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 242, "menuName": "仓库退货统计", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "兑换商品管理",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 146, "menuName": "库存成本统计", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工兑换记录",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 148, "menuName": "销售明细统计", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 149, "menuName": "订单销售明细", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 150, "menuName": "客诉退货明细", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 151, "menuName": "出入库查询", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 235, "menuName": "成单分析", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 237, "menuName": "各营成单分析", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 238, "menuName": "成单排名", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 239, "menuName": "员工成交统计", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 266, "menuName": "产品成交明细", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 240, "menuName": "热线成单分析", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 264, "menuName": "员工核单/追单汇总表", "parentId": 145, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "员工积分管理",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 152, "menuName": "积分商城", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "系统配置",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "报表权限",
+				"component": "CRM",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 153, "menuName": "商城首页", "parentId": 152, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 154, "menuName": "积分获取规则", "parentId": 152, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 155, "menuName": "兑换商品管理", "parentId": 152, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 156, "menuName": "员工兑换记录", "parentId": 152, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 157, "menuName": "员工积分管理", "parentId": 152, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "分机号管理",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 158, "menuName": "系统配置", "parentId": 0, "component": "CRM", "childrens": 
-		[
-			{
-				"menuId": 263, "menuName": "报表权限", "parentId": 158, "component": "CRM", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 159, "menuName": "分机号管理", "parentId": 158, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "需求中心",
+		"component": "CRM",
+		"childrens": [ {
+				"menuName": "需求研发进度",
+				"component": "CRM",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 290, "menuName": "需求中心", "parentId": 0, "component": "CRM", "childrens": 
-		[
+		"menuName": "CEO驾驶舱",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "首页",
+				"component": "BI",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 291, "menuName": "需求研发进度", "parentId": 290, "component": "CRM", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "人",
+				"component": "BI",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "货",
+				"component": "BI",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "场",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 205, "menuName": "CEO驾驶舱", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 206, "menuName": "首页", "parentId": 205, "component": "BI", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 207, "menuName": "人", "parentId": 205, "component": "BI", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 208, "menuName": "货", "parentId": 205, "component": "BI", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 209, "menuName": "场", "parentId": 205, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "指标",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "指标详情",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 212, "menuName": "指标", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 213, "menuName": "指标详情", "parentId": 212, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "业务分析",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "销售情况",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 214, "menuName": "业务分析", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 215, "menuName": "销售情况", "parentId": 214, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "目标管理",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "我的目标管理",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 219, "menuName": "目标管理", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 220, "menuName": "我的目标管理", "parentId": 219, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "系统设置",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "跨系统数据配置",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 221, "menuName": "系统设置", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 224, "menuName": "跨系统数据配置", "parentId": 221, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "员工积分配置",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "积分总览",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 225, "menuName": "员工积分配置", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 226, "menuName": "积分总览", "parentId": 225, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "指标库配置",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "指标库",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 227, "menuName": "指标库配置", "parentId": 0, "component": "BI", "childrens": 
-		[
-			{
-				"menuId": 228, "menuName": "指标库", "parentId": 227, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "数据库",
+		"component": "BI",
+		"childrens": [ {
+				"menuName": "数据库",
+				"component": "BI",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 232, "menuName": "数据库", "parentId": 0, "component": "BI", "childrens": 
-		[
+		"menuName": "媒体管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "合作管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 233, "menuName": "数据库", "parentId": 232, "component": "BI", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "合作公司",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "媒体管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "资源管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "400电话",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "网络资源账号",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 171, "menuName": "媒体管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
+		"menuName": "促销管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "优惠券管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 172, "menuName": "合作管理", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "商品促销活动",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 173, "menuName": "合作公司", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 174, "menuName": "媒体管理", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 175, "menuName": "资源管理", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 176, "menuName": "400电话", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 177, "menuName": "网络资源账号", "parentId": 171, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "活动返券管理",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 178, "menuName": "促销管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
+		"menuName": "投放管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "电视媒体投放",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 179, "menuName": "优惠券管理", "parentId": 178, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 180, "menuName": "商品促销活动", "parentId": 178, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 259, "menuName": "活动返券管理", "parentId": 178, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "广播电台媒体投放",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 181, "menuName": "投放管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
+		"menuName": "任务系统",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "商品销售任务下发",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 182, "menuName": "电视媒体投放", "parentId": 181, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 183, "menuName": "广播电台媒体投放", "parentId": 181, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "营销活动任务下发",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 184, "menuName": "任务系统", "parentId": 0, "component": "DMC", "childrens": 
-		[
+		"menuName": "会员管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "会员级别管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 185, "menuName": "商品销售任务下发", "parentId": 184, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "会员优惠管理",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 186, "menuName": "营销活动任务下发", "parentId": 184, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "买商品送积分规则",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "会员活动管理",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 187, "menuName": "会员管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
+		"menuName": "积分商城",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "积分商城首页",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 188, "menuName": "会员级别管理", "parentId": 187, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "积分兑换商品",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 189, "menuName": "会员优惠管理", "parentId": 187, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "积分兑换优惠券",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 190, "menuName": "买商品送积分规则", "parentId": 187, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "积分抵现",
+				"component": "DMC",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 265, "menuName": "会员活动管理", "parentId": 187, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "签到奖励",
+				"component": "DMC",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "积分兑换订单",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 191, "menuName": "积分商城", "parentId": 0, "component": "DMC", "childrens": 
-		[
-			{
-				"menuId": 192, "menuName": "积分商城首页", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 193, "menuName": "积分兑换商品", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 194, "menuName": "积分兑换优惠券", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 195, "menuName": "积分抵现", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 196, "menuName": "签到奖励", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 197, "menuName": "积分兑换订单", "parentId": 191, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "营销素材管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "企业文件夹",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 198, "menuName": "营销素材管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
-			{
-				"menuId": 199, "menuName": "企业文件夹", "parentId": 198, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "自主营销管理",
+		"component": "DMC",
+		"childrens": [ {
+				"menuName": "客户群投放",
+				"component": "DMC",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 200, "menuName": "自主营销管理", "parentId": 0, "component": "DMC", "childrens": 
-		[
-			{
-				"menuId": 201, "menuName": "客户群投放", "parentId": 200, "component": "DMC", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+		"menuName": "首页",
+		"component": "EHR",
+		"childrens": [ ]
+	},
 	{
-		"menuId": 2, "menuName": "首页", "parentId": 0, "component": "EHR", "childrens": 
-		[
-		]
-	}, 
+		"menuName": "组织管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "组织架构管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "功能属性管理",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 3, "menuName": "组织管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "人事管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "员工列表(人资)",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 4, "menuName": "组织架构管理", "parentId": 3, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工列表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 5, "menuName": "功能属性管理", "parentId": 3, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "人事审批",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "待招任务",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "面试管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "培训管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "招聘渠道",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "奖惩管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "员工调整记录",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "转介绍提成设置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "审批流程配置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "考勤范围设置",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 6, "menuName": "人事管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "一线管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "绩效系数配置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 7, "menuName": "员工列表(人资)", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "配置绩效查看",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 279, "menuName": "员工列表", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "查看排班表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 8, "menuName": "人事审批", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "查看考勤表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 9, "menuName": "待招任务", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "抢休规则配置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 10, "menuName": "面试管理", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "岗位级别条件",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 11, "menuName": "培训管理", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "提成考核",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 12, "menuName": "招聘渠道", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "薪酬核算规则",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 13, "menuName": "奖惩管理", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "工资发放列表(人资)",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 14, "menuName": "员工调整记录", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 15, "menuName": "转介绍提成设置", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 16, "menuName": "审批流程配置", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 281, "menuName": "考勤范围设置", "parentId": 6, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": " 工资发放列表(财务)",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 17, "menuName": "一线管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "职能管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "配置绩效审批",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 18, "menuName": "绩效系数配置", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "查看考勤表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 19, "menuName": "配置绩效查看", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "月初计划填报",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 20, "menuName": "查看排班表", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "月末绩效考核",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 21, "menuName": "查看考勤表", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "绩效配置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 22, "menuName": "抢休规则配置", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "工资发放列表(人资)",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 23, "menuName": "岗位级别条件", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": " 工资发放列表(财务)",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 24, "menuName": "提成考核", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 25, "menuName": "薪酬核算规则", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 26, "menuName": "工资发放列表(人资)", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 60, "menuName": " 工资发放列表(财务)", "parentId": 17, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "考评填报提醒",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 27, "menuName": "职能管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "公共资源管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "培训课件管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 28, "menuName": "配置绩效审批", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "入司车辆管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 29, "menuName": "查看考勤表", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 30, "menuName": "月初计划填报", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 31, "menuName": "月末绩效考核", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 32, "menuName": "绩效配置", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 33, "menuName": "工资发放列表(人资)", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 34, "menuName": " 工资发放列表(财务)", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 61, "menuName": "考评填报提醒", "parentId": 27, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "办公用品管理",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 35, "menuName": "公共资源管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "消息管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "消息列表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 36, "menuName": "培训课件管理", "parentId": 35, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 37, "menuName": "入司车辆管理", "parentId": 35, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 38, "menuName": "办公用品管理", "parentId": 35, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "消息发布",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 39, "menuName": "消息管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "系统管理",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "角色管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 40, "menuName": "消息列表", "parentId": 39, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "菜单管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 41, "menuName": "消息发布", "parentId": 39, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
+				"menuName": "快捷方式管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "员工权限配置",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "流程管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "操作日志",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "ASR配置管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "CTI配置管理",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "密码规则",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "导入目标",
+				"component": "EHR",
+				"childrens": [ ]
+			},
+			{
+				"menuName": "设备管理",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	},
 	{
-		"menuId": 42, "menuName": "系统管理", "parentId": 0, "component": "EHR", "childrens": 
-		[
+		"menuName": "个人中心",
+		"component": "EHR",
+		"childrens": [ {
+				"menuName": "个人资料",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 43, "menuName": "角色管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的排班",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 282, "menuName": "菜单管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的考勤",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 283, "menuName": "快捷方式管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的绩效",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 44, "menuName": "员工权限配置", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的工资",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 45, "menuName": "流程管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "发起流程",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 46, "menuName": "操作日志", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "我的流程",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 58, "menuName": "ASR配置管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "员工旅程",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 59, "menuName": "CTI配置管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "消息列表",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 62, "menuName": "密码规则", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
+				"menuName": "待选简历",
+				"component": "EHR",
+				"childrens": [ ]
+			},
 			{
-				"menuId": 246, "menuName": "导入目标", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 251, "menuName": "设备管理", "parentId": 42, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}, 
-	{
-		"menuId": 47, "menuName": "个人中心", "parentId": 0, "component": "EHR", "childrens": 
-		[
-			{
-				"menuId": 280, "menuName": "个人资料", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 48, "menuName": "我的排班", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 49, "menuName": "我的考勤", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 50, "menuName": "我的绩效", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 51, "menuName": "我的工资", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 52, "menuName": "发起流程", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 53, "menuName": "我的流程", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 54, "menuName": "员工旅程", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 55, "menuName": "消息列表", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 56, "menuName": "待选简历", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}, 
-			{
-				"menuId": 57, "menuName": "我的面试", "parentId": 47, "component": "EHR", "childrens": 
-				[
-				]
-			}
-		]
-	}
-]
+				"menuName": "我的面试",
+				"component": "EHR",
+				"childrens": [ ]
+			} ]
+	} ]
