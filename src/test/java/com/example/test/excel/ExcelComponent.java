@@ -2,6 +2,8 @@ package com.example.test.excel;
 
 import java.io.OutputStream;
 
+import org.apache.poi.hssf.usermodel.HSSFDataValidationHelper;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataValidation;
@@ -44,8 +46,16 @@ public interface ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:06:45
 	 */
-	default void addSimpleValidationData(XSSFSheet sheet, String[] data, int index) {
-		DataValidationHelper helper = new XSSFDataValidationHelper(sheet);
+	default void addSimpleValidationData(Sheet sheet, String[] data, int index) {
+		DataValidationHelper helper = null;
+		if (sheet instanceof XSSFSheet) {
+			helper = new XSSFDataValidationHelper((XSSFSheet) sheet);
+		} else if (sheet instanceof HSSFSheet) {
+			helper = new HSSFDataValidationHelper((HSSFSheet) sheet);
+		}
+		if (helper == null) {
+			return;
+		}
 		DataValidationConstraint constraint = helper.createExplicitListConstraint(data);
 		CellRangeAddressList addressList = new CellRangeAddressList(1, 65535, index, index);
 		DataValidation validation = helper.createValidation(constraint, addressList);
@@ -64,8 +74,16 @@ public interface ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:07:08
 	 */
-	default void addFormulaListValidationData(XSSFSheet sheet, String listFormula, int index) {
-		DataValidationHelper helper = new XSSFDataValidationHelper(sheet);
+	default void addFormulaListValidationData(Sheet sheet, String listFormula, int index) {
+		DataValidationHelper helper = null;
+		if (sheet instanceof XSSFSheet) {
+			helper = new XSSFDataValidationHelper((XSSFSheet) sheet);
+		} else if (sheet instanceof HSSFSheet) {
+			helper = new HSSFDataValidationHelper((HSSFSheet) sheet);
+		}
+		if (helper == null) {
+			return;
+		}
 		DataValidationConstraint constraint = helper.createFormulaListConstraint(listFormula);
 		CellRangeAddressList addressList = new CellRangeAddressList(1, 65535, index, index);
 		DataValidation validation = helper.createValidation(constraint, addressList);
