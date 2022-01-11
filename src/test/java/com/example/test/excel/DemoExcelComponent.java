@@ -14,6 +14,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,21 +27,26 @@ public class DemoExcelComponent implements ExcelComponent {
 	@Override
 	public void write(OutputStream os) {
 		try (Workbook wb = new XSSFWorkbook()) {
-			Sheet sheet = wb.createSheet("系统菜单");
 			Set<Entry<String, List<MenuData>>> entries = this.findMenuMap().entrySet();
-			int i = 0;
-			Row firstRow = sheet.createRow(0);
 			for (Entry<String, List<MenuData>> entry : entries) {
-				firstRow.createCell(i).setCellValue(entry.getKey());
-				List<MenuData> value = entry.getValue();
-				for (int j = 0; j < value.size(); j++) {
-					Row row = i == 0 ? sheet.createRow(j + 1) : sheet.getRow(j + 1);
-					if (row == null) {
-						row = sheet.createRow(j + 1);
+				Sheet sheet = wb.createSheet(entry.getKey());
+				Row firstRow = sheet.createRow(0);
+				List<MenuData> menuList = entry.getValue();
+				for (int i = 0; i < menuList.size(); i++) {
+					MenuData menu = menuList.get(i);
+					firstRow.createCell(i).setCellValue(menu.getMenuName());
+					List<MenuData> subMenuList = menu.getChildrens();
+					if (!CollectionUtils.isEmpty(subMenuList)) {
+						for (int j = 0; j < subMenuList.size(); j++) {
+							int rownum = j + 1;
+							Row row = i == 0 ? sheet.createRow(rownum) : sheet.getRow(rownum);
+							if (row == null) {
+								row = sheet.createRow(rownum);
+							}
+							row.createCell(i).setCellValue(subMenuList.get(j).getMenuName());
+						}
 					}
-					row.createCell(i).setCellValue(value.get(j).getMenuName());
 				}
-				i++;
 			}
 			wb.write(os);
 			log.info("成功写入工作簿中电子表格的数量: {}", wb.getNumberOfSheets());
