@@ -124,8 +124,16 @@ public interface ExcelComponent {
 		}
 	}
 
+	/**
+	 * 设置单元格宽度
+	 * 
+	 * @author zww1990@foxmail.com
+	 * @since 2022年1月11日,下午9:00:55
+	 * @param sheet {@link Sheet}
+	 * @param index 列所在的索引，从0开始
+	 * @param value 单元格内容
+	 */
 	default void setCellWidth(Sheet sheet, int index, String value) {
-		// 设置单元格宽度
 		sheet.setColumnWidth(index, (value.getBytes().length + 4) * 256);
 	}
 
