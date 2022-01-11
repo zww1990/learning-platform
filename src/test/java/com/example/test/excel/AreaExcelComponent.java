@@ -9,7 +9,6 @@ import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
@@ -31,7 +30,7 @@ public class AreaExcelComponent implements ExcelComponent {
 	@Override
 	public void write(OutputStream os) {
 		try (Workbook wb = new XSSFWorkbook()) {
-			XSSFSheet sheet = (XSSFSheet) wb.createSheet("省份-城市-区县");
+			Sheet sheet = wb.createSheet("省份-城市-区县");
 			String[] headers = { "省份", "城市", "区县" };
 			this.createHeaderRow(wb, sheet, headers);
 			List<ExcelData> provinceList = this.findProvinceCityDistrictList();
@@ -53,10 +52,10 @@ public class AreaExcelComponent implements ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:18
 	 * @param wb           {@link Workbook}
-	 * @param sheet        {@link XSSFSheet}
+	 * @param sheet        {@link Sheet}
 	 * @param provinceList {@link ExcelData}
 	 */
-	private void createProvinceSheet(Workbook wb, XSSFSheet sheet, List<ExcelData> provinceList) {
+	private void createProvinceSheet(Workbook wb, Sheet sheet, List<ExcelData> provinceList) {
 		Sheet provinceSheet = wb.createSheet("全国省份");
 		for (int i = 0; i < provinceList.size(); i++) {
 			String value = provinceList.get(i).getCellValue();
@@ -83,10 +82,10 @@ public class AreaExcelComponent implements ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:22
 	 * @param wb           {@link Workbook}
-	 * @param sheet        {@link XSSFSheet}
+	 * @param sheet        {@link Sheet}
 	 * @param provinceList {@link ExcelData}
 	 */
-	private void createCityDistrictSheet(Workbook wb, XSSFSheet sheet, List<ExcelData> provinceList) {
+	private void createCityDistrictSheet(Workbook wb, Sheet sheet, List<ExcelData> provinceList) {
 		// 为每个省份创建一个单独的sheet页
 		for (ExcelData province : provinceList) {
 			List<ExcelData> cityList = province.getChildrens();

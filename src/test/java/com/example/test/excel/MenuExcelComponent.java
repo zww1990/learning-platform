@@ -13,7 +13,6 @@ import org.apache.poi.ss.usermodel.Name;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +34,7 @@ public class MenuExcelComponent implements ExcelComponent {
 	@Override
 	public void write(OutputStream os) {
 		try (Workbook wb = new XSSFWorkbook()) {
-			XSSFSheet sheet = (XSSFSheet) wb.createSheet("系统菜单");
+			Sheet sheet = wb.createSheet("系统菜单");
 			String[] headers = { "一级菜单", "二级菜单", "三级菜单" };
 			this.createHeaderRow(wb, sheet, headers);
 			List<MenuData> provinceList = this.findMenuList();
@@ -59,10 +58,10 @@ public class MenuExcelComponent implements ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:18
 	 * @param wb      {@link Workbook}
-	 * @param sheet   {@link XSSFSheet}
+	 * @param sheet   {@link Sheet}
 	 * @param menuMap {@link MenuData}
 	 */
-	private void createMenuSheet(Workbook wb, XSSFSheet sheet, Map<String, List<MenuData>> menuMap) {
+	private void createMenuSheet(Workbook wb, Sheet sheet, Map<String, List<MenuData>> menuMap) {
 		Sheet menuSheet = wb.createSheet("所有系统");
 		List<String> menuList = menuMap.keySet().stream().collect(Collectors.toList());
 		for (int i = 0; i < menuList.size(); i++) {
@@ -89,10 +88,10 @@ public class MenuExcelComponent implements ExcelComponent {
 	 * @author zww1990@foxmail.com
 	 * @since 2022年1月8日,下午11:05:22
 	 * @param wb      {@link Workbook}
-	 * @param sheet   {@link XSSFSheet}
+	 * @param sheet   {@link Sheet}
 	 * @param menuMap {@link MenuData}
 	 */
-	private void createSubMenuSheet(Workbook wb, XSSFSheet sheet, Map<String, List<MenuData>> menuMap) {
+	private void createSubMenuSheet(Workbook wb, Sheet sheet, Map<String, List<MenuData>> menuMap) {
 		Set<Entry<String, List<MenuData>>> menuEntrySet = menuMap.entrySet();
 		// 为每个省份创建一个单独的sheet页
 		for (Entry<String, List<MenuData>> entry : menuEntrySet) {
