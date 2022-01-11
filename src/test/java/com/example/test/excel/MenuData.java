@@ -18,9 +18,9 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class MenuData {
-	private Integer menuId;
+//	private Integer menuId;
+//	private Integer parentId;
 	private String menuName;
-	private Integer parentId;
 	private String component;
 	private List<MenuData> childrens;
 }
