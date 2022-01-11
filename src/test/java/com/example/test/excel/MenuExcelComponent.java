@@ -66,8 +66,10 @@ public class MenuExcelComponent implements ExcelComponent {
 		Sheet menuSheet = wb.createSheet("所有系统");
 		List<String> menuList = menuMap.keySet().stream().collect(Collectors.toList());
 		for (int i = 0; i < menuList.size(); i++) {
+			String value = menuList.get(i);
 			// 每行的第一个单元格写入省份
-			menuSheet.createRow(i).createCell(0).setCellValue(menuList.get(i));
+			menuSheet.createRow(i).createCell(0).setCellValue(value);
+			this.setCellWidth(menuSheet, i, value);
 		}
 		Name menuName = wb.createName();
 		menuName.setNameName(menuSheet.getSheetName());
@@ -106,14 +108,17 @@ public class MenuExcelComponent implements ExcelComponent {
 				Row row = menuSheet.createRow(i);
 				// 每行的第一个单元格写入城市
 				row.createCell(0).setCellValue(menu.getMenuName());
+				this.setCellWidth(menuSheet, i, menu.getMenuName());
 				List<MenuData> subMenuList = menu.getChildrens();
 				if (CollectionUtils.isEmpty(subMenuList)) {
 					// 如果没有区县，直接跳过
 					continue;
 				}
 				for (int j = 0; j < subMenuList.size(); j++) {
+					String value = subMenuList.get(j).getMenuName();
 					// 每行从第二个单元格开始写入区县
-					row.createCell(j + 1).setCellValue(subMenuList.get(j).getMenuName());
+					row.createCell(j + 1).setCellValue(value);
+					this.setCellWidth(menuSheet, j + 1, value);
 				}
 				Name menuName = wb.createName();
 				// 名称格式：省份_城市
