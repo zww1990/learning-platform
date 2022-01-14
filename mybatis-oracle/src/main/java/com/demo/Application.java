@@ -1,16 +1,18 @@
 package com.demo;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import com.demo.config.SpringConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication
 public class Application {
-	@SuppressWarnings("resource")
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
+
 	public static void main(String[] args) throws Exception {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-		context.registerShutdownHook();
-		context.start();
-		System.err.println(context.getBeanDefinitionCount());
-//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
-		Thread.currentThread().join();
+		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 	}
+
 }
