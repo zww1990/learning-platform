@@ -26,6 +26,8 @@ public enum MethodComments {
 	/**  */
 	selectMany("查询多条记录", "查询语句"),
 	/**  */
+	select("查询多条记录", "查询语句"),
+	/**  */
 	update("更新记录", "更新语句"),
 	/**  */
 	countByExample("返回表中与指定示例对象相匹配的行数", ""),
@@ -36,13 +38,20 @@ public enum MethodComments {
 	/**  */
 	selectDistinctByExample("查询表中与指定示例对象相匹配的不重复记录", ""),
 	/**  */
+	selectDistinct("查询表中不重复的记录", "查询语句"),
+	/**  */
 	updateByExample("更新表中与指定示例对象相匹配的记录", ""),
 	/**  */
 	updateByExampleSelective("选择性更新表中与指定示例对象相匹配的记录", ""),
 	/**  */
 	selectByExampleWithBLOBs("查询表中与指定示例对象相匹配的记录包含所有BLOB类型的字段", ""),
 	/**  */
-	updateByExampleWithBLOBs("更新表中与指定示例对象相匹配的记录包含所有BLOB类型的字段", "");
+	updateByExampleWithBLOBs("更新表中与指定示例对象相匹配的记录包含所有BLOB类型的字段", ""),
+	/**  */
+	updateSelectiveColumns("选择性更新列表", ""),
+	/**  */
+	updateAllColumns("更新所有列", "");
+
 	private String comment;
 	private String remark;
 
