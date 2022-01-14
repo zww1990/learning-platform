@@ -43,9 +43,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 		if (compilationUnit instanceof Interface) {
 			Interface topLevelClass = (Interface) compilationUnit;
 			topLevelClass.addJavaDocLine("/**");
-			topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 			topLevelClass.addJavaDocLine(
-					new StringBuilder(" * @description ").append("Data Access Object for domain model").toString());
+					new StringBuilder(" * ").append("Data Access Object for domain model").toString());
+			topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 			this.addJavadocTag(topLevelClass, false);
 			topLevelClass.addJavaDocLine(" */");
 		}
@@ -89,12 +89,12 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {
 		MethodComments comment = MethodComments.value(method.getName());
 		method.addJavaDocLine("/**");
-		method.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
-		StringBuilder sb1 = new StringBuilder(" * @description ");
+		StringBuilder sb1 = new StringBuilder(" * ");
 		if (comment != null) {
 			sb1.append(comment.getComment());
 		}
 		method.addJavaDocLine(sb1.toString());
+		method.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		List<Parameter> params = method.getParameters();
 		for (int i = 0, size = params.size(); i < size; i++) {
 			StringBuilder sb2 = new StringBuilder(" * @param ").append(params.get(i).getName()).append(" ");
@@ -110,9 +110,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
 		topLevelClass.addJavaDocLine("/**");
-		topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		topLevelClass.addJavaDocLine(
-				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
+				new StringBuilder(" * ").append(introspectedTable.getRemarks()).toString());
+		topLevelClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		this.addJavadocTag(topLevelClass, false);
 		topLevelClass.addJavaDocLine(" */");
 		if (this.addSwaggerAnnotations) {
@@ -126,9 +126,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable) {
 		innerClass.addJavaDocLine("/**");
-		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		innerClass.addJavaDocLine(
-				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
+				new StringBuilder(" * ").append(introspectedTable.getRemarks()).toString());
+		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		this.addJavadocTag(innerClass, false);
 		innerClass.addJavaDocLine(" */");
 	}
@@ -136,9 +136,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 	@Override
 	public void addClassComment(InnerClass innerClass, IntrospectedTable introspectedTable, boolean markAsDoNotDelete) {
 		innerClass.addJavaDocLine("/**");
-		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		innerClass.addJavaDocLine(
-				new StringBuilder(" * @description ").append(introspectedTable.getRemarks()).toString());
+				new StringBuilder(" * ").append(introspectedTable.getRemarks()).toString());
+		innerClass.addJavaDocLine(new StringBuilder(" * @author ").append(this.author).toString());
 		this.addJavadocTag(innerClass, false);
 		innerClass.addJavaDocLine(" */");
 	}
@@ -199,7 +199,7 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
 	@Override
 	public void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
-		javaElement.addJavaDocLine(new StringBuilder(" * @date ").append(super.getDateString()).toString());
+		javaElement.addJavaDocLine(new StringBuilder(" * @since ").append(super.getDateString()).toString());
 	}
 
 	@Override
