@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class UserLogin {
 	private String userNo;
+	private String username;
 	private String password;
 	private String address;
 	private BigDecimal longitude;

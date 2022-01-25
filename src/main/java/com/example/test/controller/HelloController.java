@@ -1,10 +1,5 @@
 package com.example.test.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -61,27 +56,6 @@ public class HelloController {
 
 	@GetMapping("/users")
 	public ResponseBody<List<UserInfo>> getUsers() {
-		Path path = Paths.get("users.json");
-		if (Files.isReadable(path)) {
-			try {
-				List<UserInfo> list = this.objectMapper.readValue(Files.newInputStream(path),
-						this.objectMapper.getTypeFactory().constructParametricType(List.class, UserInfo.class));
-				log.info("从本地磁盘中加载配置成功==>>{}", path);
-				if (list.isEmpty()) {
-					list = this.properties.getUsers();
-				}
-				return new ResponseBody<List<UserInfo>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(list);
-			} catch (IOException e) {
-				log.warn("从本地磁盘中加载配置失败==>>{}", path);
-				return new ResponseBody<List<UserInfo>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(this.properties.getUsers());
-			}
-		}
 		log.info("从当前应用中加载配置成功");
 		return new ResponseBody<List<UserInfo>>()//
 				.setCode(HttpStatus.OK.value())//
@@ -91,31 +65,6 @@ public class HelloController {
 
 	@GetMapping("/addresses")
 	public ResponseBody<List<Address>> getAddresses() {
-		Path path = Paths.get("addresses.json");
-		if (Files.isReadable(path) && Files.isWritable(path)) {
-			try {
-				List<Address> list = this.objectMapper.readValue(Files.newInputStream(path),
-						this.objectMapper.getTypeFactory().constructParametricType(List.class, Address.class));
-				log.info("从本地磁盘中加载配置成功==>>{}", path);
-				if (list.isEmpty()) {
-					list = this.properties.getAddresses();
-					Files.write(path, this.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(list),
-							StandardOpenOption.WRITE);
-				} else {
-					this.properties.setAddresses(list);
-				}
-				return new ResponseBody<List<Address>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(list);
-			} catch (IOException e) {
-				log.warn("从本地磁盘中加载配置失败==>>{}", path);
-				return new ResponseBody<List<Address>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(this.properties.getAddresses());
-			}
-		}
 		log.info("从当前应用中加载配置成功");
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
@@ -151,16 +100,6 @@ public class HelloController {
 		}
 		log.info("{}", address);
 		this.properties.getAddresses().add(address);
-		Path path = Paths.get("addresses.json");
-		try {
-			Files.write(path,
-					this.objectMapper.writerWithDefaultPrettyPrinter()
-							.writeValueAsBytes(this.properties.getAddresses()),
-					StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-			log.info("写入文件成功==>>{}", path);
-		} catch (IOException e) {
-			log.warn("写入文件失败==>>{}", path);
-		}
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(1);
@@ -286,6 +225,13 @@ public class HelloController {
 			if (StringUtils.hasText(String.valueOf(body.getData()))) {
 				AppStaffClockLogDTO resp = this.objectMapper
 						.readValue(AESUtil.decryptAES(String.valueOf(body.getData())), AppStaffClockLogDTO.class);
+				if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+					this.properties.getUsers().add(//
+							new UserInfo()//
+									.setUserNo(userLogin.getUserNo())//
+									.setUsername(userLogin.getUsername())//
+									.setPassword(userLogin.getPassword()));
+				}
 				return body.setData(resp);
 			}
 			return body;
