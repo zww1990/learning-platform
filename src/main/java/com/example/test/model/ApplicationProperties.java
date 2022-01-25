@@ -10,6 +10,7 @@ import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @ConfigurationProperties(prefix = "app")
 @Getter
@@ -43,6 +44,7 @@ public class ApplicationProperties {
 	@Getter
 	@Setter
 	@ToString
+	@Accessors(chain = true)
 	public static class UserInfo {
 		private String userNo;
 		private String password;
