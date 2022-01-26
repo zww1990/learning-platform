@@ -4,4 +4,17 @@ server:
 spring:
   application:
     name: nacos-consumer
+  cloud:
+    nacos:
+      server-addr: 192.168.34.156:8848
+      config:
+        username: nacos
+        password: nacos
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        username: nacos
+        password: nacos
+        namespace: public
 
