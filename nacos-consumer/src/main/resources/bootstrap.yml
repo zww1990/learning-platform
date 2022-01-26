@@ -1,15 +1,15 @@
-spring:
-  cloud:
-    nacos:
-      server-addr: localhost:8848
-      config:
-        username: nacos
-        password: nacos
-        context-path: /nacos
-        namespace: 
-        file-extension: yml
-      discovery:
-        username: nacos
-        password: nacos
-        namespace: public
-
+#spring:
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848
+#      config:
+#        username: nacos
+#        password: nacos
+#        context-path: /nacos
+#        namespace: 
+#        file-extension: yml
+#      discovery:
+#        username: nacos
+#        password: nacos
+#        namespace: public
+#
