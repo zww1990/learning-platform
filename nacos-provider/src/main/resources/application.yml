@@ -15,4 +15,18 @@ spring:
         file-extension: yml
       discovery:
         namespace: public
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        username: admin
+        password: admin@2022
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
