@@ -12,9 +12,6 @@
     <name>nacos-provider</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
