@@ -1,4 +1,9 @@
+server:
+  port: 8081
+
 spring:
+  application:
+    name: nacos-consumer
   cloud:
     nacos:
       server-addr: 192.168.34.156:8848
@@ -10,4 +15,18 @@ spring:
         file-extension: yml
       discovery:
         namespace: public
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        username: admin
+        password: admin@2022
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
