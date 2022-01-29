@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +26,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/demo")
 @Tag(description = "API示例", name = "DemoController")
+@Slf4j
 public class DemoController {
-	private static final Logger log = LoggerFactory.getLogger(DemoController.class);
 
 	@GetMapping("/get")
 	@Operation(summary = "查询用户信息", description = "按id查询用户信息")

@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,10 +13,12 @@ import org.springframework.http.converter.AbstractHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.retry.annotation.EnableRetry;
 
+import lombok.extern.slf4j.Slf4j;
+
 @EnableRetry
 @SpringBootApplication
+@Slf4j
 public class SpringSwaggerOpenApiApplication implements CommandLineRunner {
-	private static final Logger log = LoggerFactory.getLogger(SpringSwaggerOpenApiApplication.class);
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(SpringSwaggerOpenApiApplication.class, args);
