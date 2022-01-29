@@ -6,8 +6,20 @@ import javax.validation.constraints.Positive;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * UserModel
+ * 
+ * @author zww19
+ * @since 2022年1月29日,下午8:47:03
+ */
 @ApiModel(description = "用户模型")
+@Getter
+@Setter
+@ToString
 public class UserModel {
 	@ApiModelProperty(value = "用户ID", required = true)
 	@NotNull(message = "用户ID不能为空")
@@ -16,21 +28,5 @@ public class UserModel {
 	@ApiModelProperty(value = "用户名", required = true)
 	@NotBlank(message = "用户名不能为空")
 	private String userName;
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
 
 }
