@@ -1,8 +1,6 @@
 server:
-  #应用端口号
   port: 8081
   servlet:
-    #应用上下文路径
     context-path: /spring
     jsp:
       registered: false
@@ -16,9 +14,7 @@ spring:
     exceptiontranslation:
       enabled: false
   jackson:
-    #简体中文
     locale: zh_CN
-    #北京时间
     time-zone: GMT+8
   mvc:
     publish-request-handled-events: false
@@ -32,13 +28,12 @@ spring:
   messages:
     basename: org.springframework.security.messages,com.example.security.messages
   datasource:
-    #数据库用户名
     username: root
-    #数据库密码
     password: root
-    #数据库连接
     url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai
-    initialization-mode: never
+  sql:
+    init:
+      mode: never
   jpa:
     show-sql: true
     hibernate:
@@ -49,6 +44,19 @@ spring:
     jdbc:
       initialize-schema: never
       table-name: T_USER_SESSION
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration
+    - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
+    - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
+    - org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+    - org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration
 
 cas:
   server:
