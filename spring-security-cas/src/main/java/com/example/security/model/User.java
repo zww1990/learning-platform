@@ -42,7 +42,9 @@ public class User implements UserDetails {
 	private boolean credentialsNonExpired;
 	private boolean enabled;
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinTable(name = "t_user_authority", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
+	@JoinTable(name = "t_user_authority", //
+			joinColumns = @JoinColumn(name = "user_id"), //
+			inverseJoinColumns = @JoinColumn(name = "auth_id"))
 	private List<Authority> authorities;
 
 	public User() {
