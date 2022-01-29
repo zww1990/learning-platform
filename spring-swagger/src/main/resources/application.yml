@@ -3,6 +3,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
     locale: zh_CN
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
   dao:
     exceptiontranslation:
       enabled: false

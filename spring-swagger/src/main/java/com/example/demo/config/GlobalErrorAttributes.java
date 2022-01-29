@@ -9,8 +9,6 @@ import java.util.stream.Collectors;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.error.ErrorAttributeOptions.Include;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -22,10 +20,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 
-@Component
-public class GlobalErrorAttributes extends DefaultErrorAttributes {
+import lombok.extern.slf4j.Slf4j;
 
-	private static final Logger log = LoggerFactory.getLogger(GlobalErrorAttributes.class);
+@Component
+@Slf4j
+public class GlobalErrorAttributes extends DefaultErrorAttributes {
 
 	public GlobalErrorAttributes() {
 		log.info("初始化>>>{}", this.getClass().getTypeName());
