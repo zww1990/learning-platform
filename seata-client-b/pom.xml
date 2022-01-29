@@ -46,6 +46,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
 		</dependency>
+		<!-- Spring Cloud Starter 引导程序 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
         <!-- 配置中心 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
