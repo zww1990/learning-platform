@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
@@ -18,13 +16,15 @@ import com.example.security.model.Authority;
 import com.example.security.model.Menu;
 import com.example.security.service.MenuService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 安全元数据源实现标记接口，旨在执行过滤器调用上键对的查找。
  * 
  * @author home
  */
+@Slf4j
 public class DaoFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
-	private static final Logger log = LoggerFactory.getLogger(DaoFilterInvocationSecurityMetadataSource.class);
 	@Resource
 	private PathMatcher pathMatcher;
 	@Resource

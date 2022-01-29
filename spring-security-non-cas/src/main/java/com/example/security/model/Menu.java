@@ -14,6 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * 菜单
  * 
@@ -22,6 +26,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_menu")
 @SuppressWarnings("serial")
+@Getter
+@Setter
+@ToString
 public class Menu implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +40,9 @@ public class Menu implements Serializable {
 	@JoinColumn(name = "parent_menu_id")
 	private Menu parentMenu;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "t_menu_authority", joinColumns = @JoinColumn(name = "menu_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
+	@JoinTable(name = "t_menu_authority", //
+			joinColumns = @JoinColumn(name = "menu_id"), //
+			inverseJoinColumns = @JoinColumn(name = "auth_id"))
 	private List<Authority> authorities;
 
 	public Menu() {
@@ -49,51 +58,4 @@ public class Menu implements Serializable {
 		this.authorities = authorities;
 	}
 
-	public Integer getMenuId() {
-		return menuId;
-	}
-
-	public String getMenuName() {
-		return menuName;
-	}
-
-	public String getPatternUrl() {
-		return patternUrl;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public Menu getParentMenu() {
-		return parentMenu;
-	}
-
-	public List<Authority> getAuthorities() {
-		return authorities;
-	}
-
-	public void setMenuId(Integer menuId) {
-		this.menuId = menuId;
-	}
-
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
-
-	public void setPatternUrl(String patternUrl) {
-		this.patternUrl = patternUrl;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public void setParentMenu(Menu parentMenu) {
-		this.parentMenu = parentMenu;
-	}
-
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
-	}
 }

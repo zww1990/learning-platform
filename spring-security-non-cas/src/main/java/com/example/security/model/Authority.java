@@ -8,6 +8,10 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * 权限
  * 
@@ -16,6 +20,9 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name = "t_authority")
 @SuppressWarnings("serial")
+@Getter
+@Setter
+@ToString
 public class Authority implements GrantedAuthority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,31 +37,6 @@ public class Authority implements GrantedAuthority {
 	public Authority(String authName, String authority) {
 		super();
 		this.authName = authName;
-		this.authority = authority;
-	}
-
-	@Override
-	public String getAuthority() {
-		return this.authority;
-	}
-
-	public Integer getAuthId() {
-		return authId;
-	}
-
-	public String getAuthName() {
-		return authName;
-	}
-
-	public void setAuthId(Integer authId) {
-		this.authId = authId;
-	}
-
-	public void setAuthName(String authName) {
-		this.authName = authName;
-	}
-
-	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 

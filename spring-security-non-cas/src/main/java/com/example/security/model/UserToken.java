@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * 自动登录表
  * 
@@ -13,6 +17,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "t_user_token")
+@Getter
+@Setter
+@ToString
 public class UserToken {
 	@Id
 	private String series;
@@ -32,35 +39,4 @@ public class UserToken {
 		this.lastUsed = lastUsed;
 	}
 
-	public String getSeries() {
-		return series;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public Date getLastUsed() {
-		return lastUsed;
-	}
-
-	public void setSeries(String series) {
-		this.series = series;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public void setLastUsed(Date lastUsed) {
-		this.lastUsed = lastUsed;
-	}
 }

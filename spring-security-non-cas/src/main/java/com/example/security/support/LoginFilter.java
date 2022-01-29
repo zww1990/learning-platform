@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
@@ -30,6 +28,8 @@ import com.example.security.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.code.kaptcha.Constants;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 登录过滤器：<br>
  * 1、包含用户名、密码、验证码。<br>
@@ -37,8 +37,8 @@ import com.google.code.kaptcha.Constants;
  * 
  * @author home
  */
+@Slf4j
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-	private static final Logger log = LoggerFactory.getLogger(LoginFilter.class);
 	private String captchaParameter = "captcha";
 	@Resource
 	private MessageSource messageSource;
@@ -88,6 +88,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private void attemptCaptcha(String requestCaptcha, String sessionCaptcha, HttpSession session) {
 		if (StringUtils.isEmpty(requestCaptcha) || StringUtils.isEmpty(sessionCaptcha)
 				|| !requestCaptcha.equalsIgnoreCase(sessionCaptcha)) {
