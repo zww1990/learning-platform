@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +25,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/demo")
 @Api(tags = "API示例")
+@Slf4j
 public class DemoController {
-	private static final Logger log = LoggerFactory.getLogger(DemoController.class);
 
 	@GetMapping("/get")
 	@ApiOperation(value = "查询用户信息", notes = "按id查询用户信息")

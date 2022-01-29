@@ -2,8 +2,6 @@ package com.example.demo.service.impl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -12,10 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.service.RetryService;
 
-@Service
-public class RetryServiceImpl implements RetryService {
+import lombok.extern.slf4j.Slf4j;
 
-	private static final Logger log = LoggerFactory.getLogger(RetryServiceImpl.class);
+@Service
+@Slf4j
+public class RetryServiceImpl implements RetryService {
 
 	@Override
 	@Retryable(value = Exception.class, maxAttempts = 3)
