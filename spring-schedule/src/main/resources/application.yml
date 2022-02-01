@@ -9,7 +9,9 @@ spring:
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: enc(F5qYZDfOeGE26wHjxxcAqnxIaXVper1E)
-    initialization-mode: never
+  sql:
+    init:
+      mode: never
   quartz:
     job-store-type: jdbc
     jdbc:
