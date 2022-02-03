@@ -1,9 +1,10 @@
 package com.example.dubbo.service.provider;
 
-import com.alibaba.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.DubboService;
+
 import com.example.dubbo.service.DemoService;
 
-@Service(version = "1.0.0")
+@DubboService(version = "1.0.0")
 public class DemoServiceImpl implements DemoService {
 
 	@Override
