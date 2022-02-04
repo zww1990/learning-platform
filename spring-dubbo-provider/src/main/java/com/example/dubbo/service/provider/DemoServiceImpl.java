@@ -9,7 +9,7 @@ public class DemoServiceImpl implements DemoService {
 
 	@Override
 	public String sayHello(String name) {
-		System.out.println("输入参数name=" + name);
+		System.err.println("输入参数name=" + name);
 		return "Hello " + name;
 	}
 
