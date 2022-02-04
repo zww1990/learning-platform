@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: dubbo-nacos-provider
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: com.example.demo
