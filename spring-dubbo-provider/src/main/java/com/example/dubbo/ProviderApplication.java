@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class ProviderApplication {
 	private static final Logger log = LoggerFactory.getLogger(ProviderApplication.class);
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(ProviderApplication.class, args);
 		log.info("应用程序上下文Bean定义计数={}", context.getBeanDefinitionCount());
 	}
