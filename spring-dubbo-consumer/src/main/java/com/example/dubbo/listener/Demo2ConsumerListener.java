@@ -1,4 +1,4 @@
-package com.example.dubbo.consumer;
+package com.example.dubbo.listener;
 
 import java.util.List;
 
@@ -19,17 +19,17 @@ import com.rabbitmq.client.Channel;
  * @description
  */
 @SuppressWarnings("unchecked")
-public class Demo4ConsumerListener implements ChannelAwareMessageListener {
-	private static final Logger logger = LoggerFactory.getLogger(Demo4ConsumerListener.class);
+public class Demo2ConsumerListener implements ChannelAwareMessageListener {
+	private static final Logger logger = LoggerFactory.getLogger(Demo2ConsumerListener.class);
 	@Resource
 	private ObjectMapper jsonMapper;
 
 	@Override
-	@RabbitListener(queues = "qu.demo4")
+	@RabbitListener(queues = "qu.demo2")
 	public void onMessage(Message message, Channel channel) throws Exception {
 		try {
 			List<String> values = this.jsonMapper.readValue(message.getBody(), List.class);
-			logger.info("MQ接收到消息4：{}", values);
+			logger.info("MQ接收到消息2：{}", values);
 			channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());

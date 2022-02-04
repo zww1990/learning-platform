@@ -3,10 +3,11 @@ package com.example.dubbo.config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.example.dubbo.consumer.Demo1ConsumerListener;
-import com.example.dubbo.consumer.Demo2ConsumerListener;
-import com.example.dubbo.consumer.Demo3ConsumerListener;
-import com.example.dubbo.consumer.Demo4ConsumerListener;
+
+import com.example.dubbo.listener.Demo1ConsumerListener;
+import com.example.dubbo.listener.Demo2ConsumerListener;
+import com.example.dubbo.listener.Demo3ConsumerListener;
+import com.example.dubbo.listener.Demo4ConsumerListener;
 
 @Configuration
 @ConditionalOnProperty(name = "rabbitmq.enable", matchIfMissing = true)
