@@ -23,6 +23,10 @@ dubbo:
     address: zookeeper://localhost:2181
   scan:
     base-packages: com.example.dubbo.service
+  application:
+    register-mode: instance
+    service-discovery:
+      migration: FORCE_APPLICATION
 
 rabbitmq:
   enable: false

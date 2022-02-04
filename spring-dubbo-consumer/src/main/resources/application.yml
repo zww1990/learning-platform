@@ -22,6 +22,10 @@ spring:
 dubbo:
   registry:
     address: zookeeper://localhost:2181
+  application:
+    register-mode: instance
+    service-discovery:
+      migration: FORCE_APPLICATION
 
 rabbitmq:
   enable: false
