@@ -3,16 +3,13 @@ package com.stampede.changepwd;
 import javax.annotation.Resource;
 import javax.naming.directory.Attributes;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class LdapTemplateTests {
 	@Resource

@@ -3,9 +3,9 @@ package com.stampede.changepwd;
 import java.util.Date;
 import java.util.UUID;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
@@ -22,7 +22,7 @@ public class JoseJwtTests {
 	private String token;
 	private RSAKey publicJWK;
 
-	@Before
+	@BeforeEach
 	public void createKey() {
 		try {
 			rsaKey = new RSAKeyGenerator(2048).generate();
@@ -55,7 +55,7 @@ public class JoseJwtTests {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void checkToken() {
 		try {
 			SignedJWT signedJWT = SignedJWT.parse(token);
