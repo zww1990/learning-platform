@@ -13,9 +13,9 @@ import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.NumericDate;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Jose4jTests {
 
@@ -24,7 +24,7 @@ public class Jose4jTests {
 	private String privateKey;
 	private String token;
 
-	@Before
+	@BeforeEach
 	public void createKeyPair() {
 		try {
 			keyId = UUID.randomUUID().toString();
@@ -67,7 +67,7 @@ public class Jose4jTests {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void checkToken() {
 		try {
 			JwtConsumer consumer = new JwtConsumerBuilder()//

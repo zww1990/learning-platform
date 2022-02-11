@@ -1,19 +1,19 @@
 package com.stampede.changepwd;
 
 import java.nio.charset.StandardCharsets;
+
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import com.stampede.changepwd.domain.Person;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class JavaMailSenderTests {
 	@Resource
