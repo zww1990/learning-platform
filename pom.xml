@@ -45,12 +45,12 @@
 			</exclusions>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -85,7 +85,7 @@
 		<dependency>
 		    <groupId>com.nimbusds</groupId>
 		    <artifactId>nimbus-jose-jwt</artifactId>
-		    <version>8.17</version>
+		    <version>9.19</version>
 		</dependency>
 	</dependencies>
 
