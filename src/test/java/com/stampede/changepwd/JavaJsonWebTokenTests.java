@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JavaJsonWebTokenTests {
 	@Test
-	public void testJavaJwt() {
+	public void testJwt() {
 		try {
 			long current = System.currentTimeMillis();
 			String token = JWT.create()//
