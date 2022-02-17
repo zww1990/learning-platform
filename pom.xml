@@ -17,6 +17,7 @@
 		<module>admin-server</module>
 		<module>dubbo-nacos-provider</module>
 		<module>dubbo-nacos-consumer</module>
+		<module>nacos-gateway</module>
 	</modules>
 
     <properties>
