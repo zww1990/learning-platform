@@ -1,0 +1,29 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: nacos-gateway
+  cloud:
+    nacos:
+      server-addr: 192.168.32.141:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - uri: lb://nacos-provider
+        predicates:
+        - Path=/nacosprovider/**
+      - uri: lb://nacos-consumer
+        predicates:
+        - Path=/nacosconsumer/**
+
