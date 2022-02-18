@@ -17,6 +17,7 @@ public class RestTemplateController {
 	@GetMapping("/call/echo/{message}")
 	public String callEcho(@PathVariable String message) {
 		// 访问应用 nacos-provider 的 REST "/echo/{message}"
-		return restTemplate.getForObject("http://nacos-provider/nacosprovider/echo/" + message, String.class);
+//		return restTemplate.getForObject("http://nacos-provider/nacosprovider/echo/" + message, String.class);
+		return restTemplate.getForObject("http://nacos-provider/echo/" + message, String.class);
 	}
 }
