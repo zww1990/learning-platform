@@ -30,4 +30,22 @@ spring:
         - Path=/nacosconsumer/**
         filters:
         - StripPrefix=1
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        username: admin
+        password: admin@2022
 
+feign:
+  httpclient:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
