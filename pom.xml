@@ -71,6 +71,12 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<!-- feign-httpclient -->
+			<dependency>
+			    <groupId>io.github.openfeign</groupId>
+			    <artifactId>feign-httpclient</artifactId>
+			    <version>11.8</version>
+			</dependency>
         </dependencies>
     </dependencyManagement>
 
