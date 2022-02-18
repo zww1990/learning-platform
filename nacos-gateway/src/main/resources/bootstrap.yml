@@ -23,7 +23,11 @@ spring:
       - uri: lb://nacos-provider
         predicates:
         - Path=/nacosprovider/**
+        filters:
+        - StripPrefix=1
       - uri: lb://nacos-consumer
         predicates:
         - Path=/nacosconsumer/**
+        filters:
+        - StripPrefix=1
 
