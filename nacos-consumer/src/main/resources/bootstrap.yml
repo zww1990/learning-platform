@@ -24,6 +24,10 @@ spring:
         username: admin
         password: admin@2022
 
+feign:
+  httpclient:
+    enabled: true
+
 management:
   endpoints:
     web:
