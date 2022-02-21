@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.3</spring-boot.version>
-        <spring-cloud.version>2021.0.0</spring-cloud.version>
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
 		<nacos.client.version>2.0.4</nacos.client.version>
     	<seata.version>1.4.2</seata.version>
@@ -30,7 +30,7 @@
         <kryo-serializers.version>0.45</kryo-serializers.version>
     	<druid.version>1.2.8</druid.version>
     	<mysql.version>8.0.28</mysql.version>
-    	<mybatis.version>2.2.1</mybatis.version>
+    	<mybatis.version>2.2.2</mybatis.version>
     </properties>
 
     <dependencyManagement>
