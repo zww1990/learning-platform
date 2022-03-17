@@ -28,4 +28,10 @@ app:
   - user-no: 100261
     username: 张东丽
     password: 123456
+  - user-no: 100248
+    username: 汪化胜
+    password: 654321
+  - user-no: 100264
+    username: 潘倩
+    password: 021497pq
 
