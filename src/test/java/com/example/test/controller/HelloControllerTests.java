@@ -1,5 +1,8 @@
 package com.example.test.controller;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
@@ -18,8 +21,15 @@ public class HelloControllerTests {
 	@Test
 	public void testUserLoginAndStaffClock() {
 		try {
-			System.err.println(
-					this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("14699").setPassword("123456")));
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(this.controller.userLoginAndStaffClock(//
+							new UserLogin()//
+									.setUserNo("100230")//
+									.setPassword("123456")//
+									.setClockTime(LocalDateTime.of(2022, 3, 3, 11, 22, 33))//
+									.setAddress("北京市海淀区花园东路11号")//
+									.setLatitude(BigDecimal.valueOf(39.9802720D))//
+									.setLongitude(BigDecimal.valueOf(116.3690760D)))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

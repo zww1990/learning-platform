@@ -1,6 +1,5 @@
 package com.example.test.controller;
 
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -195,14 +194,13 @@ public class HelloController {
 		log.info("token={}", token);
 		headers.set("token", token);
 		Map<String, String> staffClock = new HashMap<>();
-		LocalDateTime now = LocalDateTime.now();
 		AppStaffClockVO vo = new AppStaffClockVO()//
 				.setAddress(userLogin.getAddress())//
 				.setLatitude(userLogin.getLatitude())//
 				.setLongitude(userLogin.getLongitude())//
 				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
-						now.format(DateTimeFormatter.ofPattern(AESUtil.FORMAT)))))
-				.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
+						userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.FORMAT)))))
+				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 		try {
 			String json = this.objectMapper.writeValueAsString(vo);
 			log.info("{}", json);
