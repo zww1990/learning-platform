@@ -26,15 +26,13 @@
 						    <template v-slot:default>
 						      <thead>
 						        <tr>
-						          <th class="text-left" style="width: 100px;">员工编号</th>
-						          <th class="text-left" style="width: 100px;">员工姓名</th>
-						          <th class="text-left" style="width: 100px;">员工密码</th>
-						          <th class="text-left" style="width: 300px;">公司地址</th>
-						          <th class="text-left" style="width: 150px;">上班时间</th>
-						          <th class="text-left" style="width: 100px;">上班状态</th>
-						          <th class="text-left" style="width: 150px;">下班时间</th>
-						          <th class="text-left" style="width: 100px;">下班状态</th>
-						          <th class="text-left" style="width: 200px;">操作</th>
+						          <th class="text-left" >编号</th>
+						          <th class="text-left" >姓名</th>
+						          <th class="text-left" >密码</th>
+						          <th class="text-left" >地址</th>
+						          <th class="text-left" >上班</th>
+						          <th class="text-left" >下班</th>
+						          <th class="text-left" >操作</th>
 						        </tr>
 						      </thead>
 						      <tbody>
@@ -81,25 +79,23 @@
 							              return-object>
 						              </v-select>
 						          </td>
-						          <td>{{user?.staffClock?.clockTimeMin}}</td>
 						          <td>
 						          	<span v-if="user?.staffClock?.clockWorkOnStatus == null"></span>
-						          	<v-avatar color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
-						          		{{user?.staffClock?.clockWorkOnStatusName}}
-								    </v-avatar>
-						          	<v-avatar color="red" v-else>
-						          		{{user?.staffClock?.clockWorkOnStatusName}}
-								    </v-avatar>
+						          	<v-chip color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
+						          		{{user?.staffClock?.clockTimeMin}}
+								    </v-chip>
+						          	<v-chip color="red" v-else>
+						          		{{user?.staffClock?.clockTimeMin}}
+								    </v-chip>
 						          </td>
-						          <td>{{user?.staffClock?.clockTimeMax}}</td>
 						          <td>
 						          	<span v-if="user?.staffClock?.clockWorkOffStatus == null"></span>
-						          	<v-avatar color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
-						          		{{user?.staffClock?.clockWorkOffStatusName}}
-								    </v-avatar>
-						          	<v-avatar color="red" v-else>
-						          		{{user?.staffClock?.clockWorkOffStatusName}}
-								    </v-avatar>
+						          	<v-chip color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
+						          		{{user?.staffClock?.clockTimeMax}}
+								    </v-chip>
+						          	<v-chip color="red" v-else>
+						          		{{user?.staffClock?.clockTimeMax}}
+								    </v-chip>
 						          </td>
 						          <td>
 						          	<div v-if="user.status === 1">
