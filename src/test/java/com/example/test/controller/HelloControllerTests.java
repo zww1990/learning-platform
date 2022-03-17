@@ -1,12 +1,12 @@
 package com.example.test.controller;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.io.InputStream;
 
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 
 import com.example.test.model.UserLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,16 +20,10 @@ public class HelloControllerTests {
 
 	@Test
 	public void testUserLoginAndStaffClock() {
-		try {
+		try (InputStream is = new ClassPathResource("HelloControllerTests.json").getInputStream()) {
+			UserLogin req = json.readValue(is, UserLogin.class);
 			System.err.println(json.writerWithDefaultPrettyPrinter()
-					.writeValueAsString(this.controller.userLoginAndStaffClock(//
-							new UserLogin()//
-									.setUserNo("100230")//
-									.setPassword("123456")//
-									.setClockTime(LocalDateTime.of(2022, 3, 3, 11, 22, 33))//
-									.setAddress("北京市海淀区花园东路11号")//
-									.setLatitude(BigDecimal.valueOf(39.9802720D))//
-									.setLongitude(BigDecimal.valueOf(116.3690760D)))));
+					.writeValueAsString(this.controller.userLoginAndStaffClock(req)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
