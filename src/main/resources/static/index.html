@@ -29,10 +29,11 @@
 						          <th class="text-left" >编号</th>
 						          <th class="text-left" >姓名</th>
 						          <th class="text-left" >密码</th>
-						          <th class="text-left" >地址</th>
-						          <th class="text-left" >上班</th>
-						          <th class="text-left" >下班</th>
-						          <th class="text-left" >操作</th>
+						          <th class="text-left" style="width: 280px;">地址</th>
+						          <th class="text-left" style="width: 190px;">上班</th>
+						          <th class="text-left" style="width: 190px;">下班</th>
+						          <th class="text-left" style="width: 300px;">日期</th>
+						          <th class="text-left" style="width: 190px;">操作</th>
 						        </tr>
 						      </thead>
 						      <tbody>
@@ -98,8 +99,34 @@
 								    </v-chip>
 						          </td>
 						          <td>
+								      <v-menu 
+									      v-model="user.menu" 
+									      :close-on-content-click="false" 
+									      transition="scale-transition" 
+									      offset-y 
+									      min-width="auto">
+								        <template v-slot:activator="{ on, attrs }">
+								          <v-text-field 
+									          v-model="user.date" 
+									          prepend-icon="mdi-calendar" 
+									          readonly 
+									          v-bind="attrs" 
+									          v-on="on">
+								          </v-text-field>
+								        </template>
+								        <v-date-picker 
+									        v-model="user.date" 
+									        @input="user.menu = false" 
+									        no-title 
+									        scrollable 
+									        locale="zh-cn">
+								        </v-date-picker>
+								      </v-menu>
+						          </td>
+						          <td>
 						          	<div v-if="user.status === 1">
 						          		<v-btn color="success" @click="gotoWork(user)">打卡</v-btn>
+						          		<v-btn color="success" @click="repairWork(user)">补卡</v-btn>
 						          		<v-btn color="success" @click="showDeviceList(user)">查看设备绑定</v-btn>
 						          	</div>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
@@ -308,6 +335,9 @@
 				});
 			},
 			methods: {
+				repairWork(user){
+					console.log(user)
+				},
 				gotoWork(user){
 				  if (user.userNo === null || user.userNo.length === 0) {
 					this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
