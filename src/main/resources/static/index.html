@@ -114,12 +114,8 @@
 									          v-on="on">
 								          </v-text-field>
 								        </template>
-								        <v-date-picker 
-									        v-model="user.date" 
-									        @input="user.menu = false" 
-									        no-title 
-									        scrollable 
-									        locale="zh-cn">
+								        <v-date-picker v-model="user.date" no-title scrollable locale="zh-cn">
+								        	<v-time-picker v-model="user.time" format="24hr" use-seconds scrollable></v-time-picker>
 								        </v-date-picker>
 								      </v-menu>
 						          </td>
