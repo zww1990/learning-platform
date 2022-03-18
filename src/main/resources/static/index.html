@@ -114,8 +114,19 @@
 									          v-on="on">
 								          </v-text-field>
 								        </template>
-								        <v-date-picker v-model="user.date" no-title scrollable locale="zh-cn">
-								        	<v-time-picker v-model="user.time" format="24hr" use-seconds scrollable></v-time-picker>
+								        <v-date-picker 
+									        v-model="user.date" 
+									        no-title 
+									        scrollable 
+									        locale="zh-cn" 
+									        @click:date="user.clockTime = `${user.date} 09:00:00`">
+								        	<v-time-picker 
+									        	v-model="user.time" 
+									        	format="24hr" 
+									        	use-seconds 
+									        	scrollable 
+									        	@click:second="user.clockTime = `${user.date} ${user.time}`">
+								        	</v-time-picker>
 								        </v-date-picker>
 								      </v-menu>
 						          </td>
@@ -332,7 +343,11 @@
 			},
 			methods: {
 				repairWork(user){
-					console.log(user)
+				  if (user.clockTime == null || user.clockTime.length === 0) {
+					this.$toast.error('请输入日期', {x: 'center', y: 'top'});
+			        return;
+			      }
+					this.gotoWork(user);
 				},
 				gotoWork(user){
 				  if (user.userNo === null || user.userNo.length === 0) {
