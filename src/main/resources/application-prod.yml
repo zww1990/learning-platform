@@ -1,3 +1,6 @@
+server:
+  port: 9999
+
 app:
   user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
   staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
