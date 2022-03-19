@@ -154,6 +154,30 @@
 			            	</v-btn>
 			            </v-toolbar>
 			            <v-card-text>
+					      <v-menu 
+						      v-model="user.rangemenu" 
+						      :close-on-content-click="false" 
+						      transition="scale-transition" 
+						      offset-y 
+						      min-width="auto">
+					        <template v-slot:activator="{ on, attrs }">
+					          <v-text-field 
+						          v-model="user.daterange" 
+						          prepend-icon="mdi-calendar" 
+						          readonly 
+						          v-bind="attrs" 
+						          v-on="on">
+					          </v-text-field>
+					        </template>
+					        <v-date-picker 
+						        v-model="user.dates" 
+						        no-title 
+						        scrollable 
+						        locale="zh-cn" 
+						        range
+						        @click:date="user.daterange = user.dates.join(' ~ ')">
+					        </v-date-picker>
+					      </v-menu>
 						  <v-simple-table dense fixed-header height="500px">
 						    <template v-slot:default>
 						      <thead>
