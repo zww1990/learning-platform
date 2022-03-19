@@ -15,15 +15,12 @@ import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * AreaExcelComponent
  * 
  * @author zww1990@foxmail.com
  * @since 2022年1月8日,下午11:05:12
  */
-@Slf4j
 public class AreaExcelComponent implements ExcelComponent {
 	private ObjectMapper json = new ObjectMapper();
 
