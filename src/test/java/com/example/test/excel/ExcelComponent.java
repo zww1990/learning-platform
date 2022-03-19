@@ -20,6 +20,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.usermodel.XSSFDataValidationHelper;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ExcelComponent
@@ -28,6 +30,9 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
  * @since 2022年1月8日,下午11:06:00
  */
 public interface ExcelComponent {
+
+	static final Logger log = LoggerFactory.getLogger(ExcelComponent.class);
+
 	/**
 	 * 写入Excel
 	 * 
