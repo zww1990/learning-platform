@@ -1,5 +1,6 @@
 package com.example.test.controller;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -342,12 +343,15 @@ public class HelloController {
 		log.info("token={}", token);
 		headers.set("token", token);
 		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId());
-		if (userLogin.getDates()==null||userLogin.getDates().length!=2) {
-			
+		if (userLogin.getDates() != null && userLogin.getDates().length == 2) {
+			sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(),
+					userLogin.getDates()[0], userLogin.getDates()[1]));
 		} else {
-
+			LocalDate begin = LocalDate.now().minusMonths(1);
+			LocalDate end = LocalDate.now();
+			sqlExecQuery.setCommand(
+					String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(), begin, end));
 		}
-				sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo()));
 		log.info("{}", sqlExecQuery);
 		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
 				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();

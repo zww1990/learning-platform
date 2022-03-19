@@ -23,7 +23,7 @@ spring:
     - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
 
 app:
-  select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s' and '%s' ORDER BY create_time DESC"
+  select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s 00:00:00' and '%s 23:59:59' ORDER BY create_time DESC"
   addresses:
   - id: 1
     address: 北京市海淀区花园东路11号

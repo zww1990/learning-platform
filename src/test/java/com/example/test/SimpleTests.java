@@ -1,5 +1,6 @@
 package com.example.test;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,5 +19,14 @@ public class SimpleTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testLocalDate() {
+		System.err.println(LocalDate.now());
+		System.err.println(LocalDate.now().minusMonths(1));
+		System.err.println(String.format(
+				"SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s 00:00:00' and '%s 23:59:59' ORDER BY create_time DESC",
+				100230, LocalDate.now().minusMonths(1), LocalDate.now()));
 	}
 }
