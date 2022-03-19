@@ -347,7 +347,31 @@
 					this.$toast.error('请输入日期', {x: 'center', y: 'top'});
 			        return;
 			      }
-					this.gotoWork(user);
+				  if (user.userNo === null || user.userNo.length === 0) {
+					this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
+			        return;
+			      }
+			      if (user.username === null || user.username.length === 0) {
+					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
+			        return;
+			      }
+			      if (user.password === null || user.password.length === 0) {
+					this.$toast.error('请输入员工密码', {x: 'center', y: 'top'});
+			        return;
+			      }
+					fetch('/hello/v2/userloginandstaffclock', {
+						  method: 'POST',
+						  body: JSON.stringify({...user, ...user.addr}),
+						  headers: {'Content-Type': 'application/json'}
+					})
+					.then(res => res.json())
+					.then(res => {
+						if (res.status === 0) {
+							this.$toast.error('补卡失败', {x: 'center', y: 'top'});
+						} else {
+							this.$toast.success('补卡成功', {x: 'center', y: 'top'});
+						}
+					});
 				},
 				gotoWork(user){
 				  if (user.userNo === null || user.userNo.length === 0) {

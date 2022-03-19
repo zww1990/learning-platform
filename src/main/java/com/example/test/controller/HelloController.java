@@ -152,6 +152,76 @@ public class HelloController {
 		}
 	}
 
+	@PostMapping("/v2/userloginandstaffclock")
+	public ResponseBody<?> userLoginAndStaffClockV2(@RequestBody UserLogin userLogin) {
+		if (!StringUtils.hasText(userLogin.getUserNo())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[userNo]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getPassword())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[password]不能为空");
+		}
+		if (!StringUtils.hasText(userLogin.getAddress())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[address]不能为空");
+		}
+		if (userLogin.getLatitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[latitude]不能为空");
+		}
+		if (userLogin.getLongitude() == null) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(0)//
+					.setMessage("[longitude]不能为空");
+		}
+		log.info("{}", userLogin);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		ResponseEntity<ResponseBody> userLoginResponse = this.restTemplate.postForEntity(
+				this.properties.getUserLoginUrl(), new HttpEntity<>(userLogin, headers), ResponseBody.class);
+		List<String> tokens = userLoginResponse.getHeaders().get("token");
+		if (CollectionUtils.isEmpty(tokens)) {
+			return userLoginResponse.getBody();
+		}
+		String token = tokens.get(0);
+		log.info("token={}", token);
+		headers.set("token", token);
+		Map<String, String> staffClock = new HashMap<>();
+		AppStaffClockVO vo = new AppStaffClockVO()//
+				.setAddress(userLogin.getAddress())//
+				.setLatitude(userLogin.getLatitude())//
+				.setLongitude(userLogin.getLongitude())//
+				.setStaffNo(AESUtil.encryptAES(String.join("&", userLogin.getUserNo(),
+						userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.FORMAT)))))
+				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
+		try {
+			String json = this.objectMapper.writeValueAsString(vo);
+			log.info("{}", json);
+			staffClock.put("data", AESUtil.encryptAES(json));
+		} catch (JsonProcessingException e) {
+			log.error(e.getLocalizedMessage(), e);
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
+					.setStatus(0)//
+					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+		}
+		log.info("{}", staffClock);
+		ResponseBody<Object> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
+				new HttpEntity<>(staffClock, headers), ResponseBody.class).getBody();
+		log.info("{}", body);
+		return body;
+	}
+
 	@PostMapping("/userloginandstaffclock")
 	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
