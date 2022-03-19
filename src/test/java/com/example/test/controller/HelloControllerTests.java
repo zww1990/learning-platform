@@ -71,8 +71,12 @@ public class HelloControllerTests {
 	@Test
 	public void testSelectAppStaffClockLogList() {
 		try {
-			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(
-					controller.selectAppStaffClockLogList(new UserLogin().setUserNo("100230").setPassword("123456"))));
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(controller.selectAppStaffClockLogList(//
+							new UserLogin()//
+									.setUserNo("100230")//
+									.setPassword("123456")//
+									.setDates(new String[] { "2021-01-01", "2022-01-01" }))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
