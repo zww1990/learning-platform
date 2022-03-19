@@ -2,7 +2,6 @@ package cn.net.yzl.oa.util;
 
 import java.util.Base64;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -10,19 +9,15 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.net.yzl.oa.entity.pojo.AppStaffClockLogPo;
-import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 
 public class AESUtil {
 	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String TIMEZONE = "GMT+8";
-	private static final Pattern pattern = Pattern.compile("&");
 	private static final String key = "yzl_staff&oa#514";
 
 	private AESUtil() {
@@ -62,31 +57,6 @@ public class AESUtil {
 		return reslut;
 	}
 
-	/**
-	 * 解密打卡对象（staffNo=aes(staffNo&date)）
-	 *
-	 * @param appStaffClockVO
-	 * @return
-	 */
-	public static AppStaffClockLogPo decryptAES(AppStaffClockVO appStaffClockVO) {
-		AppStaffClockLogPo po = null;
-		String staffNo = appStaffClockVO.getStaffNo();
-		if (StrUtil.isNotBlank(staffNo)) {
-			String result = decryptAES(staffNo);
-			String[] ss = pattern.split(result);
-			if (ss.length != 2) {
-				return po;
-			}
-			staffNo = ss[0];
-			Date clockTime = DateUtil.parse(ss[1], FORMAT);
-			po = new AppStaffClockLogPo();
-			BeanUtils.copyProperties(appStaffClockVO, po);
-			po.setStaffNo(staffNo);
-			po.setClockTime(clockTime);
-		}
-		return po;
-	}
-
 	public static String decryptAES(String content) {
 		if (StrUtil.isBlank(content)) {
 			return null;
@@ -100,25 +70,6 @@ public class AESUtil {
 		}
 		return reslut;
 	}
-
-//	public static void main(String[] args) {
-//		AppStaffClockVO vo = new AppStaffClockVO();
-//		vo.setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)");
-//		vo.setLatitude(BigDecimal.valueOf(39.9803540));
-//		vo.setLongitude(BigDecimal.valueOf(116.3689370));
-//		LocalDateTime now = LocalDateTime.now().minusMinutes(1);
-//		vo.setStaffNo(AESUtil.encryptAES(String.join("&", "6666", now.format(DateTimeFormatter.ofPattern(FORMAT)))));
-//		vo.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
-//		try {
-//			String json = new ObjectMapper().writeValueAsString(vo);
-//			System.err.println(json);
-//			System.err.println(AESUtil.encryptAES(json));
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//		}
-//		AppStaffClockLogPo po = AESUtil.decryptAES(vo);
-//		System.out.println(po);
-//	}
 
 	/**
 	 * 加密
