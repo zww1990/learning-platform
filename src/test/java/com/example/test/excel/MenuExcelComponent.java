@@ -19,15 +19,12 @@ import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * MenuExcelComponent
  * 
  * @author zww1990@foxmail.com
  * @since 2022年1月8日,下午11:05:12
  */
-@Slf4j
 public class MenuExcelComponent implements ExcelComponent {
 	private ObjectMapper json = new ObjectMapper();
 
