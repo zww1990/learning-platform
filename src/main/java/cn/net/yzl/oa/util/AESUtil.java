@@ -1,9 +1,5 @@
 package cn.net.yzl.oa.util;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -12,20 +8,17 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.net.yzl.oa.entity.pojo.AppStaffClockLogPo;
 import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class AESUtil {
-
+	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String TIMEZONE = "GMT+8";
@@ -108,24 +101,24 @@ public class AESUtil {
 		return reslut;
 	}
 
-	public static void main(String[] args) {
-		AppStaffClockVO vo = new AppStaffClockVO();
-		vo.setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)");
-		vo.setLatitude(BigDecimal.valueOf(39.9803540));
-		vo.setLongitude(BigDecimal.valueOf(116.3689370));
-		LocalDateTime now = LocalDateTime.now().minusMinutes(1);
-		vo.setStaffNo(AESUtil.encryptAES(String.join("&", "6666", now.format(DateTimeFormatter.ofPattern(FORMAT)))));
-		vo.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
-		try {
-			String json = new ObjectMapper().writeValueAsString(vo);
-			System.err.println(json);
-			System.err.println(AESUtil.encryptAES(json));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		AppStaffClockLogPo po = AESUtil.decryptAES(vo);
-		System.out.println(po);
-	}
+//	public static void main(String[] args) {
+//		AppStaffClockVO vo = new AppStaffClockVO();
+//		vo.setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)");
+//		vo.setLatitude(BigDecimal.valueOf(39.9803540));
+//		vo.setLongitude(BigDecimal.valueOf(116.3689370));
+//		LocalDateTime now = LocalDateTime.now().minusMinutes(1);
+//		vo.setStaffNo(AESUtil.encryptAES(String.join("&", "6666", now.format(DateTimeFormatter.ofPattern(FORMAT)))));
+//		vo.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
+//		try {
+//			String json = new ObjectMapper().writeValueAsString(vo);
+//			System.err.println(json);
+//			System.err.println(AESUtil.encryptAES(json));
+//		} catch (JsonProcessingException e) {
+//			e.printStackTrace();
+//		}
+//		AppStaffClockLogPo po = AESUtil.decryptAES(vo);
+//		System.out.println(po);
+//	}
 
 	/**
 	 * 加密
