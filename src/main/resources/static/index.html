@@ -107,7 +107,7 @@
 									      min-width="auto">
 								        <template v-slot:activator="{ on, attrs }">
 								          <v-text-field 
-									          v-model="user.date" 
+									          v-model="user.clockTime" 
 									          prepend-icon="mdi-calendar" 
 									          readonly 
 									          v-bind="attrs" 
@@ -119,13 +119,13 @@
 									        no-title 
 									        scrollable 
 									        locale="zh-cn" 
-									        @click:date="user.clockTime = `${user.date} 09:00:00`">
+									        @click:date="clickDate(user)">
 								        	<v-time-picker 
 									        	v-model="user.time" 
 									        	format="24hr" 
 									        	use-seconds 
 									        	scrollable 
-									        	@click:second="user.clockTime = `${user.date} ${user.time}`">
+									        	@click:second="clickSecond(user)">
 								        	</v-time-picker>
 								        </v-date-picker>
 								      </v-menu>
@@ -342,6 +342,15 @@
 				});
 			},
 			methods: {
+				clickDate(user){
+					if(user.time == null){
+						user.time = '09:00:00';
+					}
+					user.clockTime = `${user.date} ${user.time}`;
+				},
+				clickSecond(user){
+					user.clockTime = `${user.date} ${user.time}`;
+				},
 				repairWork(user){
 				  if (user.clockTime == null || user.clockTime.length === 0) {
 					this.$toast.error('请输入日期', {x: 'center', y: 'top'});
