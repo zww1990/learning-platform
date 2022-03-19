@@ -18,9 +18,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class DemoExcelComponent implements ExcelComponent {
 	private ObjectMapper json = new ObjectMapper();
 
