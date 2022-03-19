@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -39,13 +41,14 @@ import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import cn.net.yzl.oa.entity.SqlExecQueryDTO;
 import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 import cn.net.yzl.oa.util.AESUtil;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/hello")
-@Slf4j
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class HelloController {
+
+	private static final Logger log = LoggerFactory.getLogger(HelloController.class);
+
 	@Resource
 	private RestTemplate restTemplate;
 	@Resource
