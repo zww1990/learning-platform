@@ -2,6 +2,8 @@ package com.example.test.service.impl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -10,8 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.test.service.RetryService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * RetryServiceImpl
  * 
@@ -19,8 +19,9 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021年6月17日,下午1:08:51
  */
 @Service
-@Slf4j
 public class RetryServiceImpl implements RetryService {
+
+	private static final Logger log = LoggerFactory.getLogger(RetryServiceImpl.class);
 
 	@Override
 	@Retryable(value = Exception.class, maxAttempts = 3)
