@@ -17,6 +17,16 @@ public class UserLogin {
 	private BigDecimal latitude;
 	@JsonFormat(pattern = AESUtil.FORMAT, timezone = AESUtil.TIMEZONE)
 	private LocalDateTime clockTime;
+	private String[] dates;
+
+	public String[] getDates() {
+		return dates;
+	}
+
+	public UserLogin setDates(String[] dates) {
+		this.dates = dates;
+		return this;
+	}
 
 	public LocalDateTime getClockTime() {
 		return Optional.ofNullable(this.clockTime).orElseGet(LocalDateTime::now);

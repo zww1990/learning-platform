@@ -341,8 +341,13 @@ public class HelloController {
 		String token = tokens.get(0);
 		log.info("token={}", token);
 		headers.set("token", token);
-		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId())
-				.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo()));
+		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId());
+		if (userLogin.getDates()==null||userLogin.getDates().length!=2) {
+			
+		} else {
+
+		}
+				sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo()));
 		log.info("{}", sqlExecQuery);
 		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
 				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
