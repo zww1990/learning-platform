@@ -2,6 +2,7 @@ package com.example.test.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -94,7 +95,8 @@ public class UserLogin {
 	@Override
 	public String toString() {
 		return String.format(
-				"UserLogin [userNo=%s, username=%s, password=%s, address=%s, longitude=%s, latitude=%s, clockTime=%s]",
-				userNo, username, password, address, longitude, latitude, clockTime);
+				"UserLogin [userNo=%s, username=%s, password=%s, address=%s, longitude=%s, latitude=%s, clockTime=%s, dates=%s]",
+				userNo, username, password, address, longitude, latitude, clockTime, Arrays.toString(dates));
 	}
+
 }
