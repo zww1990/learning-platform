@@ -154,30 +154,38 @@
 			            	</v-btn>
 			            </v-toolbar>
 			            <v-card-text>
-					      <v-menu 
-						      v-model="user.rangemenu" 
-						      :close-on-content-click="false" 
-						      transition="scale-transition" 
-						      offset-y 
-						      min-width="auto">
-					        <template v-slot:activator="{ on, attrs }">
-					          <v-text-field 
-						          v-model="user.daterange" 
-						          prepend-icon="mdi-calendar" 
-						          readonly 
-						          v-bind="attrs" 
-						          v-on="on">
-					          </v-text-field>
-					        </template>
-					        <v-date-picker 
-						        v-model="user.dates" 
-						        no-title 
-						        scrollable 
-						        locale="zh-cn" 
-						        range
-						        @click:date="user.daterange = user.dates.join(' ~ ')">
-					        </v-date-picker>
-					      </v-menu>
+						  <v-row>
+							  <v-col>
+							      <v-menu 
+								      v-model="user.rangemenu" 
+								      :close-on-content-click="false" 
+								      transition="scale-transition" 
+								      offset-y 
+								      min-width="auto">
+							        <template v-slot:activator="{ on, attrs }">
+							          <v-text-field 
+								          v-model="user.daterange" 
+								          label="日期范围"
+								          prepend-icon="mdi-calendar" 
+								          readonly 
+								          v-bind="attrs" 
+								          v-on="on">
+							          </v-text-field>
+							        </template>
+							        <v-date-picker 
+								        v-model="user.dates" 
+								        no-title 
+								        scrollable 
+								        locale="zh-cn" 
+								        range
+								        @change="rangeChange()">
+							        </v-date-picker>
+							      </v-menu>
+							  </v-col>
+							  <v-col style="padding-top:30px">
+							      <v-btn color="success" @click="showLogList(user)">查询</v-btn>
+							  </v-col>
+						  </v-row>
 						  <v-simple-table dense fixed-header height="500px">
 						    <template v-slot:default>
 						      <thead>
@@ -325,7 +333,11 @@
 			}),
 			data:{
 				users: [],
-				user: null,
+				user: {
+					dates: null,
+					daterange: null,
+					rangemenu: null
+				},
 				addresses: [],
 				addr: {
 					id: null,
@@ -366,6 +378,13 @@
 				});
 			},
 			methods: {
+				rangeChange(){
+					let tmp = this.user.dates;
+					if(Date.parse(tmp[0]) > Date.parse(tmp[1])){
+						this.user.dates = [tmp[1], tmp[0]];
+					}
+					this.user.daterange = this.user.dates.join(' ~ ');
+				},
 				clickDate(user){
 					if(user.time == null){
 						user.time = '09:00:00';
@@ -475,7 +494,7 @@
 					.then(res => res.json())
 					.then(res => {
 						this.logList = res.data || [];
-						this.user = user;
+						this.user = { ...user, dates: null, daterange: null, rangemenu: null };
 						this.logDialog = true;
 					});
 				},
@@ -492,7 +511,7 @@
 					.then(res => res.json())
 					.then(res => {
 						this.deviceList = res.data.items || [];
-						this.user = user;
+						this.user = { ...user };
 						this.deviceDialog = true;
 					});
 				},
