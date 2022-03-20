@@ -144,12 +144,16 @@
 						  </v-simple-table>
 					  </v-col>
 		          </v-row>
-			      <v-dialog transition="dialog-bottom-transition" v-model="logDialog" max-width="1024px">
+			      <v-dialog 
+				      transition="dialog-bottom-transition" 
+				      v-model="logDialog" 
+				      max-width="1024px" 
+				      @click:outside="logDialogClose()">
 			          <v-card>
 			            <v-toolbar color="purple">
 			            	{{user?.username}}打卡记录{{logList?.length}}条
 			            	<v-spacer></v-spacer>
-			            	<v-btn icon @click="logDialog = false">
+			            	<v-btn icon @click="logDialogClose()">
 			            		<v-icon>mdi-close</v-icon>
 			            	</v-btn>
 			            </v-toolbar>
@@ -494,9 +498,13 @@
 					.then(res => res.json())
 					.then(res => {
 						this.logList = res.data || [];
-						this.user = { ...user, dates: null, daterange: null, rangemenu: null };
+						this.user = { ...user };
 						this.logDialog = true;
 					});
+				},
+				logDialogClose(){
+					this.logDialog = false;
+					this.user = { dates: null, daterange: null, rangemenu: null };
 				},
 				showDeviceList(user){
 				    if (user.userNo === null || user.userNo.length === 0) {
