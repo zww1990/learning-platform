@@ -17,7 +17,7 @@
 				  <v-row>
 					  <v-col>
 					  	<v-btn color="primary" @click="addRow()">添加员工</v-btn>
-					  	<v-btn color="primary" @click="open()">添加地址</v-btn>
+					  	<v-btn color="primary" @click="openAddr()">添加地址</v-btn>
 					  </v-col>
 				  </v-row>
 				  <v-row>
@@ -266,8 +266,8 @@
 					        </v-card-text>
 					        <v-card-actions>
 					          <v-spacer></v-spacer>
-					          <v-btn color="green darken-1" text @click="close()">关闭</v-btn>
-					          <v-btn color="green darken-1" text @click="save()">保存</v-btn>
+					          <v-btn color="green darken-1" text @click="closeAddr()">关闭</v-btn>
+					          <v-btn color="green darken-1" text @click="saveAddr()">保存</v-btn>
 					        </v-card-actions>
 				        </v-form>
 				      </v-card>
@@ -466,14 +466,14 @@
 						staffClock: null
 					});
 				},
-				open(){
+				openAddr(){
 					this.addrDialog = true;
 				},
-				close(){
+				closeAddr(){
 					this.addrDialog = false;
 			        this.$refs.form.reset();
 				},
-				save() {
+				saveAddr() {
 					if(this.$refs.form.validate()){
 						this.addr.id = this.addresses.length + 1;
 						fetch('/hello/saveaddress',{
@@ -486,7 +486,7 @@
 							console.log(res);
 						});
 						this.addresses.push({...this.addr});
-						this.close();
+						this.closeAddr();
 					}
 		        },
 				showLogList(user){
