@@ -26,14 +26,14 @@
 						    <template v-slot:default>
 						      <thead>
 						        <tr>
-						          <th class="text-left" >编号</th>
-						          <th class="text-left" >姓名</th>
-						          <th class="text-left" >密码</th>
-						          <th class="text-left" style="width: 280px;">地址</th>
-						          <th class="text-left" style="width: 190px;">上班</th>
-						          <th class="text-left" style="width: 190px;">下班</th>
-						          <th class="text-left" style="width: 300px;">日期</th>
-						          <th class="text-left" style="width: 190px;">操作</th>
+						          <th class="text-left">编号</th>
+						          <th class="text-left">姓名</th>
+						          <th class="text-left">密码</th>
+						          <th class="text-left">地址</th>
+						          <th class="text-left">上班</th>
+						          <th class="text-left">下班</th>
+						          <th class="text-left">日期</th>
+						          <th class="text-left">操作</th>
 						        </tr>
 						      </thead>
 						      <tbody>
@@ -44,7 +44,7 @@
 							          	placeholder="员工编号" 
 							          	v-model="user.userNo" 
 							          	v-if="user.edited"
-							          	clearable>
+							          	clearable style="width:100px">
 						          	</v-text-field>
 						          	<span v-else-if="user.status === 1">
 						          		<a @click="showLogList(user)">{{ user.userNo }}</a>
@@ -57,9 +57,9 @@
 							          	placeholder="员工姓名" 
 							          	v-model="user.username" 
 							          	v-if="user.edited"
-							          	clearable>
+							          	clearable style="width:100px">
 						          	</v-text-field>
-						          	<span v-else>{{ user.username }}</span>
+						          	<div v-else style="width:50px">{{ user.username }}</div>
 						          </td>
 						          <td>
 						          	<v-text-field 
@@ -67,7 +67,7 @@
 							          	placeholder="员工密码" 
 							          	v-model="user.password" 
 							          	v-if="user.edited"
-							          	clearable>
+							          	clearable style="width:100px">
 						          	</v-text-field>
 						          	<span v-else>******</span>
 						          </td>
@@ -77,11 +77,11 @@
 							              :items="addresses" 
 							              item-text="address" 
 							              item-value="id" 
-							              return-object>
+							              return-object style="width:150px">
 						              </v-select>
 						          </td>
 						          <td>
-						          	<span v-if="user?.staffClock?.clockWorkOnStatus == null"></span>
+						          	<div v-if="user?.staffClock?.clockWorkOnStatus == null" style="width:160px"></div>
 						          	<v-chip color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
 						          		{{user?.staffClock?.clockTimeMin}}
 								    </v-chip>
@@ -90,7 +90,7 @@
 								    </v-chip>
 						          </td>
 						          <td>
-						          	<span v-if="user?.staffClock?.clockWorkOffStatus == null"></span>
+						          	<div v-if="user?.staffClock?.clockWorkOffStatus == null" style="width:160px"></div>
 						          	<v-chip color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
 						          		{{user?.staffClock?.clockTimeMax}}
 								    </v-chip>
@@ -111,7 +111,7 @@
 									          prepend-icon="mdi-calendar" 
 									          readonly 
 									          v-bind="attrs" 
-									          v-on="on">
+									          v-on="on" style="width:200px">
 								          </v-text-field>
 								        </template>
 								        <v-date-picker 
@@ -131,10 +131,10 @@
 								      </v-menu>
 						          </td>
 						          <td>
-						          	<div v-if="user.status === 1">
+						          	<div v-if="user.status === 1" style="width: 240px">
 						          		<v-btn color="success" @click="gotoWork(user)">打卡</v-btn>
 						          		<v-btn color="success" @click="repairWork(user)">补卡</v-btn>
-						          		<v-btn color="success" @click="showDeviceList(user)">查看设备绑定</v-btn>
+						          		<v-btn color="success" @click="showDeviceList(user)">查看设备</v-btn>
 						          	</div>
 						          	<v-alert type="error" v-else>{{user.message}}</v-alert>
 						          </td>
@@ -173,7 +173,7 @@
 								          prepend-icon="mdi-calendar" 
 								          readonly 
 								          v-bind="attrs" 
-								          v-on="on">
+								          v-on="on" style="width:200px">
 							          </v-text-field>
 							        </template>
 							        <v-date-picker 
@@ -207,13 +207,13 @@
 						      <tbody>
 						        <tr v-for="(log, index) in logList" :key="index">
 						          <td>{{log.id}}</td>
-						          <td>{{log.staff_no}}</td>
-						          <td>{{log.clock_time}}</td>
+						          <td><div style="width: 80px">{{log.staff_no}}</div></td>
+						          <td><div style="width: 80px">{{log.clock_time}}</div></td>
 						          <td>{{log.longitude}}</td>
 						          <td>{{log.latitude}}</td>
-						          <td>{{log.address}}</td>
-						          <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
-						          <td>{{log.create_time}}</td>
+						          <td><div style="width: 100px">{{log.address}}</div></td>
+						          <td><div style="width: 50px">{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</div></td>
+						          <td><div style="width: 80px">{{log.create_time}}</div></td>
 						        </tr>
 						      </tbody>
 						    </template>
@@ -289,11 +289,11 @@
 						          <th class="text-left">ID</th>
 						          <th class="text-left">绑定设备标识</th>
 						          <th class="text-left">手机唯一标识</th>
-						          <th class="text-left" style="width: 100px">机型</th>
-						          <th class="text-left" style="width: 100px">OS</th>
-						          <th class="text-left" style="width: 100px">OS版本</th>
-						          <th class="text-left" style="width: 100px">分辨率</th>
-						          <th class="text-left" style="width: 100px">设备推送ID</th>
+						          <th class="text-left">机型</th>
+						          <th class="text-left">OS</th>
+						          <th class="text-left">OS版本</th>
+						          <th class="text-left">分辨率</th>
+						          <th class="text-left">设备推送ID</th>
 						          <th class="text-left">创建时间</th>
 						          <th class="text-left">更新时间</th>
 						          <th class="text-left">操作</th>
@@ -302,15 +302,15 @@
 						      <tbody>
 						        <tr v-for="(dev, index) in deviceList" :key="index">
 						          <td>{{dev.id}}</td>
-						          <td>{{dev.bindDeviceId}}</td>
-						          <td>{{dev.deviceId}}</td>
+						          <td><div style="width: 100px">{{dev.bindDeviceId}}</div></td>
+						          <td><div style="width: 100px">{{dev.deviceId}}</div></td>
 						          <td>{{dev.model}}</td>
-						          <td>{{dev.systemName}}</td>
-						          <td>{{dev.systemVersion}}</td>
+						          <td><div style="width: 100px">{{dev.systemName}}</div></td>
+						          <td><div style="width: 60px">{{dev.systemVersion}}</div></td>
 						          <td>{{dev.resolution}}</td>
-						          <td>{{dev.pushId}}</td>
-						          <td>{{dev.createTime}}</td>
-						          <td>{{dev.updateTime}}</td>
+						          <td><div style="width: 80px">{{dev.pushId}}</div></td>
+						          <td><div style="width: 80px">{{dev.createTime}}</div></td>
+						          <td><div style="width: 80px">{{dev.updateTime}}</div></td>
 						          <td>
 						          	<v-btn color="success" @click="resetBindDevice(dev)" small>重绑</v-btn>
 						          </td>
