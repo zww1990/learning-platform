@@ -145,6 +145,7 @@
 					  </v-col>
 		          </v-row>
 			      <v-dialog 
+			      	  :fullscreen="$vuetify.breakpoint.mobile"
 				      transition="dialog-bottom-transition" 
 				      v-model="logDialog" 
 				      max-width="1024px" 
@@ -173,7 +174,7 @@
 								          prepend-icon="mdi-calendar" 
 								          readonly 
 								          v-bind="attrs" 
-								          v-on="on" style="width:200px">
+								          v-on="on" :style="style">
 							          </v-text-field>
 							        </template>
 							        <v-date-picker 
@@ -221,7 +222,12 @@
 			            </v-card-text>
 			          </v-card>
 			      </v-dialog>
-				    <v-dialog v-model="addrDialog" persistent max-width="400px" transition="dialog-top-transition">
+				    <v-dialog 
+					    :fullscreen="$vuetify.breakpoint.mobile" 
+					    v-model="addrDialog" 
+					    persistent 
+					    max-width="400px" 
+					    transition="dialog-top-transition">
 				      <v-card>
 				      	<v-form ref="form" lazy-validation>
 					        <v-toolbar color="purple">
@@ -272,7 +278,11 @@
 				        </v-form>
 				      </v-card>
 				    </v-dialog>
-			      <v-dialog transition="dialog-bottom-transition" v-model="deviceDialog" max-width="1440px">
+			      <v-dialog 
+				      :fullscreen="$vuetify.breakpoint.mobile" 
+				      transition="dialog-bottom-transition" 
+				      v-model="deviceDialog" 
+				      max-width="1440px">
 			          <v-card>
 			            <v-toolbar color="purple">
 			            	{{user?.username}}设备绑定记录{{deviceList?.length}}条
@@ -359,6 +369,13 @@
 				addrDialog: false,
 				deviceList: [],
 				deviceDialog: false,
+			},
+			computed:{
+				style(){
+					if(this.$vuetify.breakpoint.name === 'xs'){
+						return 'width:250px';
+					}
+				}
 			},
 			async mounted(){
 				let json1 = await (await fetch('/hello/addresses')).json();
