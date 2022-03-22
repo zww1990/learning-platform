@@ -391,11 +391,14 @@
 				},
 				clickDate(user){
 					if(user.time == null){
-						user.time = '09:00:00';
+						user.time = new Date().toLocaleTimeString();
 					}
 					user.clockTime = `${user.date} ${user.time}`;
 				},
 				clickSecond(user){
+					if(user.date == null){
+						user.date = new Date().toJSON().split('T')[0];
+					}
 					user.clockTime = `${user.date} ${user.time}`;
 				},
 				repairWork(user){
