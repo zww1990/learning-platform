@@ -16,7 +16,7 @@
 				<v-container>
 				  <v-row>
 					  <v-col>
-					  	<v-btn color="primary" @click="addRow()">添加员工</v-btn>
+					  	<v-btn color="primary" @click="openUser()">添加员工</v-btn>
 					  	<v-btn color="primary" @click="openAddr()">添加地址</v-btn>
 					  </v-col>
 				  </v-row>
@@ -28,7 +28,6 @@
 						        <tr>
 						          <th class="text-left">编号</th>
 						          <th class="text-left">姓名</th>
-						          <th class="text-left">密码</th>
 						          <th class="text-left">地址</th>
 						          <th class="text-left">上班</th>
 						          <th class="text-left">下班</th>
@@ -39,37 +38,13 @@
 						      <tbody>
 						        <tr v-for="(user, index) in users" :key="index">
 						          <td>
-						          	<v-text-field 
-							          	label="员工编号" 
-							          	placeholder="员工编号" 
-							          	v-model="user.userNo" 
-							          	v-if="user.edited"
-							          	clearable style="width:100px">
-						          	</v-text-field>
-						          	<span v-else-if="user.status === 1">
+						          	<span v-if="user.status === 1">
 						          		<a @click="showLogList(user)">{{ user.userNo }}</a>
 						          	</span>
 						          	<span v-else>{{ user.userNo }}</span>
 						          </td>
 						          <td>
-						          	<v-text-field 
-							          	label="员工姓名" 
-							          	placeholder="员工姓名" 
-							          	v-model="user.username" 
-							          	v-if="user.edited"
-							          	clearable style="width:100px">
-						          	</v-text-field>
-						          	<div v-else style="width:50px">{{ user.username }}</div>
-						          </td>
-						          <td>
-						          	<v-text-field 
-							          	label="员工密码" 
-							          	placeholder="员工密码" 
-							          	v-model="user.password" 
-							          	v-if="user.edited"
-							          	clearable style="width:100px">
-						          	</v-text-field>
-						          	<span v-else>******</span>
+						          	<div style="width:50px">{{ user.username }}</div>
 						          </td>
 						          <td>
 						              <v-select 
@@ -144,6 +119,58 @@
 						  </v-simple-table>
 					  </v-col>
 		          </v-row>
+			    <v-dialog 
+				    :fullscreen="$vuetify.breakpoint.mobile" 
+				    v-model="userDialog" 
+				    persistent 
+				    max-width="400px" 
+				    transition="dialog-top-transition">
+			      <v-card>
+			      	<v-form ref="userForm" lazy-validation>
+				        <v-toolbar color="purple">
+				          <span class="text-h5">公司员工</span>
+				        </v-toolbar>
+				        <v-card-text>
+				          <v-container>
+				            <v-row>
+				              <v-col cols="12">
+					          	<v-text-field 
+						          	label="员工编号*" 
+					                required 
+						          	v-model="user.userNo" 
+					                :rules="validation.usernoRules"
+						          	clearable>
+					          	</v-text-field>
+				              </v-col>
+				              <v-col cols="12">
+					          	<v-text-field 
+						          	label="员工姓名*" 
+					                required 
+						          	v-model="user.username" 
+					                :rules="validation.usernameRules"
+						          	clearable>
+					          	</v-text-field>
+				              </v-col>
+				              <v-col cols="12">
+					          	<v-text-field 
+						          	label="员工密码*" 
+					                required 
+						          	v-model="user.password" 
+					                :rules="validation.passwordRules"
+						          	clearable>
+					          	</v-text-field>
+				              </v-col>
+				            </v-row>
+				          </v-container>
+				        </v-card-text>
+				        <v-card-actions>
+				          <v-spacer></v-spacer>
+				          <v-btn color="green darken-1" text @click="closeUser()">关闭</v-btn>
+				          <v-btn color="green darken-1" text @click="saveUser()">保存</v-btn>
+				        </v-card-actions>
+			        </v-form>
+			      </v-card>
+			    </v-dialog>
 			      <v-dialog 
 			      	  :fullscreen="$vuetify.breakpoint.mobile"
 				      transition="dialog-bottom-transition" 
@@ -222,62 +249,62 @@
 			            </v-card-text>
 			          </v-card>
 			      </v-dialog>
-				    <v-dialog 
-					    :fullscreen="$vuetify.breakpoint.mobile" 
-					    v-model="addrDialog" 
-					    persistent 
-					    max-width="400px" 
-					    transition="dialog-top-transition">
-				      <v-card>
-				      	<v-form ref="form" lazy-validation>
-					        <v-toolbar color="purple">
-					          <span class="text-h5">公司地址</span>
-					        </v-toolbar>
-					        <v-card-text>
-					          <v-container>
-					            <v-row>
-					              <v-col cols="12">
-					                <v-text-field 
-						                label="经度*" 
-						                required 
-						                v-model="addr.longitude" 
-						                :rules="validation.longitudeRules"
-						                clearable
-						                type="number"
-						                min="0">
-					                </v-text-field>
-					              </v-col>
-					              <v-col cols="12">
-					                <v-text-field 
-						                label="纬度*" 
-						                required 
-						                v-model="addr.latitude" 
-						                :rules="validation.latitudeRules"
-						                clearable
-						                type="number"
-						                min="0">
-					                </v-text-field>
-					              </v-col>
-					              <v-col cols="12">
-					                <v-text-field 
-						                label="地址*" 
-						                required 
-						                v-model="addr.address" 
-						                :rules="validation.addressRules"
-						                clearable>
-					                </v-text-field>
-					              </v-col>
-					            </v-row>
-					          </v-container>
-					        </v-card-text>
-					        <v-card-actions>
-					          <v-spacer></v-spacer>
-					          <v-btn color="green darken-1" text @click="closeAddr()">关闭</v-btn>
-					          <v-btn color="green darken-1" text @click="saveAddr()">保存</v-btn>
-					        </v-card-actions>
-				        </v-form>
-				      </v-card>
-				    </v-dialog>
+			    <v-dialog 
+				    :fullscreen="$vuetify.breakpoint.mobile" 
+				    v-model="addrDialog" 
+				    persistent 
+				    max-width="400px" 
+				    transition="dialog-top-transition">
+			      <v-card>
+			      	<v-form ref="addrForm" lazy-validation>
+				        <v-toolbar color="purple">
+				          <span class="text-h5">公司地址</span>
+				        </v-toolbar>
+				        <v-card-text>
+				          <v-container>
+				            <v-row>
+				              <v-col cols="12">
+				                <v-text-field 
+					                label="经度*" 
+					                required 
+					                v-model="addr.longitude" 
+					                :rules="validation.longitudeRules"
+					                clearable
+					                type="number"
+					                min="0">
+				                </v-text-field>
+				              </v-col>
+				              <v-col cols="12">
+				                <v-text-field 
+					                label="纬度*" 
+					                required 
+					                v-model="addr.latitude" 
+					                :rules="validation.latitudeRules"
+					                clearable
+					                type="number"
+					                min="0">
+				                </v-text-field>
+				              </v-col>
+				              <v-col cols="12">
+				                <v-text-field 
+					                label="地址*" 
+					                required 
+					                v-model="addr.address" 
+					                :rules="validation.addressRules"
+					                clearable>
+				                </v-text-field>
+				              </v-col>
+				            </v-row>
+				          </v-container>
+				        </v-card-text>
+				        <v-card-actions>
+				          <v-spacer></v-spacer>
+				          <v-btn color="green darken-1" text @click="closeAddr()">关闭</v-btn>
+				          <v-btn color="green darken-1" text @click="saveAddr()">保存</v-btn>
+				        </v-card-actions>
+			        </v-form>
+			      </v-card>
+			    </v-dialog>
 			      <v-dialog 
 				      :fullscreen="$vuetify.breakpoint.mobile" 
 				      transition="dialog-bottom-transition" 
@@ -348,9 +375,13 @@
 			data:{
 				users: [],
 				user: {
+					userNo: null,
+					username: null,
+					password: null,
 					dates: null,
 					daterange: null,
-					rangemenu: null
+					rangemenu: null, 
+					staffClock: null,
 				},
 				addresses: [],
 				addr: {
@@ -363,9 +394,13 @@
 					longitudeRules: [v => !!v || '经度必须填'],
 					latitudeRules: [v => !!v || '纬度必须填'],
 					addressRules: [v => !!v || '地址必须填'],
+					usernoRules: [v => !!v || '员工编号必须填'],
+					usernameRules: [v => !!v || '员工姓名必须填'],
+					passwordRules: [v => !!v || '员工密码必须填'],
 				},
 				logList: [],
 				logDialog: false,
+				userDialog: false,
 				addrDialog: false,
 				deviceList: [],
 				deviceDialog: false,
@@ -386,7 +421,7 @@
 				this.users.forEach(user => {
 					fetch('/hello/initstaffclock',{
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...addr}),
+						  body: JSON.stringify({ ...user, ...addr }),
 						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
@@ -437,13 +472,13 @@
 			      }
 					fetch('/hello/v2/userloginandstaffclock', {
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...user.addr}),
+						  body: JSON.stringify({ ...user, ...user.addr }),
 						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
 					.then(res => {
 						if (res.status === 0) {
-							this.$toast.error('补卡失败', {x: 'center', y: 'top'});
+							this.$toast.error(res.message, {x: 'center', y: 'top'});
 						} else {
 							this.$toast.success('补卡成功', {x: 'center', y: 'top'});
 						}
@@ -464,7 +499,7 @@
 			      }
 					fetch('/hello/userloginandstaffclock', {
 						  method: 'POST',
-						  body: JSON.stringify({...user, ...user.addr}),
+						  body: JSON.stringify({ ...user, ...user.addr }),
 						  headers: {'Content-Type': 'application/json'}
 					})
 					.then(res => res.json())
@@ -472,29 +507,30 @@
 						user.status = res.status;
 						user.message = res.message;
 						user.staffClock = res.data;
-						user.edited = user.status === 0;
 					});
 				},
-				addRow(){
-					this.users.push({
-						userNo: null, 
-						password: null, 
-						username: null, 
-						addr: this.addresses[0], 
-						status: 1, 
-						edited: true,
-						staffClock: null
-					});
+				saveUser(){
+					if(this.$refs.userForm.validate()){
+						this.users.push({ addr: this.addresses[0], status: 1, ...this.user });
+						this.closeUser();
+					}
+				},
+				openUser(){
+					this.userDialog = true;
+				},
+				closeUser(){
+					this.userDialog = false;
+			        this.$refs.userForm.reset();
 				},
 				openAddr(){
 					this.addrDialog = true;
 				},
 				closeAddr(){
 					this.addrDialog = false;
-			        this.$refs.form.reset();
+			        this.$refs.addrForm.reset();
 				},
 				saveAddr() {
-					if(this.$refs.form.validate()){
+					if(this.$refs.addrForm.validate()){
 						this.addr.id = this.addresses.length + 1;
 						fetch('/hello/saveaddress',{
 							  method: 'POST',
@@ -505,7 +541,7 @@
 						.then(res => {
 							console.log(res);
 						});
-						this.addresses.push({...this.addr});
+						this.addresses.push({ ...this.addr });
 						this.closeAddr();
 					}
 		        },
