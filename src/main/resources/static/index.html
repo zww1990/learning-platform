@@ -43,9 +43,7 @@
 						          	</span>
 						          	<span v-else>{{ user.userNo }}</span>
 						          </td>
-						          <td>
-						          	<div style="width:50px">{{ user.username }}</div>
-						          </td>
+						          <td><div style="width:50px">{{ user.username }}</div></td>
 						          <td>
 						              <v-select 
 							              v-model="user.addr" 
@@ -348,9 +346,7 @@
 						          <td><div style="width: 80px">{{dev.pushId}}</div></td>
 						          <td><div style="width: 80px">{{dev.createTime}}</div></td>
 						          <td><div style="width: 80px">{{dev.updateTime}}</div></td>
-						          <td>
-						          	<v-btn color="success" @click="resetBindDevice(dev)" small>重绑</v-btn>
-						          </td>
+						          <td><v-btn color="success" @click="resetBindDevice(dev)" small>重绑</v-btn></td>
 						        </tr>
 						      </tbody>
 						    </template>
