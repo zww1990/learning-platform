@@ -68,12 +68,13 @@
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 		</dependency>
-		
+		<!-- 
 		<dependency>
 		    <groupId>cn.hutool</groupId>
 		    <artifactId>hutool-all</artifactId>
 		    <version>5.7.12</version>
 		</dependency>
+		-->
 		
 		<dependency>
 		    <groupId>org.apache.poi</groupId>

@@ -1,7 +1,6 @@
 package cn.net.yzl.oa.util;
 
 import java.util.Base64;
-import java.util.Date;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -9,9 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+import org.springframework.util.StringUtils;
 
 public class AESUtil {
 	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
@@ -22,25 +19,6 @@ public class AESUtil {
 
 	private AESUtil() {
 		super();
-	}
-
-	/**
-	 * 加密时间date
-	 *
-	 * @param content
-	 * @return
-	 */
-	public static String encryptAES(Date content) {
-		if (content == null) {
-			return null;
-		}
-		String reslut = null;
-		try {
-			reslut = encryptAES(DateUtil.format(content, FORMAT), key);
-		} catch (Exception e) {
-			log.error("AES加密失败.{}", content, e);
-		}
-		return reslut;
 	}
 
 	public static String encryptAES(String content) {
@@ -58,7 +36,7 @@ public class AESUtil {
 	}
 
 	public static String decryptAES(String content) {
-		if (StrUtil.isBlank(content)) {
+		if (!StringUtils.hasText(content)) {
 			return null;
 		}
 		String reslut = null;
