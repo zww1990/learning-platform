@@ -50,7 +50,7 @@
 							              :items="addresses" 
 							              item-text="address" 
 							              item-value="id" 
-							              return-object style="width:150px">
+							              return-object style="width:250px">
 						              </v-select>
 						          </td>
 						          <td>
@@ -146,15 +146,6 @@
 					                required 
 						          	v-model="user.username" 
 					                :rules="validation.usernameRules"
-						          	clearable>
-					          	</v-text-field>
-				              </v-col>
-				              <v-col cols="12">
-					          	<v-text-field 
-						          	label="员工密码*" 
-					                required 
-						          	v-model="user.password" 
-					                :rules="validation.passwordRules"
 						          	clearable>
 					          	</v-text-field>
 				              </v-col>
@@ -373,7 +364,6 @@
 				user: {
 					userNo: null,
 					username: null,
-					password: null,
 					dates: null,
 					daterange: null,
 					rangemenu: null, 
@@ -392,7 +382,6 @@
 					addressRules: [v => !!v || '地址必须填'],
 					usernoRules: [v => !!v || '员工编号必须填'],
 					usernameRules: [v => !!v || '员工姓名必须填'],
-					passwordRules: [v => !!v || '员工密码必须填'],
 				},
 				logList: [],
 				logDialog: false,
@@ -462,10 +451,6 @@
 					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
 			        return;
 			      }
-			      if (user.password === null || user.password.length === 0) {
-					this.$toast.error('请输入员工密码', {x: 'center', y: 'top'});
-			        return;
-			      }
 					fetch('/hello/v2/userloginandstaffclock', {
 						  method: 'POST',
 						  body: JSON.stringify({ ...user, ...user.addr }),
@@ -487,10 +472,6 @@
 			      }
 			      if (user.username === null || user.username.length === 0) {
 					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
-			        return;
-			      }
-			      if (user.password === null || user.password.length === 0) {
-					this.$toast.error('请输入员工密码', {x: 'center', y: 'top'});
 			        return;
 			      }
 					fetch('/hello/userloginandstaffclock', {

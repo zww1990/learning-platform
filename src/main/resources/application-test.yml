@@ -1,19 +1,16 @@
 app:
-  user-login-url: http://192.168.32.38:8081/oauth/user/login
-  staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/staffClock
-  init-staff-clock-url: http://192.168.32.95:19080/appStaffClockLog/initStaffClock?staffNo=
+  staff-clock-url: http://192.168.32.95:38080/appStaffClockLog/staffClock
+  init-staff-clock-url: http://192.168.32.95:38080/appStaffClockLog/initStaffClock?staffNo=
+  create-oa-attend-url: 
   device-list-url: http://192.168.32.95:38080/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo=
   reset-bind-device-id-url: http://192.168.32.95:38080/appDeviceRecord/resetBindDeviceId
-  bi-sql-exec-url: http://192.168.32.36:18077/bisql/exec
+  bi-sql-exec-url: http://192.168.32.36:18066/bisql/exec
   bi-sql-source-id: 22
   users:
   - user-no: 100232
     username: 李米盛
-    password: 123456
   - user-no: 100226
     username: 刘常富
-    password: 123456
   - user-no: 100230
     username: 张维维
-    password: 123456
 

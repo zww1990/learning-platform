@@ -19,6 +19,17 @@ public class HelloControllerTests {
 	private ObjectMapper json;
 
 	@Test
+	public void testUserLoginAndStaffClockV2() {
+		try (InputStream is = new ClassPathResource("HelloControllerTests.json").getInputStream()) {
+			UserLogin req = json.readValue(is, UserLogin.class);
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(this.controller.userLoginAndStaffClockV2(req)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
 	public void testUserLoginAndStaffClock() {
 		try (InputStream is = new ClassPathResource("HelloControllerTests.json").getInputStream()) {
 			UserLogin req = json.readValue(is, UserLogin.class);
@@ -32,8 +43,7 @@ public class HelloControllerTests {
 	@Test
 	public void testUserLoginAndStaffClock2() {
 		try {
-			System.err.println(
-					this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("9999").setPassword("123456")));
+			System.err.println(this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("9999")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,8 +52,7 @@ public class HelloControllerTests {
 	@Test
 	public void testInitStaffClock() {
 		try {
-			System.err
-					.println(this.controller.initStaffClock(new UserLogin().setUserNo("60123").setPassword("123456")));
+			System.err.println(this.controller.initStaffClock(new UserLogin().setUserNo("60123")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +61,7 @@ public class HelloControllerTests {
 	@Test
 	public void testInitStaffClock2() {
 		try {
-			System.err.println(this.controller.initStaffClock(new UserLogin().setUserNo("9999").setPassword("123456")));
+			System.err.println(this.controller.initStaffClock(new UserLogin().setUserNo("9999")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,8 +70,8 @@ public class HelloControllerTests {
 	@Test
 	public void testInitStaffClock3() {
 		try {
-			System.err.println(json.writerWithDefaultPrettyPrinter().writeValueAsString(
-					this.controller.initStaffClock(new UserLogin().setUserNo("100230").setPassword("123456"))));
+			System.err.println(json.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(this.controller.initStaffClock(new UserLogin().setUserNo("100230"))));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,7 +84,6 @@ public class HelloControllerTests {
 					.writeValueAsString(controller.selectAppStaffClockLogList(//
 							new UserLogin()//
 									.setUserNo("100230")//
-									.setPassword("123456")//
 									.setDates(new String[] { "2021-01-01", "2022-01-01" }))));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,7 +113,7 @@ public class HelloControllerTests {
 	public void testSelectDeviceList() {
 		try {
 			System.err.println(json.writerWithDefaultPrettyPrinter()
-					.writeValueAsString(controller.selectDeviceList(new UserLogin().setUserNo("100222")).getData()));
+					.writeValueAsString(controller.selectDeviceList(new UserLogin().setUserNo("100230")).getData()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

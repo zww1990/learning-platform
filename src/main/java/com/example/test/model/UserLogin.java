@@ -12,7 +12,6 @@ import cn.net.yzl.oa.util.AESUtil;
 public class UserLogin {
 	private String userNo;
 	private String username;
-	private String password;
 	private String address;
 	private BigDecimal longitude;
 	private BigDecimal latitude;
@@ -41,10 +40,6 @@ public class UserLogin {
 		return username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -64,11 +59,6 @@ public class UserLogin {
 
 	public UserLogin setUsername(String username) {
 		this.username = username;
-		return this;
-	}
-
-	public UserLogin setPassword(String password) {
-		this.password = password;
 		return this;
 	}
 
@@ -95,8 +85,8 @@ public class UserLogin {
 	@Override
 	public String toString() {
 		return String.format(
-				"UserLogin [userNo=%s, username=%s, password=%s, address=%s, longitude=%s, latitude=%s, clockTime=%s, dates=%s]",
-				userNo, username, password, address, longitude, latitude, clockTime, Arrays.toString(dates));
+				"UserLogin [userNo=%s, username=%s, address=%s, longitude=%s, latitude=%s, clockTime=%s, dates=%s]",
+				userNo, username, address, longitude, latitude, clockTime, Arrays.toString(dates));
 	}
 
 }
