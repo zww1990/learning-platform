@@ -10,20 +10,16 @@ import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 
 @ConfigurationProperties(prefix = "app")
 public class ApplicationProperties {
-	private String userLoginUrl;
 	private String staffClockUrl;
 	private String initStaffClockUrl;
 	private String deviceListUrl;
 	private String resetBindDeviceIdUrl;
+	private String createOaAttendUrl;
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
 	private String selectAppStaffClockLogSql;
 	private List<Address> addresses = new ArrayList<>();
 	private List<UserInfo> users = new ArrayList<>();
-
-	public String getUserLoginUrl() {
-		return userLoginUrl;
-	}
 
 	public String getStaffClockUrl() {
 		return staffClockUrl;
@@ -59,11 +55,6 @@ public class ApplicationProperties {
 
 	public List<UserInfo> getUsers() {
 		return users;
-	}
-
-	public ApplicationProperties setUserLoginUrl(String userLoginUrl) {
-		this.userLoginUrl = userLoginUrl;
-		return this;
 	}
 
 	public ApplicationProperties setStaffClockUrl(String staffClockUrl) {
@@ -111,11 +102,20 @@ public class ApplicationProperties {
 		return this;
 	}
 
+	public String getCreateOaAttendUrl() {
+		return createOaAttendUrl;
+	}
+
+	public ApplicationProperties setCreateOaAttendUrl(String createOaAttendUrl) {
+		this.createOaAttendUrl = createOaAttendUrl;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
-				"ApplicationProperties [userLoginUrl=%s, staffClockUrl=%s, initStaffClockUrl=%s, deviceListUrl=%s, resetBindDeviceIdUrl=%s, biSqlExecUrl=%s, biSqlSourceId=%s]",
-				userLoginUrl, staffClockUrl, initStaffClockUrl, deviceListUrl, resetBindDeviceIdUrl, biSqlExecUrl,
+				"ApplicationProperties [staffClockUrl=%s, initStaffClockUrl=%s, deviceListUrl=%s, resetBindDeviceIdUrl=%s, createOaAttendUrl=%s, biSqlExecUrl=%s, biSqlSourceId=%s]",
+				staffClockUrl, initStaffClockUrl, deviceListUrl, resetBindDeviceIdUrl, createOaAttendUrl, biSqlExecUrl,
 				biSqlSourceId);
 	}
 
@@ -170,7 +170,6 @@ public class ApplicationProperties {
 
 	public static class UserInfo {
 		private String userNo;
-		private String password;
 		private String username;
 		private Integer status;
 		private String message;
@@ -179,10 +178,6 @@ public class ApplicationProperties {
 
 		public String getUserNo() {
 			return userNo;
-		}
-
-		public String getPassword() {
-			return password;
 		}
 
 		public String getUsername() {
@@ -207,11 +202,6 @@ public class ApplicationProperties {
 
 		public UserInfo setUserNo(String userNo) {
 			this.userNo = userNo;
-			return this;
-		}
-
-		public UserInfo setPassword(String password) {
-			this.password = password;
 			return this;
 		}
 
@@ -242,9 +232,8 @@ public class ApplicationProperties {
 
 		@Override
 		public String toString() {
-			return String.format(
-					"UserInfo [userNo=%s, password=%s, username=%s, status=%s, message=%s, addr=%s, staffClock=%s]",
-					userNo, password, username, status, message, addr, staffClock);
+			return String.format("UserInfo [userNo=%s, username=%s, status=%s, message=%s, addr=%s, staffClock=%s]",
+					userNo, username, status, message, addr, staffClock);
 		}
 	}
 }

@@ -2,39 +2,30 @@ server:
   port: 9999
 
 app:
-  user-login-url: http://server.yuzhilin.net.cn/oauth/user/login
-  staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/staffClock
-  init-staff-clock-url: http://server.yuzhilin.net.cn/oa/appStaffClockLog/initStaffClock?staffNo=
+  staff-clock-url: http://api.yuzhilin.net.cn/staffDB/appStaffClockLog/staffClock
+  init-staff-clock-url: http://api.yuzhilin.net.cn/staffDB/appStaffClockLog/initStaffClock?staffNo=
+  create-oa-attend-url: 
   device-list-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo=
   reset-bind-device-id-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/resetBindDeviceId
-  bi-sql-exec-url: http://server.yuzhilin.net.cn/bisearchecharts/bisql/exec
+  bi-sql-exec-url: http://api.yuzhilin.net.cn/bisearchserver/bisql/exec
   bi-sql-source-id: 5
   users:
   - user-no: 100245
     username: 王哲
-    password: 123456
   - user-no: 100232
     username: 李米盛
-    password: 123456
   - user-no: 100226
     username: 刘常富
-    password: 654321
   - user-no: 100246
     username: 李贺彦
-    password: 123456
   - user-no: 100627
     username: 关晓鹏
-    password: 123456
   - user-no: 100230
     username: 张维维
-    password: 123456
   - user-no: 100261
     username: 张东丽
-    password: 123456
   - user-no: 100248
     username: 汪化胜
-    password: 654321
   - user-no: 100264
     username: 潘倩
-    password: 021497pq
 
