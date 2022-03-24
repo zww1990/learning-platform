@@ -127,7 +127,7 @@ public class HelloController {
 				body.getData().put("clockWorkOnStatusName",
 						ClockWorkStatus.codeToName((Integer) body.getData().get("clockWorkOnStatus")));
 			}
-			log.info("{}", body.getData());
+			log.info("{}", body);
 			return body;
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
@@ -179,10 +179,9 @@ public class HelloController {
 				.getBody();
 		log.info("{}", body);
 		String time = userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.DATEFORMAT));
-		body = this.restTemplate
-				.exchange(String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time),
-						HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class)
-				.getBody();
+		String url = String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time);
+		body = this.restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
+		log.info("{} - {}", url, body);
 		return body;
 	}
 
@@ -291,6 +290,7 @@ public class HelloController {
 		params.add("id", id);
 		ResponseBody body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
 				new HttpEntity<>(params, headers), ResponseBody.class);
+		log.info("{}", body);
 		if (body.getStatus() != 1) {
 			return body;
 		}
