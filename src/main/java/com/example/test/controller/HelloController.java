@@ -2,6 +2,7 @@ package com.example.test.controller;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import com.example.test.model.UserLogin;
 import cn.net.yzl.oa.entity.ClockWorkStatus;
 import cn.net.yzl.oa.entity.SqlExecQueryDTO;
 import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
+import cn.net.yzl.oa.util.AESUtil;
 
 @RestController
 @RequestMapping("/hello")
@@ -162,7 +164,7 @@ public class HelloController {
 					.setStatus(0)//
 					.setMessage("[longitude]不能为空");
 		}
-		log.info("{}", userLogin);
+		log.info("补卡>>>{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
@@ -176,6 +178,11 @@ public class HelloController {
 				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
 				.getBody();
 		log.info("{}", body);
+		String time = userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.DATEFORMAT));
+		body = this.restTemplate
+				.exchange(String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time),
+						HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class)
+				.getBody();
 		return body;
 	}
 
@@ -205,7 +212,7 @@ public class HelloController {
 					.setStatus(0)//
 					.setMessage("[longitude]不能为空");
 		}
-		log.info("{}", userLogin);
+		log.info("打卡>>>{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
