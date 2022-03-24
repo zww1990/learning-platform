@@ -14,6 +14,7 @@ public class AESUtil {
 	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
+	public static final String DATEFORMAT = "yyyy-MM-dd";
 	public static final String TIMEZONE = "GMT+8";
 	private static final String key = "yzl_staff&oa#514";
 
