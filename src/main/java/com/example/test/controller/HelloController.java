@@ -182,6 +182,12 @@ public class HelloController {
 		String url = String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time);
 		body = this.restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
 		log.info("{} - {}", url, body);
+		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+			this.properties.getUsers().add(//
+					new UserInfo()//
+							.setUserNo(userLogin.getUserNo())//
+							.setUsername(userLogin.getUsername()));
+		}
 		return body;
 	}
 
@@ -225,6 +231,12 @@ public class HelloController {
 			ResponseBody<Object> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
 					new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
 			log.info("{}", body);
+			if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+				this.properties.getUsers().add(//
+						new UserInfo()//
+								.setUserNo(userLogin.getUserNo())//
+								.setUsername(userLogin.getUsername()));
+			}
 			return this.initStaffClock(userLogin);
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
