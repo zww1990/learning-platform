@@ -6,20 +6,22 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @ConfigurationProperties(prefix = "app")
 @Getter
 @Setter
 @ToString
 public class ApplicationProperties {
-	private String userLoginUrl;
 	private String staffClockUrl;
 	private String initStaffClockUrl;
 	private String deviceListUrl;
 	private String resetBindDeviceIdUrl;
+	private String createOaAttendUrl;
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
 	@ToString.Exclude
@@ -42,9 +44,13 @@ public class ApplicationProperties {
 	@Getter
 	@Setter
 	@ToString
+	@Accessors(chain = true)
 	public static class UserInfo {
 		private String userNo;
-		private String password;
 		private String username;
+		private Integer status;
+		private String message;
+		private Address addr;
+		private AppStaffClockLogDTO staffClock;
 	}
 }
