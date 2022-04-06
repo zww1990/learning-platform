@@ -54,9 +54,6 @@
 						    <van-field v-model="temp.username" name="username" label="员工姓名" readonly/>
 						  </van-cell-group>
 						  <van-cell-group inset>
-						    <van-field v-model="temp.password" type="password" name="password" label="员工密码" readonly/>
-						  </van-cell-group>
-						  <van-cell-group inset>
 						    <van-field
 							  v-model="temp.address"
 							  is-link
@@ -139,18 +136,6 @@
 				      label="姓名"
 				      placeholder="请输入员工姓名"
 				      :rules="[{ required: true, message: '请输入员工姓名' }]"
-				      required
-				      colon
-				      clearable/>
-				  </van-cell-group>
-				  <van-cell-group inset style="height: 68px;">
-				    <van-field
-				      v-model="user.password"
-				      name="password"
-				      type="password"
-				      label="密码"
-				      placeholder="请输入员工密码"
-				      :rules="[{ required: true, message: '请输入员工密码' }]"
 				      required
 				      colon
 				      clearable/>
