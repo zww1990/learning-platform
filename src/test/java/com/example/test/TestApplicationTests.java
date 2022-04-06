@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 import com.example.test.controller.TestController;
-import com.example.test.mapper.PersonMapper;
 import com.example.test.service.TestService;
 
 @SpringBootTest
@@ -49,13 +48,5 @@ public class TestApplicationTests {
 			e.printStackTrace();
 		}
 	}
-	
-	@Test
-	public void testPerson() {
-		try {
-			System.err.println(PersonMapper.INSTANCE);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 }
