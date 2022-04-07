@@ -9,11 +9,8 @@ app:
   users:
   - user-no: 100232
     username: 李米盛
-    password: 123456
   - user-no: 100226
     username: 刘常富
-    password: 123456
   - user-no: 100230
     username: 张维维
-    password: 123456
 
