@@ -96,7 +96,9 @@
 									        no-title 
 									        scrollable 
 									        locale="zh-cn" 
-									        @click:date="clickDate(user)">
+									        @click:date="clickDate(user)"
+                                            :min="minDate"
+                                            :max="maxDate">
 								        	<v-time-picker 
 									        	v-model="user.time" 
 									        	format="24hr" 
@@ -203,7 +205,9 @@
 								        scrollable 
 								        locale="zh-cn" 
 								        range
-								        @change="rangeChange()">
+								        @change="rangeChange()"
+                                        :min="minDate"
+                                        :max="maxDate">
 							        </v-date-picker>
 							      </v-menu>
 							  </v-col>
