@@ -102,7 +102,7 @@
         									        no-title 
         									        scrollable 
         									        locale="zh-cn" 
-        									        @click:date="clickDate(user)"
+        									        @input="clickDate(user)"
                                                     :min="minDate"
                                                     :max="maxDate">
         								        </v-date-picker>
@@ -113,7 +113,7 @@
         								        	format="24hr" 
         								        	use-seconds 
         								        	scrollable 
-        								        	@click:second="clickSecond(user)">
+        								        	@input="clickSecond(user)">
         							        	</v-time-picker>
                                             </v-tab-item>
                                         </v-tabs-items>
