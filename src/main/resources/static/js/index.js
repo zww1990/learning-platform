@@ -119,7 +119,7 @@ new Vue({
 	                this.snackbar.text = res.message;
 	                this.snackbar.color = 'error';
                 } else {
-	                this.snackbar.text = '补卡成功';
+                	this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 补卡成功`;
 	                this.snackbar.color = 'success';
                 }
             });
