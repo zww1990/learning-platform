@@ -18,6 +18,10 @@
 					  <v-col>
 					  	<v-btn color="primary" @click="openUser()">添加员工</v-btn>
 					  	<v-btn color="primary" @click="openAddr()">添加地址</v-btn>
+                        <v-snackbar top shaped
+                            v-model="snackbar.value" 
+                            :timeout="snackbar.timeout" 
+                            :color="snackbar.color">{{ snackbar.text }}</v-snackbar>
 					  </v-col>
 				  </v-row>
 				  <v-row>
@@ -352,6 +356,5 @@
 	</body>
 	<script src="/webjars/vue/vue.min.js"></script>
 	<script src="/webjars/vuetify/dist/vuetify.min.js"></script>
-	<script src="vuetify-toast-snackbar-ng/index.umd.min.js"></script>
 	<script src="js/index.js"></script>
 </html>
