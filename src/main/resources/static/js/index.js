@@ -41,6 +41,8 @@ new Vue({
         	timeout: 3000,
         	color: 'info',
         },
+        minDate: '2020-01-01',
+        maxDate: `${new Date().getFullYear()}-12-31`,
     },
     computed: {
         style() {
