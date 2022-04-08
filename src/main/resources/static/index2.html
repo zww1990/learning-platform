@@ -16,16 +16,46 @@
                     <v-container>
                         <v-row>
                             <v-col>
-                                <v-tabs v-model="tabs">
-                                    <v-tab>tab-1</v-tab>
-                                    <v-tab>tab-2</v-tab>
-                                    <v-tab>tab-3</v-tab>
-                                </v-tabs>
-                                <v-tabs-items v-model="tabs">
-                                    <v-tab-item>item-1</v-tab-item>
-                                    <v-tab-item>item-2</v-tab-item>
-                                    <v-tab-item>item-3</v-tab-item>
-                                </v-tabs-items>
+								<v-menu 
+									v-model="user.menu" 
+									:close-on-content-click="false" 
+									transition="scale-transition" 
+									offset-y 
+									min-width="auto">
+									<template v-slot:activator="{ on, attrs }">
+										<v-text-field 
+											v-model="user.clockTime" 
+											prepend-icon="mdi-calendar" 
+											readonly 
+											v-bind="attrs" 
+											v-on="on">
+										</v-text-field>
+									</template>
+									<v-tabs v-model="user.tabs">
+										<v-tab>日期</v-tab>
+										<v-tab>时间</v-tab>
+									</v-tabs>
+									<v-tabs-items v-model="user.tabs">
+										<v-tab-item>
+											<v-date-picker 
+												v-model="user.date" 
+												no-title 
+												scrollable 
+												locale="zh-cn" 
+												@click:date="clickDate(user)">
+											</v-date-picker>
+										</v-tab-item>
+										<v-tab-item>
+											<v-time-picker 
+												v-model="user.time" 
+												format="24hr" 
+												use-seconds 
+												scrollable 
+												@click:second="clickSecond(user)">
+											</v-time-picker>
+										</v-tab-item>
+									</v-tabs-items>
+								</v-menu>
                             </v-col>
                         </v-row>
                     </v-container>
