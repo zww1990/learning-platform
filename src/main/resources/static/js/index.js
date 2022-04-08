@@ -35,6 +35,12 @@ new Vue({
         addrDialog: false,
         deviceList: [],
         deviceDialog: false,
+        snackbar: {
+        	value: false,
+        	text: '你好，世界！',
+        	timeout: 3000,
+        	color: 'info',
+        },
     },
     computed: {
         style() {
@@ -91,10 +97,9 @@ new Vue({
         },
         repairWork(user) {
             if (user.clockTime == null || user.clockTime.length === 0) {
-                this.$toast.error('请输入日期', {
-                    x: 'center',
-                    y: 'top'
-                });
+                this.snackbar.value = true;
+                this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 请输入日期`;
+                this.snackbar.color = 'error';
                 return;
             }
             fetch('/hello/v2/userloginandstaffclock', {
@@ -109,16 +114,13 @@ new Vue({
             })
             .then(res => res.json())
             .then(res => {
+	                this.snackbar.value = true;
                 if (res.status === 0) {
-                    this.$toast.error(res.message, {
-                        x: 'center',
-                        y: 'top'
-                    });
+	                this.snackbar.text = res.message;
+	                this.snackbar.color = 'error';
                 } else {
-                    this.$toast.success('补卡成功', {
-                        x: 'center',
-                        y: 'top'
-                    });
+	                this.snackbar.text = '补卡成功';
+	                this.snackbar.color = 'success';
                 }
             });
         },
