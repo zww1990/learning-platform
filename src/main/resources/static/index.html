@@ -91,22 +91,32 @@
 									          v-on="on" style="width:200px">
 								          </v-text-field>
 								        </template>
-								        <v-date-picker 
-									        v-model="user.date" 
-									        no-title 
-									        scrollable 
-									        locale="zh-cn" 
-									        @click:date="clickDate(user)"
-                                            :min="minDate"
-                                            :max="maxDate">
-								        	<v-time-picker 
-									        	v-model="user.time" 
-									        	format="24hr" 
-									        	use-seconds 
-									        	scrollable 
-									        	@click:second="clickSecond(user)">
-								        	</v-time-picker>
-								        </v-date-picker>
+                                        <v-tabs v-model="user.tabs">
+                                            <v-tab>日期</v-tab>
+                                            <v-tab>时间</v-tab>
+                                        </v-tabs>
+                                        <v-tabs-items v-model="user.tabs">
+                                            <v-tab-item>
+        								        <v-date-picker 
+        									        v-model="user.date" 
+        									        no-title 
+        									        scrollable 
+        									        locale="zh-cn" 
+        									        @click:date="clickDate(user)"
+                                                    :min="minDate"
+                                                    :max="maxDate">
+        								        </v-date-picker>
+                                            </v-tab-item>
+                                            <v-tab-item>
+        							        	<v-time-picker 
+        								        	v-model="user.time" 
+        								        	format="24hr" 
+        								        	use-seconds 
+        								        	scrollable 
+        								        	@click:second="clickSecond(user)">
+        							        	</v-time-picker>
+                                            </v-tab-item>
+                                        </v-tabs-items>
 								      </v-menu>
 						          </td>
 						          <td>
