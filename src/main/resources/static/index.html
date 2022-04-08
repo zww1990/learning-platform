@@ -443,14 +443,6 @@
 					this.$toast.error('请输入日期', {x: 'center', y: 'top'});
 			        return;
 			      }
-				  if (user.userNo === null || user.userNo.length === 0) {
-					this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
-			        return;
-			      }
-			      if (user.username === null || user.username.length === 0) {
-					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
-			        return;
-			      }
 					fetch('/hello/v2/userloginandstaffclock', {
 						  method: 'POST',
 						  body: JSON.stringify({ ...user, ...user.addr }),
@@ -466,14 +458,6 @@
 					});
 				},
 				gotoWork(user){
-				  if (user.userNo === null || user.userNo.length === 0) {
-					this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
-			        return;
-			      }
-			      if (user.username === null || user.username.length === 0) {
-					this.$toast.error('请输入员工姓名', {x: 'center', y: 'top'});
-			        return;
-			      }
 					fetch('/hello/userloginandstaffclock', {
 						  method: 'POST',
 						  body: JSON.stringify({ ...user, ...user.addr }),
@@ -540,10 +524,6 @@
 					this.user = { dates: null, daterange: null, rangemenu: null };
 				},
 				showDeviceList(user){
-				    if (user.userNo === null || user.userNo.length === 0) {
-					  this.$toast.error('请输入员工编号', {x: 'center', y: 'top'});
-			          return;
-			        }
 					fetch('/hello/selectdevicelist',{
 						  method: 'POST',
 						  body: JSON.stringify(user),
