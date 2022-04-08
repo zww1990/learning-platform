@@ -264,7 +264,7 @@ public class HelloController {
 			sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(),
 					userLogin.getDates()[0], userLogin.getDates()[1]));
 		} else {
-			LocalDate begin = LocalDate.now().minusMonths(1);
+			LocalDate begin = LocalDate.now().withDayOfMonth(1);
 			LocalDate end = LocalDate.now();
 			sqlExecQuery.setCommand(
 					String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(), begin, end));
