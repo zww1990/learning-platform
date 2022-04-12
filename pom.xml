@@ -44,20 +44,12 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
-    	
 		<dependency>
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
@@ -75,30 +67,26 @@
 		    <version>${poi.version}</version>
 		    <scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars/webjars-locator-core -->
+		
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>webjars-locator-core</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars/vue -->
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>vue</artifactId>
 		    <version>2.6.14</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars.npm/vuetify -->
 		<dependency>
 		    <groupId>org.webjars.npm</groupId>
 		    <artifactId>vuetify</artifactId>
 		    <version>2.6.4</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars.npm/roboto-fontface -->
 		<dependency>
 		    <groupId>org.webjars.npm</groupId>
 		    <artifactId>roboto-fontface</artifactId>
 		    <version>0.10.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars.npm/mdi__font -->
 		<dependency>
 		    <groupId>org.webjars.npm</groupId>
 		    <artifactId>mdi__font</artifactId>
@@ -113,14 +101,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 	        <plugin>
 	        	<artifactId>maven-install-plugin</artifactId>
