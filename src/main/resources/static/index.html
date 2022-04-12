@@ -57,8 +57,7 @@
                                                     item-text="address" 
                                                     item-value="id" 
                                                     return-object 
-                                                    style="width:250px">
-                                                    </v-select>
+                                                    style="width:250px"></v-select>
                                                 </td>
                                                 <td>
                                                     <div v-if="user?.staffClock?.clockWorkOnStatus == null" style="width:160px">
@@ -90,8 +89,7 @@
                                                             readonly 
                                                             v-bind="attrs" 
                                                             v-on="on" 
-                                                            style="width:200px">
-                                                            </v-text-field>
+                                                            style="width:200px"></v-text-field>
                                                         </template>
                                                         <v-tabs v-model="user.tabs">
                                                             <v-tab>日期</v-tab>
@@ -106,8 +104,7 @@
                                                                 locale="zh-cn" 
                                                                 @input="clickDate(user)" 
                                                                 :min="minDate" 
-                                                                :max="maxDate">
-                                                                </v-date-picker>
+                                                                :max="maxDate"></v-date-picker>
                                                             </v-tab-item>
                                                             <v-tab-item>
                                                                 <v-time-picker 
@@ -115,8 +112,7 @@
                                                                 format="24hr" 
                                                                 use-seconds 
                                                                 scrollable 
-                                                                @input="clickSecond(user)">
-                                                                </v-time-picker>
+                                                                @input="clickSecond(user)"></v-time-picker>
                                                             </v-tab-item>
                                                         </v-tabs-items>
                                                     </v-menu>
@@ -155,8 +151,7 @@
                                                     required 
                                                     v-model="user.userNo" 
                                                     :rules="validation.usernoRules" 
-                                                    clearable>
-                                                    </v-text-field>
+                                                    clearable></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
@@ -164,8 +159,7 @@
                                                     required 
                                                     v-model="user.username" 
                                                     :rules="validation.usernameRules" 
-                                                    clearable>
-                                                    </v-text-field>
+                                                    clearable></v-text-field>
                                                 </v-col>
                                             </v-row>
                                         </v-container>
@@ -208,8 +202,7 @@
                                                     readonly 
                                                     v-bind="attrs" 
                                                     v-on="on" 
-                                                    :style="style">
-                                                    </v-text-field>
+                                                    :style="style"></v-text-field>
                                                 </template>
                                                 <v-date-picker 
                                                 v-model="user.dates" 
@@ -219,8 +212,7 @@
                                                 range 
                                                 @change="rangeChange()" 
                                                 :min="minDate" 
-                                                :max="maxDate">
-                                                </v-date-picker>
+                                                :max="maxDate"></v-date-picker>
                                             </v-menu>
                                         </v-col>
                                         <v-col style="padding-top:30px">
@@ -282,8 +274,7 @@
                                                     :rules="validation.longitudeRules" 
                                                     clearable 
                                                     type="number" 
-                                                    min="0">
-                                                    </v-text-field>
+                                                    min="0"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
@@ -293,8 +284,7 @@
                                                     :rules="validation.latitudeRules" 
                                                     clearable 
                                                     type="number" 
-                                                    min="0">
-                                                    </v-text-field>
+                                                    min="0"></v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
@@ -302,8 +292,7 @@
                                                     required 
                                                     v-model="addr.address" 
                                                     :rules="validation.addressRules" 
-                                                    clearable>
-                                                    </v-text-field>
+                                                    clearable></v-text-field>
                                                 </v-col>
                                             </v-row>
                                         </v-container>
