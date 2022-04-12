@@ -6,18 +6,17 @@ new Vue({
         },
     }),
     data: {
-    	user: {
-    		menu: null,
-    		clockTime: null,
-    		tabs: null,
-    		date: null,
-    		time: null,
-    	}
+        user: {
+            menu: null,
+            clockTime: null,
+            tabs: null,
+            date: null,
+            time: null,
+        }
     },
-    computed: {
-    },
+    computed: {},
     mounted() {
-    	console.log('hello world');
+        console.log('hello world');
     },
     methods: {
         clickDate(user) {

@@ -36,10 +36,10 @@ new Vue({
         deviceList: [],
         deviceDialog: false,
         snackbar: {
-        	value: false,
-        	text: '你好，世界！',
-        	timeout: 3000,
-        	color: 'info',
+            value: false,
+            text: '你好，世界！',
+            timeout: 3000,
+            color: 'info',
         },
         minDate: '2020-01-01',
         maxDate: `${new Date().getFullYear()}-12-31`,
@@ -116,13 +116,13 @@ new Vue({
             })
             .then(res => res.json())
             .then(res => {
-	                this.snackbar.value = true;
+                this.snackbar.value = true;
                 if (res.status === 0) {
-	                this.snackbar.text = res.message;
-	                this.snackbar.color = 'error';
+                    this.snackbar.text = res.message;
+                    this.snackbar.color = 'error';
                 } else {
-                	this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 补卡成功`;
-	                this.snackbar.color = 'success';
+                    this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 补卡成功`;
+                    this.snackbar.color = 'success';
                 }
             });
         },
