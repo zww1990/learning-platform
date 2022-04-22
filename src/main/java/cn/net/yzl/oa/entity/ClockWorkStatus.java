@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum ClockWorkStatus {
 	/** 正常 */
 	STATUS_611(611, "正常"),
@@ -16,19 +21,6 @@ public enum ClockWorkStatus {
 
 	private Integer code;
 	private String name;
-
-	private ClockWorkStatus(Integer code, String name) {
-		this.code = code;
-		this.name = name;
-	}
-
-	public Integer getCode() {
-		return code;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	public static String codeToName(Integer code) {
 		return Optional.ofNullable(code)

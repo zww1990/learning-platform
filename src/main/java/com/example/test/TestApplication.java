@@ -2,8 +2,6 @@ package com.example.test;
 
 import javax.annotation.Resource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.test.model.ApplicationProperties;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * spring boot application
  * 
@@ -24,11 +24,10 @@ import com.example.test.model.ApplicationProperties;
  */
 @EnableRetry
 @SpringBootApplication
+@Slf4j
 @EnableAutoConfiguration
 @EnableConfigurationProperties(ApplicationProperties.class)
 public class TestApplication implements CommandLineRunner {
-
-	private static final Logger log = LoggerFactory.getLogger(TestApplication.class);
 
 	/**
 	 * @param args
