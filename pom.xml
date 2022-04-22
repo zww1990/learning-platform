@@ -21,14 +21,14 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.6.6</spring-boot.version>
+        <spring-boot.version>2.6.7</spring-boot.version>
         <spring-cloud.version>2021.0.1</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
 		<nacos.client.version>2.0.4</nacos.client.version>
     	<seata.version>1.4.2</seata.version>
         <kryo.version>4.0.2</kryo.version>
         <kryo-serializers.version>0.45</kryo-serializers.version>
-    	<druid.version>1.2.8</druid.version>
+    	<druid.version>1.2.9</druid.version>
     	<mysql.version>8.0.28</mysql.version>
     	<mybatis.version>2.2.2</mybatis.version>
     </properties>
