@@ -26,8 +26,13 @@ public class UserControllerTests {
 	@Test
 	public void testGetClientUser() {
 		try {
-			System.err.println(this.webClient.get().uri("/user/get").exchange().expectStatus().isOk()
-					.expectBody(String.class).returnResult());
+			System.err.println(this.webClient.get()//
+					.uri("/user/get")//
+					.exchange()//
+					.expectStatus()//
+					.isOk()//
+					.expectBody(String.class)//
+					.returnResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,10 +41,20 @@ public class UserControllerTests {
 	@Test
 	public void testAddClientUser() {
 		try {
-			ClientUser user = new ClientUser().setGender(1).setPhoneNumber("1346579").setUserId("1002")
+			ClientUser user = new ClientUser()//
+					.setGender(1)//
+					.setPhoneNumber("1346579")//
+					.setUserId("1002")//
 					.setUsername("张三");
-			System.err.println(this.webClient.post().uri("/user/add").contentType(MediaType.APPLICATION_JSON)
-					.bodyValue(user).exchange().expectStatus().isOk().expectBody(String.class).returnResult());
+			System.err.println(this.webClient.post()//
+					.uri("/user/add")//
+					.contentType(MediaType.APPLICATION_JSON)//
+					.bodyValue(user)//
+					.exchange()//
+					.expectStatus()//
+					.isOk()//
+					.expectBody(String.class)//
+					.returnResult());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
