@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.example.springreactive.model.ClientUser;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * UserControllerTests
@@ -23,8 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserControllerTests {
 	@Resource
 	private WebTestClient webClient;
-	@Resource
-	private ObjectMapper json;
 
 	@Test
 	public void testGetClientUser() {
@@ -41,7 +38,6 @@ public class UserControllerTests {
 		try {
 			ClientUser user = new ClientUser().setGender(1).setPhoneNumber("1346579").setUserId("1002")
 					.setUsername("张三");
-//			System.err.println(this.json.writerWithDefaultPrettyPrinter().writeValueAsString(user));
 			System.err.println(this.webClient.post().uri("/user/add").contentType(MediaType.APPLICATION_JSON)
 					.bodyValue(user).exchange().expectStatus().isOk().expectBody(String.class).returnResult());
 		} catch (Exception e) {
