@@ -30,11 +30,18 @@ public class UserController {
 
 	@GetMapping("/get")
 	public Flux<ClientUser> getClientUser() {
-		return this.databaseClient.select().from(ClientUser.class).fetch().all();
+		return this.databaseClient.select()//
+				.from(ClientUser.class)//
+				.fetch()//
+				.all();
 	}
 
 	@PostMapping("/add")
 	public Mono<Integer> addClientUser(@RequestBody ClientUser user) {
-		return this.databaseClient.insert().into(ClientUser.class).using(user).fetch().rowsUpdated();
+		return this.databaseClient.insert()//
+				.into(ClientUser.class)//
+				.using(user)//
+				.fetch()//
+				.rowsUpdated();
 	}
 }
