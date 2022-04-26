@@ -1,1 +1,9 @@
-
+spring:
+  sql:
+    init:
+      mode: never
+      enabled: false
+  r2dbc:
+    url: r2dbc:mysql://192.168.32.33:3306/seata_client?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: zww
+    password: 1qaz2wsx
