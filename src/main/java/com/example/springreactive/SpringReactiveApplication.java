@@ -7,6 +7,13 @@ import org.springframework.data.r2dbc.core.DatabaseClient;
 
 import io.r2dbc.spi.ConnectionFactory;
 
+/**
+ * SpringReactiveApplication
+ * 
+ * @author weiwei
+ * @version v1
+ * @since 2022年4月26日,下午5:53:23
+ */
 @SuppressWarnings("deprecation")
 @SpringBootApplication
 public class SpringReactiveApplication {

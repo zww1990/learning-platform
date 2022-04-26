@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 
 /**
  * ClientUser
+ * 
  * @author weiwei
  * @version v1
  * @since 2022年4月26日,下午4:10:52
@@ -17,7 +18,7 @@ import lombok.experimental.Accessors;
 @ToString
 public class ClientUser {
 	private String userId;
-    private String username;
-    private String phoneNumber;
-    private Integer gender;
+	private String username;
+	private String phoneNumber;
+	private Integer gender;
 }
