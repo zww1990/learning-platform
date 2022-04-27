@@ -44,7 +44,7 @@ public class UserControllerTests {
 			ClientUser user = new ClientUser()//
 					.setGender(1)//
 					.setPhoneNumber("1346579")//
-					.setUserId("1002")//
+					.setUserId("1004")//
 					.setUsername("张三");
 			System.err.println(this.webClient.post()//
 					.uri("/user/add")//
@@ -60,4 +60,19 @@ public class UserControllerTests {
 		}
 	}
 
+	@Test
+	public void testDelClientUser() {
+		try {
+			String userId = "1001";
+			System.err.println(this.webClient.delete()//
+					.uri("/user/del/{userId}", userId)//
+					.exchange()//
+					.expectStatus()//
+					.isOk()//
+					.expectBody(String.class)//
+					.returnResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

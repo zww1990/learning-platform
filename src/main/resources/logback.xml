@@ -13,8 +13,8 @@
 	<logger name="org.springframework.boot.actuate.endpoint.jmx" level="WARN"/>
 	<logger name="org.reflections.Reflections" level="WARN"/>
     <!-- sql打印 -->
-	<logger name="org.springframework.r2dbc.core" level="debug"/>
-	<logger name="org.springframework.data.r2dbc.core" level="debug"/>
+	<logger name="org.springframework.r2dbc" level="debug"/>
+	<logger name="org.springframework.data.r2dbc" level="debug"/>
 	
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
