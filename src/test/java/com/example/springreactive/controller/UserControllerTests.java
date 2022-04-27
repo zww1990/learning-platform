@@ -75,4 +75,26 @@ public class UserControllerTests {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void testUpdateClientUser() {
+		try {
+			ClientUser user = new ClientUser()//
+					.setGender(2)//
+					.setPhoneNumber("2222222")//
+					.setUserId("1002")//
+					.setUsername("李四");
+			System.err.println(this.webClient.put()//
+					.uri("/user/update")//
+					.contentType(MediaType.APPLICATION_JSON)//
+					.bodyValue(user)//
+					.exchange()//
+					.expectStatus()//
+					.isOk()//
+					.expectBody(String.class)//
+					.returnResult());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

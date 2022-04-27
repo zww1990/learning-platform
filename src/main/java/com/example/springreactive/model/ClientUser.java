@@ -1,5 +1,7 @@
 package com.example.springreactive.model;
 
+import org.springframework.data.annotation.Id;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,6 +19,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString
 public class ClientUser {
+	@Id
 	private String userId;
 	private String username;
 	private String phoneNumber;
