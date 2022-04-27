@@ -2,8 +2,12 @@ package com.example.springreactive.controller;
 
 import javax.annotation.Resource;
 
-import org.springframework.data.r2dbc.core.DatabaseClient;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.relational.core.query.Criteria;
+import org.springframework.data.relational.core.query.Query;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,27 +25,26 @@ import reactor.core.publisher.Mono;
  * @version v1
  * @since 2022年4月26日,下午4:14:03
  */
-@SuppressWarnings("deprecation")
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	@Resource
-	private DatabaseClient databaseClient;
+	private R2dbcEntityTemplate entityTemplate;
 
 	@GetMapping("/get")
 	public Flux<ClientUser> getClientUser() {
-		return this.databaseClient.select()//
-				.from(ClientUser.class)//
-				.fetch()//
-				.all();
+		return this.entityTemplate.select(ClientUser.class).all();
 	}
 
 	@PostMapping("/add")
-	public Mono<Integer> addClientUser(@RequestBody ClientUser user) {
-		return this.databaseClient.insert()//
-				.into(ClientUser.class)//
-				.using(user)//
-				.fetch()//
-				.rowsUpdated();
+	public Mono<ClientUser> addClientUser(@RequestBody ClientUser user) {
+		return this.entityTemplate.insert(user);
+	}
+
+	@DeleteMapping("/del/{userId}")
+	public Mono<Integer> delClientUser(@PathVariable String userId) {
+		return this.entityTemplate.delete(ClientUser.class)//
+				.matching(Query.query(Criteria.where("userId").is(userId)))//
+				.all();
 	}
 }
