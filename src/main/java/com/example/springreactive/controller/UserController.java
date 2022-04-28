@@ -2,6 +2,7 @@ package com.example.springreactive.controller;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
@@ -34,7 +35,9 @@ public class UserController {
 
 	@GetMapping("/get")
 	public Flux<ClientUser> getClientUser() {
-		return this.entityTemplate.select(ClientUser.class).all();
+		return this.entityTemplate.select(ClientUser.class)//
+				.matching(Query.empty().sort(Sort.by("userId")))//
+				.all();
 	}
 
 	@PostMapping("/add")

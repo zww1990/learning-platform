@@ -43,9 +43,9 @@ public class UserControllerTests {
 		try {
 			ClientUser user = new ClientUser()//
 					.setGender(1)//
-					.setPhoneNumber("1346579")//
-					.setUserId("1004")//
-					.setUsername("张三");
+					.setPhoneNumber("4444444")//
+					.setUserId("1003")//
+					.setUsername("张三疯");
 			System.err.println(this.webClient.post()//
 					.uri("/user/add")//
 					.contentType(MediaType.APPLICATION_JSON)//
@@ -80,9 +80,10 @@ public class UserControllerTests {
 	public void testUpdateClientUser() {
 		try {
 			ClientUser user = new ClientUser()//
+					.setSequence(2)//
 					.setGender(2)//
 					.setPhoneNumber("2222222")//
-					.setUserId("1002")//
+					.setUserId("1001")//
 					.setUsername("李四");
 			System.err.println(this.webClient.put()//
 					.uri("/user/update")//

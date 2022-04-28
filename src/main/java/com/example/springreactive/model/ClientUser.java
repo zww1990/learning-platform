@@ -1,6 +1,9 @@
 package com.example.springreactive.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +23,13 @@ import lombok.experimental.Accessors;
 @ToString
 public class ClientUser {
 	@Id
+	private Integer sequence;
 	private String userId;
 	private String username;
 	private String phoneNumber;
 	private Integer gender;
+	@ReadOnlyProperty
+	private LocalDateTime createdDate;
+	@ReadOnlyProperty
+	private LocalDateTime modifiedDate;
 }
