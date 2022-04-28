@@ -25,77 +25,61 @@ public class UserControllerTests {
 
 	@Test
 	public void testGetClientUser() {
-		try {
-			System.err.println(this.webClient.get()//
-					.uri("/user/get")//
-					.exchange()//
-					.expectStatus()//
-					.isOk()//
-					.expectBody(String.class)//
-					.returnResult());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		System.err.println(this.webClient.get()//
+				.uri("/user/get")//
+				.exchange()//
+				.expectStatus()//
+				.isOk()//
+				.expectBody(String.class)//
+				.returnResult());
 	}
 
 	@Test
 	public void testAddClientUser() {
-		try {
-			ClientUser user = new ClientUser()//
-					.setGender(0)//
-					.setPhoneNumber("5555555")//
-					.setUserId("1004")//
-					.setUsername("张无忌");
-			System.err.println(this.webClient.post()//
-					.uri("/user/add")//
-					.contentType(MediaType.APPLICATION_JSON)//
-					.bodyValue(user)//
-					.exchange()//
-					.expectStatus()//
-					.isOk()//
-					.expectBody(String.class)//
-					.returnResult());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ClientUser user = new ClientUser()//
+				.setGender(0)//
+				.setPhoneNumber("5555555")//
+				.setUserId("1004")//
+				.setUsername("张无忌");
+		System.err.println(this.webClient.post()//
+				.uri("/user/add")//
+				.contentType(MediaType.APPLICATION_JSON)//
+				.bodyValue(user)//
+				.exchange()//
+				.expectStatus()//
+				.isOk()//
+				.expectBody(String.class)//
+				.returnResult());
 	}
 
 	@Test
 	public void testDelClientUser() {
-		try {
-			String userId = "1001";
-			System.err.println(this.webClient.delete()//
-					.uri("/user/del/{userId}", userId)//
-					.exchange()//
-					.expectStatus()//
-					.isOk()//
-					.expectBody(String.class)//
-					.returnResult());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String userId = "1001";
+		System.err.println(this.webClient.delete()//
+				.uri("/user/del/{userId}", userId)//
+				.exchange()//
+				.expectStatus()//
+				.isOk()//
+				.expectBody(String.class)//
+				.returnResult());
 	}
 
 	@Test
 	public void testUpdateClientUser() {
-		try {
-			ClientUser user = new ClientUser()//
-					.setSequence(2)//
-					.setGender(0)//
-					.setPhoneNumber("99999999")//
-					.setUserId("1001")//
-					.setUsername("李小龙");
-			System.err.println(this.webClient.put()//
-					.uri("/user/update")//
-					.contentType(MediaType.APPLICATION_JSON)//
-					.bodyValue(user)//
-					.exchange()//
-					.expectStatus()//
-					.isOk()//
-					.expectBody(String.class)//
-					.returnResult());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		ClientUser user = new ClientUser()//
+				.setSequence(2)//
+				.setGender(0)//
+				.setPhoneNumber("99999999")//
+				.setUserId("1001")//
+				.setUsername("李小龙");
+		System.err.println(this.webClient.put()//
+				.uri("/user/update")//
+				.contentType(MediaType.APPLICATION_JSON)//
+				.bodyValue(user)//
+				.exchange()//
+				.expectStatus()//
+				.isOk()//
+				.expectBody(String.class)//
+				.returnResult());
 	}
 }
