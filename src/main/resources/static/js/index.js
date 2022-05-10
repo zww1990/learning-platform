@@ -1,9 +1,7 @@
 new Vue({
     el: '#app',
     vuetify: new Vuetify({
-        theme: {
-            dark: true
-        },
+        theme: { dark: true },
     }),
     data: {
         users: [],
@@ -56,16 +54,15 @@ new Vue({
         this.addresses = json1.data;
         let json2 = await(await fetch('/hello/users')).json();
         this.users = json2.data;
-        let addr = this.addresses[0];
-        this.users.forEach(user => {
+        this.users.forEach(user => this.initStaffClock(user));
+    },
+    methods: {
+		initStaffClock(user) {
+        	let addr = this.addresses[0];
             fetch('/hello/initstaffclock', {
                 method: 'POST',
-                body: JSON.stringify({
-                    ...user,
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                body: JSON.stringify({ ...user }),
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(res => {
@@ -74,9 +71,7 @@ new Vue({
                 user.staffClock = res.data;
                 user.addr = addr;
             });
-        });
-    },
-    methods: {
+		},
         rangeChange() {
             let tmp = this.user.dates;
             if (Date.parse(tmp[0]) > Date.parse(tmp[1])) {
@@ -109,9 +104,7 @@ new Vue({
                     ...user,
                     ...user.addr
                 }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(res => {
@@ -122,6 +115,7 @@ new Vue({
                 } else {
                     this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 补卡成功`;
                     this.snackbar.color = 'success';
+                    this.initStaffClock(user);
                 }
             });
         },
@@ -132,9 +126,7 @@ new Vue({
                     ...user,
                     ...user.addr
                 }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(res => {
@@ -173,17 +165,11 @@ new Vue({
                 fetch('/hello/saveaddress', {
                     method: 'POST',
                     body: JSON.stringify(this.addr),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 })
                 .then(res => res.json())
-                .then(res => {
-                    console.log(res);
-                });
-                this.addresses.push({
-                    ...this.addr
-                });
+                .then(res => console.log(res));
+                this.addresses.push({ ...this.addr });
                 this.closeAddr();
             }
         },
@@ -191,16 +177,12 @@ new Vue({
             fetch('/hello/selectappstaffclockloglist', {
                 method: 'POST',
                 body: JSON.stringify(user),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(res => {
                 this.logList = res.data || [];
-                this.user = {
-                    ...user
-                };
+                this.user = { ...user };
                 this.logDialog = true;
             });
         },
@@ -216,16 +198,12 @@ new Vue({
             fetch('/hello/selectdevicelist', {
                 method: 'POST',
                 body: JSON.stringify(user),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
             .then(res => {
                 this.deviceList = res.data.items || [];
-                this.user = {
-                    ...user
-                };
+                this.user = { ...user };
                 this.deviceDialog = true;
             });
         },
@@ -234,9 +212,7 @@ new Vue({
             fetch('/hello/resetbinddevice', {
                 method: 'POST',
                 body: formData,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
             .then(res => res.json())
             .then(res => {
