@@ -62,7 +62,6 @@ new Vue({
                 method: 'POST',
                 body: JSON.stringify({
                     ...user,
-                    ...addr
                 }),
                 headers: {
                     'Content-Type': 'application/json'
