@@ -21,6 +21,7 @@ spring:
     - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
     - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
 
 app:
   select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s 00:00:00' and '%s 23:59:59' ORDER BY create_time DESC"
