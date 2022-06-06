@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {Address, AppStaffClockLog, User} from "./user";
@@ -18,12 +18,12 @@ export class WelcomeComponent implements OnInit {
   isAddrVisible = false;
   title: string;
   logList: AppStaffClockLog[];
-  validateForm: FormGroup;
+  validateForm: UntypedFormGroup;
 
   constructor(private http: HttpClient,
               private messageService: NzMessageService,
               private notificationService: NzNotificationService,
-              private fb: FormBuilder) {
+              private fb: UntypedFormBuilder) {
     this.validateForm = this.fb.group({
       address: [null, [Validators.required]],
       longitude: [null, [Validators.required]],
