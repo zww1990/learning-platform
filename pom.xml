@@ -25,7 +25,7 @@
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
 		<nacos.client.version>2.1.0</nacos.client.version>
-    	<seata.version>1.4.2</seata.version>
+    	<seata.version>1.5.1</seata.version>
         <kryo.version>4.0.2</kryo.version>
         <kryo-serializers.version>0.45</kryo-serializers.version>
     	<druid.version>1.2.9</druid.version>
