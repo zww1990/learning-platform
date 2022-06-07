@@ -7,7 +7,7 @@ spring:
 #  main:
 #    allow-circular-references: true
   profiles:
-    active: local
+    active: dev
 
 
 mybatis:
