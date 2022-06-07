@@ -117,13 +117,6 @@ if $cygwin; then
   [ -n "$REPO" ] && REPO=`cygpath --path --windows "$REPO"`
 fi
 
-if [ "$SKYWALKING_ENABLE" = "true" ]; then
-  SKYWALKING_OPTS="-javaagent:${BASEDIR}/ext/apm-skywalking/skywalking-agent.jar -Dskywalking_config=${BASEDIR}/ext/apm-skywalking/config/agent.config -Dskywalking.logging.dir=${BASEDIR}/logs"
-  JAVA_OPT="${JAVA_OPT} $SKYWALKING_OPTS"
-  echo "apm-skywalking enabled opts: $SKYWALKING_OPTS"
-else
-  echo "apm-skywalking not enabled"
-fi
 JVM_XMX=$JVM_XMX
 JVM_XMS=$JVM_XMS
 JVM_XMN=$JVM_XMN
