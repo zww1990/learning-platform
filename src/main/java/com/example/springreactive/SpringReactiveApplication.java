@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  * @version v1
  * @since 2022年4月26日,下午5:53:23
  */
-@EnableFeignClients // 激活 @FeignClient
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 @Slf4j
