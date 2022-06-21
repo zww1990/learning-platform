@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -24,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
  * @version v1
  * @since 2022年4月26日,下午5:53:23
  */
+@EnableFeignClients // 激活 @FeignClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @Slf4j
 public class SpringReactiveApplication {
