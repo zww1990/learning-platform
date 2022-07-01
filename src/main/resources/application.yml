@@ -38,4 +38,8 @@ app:
     address: 石家庄桥西区物联网大厦c座
     longitude: 114.4414380
     latitude: 38.0165270
+  - id: 4
+    address: 河北省石家庄市裕华区长江街道黄河大道374号河北御芝林
+    longitude: 114.6223930
+    latitude: 38.0481220
 
