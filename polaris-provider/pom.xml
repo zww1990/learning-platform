@@ -32,6 +32,16 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
+		<!-- tencent cloud -->
+		<dependency>
+		    <groupId>com.tencent.cloud</groupId>
+		    <artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
+		</dependency>
+		<!-- caffeine -->
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
 		<!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
