@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demoprovider;
 
 import javax.annotation.Resource;
 
