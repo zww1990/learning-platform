@@ -4,3 +4,11 @@ server:
 spring:
   application:
     name: polaris-provider
+  cloud:
+    polaris:
+      address: grpc://183.47.111.80:8091
+      namespace: zww
+      enabled: true
+      discovery:
+        enabled: true
+        register: true
