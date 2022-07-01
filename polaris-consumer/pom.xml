@@ -40,12 +40,11 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+		<!-- tencent cloud -->
+		<dependency>
+		    <groupId>com.tencent.cloud</groupId>
+		    <artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
+		</dependency>
 		<!-- caffeine -->
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
@@ -56,6 +55,12 @@
 		    <groupId>io.github.openfeign</groupId>
 		    <artifactId>feign-httpclient</artifactId>
 		</dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
