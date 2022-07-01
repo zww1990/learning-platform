@@ -32,6 +32,10 @@
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
 		<!-- tencent cloud -->
 		<dependency>
 		    <groupId>com.tencent.cloud</groupId>
