@@ -19,13 +19,13 @@ public class DiscoveryCalleeController {
 
 	@GetMapping("/info")
 	public String info() {
-		log.info("Discovery Service Callee [{}] is called.", this.properties.getPort());
-		return String.format("Discovery Service Callee [%s] is called.", this.properties.getPort());
+		log.info("服务提供者[{}]的info方法被调用了。", this.properties.getPort());
+		return String.format("服务提供者[{}]的info方法被调用了。", this.properties.getPort());
 	}
 
 	@GetMapping("/sum")
 	public int sum(@RequestParam int value1, @RequestParam int value2) {
-		log.info("Discovery Service Callee is called and sum is {}.", value1 + value2);
+		log.info("服务提供者的sum方法调用结果是[{}]。", value1 + value2);
 		return value1 + value2;
 	}
 }
