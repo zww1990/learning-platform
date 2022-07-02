@@ -41,6 +41,10 @@
 		    <groupId>com.tencent.cloud</groupId>
 		    <artifactId>spring-cloud-starter-tencent-polaris-discovery</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.tencent.cloud</groupId>
+		    <artifactId>spring-cloud-starter-tencent-polaris-config</artifactId>
+		</dependency>
 		<!-- caffeine -->
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
