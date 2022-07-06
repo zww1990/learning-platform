@@ -20,7 +20,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<poi.version>3.17</poi.version>
-		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	
 	<dependencies>
@@ -128,17 +127,28 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			<!-- ↓构建过程中，跳过执行单元测试↓ -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- ↑构建过程中，跳过执行单元测试↑ -->
 		</plugins>
 	</build>
 </project>
