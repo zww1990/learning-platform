@@ -17,7 +17,6 @@
 	<description>Demo project for Spring Boot</description>
 	
 	<properties>
-		<maven.test.skip>true</maven.test.skip>
 		<java.version>1.8</java.version>
 		<spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
@@ -142,6 +141,15 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- ↓构建过程中，跳过执行单元测试↓ -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- ↑构建过程中，跳过执行单元测试↑ -->
 		</plugins>
 	</build>
 
