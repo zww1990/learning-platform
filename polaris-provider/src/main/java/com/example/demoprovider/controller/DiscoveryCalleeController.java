@@ -20,7 +20,7 @@ public class DiscoveryCalleeController {
 	@GetMapping("/info")
 	public String info() {
 		log.info("服务提供者[{}]的info方法被调用了。", this.properties.getPort());
-		return String.format("服务提供者[{}]的info方法被调用了。", this.properties.getPort());
+		return String.format("服务提供者[%s]的info方法被调用了。", this.properties.getPort());
 	}
 
 	@GetMapping("/sum")
