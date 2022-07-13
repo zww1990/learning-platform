@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<properties resource="./application.properties"/>
+	<classPathEntry location="D:\.m2\repository\com\oracle\jdbc\ojdbc8\19.3.0.0\ojdbc8-19.3.0.0.jar"/>
+	<!-- MyBatis3DynamicSql：动态sql，需jdk8以上支持 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 实体类序列化 -->
+		<plugin type="org.mybatis.generator.plugins.MySerializablePlugin"/>
+		<commentGenerator type="org.mybatis.generator.internal.MyDefaultCommentGenerator">
+			<property name="suppressAllComments" value="false"/><!-- 生成所有文档注释 -->
+			<property name="suppressDate" value="false"/><!-- 生成日期注释 -->
+			<property name="addRemarkComments" value="true"/><!-- 添加表、字段注释 -->
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/><!-- 格式化时间 -->
+			<property name="author" value="zhangweiwei"/><!-- 作者 -->
+			<property name="addSwaggerAnnotations" value="false"/><!-- 添加Swagger注解 -->
+		</commentGenerator>
+		<jdbcConnection 
+			driverClass="${spring.datasource.driver-class-name}" 
+			connectionURL="${spring.datasource.url}" 
+			userId="${spring.datasource.username}" 
+			password="${spring.datasource.password}">
+			<property name="remarksReporting" value="true"/><!-- 允许读取表、字段注释信息 -->
+		</jdbcConnection>
+		<javaTypeResolver type="org.mybatis.generator.internal.types.MyJavaTypeResolverImpl">
+			<property name="forceBigDecimals" value="false"/><!-- 使用java.math.BigDecimal -->
+			<property name="useJSR310Types" value="false"/><!-- 使用JSR-310数据类型 -->
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="${java.model.package}" targetProject="./src/main/java"/>
+		<sqlMapGenerator targetPackage="${sql.map.package}" targetProject="./src/main/java"/>
+		<!-- ANNOTATEDMAPPER：全注解，
+			XMLMAPPER：全XML文件，
+			MIXEDMAPPER：注解和XML混合 -->
+		<javaClientGenerator targetPackage="${java.client.package}" targetProject="./src/main/java" type="XMLMAPPER"/>
+		<table tableName="BDM_TRAFFIC" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">
+			<!-- 主键生成策略 -->
+			<!-- <generatedKey column="SHOP_ID" sqlStatement="select BDM_SHOPS_SEQ.nextval from dual"/> -->
+		</table>
+	</context>
+</generatorConfiguration>
