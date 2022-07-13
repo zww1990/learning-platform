@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>首页</title>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+	</head>
+	<body>
+		<h1>你好世界！！！</h1>
+		<div th:text="${session[SPRING_SECURITY_CONTEXT].authentication.principal}"></div>
+		<div th:text="${session[SPRING_SECURITY_CONTEXT].authentication.authorities}"></div>
+		<div th:text="${session[SPRING_SECURITY_CONTEXT].authentication.name}"></div>
+		<div th:text="${session[SPRING_SECURITY_CONTEXT].authentication.details}"></div>
+	</body>
+</html>
