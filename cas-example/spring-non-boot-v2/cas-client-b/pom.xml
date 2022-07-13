@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.example</groupId>
+	<artifactId>cas-client-b</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cas-client-b</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+		<maven.test.skip>true</maven.test.skip>
+		<java.cas.client.version>3.6.1</java.cas.client.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.2.4.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- servlet api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- 核心功能，包括CAS认证/验证过滤器。 -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-core</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency>
+		
+		<!-- Tomcat 6集成由此依赖提供 -->
+		<!-- <dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-tomcat-v6</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency> -->
+		
+		<!-- Tomcat 7由此依赖提供 -->
+		<!-- <dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-integration-tomcat-v7</artifactId>
+			<version>${java.cas.client.version}</version>
+		</dependency> -->
+		
+		<!-- Tomcat 8.0.x由此依赖提供 -->
+		<!-- <dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v8</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency> -->
+		
+		<!-- Tomcat 8.5.x由此依赖关系提供 -->
+		<!-- <dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v85</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency> -->
+		
+		<!-- Tomcat 9.0.x 由此依赖项提供 -->
+		<!-- <dependency>
+		   <groupId>org.jasig.cas.client</groupId>
+		   <artifactId>cas-client-integration-tomcat-v90</artifactId>
+		   <version>${java.cas.client.version}</version>
+		</dependency> -->
+
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-indexer</artifactId>
+			<optional>true</optional>
+		</dependency>
+		
+		<!-- Log4j -->
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-jcl</artifactId>
+		</dependency>
+		
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${project.name}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+            <plugin>
+			    <groupId>org.eclipse.jetty</groupId>
+			    <artifactId>jetty-maven-plugin</artifactId>
+			    <version>9.4.25.v20191220</version>
+			    <configuration>
+			    	<webApp>
+			    		<contextPath>/client-b</contextPath>
+			    	</webApp>
+			    	<httpConnector>
+			    		<port>8082</port>
+			    	</httpConnector>
+			    </configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+</project>
