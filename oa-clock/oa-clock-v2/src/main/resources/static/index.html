@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+		<title>hello, mobile</title>
+		<link rel="icon" type="image/x-icon" href="favicon.ico">
+		<link rel="stylesheet" href="vant/index.css"/>
+		<style type="text/css">
+			:root {
+				--van-field-label-width: 4.2em;
+			}
+			.van-icon__image {
+				float: left;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<br>
+			<van-row gutter="20" justify="center">
+			  <van-col span="8">
+				<van-button type="primary" @click="openStaffDialog()">添加员工</van-button>
+			  </van-col>
+			  <van-col span="8">
+				<van-button type="primary" @click="openAddressDialog()">添加地址</van-button>
+			  </van-col>
+			</van-row>
+			<van-row>
+				<van-col span="24">
+					<van-divider />
+				</van-col>
+			</van-row>
+			<van-row>
+				<van-col span="24">
+					<van-tabs 
+						v-model:active="activeIndex" 
+						sticky 
+						swipeable 
+						animated 
+						@click-tab="onClickTab"
+						@rendered="onRenderedTab">
+					  <van-tab v-for="(temp, index) in users" :key="index">
+					  	<template #title>
+						  	<van-icon name="icons/icon-1126.png"/>
+						  	<b>{{ temp.username }}</b>
+					  	</template>
+					    <van-form @submit="gotoWork(index)">
+						  <van-cell-group inset>
+						    <van-field v-model="temp.userNo" name="userNo" label="员工编号" readonly/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field v-model="temp.username" name="username" label="员工姓名" readonly/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field
+							  v-model="temp.address"
+							  is-link
+							  readonly
+							  name="address"
+							  label="公司地址"
+							  placeholder="点击选择公司地址"
+							  @click="openPicker(index)"/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field :model-value="temp.staffClock?.clockTimeMin" label="上班时间" readonly/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field :model-value="temp.staffClock?.clockWorkOnStatusName" label="上班状态" readonly/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field :model-value="temp.staffClock?.clockTimeMax" label="下班时间" readonly/>
+						  </van-cell-group>
+						  <van-cell-group inset>
+						    <van-field :model-value="temp.staffClock?.clockWorkOffStatusName" label="下班状态" readonly/>
+						  </van-cell-group>
+						  <div style="margin: 16px;" v-if="temp.status === 1">
+						    <van-button round block type="primary" native-type="submit">打卡</van-button>
+							<br>
+						    <van-button round block type="success" native-type="button" @click="showList(index)">
+						    	打卡记录
+						    </van-button>
+						  </div>
+						</van-form>
+					  </van-tab>
+					</van-tabs>
+				</van-col>
+			</van-row>
+			<van-popup v-model:show="showPicker" position="bottom" round :lazy-render="false">
+			  <van-picker
+			    :columns="pickerColumns"
+			    @confirm="pickerConfirm"
+			    @cancel="pickerCancel"
+			    default-index="0"
+			    ref="picker"/>
+			</van-popup>
+			<van-popup v-model:show="showSteps" position="top" round style="height:90%">
+			    <van-steps direction="vertical" active="0">
+				  <van-step v-for="(log, index) in logList" :key="index">
+				    <h3>员工: 【{{log.staff_no}}】{{log.username}}</h3>
+				    <p>
+					    打卡时间: {{log.clock_time}}<br>
+					    打卡地址: {{log.address}}<br>
+					    经度: {{log.longitude}}<br>
+					    纬度: {{log.latitude}}<br>
+					    打卡类型: {{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}
+				    </p>
+				  </van-step>
+				</van-steps>
+			</van-popup>
+			<van-dialog 
+				v-model:show="showStaffDialog" 
+				title="添加员工" 
+				show-cancel-button 
+				theme="round-button"
+				@confirm="staffDialogConfirm()"
+				@cancel="staffDialogCancel()"
+				:before-close="staffDialogClose">
+			  <van-form ref="staffForm" @submit="staffFormSubmit" @failed="staffFormFailed">
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="user.userNo"
+				      name="userNo"
+				      label="编号"
+				      placeholder="请输入员工编号"
+				      :rules="[{ required: true, message: '请输入员工编号' }]"
+				      required
+				      colon
+				      clearable/>
+				  </van-cell-group>
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="user.username"
+				      name="username"
+				      label="姓名"
+				      placeholder="请输入员工姓名"
+				      :rules="[{ required: true, message: '请输入员工姓名' }]"
+				      required
+				      colon
+				      clearable/>
+				  </van-cell-group>
+			  </van-form>
+			</van-dialog>
+			<van-dialog 
+				v-model:show="showAddressDialog" 
+				title="添加地址" 
+				show-cancel-button 
+				theme="round-button"
+				@confirm="addressDialogConfirm()"
+				@cancel="addressDialogCancel()"
+				:before-close="addressDialogClose">
+			  <van-form ref="addressForm" @submit="addressFormSubmit" @failed="addressFormFailed">
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.longitude"
+				      name="longitude"
+				      label="经度"
+				      placeholder="请输入经度"
+				      :rules="[{ required: true, message: '请输入经度' }]"
+				      required
+				      colon
+				      clearable
+				      type="number"/>
+				  </van-cell-group>
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.latitude"
+				      name="latitude"
+				      label="纬度"
+				      placeholder="请输入纬度"
+				      :rules="[{ required: true, message: '请输入纬度' }]"
+				      required
+				      colon
+				      clearable
+				      type="number"/>
+				  </van-cell-group>
+				  <van-cell-group inset style="height: 68px;">
+				    <van-field
+				      v-model="addr.address"
+				      name="address"
+				      label="地址"
+				      placeholder="请输入地址"
+				      :rules="[{ required: true, message: '请输入地址' }]"
+				      required
+				      colon
+				      clearable/>
+				  </van-cell-group>
+			  </van-form>
+			</van-dialog>
+		</div>
+	</body>
+	<script src="vue3/vue.global.prod.js"></script>
+	<script src="vant/vant.min.js"></script>
+	<script src="touch-emulator/index.min.js"></script>
+	<script type="text/javascript">
+		Vue.createApp({
+		  data() {
+		    return {
+		    	showStaffDialog: false,
+		    	showAddressDialog: false,
+		    	showPicker: false,
+		    	showSteps: false,
+		    	user: {},
+		    	userIndex: {},
+		    	users: [],
+		    	addr: {},
+		    	addresses: [],
+		    	pickerColumns: [],
+		    	logList: [],
+		    	activeIndex: 0,
+		    }
+		  },
+		  created() {
+		  	fetch('/hello/addresses')
+			  	.then(res => res.json())
+			  	.then(res => {
+					this.addresses = res.data;
+					this.pickerColumns = this.addresses.map(m => m.address);
+			  	});
+			fetch('/hello/users')
+				.then(res => res.json())
+				.then(res => {
+					this.users = res.data;
+				});
+		  },
+		  methods:{
+			  //标签页切换
+			  onClickTab({ name, title, event, disabled }){
+				  /* this.users[name] = {...this.users[name], ...this.addresses[0]};
+				  fetch('/hello/initStaffClock',{
+				      method: 'POST',
+				      body: JSON.stringify(this.users[name]),
+				      headers: new Headers({'Content-Type': 'application/json'})
+				  })
+				  .then(res => res.json())
+				  .then(res => {
+					  this.users[name].status = res.status;
+					  this.users[name].staffClock = res.data;
+					  if(res.status !== 1){
+						  vant.Toast.fail(res.message);
+					  }
+				  }); */
+			  },
+			  //标签内容首次渲染时触发
+			  onRenderedTab(name, title){
+				  this.users[name] = {...this.users[name], ...this.addresses[0]};
+				  fetch('/hello/initStaffClock',{
+				      method: 'POST',
+				      body: JSON.stringify(this.users[name]),
+				      headers: new Headers({'Content-Type': 'application/json'})
+				  })
+				  .then(res => res.json())
+				  .then(res => {
+					  this.users[name].status = res.status;
+					  this.users[name].staffClock = res.data;
+					  if(res.status !== 1){
+						  vant.Toast.fail(res.message);
+					  }
+				  });
+			  },
+			  //地址选择器确认按钮
+			  pickerConfirm(value, index){
+				  //关闭地址选择器
+				  this.showPicker = false;
+				  this.users[this.userIndex] = {...this.users[this.userIndex], ...this.addresses[index]};
+			  },
+			  //地址选择器取消按钮
+			  pickerCancel(value, index){
+				  //关闭地址选择器
+				  this.showPicker = false;
+				  this.$refs.picker.setColumnIndex(0, 0);
+			  },
+			  //打开地址选择器
+			  openPicker(index){
+				  this.userIndex = index;
+				  this.showPicker = true;
+			  },
+			  //打开员工对话框
+			  openStaffDialog(){
+				  this.showStaffDialog = true;
+			  },
+			  //员工对话框确认按钮
+			  staffDialogConfirm(){
+				  //员工表单提交
+				  this.$refs.staffForm.submit();
+			  },
+			  //员工对话框取消按钮
+			  staffDialogCancel(){
+				  //员工表单重置验证
+				  this.$refs.staffForm.resetValidation();
+				  this.user = {};
+			  },
+			  //员工表单验证通过
+			  staffFormSubmit(values){
+				  //关闭员工对话框
+				  this.showStaffDialog = false;
+				  this.users.push({...values, ...this.addresses[0]});
+			  },
+			  //员工表单验证不通过
+			  staffFormFailed({ values, errors }){
+				  console.log(values, errors);
+				  //显示员工对话框
+				  this.showStaffDialog = true;
+			  },
+			  //员工对话框关闭之前
+			  staffDialogClose(action){
+				  //如果是取消按钮,始终允许关闭
+				  return action === 'cancel' ? true : !this.showStaffDialog;
+			  },
+			  //打开地址对话框
+			  openAddressDialog(){
+				  this.showAddressDialog = true;
+			  },
+			  //地址对话框确认按钮
+			  addressDialogConfirm(){
+				  //地址表单提交
+				  this.$refs.addressForm.submit();
+			  },
+			  //地址对话框取消按钮
+			  addressDialogCancel(){
+				  //地址表单重置验证
+				  this.$refs.addressForm.resetValidation();
+				  this.addr = {};
+			  },
+			  //地址表单验证通过
+			  addressFormSubmit(values){
+				  values.id = this.addresses.length + 1;
+				  this.addresses.push({...values});
+				  this.pickerColumns.push(values.address);
+				  this.$refs.picker.setColumnValues(0, this.pickerColumns);
+				  //关闭地址对话框
+				  this.showAddressDialog = false;
+				  this.addr = {};
+				  fetch('/hello/saveaddress',{
+					  method: 'POST',
+					  body: JSON.stringify(values),
+					  headers: new Headers({'Content-Type': 'application/json'})
+				  })
+				  .then(res => res.json())
+				  .then(res => {
+					  console.log(res);
+				  });
+			  },
+			  //地址表单验证不通过
+			  addressFormFailed({ values, errors }){
+				  console.log(values, errors);
+				  //显示地址对话框
+				  this.showAddressDialog = true;
+			  },
+			  //地址对话框关闭之前
+			  addressDialogClose(action){
+				  //如果是取消按钮,始终允许关闭
+				  return action === 'cancel' ? true : !this.showAddressDialog;
+			  },
+			  //打卡按钮
+			  gotoWork(index){
+				  fetch('/hello/userLoginAndStaffClock', {
+					  method: 'POST',
+					  body: JSON.stringify(this.users[index]),
+					  headers: new Headers({'Content-Type': 'application/json'})
+				  })
+				  .then(res => res.json())
+				  .then(res => {
+					  this.users[index].status = res.status;
+					  this.users[index].staffClock = res.data;
+					  if(res.status !== 1){
+						  vant.Toast.fail(res.message);
+					  }
+				  });
+			  },
+			  //打卡记录按钮
+			  showList(index){
+				  fetch('/hello/selectAppStaffClockLogList',{
+					  method: 'POST',
+					  body: JSON.stringify(this.users[index]),
+					  headers: new Headers({'Content-Type': 'application/json'})
+				  })
+				  .then(res => res.json())
+				  .then(res => {
+					  this.logList = res.data || [];
+					  this.showSteps = true;
+				  });
+			  }
+		  }
+		})
+		.use(vant)
+		.use(vant.Lazyload)
+		.mount('#app');
+	</script>
+</html>
