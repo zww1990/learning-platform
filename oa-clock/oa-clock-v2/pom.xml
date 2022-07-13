@@ -67,7 +67,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>NBApp-mobile</finalName>
+		<finalName>NBApp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
