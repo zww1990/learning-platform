@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="~{common/header :: head}"></head>
+	<body>
+		<div class="container">
+			<div class="panel panel-success">
+				<div class="panel-body">
+				    <div th:replace="~{common/banner :: navbar}"></div>
+					<div class="result alert alert-success">
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> LDAP创建查询平台</p>
+					</div>
+					<div class="result alert alert-warning" th:if="${message != null}">
+						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
+					</div>
+					<table style="width: 100%;">
+						<tbody>
+							<tr>
+								<td width="35%">
+									<div class="help alert alert-warning">
+										<p>创建账号必须符合以下条件:</p>
+										<ul>
+											<li>uidNumber不能为空</li>
+											<li>uid不能为空</li>
+											<li>email不能为空</li>
+											<li>givenName不能为空</li>
+											<li>gidNumber不能为空</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+										</ul>
+									</div>
+								</td>
+								<td>
+									<div class="alert alert-info">
+										<form th:action="@{/admin/sendmail}" method="post" class="form-horizontal">
+										    <div class="form-group">
+										        <label for="uidNumber" class="col-sm-4 control-label">uidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="uidNumber" id="uidNumber" th:value="${param.uidNumber}" class="form-control" placeholder="HR系统员工编号" autocomplete="off" required="required" style="width: 230px;"/>
+										                <button type="button" class="btn btn-info" id="querywaibao" style="margin-left: 5px;">查询外包人员可用编号</button>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="uid" class="col-sm-4 control-label">uid</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="text" name="uid" id="uid" th:value="${param.uid}" class="form-control" placeholder="唯一标识符" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="mail" class="col-sm-4 control-label">email</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
+										                <input type="text" name="mail" id="mail" th:value="${param.mail}" class="form-control" placeholder="电子邮箱地址" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="givenName" class="col-sm-4 control-label">givenName</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="text" name="givenName" id="givenName" th:value="${param.givenName}" class="form-control" placeholder="中文姓名" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="gidNumber" class="col-sm-4 control-label">gidNumber</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="number" min="1" name="gidNumber" id="gidNumber" th:value="${param.gidNumber?:501}" class="form-control" placeholder="组编号，默认501" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="col-sm-offset-4 col-sm-8">
+										            <button type="submit" class="btn btn-success">
+										                <i class="fa fa-fw fa-check-square-o"></i> 提交
+										            </button>
+										        </div>
+										    </div>
+										</form>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<span th:replace="~{common/script :: jquery}"></span>
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		        // 菜单链接弹出窗口
+		        $('[data-toggle="menu-popover"]').popover({
+		            trigger: 'hover',
+		            placement: 'bottom',
+		            container: 'body' // 允许弹出窗口大于菜单按钮
+		        });
+		        function checkuid(){
+		        	let _this=$('#uid');
+		        	let parent=_this.parent();
+		        	let uid=_this.val();
+        			parent.nextAll().remove();
+		        	if(uid.length>0){
+		        		$.get('[[${#request.contextPath}]]/admin/checkuid',{uid:uid},function(data){
+		        			if (data.status) {
+		        				parent.after('<div style="color: red;font-size: 12px;font-weight: bold;">'+data.message+'</div>');
+							} else {
+								parent.after('<div style="color: green;font-size: 12px;font-weight: bold;">'+data.message+'</div>');
+							}
+		        		});
+		        	}
+		        }
+		        function queryuser(){
+		        	let _this=$('#uid');
+		        	let uidNumber=$('#uidNumber').val();
+		        	if (uidNumber.length>0) {
+						$.get('[[${#request.contextPath}]]/admin/queryuser',{userId:uidNumber},function(data){
+							if (data.status) {
+								let COMP_EMAIL=data.COMP_EMAIL.split('@');
+								$('#givenName').val(data.USER_NAME);
+								_this.val(COMP_EMAIL[0]);
+								$('#mail').val(data.COMP_EMAIL);
+								checkuid();
+							}else {
+								$('#givenName').val('');
+								_this.val('');
+					        	_this.parent().nextAll().remove();
+								$('#mail').val('');
+							}
+		        		});
+					}
+		        }
+		        $('#uid').on('input propertychange',$.debounce(500,checkuid));
+		        $('#uidNumber').on('input propertychange',$.debounce(500,queryuser));
+		        $('#querywaibao').click(function(){
+		        	let _this=$('#uid');
+		        	$.get('[[${#request.contextPath}]]/admin/querywaibao',{},function(resp){
+		        		$('#uidNumber').val(resp.data);
+						$('#givenName').val('');
+						$('#mail').val('');
+						_this.val('');
+			        	_this.parent().nextAll().remove();
+		        	});
+		        });
+		    });
+		</script>
+	</body>
+</html>

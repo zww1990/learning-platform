@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<body>
+	    <div class="navbar-wrapper" th:fragment="navbar">
+	        <div class="navbar navbar-default navbar-static-top" role="navigation">
+	          <div class="container-fluid">
+	            <div class="navbar-header">
+	              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	                <span class="sr-only">切换导航</span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	                <span class="icon-bar"></span>
+	              </button>
+	              <a class="navbar-brand" th:href="@{/}">
+	              	<i class="fa fa-fw fa-home"></i> 自助密码服务
+	              </a>
+	            </div>
+	            <div class="navbar-collapse collapse">
+	              <ul class="nav navbar-nav">
+	                <li class="" th:if="${session.admin != null}">
+	                  <a th:href="@{/admin}" data-toggle="menu-popover" data-content="只有管理员才能访问的页面">
+	                  	<i class="fa fa-fw fa-lock"></i> 管理员页面
+	                  </a>
+	                </li>
+	              </ul>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head th:fragment="head">
+		<title>自助密码服务</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/self-service-password.css}" />
+		<link th:href="@{/images/favicon.ico}" rel="icon" type="image/x-icon" />
+		<link th:href="@{/images/favicon.ico}" rel="shortcut icon" />
+		<style type="text/css">
+			html, body {
+	         background: url("[[${#request.contextPath}]]/images/unsplash-[[${image}]].jpeg") no-repeat center fixed;
+	         background-size: cover;
+	       }
+		</style>
+	</head>
+</html>
