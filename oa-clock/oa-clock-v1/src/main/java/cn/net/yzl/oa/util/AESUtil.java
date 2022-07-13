@@ -6,20 +6,13 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/main/java/cn/net/yzl/oa/util/AESUtil.java
 import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-========
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
->>>>>>>> t2:oa-clock-v2/src/main/java/cn/net/yzl/oa/util/AESUtil.java
 public class AESUtil {
-	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
+
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATEFORMAT = "yyyy-MM-dd";

@@ -59,34 +59,6 @@ public class HelloController {
 
 	@GetMapping("/addresses")
 	public ResponseBody<List<Address>> getAddresses() {
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/main/java/com/example/test/controller/HelloController.java
-========
-		Path path = Paths.get("addresses.json");
-		if (Files.isReadable(path) && Files.isWritable(path)) {
-			try {
-				List<Address> list = this.objectMapper.readValue(Files.newInputStream(path),
-						this.objectMapper.getTypeFactory().constructParametricType(List.class, Address.class));
-				log.info("从本地磁盘中加载配置成功==>>{}", path);
-				if (list.isEmpty()) {
-					list = this.properties.getAddresses();
-					Files.write(path, this.objectMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(list),
-							StandardOpenOption.WRITE);
-				} else {
-					this.properties.setAddresses(list);
-				}
-				return new ResponseBody<List<Address>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(list);
-			} catch (IOException e) {
-				log.warn("从本地磁盘中加载配置失败==>>{}", path);
-				return new ResponseBody<List<Address>>()//
-						.setCode(HttpStatus.OK.value())//
-						.setStatus(1)//
-						.setData(this.properties.getAddresses());
-			}
-		}
->>>>>>>> t3:oa-clock-v3/src/main/java/com/example/test/controller/HelloController.java
 		log.info("从当前应用中加载配置成功");
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
@@ -122,19 +94,6 @@ public class HelloController {
 		}
 		log.info("{}", address);
 		this.properties.getAddresses().add(address);
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/main/java/com/example/test/controller/HelloController.java
-========
-		Path path = Paths.get("addresses.json");
-		try {
-			Files.write(path,
-					this.objectMapper.writerWithDefaultPrettyPrinter()
-							.writeValueAsBytes(this.properties.getAddresses()),
-					StandardOpenOption.WRITE, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-			log.info("写入文件成功==>>{}", path);
-		} catch (IOException e) {
-			log.warn("写入文件失败==>>{}", path);
-		}
->>>>>>>> t3:oa-clock-v3/src/main/java/com/example/test/controller/HelloController.java
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(1);

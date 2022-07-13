@@ -21,10 +21,7 @@ public class ApplicationProperties {
 	private String initStaffClockUrl;
 	private String deviceListUrl;
 	private String resetBindDeviceIdUrl;
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/main/java/com/example/test/model/ApplicationProperties.java
 	private String createOaAttendUrl;
-========
->>>>>>>> t3:oa-clock-v3/src/main/java/com/example/test/model/ApplicationProperties.java
 	private String biSqlExecUrl;
 	private Integer biSqlSourceId;
 	@ToString.Exclude
