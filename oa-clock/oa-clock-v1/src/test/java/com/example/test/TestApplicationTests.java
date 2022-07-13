@@ -48,9 +48,5 @@ public class TestApplicationTests {
 			e.printStackTrace();
 		}
 	}
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/test/java/com/example/test/TestApplicationTests.java
 	
-========
-
->>>>>>>> t2:oa-clock-v2/src/test/java/com/example/test/TestApplicationTests.java
 }
