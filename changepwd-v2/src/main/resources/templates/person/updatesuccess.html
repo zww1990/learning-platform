@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="~{common/header :: head}"></head>
+	<body>
+		<div class="container">
+			<div class="panel panel-success">
+				<div class="panel-body">
+				    <div th:replace="~{common/banner :: navbar}"></div>
+					<a th:href="@{/}" alt="首页">
+						<img th:src="@{/images/ltb-logo.png}" alt="图标" class="logo img-responsive center-block" />
+					</a>
+					<div class="result alert alert-success">
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 您的密码修改成功！</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span th:replace="~{common/script :: jquery}"></span>
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		        // 菜单链接弹出窗口
+		        $('[data-toggle="menu-popover"]').popover({
+		            trigger: 'hover',
+		            placement: 'bottom',
+		            container: 'body' // 允许弹出窗口大于菜单按钮
+		        });
+		    });
+		</script>
+	</body>
+</html>

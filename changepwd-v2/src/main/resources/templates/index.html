@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="~{common/header :: head}"></head>
+	<body>
+		<div class="container">
+			<div class="panel panel-success">
+				<div class="panel-body">
+				    <div th:replace="~{common/banner :: navbar}"></div>
+					<div class="result alert alert-success">
+						<p><i class="fa fa-fw fa-check-square" aria-hidden="true"></i> 修改您的密码</p>
+					</div>
+					<div class="help alert alert-warning">
+						<p>
+							<i class="fa fa-fw fa-info-circle"></i> 输入您的旧密码并设置新密码.
+						</p>
+						<p>忘记密码?</p>
+						<ul>
+							<li><a th:href="@{/person/emailpage}">通过邮件发送密码重置链接</a></li>
+						</ul>
+					</div>
+					<div class="result alert alert-warning" th:if="${message != null}">
+						<p><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> <span th:text="${message}"></span></p>
+					</div>
+					<table style="width: 100%;">
+						<tbody>
+							<tr>
+								<td width="35%">
+									<div class="help alert alert-warning">
+										<p>您的新密码必须符合以下条件:</p>
+										<ul>
+											<li>最小长度:6</li>
+											<li>最大长度:14</li>
+											<li>最少小写字母个数:1</li>
+											<li>最少大写字母个数:1</li>
+											<li>最少数字个数:1</li>
+											<li>最少字符类型种类:3</li>
+											<li>您的新密码不能与旧密码相同</li>
+											<li>您的新密码不能与您的用户名相同</li>
+											<li style="list-style: none;">&nbsp;</li>
+											<li style="list-style: none;">&nbsp;</li>
+										</ul>
+									</div>
+								</td>
+								<td>
+									<div class="alert alert-info">
+										<form th:action="@{/person/update}" method="post" class="form-horizontal">
+										    <div class="form-group">
+										        <label for="username" class="col-sm-4 control-label">用户名</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+										                <input type="text" name="username" id="username" th:value="${param.username}" class="form-control" placeholder="用户名" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="password" class="col-sm-4 control-label">旧密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="password" id="password" th:value="${param.password}" class="form-control" placeholder="旧密码" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="newpassword" class="col-sm-4 control-label">新密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="newpassword" id="newpassword" th:value="${param.newpassword}" class="form-control" placeholder="新密码" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <label for="repassword" class="col-sm-4 control-label">确认密码</label>
+										        <div class="col-sm-8">
+										            <div class="input-group">
+										                <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+										                <input type="password" name="repassword" id="repassword" th:value="${param.repassword}" class="form-control" placeholder="确认密码" autocomplete="off" required="required"/>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="form-group">
+										        <div class="col-sm-offset-4 col-sm-8">
+										            <button type="submit" class="btn btn-success">
+										                <i class="fa fa-fw fa-check-square-o"></i> 提交
+										            </button>
+										        </div>
+										    </div>
+										</form>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<span th:replace="~{common/script :: jquery}"></span>
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		        // 菜单链接弹出窗口
+		        $('[data-toggle="menu-popover"]').popover({
+		            trigger: 'hover',
+		            placement: 'bottom',
+		            container: 'body' // 允许弹出窗口大于菜单按钮
+		        });
+		    });
+		</script>
+	</body>
+</html>
