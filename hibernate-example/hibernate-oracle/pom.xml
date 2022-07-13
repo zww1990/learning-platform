@@ -10,11 +10,11 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>hibernate5-oracle</artifactId>
+	<artifactId>hibernate-oracle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>hibernate5-oracle</name>
+	<name>hibernate-oracle</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
