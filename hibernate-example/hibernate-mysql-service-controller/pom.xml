@@ -5,24 +5,31 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.0</version>
+		<version>2.0.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>hibernate5-mysql</artifactId>
+	<artifactId>hibernate-mysql-service-controller</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>hibernate5-mysql</name>
+	<name>hibernate-mysql-service-controller</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.test.skip>true</maven.test.skip>
-		<java.version>1.8</java.version>
+		<java.version>10</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -31,7 +38,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -44,15 +50,15 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-	      <groupId>org.springframework.boot</groupId>
-	      <artifactId>spring-boot-starter-test</artifactId>
-	      <scope>test</scope>
-	    </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.13.1</version>
+			<version>1.11.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -60,11 +66,33 @@
 			<version>2.5</version>
 		</dependency>
 		
+		<!-- ↓JDK9以上版本需要添加此依赖↓ -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
+		<dependency>
+		    <groupId>com.sun.xml.bind</groupId>
+		    <artifactId>jaxb-impl</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.xml.bind</groupId>
+		    <artifactId>jaxb-core</artifactId>
+		    <version>2.3.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>javax.activation-api</artifactId>
+		    <version>1.2.0</version>
+		</dependency>
+		<!-- ↑JDK9以上版本需要添加此依赖↑ -->
+		
 		<!-- ↓hibernate tools需要添加此依赖↓ -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-tools</artifactId>
-			<version>${hibernate.version}</version>
+			<version>5.2.11.Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.eclipse.jdt</groupId>
@@ -76,7 +104,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
