@@ -2,7 +2,6 @@ package cn.net.yzl.oa.entity;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,10 +22,12 @@ public enum ClockWorkStatus {
 	private String name;
 
 	public static String codeToName(Integer code) {
-		return Optional.ofNullable(code)
-				.map(m -> Arrays.stream(values())
-						.collect(Collectors.toMap(ClockWorkStatus::getCode, ClockWorkStatus::getName))
-						.getOrDefault(code, code.toString()))
+		return Optional.ofNullable(code)// NOSONAR
+				.map(m -> Arrays.stream(values())// NOSONAR
+						.filter(p -> p.code.equals(m))// NOSONAR
+						.findFirst()// NOSONAR
+						.map(ClockWorkStatus::getName)// NOSONAR
+						.orElse(null))// NOSONAR
 				.orElse(null);
 	}
 }
