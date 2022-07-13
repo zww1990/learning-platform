@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: reactive-provider
+  sql:
+    init:
+      mode: never
+      enabled: false
+  r2dbc:
+    url: r2dbc:mysql://192.168.32.33:3306/seata_client?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: zww
+    password: 1qaz2wsx
+  cloud:
+    nacos:
+      server-addr: 192.168.32.33:8848
+      username: nacos
+      password: Yzl@2020
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+  elasticsearch:
+    uris:
+    - http://192.168.32.145:9200
+    - http://192.168.32.146:9200
+    - http://192.168.32.147:9200
+    username: elastic
+    password: 123456
+    socket-timeout: 10s
+    connection-timeout: 1s
+
+feign:
+  httpclient:
+    enabled: true
