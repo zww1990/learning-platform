@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>确认注销？</title>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+	    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" >
+	    <link th:href="@{/css/signin.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="container">
+			<form class="form-signin" method="post" th:action="@{/logout}">
+				<h2 class="form-signin-heading">您确定要注销吗？</h2>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">注销</button>
+			</form>
+		</div>
+	</body>
+</html>

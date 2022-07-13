@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <title>AJAX登录</title>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
+	    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" >
+	    <link th:href="@{/css/signin.css}" rel="stylesheet" />
+	    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+	    <script type="text/javascript" th:src="@{/js/jquery.cookie.min.js}"></script>
+	</head>
+	<body>
+    	<div class="container">
+     		<form class="form-signin" id="login_form">
+       			<h2 class="form-signin-heading">请登录</h2>
+       			<p>
+         			<label for="username" class="sr-only">用户名</label>
+         			<input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus autocomplete="off">
+       			</p>
+       			<p>
+         			<label for="password" class="sr-only">密码</label>
+         			<input type="password" id="password" name="password" class="form-control" placeholder="密码" required autocomplete="off">
+       			</p>
+       			<p style="display: flex;align-items: center;">
+         			<label for="captcha" class="sr-only">验证码</label>
+         			<input type="text" id="captcha" name="captcha" class="form-control" placeholder="验证码" required autocomplete="off" style="width: 170px;margin-right: 20px;">
+         			<img id="captcha_img" alt="图片验证码" th:src="@{/captcha}" title="点我重新生成验证码" style="cursor: pointer;">
+       			</p>
+       			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+     		</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			let contextPath='[[${#request.contextPath}]]';
+			$('#captcha_img').click(function(){
+				this.src=contextPath+'/captcha?x='+Math.random();
+			});
+			$('#login_form').submit(function(){
+				let arr=$(this).serializeArray();
+				let map=new Map(arr.map(i=>[i.name,i.value]));
+				map.set('_csrf',$.cookie('XSRF-TOKEN'));
+				let param=strMapToObj(map);
+				$.post(contextPath+'/login',param,function(data){
+					console.log(data);
+				});
+				return false;
+			});
+			function strMapToObj(strMap) {
+			  let obj = Object.create(null);
+			  for (let [k,v] of strMap) {
+			    obj[k] = v;
+			  }
+			  return obj;
+			}
+		});
+	</script>
+</html>
