@@ -1,0 +1,23 @@
+delete from QRTZ_FIRED_TRIGGERS;
+delete from QRTZ_PAUSED_TRIGGER_GRPS;
+delete from QRTZ_SCHEDULER_STATE;
+delete from QRTZ_LOCKS;
+delete from QRTZ_SIMPLE_TRIGGERS;
+delete from QRTZ_SIMPROP_TRIGGERS;
+delete from QRTZ_CRON_TRIGGERS;
+delete from QRTZ_BLOB_TRIGGERS;
+delete from QRTZ_TRIGGERS;
+delete from QRTZ_JOB_DETAILS;
+delete from QRTZ_CALENDARS;
+
+select count(*) from QRTZ_FIRED_TRIGGERS;
+select count(*) from QRTZ_PAUSED_TRIGGER_GRPS;
+select count(*) from QRTZ_SCHEDULER_STATE;
+select count(*) from QRTZ_LOCKS;
+select count(*) from QRTZ_SIMPLE_TRIGGERS;
+select count(*) from QRTZ_SIMPROP_TRIGGERS;
+select count(*) from QRTZ_CRON_TRIGGERS;
+select count(*) from QRTZ_BLOB_TRIGGERS;
+select count(*) from QRTZ_TRIGGERS;
+select count(*) from QRTZ_JOB_DETAILS;
+select count(*) from QRTZ_CALENDARS;
