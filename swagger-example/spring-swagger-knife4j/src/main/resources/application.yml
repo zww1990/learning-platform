@@ -1,0 +1,46 @@
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    locale: zh_CN
+  dao:
+    exceptiontranslation:
+      enabled: false
+  sql:
+    init:
+      mode: never
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
+    - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
+    - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+server:
+  servlet:
+    jsp:
+      registered: false
+  ssl:
+    enabled: false
+  port: 8082
+springfox:
+  swagger:
+    title: 神奇的网站
+    description: 这是一个神奇的网站
+    version: 1.0.0
+    terms-of-service-url: https://gitee.com/zww1990/spring-swagger
+    name: 神奇的网站
+    url: https://gitee.com/zww1990/spring-swagger
+    email: zww1990@foxmail.com
+    license: MIT License
+    license-url: https://gitee.com/zww1990/spring-swagger/blob/master/LICENSE
+    base-package: com.example.demo.controller
+    group-name: spring-swagger-knife4j
+  documentation:
+    enabled: true
+    swagger-ui:
+      enabled: false
+
