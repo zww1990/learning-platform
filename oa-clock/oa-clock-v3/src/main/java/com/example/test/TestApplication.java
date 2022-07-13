@@ -37,7 +37,6 @@ public class TestApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
-//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
 
 	@Bean

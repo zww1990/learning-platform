@@ -1,33 +1,58 @@
 package cn.net.yzl.oa.util;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
+import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-<<<<<<<< HEAD:oa-clock/oa-clock-v1/src/main/java/cn/net/yzl/oa/util/AESUtil.java
-import org.springframework.util.StringUtils;
+import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.net.yzl.oa.entity.pojo.AppStaffClockLogPo;
+import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-========
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
-
->>>>>>>> t2:oa-clock-v2/src/main/java/cn/net/yzl/oa/util/AESUtil.java
 public class AESUtil {
-	private static final Logger log = LoggerFactory.getLogger(AESUtil.class);
+
 	private static final String IV_STRING = "16-Bytes--String";
 	public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
-	public static final String DATEFORMAT = "yyyy-MM-dd";
 	public static final String TIMEZONE = "GMT+8";
+	private static final Pattern pattern = Pattern.compile("&");
 	private static final String key = "yzl_staff&oa#514";
 
 	private AESUtil() {
 		super();
+	}
+
+	/**
+	 * 加密时间date
+	 *
+	 * @param content
+	 * @return
+	 */
+	public static String encryptAES(Date content) {
+		if (content == null) {
+			return null;
+		}
+		String reslut = null;
+		try {
+			reslut = encryptAES(DateUtil.format(content, FORMAT), key);
+		} catch (Exception e) {
+			log.error("AES加密失败.{}", content, e);
+		}
+		return reslut;
 	}
 
 	public static String encryptAES(String content) {
@@ -44,8 +69,33 @@ public class AESUtil {
 		return reslut;
 	}
 
+	/**
+	 * 解密打卡对象（staffNo=aes(staffNo&date)）
+	 *
+	 * @param appStaffClockVO
+	 * @return
+	 */
+	public static AppStaffClockLogPo decryptAES(AppStaffClockVO appStaffClockVO) {
+		AppStaffClockLogPo po = null;
+		String staffNo = appStaffClockVO.getStaffNo();
+		if (StrUtil.isNotBlank(staffNo)) {
+			String result = decryptAES(staffNo);
+			String[] ss = pattern.split(result);
+			if (ss.length != 2) {
+				return po;
+			}
+			staffNo = ss[0];
+			Date clockTime = DateUtil.parse(ss[1], FORMAT);
+			po = new AppStaffClockLogPo();
+			BeanUtils.copyProperties(appStaffClockVO, po);
+			po.setStaffNo(staffNo);
+			po.setClockTime(clockTime);
+		}
+		return po;
+	}
+
 	public static String decryptAES(String content) {
-		if (!StringUtils.hasText(content)) {
+		if (StrUtil.isBlank(content)) {
 			return null;
 		}
 		String reslut = null;
@@ -56,6 +106,25 @@ public class AESUtil {
 			throw new RuntimeException("解密失败");
 		}
 		return reslut;
+	}
+
+	public static void main(String[] args) {
+		AppStaffClockVO vo = new AppStaffClockVO();
+		vo.setAddress("北京市海淀区花园路街道泰兴大厦泰兴大厦(花园东路)");
+		vo.setLatitude(BigDecimal.valueOf(39.9803540));
+		vo.setLongitude(BigDecimal.valueOf(116.3689370));
+		LocalDateTime now = LocalDateTime.now().minusMinutes(1);
+		vo.setStaffNo(AESUtil.encryptAES(String.join("&", "6666", now.format(DateTimeFormatter.ofPattern(FORMAT)))));
+		vo.setClockTime(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
+		try {
+			String json = new ObjectMapper().writeValueAsString(vo);
+			System.err.println(json);
+			System.err.println(AESUtil.encryptAES(json));
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		AppStaffClockLogPo po = AESUtil.decryptAES(vo);
+		System.out.println(po);
 	}
 
 	/**
