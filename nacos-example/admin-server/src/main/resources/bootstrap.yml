@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: admin-server
+  security:
+    user:
+      name: admin
+      password: admin@2022
+  thymeleaf:
+    check-template: false
+    check-template-location: false
+  cloud:
+    nacos:
+      server-addr: 192.168.32.141:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

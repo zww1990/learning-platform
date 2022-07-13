@@ -1,0 +1,34 @@
+server:
+  port: 8082
+#  servlet:
+#    context-path: /nacosprovider
+
+spring:
+  application:
+    name: nacos-provider
+  cloud:
+    nacos:
+      server-addr: 192.168.32.141:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
+        username: admin
+        password: admin@2022
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

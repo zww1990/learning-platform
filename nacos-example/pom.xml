@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>nacos-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>nacos-parent</name>
+
+	<modules>
+		<module>nacos-provider</module>
+		<module>nacos-consumer</module>
+		<module>admin-server</module>
+		<module>dubbo-nacos-provider</module>
+		<module>dubbo-nacos-consumer</module>
+		<module>nacos-gateway</module>
+	</modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.7.1</spring-boot.version>
+		<spring-boot-admin.version>2.7.1</spring-boot-admin.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+		<nacos.client.version>2.1.0</nacos.client.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+        	<!-- spring cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- alibaba cloud -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- alibaba nacos -->
+			<dependency>
+			    <groupId>com.alibaba.nacos</groupId>
+			    <artifactId>nacos-client</artifactId>
+			    <version>${nacos.client.version}</version>
+			</dependency>
+			<!-- spring boot admin -->
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- feign-httpclient -->
+			<dependency>
+			    <groupId>io.github.openfeign</groupId>
+			    <artifactId>feign-httpclient</artifactId>
+			    <version>11.8</version>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	                <version>${spring-boot.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                    	<compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-surefire-plugin</artifactId>
+            	<version>2.22.2</version>
+            	<configuration>
+            		<skipTests>true</skipTests>
+            	</configuration>
+            </plugin>
+            <plugin>
+            	<groupId>pl.project13.maven</groupId>
+            	<artifactId>git-commit-id-plugin</artifactId>
+            	<version>4.9.10</version>
+            	<executions>
+            		<execution>
+            			<goals>
+            				<goal>revision</goal>
+            			</goals>
+            		</execution>
+            	</executions>
+            	<configuration>
+            		<verbose>true</verbose>
+            		<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+            		<generateGitPropertiesFile>true</generateGitPropertiesFile>
+            		<useNativeGit>true</useNativeGit>
+            	</configuration>
+            </plugin>
+		</plugins>
+	</build>
+</project>
