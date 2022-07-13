@@ -67,7 +67,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>NBApp-angular</finalName>
+		<finalName>NBApp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

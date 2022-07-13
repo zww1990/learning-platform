@@ -112,7 +112,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>NBApp-vue</finalName>
+		<finalName>NBApp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
