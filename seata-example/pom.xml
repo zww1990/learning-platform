@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>seata-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>seata-parent</name>
+
+	<modules>
+		<module>seata-client-a</module>
+		<module>seata-client-b</module>
+		<module>seata-client-c</module>
+	</modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-boot.version>2.7.1</spring-boot.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
+		<nacos.client.version>2.1.0</nacos.client.version>
+    	<seata.version>1.5.1.1</seata.version>
+        <kryo.version>4.0.2</kryo.version>
+        <kryo-serializers.version>0.45</kryo-serializers.version>
+    	<druid.version>1.2.11</druid.version>
+    	<mysql.version>8.0.29</mysql.version>
+    	<mybatis.version>2.2.2</mybatis.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+        	<!-- 导入spring boot依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 导入spring cloud依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- 导入alibaba cloud依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- nacos客户端 -->
+			<dependency>
+			    <groupId>com.alibaba.nacos</groupId>
+			    <artifactId>nacos-client</artifactId>
+			    <version>${nacos.client.version}</version>
+			</dependency>
+			<!-- seata客户端 -->
+			<dependency>
+				<groupId>io.seata</groupId>
+				<artifactId>seata-spring-boot-starter</artifactId>
+				<version>${seata.version}</version>
+			</dependency>
+			<!-- kryo序列化 -->
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>${kryo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.javakaffee</groupId>
+                <artifactId>kryo-serializers</artifactId>
+                <version>${kryo-serializers.version}</version>
+            </dependency>
+			<!-- druid连接池 -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>druid-spring-boot-starter</artifactId>
+			    <version>${druid.version}</version>
+			</dependency>
+			<!-- mysql驱动 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<!-- mybatis -->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.zaxxer</groupId>
+						<artifactId>HikariCP</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+        </dependencies>
+    </dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+	                <groupId>org.springframework.boot</groupId>
+	                <artifactId>spring-boot-maven-plugin</artifactId>
+	                <version>${spring-boot.version}</version>
+	                <executions>
+	                    <execution>
+	                        <id>repackage</id>
+	                        <goals>
+	                            <goal>repackage</goal>
+	                        </goals>
+	                    </execution>
+	                    <execution>
+	                    	<id>build-info</id>
+	                    	<goals>
+	                    		<goal>build-info</goal>
+	                    	</goals>
+	                    </execution>
+	                </executions>
+					<configuration>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                    	<compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-surefire-plugin</artifactId>
+            	<version>2.22.2</version>
+            	<configuration>
+            		<skipTests>true</skipTests>
+            	</configuration>
+            </plugin>
+            <plugin>
+            	<groupId>pl.project13.maven</groupId>
+            	<artifactId>git-commit-id-plugin</artifactId>
+            	<version>4.9.10</version>
+            	<executions>
+            		<execution>
+            			<goals>
+            				<goal>revision</goal>
+            			</goals>
+            		</execution>
+            	</executions>
+            	<configuration>
+            		<verbose>true</verbose>
+            		<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+            		<generateGitPropertiesFile>true</generateGitPropertiesFile>
+            		<useNativeGit>true</useNativeGit>
+            	</configuration>
+            </plugin>
+		</plugins>
+	</build>
+</project>
