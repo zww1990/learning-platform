@@ -1,0 +1,31 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: demo-dubbo-consumer
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: 
+    password: 
+    virtual-host: 
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+
+dubbo:
+  registry:
+    address: zookeeper://localhost:2181
+  application:
+    register-mode: instance
+    service-discovery:
+      migration: FORCE_APPLICATION
+
+rabbitmq:
+  enable: false
