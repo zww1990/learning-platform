@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "my-angular": {
+  "newProjectRoot": "angular-example",
+  "angular-example": {
+    "my-angular-v2": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -142,19 +142,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-angular:build",
+            "browserTarget": "my-angular-v2:build",
             "proxyConfig": "proxy.conf.js"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-angular:build:production"
+              "browserTarget": "my-angular-v2:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-angular:build"
+            "browserTarget": "my-angular-v2:build"
           }
         },
         "test": {
@@ -192,16 +192,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "my-angular:serve"
+            "devServerTarget": "my-angular-v2:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-angular:serve:production"
+              "devServerTarget": "my-angular-v2:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "my-angular"
+  "defaultProject": "my-angular-v2"
 }
