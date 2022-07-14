@@ -45,10 +45,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      jQuery: 'jquery',
-      $: 'jquery'
-    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
@@ -83,24 +79,10 @@ module.exports = new Promise((resolve, reject) => {
       // add port to devServer config
       devWebpackConfig.devServer.port = port
 
-      const tables = []
-      const pt = config.dev.proxyTable
-      if (Object.keys(pt).length > 0) {
-        tables.push('API代理')
-        for (const e in pt) {
-          tables.push(`${e} ==>> ${pt[e].target}`)
-        }
-      }
-
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-<<<<<<<< HEAD:vue-example/my-vue-v3/build/webpack.dev.conf.js
-          messages: [`你的应用程序在这里运行: `, `http://${config.dev.host}:${port}`,],
-          notes: [...tables]
-========
           messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
->>>>>>>> v4:vue-example/my-vue-v4/build/webpack.dev.conf.js
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()

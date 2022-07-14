@@ -25,14 +25,7 @@ module.exports = {
     'generator-star-spacing': 'off',
     'semi': 'off',
     'space-before-function-paren': 'off',
-<<<<<<<< HEAD:vue-example/my-vue-v2/.eslintrc.js
-    'spaced-comment': 'off',
-========
->>>>>>>> v3:vue-example/my-vue-v3/.eslintrc.js
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
-  globals: {
-    'AMap': true
   }
 }
