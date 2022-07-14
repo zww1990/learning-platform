@@ -2,11 +2,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
-## Thanks
-
-<img src="/jetbrains-logos/jetbrains-variant-3.png" width="100px" height="100px"><br>
-[JetBrains](https://www.jetbrains.com/?from=my-angular)
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
