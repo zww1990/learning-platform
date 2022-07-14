@@ -1,15 +1,7 @@
 const chalk = require('chalk');
 const proxy = {
-<<<<<<<< HEAD:angular-example/my-angular-v1/proxy.conf.js
   '/hello': {
     target: 'http://192.168.34.156:9999/',
-========
-  '/cas': {
-    target: 'http://sso.bacic5i5j.com/',
-    pathRewrite: {
-      '^/cas': ''
-    },
->>>>>>>> a2:angular-example/my-angular-v2/proxy.conf.js
     secure: false
   }
 };
