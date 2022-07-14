@@ -22,11 +22,7 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-<<<<<<<< HEAD:vue-example/my-vue-v3/build/webpack.base.conf.js
-    app: ['./node_modules/babel-polyfill/dist/polyfill.min.js', './src/main.js']
-========
     app: ['./node_modules/babel-polyfill/dist/polyfill.js', './src/main.js']
->>>>>>>> v4:vue-example/my-vue-v4/build/webpack.base.conf.js
   },
   output: {
     path: config.build.assetsRoot,
