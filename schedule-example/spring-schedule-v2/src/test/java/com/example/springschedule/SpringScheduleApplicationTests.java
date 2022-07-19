@@ -1,21 +1,18 @@
 package com.example.springschedule;
 
 import javax.annotation.Resource;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import com.example.springschedule.config.SpringConfig;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = { SpringConfig.class })
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootTest
 public class SpringScheduleApplicationTests {
 	@Resource
 	private ApplicationContext context;
 
 	@Test
-	public void contextLoads() {
+	public void testContextLoads() {
 		try {
 			String[] names = this.context.getBeanDefinitionNames();
 			for (int i = 0, len = names.length; i < len; i++) {
