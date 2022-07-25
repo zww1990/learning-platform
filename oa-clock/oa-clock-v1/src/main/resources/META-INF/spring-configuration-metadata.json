@@ -1,0 +1,62 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "com.example.test.model.ApplicationProperties",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.addresses",
+      "type": "java.util.List<com.example.test.model.ApplicationProperties$Address>",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.bi-sql-exec-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.bi-sql-source-id",
+      "type": "java.lang.Integer",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.create-oa-attend-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.device-list-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.init-staff-clock-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.reset-bind-device-id-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.select-app-staff-clock-log-sql",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.staff-clock-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    },
+    {
+      "name": "app.users",
+      "type": "java.util.List<com.example.test.model.ApplicationProperties$UserInfo>",
+      "sourceType": "com.example.test.model.ApplicationProperties"
+    }
+  ],
+  "hints": []
+}
