@@ -226,11 +226,11 @@
                                                     <th class="text-left">主键</th>
                                                     <th class="text-left">员工编号</th>
                                                     <th class="text-left">打卡时间</th>
+                                                    <th class="text-left">创建时间</th>
                                                     <th class="text-left">经度</th>
                                                     <th class="text-left">纬度</th>
                                                     <th class="text-left">打卡地址</th>
                                                     <th class="text-left">打卡类型</th>
-                                                    <th class="text-left">创建时间</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -238,13 +238,13 @@
                                                     <td>{{log.id}}</td>
                                                     <td><div style="width: 80px">{{log.staff_no}}</div></td>
                                                     <td><div style="width: 80px">{{log.clock_time}}</div></td>
+                                                    <td><div style="width: 80px">{{log.create_time}}</div></td>
                                                     <td>{{log.longitude}}</td>
                                                     <td>{{log.latitude}}</td>
                                                     <td><div style="width: 100px">{{log.address}}</div></td>
                                                     <td>
                                                         <div style="width: 50px">{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</div>
                                                     </td>
-                                                    <td><div style="width: 80px">{{log.create_time}}</div></td>
                                                 </tr>
                                             </tbody>
                                         </template>
