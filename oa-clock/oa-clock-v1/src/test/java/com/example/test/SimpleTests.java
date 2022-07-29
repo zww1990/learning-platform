@@ -1,17 +1,39 @@
 package com.example.test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.Test;
 
 /**
  * SimpleTests
+ * 
  * @author zww19
  * @since 2022年5月31日,上午11:38:56
  */
 public class SimpleTests {
+	@Test
+	public void testThreadLocalRandom() {
+		try {
+			ThreadLocalRandom random = ThreadLocalRandom.current();
+			BigDecimal longitude = BigDecimal.valueOf(116);
+			BigDecimal latitude = BigDecimal.valueOf(39);
+			for (int i = 0; i < 100; i++) {
+				System.err.println(
+						BigDecimal.valueOf(random.nextFloat()).add(longitude).setScale(7, RoundingMode.HALF_UP));
+				System.err.println(
+						BigDecimal.valueOf(random.nextFloat()).add(latitude).setScale(7, RoundingMode.HALF_UP));
+				System.err.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void testNoneMatch() {
 		try {
