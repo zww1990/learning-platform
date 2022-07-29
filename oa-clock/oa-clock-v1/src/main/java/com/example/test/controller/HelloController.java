@@ -1,11 +1,14 @@
 package com.example.test.controller;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Resource;
 
@@ -165,10 +168,13 @@ public class HelloController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		AppStaffClockVO vo = new AppStaffClockVO()//
 				.setAddress(userLogin.getAddress())//
-				.setLatitude(userLogin.getLatitude())//
-				.setLongitude(userLogin.getLongitude())//
+				.setLatitude(userLogin.getLatitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+						RoundingMode.HALF_UP))//
+				.setLongitude(userLogin.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 		ResponseBody<Object> body = this.restTemplate
@@ -218,10 +224,13 @@ public class HelloController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		AppStaffClockVO vo = new AppStaffClockVO()//
 				.setAddress(userLogin.getAddress())//
-				.setLatitude(userLogin.getLatitude())//
-				.setLongitude(userLogin.getLongitude())//
+				.setLatitude(userLogin.getLatitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+						RoundingMode.HALF_UP))//
+				.setLongitude(userLogin.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 		try {
