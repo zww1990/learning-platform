@@ -54,10 +54,10 @@ new Vue({
         this.addresses = json1.data;
         let json2 = await(await fetch('/hello/users')).json();
         this.users = json2.data;
-        this.users.forEach(user => this.initStaffClock(user));
+        this.users.forEach(user => this.initStaffClockV1(user));
     },
     methods: {
-		initStaffClock(user) {
+		initStaffClockV1(user) {
         	let addr = this.addresses[0];
             fetch('/hello/initstaffclock', {
                 method: 'POST',
@@ -70,6 +70,19 @@ new Vue({
                 user.message = res.message;
                 user.staffClock = res.data;
                 user.addr = addr;
+            });
+		},
+		initStaffClockV2(user) {
+            fetch('/hello/initstaffclock', {
+                method: 'POST',
+                body: JSON.stringify({ ...user }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(res => res.json())
+            .then(res => {
+                user.status = res.status;
+                user.message = res.message;
+                user.staffClock = res.data;
             });
 		},
         rangeChange() {
@@ -115,12 +128,12 @@ new Vue({
                 } else {
                     this.snackbar.text = `[ ${user.userNo} - ${user.username} ] 补卡成功`;
                     this.snackbar.color = 'success';
-                    this.initStaffClock(user);
+                    this.initStaffClockV2(user);
                 }
             });
         },
         gotoWork(user) {
-            fetch('/hello/userloginandstaffclock', {
+            fetch('/hello/v1/userloginandstaffclock', {
                 method: 'POST',
                 body: JSON.stringify({
                     ...user,
