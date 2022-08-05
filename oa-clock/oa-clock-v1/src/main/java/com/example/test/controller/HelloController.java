@@ -194,7 +194,7 @@ public class HelloController {
 		return body;
 	}
 
-	@PostMapping("/userloginandstaffclock")
+	@PostMapping("/v1/userloginandstaffclock")
 	public ResponseBody<?> userLoginAndStaffClock(@RequestBody UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
@@ -232,7 +232,7 @@ public class HelloController {
 				.setLongitude(userLogin.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
 						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
-				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
+				.setClockTime(new Date());
 		try {
 			ResponseBody<Object> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
 					new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
