@@ -1,0 +1,72 @@
+{
+  "groups": [
+    {
+      "name": "cron",
+      "type": "com.example.springschedule.config.SpringProperties",
+      "sourceType": "com.example.springschedule.config.SpringProperties"
+    },
+    {
+      "name": "git",
+      "type": "com.example.springschedule.config.GitProperties",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "cron.expression",
+      "type": "java.lang.String",
+      "sourceType": "com.example.springschedule.config.SpringProperties"
+    },
+    {
+      "name": "git.author",
+      "type": "java.lang.String",
+      "description": "作者",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    },
+    {
+      "name": "git.branch-name",
+      "type": "java.lang.String",
+      "description": "分支名",
+      "sourceType": "com.example.springschedule.config.GitProperties",
+      "defaultValue": "master"
+    },
+    {
+      "name": "git.date-pattern",
+      "type": "java.lang.String",
+      "description": "日期格式",
+      "sourceType": "com.example.springschedule.config.GitProperties",
+      "defaultValue": "yyyyMMdd"
+    },
+    {
+      "name": "git.file-pattern",
+      "type": "java.lang.String",
+      "description": "资源目录",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    },
+    {
+      "name": "git.local-directory",
+      "type": "java.lang.String",
+      "description": "本地克隆目录",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    },
+    {
+      "name": "git.password",
+      "type": "java.lang.String",
+      "description": "密码",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    },
+    {
+      "name": "git.remote-url",
+      "type": "java.lang.String",
+      "description": "远程仓库地址",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    },
+    {
+      "name": "git.username",
+      "type": "java.lang.String",
+      "description": "用户名",
+      "sourceType": "com.example.springschedule.config.GitProperties"
+    }
+  ],
+  "hints": []
+}

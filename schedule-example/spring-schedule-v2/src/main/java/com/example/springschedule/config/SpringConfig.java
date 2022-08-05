@@ -10,6 +10,12 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.springschedule.service.JobService;
 
+/**
+ * Spring Config
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月5日,下午8:14:43
+ */
 @Configuration
 public class SpringConfig {
 

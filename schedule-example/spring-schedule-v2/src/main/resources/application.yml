@@ -1,2 +1,12 @@
 cron:
   expression: '*/10 * * * * ?'
+git:
+  remote-url: https://gitee.com/zww1990/learning-platform.git
+  local-directory: d:/projects/learning-platform
+  username: 
+  author: 
+  password: 
+  branch-name: master
+  date-pattern: yyyyMMdd
+  file-pattern: design-pattern-example/src/main/resources
+
