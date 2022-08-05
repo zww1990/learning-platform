@@ -6,6 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
+/**
+ * Spring Schedule Application Tests
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月5日,下午8:19:03
+ */
 @SpringBootTest
 public class SpringScheduleApplicationTests {
 	@Resource
