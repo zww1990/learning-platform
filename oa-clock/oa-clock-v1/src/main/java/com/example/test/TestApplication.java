@@ -4,9 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
@@ -25,8 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @EnableRetry
 @SpringBootApplication
 @Slf4j
-@EnableAutoConfiguration
-@EnableConfigurationProperties(ApplicationProperties.class)
 public class TestApplication implements CommandLineRunner {
 
 	/**
