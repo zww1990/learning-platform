@@ -1,4 +1,4 @@
-package com.example.test.controller;
+package com.example.hello.controller;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -29,11 +29,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.test.model.ApplicationProperties;
-import com.example.test.model.ApplicationProperties.Address;
-import com.example.test.model.ApplicationProperties.UserInfo;
-import com.example.test.model.ResponseBody;
-import com.example.test.model.UserLogin;
+import com.example.hello.model.ApplicationProperties;
+import com.example.hello.model.ResponseBody;
+import com.example.hello.model.UserLogin;
+import com.example.hello.model.ApplicationProperties.Address;
+import com.example.hello.model.ApplicationProperties.UserInfo;
 
 import cn.net.yzl.oa.entity.ClockWorkStatus;
 import cn.net.yzl.oa.entity.SqlExecQueryDTO;

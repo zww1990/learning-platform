@@ -8,7 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 
-import com.example.test.model.UserLogin;
+import com.example.hello.controller.HelloController;
+import com.example.hello.model.UserLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
