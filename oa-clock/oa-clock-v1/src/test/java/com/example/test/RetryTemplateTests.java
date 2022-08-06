@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.retry.support.RetryTemplate;
 
-import com.example.test.service.RetryService;
+import com.example.hello.service.RetryService;
 
 @SpringBootTest
 public class RetryTemplateTests {

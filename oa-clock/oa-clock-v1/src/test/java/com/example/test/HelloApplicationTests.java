@@ -7,17 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-import com.example.test.controller.TestController;
-import com.example.test.service.TestService;
+import com.example.hello.service.HelloService;
 
 @SpringBootTest
-public class TestApplicationTests {
+public class HelloApplicationTests {
 	@Resource
 	private ApplicationContext context;
 	@Resource
-	private TestController controller;
-	@Resource
-	private TestService service;
+	private HelloService service;
 
 	@Test
 	public void contextLoads() {
@@ -29,15 +26,6 @@ public class TestApplicationTests {
 		}
 	}
 
-	@Test
-	public void testIndex() {
-		try {
-			Object value = this.controller.index();
-			Assertions.assertNotNull(value);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Test
 	public void testSayHello() {

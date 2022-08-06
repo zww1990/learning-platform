@@ -1,4 +1,4 @@
-package com.example.test.service;
+package com.example.hello.service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

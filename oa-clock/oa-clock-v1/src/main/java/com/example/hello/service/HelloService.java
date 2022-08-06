@@ -1,11 +1,11 @@
-package com.example.test.service;
+package com.example.hello.service;
 
 /**
  * service
  * @author zhangweiwei
  * @date 2021年5月25日,下午4:15:00
  */
-public interface TestService {
+public interface HelloService {
 
 	/**
 	 * say hello world

@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.hello;
 
 import javax.annotation.Resource;
 
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.test.model.ApplicationProperties;
+import com.example.hello.model.ApplicationProperties;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableRetry
 @SpringBootApplication
 @Slf4j
-public class TestApplication implements CommandLineRunner {
+public class HelloApplication implements CommandLineRunner {
 
 	/**
 	 * @param args
@@ -31,7 +31,7 @@ public class TestApplication implements CommandLineRunner {
 	 * @date 2021年5月25日,下午4:16:28
 	 */
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(TestApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(HelloApplication.class, args);
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
