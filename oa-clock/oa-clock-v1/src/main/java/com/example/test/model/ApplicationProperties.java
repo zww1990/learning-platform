@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+@Configuration
 @ConfigurationProperties(prefix = "app")
 @Getter
 @Setter
