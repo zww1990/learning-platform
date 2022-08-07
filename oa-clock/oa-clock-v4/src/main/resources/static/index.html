@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <title>hello</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="/webjars/roboto-fontface/css/roboto/roboto-fontface.css" rel="stylesheet">
+        <link href="/webjars/mdi__font/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="/webjars/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app">
+            <v-app>
+                <v-main>
+                    <v-container>
+                        <v-row>
+                            <v-col>
+                                <v-btn color="primary" @click="openUser()">添加员工</v-btn>
+                                <v-btn color="primary" @click="openAddr()">添加地址</v-btn>
+                                <v-snackbar 
+                                top 
+                                shaped 
+                                v-model="snackbar.value" 
+                                :timeout="snackbar.timeout" 
+                                :color="snackbar.color">{{ snackbar.text }}</v-snackbar>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-simple-table>
+                                    <template v-slot:default>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-left">编号</th>
+                                                <th class="text-left">姓名</th>
+                                                <th class="text-left">地址</th>
+                                                <th class="text-left">上班</th>
+                                                <th class="text-left">下班</th>
+                                                <th class="text-left">日期</th>
+                                                <th class="text-left">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(user, index) in users" :key="index">
+                                                <td>
+                                                    <span v-if="user.status === 1">
+                                                        <a @click="showLogList(user)">{{ user.userNo }}</a>
+                                                    </span>
+                                                    <span v-else>{{ user.userNo }}</span>
+                                                </td>
+                                                <td><div style="width:50px">{{ user.username }}</div></td>
+                                                <td>
+                                                    <v-select 
+                                                    v-model="user.addr" 
+                                                    :items="addresses" 
+                                                    item-text="address" 
+                                                    item-value="id" 
+                                                    return-object 
+                                                    style="width:250px"></v-select>
+                                                </td>
+                                                <td>
+                                                    <div v-if="user?.staffClock?.clockWorkOnStatus == null" style="width:160px">
+                                                    </div>
+                                                    <v-chip color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
+                                                        {{user?.staffClock?.clockTimeMin}}
+                                                    </v-chip>
+                                                    <v-chip color="red" v-else>{{user?.staffClock?.clockTimeMin}}</v-chip>
+                                                </td>
+                                                <td>
+                                                    <div v-if="user?.staffClock?.clockWorkOffStatus == null" style="width:160px">
+                                                    </div>
+                                                    <v-chip color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
+                                                        {{user?.staffClock?.clockTimeMax}}
+                                                    </v-chip>
+                                                    <v-chip color="red" v-else>{{user?.staffClock?.clockTimeMax}}</v-chip>
+                                                </td>
+                                                <td>
+                                                    <v-menu 
+                                                    v-model="user.menu" 
+                                                    :close-on-content-click="false" 
+                                                    transition="scale-transition" 
+                                                    offset-y 
+                                                    min-width="auto">
+                                                        <template v-slot:activator="{ on, attrs }">
+                                                            <v-text-field 
+                                                            v-model="user.clockTime" 
+                                                            prepend-icon="mdi-calendar" 
+                                                            readonly 
+                                                            v-bind="attrs" 
+                                                            v-on="on" 
+                                                            style="width:200px"></v-text-field>
+                                                        </template>
+                                                        <v-tabs v-model="user.tabs">
+                                                            <v-tab>日期</v-tab>
+                                                            <v-tab>时间</v-tab>
+                                                        </v-tabs>
+                                                        <v-tabs-items v-model="user.tabs">
+                                                            <v-tab-item>
+                                                                <v-date-picker 
+                                                                v-model="user.date" 
+                                                                no-title 
+                                                                scrollable 
+                                                                locale="zh-cn" 
+                                                                @input="clickDate(user)" 
+                                                                :min="minDate" 
+                                                                :max="maxDate"></v-date-picker>
+                                                            </v-tab-item>
+                                                            <v-tab-item>
+                                                                <v-time-picker 
+                                                                v-model="user.time" 
+                                                                format="24hr" 
+                                                                use-seconds 
+                                                                scrollable 
+                                                                @input="clickSecond(user)"></v-time-picker>
+                                                            </v-tab-item>
+                                                        </v-tabs-items>
+                                                    </v-menu>
+                                                </td>
+                                                <td>
+                                                    <div v-if="user.status === 1" style="width: 240px">
+                                                        <v-btn color="success" @click="gotoWork(user)">打卡</v-btn>
+                                                        <v-btn color="success" @click="repairWork(user)">补卡</v-btn>
+                                                        <v-btn color="success" @click="showDeviceList(user)">查看设备</v-btn>
+                                                    </div>
+                                                    <v-alert type="error" v-else>{{user.message}}</v-alert>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </template>
+                                </v-simple-table>
+                            </v-col>
+                        </v-row>
+                        <v-dialog 
+                        :fullscreen="$vuetify.breakpoint.mobile" 
+                        v-model="userDialog" 
+                        persistent 
+                        max-width="400px" 
+                        transition="dialog-top-transition">
+                            <v-card>
+                                <v-form ref="userForm" lazy-validation>
+                                    <v-toolbar color="purple">
+                                        <span class="text-h5">公司员工</span>
+                                    </v-toolbar>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="员工编号*" 
+                                                    required 
+                                                    v-model="user.userNo" 
+                                                    :rules="validation.usernoRules" 
+                                                    clearable></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="员工姓名*" 
+                                                    required 
+                                                    v-model="user.username" 
+                                                    :rules="validation.usernameRules" 
+                                                    clearable></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="green darken-1" text @click="closeUser()">关闭</v-btn>
+                                        <v-btn color="green darken-1" text @click="saveUser()">保存</v-btn>
+                                    </v-card-actions>
+                                </v-form>
+                            </v-card>
+                        </v-dialog>
+                        <v-dialog 
+                        :fullscreen="$vuetify.breakpoint.mobile" 
+                        transition="dialog-bottom-transition" 
+                        v-model="logDialog" 
+                        max-width="1024px" 
+                        @click:outside="logDialogClose()">
+                            <v-card>
+                                <v-toolbar color="purple">
+                                    {{user?.username}}打卡记录{{logList?.length}}条
+                                    <v-spacer></v-spacer>
+                                    <v-btn icon @click="logDialogClose()">
+                                        <v-icon>mdi-close</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                                <v-card-text>
+                                    <v-row>
+                                        <v-col>
+                                            <v-menu 
+                                            v-model="user.rangemenu" 
+                                            :close-on-content-click="false" 
+                                            transition="scale-transition" 
+                                            offset-y min-width="auto">
+                                                <template v-slot:activator="{ on, attrs }">
+                                                    <v-text-field 
+                                                    v-model="user.daterange" 
+                                                    label="日期范围" 
+                                                    prepend-icon="mdi-calendar" 
+                                                    readonly 
+                                                    v-bind="attrs" 
+                                                    v-on="on" 
+                                                    :style="style"></v-text-field>
+                                                </template>
+                                                <v-date-picker 
+                                                v-model="user.dates" 
+                                                no-title 
+                                                scrollable 
+                                                locale="zh-cn" 
+                                                range 
+                                                @change="rangeChange()" 
+                                                :min="minDate" 
+                                                :max="maxDate"></v-date-picker>
+                                            </v-menu>
+                                        </v-col>
+                                        <v-col style="padding-top:30px">
+                                            <v-btn color="success" @click="showLogList(user)">查询</v-btn>
+                                        </v-col>
+                                    </v-row>
+                                    <v-simple-table dense fixed-header height="500px">
+                                        <template v-slot:default>
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">主键</th>
+                                                    <th class="text-left">员工编号</th>
+                                                    <th class="text-left">打卡时间</th>
+                                                    <th class="text-left">创建时间</th>
+                                                    <th class="text-left">经度</th>
+                                                    <th class="text-left">纬度</th>
+                                                    <th class="text-left">打卡地址</th>
+                                                    <th class="text-left">打卡类型</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(log, index) in logList" :key="index">
+                                                    <td>{{log.id}}</td>
+                                                    <td><div style="width: 80px">{{log.staff_no}}</div></td>
+                                                    <td><div style="width: 80px">{{log.clock_time}}</div></td>
+                                                    <td><div style="width: 80px">{{log.create_time}}</div></td>
+                                                    <td>{{log.longitude}}</td>
+                                                    <td>{{log.latitude}}</td>
+                                                    <td><div style="width: 100px">{{log.address}}</div></td>
+                                                    <td>
+                                                        <div style="width: 50px">{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </template>
+                                    </v-simple-table>
+                                </v-card-text>
+                            </v-card>
+                        </v-dialog>
+                        <v-dialog 
+                        :fullscreen="$vuetify.breakpoint.mobile" 
+                        v-model="addrDialog" 
+                        persistent 
+                        max-width="400px" 
+                        transition="dialog-top-transition">
+                            <v-card>
+                                <v-form ref="addrForm" lazy-validation>
+                                    <v-toolbar color="purple">
+                                        <span class="text-h5">公司地址</span>
+                                    </v-toolbar>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="经度*" 
+                                                    required 
+                                                    v-model="addr.longitude" 
+                                                    :rules="validation.longitudeRules" 
+                                                    clearable 
+                                                    type="number" 
+                                                    min="0"></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="纬度*" 
+                                                    required 
+                                                    v-model="addr.latitude" 
+                                                    :rules="validation.latitudeRules" 
+                                                    clearable 
+                                                    type="number" 
+                                                    min="0"></v-text-field>
+                                                </v-col>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="地址*" 
+                                                    required 
+                                                    v-model="addr.address" 
+                                                    :rules="validation.addressRules" 
+                                                    clearable></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="green darken-1" text @click="closeAddr()">关闭</v-btn>
+                                        <v-btn color="green darken-1" text @click="saveAddr()">保存</v-btn>
+                                    </v-card-actions>
+                                </v-form>
+                            </v-card>
+                        </v-dialog>
+                        <v-dialog 
+                        :fullscreen="$vuetify.breakpoint.mobile" 
+                        transition="dialog-bottom-transition" 
+                        v-model="deviceDialog" 
+                        max-width="1440px">
+                            <v-card>
+                                <v-toolbar color="purple">
+                                    {{user?.username}}设备绑定记录{{deviceList?.length}}条
+                                    <v-spacer></v-spacer>
+                                    <v-btn icon @click="deviceDialog = false">
+                                        <v-icon>mdi-close</v-icon>
+                                    </v-btn>
+                                </v-toolbar>
+                                <v-card-text>
+                                    <v-simple-table dense fixed-header height="500px">
+                                        <template v-slot:default>
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-left">ID</th>
+                                                    <th class="text-left">绑定设备标识</th>
+                                                    <th class="text-left">手机唯一标识</th>
+                                                    <th class="text-left">机型</th>
+                                                    <th class="text-left">OS</th>
+                                                    <th class="text-left">OS版本</th>
+                                                    <th class="text-left">分辨率</th>
+                                                    <th class="text-left">设备推送ID</th>
+                                                    <th class="text-left">创建时间</th>
+                                                    <th class="text-left">更新时间</th>
+                                                    <th class="text-left">操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(dev, index) in deviceList" :key="index">
+                                                    <td>{{dev.id}}</td>
+                                                    <td><div style="width: 100px">{{dev.bindDeviceId}}</div></td>
+                                                    <td><div style="width: 100px">{{dev.deviceId}}</div></td>
+                                                    <td>{{dev.model}}</td>
+                                                    <td><div style="width: 100px">{{dev.systemName}}</div></td>
+                                                    <td><div style="width: 60px">{{dev.systemVersion}}</div></td>
+                                                    <td>{{dev.resolution}}</td>
+                                                    <td><div style="width: 80px">{{dev.pushId}}</div></td>
+                                                    <td><div style="width: 80px">{{dev.createTime}}</div></td>
+                                                    <td><div style="width: 80px">{{dev.updateTime}}</div></td>
+                                                    <td><v-btn color="success" @click="resetBindDevice(dev)" small>重绑</v-btn></td>
+                                                </tr>
+                                            </tbody>
+                                        </template>
+                                    </v-simple-table>
+                                </v-card-text>
+                            </v-card>
+                        </v-dialog>
+                    </v-container>
+                </v-main>
+            </v-app>
+        </div>
+    </body>
+    <script src="/webjars/vue/vue.min.js"></script>
+    <script src="/webjars/vuetify/dist/vuetify.min.js"></script>
+    <script src="js/index.js"></script>
+</html>

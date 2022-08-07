@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  servlet:
+    jsp:
+      registered: false
+spring:
+  aop:
+    auto: false
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  main:
+    web-application-type: servlet
+  profiles:
+    active: test
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+    - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+  quartz:
+    auto-startup: true
+    job-store-type: memory
+    properties:
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.threadPool.class: org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor
+
+app:
+  select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s 00:00:00' and '%s 23:59:59' ORDER BY create_time DESC"
+  addresses:
+  - id: 1
+    address: 北京市海淀区花园路街道平安银行泰兴大厦(花园东路)
+    longitude: 116
+    latitude: 39
+  - id: 2
+    address: 河北省石家庄市裕华区长江街道黄河大道374号河北御芝林
+    longitude: 114
+    latitude: 38
+
