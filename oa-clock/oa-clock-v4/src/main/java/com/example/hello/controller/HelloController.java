@@ -52,7 +52,8 @@ public class HelloController {
 	@PostMapping("/job")
 	public ResponseBody<?> job(@RequestBody(required = false) JobInfo jobInfo) throws SchedulerException {
 		JobConfig config = this.properties.getJobConfig();
-		TriggerState state = this.scheduler.getTriggerState(TriggerKey.triggerKey(config.getTriggerKey()));
+		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
+		TriggerState state = this.scheduler.getTriggerState(triggerKey);
 		// 不存在，创建
 		if (state == TriggerState.NONE) {
 			if (jobInfo == null) {
@@ -96,7 +97,44 @@ public class HelloController {
 		}
 		// 正常
 		if (state == TriggerState.NORMAL) {
-			return null;
+			if (jobInfo == null) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("参数不能为空！");
+			}
+			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[users]不能为空！");
+			}
+			if (!StringUtils.hasText(jobInfo.getCronExpression())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[cronExpression]不能为空！");
+			}
+			CronScheduleBuilder cronSchedule = null;
+			try {
+				cronSchedule = CronScheduleBuilder.cronSchedule(jobInfo.getCronExpression());
+			} catch (Exception e) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage(e.getLocalizedMessage());
+			}
+			CronTrigger trigger = (CronTrigger) this.scheduler.getTrigger(triggerKey);
+			trigger = trigger.getTriggerBuilder()//
+					.withIdentity(triggerKey)//
+					.withSchedule(cronSchedule)//
+					.build();
+			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
+			this.scheduler.rescheduleJob(triggerKey, trigger);
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage("更新定时任务成功");
 		}
 		// 暂停
 		if (state == TriggerState.PAUSED) {
