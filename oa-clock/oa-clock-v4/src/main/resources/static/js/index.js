@@ -4,6 +4,17 @@ new Vue({
         theme: { dark: true },
     }),
     data: {
+    	selected: [],
+    	cronExpression: null,
+    	headers: [
+    		{ text: '编号', value: 'a' },
+    		{ text: '姓名', value: 'username' },
+    		{ text: '地址', value: 'b' },
+    		{ text: '上班', value: 'c' },
+    		{ text: '下班', value: 'd' },
+    		{ text: '日期', value: 'e' },
+    		{ text: '操作', value: 'f' },
+    	],
         users: [],
         user: {
             userNo: null,
@@ -26,11 +37,13 @@ new Vue({
             addressRules: [v => !!v || '地址必须填'],
             usernoRules: [v => !!v || '员工编号必须填'],
             usernameRules: [v => !!v || '员工姓名必须填'],
+            cronRules: [v => !!v || 'cron表达式必须填'],
         },
         logList: [],
         logDialog: false,
         userDialog: false,
         addrDialog: false,
+        jobDialog: false,
         deviceList: [],
         deviceDialog: false,
         snackbar: {
@@ -171,6 +184,43 @@ new Vue({
         closeAddr() {
             this.addrDialog = false;
             this.$refs.addrForm.reset();
+        },
+        openJob() {
+        	if (this.selected.length === 0) {
+        		this.snackbar.value = true;
+                this.snackbar.text = `至少选择一个员工！`;
+                this.snackbar.color = 'error';
+                return;
+        	}
+        	this.jobDialog = true;
+        },
+        closeJob() {
+        	this.jobDialog = false;
+            this.$refs.jobForm.reset();
+        },
+        saveJob() {
+            if (this.$refs.jobForm.validate()) {
+            	fetch('/hello/job', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                    	cronExpression: this.cronExpression,
+                    	users: this.selected.map(item => {
+	            			return { ...item, ...item.addr };
+	            		})
+                    }),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(res => res.json())
+                .then(res => {
+	                this.snackbar.value = true;
+	                this.snackbar.text = res.message;
+	                if (res.status === 0) {
+	                    this.snackbar.color = 'error';
+	                } else {
+	                    this.snackbar.color = 'success';
+	                }
+                });
+            }
         },
         saveAddr() {
             if (this.$refs.addrForm.validate()) {

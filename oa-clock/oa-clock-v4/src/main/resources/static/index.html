@@ -18,9 +18,8 @@
                             <v-col>
                                 <v-btn color="primary" @click="openUser()">添加员工</v-btn>
                                 <v-btn color="primary" @click="openAddr()">添加地址</v-btn>
-                                <v-snackbar 
-                                top 
-                                shaped 
+                                <v-btn color="primary" @click="openJob()">定时任务</v-btn>
+                                <v-snackbar top  
                                 v-model="snackbar.value" 
                                 :timeout="snackbar.timeout" 
                                 :color="snackbar.color">{{ snackbar.text }}</v-snackbar>
@@ -28,115 +27,137 @@
                         </v-row>
                         <v-row>
                             <v-col>
-                                <v-simple-table>
-                                    <template v-slot:default>
-                                        <thead>
-                                            <tr>
-                                                <th class="text-left">编号</th>
-                                                <th class="text-left">姓名</th>
-                                                <th class="text-left">地址</th>
-                                                <th class="text-left">上班</th>
-                                                <th class="text-left">下班</th>
-                                                <th class="text-left">日期</th>
-                                                <th class="text-left">操作</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(user, index) in users" :key="index">
-                                                <td>
-                                                    <span v-if="user.status === 1">
-                                                        <a @click="showLogList(user)">{{ user.userNo }}</a>
-                                                    </span>
-                                                    <span v-else>{{ user.userNo }}</span>
-                                                </td>
-                                                <td><div style="width:50px">{{ user.username }}</div></td>
-                                                <td>
-                                                    <v-select 
-                                                    v-model="user.addr" 
-                                                    :items="addresses" 
-                                                    item-text="address" 
-                                                    item-value="id" 
-                                                    return-object 
-                                                    style="width:250px"></v-select>
-                                                </td>
-                                                <td>
-                                                    <div v-if="user?.staffClock?.clockWorkOnStatus == null" style="width:160px">
-                                                    </div>
-                                                    <v-chip color="green" v-else-if="user?.staffClock?.clockWorkOnStatus === 611">
-                                                        {{user?.staffClock?.clockTimeMin}}
-                                                    </v-chip>
-                                                    <v-chip color="red" v-else>{{user?.staffClock?.clockTimeMin}}</v-chip>
-                                                </td>
-                                                <td>
-                                                    <div v-if="user?.staffClock?.clockWorkOffStatus == null" style="width:160px">
-                                                    </div>
-                                                    <v-chip color="green" v-else-if="user?.staffClock?.clockWorkOffStatus === 611">
-                                                        {{user?.staffClock?.clockTimeMax}}
-                                                    </v-chip>
-                                                    <v-chip color="red" v-else>{{user?.staffClock?.clockTimeMax}}</v-chip>
-                                                </td>
-                                                <td>
-                                                    <v-menu 
-                                                    v-model="user.menu" 
-                                                    :close-on-content-click="false" 
-                                                    transition="scale-transition" 
-                                                    offset-y 
-                                                    min-width="auto">
-                                                        <template v-slot:activator="{ on, attrs }">
-                                                            <v-text-field 
-                                                            v-model="user.clockTime" 
-                                                            prepend-icon="mdi-calendar" 
-                                                            readonly 
-                                                            v-bind="attrs" 
-                                                            v-on="on" 
-                                                            style="width:200px"></v-text-field>
-                                                        </template>
-                                                        <v-tabs v-model="user.tabs">
-                                                            <v-tab>日期</v-tab>
-                                                            <v-tab>时间</v-tab>
-                                                        </v-tabs>
-                                                        <v-tabs-items v-model="user.tabs">
-                                                            <v-tab-item>
-                                                                <v-date-picker 
-                                                                v-model="user.date" 
-                                                                no-title 
-                                                                scrollable 
-                                                                locale="zh-cn" 
-                                                                @input="clickDate(user)" 
-                                                                :min="minDate" 
-                                                                :max="maxDate"></v-date-picker>
-                                                            </v-tab-item>
-                                                            <v-tab-item>
-                                                                <v-time-picker 
-                                                                v-model="user.time" 
-                                                                format="24hr" 
-                                                                use-seconds 
-                                                                scrollable 
-                                                                @input="clickSecond(user)"></v-time-picker>
-                                                            </v-tab-item>
-                                                        </v-tabs-items>
-                                                    </v-menu>
-                                                </td>
-                                                <td>
-                                                    <div v-if="user.status === 1" style="width: 240px">
-                                                        <v-btn color="success" @click="gotoWork(user)">打卡</v-btn>
-                                                        <v-btn color="success" @click="repairWork(user)">补卡</v-btn>
-                                                        <v-btn color="success" @click="showDeviceList(user)">查看设备</v-btn>
-                                                    </div>
-                                                    <v-alert type="error" v-else>{{user.message}}</v-alert>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                <v-data-table
+                                    v-model="selected"
+                                    :headers="headers"
+                                    :items="users"
+                                    item-key="userNo"
+                                    hide-default-footer
+                                    disable-filtering
+                                    disable-pagination
+                                    disable-sort
+                                    show-select>
+                                    <template v-slot:item.a="{ item }">
+                                        <span v-if="item.status === 1">
+                                            <a @click="showLogList(item)">{{ item.userNo }}</a>
+                                        </span>
+                                        <span v-else>{{ item.userNo }}</span>
                                     </template>
-                                </v-simple-table>
+                                    <template v-slot:item.b="{ item }">
+                                      <v-select 
+                                        v-model="item.addr" 
+                                        :items="addresses" 
+                                        item-text="address" 
+                                        item-value="id" 
+                                        return-object 
+                                        style="width:250px">
+                                        </v-select>
+                                    </template>
+                                    <template v-slot:item.c="{ item }">
+                                        <div v-if="item?.staffClock?.clockWorkOnStatus == null" style="width:160px">
+                                        </div>
+                                        <v-chip color="green" v-else-if="item?.staffClock?.clockWorkOnStatus === 611">
+                                            {{item?.staffClock?.clockTimeMin}}
+                                        </v-chip>
+                                        <v-chip color="red" v-else>{{item?.staffClock?.clockTimeMin}}</v-chip>
+                                    </template>
+                                    <template v-slot:item.d="{ item }">
+                                        <div v-if="item?.staffClock?.clockWorkOffStatus == null" style="width:160px">
+                                        </div>
+                                        <v-chip color="green" v-else-if="item?.staffClock?.clockWorkOffStatus === 611">
+                                            {{item?.staffClock?.clockTimeMax}}
+                                        </v-chip>
+                                        <v-chip color="red" v-else>{{item?.staffClock?.clockTimeMax}}</v-chip>
+                                    </template>
+                                    <template v-slot:item.f="{ item }">
+                                        <div v-if="item.status === 1" style="width: 240px">
+                                            <v-btn color="success" @click="gotoWork(item)">打卡</v-btn>
+                                            <v-btn color="success" @click="repairWork(item)">补卡</v-btn>
+                                            <v-btn color="success" @click="showDeviceList(item)">查看设备</v-btn>
+                                        </div>
+                                        <v-alert type="error" v-else>{{item.message}}</v-alert>
+                                    </template>
+                                    <template v-slot:item.e="{ item }">
+                                        <v-menu 
+                                        v-model="item.menu" 
+                                        :close-on-content-click="false" 
+                                        transition="scale-transition" 
+                                        offset-y min-width="auto">
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-text-field 
+                                                v-model="item.clockTime" 
+                                                prepend-icon="mdi-calendar" 
+                                                v-bind="attrs" 
+                                                v-on="on" 
+                                                readonly style="width:200px">
+                                                </v-text-field>
+                                            </template>
+                                            <v-tabs v-model="item.tabs">
+                                                <v-tab>日期</v-tab>
+                                                <v-tab>时间</v-tab>
+                                            </v-tabs>
+                                            <v-tabs-items v-model="item.tabs">
+                                                <v-tab-item>
+                                                    <v-date-picker 
+                                                    v-model="item.date" 
+                                                    no-title scrollable 
+                                                    locale="zh-cn" 
+                                                    @input="clickDate(item)" 
+                                                    :min="minDate" 
+                                                    :max="maxDate">
+                                                    </v-date-picker>
+                                                </v-tab-item>
+                                                <v-tab-item>
+                                                    <v-time-picker 
+                                                    v-model="item.time" 
+                                                    format="24hr" 
+                                                    use-seconds scrollable 
+                                                    @input="clickSecond(item)">
+                                                    </v-time-picker>
+                                                </v-tab-item>
+                                            </v-tabs-items>
+                                        </v-menu>
+                                    </template>
+                                </v-data-table>
                             </v-col>
                         </v-row>
                         <v-dialog 
                         :fullscreen="$vuetify.breakpoint.mobile" 
-                        v-model="userDialog" 
-                        persistent 
+                        v-model="jobDialog" 
                         max-width="400px" 
-                        transition="dialog-top-transition">
+                        persistent transition="dialog-top-transition">
+                            <v-card>
+                                <v-form ref="jobForm" lazy-validation>
+                                    <v-toolbar color="purple">
+                                        <span class="text-h5">定时任务</span>
+                                    </v-toolbar>
+                                    <v-card-text>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-text-field 
+                                                    label="cron表达式*" 
+                                                    v-model="cronExpression" 
+                                                    :rules="validation.cronRules" 
+                                                    required clearable>
+                                                    </v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="green darken-1" text @click="closeJob()">关闭</v-btn>
+                                        <v-btn color="green darken-1" text @click="saveJob()">保存</v-btn>
+                                    </v-card-actions>
+                                </v-form>
+                            </v-card>
+                        </v-dialog>
+                        <v-dialog 
+                        :fullscreen="$vuetify.breakpoint.mobile" 
+                        v-model="userDialog" 
+                        max-width="400px" 
+                        persistent transition="dialog-top-transition">
                             <v-card>
                                 <v-form ref="userForm" lazy-validation>
                                     <v-toolbar color="purple">
@@ -148,18 +169,18 @@
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="员工编号*" 
-                                                    required 
                                                     v-model="user.userNo" 
                                                     :rules="validation.usernoRules" 
-                                                    clearable></v-text-field>
+                                                    required clearable>
+                                                    </v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="员工姓名*" 
-                                                    required 
                                                     v-model="user.username" 
                                                     :rules="validation.usernameRules" 
-                                                    clearable></v-text-field>
+                                                    required clearable>
+                                                    </v-text-field>
                                                 </v-col>
                                             </v-row>
                                         </v-container>
@@ -199,20 +220,19 @@
                                                     v-model="user.daterange" 
                                                     label="日期范围" 
                                                     prepend-icon="mdi-calendar" 
-                                                    readonly 
                                                     v-bind="attrs" 
                                                     v-on="on" 
-                                                    :style="style"></v-text-field>
+                                                    readonly :style="style">
+                                                    </v-text-field>
                                                 </template>
                                                 <v-date-picker 
                                                 v-model="user.dates" 
-                                                no-title 
-                                                scrollable 
+                                                no-title scrollable range 
                                                 locale="zh-cn" 
-                                                range 
                                                 @change="rangeChange()" 
                                                 :min="minDate" 
-                                                :max="maxDate"></v-date-picker>
+                                                :max="maxDate">
+                                                </v-date-picker>
                                             </v-menu>
                                         </v-col>
                                         <v-col style="padding-top:30px">
@@ -255,9 +275,8 @@
                         <v-dialog 
                         :fullscreen="$vuetify.breakpoint.mobile" 
                         v-model="addrDialog" 
-                        persistent 
                         max-width="400px" 
-                        transition="dialog-top-transition">
+                        persistent transition="dialog-top-transition">
                             <v-card>
                                 <v-form ref="addrForm" lazy-validation>
                                     <v-toolbar color="purple">
@@ -269,30 +288,30 @@
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="经度*" 
-                                                    required 
+                                                    required clearable 
                                                     v-model="addr.longitude" 
                                                     :rules="validation.longitudeRules" 
-                                                    clearable 
                                                     type="number" 
-                                                    min="0"></v-text-field>
+                                                    min="0">
+                                                    </v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="纬度*" 
-                                                    required 
+                                                    required clearable 
                                                     v-model="addr.latitude" 
                                                     :rules="validation.latitudeRules" 
-                                                    clearable 
                                                     type="number" 
-                                                    min="0"></v-text-field>
+                                                    min="0">
+                                                    </v-text-field>
                                                 </v-col>
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="地址*" 
-                                                    required 
                                                     v-model="addr.address" 
                                                     :rules="validation.addressRules" 
-                                                    clearable></v-text-field>
+                                                    required clearable>
+                                                    </v-text-field>
                                                 </v-col>
                                             </v-row>
                                         </v-container>

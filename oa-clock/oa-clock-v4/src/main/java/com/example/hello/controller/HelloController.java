@@ -50,7 +50,7 @@ public class HelloController {
 	private JobDetail jobDetail;
 
 	@PostMapping("/job")
-	public ResponseBody<?> job(JobInfo jobInfo) throws SchedulerException {
+	public ResponseBody<?> job(@RequestBody(required = false) JobInfo jobInfo) throws SchedulerException {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerState state = this.scheduler.getTriggerState(TriggerKey.triggerKey(config.getTriggerKey()));
 		// 不存在，创建
@@ -73,13 +73,22 @@ public class HelloController {
 						.setStatus(ResponseBody.FAILURE)//
 						.setMessage("[cronExpression]不能为空！");
 			}
+			CronScheduleBuilder cronSchedule = null;
+			try {
+				cronSchedule = CronScheduleBuilder.cronSchedule(jobInfo.getCronExpression());
+			} catch (Exception e) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage(e.getLocalizedMessage());
+			}
 			CronTrigger trigger = TriggerBuilder.newTrigger()//
 					.forJob(this.jobDetail)//
 					.withIdentity(config.getTriggerKey())//
-					.withSchedule(CronScheduleBuilder.cronSchedule(jobInfo.getCronExpression()))//
+					.withSchedule(cronSchedule)//
 					.build();
 			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
-			this.scheduler.scheduleJob(this.jobDetail, trigger);
+			this.scheduler.scheduleJob(trigger);
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.OK.value())//
 					.setStatus(ResponseBody.SUCCESS)//
