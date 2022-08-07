@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+        <title>hello</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="/webjars/roboto-fontface/css/roboto/roboto-fontface.css" rel="stylesheet">
+        <link href="/webjars/mdi__font/css/materialdesignicons.min.css" rel="stylesheet">
+        <link href="/webjars/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="app">
+            <v-app>
+                <v-main>
+                    <v-container>
+                        <v-row>
+                            <v-col>
+                                <v-btn color="primary" @click="showSelected()">显示选中</v-btn>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col>
+                                <v-data-table
+                                    v-model="selected"
+                                    :headers="headers"
+                                    :items="desserts"
+                                    item-key="name"
+                                    hide-default-footer
+                                    disable-filtering
+                                    disable-pagination
+                                    disable-sort
+                                    show-select>
+                                    <template v-slot:item.calories="{ item }">
+                                      <v-select 
+                                        v-model="item.addr" 
+                                        :items="addresses" 
+                                        item-text="address" 
+                                        item-value="id" 
+                                        return-object 
+                                        style="width:250px"></v-select>
+                                    </template>
+                                </v-data-table>
+                            </v-col>
+                        </v-row>
+                    </v-container>
+                </v-main>
+            </v-app>
+        </div>
+    </body>
+    <script src="/webjars/vue/vue.min.js"></script>
+    <script src="/webjars/vuetify/dist/vuetify.min.js"></script>
+    <script src="js/index3.js"></script>
+</html>
