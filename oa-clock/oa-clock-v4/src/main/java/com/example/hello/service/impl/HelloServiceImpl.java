@@ -9,9 +9,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.JobDetail;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger.TriggerState;
+import org.quartz.TriggerBuilder;
+import org.quartz.TriggerKey;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -26,7 +36,9 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.hello.model.ApplicationProperties;
 import com.example.hello.model.ApplicationProperties.Address;
+import com.example.hello.model.ApplicationProperties.JobConfig;
 import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.model.JobInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.HelloService;
@@ -45,11 +57,16 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Service
 @Slf4j
+@SuppressWarnings("unchecked")
 public class HelloServiceImpl implements HelloService {
 	@Resource
 	private RestTemplate restTemplate;
 	@Resource
 	private ApplicationProperties properties;
+	@Resource
+	private Scheduler scheduler;
+	@Resource
+	private JobDetail jobDetail;
 
 	@Override
 	public ResponseBody<List<UserInfo>> getUsers() {
@@ -103,7 +120,6 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public ResponseBody<?> initStaffClock(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
@@ -350,6 +366,152 @@ public class HelloServiceImpl implements HelloService {
 			return body;
 		}
 		return this.selectDeviceList(new UserLogin().setUserNo(staffNo));
+	}
+
+	@Override
+	public ResponseBody<?> pauseJob() throws SchedulerException {
+		JobConfig config = this.properties.getJobConfig();
+		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
+		TriggerState state = this.scheduler.getTriggerState(triggerKey);
+		// 正常
+		if (state == TriggerState.NORMAL) {
+			List<UserLogin> users = (List<UserLogin>) this.scheduler.getTrigger(triggerKey).getJobDataMap()
+					.get(config.getJobDataKey());
+			this.scheduler.pauseJob(JobKey.jobKey(config.getJobKey()));
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage(String.format("暂停定时任务成功，当前任务包含的员工%s", users.stream()
+							.map(m -> String.join("=", m.getUserNo(), m.getUsername())).collect(Collectors.toList())));
+		}
+		// 不在以上任何状态之内
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(ResponseBody.FAILURE)//
+				.setMessage(String.format("当前任务状态[%s]无法暂停", state));
+	}
+
+	@Override
+	public ResponseBody<?> resumeJob() throws SchedulerException {
+		JobConfig config = this.properties.getJobConfig();
+		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
+		TriggerState state = this.scheduler.getTriggerState(triggerKey);
+		// 暂停
+		if (state == TriggerState.PAUSED) {
+			List<UserLogin> users = (List<UserLogin>) this.scheduler.getTrigger(triggerKey).getJobDataMap()
+					.get(config.getJobDataKey());
+			this.scheduler.resumeJob(JobKey.jobKey(config.getJobKey()));
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage(String.format("恢复定时任务成功，当前任务包含的员工%s", users.stream()
+							.map(m -> String.join("=", m.getUserNo(), m.getUsername())).collect(Collectors.toList())));
+		}
+		// 不在以上任何状态之内
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(ResponseBody.FAILURE)//
+				.setMessage(String.format("当前任务状态[%s]无法恢复", state));
+	}
+
+	@Override
+	public ResponseBody<?> saveJob(JobInfo jobInfo) throws SchedulerException {
+		JobConfig config = this.properties.getJobConfig();
+		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
+		TriggerState state = this.scheduler.getTriggerState(triggerKey);
+		// 不存在，创建
+		if (state == TriggerState.NONE) {
+			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[users]不能为空！");
+			}
+			if (!StringUtils.hasText(jobInfo.getCronExpression())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[cronExpression]不能为空！");
+			}
+			CronScheduleBuilder cronSchedule = null;
+			try {
+				cronSchedule = CronScheduleBuilder.cronSchedule(jobInfo.getCronExpression());
+			} catch (Exception e) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage(e.getLocalizedMessage());
+			}
+			CronTrigger trigger = TriggerBuilder.newTrigger()//
+					.forJob(this.jobDetail)//
+					.withIdentity(config.getTriggerKey())//
+					.withSchedule(cronSchedule)//
+					.build();
+			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
+			this.scheduler.scheduleJob(trigger);
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage("创建定时任务成功");
+		}
+		// 正常 或 暂停
+		if (state == TriggerState.NORMAL || state == TriggerState.PAUSED) {
+			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[users]不能为空！");
+			}
+			if (!StringUtils.hasText(jobInfo.getCronExpression())) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage("[cronExpression]不能为空！");
+			}
+			CronScheduleBuilder cronSchedule = null;
+			try {
+				cronSchedule = CronScheduleBuilder.cronSchedule(jobInfo.getCronExpression());
+			} catch (Exception e) {
+				return new ResponseBody<>()//
+						.setCode(HttpStatus.BAD_REQUEST.value())//
+						.setStatus(ResponseBody.FAILURE)//
+						.setMessage(e.getLocalizedMessage());
+			}
+			CronTrigger trigger = (CronTrigger) this.scheduler.getTrigger(triggerKey);
+			trigger = trigger.getTriggerBuilder()//
+					.withIdentity(triggerKey)//
+					.withSchedule(cronSchedule)//
+					.build();
+			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
+			this.scheduler.rescheduleJob(triggerKey, trigger);
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage("更新定时任务成功");
+		}
+		// 完成
+		if (state == TriggerState.COMPLETE) {
+			return null;
+		}
+		// 错误
+		if (state == TriggerState.ERROR) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(ResponseBody.FAILURE)//
+					.setMessage(String.format("当前任务状态[%s]错误", state));
+		}
+		// 阻塞，处理中
+		if (state == TriggerState.BLOCKED) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(ResponseBody.FAILURE)//
+					.setMessage(String.format("当前任务状态[%s]处理中", state));
+		}
+		// 不在以上任何状态之内
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(ResponseBody.FAILURE)//
+				.setMessage(String.format("未知的任务状态[%s]", state));
 	}
 
 }

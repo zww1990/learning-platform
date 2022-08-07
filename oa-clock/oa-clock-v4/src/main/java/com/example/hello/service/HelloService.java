@@ -2,8 +2,11 @@ package com.example.hello.service;
 
 import java.util.List;
 
+import org.quartz.SchedulerException;
+
 import com.example.hello.model.ApplicationProperties.Address;
 import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.model.JobInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 
@@ -33,4 +36,10 @@ public interface HelloService {
 	ResponseBody<?> selectDeviceList(UserLogin userLogin);
 
 	ResponseBody<?> resetBindDevice(String staffNo, Integer id);
+
+	ResponseBody<?> pauseJob() throws SchedulerException;
+
+	ResponseBody<?> resumeJob() throws SchedulerException;
+
+	ResponseBody<?> saveJob(JobInfo jobInfo) throws SchedulerException;
 }
