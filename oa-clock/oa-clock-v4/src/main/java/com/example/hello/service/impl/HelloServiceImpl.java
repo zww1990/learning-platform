@@ -281,7 +281,6 @@ public class HelloServiceImpl implements HelloService {
 		ResponseBody<?> body = this.restTemplate
 				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
 				.getBody();
-		log.info("{}", body);
 		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
 			this.properties.getUsers().add(//
 					new UserInfo()//

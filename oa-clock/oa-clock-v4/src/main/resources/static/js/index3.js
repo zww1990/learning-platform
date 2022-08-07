@@ -17,7 +17,7 @@ new Vue({
           { text: 'Fat (g)', value: 'fat' },
           { text: 'Carbs (g)', value: 'carbs' },
           { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: 'Iron (%)', value: 'iron.text' },
         ],
         desserts: [
           {
@@ -26,7 +26,7 @@ new Vue({
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
-            iron: '1%',
+            iron: { id: 1, text: '1%' },
             addr: { id: 1, address: '北京海淀' }
           },
           {
@@ -35,7 +35,7 @@ new Vue({
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
-            iron: '1%',
+            iron: { id: 1, text: '1%' },
             addr: { id: 2, address: '河北石家庄' }
           },
           {
@@ -44,7 +44,7 @@ new Vue({
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
-            iron: '7%',
+            iron: { id: 2, text: '17%' },
             addr: { id: 2, address: '河北石家庄' }
           },
           {
@@ -53,7 +53,7 @@ new Vue({
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
-            iron: '8%',
+            iron: { id: 3, text: '18%' },
             addr: { id: 2, address: '河北石家庄' }
           },
           {
@@ -62,7 +62,7 @@ new Vue({
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
-            iron: '16%',
+            iron: { id: 4, text: '16%' },
             addr: { id: 1, address: '北京海淀' }
           },
         ],
