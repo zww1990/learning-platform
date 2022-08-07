@@ -18,7 +18,9 @@
                             <v-col>
                                 <v-btn color="primary" @click="openUser()">添加员工</v-btn>
                                 <v-btn color="primary" @click="openAddr()">添加地址</v-btn>
-                                <v-btn color="primary" @click="openJob()">定时任务</v-btn>
+                                <v-btn color="primary" @click="openJob()">创建|更新定时任务</v-btn>
+                                <v-btn color="primary" @click="pauseJob()">暂停定时任务</v-btn>
+                                <v-btn color="primary" @click="resumeJob()">恢复定时任务</v-btn>
                                 <v-snackbar top  
                                 v-model="snackbar.value" 
                                 :timeout="snackbar.timeout" 

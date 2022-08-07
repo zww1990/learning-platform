@@ -200,7 +200,7 @@ new Vue({
         },
         saveJob() {
             if (this.$refs.jobForm.validate()) {
-            	fetch('/hello/job', {
+            	fetch('/hello/savejob', {
                     method: 'POST',
                     body: JSON.stringify({
                     	cronExpression: this.cronExpression,
@@ -216,11 +216,38 @@ new Vue({
 	                this.snackbar.text = res.message;
 	                if (res.status === 1) {
 	                    this.snackbar.color = 'success';
+	                    this.closeJob();
 	                } else {
 	                    this.snackbar.color = 'error';
 	                }
                 });
             }
+        },
+        pauseJob() {
+        	fetch('/hello/pausejob')
+            .then(res => res.json())
+            .then(res => {
+                this.snackbar.value = true;
+                this.snackbar.text = res.message;
+                if (res.status === 1) {
+                    this.snackbar.color = 'success';
+                } else {
+                    this.snackbar.color = 'error';
+                }
+            });
+        },
+        resumeJob() {
+        	fetch('/hello/resumejob')
+            .then(res => res.json())
+            .then(res => {
+                this.snackbar.value = true;
+                this.snackbar.text = res.message;
+                if (res.status === 1) {
+                    this.snackbar.color = 'success';
+                } else {
+                    this.snackbar.color = 'error';
+                }
+            });
         },
         saveAddr() {
             if (this.$refs.addrForm.validate()) {

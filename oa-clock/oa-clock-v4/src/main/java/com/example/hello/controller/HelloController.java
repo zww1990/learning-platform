@@ -73,14 +73,19 @@ public class HelloController {
 	public ResponseBody<?> resumeJob() throws SchedulerException {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerState state = this.scheduler.getTriggerState(TriggerKey.triggerKey(config.getTriggerKey()));
-		if (state==null) {
-			
+		// 暂停
+		if (state == TriggerState.PAUSED) {
+			this.scheduler.resumeJob(JobKey.jobKey(config.getJobKey()));
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage("恢复定时任务成功");
 		}
-		this.scheduler.resumeJob(JobKey.jobKey(config.getJobKey()));
+		// 不在以上任何状态之内
 		return new ResponseBody<>()//
-				.setCode(HttpStatus.OK.value())//
-				.setStatus(ResponseBody.SUCCESS)//
-				.setMessage("恢复定时任务成功");
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(ResponseBody.FAILURE)//
+				.setMessage(String.format("当前任务状态[%s]无法恢复", state));
 	}
 
 	@PostMapping("/savejob")
@@ -123,8 +128,8 @@ public class HelloController {
 					.setStatus(ResponseBody.SUCCESS)//
 					.setMessage("创建定时任务成功");
 		}
-		// 正常
-		if (state == TriggerState.NORMAL) {
+		// 正常 或 暂停
+		if (state == TriggerState.NORMAL || state == TriggerState.PAUSED) {
 			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
 				return new ResponseBody<>()//
 						.setCode(HttpStatus.BAD_REQUEST.value())//
@@ -157,10 +162,6 @@ public class HelloController {
 					.setCode(HttpStatus.OK.value())//
 					.setStatus(ResponseBody.SUCCESS)//
 					.setMessage("更新定时任务成功");
-		}
-		// 暂停
-		if (state == TriggerState.PAUSED) {
-			return null;
 		}
 		// 完成
 		if (state == TriggerState.COMPLETE) {
