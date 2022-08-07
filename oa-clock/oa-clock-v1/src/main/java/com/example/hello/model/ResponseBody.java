@@ -10,9 +10,12 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class ResponseBody<T> {
+	/** 成功 */
+	public static final int SUCCESS = 1;
+	/** 失败 */
+	public static final int FAILURE = 0;
 	private int status;
 	private int code;
 	private String message;
 	private T data;
-
 }
