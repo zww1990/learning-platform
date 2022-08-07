@@ -56,10 +56,12 @@ public class HelloApplication implements CommandLineRunner {
 //	@Bean
 //	org.quartz.Trigger jobTrigger() {
 //		com.example.hello.model.ApplicationProperties.JobConfig config = this.properties.getJobConfig();
-//		return org.quartz.TriggerBuilder.newTrigger()//
+//		org.quartz.CronTrigger trigger = org.quartz.TriggerBuilder.newTrigger()//
 //				.forJob(this.jobDetail())//
 //				.withIdentity(config.getTriggerKey())//
 //				.withSchedule(org.quartz.CronScheduleBuilder.cronSchedule(config.getCronExpression()))//
 //				.build();
+//		trigger.getJobDataMap().put(config.getJobDataKey(), this.properties.getUsers());
+//		return trigger;
 //	}
 }
