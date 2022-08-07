@@ -214,10 +214,10 @@ new Vue({
                 .then(res => {
 	                this.snackbar.value = true;
 	                this.snackbar.text = res.message;
-	                if (res.status === 0) {
-	                    this.snackbar.color = 'error';
-	                } else {
+	                if (res.status === 1) {
 	                    this.snackbar.color = 'success';
+	                } else {
+	                    this.snackbar.color = 'error';
 	                }
                 });
             }
