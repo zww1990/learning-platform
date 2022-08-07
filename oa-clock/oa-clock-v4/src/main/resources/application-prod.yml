@@ -10,6 +10,8 @@ app:
   bi-sql-exec-url: http://api.yuzhilin.net.cn/bisearchserver/bisql/exec
   bi-sql-source-id: 5
   users:
+  - user-no: 100221
+    username: 姚辉宇
   - user-no: 100245
     username: 王哲
   - user-no: 100226
