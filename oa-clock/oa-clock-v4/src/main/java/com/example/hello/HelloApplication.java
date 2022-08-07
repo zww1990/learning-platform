@@ -61,7 +61,15 @@ public class HelloApplication implements CommandLineRunner {
 //				.withIdentity(config.getTriggerKey())//
 //				.withSchedule(org.quartz.CronScheduleBuilder.cronSchedule(config.getCronExpression()))//
 //				.build();
-//		trigger.getJobDataMap().put(config.getJobDataKey(), this.properties.getUsers());
+//		com.example.hello.model.ApplicationProperties.Address addr = this.properties.getAddresses().get(0);
+//		trigger.getJobDataMap().put(config.getJobDataKey(), this.properties.getUsers().stream().map(m -> {
+//			return new com.example.hello.model.UserLogin()//
+//					.setUserNo(m.getUserNo())//
+//					.setUsername(m.getUsername())//
+//					.setLatitude(addr.getLatitude())//
+//					.setLongitude(addr.getLongitude())//
+//					.setAddress(addr.getAddress());
+//		}).collect(java.util.stream.Collectors.toList()));
 //		return trigger;
 //	}
 }
