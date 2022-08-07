@@ -43,7 +43,6 @@ public class HelloJob extends QuartzJobBean {
 		List<UserLogin> users = (List<UserLogin>) context.getMergedJobDataMap()
 				.get(this.properties.getJobConfig().getJobDataKey());
 		if (!CollectionUtils.isEmpty(users)) {
-			System.err.println(users);
 			ThreadLocalRandom random = ThreadLocalRandom.current();
 			// 0=(AM)上午，1=(PM)下午
 			int ampm = LocalTime.now().get(ChronoField.AMPM_OF_DAY);
