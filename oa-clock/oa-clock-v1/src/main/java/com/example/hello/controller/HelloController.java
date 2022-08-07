@@ -30,10 +30,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.hello.model.ApplicationProperties;
-import com.example.hello.model.ResponseBody;
-import com.example.hello.model.UserLogin;
 import com.example.hello.model.ApplicationProperties.Address;
 import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.model.ResponseBody;
+import com.example.hello.model.UserLogin;
 
 import cn.net.yzl.oa.entity.ClockWorkStatus;
 import cn.net.yzl.oa.entity.SqlExecQueryDTO;
@@ -41,10 +41,10 @@ import cn.net.yzl.oa.entity.vo.AppStaffClockVO;
 import cn.net.yzl.oa.util.AESUtil;
 import lombok.extern.slf4j.Slf4j;
 
+@SuppressWarnings("unchecked")
 @RestController
 @RequestMapping("/hello")
 @Slf4j
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class HelloController {
 	@Resource
 	private RestTemplate restTemplate;
@@ -56,7 +56,7 @@ public class HelloController {
 		log.info("从当前应用中加载配置成功");
 		return new ResponseBody<List<UserInfo>>()//
 				.setCode(HttpStatus.OK.value())//
-				.setStatus(1)//
+				.setStatus(ResponseBody.SUCCESS)//
 				.setData(this.properties.getUsers());
 	}
 
@@ -65,7 +65,7 @@ public class HelloController {
 		log.info("从当前应用中加载配置成功");
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
-				.setStatus(1)//
+				.setStatus(ResponseBody.SUCCESS)//
 				.setData(this.properties.getAddresses());
 	}
 
@@ -74,32 +74,32 @@ public class HelloController {
 		if (!StringUtils.hasText(address.getAddress())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[address]不能为空");
 		}
 		if (address.getLatitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[latitude]不能为空");
 		}
 		if (address.getLongitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[longitude]不能为空");
 		}
 		if (address.getId() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[id]不能为空");
 		}
 		log.info("{}", address);
 		this.properties.getAddresses().add(address);
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
-				.setStatus(1);
+				.setStatus(ResponseBody.SUCCESS);
 	}
 
 	@PostMapping("/initstaffclock")
@@ -107,35 +107,27 @@ public class HelloController {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
-		try {
-			ResponseBody<Map<String, Object>> body = this.restTemplate
-					.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(), HttpMethod.GET,
-							new HttpEntity<>(headers), ResponseBody.class)
-					.getBody();
-			if (!CollectionUtils.isEmpty(body.getData())) {
-				body.getData().remove("wifiList");
-				body.getData().remove("rangeList");
-				body.getData().put("clockWorkOffStatusName",
-						ClockWorkStatus.codeToName((Integer) body.getData().get("clockWorkOffStatus")));
-				body.getData().put("clockWorkOnStatusName",
-						ClockWorkStatus.codeToName((Integer) body.getData().get("clockWorkOnStatus")));
-			}
-			log.info("{}", body);
-			return body;
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
-					.setStatus(0)//
-					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+		ResponseBody<Map<String, Object>> body = this.restTemplate
+				.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(), HttpMethod.GET,
+						new HttpEntity<>(headers), ResponseBody.class)
+				.getBody();
+		if (!CollectionUtils.isEmpty(body.getData())) {
+			body.getData().remove("wifiList");
+			body.getData().remove("rangeList");
+			body.getData().put("clockWorkOffStatusName",
+					ClockWorkStatus.codeToName((Integer) body.getData().get("clockWorkOffStatus")));
+			body.getData().put("clockWorkOnStatusName",
+					ClockWorkStatus.codeToName((Integer) body.getData().get("clockWorkOnStatus")));
 		}
+		log.info("{}", body);
+		return body;
 	}
 
 	@PostMapping("/v2/userloginandstaffclock")
@@ -143,25 +135,25 @@ public class HelloController {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getAddress())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[address]不能为空");
 		}
 		if (userLogin.getLatitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[latitude]不能为空");
 		}
 		if (userLogin.getLongitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[longitude]不能为空");
 		}
 		log.info("补卡>>>{}", userLogin);
@@ -177,7 +169,7 @@ public class HelloController {
 						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
-		ResponseBody<Object> body = this.restTemplate
+		ResponseBody<?> body = this.restTemplate
 				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
 				.getBody();
 		log.info("{}", body);
@@ -199,25 +191,25 @@ public class HelloController {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getAddress())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[address]不能为空");
 		}
 		if (userLogin.getLatitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[latitude]不能为空");
 		}
 		if (userLogin.getLongitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[longitude]不能为空");
 		}
 		log.info("打卡>>>{}", userLogin);
@@ -233,24 +225,17 @@ public class HelloController {
 						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(new Date());
-		try {
-			ResponseBody<Object> body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
-					new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
-			log.info("{}", body);
-			if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
-				this.properties.getUsers().add(//
-						new UserInfo()//
-								.setUserNo(userLogin.getUserNo())//
-								.setUsername(userLogin.getUsername()));
-			}
-			return this.initStaffClock(userLogin);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
-					.setStatus(0)//
-					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+		ResponseBody<?> body = this.restTemplate
+				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
+				.getBody();
+		log.info("{}", body);
+		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+			this.properties.getUsers().add(//
+					new UserInfo()//
+							.setUserNo(userLogin.getUserNo())//
+							.setUsername(userLogin.getUsername()));
 		}
+		return this.initStaffClock(userLogin);
 	}
 
 	@PostMapping("/selectappstaffclockloglist")
@@ -258,7 +243,7 @@ public class HelloController {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
@@ -286,13 +271,13 @@ public class HelloController {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(0)//
+					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("appid", "oa");
-		ResponseBody body = this.restTemplate.exchange(this.properties.getDeviceListUrl() + userLogin.getUserNo(),
+		ResponseBody<?> body = this.restTemplate.exchange(this.properties.getDeviceListUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
 		return body;
 	}
@@ -306,10 +291,10 @@ public class HelloController {
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
 		params.add("staffNo", staffNo);
 		params.add("id", id);
-		ResponseBody body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
+		ResponseBody<?> body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
 				new HttpEntity<>(params, headers), ResponseBody.class);
 		log.info("{}", body);
-		if (body.getStatus() != 1) {
+		if (body.getStatus() != ResponseBody.SUCCESS) {
 			return body;
 		}
 		return this.selectDeviceList(new UserLogin().setUserNo(staffNo));
