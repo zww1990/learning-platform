@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger.TriggerState;
@@ -49,19 +50,46 @@ public class HelloController {
 	@Resource
 	private JobDetail jobDetail;
 
-	@PostMapping("/job")
-	public ResponseBody<?> job(@RequestBody(required = false) JobInfo jobInfo) throws SchedulerException {
+	@GetMapping("/pausejob")
+	public ResponseBody<?> pauseJob() throws SchedulerException {
+		JobConfig config = this.properties.getJobConfig();
+		TriggerState state = this.scheduler.getTriggerState(TriggerKey.triggerKey(config.getTriggerKey()));
+		// 正常
+		if (state == TriggerState.NORMAL) {
+			this.scheduler.pauseJob(JobKey.jobKey(config.getJobKey()));
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.OK.value())//
+					.setStatus(ResponseBody.SUCCESS)//
+					.setMessage("暂停定时任务成功");
+		}
+		// 不在以上任何状态之内
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(ResponseBody.FAILURE)//
+				.setMessage(String.format("当前任务状态[%s]无法暂停", state));
+	}
+
+	@GetMapping("/resumejob")
+	public ResponseBody<?> resumeJob() throws SchedulerException {
+		JobConfig config = this.properties.getJobConfig();
+		TriggerState state = this.scheduler.getTriggerState(TriggerKey.triggerKey(config.getTriggerKey()));
+		if (state==null) {
+			
+		}
+		this.scheduler.resumeJob(JobKey.jobKey(config.getJobKey()));
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(ResponseBody.SUCCESS)//
+				.setMessage("恢复定时任务成功");
+	}
+
+	@PostMapping("/savejob")
+	public ResponseBody<?> saveJob(@RequestBody JobInfo jobInfo) throws SchedulerException {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
 		// 不存在，创建
 		if (state == TriggerState.NONE) {
-			if (jobInfo == null) {
-				return new ResponseBody<>()//
-						.setCode(HttpStatus.BAD_REQUEST.value())//
-						.setStatus(ResponseBody.FAILURE)//
-						.setMessage("参数不能为空！");
-			}
 			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
 				return new ResponseBody<>()//
 						.setCode(HttpStatus.BAD_REQUEST.value())//
@@ -97,12 +125,6 @@ public class HelloController {
 		}
 		// 正常
 		if (state == TriggerState.NORMAL) {
-			if (jobInfo == null) {
-				return new ResponseBody<>()//
-						.setCode(HttpStatus.BAD_REQUEST.value())//
-						.setStatus(ResponseBody.FAILURE)//
-						.setMessage("参数不能为空！");
-			}
 			if (CollectionUtils.isEmpty(jobInfo.getUsers())) {
 				return new ResponseBody<>()//
 						.setCode(HttpStatus.BAD_REQUEST.value())//
