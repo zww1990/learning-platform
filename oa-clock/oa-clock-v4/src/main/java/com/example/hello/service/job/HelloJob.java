@@ -1,6 +1,5 @@
 package com.example.hello.service.job;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -62,7 +61,7 @@ public class HelloJob extends QuartzJobBean {
 				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(user);
 				try {
 					WebSocketServer.sendInfo(user.getUserNo(), null);
-				} catch (IOException e) {
+				} catch (Exception e) {
 					log.error(e.getLocalizedMessage(), e);
 				}
 				log.info("{}", body);

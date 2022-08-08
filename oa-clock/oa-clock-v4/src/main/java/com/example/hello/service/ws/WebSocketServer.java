@@ -1,6 +1,5 @@
 package com.example.hello.service.ws;
 
-import java.io.IOException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.websocket.OnClose;
@@ -49,7 +48,7 @@ public class WebSocketServer {
 		log.info("有新窗口开始监听:{}, 当前在线人数为:{}", sid, getOnlineCount());
 //		try {
 //			sendMessage("连接成功");
-//		} catch (IOException e) {
+//		} catch (Exception e) {
 //			log.error(e.getLocalizedMessage(), e);
 //		}
 	}
@@ -77,7 +76,7 @@ public class WebSocketServer {
 		for (WebSocketServer item : webSocketSet) {
 			try {
 				item.sendMessage(message);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e.getLocalizedMessage(), e);
 			}
 		}
@@ -92,10 +91,10 @@ public class WebSocketServer {
 	 * 实现服务器主动推送
 	 * 
 	 * @param message
-	 * @throws IOException
+	 * @throws Exception
 	 * @since 2022年8月8日,下午2:20:41
 	 */
-	public void sendMessage(String message) throws IOException {
+	public void sendMessage(String message) throws Exception {
 		this.session.getBasicRemote().sendText(message);
 	}
 
@@ -104,10 +103,10 @@ public class WebSocketServer {
 	 * 
 	 * @param message
 	 * @param sid
-	 * @throws IOException
+	 * @throws Exception
 	 * @since 2022年8月8日,下午2:21:05
 	 */
-	public static void sendInfo(String message, @PathParam("sid") String sid) throws IOException {
+	public static void sendInfo(String message, @PathParam("sid") String sid) throws Exception {
 		log.info("推送消息到窗口:{}，推送内容:{}", sid, message);
 		for (WebSocketServer item : webSocketSet) {
 			try {
@@ -117,7 +116,7 @@ public class WebSocketServer {
 				} else if (item.sid.equals(sid)) {
 					item.sendMessage(message);
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(e.getLocalizedMessage(), e);
 				continue;
 			}

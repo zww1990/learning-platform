@@ -18,7 +18,6 @@ import org.quartz.CronTrigger;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.quartz.Trigger.TriggerState;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
@@ -382,7 +381,7 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	public ResponseBody<?> pauseJob() throws SchedulerException {
+	public ResponseBody<?> pauseJob() throws Exception {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
@@ -406,7 +405,7 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	public ResponseBody<?> resumeJob() throws SchedulerException {
+	public ResponseBody<?> resumeJob() throws Exception {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
@@ -430,7 +429,7 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	public ResponseBody<?> saveJob(JobInfo jobInfo) throws SchedulerException {
+	public ResponseBody<?> saveJob(JobInfo jobInfo) throws Exception {
 		JobConfig config = this.properties.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
