@@ -8,17 +8,37 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.jupiter.api.Test;
+import org.quartz.CronScheduleBuilder;
 
 /**
  * SimpleTests
  * 
- * @author zww19
+ * @author zhang weiwei
  * @since 2022年5月31日,上午11:38:56
  */
 public class SimpleTests {
+	@Test
+	public void testUUID() {
+		try {
+			System.err.println(UUID.randomUUID().toString().replace("-", ""));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testCronExpression() {
+		try {
+			System.err.println(CronScheduleBuilder.cronSchedule("0 0 9,19 ? * 1-5"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void testThreadLocalRandom() {
 		try {

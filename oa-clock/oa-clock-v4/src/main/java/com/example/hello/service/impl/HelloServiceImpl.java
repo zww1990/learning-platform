@@ -313,6 +313,7 @@ public class HelloServiceImpl implements HelloService {
 						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
 			} else {
 				log.info("跳过本次打卡");
+				body.setData(null).setMessage("跳过本次打卡");
 			}
 		}
 		return body;
@@ -393,8 +394,9 @@ public class HelloServiceImpl implements HelloService {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.OK.value())//
 					.setStatus(ResponseBody.SUCCESS)//
-					.setMessage(String.format("暂停定时任务成功，当前任务包含的员工%s", users.stream()
-							.map(m -> String.join("=", m.getUserNo(), m.getUsername())).collect(Collectors.toList())));
+					.setMessage(String.format("暂停定时任务成功，当前任务包含的员工%s",
+							users.stream().map(m -> String.join("=", m.getUserNo(), m.getUsername(), m.getAddress()))
+									.collect(Collectors.toList())));
 		}
 		// 不在以上任何状态之内
 		return new ResponseBody<>()//
@@ -416,8 +418,9 @@ public class HelloServiceImpl implements HelloService {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.OK.value())//
 					.setStatus(ResponseBody.SUCCESS)//
-					.setMessage(String.format("恢复定时任务成功，当前任务包含的员工%s", users.stream()
-							.map(m -> String.join("=", m.getUserNo(), m.getUsername())).collect(Collectors.toList())));
+					.setMessage(String.format("恢复定时任务成功，当前任务包含的员工%s",
+							users.stream().map(m -> String.join("=", m.getUserNo(), m.getUsername(), m.getAddress()))
+									.collect(Collectors.toList())));
 		}
 		// 不在以上任何状态之内
 		return new ResponseBody<>()//

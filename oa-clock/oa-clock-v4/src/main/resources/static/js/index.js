@@ -4,6 +4,7 @@ new Vue({
         theme: { dark: true },
     }),
     data: {
+    	webSocket: null,
     	selected: [],
     	cronExpression: null,
     	headers: [
@@ -68,6 +69,27 @@ new Vue({
         let json2 = await(await fetch('/hello/users')).json();
         this.users = json2.data;
         this.users.forEach(user => this.initStaffClockV1(user));
+        if (typeof WebSocket === 'undefined') {
+            console.error('浏览器不支持WebSocket！');
+        } else {
+	        let wsurl = (await(await fetch('/hello/wsurl')).json()).data;
+	        this.webSocket = new WebSocket(wsurl);
+	        this.webSocket.onmessage = function(message) {
+	        	window.location.reload();
+	        };
+            this.webSocket.onopen = function() {
+            	console.log('WebSocket服务连接成功！');
+            };
+            this.webSocket.onerror = function() {
+            	console.error('WebSocket服务发生错误！');
+            };
+            this.webSocket.onclose = function() {
+            	console.log('WebSocket服务连接断开！');
+            };
+        }
+    },
+    destroyed() {
+    	this.webSocket.close();
     },
     methods: {
 		initStaffClockV1(user) {
