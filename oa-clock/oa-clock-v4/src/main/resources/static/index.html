@@ -136,6 +136,11 @@
                                     <v-card-text>
                                         <v-container>
                                             <v-row>
+                                                <v-col cols="12" v-for="(item, index) in selected" :key="index">
+                                                    {{ item.userNo }} - {{ item.username }}
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
                                                 <v-col cols="12">
                                                     <v-text-field 
                                                     label="cron表达式*" 
