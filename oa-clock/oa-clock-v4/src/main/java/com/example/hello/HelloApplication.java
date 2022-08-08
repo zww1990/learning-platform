@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 import com.example.hello.model.ApplicationProperties;
 import com.example.hello.service.job.HelloJob;
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * spring boot application
  * 
- * @author zhangweiwei
+ * @author zhang weiwei
  * @date 2021年5月25日,下午4:16:15
  */
 @SpringBootApplication
@@ -53,23 +54,8 @@ public class HelloApplication implements CommandLineRunner {
 				.build();
 	}
 
-//	@Bean
-//	org.quartz.Trigger jobTrigger() {
-//		com.example.hello.model.ApplicationProperties.JobConfig config = this.properties.getJobConfig();
-//		org.quartz.CronTrigger trigger = org.quartz.TriggerBuilder.newTrigger()//
-//				.forJob(this.jobDetail())//
-//				.withIdentity(config.getTriggerKey())//
-//				.withSchedule(org.quartz.CronScheduleBuilder.cronSchedule(config.getCronExpression()))//
-//				.build();
-//		com.example.hello.model.ApplicationProperties.Address addr = this.properties.getAddresses().get(0);
-//		trigger.getJobDataMap().put(config.getJobDataKey(), this.properties.getUsers().stream().map(m -> {
-//			return new com.example.hello.model.UserLogin()//
-//					.setUserNo(m.getUserNo())//
-//					.setUsername(m.getUsername())//
-//					.setLatitude(addr.getLatitude())//
-//					.setLongitude(addr.getLongitude())//
-//					.setAddress(addr.getAddress());
-//		}).collect(java.util.stream.Collectors.toList()));
-//		return trigger;
-//	}
+	@Bean
+	ServerEndpointExporter serverEndpointExporter() {
+		return new ServerEndpointExporter();
+	}
 }

@@ -1,5 +1,6 @@
 package com.example.hello.service.job;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -19,6 +20,7 @@ import com.example.hello.model.ApplicationProperties;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.HelloService;
+import com.example.hello.service.ws.WebSocketServer;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -58,6 +60,11 @@ public class HelloJob extends QuartzJobBean {
 				}
 				user.setAmpm(ampm);
 				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(user);
+				try {
+					WebSocketServer.sendInfo(body.toString(), null);
+				} catch (IOException e) {
+					log.error(e.getLocalizedMessage(), e);
+				}
 				log.info("{}", body);
 			}
 		}

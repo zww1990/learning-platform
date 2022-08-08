@@ -1,10 +1,13 @@
 package com.example.hello.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.quartz.SchedulerException;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +33,17 @@ import com.example.hello.service.HelloService;
 public class HelloController {
 	@Resource
 	private HelloService helloService;
+	@Resource
+	private ServerProperties properties;
+
+	@GetMapping("/wsurl")
+	public ResponseBody<String> wsUrl() {
+		return new ResponseBody<String>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(ResponseBody.SUCCESS)//
+				.setData(String.format("ws://localhost:%s/websocket/%s", this.properties.getPort(),
+						UUID.randomUUID().toString().replace("-", "")));
+	}
 
 	@GetMapping("/pausejob")
 	public ResponseBody<?> pauseJob() throws SchedulerException {
