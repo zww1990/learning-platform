@@ -256,52 +256,64 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
-	public ResponseBody<?> userLoginAndStaffClockV3(UserLogin userLogin) {
-		if (!StringUtils.hasText(userLogin.getUserNo())) {
+	public ResponseBody<?> userLoginAndStaffClockV3(UserLogin user) {
+		if (!StringUtils.hasText(user.getUserNo())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
 					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[userNo]不能为空");
 		}
-		if (!StringUtils.hasText(userLogin.getAddress())) {
+		if (!StringUtils.hasText(user.getAddress())) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
 					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[address]不能为空");
 		}
-		if (userLogin.getLatitude() == null) {
+		if (user.getLatitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
 					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[latitude]不能为空");
 		}
-		if (userLogin.getLongitude() == null) {
+		if (user.getLongitude() == null) {
 			return new ResponseBody<>()//
 					.setCode(HttpStatus.BAD_REQUEST.value())//
 					.setStatus(ResponseBody.FAILURE)//
 					.setMessage("[longitude]不能为空");
 		}
-		log.info("定时打卡>>>{}", userLogin);
+		log.info("定时打卡>>>{}", user);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
-		ThreadLocalRandom random = ThreadLocalRandom.current();
-		AppStaffClockVO vo = new AppStaffClockVO()//
-				.setAddress(userLogin.getAddress())//
-				.setLatitude(userLogin.getLatitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
-						RoundingMode.HALF_UP))//
-				.setLongitude(userLogin.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
-						RoundingMode.HALF_UP))//
-				.setStaffNo(userLogin.getUserNo())//
-				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
-		ResponseBody<?> body = this.restTemplate
-				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
+		ResponseBody<Map<String, Object>> body = this.restTemplate
+				.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
+						new HttpEntity<>(headers), ResponseBody.class)
 				.getBody();
-		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
-			this.properties.getUsers().add(//
-					new UserInfo()//
-							.setUserNo(userLogin.getUserNo())//
-							.setUsername(userLogin.getUsername()));
+		Map<String, Object> data = body.getData();
+		if (CollectionUtils.isEmpty(data)) {
+			log.error("定时打卡异常>>>{}", data);
+		} else {
+			boolean flag = false;
+			if (user.getAmpm() == UserLogin.AM) {
+				flag = data.get("clockWorkOnStatus") == null;
+			} else if (user.getAmpm() == UserLogin.PM) {
+				flag = data.get("clockWorkOffStatus") == null;
+			}
+			if (flag) {
+				ThreadLocalRandom random = ThreadLocalRandom.current();
+				AppStaffClockVO vo = new AppStaffClockVO()//
+						.setAddress(user.getAddress())//
+						.setLatitude(user.getLatitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+								RoundingMode.HALF_UP))//
+						.setLongitude(user.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+								RoundingMode.HALF_UP))//
+						.setStaffNo(user.getUserNo())//
+						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
+				body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
+						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
+			} else {
+				log.info("跳过本次打卡");
+			}
 		}
 		return body;
 	}
