@@ -20,10 +20,6 @@ app:
     username: 关晓鹏
   - user-no: 100248
     username: 汪化胜
-  - user-no: 100261
-    username: 张东丽
-  - user-no: 100230
-    username: 张维维
   job-config:
     job-key: hello-job
     trigger-key: hello-trigger
