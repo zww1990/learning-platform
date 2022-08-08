@@ -2,11 +2,14 @@ package com.example.test;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -21,6 +24,42 @@ import org.quartz.CronScheduleBuilder;
  * @since 2022年5月31日,上午11:38:56
  */
 public class SimpleTests {
+	@Test
+	public void testGetHostAddress() {
+		try {
+			System.err.println(this.getLocalHostLANAddress().getHostAddress());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private InetAddress getLocalHostLANAddress() throws Exception {
+		InetAddress candidateAddress = null;
+		// 遍历所有的网络接口
+		for (Enumeration<NetworkInterface> ifaces = NetworkInterface.getNetworkInterfaces(); ifaces
+				.hasMoreElements();) {
+			NetworkInterface iface = ifaces.nextElement();
+			// 在所有的接口下再遍历IP
+			for (Enumeration<InetAddress> inetAddrs = iface.getInetAddresses(); inetAddrs.hasMoreElements();) {
+				InetAddress inetAddr = inetAddrs.nextElement();
+				if (!inetAddr.isLoopbackAddress()) {// 排除loopback类型地址
+					if (inetAddr.isSiteLocalAddress()) {
+						// 如果是site-local地址，就是它了
+						return inetAddr;
+					} else if (candidateAddress == null) {
+						// site-local类型的地址未被发现，先记录候选地址
+						candidateAddress = inetAddr;
+					}
+				}
+			}
+		}
+		if (candidateAddress != null) {
+			return candidateAddress;
+		}
+		// 如果没有发现 non-loopback地址.只能用最次选的方案
+		return InetAddress.getLocalHost();
+	}
+
 	@Test
 	public void testUUID() {
 		try {
