@@ -28,5 +28,5 @@ app:
     job-key: hello-job
     trigger-key: hello-trigger
     job-data-key: hello-data
-    cron-expression: '0 0 9,19 * * ?'
+    cron-expression: '0 0 9,19 * * 1/5'
 
