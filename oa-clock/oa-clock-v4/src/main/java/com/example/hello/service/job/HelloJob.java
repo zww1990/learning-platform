@@ -48,15 +48,16 @@ public class HelloJob extends QuartzJobBean {
 			int ampm = LocalTime.now().get(ChronoField.AMPM_OF_DAY);
 			// 当前日期
 			LocalDate date = LocalDate.now();
-			for (UserLogin userLogin : users) {
-				if (ampm == 0) {
-					userLogin.setClockTime(LocalDateTime.of(date, //
+			for (UserLogin user : users) {
+				if (ampm == UserLogin.AM) {
+					user.setClockTime(LocalDateTime.of(date, //
 							LocalTime.of(8, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
-				} else if (ampm == 1) {
-					userLogin.setClockTime(LocalDateTime.of(date, //
+				} else if (ampm == UserLogin.PM) {
+					user.setClockTime(LocalDateTime.of(date, //
 							LocalTime.of(18, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
 				}
-				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(userLogin);
+				user.setAmpm(ampm);
+				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(user);
 				log.info("{}", body);
 			}
 		}
