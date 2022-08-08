@@ -74,8 +74,9 @@ new Vue({
         } else {
 	        let wsurl = (await(await fetch('/hello/wsurl')).json()).data;
 	        this.webSocket = new WebSocket(wsurl);
-	        this.webSocket.onmessage = function(message) {
-	        	window.location.reload();
+	        this.webSocket.onmessage = (message) => {
+	        	console.log('接收服务端消息: ' + message.data);
+	        	this.initStaffClockV2(this.users.find(user => user.userNo === message.data));
 	        };
             this.webSocket.onopen = function() {
             	console.log('WebSocket服务连接成功！');

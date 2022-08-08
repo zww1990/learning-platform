@@ -61,7 +61,7 @@ public class HelloJob extends QuartzJobBean {
 				user.setAmpm(ampm);
 				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(user);
 				try {
-					WebSocketServer.sendInfo(body.toString(), null);
+					WebSocketServer.sendInfo(user.getUserNo(), null);
 				} catch (IOException e) {
 					log.error(e.getLocalizedMessage(), e);
 				}
