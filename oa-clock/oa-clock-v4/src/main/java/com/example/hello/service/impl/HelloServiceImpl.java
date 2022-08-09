@@ -458,7 +458,7 @@ public class HelloServiceImpl implements HelloService {
 			}
 			CronTrigger trigger = TriggerBuilder.newTrigger()//
 					.forJob(this.jobDetail)//
-					.withIdentity(config.getTriggerKey())//
+					.withIdentity(triggerKey)//
 					.withSchedule(cronSchedule)//
 					.build();
 			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
@@ -491,10 +491,10 @@ public class HelloServiceImpl implements HelloService {
 						.setStatus(ResponseBody.FAILURE)//
 						.setMessage(e.getLocalizedMessage());
 			}
-			CronTrigger trigger = (CronTrigger) this.scheduler.getTrigger(triggerKey);
-			trigger = trigger.getTriggerBuilder()//
+			CronTrigger trigger = TriggerBuilder.newTrigger()//
+					.forJob(this.jobDetail)//
 					.withIdentity(triggerKey)//
-					.withSchedule(cronSchedule)//
+					.withSchedule(cronSchedule.withMisfireHandlingInstructionDoNothing())//
 					.build();
 			trigger.getJobDataMap().put(config.getJobDataKey(), jobInfo.getUsers());
 			this.scheduler.rescheduleJob(triggerKey, trigger);
