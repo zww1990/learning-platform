@@ -6,15 +6,18 @@ spring:
       org.quartz.scheduler.instanceId: AUTO
       org.quartz.threadPool.class: org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor
 
-cron:
-  expression: '*/10 * * * * ?'
-git:
-  remote-url: https://gitee.com/zww1990/learning-platform.git
-  local-directory: d:/projects/learning-platform
-  username: 
-  author: 
-  password: 
-  branch-name: master
-  date-pattern: yyyyMMdd
-  file-pattern: design-pattern-example/src/main/resources
+app:
+  job-config:
+    job-key: job-1
+    trigger-key: trigger-1
+    cron-expression: '*/10 * * * * ?'
+  git-config:
+    remote-url: https://gitee.com/zww1990/learning-platform.git
+    local-directory: d:/projects/learning-platform
+    username: 
+    author: 
+    password: 
+    branch-name: master
+    date-pattern: yyyyMMdd
+    file-pattern: design-pattern-example/src/main/resources
 

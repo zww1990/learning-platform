@@ -1,71 +1,89 @@
 {
   "groups": [
     {
-      "name": "cron",
-      "type": "com.example.springschedule.config.SpringProperties",
-      "sourceType": "com.example.springschedule.config.SpringProperties"
+      "name": "app",
+      "type": "com.example.springschedule.config.ApplicationConfig",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig"
     },
     {
-      "name": "git",
-      "type": "com.example.springschedule.config.GitProperties",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "name": "app.git-config",
+      "type": "com.example.springschedule.config.ApplicationConfig$GitConfig",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig"
+    },
+    {
+      "name": "app.job-config",
+      "type": "com.example.springschedule.config.ApplicationConfig$JobConfig",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig"
     }
   ],
   "properties": [
     {
-      "name": "cron.expression",
-      "type": "java.lang.String",
-      "sourceType": "com.example.springschedule.config.SpringProperties"
-    },
-    {
-      "name": "git.author",
+      "name": "app.git-config.author",
       "type": "java.lang.String",
       "description": "作者",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "git.branch-name",
+      "name": "app.git-config.branch-name",
       "type": "java.lang.String",
       "description": "分支名",
-      "sourceType": "com.example.springschedule.config.GitProperties",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig",
       "defaultValue": "master"
     },
     {
-      "name": "git.date-pattern",
+      "name": "app.git-config.date-pattern",
       "type": "java.lang.String",
       "description": "日期格式",
-      "sourceType": "com.example.springschedule.config.GitProperties",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig",
       "defaultValue": "yyyyMMdd"
     },
     {
-      "name": "git.file-pattern",
+      "name": "app.git-config.file-pattern",
       "type": "java.lang.String",
       "description": "资源目录",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "git.local-directory",
+      "name": "app.git-config.local-directory",
       "type": "java.lang.String",
       "description": "本地克隆目录",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "git.password",
+      "name": "app.git-config.password",
       "type": "java.lang.String",
       "description": "密码",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "git.remote-url",
+      "name": "app.git-config.remote-url",
       "type": "java.lang.String",
       "description": "远程仓库地址",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "git.username",
+      "name": "app.git-config.username",
       "type": "java.lang.String",
       "description": "用户名",
-      "sourceType": "com.example.springschedule.config.GitProperties"
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
+    },
+    {
+      "name": "app.job-config.cron-expression",
+      "type": "java.lang.String",
+      "description": "cron表达式",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
+    },
+    {
+      "name": "app.job-config.job-key",
+      "type": "java.lang.String",
+      "description": "任务键",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
+    },
+    {
+      "name": "app.job-config.trigger-key",
+      "type": "java.lang.String",
+      "description": "触发器键",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
     }
   ],
   "hints": []
