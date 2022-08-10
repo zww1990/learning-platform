@@ -1,3 +1,11 @@
+spring:
+  quartz:
+    auto-startup: true
+    job-store-type: memory
+    properties:
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.threadPool.class: org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor
+
 cron:
   expression: '*/10 * * * * ?'
 git:
