@@ -8,7 +8,7 @@ import org.quartz.TriggerBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.springschedule.service.JobService;
+import com.example.springschedule.service.JgitJobService;
 
 /**
  * Spring Config
@@ -22,7 +22,7 @@ public class SpringConfig {
 	@Bean
 	JobDetail jobDetail() {
 		return JobBuilder//
-				.newJob(JobService.class)//
+				.newJob(JgitJobService.class)//
 				.withIdentity("job_1")//
 				.storeDurably()//
 				.build();

@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @DisallowConcurrentExecution
 @Slf4j
-public class JobService extends QuartzJobBean {
+public class JgitJobService extends QuartzJobBean {
 	@Resource
 	private GitProperties gitProps;
 
