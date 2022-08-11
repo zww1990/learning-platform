@@ -4,7 +4,9 @@ import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Spring Schedule Application Tests
@@ -20,10 +22,9 @@ public class SpringScheduleApplicationTests {
 	@Test
 	public void testContextLoads() {
 		try {
-			String[] names = this.context.getBeanDefinitionNames();
-			for (int i = 0, len = names.length; i < len; i++) {
-				System.err.println((i + 1) + "\t" + names[i]);
-			}
+			System.err.println(this.context.getBeanDefinitionCount());
+			System.err.println(this.context.getBean(RestTemplateBuilder.class));
+			System.err.println(this.context.getBean(RestTemplate.class));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

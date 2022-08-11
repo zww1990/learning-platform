@@ -8,8 +8,10 @@ import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.springschedule.config.ApplicationConfig.JobConfig;
 import com.example.springschedule.service.GiteeJobService;
@@ -23,9 +25,13 @@ import com.example.springschedule.service.JgitJobService;
  */
 @Configuration
 public class JobAutoConfiguration {
-
 	@Resource
 	private ApplicationConfig appConfig;
+
+	@Bean
+	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
+		return restBuilder.build();
+	}
 
 	@Bean
 	@ConditionalOnProperty(//

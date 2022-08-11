@@ -7,6 +7,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.springschedule.config.ApplicationConfig;
 import com.example.springschedule.config.ApplicationConfig.GitConfig;
@@ -24,6 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 public class GiteeJobService extends QuartzJobBean {
 	@Resource
 	private ApplicationConfig appConfig;
+	@Resource
+	private RestTemplate restTemplate;
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
