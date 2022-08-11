@@ -11,7 +11,7 @@
       "sourceType": "com.example.springschedule.config.ApplicationConfig"
     },
     {
-      "name": "app.job-config",
+      "name": "app.jgit-job",
       "type": "com.example.springschedule.config.ApplicationConfig$JobConfig",
       "sourceType": "com.example.springschedule.config.ApplicationConfig"
     }
@@ -80,21 +80,27 @@
       "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
-      "name": "app.job-config.cron-expression",
+      "name": "app.jgit-job.cron-expression",
       "type": "java.lang.String",
       "description": "cron表达式",
       "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
     },
     {
-      "name": "app.job-config.job-key",
+      "name": "app.jgit-job.job-key",
       "type": "java.lang.String",
       "description": "任务键",
       "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
     },
     {
-      "name": "app.job-config.trigger-key",
+      "name": "app.jgit-job.trigger-key",
       "type": "java.lang.String",
       "description": "触发器键",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
+    },
+    {
+      "name": "app.jgit-job.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否启用",
       "sourceType": "com.example.springschedule.config.ApplicationConfig$JobConfig"
     }
   ],

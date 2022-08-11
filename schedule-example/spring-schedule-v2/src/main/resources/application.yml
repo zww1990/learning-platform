@@ -7,10 +7,11 @@ spring:
       org.quartz.threadPool.class: org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor
 
 app:
-  job-config:
+  jgit-job:
     job-key: job-1
     trigger-key: trigger-1
     cron-expression: '*/10 * * * * ?'
+    enabled: false
   git-config:
     remote-url: https://gitee.com/zww1990/learning-platform.git
     local-directory: d:/projects/learning-platform

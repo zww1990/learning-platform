@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 public class ApplicationConfig {
 	/** 任务属性配置 */
-	private JobConfig jobConfig = new JobConfig();
+	private JobConfig jgitJob = new JobConfig();
 	/** Git属性配置 */
 	private GitConfig gitConfig = new GitConfig();
 
@@ -34,6 +34,8 @@ public class ApplicationConfig {
 		private String triggerKey;
 		/** cron表达式 */
 		private String cronExpression;
+		/** 是否启用 */
+		private Boolean enabled;
 	}
 
 	@Getter
