@@ -13,7 +13,7 @@ app:
     trigger-key: trigger-1
     cron-expression: '*/10 * * * * ?'
   gitee-job:
-    enabled: true
+    enabled: false
     job-key: job-2
     trigger-key: trigger-2
     cron-expression: '*/10 * * * * ?'
