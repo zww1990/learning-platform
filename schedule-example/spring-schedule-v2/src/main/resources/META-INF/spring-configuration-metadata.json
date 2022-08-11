@@ -68,6 +68,18 @@
       "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
     },
     {
+      "name": "app.git-config.create-new-file-url",
+      "type": "java.lang.String",
+      "description": "新建文件接口地址",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
+    },
+    {
+      "name": "app.git-config.access-token",
+      "type": "java.lang.String",
+      "description": "用户授权码",
+      "sourceType": "com.example.springschedule.config.ApplicationConfig$GitConfig"
+    },
+    {
       "name": "app.job-config.cron-expression",
       "type": "java.lang.String",
       "description": "cron表达式",
