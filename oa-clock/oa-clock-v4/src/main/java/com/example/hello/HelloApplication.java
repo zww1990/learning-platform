@@ -7,6 +7,7 @@ import org.quartz.JobDetail;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -34,8 +35,8 @@ public class HelloApplication implements CommandLineRunner {
 	}
 
 	@Bean
-	RestTemplate restTemplate() {
-		return new RestTemplate();
+	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
+		return restBuilder.build();
 	}
 
 	@Resource
