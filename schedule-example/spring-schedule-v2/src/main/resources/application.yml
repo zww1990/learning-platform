@@ -8,10 +8,15 @@ spring:
 
 app:
   jgit-job:
+    enabled: false
     job-key: job-1
     trigger-key: trigger-1
     cron-expression: '*/10 * * * * ?'
-    enabled: false
+  gitee-job:
+    enabled: true
+    job-key: job-2
+    trigger-key: trigger-2
+    cron-expression: '*/10 * * * * ?'
   git-config:
     remote-url: https://gitee.com/zww1990/learning-platform.git
     local-directory: d:/projects/learning-platform
