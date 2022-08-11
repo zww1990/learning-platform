@@ -61,9 +61,13 @@ public class GiteeJobService extends QuartzJobBean {
 		params.put("message", message);
 		log.info("Gitee API >> 仓库 >> 新建文件 >> {}", path);
 		log.info("Gitee API >> 仓库 >> 新建文件 >> {}", params);
-		ResponseEntity<String> result = this.restTemplate.postForEntity(path, new HttpEntity<>(params, headers),
-				String.class);
-		System.err.println(result);
+		try {
+			ResponseEntity<String> result = this.restTemplate.postForEntity(path, new HttpEntity<>(params, headers),
+					String.class);
+			log.info("Gitee API >> 仓库 >> 新建文件 >> {}", result.getBody());
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+		}
 	}
 
 	private boolean validated(GitConfig gitConfig) {

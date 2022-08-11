@@ -81,7 +81,7 @@ public class JgitJobService extends QuartzJobBean {
 					.call();
 			git.push().setCredentialsProvider(cp).call();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		} finally {
 			git.close();
 		}
