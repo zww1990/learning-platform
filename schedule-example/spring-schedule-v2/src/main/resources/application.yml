@@ -26,6 +26,6 @@ app:
     branch-name: master
     date-pattern: yyyyMMdd
     file-pattern: design-pattern-example/src/main/resources
-    create-new-file-url: https://gitee.com/api/v5/repos/zww1990/learning-platform/contents/%s
-    access-token: 
+    create-new-file-url: https://gitee.com/api/v5/repos/zww1990/learning-platform/contents
+    access-token: 90ed6ca565b6374a1f677b17ea7cdc1a
 
