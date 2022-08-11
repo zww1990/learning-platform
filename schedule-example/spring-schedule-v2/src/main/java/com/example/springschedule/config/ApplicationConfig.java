@@ -56,5 +56,9 @@ public class ApplicationConfig {
 		private String datePattern = "yyyyMMdd";
 		/** 资源目录 */
 		private String filePattern;
+		/** 新建文件接口地址 */
+		private String createNewFileUrl;
+		/** 用户授权码 */
+		private String accessToken;
 	}
 }
