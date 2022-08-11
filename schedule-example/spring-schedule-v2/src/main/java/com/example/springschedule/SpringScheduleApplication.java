@@ -9,6 +9,7 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -38,14 +39,16 @@ public class SpringScheduleApplication {
 	private ApplicationConfig appConfig;
 
 	@Bean
+	@ConditionalOnProperty(prefix = "app", name = "jgit-job.enabled", havingValue = "true")
 	JobDetail jobDetail() {
-		JobConfig jobConfig = this.appConfig.getJobConfig();
+		JobConfig jobConfig = this.appConfig.getJgitJob();
 		return JobBuilder.newJob(JgitJobService.class).withIdentity(jobConfig.getJobKey()).storeDurably().build();
 	}
 
 	@Bean
+	@ConditionalOnProperty(prefix = "app", name = "jgit-job.enabled", havingValue = "true")
 	Trigger jobTrigger() {
-		JobConfig jobConfig = this.appConfig.getJobConfig();
+		JobConfig jobConfig = this.appConfig.getJgitJob();
 		return TriggerBuilder.newTrigger().forJob(this.jobDetail()).withIdentity(jobConfig.getTriggerKey())
 				.withSchedule(CronScheduleBuilder.cronSchedule(jobConfig.getCronExpression())).build();
 	}
