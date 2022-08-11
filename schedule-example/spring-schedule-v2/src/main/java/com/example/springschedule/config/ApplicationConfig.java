@@ -14,13 +14,16 @@ import lombok.ToString;
  * @since 2022年8月10日,下午8:44:15
  */
 @Configuration
-@ConfigurationProperties(prefix = "app")
+@ConfigurationProperties(prefix = ApplicationConfig.APP_CONFIG_PREFIX)
 @Getter
 @Setter
 @ToString
 public class ApplicationConfig {
-	/** 任务属性配置 */
+	public static final String APP_CONFIG_PREFIX = "app";
+	/** Jgit任务属性配置 */
 	private JobConfig jgitJob = new JobConfig();
+	/** Gitee任务属性配置 */
+	private JobConfig giteeJob = new JobConfig();
 	/** Git属性配置 */
 	private GitConfig gitConfig = new GitConfig();
 
