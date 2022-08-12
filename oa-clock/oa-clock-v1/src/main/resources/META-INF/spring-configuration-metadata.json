@@ -2,60 +2,60 @@
   "groups": [
     {
       "name": "app",
-      "type": "com.example.hello.model.ApplicationProperties",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "type": "com.example.hello.config.ApplicationProperties",
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     }
   ],
   "properties": [
     {
       "name": "app.addresses",
-      "type": "java.util.List<com.example.hello.model.ApplicationProperties$Address>",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "type": "java.util.List<com.example.hello.config.ApplicationProperties$Address>",
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.bi-sql-exec-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.bi-sql-source-id",
       "type": "java.lang.Integer",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.create-oa-attend-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.device-list-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.init-staff-clock-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.reset-bind-device-id-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.select-app-staff-clock-log-sql",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.staff-clock-url",
       "type": "java.lang.String",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
       "name": "app.users",
-      "type": "java.util.List<com.example.hello.model.ApplicationProperties$UserInfo>",
-      "sourceType": "com.example.hello.model.ApplicationProperties"
+      "type": "java.util.List<com.example.hello.config.ApplicationProperties$UserInfo>",
+      "sourceType": "com.example.hello.config.ApplicationProperties"
     }
   ],
   "hints": []
