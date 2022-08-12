@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.hello;
 
 import javax.annotation.Resource;
 
