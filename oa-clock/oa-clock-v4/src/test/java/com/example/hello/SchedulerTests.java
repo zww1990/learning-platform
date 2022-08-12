@@ -1,12 +1,11 @@
-package com.example.test;
+package com.example.hello;
 
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.quartz.Scheduler;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.example.hello.HelloApplication;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 /**
  * SchedulerTests
@@ -14,7 +13,7 @@ import com.example.hello.HelloApplication;
  * @author zhang weiwei
  * @since 2022年8月6日,下午1:34:14
  */
-@SpringBootTest(classes = HelloApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class SchedulerTests {
 	@Resource
 	private Scheduler scheduler;
