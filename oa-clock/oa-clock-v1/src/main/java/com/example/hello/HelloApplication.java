@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.hello.model.ApplicationProperties;
@@ -21,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhangweiwei
  * @date 2021年5月25日,下午4:16:15
  */
-@EnableRetry
 @SpringBootApplication
 @Slf4j
 public class HelloApplication implements CommandLineRunner {
