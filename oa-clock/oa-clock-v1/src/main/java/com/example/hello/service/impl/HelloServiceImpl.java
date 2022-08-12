@@ -24,9 +24,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.hello.model.ApplicationProperties;
-import com.example.hello.model.ApplicationProperties.Address;
-import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.config.ApplicationProperties;
+import com.example.hello.config.ApplicationProperties.Address;
+import com.example.hello.config.ApplicationProperties.UserInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.HelloService;

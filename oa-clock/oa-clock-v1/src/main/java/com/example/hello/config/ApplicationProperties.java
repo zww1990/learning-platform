@@ -1,4 +1,4 @@
-package com.example.hello.model;
+package com.example.hello.config;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
