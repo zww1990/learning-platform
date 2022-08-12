@@ -1,4 +1,4 @@
-package com.example.test.controller;
+package com.example.hello.controller;
 
 import java.io.InputStream;
 
@@ -6,10 +6,9 @@ import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.core.io.ClassPathResource;
 
-import com.example.hello.HelloApplication;
-import com.example.hello.controller.HelloController;
 import com.example.hello.model.UserLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author zhang weiwei
  * @since 2022年8月6日,下午4:26:13
  */
-@SpringBootTest(classes = HelloApplication.class)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class HelloControllerTests {
 	@Resource
 	private HelloController controller;
