@@ -18,9 +18,7 @@ spring:
     active: test
   autoconfigure:
     exclude:
-    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
-    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
     - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
 
 app:

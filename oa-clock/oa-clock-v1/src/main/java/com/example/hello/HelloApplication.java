@@ -24,11 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HelloApplication implements CommandLineRunner {
 
-	/**
-	 * @param args
-	 * @author zhangweiwei
-	 * @date 2021年5月25日,下午4:16:28
-	 */
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(HelloApplication.class, args);
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());

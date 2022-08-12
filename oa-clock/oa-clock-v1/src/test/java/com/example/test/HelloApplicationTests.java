@@ -7,14 +7,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-import com.example.hello.service.HelloService;
-
+/**
+ * HelloApplicationTests
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月12日,下午9:17:03
+ */
 @SpringBootTest
 public class HelloApplicationTests {
 	@Resource
 	private ApplicationContext context;
-	@Resource
-	private HelloService service;
 
 	@Test
 	public void contextLoads() {
@@ -25,16 +27,4 @@ public class HelloApplicationTests {
 			e.printStackTrace();
 		}
 	}
-
-
-	@Test
-	public void testSayHello() {
-		try {
-			Object value = this.service.sayHello();
-			Assertions.assertNotNull(value);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
 }

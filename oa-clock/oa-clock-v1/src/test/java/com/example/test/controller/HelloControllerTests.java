@@ -12,6 +12,12 @@ import com.example.hello.controller.HelloController;
 import com.example.hello.model.UserLogin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * HelloControllerTests
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月12日,下午9:17:18
+ */
 @SpringBootTest
 public class HelloControllerTests {
 	@Resource
@@ -35,7 +41,7 @@ public class HelloControllerTests {
 		try (InputStream is = new ClassPathResource("HelloControllerTests.json").getInputStream()) {
 			UserLogin req = json.readValue(is, UserLogin.class);
 			System.err.println(json.writerWithDefaultPrettyPrinter()
-					.writeValueAsString(this.controller.userLoginAndStaffClock(req)));
+					.writeValueAsString(this.controller.userLoginAndStaffClockV1(req)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,7 +50,7 @@ public class HelloControllerTests {
 	@Test
 	public void testUserLoginAndStaffClock2() {
 		try {
-			System.err.println(this.controller.userLoginAndStaffClock(new UserLogin().setUserNo("9999")));
+			System.err.println(this.controller.userLoginAndStaffClockV1(new UserLogin().setUserNo("9999")));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
