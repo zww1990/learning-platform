@@ -2,8 +2,8 @@ package com.example.hello.service;
 
 import java.util.List;
 
-import com.example.hello.model.ApplicationProperties.Address;
-import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.config.ApplicationConfig.Address;
+import com.example.hello.config.ApplicationConfig.UserInfo;
 import com.example.hello.model.JobInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
