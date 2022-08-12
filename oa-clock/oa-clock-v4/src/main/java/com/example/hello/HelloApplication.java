@@ -2,19 +2,12 @@ package com.example.hello;
 
 import javax.annotation.Resource;
 
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import com.example.hello.model.ApplicationProperties;
-import com.example.hello.service.job.HelloJob;
+import com.example.hello.config.ApplicationConfig;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,29 +27,12 @@ public class HelloApplication implements CommandLineRunner {
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
 
-	@Bean
-	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
-		return restBuilder.build();
-	}
-
 	@Resource
-	private ApplicationProperties properties;
+	private ApplicationConfig appConfig;
 
 	@Override
 	public void run(String... args) throws Exception {
-		log.info("{}", this.properties);
+		log.info("{}", this.appConfig);
 	}
 
-	@Bean
-	JobDetail jobDetail() {
-		return JobBuilder.newJob(HelloJob.class)//
-				.withIdentity(this.properties.getJobConfig().getJobKey())//
-				.storeDurably()//
-				.build();
-	}
-
-	@Bean
-	ServerEndpointExporter serverEndpointExporter() {
-		return new ServerEndpointExporter();
-	}
 }

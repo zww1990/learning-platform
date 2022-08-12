@@ -15,7 +15,7 @@ import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.CollectionUtils;
 
-import com.example.hello.model.ApplicationProperties;
+import com.example.hello.config.ApplicationConfig;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.HelloService;
@@ -35,14 +35,14 @@ public class HelloJob extends QuartzJobBean {
 	@Resource
 	private HelloService helloService;
 	@Resource
-	private ApplicationProperties properties;
+	private ApplicationConfig appConfig;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		log.info("执行任务");
 		List<UserLogin> users = (List<UserLogin>) context.getMergedJobDataMap()
-				.get(this.properties.getJobConfig().getJobDataKey());
+				.get(this.appConfig.getJobConfig().getJobDataKey());
 		if (!CollectionUtils.isEmpty(users)) {
 			ThreadLocalRandom random = ThreadLocalRandom.current();
 			// 0=(AM)上午，1=(PM)下午

@@ -1,4 +1,4 @@
-package com.example.hello.model;
+package com.example.hello.config;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * ApplicationProperties
+ * ApplicationConfig
  * 
  * @author zhang weiwei
  * @since 2022年8月6日,下午4:23:08
@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Getter
 @Setter
 @ToString
-public class ApplicationProperties {
+public class ApplicationConfig {
 	private String staffClockUrl;
 	private String initStaffClockUrl;
 	private String deviceListUrl;

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.hello.model.ApplicationProperties.Address;
-import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.config.ApplicationConfig.Address;
+import com.example.hello.config.ApplicationConfig.UserInfo;
 import com.example.hello.model.JobInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;

@@ -33,10 +33,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.hello.model.ApplicationProperties;
-import com.example.hello.model.ApplicationProperties.Address;
-import com.example.hello.model.ApplicationProperties.JobConfig;
-import com.example.hello.model.ApplicationProperties.UserInfo;
+import com.example.hello.config.ApplicationConfig;
+import com.example.hello.config.ApplicationConfig.Address;
+import com.example.hello.config.ApplicationConfig.JobConfig;
+import com.example.hello.config.ApplicationConfig.UserInfo;
 import com.example.hello.model.JobInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
@@ -61,7 +61,7 @@ public class HelloServiceImpl implements HelloService {
 	@Resource
 	private RestTemplate restTemplate;
 	@Resource
-	private ApplicationProperties properties;
+	private ApplicationConfig appConfig;
 	@Resource
 	private Scheduler scheduler;
 	@Resource
@@ -73,7 +73,7 @@ public class HelloServiceImpl implements HelloService {
 		return new ResponseBody<List<UserInfo>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(ResponseBody.SUCCESS)//
-				.setData(this.properties.getUsers());
+				.setData(this.appConfig.getUsers());
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class HelloServiceImpl implements HelloService {
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(ResponseBody.SUCCESS)//
-				.setData(this.properties.getAddresses());
+				.setData(this.appConfig.getAddresses());
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[id]不能为空");
 		}
 		log.info("{}", address);
-		this.properties.getAddresses().add(address);
+		this.appConfig.getAddresses().add(address);
 		return new ResponseBody<List<Address>>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(ResponseBody.SUCCESS);
@@ -131,7 +131,7 @@ public class HelloServiceImpl implements HelloService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
 		ResponseBody<Map<String, Object>> body = this.restTemplate
-				.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(), HttpMethod.GET,
+				.exchange(this.appConfig.getInitStaffClockUrl() + userLogin.getUserNo(), HttpMethod.GET,
 						new HttpEntity<>(headers), ResponseBody.class)
 				.getBody();
 		if (!CollectionUtils.isEmpty(body.getData())) {
@@ -186,15 +186,15 @@ public class HelloServiceImpl implements HelloService {
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 		ResponseBody<?> body = this.restTemplate
-				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
+				.postForEntity(this.appConfig.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
 				.getBody();
 		log.info("{}", body);
 		String time = userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.DATEFORMAT));
-		String url = String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time);
+		String url = String.format(this.appConfig.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time);
 		body = this.restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
 		log.info("{} - {}", url, body);
-		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
-			this.properties.getUsers().add(//
+		if (this.appConfig.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+			this.appConfig.getUsers().add(//
 					new UserInfo()//
 							.setUserNo(userLogin.getUserNo())//
 							.setUsername(userLogin.getUsername()));
@@ -242,11 +242,11 @@ public class HelloServiceImpl implements HelloService {
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(new Date());
 		ResponseBody<?> body = this.restTemplate
-				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
+				.postForEntity(this.appConfig.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
 				.getBody();
 		log.info("{}", body);
-		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
-			this.properties.getUsers().add(//
+		if (this.appConfig.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
+			this.appConfig.getUsers().add(//
 					new UserInfo()//
 							.setUserNo(userLogin.getUserNo())//
 							.setUsername(userLogin.getUsername()));
@@ -285,7 +285,7 @@ public class HelloServiceImpl implements HelloService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
 		ResponseBody<Map<String, Object>> body = this.restTemplate
-				.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
+				.exchange(this.appConfig.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
 						new HttpEntity<>(headers), ResponseBody.class)
 				.getBody();
 		Map<String, Object> data = body.getData();
@@ -308,8 +308,8 @@ public class HelloServiceImpl implements HelloService {
 								RoundingMode.HALF_UP))//
 						.setStaffNo(user.getUserNo())//
 						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
-				body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
-						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
+				body = this.restTemplate.postForEntity(this.appConfig.getStaffClockUrl(), new HttpEntity<>(vo, headers),
+						ResponseBody.class).getBody();
 			} else {
 				log.info("跳过本次打卡");
 				body.setData(null).setMessage("跳过本次打卡");
@@ -330,18 +330,18 @@ public class HelloServiceImpl implements HelloService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
-		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId());
+		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.appConfig.getBiSqlSourceId());
 		if (userLogin.getDates() != null && userLogin.getDates().length == 2) {
-			sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(),
+			sqlExecQuery.setCommand(String.format(this.appConfig.getSelectAppStaffClockLogSql(), userLogin.getUserNo(),
 					userLogin.getDates()[0], userLogin.getDates()[1]));
 		} else {
 			LocalDate begin = LocalDate.now().withDayOfMonth(1);
 			LocalDate end = LocalDate.now();
 			sqlExecQuery.setCommand(
-					String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(), begin, end));
+					String.format(this.appConfig.getSelectAppStaffClockLogSql(), userLogin.getUserNo(), begin, end));
 		}
 		log.info("{}", sqlExecQuery);
-		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
+		ResponseBody<?> body = this.restTemplate.postForEntity(this.appConfig.getBiSqlExecUrl(),
 				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
 		return body;
 	}
@@ -357,7 +357,7 @@ public class HelloServiceImpl implements HelloService {
 		log.info("{}", userLogin);
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("appid", "oa");
-		ResponseBody<?> body = this.restTemplate.exchange(this.properties.getDeviceListUrl() + userLogin.getUserNo(),
+		ResponseBody<?> body = this.restTemplate.exchange(this.appConfig.getDeviceListUrl() + userLogin.getUserNo(),
 				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
 		return body;
 	}
@@ -371,7 +371,7 @@ public class HelloServiceImpl implements HelloService {
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
 		params.add("staffNo", staffNo);
 		params.add("id", id);
-		ResponseBody<?> body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
+		ResponseBody<?> body = this.restTemplate.postForObject(this.appConfig.getResetBindDeviceIdUrl(),
 				new HttpEntity<>(params, headers), ResponseBody.class);
 		log.info("{}", body);
 		if (body.getStatus() != ResponseBody.SUCCESS) {
@@ -382,7 +382,7 @@ public class HelloServiceImpl implements HelloService {
 
 	@Override
 	public ResponseBody<?> pauseJob() throws Exception {
-		JobConfig config = this.properties.getJobConfig();
+		JobConfig config = this.appConfig.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
 		// 正常
@@ -406,7 +406,7 @@ public class HelloServiceImpl implements HelloService {
 
 	@Override
 	public ResponseBody<?> resumeJob() throws Exception {
-		JobConfig config = this.properties.getJobConfig();
+		JobConfig config = this.appConfig.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
 		// 暂停
@@ -430,7 +430,7 @@ public class HelloServiceImpl implements HelloService {
 
 	@Override
 	public ResponseBody<?> saveJob(JobInfo jobInfo) throws Exception {
-		JobConfig config = this.properties.getJobConfig();
+		JobConfig config = this.appConfig.getJobConfig();
 		TriggerKey triggerKey = TriggerKey.triggerKey(config.getTriggerKey());
 		TriggerState state = this.scheduler.getTriggerState(triggerKey);
 		// 不存在，创建
