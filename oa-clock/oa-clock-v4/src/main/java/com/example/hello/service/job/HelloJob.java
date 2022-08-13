@@ -59,12 +59,12 @@ public class HelloJob extends QuartzJobBean {
 				}
 				user.setAmpm(ampm);
 				ResponseBody<?> body = this.helloService.userLoginAndStaffClockV3(user);
+				log.info("{}", body);
 				try {
 					WebSocketServer.sendInfo(user.getUserNo(), null);
 				} catch (Exception e) {
 					log.error(e.getLocalizedMessage(), e);
 				}
-				log.info("{}", body);
 			}
 		}
 		log.info("完成任务");

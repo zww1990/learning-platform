@@ -40,4 +40,6 @@ public interface HelloService {
 	ResponseBody<?> resumeJob() throws Exception;
 
 	ResponseBody<?> saveJob(JobInfo jobInfo) throws Exception;
+
+	ResponseBody<?> triggers() throws Exception;
 }

@@ -47,6 +47,11 @@ public class HelloController {
 						this.properties.getPort(), UUID.randomUUID().toString().replace("-", "")));
 	}
 
+	@GetMapping("/triggers")
+	public ResponseBody<?> triggers() throws Exception {
+		return this.helloService.triggers();
+	}
+
 	@GetMapping("/pausejob")
 	public ResponseBody<?> pauseJob() throws Exception {
 		return this.helloService.pauseJob();
