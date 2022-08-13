@@ -6,6 +6,7 @@ app:
   reset-bind-device-id-url: http://192.168.32.95:38080/appDeviceRecord/resetBindDeviceId
   bi-sql-exec-url: http://192.168.32.36:18066/bisql/exec
   bi-sql-source-id: 22
+  cron-expression: '*/10 * * * * ?'
   users:
   - user-no: 100232
     username: 李米盛

@@ -3,11 +3,14 @@ package com.example.hello;
 import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.config.EmbeddedValueResolver;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.util.StringValueResolver;
+import org.springframework.web.context.support.GenericWebApplicationContext;
 
 import com.example.hello.config.ApplicationProperties;
 
@@ -33,6 +36,9 @@ public class HelloApplicationTests {
 		try {
 			System.err.println(this.context.getBeanDefinitionCount());
 			System.err.println(this.context.getBean(JavaMailSender.class));
+			StringValueResolver resolver = new EmbeddedValueResolver(
+					((GenericWebApplicationContext) this.context).getBeanFactory());
+			System.err.println(resolver.resolveStringValue("${app.cron-expression}"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -42,7 +48,7 @@ public class HelloApplicationTests {
 	public void testSendMail() {
 		try {
 			SimpleMailMessage m = new SimpleMailMessage();
-			m.setFrom(String.format("test <%s>", this.mailProperties.getUsername()));
+			m.setFrom(this.mailProperties.getUsername());
 			m.setTo(this.mailProperties.getUsername());
 			m.setSubject("test");
 			m.setText("this is test mail");
