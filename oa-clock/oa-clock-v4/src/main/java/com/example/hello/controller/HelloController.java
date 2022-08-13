@@ -79,7 +79,15 @@ public class HelloController {
 
 	@PostMapping("/initstaffclock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
-		return this.helloService.initStaffClock(userLogin);
+		try {
+			return this.helloService.initStaffClock(userLogin);
+		} catch (Exception e) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())//
+					.setStatus(ResponseBody.FAILURE)//
+					.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())//
+					.setData(e.getLocalizedMessage());
+		}
 	}
 
 	@PostMapping("/v2/userloginandstaffclock")
