@@ -53,6 +53,11 @@
       "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
+      "name": "app.cron-expression",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationProperties"
+    },
+    {
       "name": "app.users",
       "type": "java.util.List<com.example.hello.config.ApplicationProperties$UserInfo>",
       "sourceType": "com.example.hello.config.ApplicationProperties"

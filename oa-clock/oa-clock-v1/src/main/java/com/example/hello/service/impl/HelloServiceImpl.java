@@ -3,8 +3,11 @@ package com.example.hello.service.impl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +15,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.Resource;
 
+import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.LinkedMultiValueMap;
@@ -51,6 +58,59 @@ public class HelloServiceImpl implements HelloService {
 	private RestTemplate restTemplate;
 	@Resource
 	private ApplicationProperties properties;
+	@Resource
+	private JavaMailSender mailSender;
+	@Resource
+	private MailProperties mailProperties;
+
+	@Scheduled(cron = "${app.cron-expression}")
+	public void staffClockJob() {
+		log.info("执行任务");
+		ThreadLocalRandom random = ThreadLocalRandom.current();
+		// 0=(AM)上午，1=(PM)下午
+		int ampm = LocalTime.now().get(ChronoField.AMPM_OF_DAY);
+		// 当前日期
+		LocalDate date = LocalDate.now();
+		Address addr = this.properties.getAddresses().get(0);
+		this.properties.getUsers()//
+				.stream()//
+				.filter(p -> p.isEnabled() && StringUtils.hasText(p.getEmail()))//
+				.forEach(c -> {
+					UserLogin user = new UserLogin()//
+							.setUserNo(c.getUserNo())//
+							.setUsername(c.getUsername())//
+							.setAddress(addr.getAddress())//
+							.setLatitude(addr.getLatitude())//
+							.setLongitude(addr.getLongitude())//
+							.setAmpm(ampm);
+					if (ampm == UserLogin.AM) {
+						user.setClockTime(LocalDateTime.of(date, //
+								LocalTime.of(8, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+					} else if (ampm == UserLogin.PM) {
+						user.setClockTime(LocalDateTime.of(date, //
+								LocalTime.of(18, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+					}
+					try {
+						ResponseBody<?> body = this.userLoginAndStaffClockV3(user);
+						log.info("{}", body);
+						SimpleMailMessage smm = new SimpleMailMessage();
+						smm.setFrom(this.mailProperties.getUsername());
+						smm.setTo(c.getEmail());
+						smm.setSubject("打卡结果");
+						smm.setText(body.getMessage());
+						this.mailSender.send(smm);
+					} catch (Exception e) {
+						log.error(e.getLocalizedMessage(), e);
+						SimpleMailMessage smm = new SimpleMailMessage();
+						smm.setFrom(this.mailProperties.getUsername());
+						smm.setTo(c.getEmail());
+						smm.setSubject("打卡结果");
+						smm.setText(e.getLocalizedMessage());
+						this.mailSender.send(smm);
+					}
+				});
+		log.info("完成任务");
+	}
 
 	@Override
 	public ResponseBody<List<UserInfo>> getUsers() {
@@ -237,6 +297,51 @@ public class HelloServiceImpl implements HelloService {
 							.setUsername(userLogin.getUsername()));
 		}
 		return this.initStaffClock(userLogin);
+	}
+
+	private ResponseBody<?> userLoginAndStaffClockV3(UserLogin user) {
+		log.info("定时打卡>>>{}", user);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("appid", "oa");
+		ResponseBody<Map<String, Object>> body = this.restTemplate
+				.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
+						new HttpEntity<>(headers), ResponseBody.class)
+				.getBody();
+		Map<String, Object> data = body.getData();
+		if (CollectionUtils.isEmpty(data)) {
+			log.error("定时打卡异常>>>{}", data);
+			body.setMessage("打卡异常");
+		} else {
+			boolean flag = false;
+			if (user.getAmpm() == UserLogin.AM) {
+				flag = data.get("clockWorkOnStatus") == null;
+			} else if (user.getAmpm() == UserLogin.PM) {
+				flag = data.get("clockWorkOffStatus") == null;
+			}
+			if (flag) {
+				ThreadLocalRandom random = ThreadLocalRandom.current();
+				AppStaffClockVO vo = new AppStaffClockVO()//
+						.setAddress(user.getAddress())//
+						.setLatitude(user.getLatitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+								RoundingMode.HALF_UP))//
+						.setLongitude(user.getLongitude().add(BigDecimal.valueOf(random.nextFloat())).setScale(7,
+								RoundingMode.HALF_UP))//
+						.setStaffNo(user.getUserNo())//
+						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
+				body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
+						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
+				if (user.getAmpm() == UserLogin.AM) {
+					body.setMessage(String.format("上班打卡成功[%s]", user.getClockTime()));
+				} else if (user.getAmpm() == UserLogin.PM) {
+					body.setMessage(String.format("下班打卡成功[%s]", user.getClockTime()));
+				}
+			} else {
+				log.info("今日已打卡，跳过本次打卡");
+				body.setMessage("今日已打卡，跳过本次打卡");
+			}
+		}
+		return body;
 	}
 
 	@Override
