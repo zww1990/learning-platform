@@ -12,6 +12,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * UserLogin
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月13日,下午8:58:54
+ */
 @Getter
 @Setter
 @ToString
