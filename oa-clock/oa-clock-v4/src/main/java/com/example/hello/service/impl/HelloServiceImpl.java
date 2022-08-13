@@ -528,4 +528,15 @@ public class HelloServiceImpl implements HelloService {
 				.setMessage(String.format("未知的任务状态[%s]", state));
 	}
 
+	@Override
+	public ResponseBody<?> triggers() throws Exception {
+		int size = this.scheduler.getTriggersOfJob(this.jobDetail.getKey()).size();
+		TriggerState state = this.scheduler
+				.getTriggerState(TriggerKey.triggerKey(this.appConfig.getJobConfig().getTriggerKey()));
+		return new ResponseBody<>()//
+				.setMessage(String.format("当前任务总数[%s], 任务状态[%s]", size, state))//
+				.setStatus(ResponseBody.SUCCESS)//
+				.setCode(HttpStatus.OK.value());
+	}
+
 }
