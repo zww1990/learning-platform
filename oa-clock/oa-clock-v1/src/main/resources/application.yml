@@ -32,6 +32,9 @@ spring:
     port: 587
     username: zhangweiwei@yuzhilin.net.cn
     password: zww@2021
+    properties:
+      mail:
+        debug: false
 
 app:
   select-app-staff-clock-log-sql: "SELECT id,staff_no,clock_time,longitude,latitude,address,clock_type,create_time FROM app_staff_clock_log WHERE staff_no='%s' and create_time between '%s 00:00:00' and '%s 23:59:59' ORDER BY create_time DESC"
