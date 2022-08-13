@@ -1,5 +1,7 @@
 package com.example.hello;
 
+import java.time.Duration;
+
 import javax.annotation.Resource;
 
 import org.springframework.boot.CommandLineRunner;
@@ -34,7 +36,9 @@ public class HelloApplication implements CommandLineRunner {
 
 	@Bean
 	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
-		return restBuilder.build();
+		return restBuilder.setConnectTimeout(Duration.ofSeconds(5))//
+				.setReadTimeout(Duration.ofSeconds(5))//
+				.build();
 	}
 
 	@Resource
