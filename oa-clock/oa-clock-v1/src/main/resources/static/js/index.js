@@ -50,10 +50,8 @@ new Vue({
         }
     },
     async mounted() {
-        let json1 = await(await fetch('/hello/addresses')).json();
-        this.addresses = json1.data;
-        let json2 = await(await fetch('/hello/users')).json();
-        this.users = json2.data;
+        this.addresses = (await(await fetch('/hello/addresses')).json()).data;
+        this.users = (await(await fetch('/hello/users')).json()).data;
         this.users.forEach(user => this.initStaffClockV1(user));
     },
     methods: {
