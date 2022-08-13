@@ -1,5 +1,7 @@
 package com.example.hello.config;
 
+import java.time.Duration;
+
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -21,7 +23,9 @@ public class HelloAutoConfiguration {
 
 	@Bean
 	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
-		return restBuilder.build();
+		return restBuilder.setConnectTimeout(Duration.ofSeconds(5))//
+				.setReadTimeout(Duration.ofSeconds(5))//
+				.build();
 	}
 
 	@Bean
