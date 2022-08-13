@@ -7,12 +7,20 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import cn.net.yzl.oa.entity.AppStaffClockLogDTO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * ApplicationProperties
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月13日,下午8:58:14
+ */
 @Configuration
 @ConfigurationProperties(prefix = "app")
 @Getter
@@ -25,6 +33,7 @@ public class ApplicationProperties {
 	private String resetBindDeviceIdUrl;
 	private String createOaAttendUrl;
 	private String biSqlExecUrl;
+	@ToString.Exclude
 	private Integer biSqlSourceId;
 	@ToString.Exclude
 	private String selectAppStaffClockLogSql;
@@ -52,6 +61,10 @@ public class ApplicationProperties {
 		private String username;
 		private Integer status;
 		private String message;
+		@JsonIgnore
+		private boolean enabled;
+		@JsonIgnore
+		private String email;
 		private Address addr;
 		private AppStaffClockLogDTO staffClock;
 	}

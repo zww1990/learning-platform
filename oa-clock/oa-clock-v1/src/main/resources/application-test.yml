@@ -13,4 +13,6 @@ app:
     username: 刘常富
   - user-no: 100230
     username: 张维维
+    enabled: true
+    email: zhangweiwei@yuzhilin.net.cn
 
