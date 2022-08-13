@@ -239,7 +239,9 @@ new Vue({
 	                this.snackbar.text = res.message;
 	                if (res.status === 1) {
 	                    this.snackbar.color = 'success';
-	                    this.closeJob();
+	                    setTimeout(() => {
+	                    	this.closeJob();
+	                    }, 3000);
 	                } else {
 	                    this.snackbar.color = 'error';
 	                }
