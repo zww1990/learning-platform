@@ -17,6 +17,12 @@ import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.HelloService;
 
+/**
+ * HelloController
+ * 
+ * @author zhang weiwei
+ * @since 2022年8月13日,下午8:57:43
+ */
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
