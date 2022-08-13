@@ -47,6 +47,7 @@ public class HelloApplicationTests {
 			m.setSubject("test");
 			m.setText("this is test mail");
 			this.mailSender.send(m);
+			System.err.println("done.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
