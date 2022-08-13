@@ -338,7 +338,7 @@ public class HelloServiceImpl implements HelloService {
 				}
 			} else {
 				log.info("今日已打卡，跳过本次打卡");
-				body.setMessage("今日已打卡，跳过本次打卡");
+				body.setData(null).setMessage("今日已打卡，跳过本次打卡");
 			}
 		}
 		return body;
