@@ -74,7 +74,7 @@ public class HelloServiceImpl implements HelloService {
 		Address addr = this.properties.getAddresses().get(0);
 		this.properties.getUsers()//
 				.stream()//
-				.filter(p -> p.isEnabled() && StringUtils.hasText(p.getEmail()))//
+				.filter(p -> p.isEnabled())//
 				.forEach(c -> {
 					UserLogin user = new UserLogin()//
 							.setUserNo(c.getUserNo())//
@@ -93,23 +93,26 @@ public class HelloServiceImpl implements HelloService {
 					try {
 						ResponseBody<?> body = this.userLoginAndStaffClockV3(user);
 						log.info("{}", body);
-						SimpleMailMessage smm = new SimpleMailMessage();
-						smm.setFrom(this.mailProperties.getUsername());
-						smm.setTo(c.getEmail());
-						smm.setSubject("打卡结果");
-						smm.setText(body.getMessage());
-						this.mailSender.send(smm);
+						if (StringUtils.hasText(c.getEmail())) {
+							this.sendMail(c.getEmail(), body.getMessage());
+						}
 					} catch (Exception e) {
 						log.error(e.getLocalizedMessage(), e);
-						SimpleMailMessage smm = new SimpleMailMessage();
-						smm.setFrom(this.mailProperties.getUsername());
-						smm.setTo(c.getEmail());
-						smm.setSubject("打卡结果");
-						smm.setText(e.getLocalizedMessage());
-						this.mailSender.send(smm);
+						if (StringUtils.hasText(c.getEmail())) {
+							this.sendMail(c.getEmail(), e.getLocalizedMessage());
+						}
 					}
 				});
 		log.info("完成任务");
+	}
+
+	private void sendMail(String email, String content) {
+		SimpleMailMessage smm = new SimpleMailMessage();
+		smm.setFrom(this.mailProperties.getUsername());
+		smm.setTo(email);
+		smm.setSubject("打卡结果");
+		smm.setText(content);
+		this.mailSender.send(smm);
 	}
 
 	@Override
