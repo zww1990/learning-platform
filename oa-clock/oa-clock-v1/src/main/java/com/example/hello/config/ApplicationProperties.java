@@ -65,6 +65,8 @@ public class ApplicationProperties {
 		@JsonIgnore
 		private boolean enabled;
 		@JsonIgnore
+		private boolean pmOn;
+		@JsonIgnore
 		private String email;
 		private Address addr;
 		private AppStaffClockLogDTO staffClock;
