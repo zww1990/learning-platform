@@ -83,23 +83,28 @@ public class HelloServiceImpl implements HelloService {
 							.setLatitude(addr.getLatitude())//
 							.setLongitude(addr.getLongitude())//
 							.setAmpm(ampm);
+					boolean isClock = false;
 					if (ampm == UserLogin.AM) {
 						user.setClockTime(LocalDateTime.of(date, //
 								LocalTime.of(8, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+						isClock = true;
 					} else if (ampm == UserLogin.PM) {
 						user.setClockTime(LocalDateTime.of(date, //
 								LocalTime.of(18, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+						isClock = c.isPmOn();
 					}
-					try {
-						ResponseBody<?> body = this.userLoginAndStaffClockV3(user);
-						log.info("{}", body);
-						if (StringUtils.hasText(c.getEmail())) {
-							this.sendMail(c.getEmail(), body.getMessage());
-						}
-					} catch (Exception e) {
-						log.error(e.getLocalizedMessage(), e);
-						if (StringUtils.hasText(c.getEmail())) {
-							this.sendMail(c.getEmail(), e.getLocalizedMessage());
+					if (isClock) {
+						try {
+							ResponseBody<?> body = this.userLoginAndStaffClockV3(user);
+							log.info("{}", body);
+							if (StringUtils.hasText(c.getEmail())) {
+								this.sendMail(c.getEmail(), body.getMessage());
+							}
+						} catch (Exception e) {
+							log.error(e.getLocalizedMessage(), e);
+							if (StringUtils.hasText(c.getEmail())) {
+								this.sendMail(c.getEmail(), e.getLocalizedMessage());
+							}
 						}
 					}
 				});
@@ -307,20 +312,23 @@ public class HelloServiceImpl implements HelloService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
-		ResponseBody<Map<String, Object>> body = this.restTemplate
+		ResponseBody<?> body = this.restTemplate
 				.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
 						new HttpEntity<>(headers), ResponseBody.class)
 				.getBody();
-		Map<String, Object> data = body.getData();
+		Map<String, Object> data = (Map<String, Object>) body.getData();
 		if (CollectionUtils.isEmpty(data)) {
 			log.error("定时打卡异常>>>{}", data);
 			body.setMessage("打卡异常");
 		} else {
 			boolean flag = false;
+			String flagName = "";
 			if (user.getAmpm() == UserLogin.AM) {
 				flag = data.get("clockWorkOnStatus") == null;
+				flagName = "上班";
 			} else if (user.getAmpm() == UserLogin.PM) {
 				flag = data.get("clockWorkOffStatus") == null;
+				flagName = "下班";
 			}
 			if (flag) {
 				ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -334,11 +342,7 @@ public class HelloServiceImpl implements HelloService {
 						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 				body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
 						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
-				if (user.getAmpm() == UserLogin.AM) {
-					body.setMessage(String.format("上班打卡成功[%s]", user.getClockTime()));
-				} else if (user.getAmpm() == UserLogin.PM) {
-					body.setMessage(String.format("下班打卡成功[%s]", user.getClockTime()));
-				}
+				body.setMessage(String.format("%s打卡成功: [%s]", flagName, body.getData()));
 			} else {
 				log.info("今日已打卡，跳过本次打卡");
 				body.setData(null).setMessage("今日已打卡，跳过本次打卡");
