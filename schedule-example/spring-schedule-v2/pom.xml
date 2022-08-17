@@ -54,6 +54,17 @@
 		    <artifactId>org.eclipse.jgit</artifactId>
 		    <version>5.13.1.202206130422-r</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.gitlab4j</groupId>
+		    <artifactId>gitlab4j-api</artifactId>
+		    <version>5.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.kohsuke</groupId>
+		    <artifactId>github-api</artifactId>
+		    <version>1.307</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
