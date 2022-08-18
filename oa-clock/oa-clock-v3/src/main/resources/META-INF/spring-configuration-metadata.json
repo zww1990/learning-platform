@@ -1,0 +1,67 @@
+{
+  "groups": [
+    {
+      "name": "app",
+      "type": "com.example.hello.config.ApplicationConfig",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "app.addresses",
+      "type": "java.util.List<com.example.hello.config.ApplicationConfig$Address>",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.bi-sql-exec-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.bi-sql-source-id",
+      "type": "java.lang.Integer",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.create-oa-attend-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.device-list-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.init-staff-clock-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.reset-bind-device-id-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.select-app-staff-clock-log-sql",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.staff-clock-url",
+      "type": "java.lang.String",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.users",
+      "type": "java.util.List<com.example.hello.config.ApplicationConfig$UserInfo>",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    },
+    {
+      "name": "app.job-config",
+      "type": "com.example.hello.config.ApplicationConfig$JobConfig",
+      "sourceType": "com.example.hello.config.ApplicationConfig"
+    }
+  ],
+  "hints": []
+}
