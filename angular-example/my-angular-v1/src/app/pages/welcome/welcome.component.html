@@ -9,13 +9,11 @@
           [nzShowPagination]="false">
   <thead>
   <tr>
-    <th nzWidth="100px">员工编号</th>
-    <th nzWidth="100px">员工姓名</th>
-    <th nzWidth="200px">公司地址</th>
-    <th nzWidth="150px">上班时间</th>
-    <th nzWidth="100px">上班状态</th>
-    <th nzWidth="150px">下班时间</th>
-    <th nzWidth="100px">下班状态</th>
+    <th nzWidth="100px">编号</th>
+    <th nzWidth="100px">姓名</th>
+    <th nzWidth="200px">地址</th>
+    <th nzWidth="150px">上班</th>
+    <th nzWidth="150px">下班</th>
     <th nzWidth="200px">操作</th>
   </tr>
   </thead>
@@ -41,29 +39,25 @@
         <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
       </nz-select>
     </td>
-    <td>{{data?.staffClock?.clockTimeMin}}</td>
     <td>
       <span *ngIf="data?.staffClock?.clockWorkOnStatus === null; else clockworkonstatus"></span>
       <ng-template #clockworkonstatus>
-        <nz-avatar
-          [nzText]="data?.staffClock?.clockWorkOnStatusName"
+        <nz-tag
           *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild"
-          style="background-color: green;"></nz-avatar>
+          nzColor="green">{{data?.staffClock?.clockTimeMin}}</nz-tag>
         <ng-template #clockworkonstatusChild>
-          <nz-avatar [nzText]="data?.staffClock?.clockWorkOnStatusName" style="background-color: red;"></nz-avatar>
+          <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMin}}</nz-tag>
         </ng-template>
       </ng-template>
     </td>
-    <td>{{data?.staffClock?.clockTimeMax}}</td>
     <td>
       <span *ngIf="data?.staffClock?.clockWorkOffStatus === null; else clockworkoffstatus"></span>
       <ng-template #clockworkoffstatus>
-        <nz-avatar
-          [nzText]="data?.staffClock?.clockWorkOffStatusName"
+        <nz-tag
           *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild"
-          style="background-color: green;"></nz-avatar>
+          nzColor="green">{{data?.staffClock?.clockTimeMax}}</nz-tag>
         <ng-template #clockworkoffstatusChild>
-          <nz-avatar [nzText]="data?.staffClock?.clockWorkOffStatusName" style="background-color: red;"></nz-avatar>
+          <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMax}}</nz-tag>
         </ng-template>
       </ng-template>
     </td>
@@ -155,11 +149,11 @@
         <th nzWidth="100px">主键</th>
         <th nzWidth="100px">员工编号</th>
         <th nzWidth="200px">打卡时间</th>
+        <th nzWidth="200px">创建时间</th>
         <th nzWidth="100px">经度</th>
         <th nzWidth="100px">纬度</th>
         <th>打卡地址</th>
         <th nzWidth="100px">打卡类型</th>
-        <th nzWidth="200px">创建时间</th>
       </tr>
       </thead>
       <tbody>
@@ -167,11 +161,11 @@
         <td>{{log.id}}</td>
         <td>{{log.staff_no}}</td>
         <td>{{log.clock_time}}</td>
+        <td>{{log.create_time}}</td>
         <td>{{log.longitude}}</td>
         <td>{{log.latitude}}</td>
         <td>{{log.address}}</td>
         <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
-        <td>{{log.create_time}}</td>
       </tr>
       </tbody>
     </nz-table>
