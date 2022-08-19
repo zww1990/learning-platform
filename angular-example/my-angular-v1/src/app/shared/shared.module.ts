@@ -26,13 +26,13 @@ import {NzSwitchModule} from 'ng-zorro-antd/switch';
 import {NzRadioModule} from 'ng-zorro-antd/radio';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {NzPopconfirmModule} from 'ng-zorro-antd/popconfirm';
-import {NzDividerModule} from "ng-zorro-antd/divider";
-import {NzAlertModule} from "ng-zorro-antd/alert";
-import {NzNotificationModule} from "ng-zorro-antd/notification";
+import {NzDividerModule} from 'ng-zorro-antd/divider';
+import {NzAlertModule} from 'ng-zorro-antd/alert';
+import {NzNotificationModule} from 'ng-zorro-antd/notification';
 import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
 
 import {IconsProviderModule} from './icons-provider.module';
-import {DefaultValuePipe} from "./default-value.pipe";
+import {DefaultValuePipe} from './default-value.pipe';
 
 @NgModule({
   declarations: [DefaultValuePipe],
