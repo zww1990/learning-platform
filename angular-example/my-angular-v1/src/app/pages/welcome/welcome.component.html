@@ -11,7 +11,6 @@
   <tr>
     <th nzWidth="100px">员工编号</th>
     <th nzWidth="100px">员工姓名</th>
-    <th nzWidth="100px">员工密码</th>
     <th nzWidth="200px">公司地址</th>
     <th nzWidth="150px">上班时间</th>
     <th nzWidth="100px">上班状态</th>
@@ -32,10 +31,6 @@
     <td>
       <input nz-input placeholder="员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
       <ng-template #username>{{data.username}}</ng-template>
-    </td>
-    <td>
-      <input nz-input placeholder="员工密码" [(ngModel)]="data.password" *ngIf="data.edited; else password"/>
-      <ng-template #password>******</ng-template>
     </td>
     <td>
       <nz-select

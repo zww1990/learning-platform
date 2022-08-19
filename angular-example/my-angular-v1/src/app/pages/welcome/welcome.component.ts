@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {NzNotificationService} from "ng-zorro-antd/notification";
-import {Address, AppStaffClockLog, User} from "./user";
-import {ResponseBody} from "../../shared/response-body";
+import {HttpClient} from '@angular/common/http';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {NzMessageService} from 'ng-zorro-antd/message';
+import {NzNotificationService} from 'ng-zorro-antd/notification';
+import {Address, AppStaffClockLog, User} from './user';
+import {ResponseBody} from '../../shared/response-body';
 
 @Component({
   selector: 'app-welcome',
@@ -32,28 +32,28 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  async ngOnInit(): Promise<void> {
     this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
     this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
     this.users.forEach(user => {
-      this.http.post('/hello/initStaffClock', user)
+      this.http.post('/hello/initstaffclock', user)
         .subscribe((response: ResponseBody<AppStaffClockLog>) => {
           user.message = response.message;
           user.status = response.status;
           user.staffClock = response.data;
           user.addr = this.addresses[0];
-        })
-    })
+        });
+    });
   }
 
-  addRow() {
+  addRow(): void {
     this.users = [
       ...this.users,
-      {userNo: null, password: null, username: null, addr: this.addresses[0], status: 1, edited: true}
+      {userNo: null, username: null, addr: this.addresses[0], status: 1, edited: true}
     ];
   }
 
-  gotoWork(user: User) {
+  gotoWork(user: User): void {
     if (user.userNo === null || user.userNo.length === 0) {
       // this.messageService.error('请输入员工编号');
       this.notificationService.error('操作提示', '请输入员工编号!');
@@ -64,44 +64,39 @@ export class WelcomeComponent implements OnInit {
       this.notificationService.error('操作提示', '请输入员工姓名!');
       return;
     }
-    if (user.password === null || user.password.length === 0) {
-      // this.messageService.error('请输入员工密码');
-      this.notificationService.error('操作提示', '请输入员工密码!');
-      return;
-    }
     const request = {...user, ...user.addr};
-    this.http.post('/hello/userLoginAndStaffClock', request)
+    this.http.post('/hello/v1/userloginandstaffclock', request)
       .subscribe((response: ResponseBody<AppStaffClockLog>) => {
         user.message = response.message;
         user.status = response.status;
         user.staffClock = response.data;
-      })
+      });
   }
 
   compareFn = (o1: Address, o2: Address) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
 
-  showList(user: User) {
-    this.http.post('/hello/selectAppStaffClockLogList', user)
+  showList(user: User): void {
+    this.http.post('/hello/selectappstaffclockloglist', user)
       .subscribe((response: ResponseBody<AppStaffClockLog[]>) => {
         this.logList = response.data || [];
         this.title = `${user.username}打卡记录${this.logList.length}条`;
         this.isVisible = true;
-      })
+      });
   }
 
-  handleCancel() {
+  handleCancel(): void {
     this.isVisible = false;
   }
 
-  handleOk() {
+  handleOk(): void {
     this.isVisible = false;
   }
 
-  open() {
+  open(): void {
     this.isAddrVisible = true;
   }
 
-  submitForm(value: Address) {
+  submitForm(value: Address): void {
     for (const key in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(key)) {
         this.validateForm.controls[key].markAsDirty();
@@ -115,7 +110,7 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
-  resetForm() {
+  resetForm(): void {
     this.isAddrVisible = false;
     this.validateForm.reset();
     for (const key in this.validateForm.controls) {

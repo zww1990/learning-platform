@@ -1,6 +1,5 @@
 export class User {
   userNo: string;
-  password: string;
   username: string;
   status?: number;
   message?: string;
