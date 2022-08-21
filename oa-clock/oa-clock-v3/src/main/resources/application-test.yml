@@ -4,8 +4,8 @@ app:
   create-oa-attend-url: 'http://192.168.32.95:38080/appStaffClockLog/createYesterdayOaAttendTest?staffNos=%s&stratTime=%s&endTime=%s'
   device-list-url: 'http://192.168.32.95:38080/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo='
   reset-bind-device-id-url: http://192.168.32.95:38080/appDeviceRecord/resetBindDeviceId
-  bi-sql-exec-url: http://192.168.32.36:18066/bisql/exec
-  bi-sql-source-id: 22
+  bi-sql-exec-url: http://api.yuzhilin.net.cn/bisearchserver/bisql/exec
+  bi-sql-source-id: 5
   users:
   - user-no: 100232
     username: 李米盛
