@@ -154,16 +154,25 @@ export class WelcomeComponent implements OnInit {
   }
 
   /**
+   * 重新绑定设备操作
+   */
+  resetBindDevice(devi: AppDeviceRecord): void {
+    const formData = Object.entries(devi).filter(p => !!p[1]).map(c => c.join('=')).join('&');
+    this.http.post('/hello/resetbinddevice', formData, {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).subscribe((response: ResponseBody<AppDeviceRecordPage>) => {
+      this.deviList = response.data.items || [];
+    });
+  }
+
+  /**
    * 打卡记录对话框
    */
   showLogList(user: User): void {
     this.current = user;
     if (!!this.current.dateRange) {
       if (this.current.dateRange.length === 2) {
-        this.current.dates = [
-          format(this.current.dateRange[0], 'yyyy-MM-dd'),
-          format(this.current.dateRange[1], 'yyyy-MM-dd')
-        ];
+        this.current.dates = this.current.dateRange.map(c => format(c, 'yyyy-MM-dd'));
       } else {
         this.current.dates = null;
       }
