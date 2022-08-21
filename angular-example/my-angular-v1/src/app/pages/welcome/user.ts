@@ -6,6 +6,10 @@ export class User {
   staffClock?: AppStaffClockLog;
   addr: Address;
   edited?: boolean;
+  dates?: string[];
+  dateRange?: Date[];
+  clockTime?: string;
+  clockTimeOfDate?: Date;
 }
 
 export class Address {
