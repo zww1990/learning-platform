@@ -47,6 +47,14 @@ export class WelcomeComponent implements OnInit {
     this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
     this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
     this.users.forEach(user => this.initStaffClockV1(user));
+    this.http.get('/hello/triggers')
+      .subscribe((response: ResponseBody<any>) => {
+        if (response.status === 1) {
+          this.notificationService.info('定时任务', response.message, {
+            nzPlacement: 'bottomRight'
+          });
+        }
+      });
   }
 
   /**
@@ -222,6 +230,27 @@ export class WelcomeComponent implements OnInit {
    */
   openAddr(): void {
     this.isAddrVisible = true;
+  }
+
+  /**
+   * 创建|更新定时任务
+   */
+  openJob(): void {
+    console.log(1);
+  }
+
+  /**
+   * 暂停定时任务
+   */
+  pauseJob(): void {
+    console.log(2);
+  }
+
+  /**
+   * 恢复定时任务
+   */
+  resumeJob(): void {
+    console.log(3);
   }
 
   /**
