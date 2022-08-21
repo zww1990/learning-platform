@@ -14,6 +14,7 @@
     <th nzWidth="200px">地址</th>
     <th nzWidth="150px">上班</th>
     <th nzWidth="150px">下班</th>
+    <th nzWidth="200px">日期</th>
     <th nzWidth="200px">操作</th>
   </tr>
   </thead>
@@ -62,12 +63,20 @@
       </ng-template>
     </td>
     <td>
-      <button
-        nz-button
-        (click)="gotoWork(data)"
-        nzType="primary"
-        nzDanger
-        *ngIf="data.status === 1; else elseBlock">打卡</button>
+      <nz-date-picker
+        [(ngModel)]="data.clockTimeOfDate"
+        nzShowTime
+        nzInputReadOnly
+        nzBackdrop
+        nzMode="date">
+      </nz-date-picker>
+    </td>
+    <td>
+      <div *ngIf="data.status === 1; else elseBlock">
+        <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger>打卡</button>
+        &nbsp;
+        <button nz-button (click)="repairWork(data)" nzType="primary" nzDanger>补卡</button>
+      </div>
       <ng-template #elseBlock>
         <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
       </ng-template>
@@ -137,6 +146,16 @@
   (nzOnOk)="handleOk()"
   nzWidth="1440px">
   <ng-container *nzModalContent>
+    <nz-range-picker
+      nzBackdrop
+      nzInputReadOnly
+      nzMode="date"
+      [(ngModel)]="current.dateRange">
+    </nz-range-picker>
+    &nbsp;
+    <button nz-button nzType="primary" (click)="showList(current)">查询</button>
+    <br/>
+    <br/>
     <nz-table #basicTable
               [nzData]="logList"
               nzSize="small"

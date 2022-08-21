@@ -31,7 +31,7 @@ import {NzAlertModule} from 'ng-zorro-antd/alert';
 import {NzNotificationModule} from 'ng-zorro-antd/notification';
 import {NzTagModule} from 'ng-zorro-antd/tag';
 
-import {NZ_I18N, zh_CN} from 'ng-zorro-antd/i18n';
+import {NZ_I18N, zh_CN, NZ_DATE_CONFIG} from 'ng-zorro-antd/i18n';
 import {IconsProviderModule} from './icons-provider.module';
 import {DefaultValuePipe} from './default-value.pipe';
 
@@ -108,7 +108,10 @@ import {DefaultValuePipe} from './default-value.pipe';
     IconsProviderModule,
     DefaultValuePipe,
   ],
-  providers: [{provide: NZ_I18N, useValue: zh_CN}],
+  providers: [
+    {provide: NZ_I18N, useValue: zh_CN},
+    {provide: NZ_DATE_CONFIG, useValue: {firstDayOfWeek: 0}}
+  ],
 })
 export class SharedModule {
 }

@@ -5,6 +5,7 @@ import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzNotificationService} from 'ng-zorro-antd/notification';
 import {Address, AppStaffClockLog, User} from './user';
 import {ResponseBody} from '../../shared/response-body';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-welcome',
@@ -19,6 +20,7 @@ export class WelcomeComponent implements OnInit {
   title: string;
   logList: AppStaffClockLog[];
   validateForm: UntypedFormGroup;
+  current: User;
 
   constructor(private http: HttpClient,
               private messageService: NzMessageService,
@@ -35,15 +37,26 @@ export class WelcomeComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
     this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
-    this.users.forEach(user => {
-      this.http.post('/hello/initstaffclock', user)
-        .subscribe((response: ResponseBody<AppStaffClockLog>) => {
-          user.message = response.message;
-          user.status = response.status;
-          user.staffClock = response.data;
-          user.addr = this.addresses[0];
-        });
-    });
+    this.users.forEach(user => this.initStaffClockV1(user));
+  }
+
+  initStaffClockV1(user: User): void {
+    this.http.post('/hello/initstaffclock', user)
+      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
+        user.message = response.message;
+        user.status = response.status;
+        user.staffClock = response.data;
+        user.addr = this.addresses[0];
+      });
+  }
+
+  initStaffClockV2(user: User): void {
+    this.http.post('/hello/initstaffclock', user)
+      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
+        user.message = response.message;
+        user.status = response.status;
+        user.staffClock = response.data;
+      });
   }
 
   addRow(): void {
@@ -54,17 +67,19 @@ export class WelcomeComponent implements OnInit {
   }
 
   gotoWork(user: User): void {
-    if (user.userNo === null || user.userNo.length === 0) {
+    if (!user.userNo || user.userNo.length === 0) {
       // this.messageService.error('请输入员工编号');
       this.notificationService.error('操作提示', '请输入员工编号!');
       return;
     }
-    if (user.username === null || user.username.length === 0) {
+    if (!user.username || user.username.length === 0) {
       // this.messageService.error('请输入员工姓名');
       this.notificationService.error('操作提示', '请输入员工姓名!');
       return;
     }
     const request = {...user, ...user.addr};
+    request.addr = null;
+    request.staffClock = null;
     this.http.post('/hello/v1/userloginandstaffclock', request)
       .subscribe((response: ResponseBody<AppStaffClockLog>) => {
         user.message = response.message;
@@ -73,23 +88,69 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
+  repairWork(user: User): void {
+    if (!user.userNo || user.userNo.length === 0) {
+      this.notificationService.error('操作提示', '请输入员工编号!');
+      return;
+    }
+    if (!user.username || user.username.length === 0) {
+      this.notificationService.error('操作提示', '请输入员工姓名!');
+      return;
+    }
+    if (!user.clockTimeOfDate) {
+      this.notificationService.error('操作提示', '请选择日期!');
+      return;
+    }
+    user.clockTime = format(user.clockTimeOfDate, 'yyyy-MM-dd HH:mm:ss');
+    const request = {...user, ...user.addr};
+    request.addr = null;
+    request.staffClock = null;
+    this.http.post('/hello/v2/userloginandstaffclock', request)
+      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
+        user.message = response.message;
+        user.status = response.status;
+        if (user.status === 0) {
+          this.notificationService.error('操作提示', user.message);
+        } else {
+          this.notificationService.success('操作提示', `[ ${user.userNo} - ${user.username} ] 补卡成功`);
+          user.staffClock = response.data;
+          this.initStaffClockV2(user);
+        }
+      });
+  }
+
   compareFn = (o1: Address, o2: Address) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
 
   showList(user: User): void {
+    this.current = user;
+    if (!!this.current.dateRange) {
+      if (this.current.dateRange.length === 2) {
+        this.current.dates = [
+          format(this.current.dateRange[0], 'yyyy-MM-dd'),
+          format(this.current.dateRange[1], 'yyyy-MM-dd')
+        ];
+      } else {
+        this.current.dates = null;
+      }
+    }
     this.http.post('/hello/selectappstaffclockloglist', user)
       .subscribe((response: ResponseBody<AppStaffClockLog[]>) => {
         this.logList = response.data || [];
-        this.title = `${user.username}打卡记录${this.logList.length}条`;
+        this.title = `${user.username} - 打卡记录`;
         this.isVisible = true;
       });
   }
 
   handleCancel(): void {
     this.isVisible = false;
+    this.current.dateRange = null;
+    this.current.dates = null;
   }
 
   handleOk(): void {
     this.isVisible = false;
+    this.current.dateRange = null;
+    this.current.dates = null;
   }
 
   open(): void {
