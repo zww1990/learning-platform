@@ -35,3 +35,36 @@ export class AppStaffClockLog {
   clock_type: number;
   create_time: string;
 }
+
+export class AppDeviceRecord {
+  id: number;
+  staffNo: string;
+  staffName: string;
+  bindDeviceId: string;
+  deviceId: string;
+  model: string;
+  systemName: string;
+  systemVersion: string;
+  resolution: string;
+  pushId: string;
+  isDel: number;
+  creator: string;
+  createTime: string;
+  updator: string;
+  updateTime: string;
+  type: number;
+}
+
+export class Page {
+  nextPage: number;
+  previousPage: number;
+  pageSize: number;
+  pageNo: number;
+  pageTotal: number;
+  totalCount: number;
+}
+
+export class AppDeviceRecordPage {
+  items: AppDeviceRecord[];
+  pageParam: Page;
+}
