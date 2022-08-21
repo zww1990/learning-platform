@@ -1,6 +1,6 @@
-<button nz-button (click)="addRow()" nzType="primary">添加员工</button>
+<button nz-button (click)="openUser()" nzType="primary">添加员工</button>
 &nbsp;
-<button nz-button (click)="open()" nzType="primary">添加地址</button>
+<button nz-button (click)="openAddr()" nzType="primary">添加地址</button>
 <br/>
 <br/>
 <nz-table #basicTable
@@ -8,92 +8,94 @@
           [nzFrontPagination]="false"
           [nzShowPagination]="false">
   <thead>
-  <tr>
-    <th nzWidth="100px">编号</th>
-    <th nzWidth="100px">姓名</th>
-    <th nzWidth="200px">地址</th>
-    <th nzWidth="150px">上班</th>
-    <th nzWidth="150px">下班</th>
-    <th nzWidth="200px">日期</th>
-    <th nzWidth="200px">操作</th>
-  </tr>
+    <tr>
+      <th nzWidth="100px">编号</th>
+      <th nzWidth="100px">姓名</th>
+      <th nzWidth="200px">地址</th>
+      <th nzWidth="150px">上班</th>
+      <th nzWidth="150px">下班</th>
+      <th nzWidth="200px">日期</th>
+      <th nzWidth="200px">操作</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of basicTable.data">
-    <td>
-      <input nz-input placeholder="员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
-      <ng-template #userno>
-        <a (click)="showList(data)" *ngIf="data.status === 1; else elseBlockChild">{{data.userNo}}</a>
-        <ng-template #elseBlockChild>{{data.userNo}}</ng-template>
-      </ng-template>
-    </td>
-    <td>
-      <input nz-input placeholder="员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
-      <ng-template #username>{{data.username}}</ng-template>
-    </td>
-    <td>
-      <nz-select
-        [(ngModel)]="data.addr"
-        [nzDropdownMatchSelectWidth]="false"
-        [compareWith]="compareFn"
-        style="width: 200px">
-        <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
-      </nz-select>
-    </td>
-    <td>
-      <span *ngIf="data?.staffClock?.clockWorkOnStatus === null; else clockworkonstatus"></span>
-      <ng-template #clockworkonstatus>
-        <nz-tag
-          *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild"
-          nzColor="green">{{data?.staffClock?.clockTimeMin}}</nz-tag>
-        <ng-template #clockworkonstatusChild>
-          <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMin}}</nz-tag>
+    <tr *ngFor="let data of basicTable.data">
+      <td>
+        <input nz-input placeholder="员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
+        <ng-template #userno>
+          <a (click)="showLogList(data)" *ngIf="data.status === 1; else elseBlockChild">{{data.userNo}}</a>
+          <ng-template #elseBlockChild>{{data.userNo}}</ng-template>
         </ng-template>
-      </ng-template>
-    </td>
-    <td>
-      <span *ngIf="data?.staffClock?.clockWorkOffStatus === null; else clockworkoffstatus"></span>
-      <ng-template #clockworkoffstatus>
-        <nz-tag
-          *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild"
-          nzColor="green">{{data?.staffClock?.clockTimeMax}}</nz-tag>
-        <ng-template #clockworkoffstatusChild>
-          <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMax}}</nz-tag>
+      </td>
+      <td>
+        <input nz-input placeholder="员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
+        <ng-template #username>{{data.username}}</ng-template>
+      </td>
+      <td>
+        <nz-select
+          [(ngModel)]="data.addr"
+          [nzDropdownMatchSelectWidth]="false"
+          [compareWith]="compareAddrFn"
+          style="width: 200px">
+          <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
+        </nz-select>
+      </td>
+      <td>
+        <span *ngIf="data?.staffClock?.clockWorkOnStatus === null; else clockworkonstatus"></span>
+        <ng-template #clockworkonstatus>
+          <nz-tag
+            *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild"
+            nzColor="green">{{data?.staffClock?.clockTimeMin}}</nz-tag>
+          <ng-template #clockworkonstatusChild>
+            <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMin}}</nz-tag>
+          </ng-template>
         </ng-template>
-      </ng-template>
-    </td>
-    <td>
-      <nz-date-picker
-        [(ngModel)]="data.clockTimeOfDate"
-        nzShowTime
-        nzInputReadOnly
-        nzBackdrop
-        nzMode="date">
-      </nz-date-picker>
-    </td>
-    <td>
-      <div *ngIf="data.status === 1; else elseBlock">
-        <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger>打卡</button>
-        &nbsp;
-        <button nz-button (click)="repairWork(data)" nzType="primary" nzDanger>补卡</button>
-      </div>
-      <ng-template #elseBlock>
-        <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
-      </ng-template>
-    </td>
-  </tr>
+      </td>
+      <td>
+        <span *ngIf="data?.staffClock?.clockWorkOffStatus === null; else clockworkoffstatus"></span>
+        <ng-template #clockworkoffstatus>
+          <nz-tag
+            *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild"
+            nzColor="green">{{data?.staffClock?.clockTimeMax}}</nz-tag>
+          <ng-template #clockworkoffstatusChild>
+            <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMax}}</nz-tag>
+          </ng-template>
+        </ng-template>
+      </td>
+      <td>
+        <nz-date-picker
+          [(ngModel)]="data.clockTimeOfDate"
+          nzShowTime
+          nzInputReadOnly
+          nzBackdrop
+          nzMode="date">
+        </nz-date-picker>
+      </td>
+      <td>
+        <div *ngIf="data.status === 1; else elseBlock">
+          <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger>打卡</button>
+          &nbsp;
+          <button nz-button (click)="repairWork(data)" nzType="primary" nzDanger>补卡</button>
+          &nbsp;
+          <button nz-button (click)="showDeviceList(data)" nzType="primary" nzDanger>查看设备</button>
+        </div>
+        <ng-template #elseBlock>
+          <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
+        </ng-template>
+      </td>
+    </tr>
   </tbody>
 </nz-table>
 <nz-modal
   [(nzVisible)]="isAddrVisible"
   nzTitle="公司地址"
   nzWidth="400px"
-  (nzOnCancel)="resetForm()"
-  (nzOnOk)="submitForm(validateForm.value)"
+  (nzOnCancel)="resetAddrForm()"
+  (nzOnOk)="submitAddrForm(validateAddrForm.value)"
   [nzMaskClosable]="false"
-  [nzOkDisabled]="!validateForm.valid">
+  [nzOkDisabled]="!validateAddrForm.valid">
   <ng-container *nzModalContent>
-    <form nz-form [formGroup]="validateForm">
+    <form nz-form [formGroup]="validateAddrForm">
       <nz-form-item>
         <nz-form-label nzRequired>经度</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="longitudeErrorTpl">
@@ -139,11 +141,60 @@
   </ng-container>
 </nz-modal>
 <nz-modal
-  [(nzVisible)]="isVisible"
+  [(nzVisible)]="isDeviVisible"
   [nzTitle]="title"
   [nzFooter]="null"
-  (nzOnCancel)="handleCancel()"
-  (nzOnOk)="handleOk()"
+  (nzOnCancel)="handleDeviCancel()"
+  (nzOnOk)="handleDeviOk()"
+  nzWidth="1440px">
+  <ng-container *nzModalContent>
+    <nz-table #basicTable
+              [nzData]="deviList"
+              nzSize="small"
+              [nzScroll]="{ y: '600px' }"
+              [nzFrontPagination]="false"
+              [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th nzWidth="50px">ID</th>
+          <th>绑定设备标识</th>
+          <th>手机唯一标识</th>
+          <th>机型</th>
+          <th>OS</th>
+          <th>OS版本</th>
+          <th>分辨率</th>
+          <th>设备推送ID</th>
+          <th nzWidth="100px">创建时间</th>
+          <th nzWidth="100px">更新时间</th>
+          <th nzWidth="100px">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dev of basicTable.data">
+          <td>{{dev.id}}</td>
+          <td>{{dev.bindDeviceId}}</td>
+          <td>{{dev.deviceId}}</td>
+          <td>{{dev.model}}</td>
+          <td>{{dev.systemName}}</td>
+          <td>{{dev.systemVersion}}</td>
+          <td>{{dev.resolution}}</td>
+          <td>{{dev.pushId}}</td>
+          <td>{{dev.createTime}}</td>
+          <td>{{dev.updateTime}}</td>
+          <td>
+            <button nz-button nzType="primary" (click)="showLogList(current)">重新绑定</button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-modal>
+<nz-modal
+  [(nzVisible)]="isLogVisible"
+  [nzTitle]="title"
+  [nzFooter]="null"
+  (nzOnCancel)="handleLogCancel()"
+  (nzOnOk)="handleLogOk()"
   nzWidth="1440px">
   <ng-container *nzModalContent>
     <nz-range-picker
@@ -153,7 +204,7 @@
       [(ngModel)]="current.dateRange">
     </nz-range-picker>
     &nbsp;
-    <button nz-button nzType="primary" (click)="showList(current)">查询</button>
+    <button nz-button nzType="primary" (click)="showLogList(current)">查询</button>
     <br/>
     <br/>
     <nz-table #basicTable
@@ -164,28 +215,28 @@
               nzShowQuickJumper
               nzShowSizeChanger>
       <thead>
-      <tr>
-        <th nzWidth="100px">主键</th>
-        <th nzWidth="100px">员工编号</th>
-        <th nzWidth="200px">打卡时间</th>
-        <th nzWidth="200px">创建时间</th>
-        <th nzWidth="100px">经度</th>
-        <th nzWidth="100px">纬度</th>
-        <th>打卡地址</th>
-        <th nzWidth="100px">打卡类型</th>
-      </tr>
+        <tr>
+          <th nzWidth="100px">主键</th>
+          <th nzWidth="100px">员工编号</th>
+          <th nzWidth="200px">打卡时间</th>
+          <th nzWidth="200px">创建时间</th>
+          <th nzWidth="100px">经度</th>
+          <th nzWidth="100px">纬度</th>
+          <th>打卡地址</th>
+          <th nzWidth="100px">打卡类型</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let log of basicTable.data">
-        <td>{{log.id}}</td>
-        <td>{{log.staff_no}}</td>
-        <td>{{log.clock_time}}</td>
-        <td>{{log.create_time}}</td>
-        <td>{{log.longitude}}</td>
-        <td>{{log.latitude}}</td>
-        <td>{{log.address}}</td>
-        <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
-      </tr>
+        <tr *ngFor="let log of basicTable.data">
+          <td>{{log.id}}</td>
+          <td>{{log.staff_no}}</td>
+          <td>{{log.clock_time}}</td>
+          <td>{{log.create_time}}</td>
+          <td>{{log.longitude}}</td>
+          <td>{{log.latitude}}</td>
+          <td>{{log.address}}</td>
+          <td>{{log.clock_type === 0 ? 'OA打卡' : '审批补卡'}}</td>
+        </tr>
       </tbody>
     </nz-table>
   </ng-container>

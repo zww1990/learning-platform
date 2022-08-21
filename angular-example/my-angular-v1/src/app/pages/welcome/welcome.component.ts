@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzNotificationService} from 'ng-zorro-antd/notification';
-import {Address, AppStaffClockLog, User} from './user';
+import {Address, AppDeviceRecord, AppDeviceRecordPage, AppStaffClockLog, User} from './user';
 import {ResponseBody} from '../../shared/response-body';
 import {format} from 'date-fns';
 
@@ -15,18 +15,24 @@ import {format} from 'date-fns';
 export class WelcomeComponent implements OnInit {
   users: User[];
   addresses: Address[];
-  isVisible = false;
+  isLogVisible = false;
   isAddrVisible = false;
+  isDeviVisible = false;
   title: string;
   logList: AppStaffClockLog[];
-  validateForm: UntypedFormGroup;
+  deviList: AppDeviceRecord[];
+  validateAddrForm: UntypedFormGroup;
   current: User;
+  compareAddrFn = (o1: Address, o2: Address) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
 
+  /**
+   * 构造方法
+   */
   constructor(private http: HttpClient,
               private messageService: NzMessageService,
               private notificationService: NzNotificationService,
               private fb: UntypedFormBuilder) {
-    this.validateForm = this.fb.group({
+    this.validateAddrForm = this.fb.group({
       address: [null, [Validators.required]],
       longitude: [null, [Validators.required]],
       latitude: [null, [Validators.required]],
@@ -34,12 +40,18 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
+  /**
+   * 初始化方法
+   */
   async ngOnInit(): Promise<void> {
     this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
     this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
     this.users.forEach(user => this.initStaffClockV1(user));
   }
 
+  /**
+   * 初始化打卡以及地址数据
+   */
   initStaffClockV1(user: User): void {
     this.http.post('/hello/initstaffclock', user)
       .subscribe((response: ResponseBody<AppStaffClockLog>) => {
@@ -50,6 +62,9 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
+  /**
+   * 初始化打卡数据
+   */
   initStaffClockV2(user: User): void {
     this.http.post('/hello/initstaffclock', user)
       .subscribe((response: ResponseBody<AppStaffClockLog>) => {
@@ -59,21 +74,25 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
-  addRow(): void {
+  /**
+   * 添加员工操作
+   */
+  openUser(): void {
     this.users = [
       ...this.users,
       {userNo: null, username: null, addr: this.addresses[0], status: 1, edited: true}
     ];
   }
 
+  /**
+   * 打卡操作
+   */
   gotoWork(user: User): void {
     if (!user.userNo || user.userNo.length === 0) {
-      // this.messageService.error('请输入员工编号');
       this.notificationService.error('操作提示', '请输入员工编号!');
       return;
     }
     if (!user.username || user.username.length === 0) {
-      // this.messageService.error('请输入员工姓名');
       this.notificationService.error('操作提示', '请输入员工姓名!');
       return;
     }
@@ -88,6 +107,9 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
+  /**
+   * 补卡操作
+   */
   repairWork(user: User): void {
     if (!user.userNo || user.userNo.length === 0) {
       this.notificationService.error('操作提示', '请输入员工编号!');
@@ -119,9 +141,22 @@ export class WelcomeComponent implements OnInit {
       });
   }
 
-  compareFn = (o1: Address, o2: Address) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
+  /**
+   * 查看设备对话框
+   */
+  showDeviceList(user: User): void {
+    this.http.post('/hello/selectdevicelist', user)
+      .subscribe((response: ResponseBody<AppDeviceRecordPage>) => {
+        this.deviList = response.data.items || [];
+        this.title = `${user.username} - 设备绑定记录`;
+        this.isDeviVisible = true;
+      });
+  }
 
-  showList(user: User): void {
+  /**
+   * 打卡记录对话框
+   */
+  showLogList(user: User): void {
     this.current = user;
     if (!!this.current.dateRange) {
       if (this.current.dateRange.length === 2) {
@@ -137,47 +172,76 @@ export class WelcomeComponent implements OnInit {
       .subscribe((response: ResponseBody<AppStaffClockLog[]>) => {
         this.logList = response.data || [];
         this.title = `${user.username} - 打卡记录`;
-        this.isVisible = true;
+        this.isLogVisible = true;
       });
   }
 
-  handleCancel(): void {
-    this.isVisible = false;
+  /**
+   * 打卡记录对话框取消操作
+   */
+  handleLogCancel(): void {
+    this.isLogVisible = false;
     this.current.dateRange = null;
     this.current.dates = null;
   }
 
-  handleOk(): void {
-    this.isVisible = false;
+  /**
+   * 设备绑定记录对话框取消操作
+   */
+  handleDeviCancel(): void {
+    this.isDeviVisible = false;
+  }
+
+  /**
+   * 打卡记录对话框确认操作
+   */
+  handleLogOk(): void {
+    this.isLogVisible = false;
     this.current.dateRange = null;
     this.current.dates = null;
   }
 
-  open(): void {
+  /**
+   * 设备绑定记录对话框确认操作
+   */
+  handleDeviOk(): void {
+    this.isDeviVisible = false;
+  }
+
+  /**
+   * 添加地址对话框
+   */
+  openAddr(): void {
     this.isAddrVisible = true;
   }
 
-  submitForm(value: Address): void {
-    for (const key in this.validateForm.controls) {
-      if (this.validateForm.controls.hasOwnProperty(key)) {
-        this.validateForm.controls[key].markAsDirty();
-        this.validateForm.controls[key].updateValueAndValidity();
+  /**
+   * 提交地址表单
+   */
+  submitAddrForm(value: Address): void {
+    for (const key in this.validateAddrForm.controls) {
+      if (this.validateAddrForm.controls.hasOwnProperty(key)) {
+        this.validateAddrForm.controls[key].markAsDirty();
+        this.validateAddrForm.controls[key].updateValueAndValidity();
       }
     }
-    if (this.validateForm.valid) {
+    if (this.validateAddrForm.valid) {
       value.id = this.addresses.length + 1;
       this.addresses.push(value);
       this.isAddrVisible = false;
     }
   }
 
-  resetForm(): void {
+  /**
+   * 重置地址表单
+   */
+  resetAddrForm(): void {
     this.isAddrVisible = false;
-    this.validateForm.reset();
-    for (const key in this.validateForm.controls) {
-      if (this.validateForm.controls.hasOwnProperty(key)) {
-        this.validateForm.controls[key].markAsPristine();
-        this.validateForm.controls[key].updateValueAndValidity();
+    this.validateAddrForm.reset();
+    for (const key in this.validateAddrForm.controls) {
+      if (this.validateAddrForm.controls.hasOwnProperty(key)) {
+        this.validateAddrForm.controls[key].markAsPristine();
+        this.validateAddrForm.controls[key].updateValueAndValidity();
       }
     }
   }
