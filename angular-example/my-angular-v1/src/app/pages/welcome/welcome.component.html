@@ -1,6 +1,12 @@
 <button nz-button (click)="openUser()" nzType="primary">添加员工</button>
 &nbsp;
 <button nz-button (click)="openAddr()" nzType="primary">添加地址</button>
+&nbsp;
+<button nz-button (click)="openJob()" nzType="primary">创建|更新定时任务</button>
+&nbsp;
+<button nz-button (click)="pauseJob()" nzType="primary">暂停定时任务</button>
+&nbsp;
+<button nz-button (click)="resumeJob()" nzType="primary">恢复定时任务</button>
 <br/>
 <br/>
 <nz-table #basicTable
