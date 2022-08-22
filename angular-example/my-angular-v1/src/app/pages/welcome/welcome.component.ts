@@ -23,6 +23,9 @@ export class WelcomeComponent implements OnInit {
   deviList: AppDeviceRecord[];
   validateAddrForm: UntypedFormGroup;
   current: User;
+  checked = false;
+  indeterminate = false;
+  setOfCheckedId = new Set<string>();
   compareAddrFn = (o1: Address, o2: Address) => (o1 && o2 ? o1.id === o2.id : o1 === o2);
 
   /**
@@ -236,7 +239,7 @@ export class WelcomeComponent implements OnInit {
    * 创建|更新定时任务
    */
   openJob(): void {
-    console.log(1);
+    console.log(this.users);
   }
 
   /**
@@ -282,5 +285,41 @@ export class WelcomeComponent implements OnInit {
         this.validateAddrForm.controls[key].updateValueAndValidity();
       }
     }
+  }
+
+  /**
+   * 全选操作
+   */
+  onAllChecked(checked: boolean): void {
+    this.users.forEach(({ userNo }) => this.updateCheckedSet(userNo, checked));
+    this.refreshCheckedStatus();
+  }
+
+  /**
+   * 更新选中集合
+   */
+  updateCheckedSet(id: string, checked: boolean): void {
+    if (checked) {
+      this.setOfCheckedId.add(id);
+    } else {
+      this.setOfCheckedId.delete(id);
+    }
+  }
+
+  /**
+   * 刷新选中状态
+   */
+  refreshCheckedStatus(): void {
+    const listOfEnabledData = this.users;
+    this.checked = listOfEnabledData.every(({ userNo }) => this.setOfCheckedId.has(userNo));
+    this.indeterminate = listOfEnabledData.some(({ userNo }) => this.setOfCheckedId.has(userNo)) && !this.checked;
+  }
+
+  /**
+   * 表格中每一项选中操作
+   */
+  onItemChecked(id: string, checked: boolean): void {
+    this.updateCheckedSet(id, checked);
+    this.refreshCheckedStatus();
   }
 }

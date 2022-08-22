@@ -2,19 +2,17 @@
 &nbsp;
 <button nz-button (click)="openAddr()" nzType="primary">添加地址</button>
 &nbsp;
-<button nz-button (click)="openJob()" nzType="primary">创建|更新定时任务</button>
+<button nz-button (click)="openJob()" nzType="primary" [disabled]="setOfCheckedId.size === 0">创建|更新定时任务</button>
 &nbsp;
 <button nz-button (click)="pauseJob()" nzType="primary">暂停定时任务</button>
 &nbsp;
 <button nz-button (click)="resumeJob()" nzType="primary">恢复定时任务</button>
 <br/>
 <br/>
-<nz-table #basicTable
-          [nzData]="users"
-          [nzFrontPagination]="false"
-          [nzShowPagination]="false">
+<nz-table #basicTable [nzData]="users" [nzFrontPagination]="false" [nzShowPagination]="false">
   <thead>
     <tr>
+      <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)" nzWidth="30px"></th>
       <th nzWidth="100px">编号</th>
       <th nzWidth="100px">姓名</th>
       <th nzWidth="200px">地址</th>
@@ -26,6 +24,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
+      <td [nzChecked]="setOfCheckedId.has(data.userNo)" (nzCheckedChange)="onItemChecked(data.userNo, $event)"></td>
       <td>
         <input nz-input placeholder="员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
         <ng-template #userno>
@@ -38,20 +37,14 @@
         <ng-template #username>{{data.username}}</ng-template>
       </td>
       <td>
-        <nz-select
-          [(ngModel)]="data.addr"
-          [nzDropdownMatchSelectWidth]="false"
-          [compareWith]="compareAddrFn"
-          style="width: 200px">
+        <nz-select [(ngModel)]="data.addr" [nzDropdownMatchSelectWidth]="false" [compareWith]="compareAddrFn" style="width: 200px">
           <nz-option *ngFor="let addr of addresses" [nzLabel]="addr.address" [nzValue]="addr"></nz-option>
         </nz-select>
       </td>
       <td>
         <span *ngIf="data?.staffClock?.clockWorkOnStatus === null; else clockworkonstatus"></span>
         <ng-template #clockworkonstatus>
-          <nz-tag
-            *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild"
-            nzColor="green">{{data?.staffClock?.clockTimeMin}}</nz-tag>
+          <nz-tag *ngIf="data?.staffClock?.clockWorkOnStatus === 611; else clockworkonstatusChild" nzColor="green">{{data?.staffClock?.clockTimeMin}}</nz-tag>
           <ng-template #clockworkonstatusChild>
             <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMin}}</nz-tag>
           </ng-template>
@@ -60,23 +53,13 @@
       <td>
         <span *ngIf="data?.staffClock?.clockWorkOffStatus === null; else clockworkoffstatus"></span>
         <ng-template #clockworkoffstatus>
-          <nz-tag
-            *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild"
-            nzColor="green">{{data?.staffClock?.clockTimeMax}}</nz-tag>
+          <nz-tag *ngIf="data?.staffClock?.clockWorkOffStatus === 611; else clockworkoffstatusChild" nzColor="green">{{data?.staffClock?.clockTimeMax}}</nz-tag>
           <ng-template #clockworkoffstatusChild>
             <nz-tag nzColor="red">{{data?.staffClock?.clockTimeMax}}</nz-tag>
           </ng-template>
         </ng-template>
       </td>
-      <td>
-        <nz-date-picker
-          [(ngModel)]="data.clockTimeOfDate"
-          nzShowTime
-          nzInputReadOnly
-          nzBackdrop
-          nzMode="date">
-        </nz-date-picker>
-      </td>
+      <td><nz-date-picker [(ngModel)]="data.clockTimeOfDate" nzShowTime nzInputReadOnly nzBackdrop nzMode="date"></nz-date-picker></td>
       <td>
         <div *ngIf="data.status === 1; else elseBlock">
           <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger>打卡</button>
@@ -85,9 +68,7 @@
           &nbsp;
           <button nz-button (click)="showDeviceList(data)" nzType="primary" nzDanger>查看设备</button>
         </div>
-        <ng-template #elseBlock>
-          <nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert>
-        </ng-template>
+        <ng-template #elseBlock><nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert></ng-template>
       </td>
     </tr>
   </tbody>
@@ -105,14 +86,7 @@
       <nz-form-item>
         <nz-form-label nzRequired>经度</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="longitudeErrorTpl">
-          <nz-input-number
-            formControlName="longitude"
-            nzPlaceHolder="请输入经度"
-            [nzPrecision]="7"
-            [nzMin]="0"
-            nzPrecisionMode="cut"
-            style="width: 100%">
-          </nz-input-number>
+          <nz-input-number formControlName="longitude" nzPlaceHolder="请输入经度" [nzPrecision]="7" [nzMin]="0" nzPrecisionMode="cut" style="width: 100%"></nz-input-number>
           <ng-template #longitudeErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">请输入经度!</ng-container>
           </ng-template>
@@ -121,14 +95,7 @@
       <nz-form-item>
         <nz-form-label nzRequired>纬度</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="latitudeErrorTpl">
-          <nz-input-number
-            formControlName="latitude"
-            nzPlaceHolder="请输入纬度"
-            [nzPrecision]="7"
-            [nzMin]="0"
-            nzPrecisionMode="cut"
-            style="width: 100%">
-          </nz-input-number>
+          <nz-input-number formControlName="latitude" nzPlaceHolder="请输入纬度" [nzPrecision]="7" [nzMin]="0" nzPrecisionMode="cut" style="width: 100%"></nz-input-number>
           <ng-template #latitudeErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">请输入纬度!</ng-container>
           </ng-template>
@@ -146,20 +113,9 @@
     </form>
   </ng-container>
 </nz-modal>
-<nz-modal
-  [(nzVisible)]="isDeviVisible"
-  [nzTitle]="title"
-  [nzFooter]="null"
-  (nzOnCancel)="handleDeviCancel()"
-  (nzOnOk)="handleDeviOk()"
-  nzWidth="1440px">
+<nz-modal [(nzVisible)]="isDeviVisible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="handleDeviCancel()" (nzOnOk)="handleDeviOk()" nzWidth="1440px">
   <ng-container *nzModalContent>
-    <nz-table #basicTable
-              [nzData]="deviList"
-              nzSize="small"
-              [nzScroll]="{ y: '600px' }"
-              [nzFrontPagination]="false"
-              [nzShowPagination]="false">
+    <nz-table #basicTable [nzData]="deviList" nzSize="small" [nzScroll]="{ y: '600px' }" [nzFrontPagination]="false" [nzShowPagination]="false">
       <thead>
         <tr>
           <th nzWidth="50px">ID</th>
@@ -187,39 +143,20 @@
           <td>{{dev.pushId}}</td>
           <td>{{dev.createTime}}</td>
           <td>{{dev.updateTime}}</td>
-          <td>
-            <button nz-button nzType="primary" (click)="resetBindDevice(dev)" nzDanger>重新绑定</button>
-          </td>
+          <td><button nz-button nzType="primary" (click)="resetBindDevice(dev)" nzDanger>重新绑定</button></td>
         </tr>
       </tbody>
     </nz-table>
   </ng-container>
 </nz-modal>
-<nz-modal
-  [(nzVisible)]="isLogVisible"
-  [nzTitle]="title"
-  [nzFooter]="null"
-  (nzOnCancel)="handleLogCancel()"
-  (nzOnOk)="handleLogOk()"
-  nzWidth="1440px">
+<nz-modal [(nzVisible)]="isLogVisible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="handleLogCancel()" (nzOnOk)="handleLogOk()" nzWidth="1440px">
   <ng-container *nzModalContent>
-    <nz-range-picker
-      nzBackdrop
-      nzInputReadOnly
-      nzMode="date"
-      [(ngModel)]="current.dateRange">
-    </nz-range-picker>
+    <nz-range-picker nzBackdrop nzInputReadOnly nzMode="date" [(ngModel)]="current.dateRange"></nz-range-picker>
     &nbsp;
     <button nz-button nzType="primary" (click)="showLogList(current)">查询</button>
     <br/>
     <br/>
-    <nz-table #basicTable
-              [nzData]="logList"
-              nzSize="small"
-              [nzScroll]="{ y: '600px' }"
-              nzShowPagination
-              nzShowQuickJumper
-              nzShowSizeChanger>
+    <nz-table #basicTable [nzData]="logList" nzSize="small" [nzScroll]="{ y: '600px' }" nzShowPagination nzShowQuickJumper nzShowSizeChanger>
       <thead>
         <tr>
           <th nzWidth="100px">主键</th>
