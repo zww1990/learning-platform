@@ -55,10 +55,10 @@ export class WelcomeComponent implements OnInit {
     this.addresses = (await this.http.get<ResponseBody<Address[]>>('/hello/addresses').toPromise()).data;
     this.users = (await this.http.get<ResponseBody<User[]>>('/hello/users').toPromise()).data;
     this.users.forEach(user => this.initStaffClockV1(user));
-    this.http.get('/hello/triggers')
-      .subscribe((response: ResponseBody<any>) => {
-        if (response.status === 1) {
-          this.notificationService.info('定时任务', response.message, {
+    this.http.get<ResponseBody<any>>('/hello/triggers')
+      .subscribe(({status, message}) => {
+        if (status === 1) {
+          this.notificationService.info('定时任务', message, {
             nzPlacement: 'bottomRight'
           });
         }
@@ -69,11 +69,11 @@ export class WelcomeComponent implements OnInit {
    * 初始化打卡以及地址数据
    */
   initStaffClockV1(user: User): void {
-    this.http.post('/hello/initstaffclock', user)
-      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
-        user.message = response.message;
-        user.status = response.status;
-        user.staffClock = response.data;
+    this.http.post<ResponseBody<AppStaffClockLog>>('/hello/initstaffclock', user)
+      .subscribe(({message, status, data}) => {
+        user.message = message;
+        user.status = status;
+        user.staffClock = data;
         user.addr = this.addresses[0];
       });
   }
@@ -82,11 +82,11 @@ export class WelcomeComponent implements OnInit {
    * 初始化打卡数据
    */
   initStaffClockV2(user: User): void {
-    this.http.post('/hello/initstaffclock', user)
-      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
-        user.message = response.message;
-        user.status = response.status;
-        user.staffClock = response.data;
+    this.http.post<ResponseBody<AppStaffClockLog>>('/hello/initstaffclock', user)
+      .subscribe(({message, status, data}) => {
+        user.message = message;
+        user.status = status;
+        user.staffClock = data;
       });
   }
 
@@ -116,11 +116,11 @@ export class WelcomeComponent implements OnInit {
     const request = {...user, ...user.addr};
     request.addr = null;
     request.staffClock = null;
-    this.http.post('/hello/v1/userloginandstaffclock', request)
-      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
-        user.message = response.message;
-        user.status = response.status;
-        user.staffClock = response.data;
+    this.http.post<ResponseBody<AppStaffClockLog>>('/hello/v1/userloginandstaffclock', request)
+      .subscribe(({message, status, data}) => {
+        user.message = message;
+        user.status = status;
+        user.staffClock = data;
       });
   }
 
@@ -144,15 +144,12 @@ export class WelcomeComponent implements OnInit {
     const request = {...user, ...user.addr};
     request.addr = null;
     request.staffClock = null;
-    this.http.post('/hello/v2/userloginandstaffclock', request)
-      .subscribe((response: ResponseBody<AppStaffClockLog>) => {
-        user.message = response.message;
-        user.status = response.status;
-        if (user.status === 0) {
-          this.notificationService.error('操作提示', user.message);
+    this.http.post<ResponseBody<AppStaffClockLog>>('/hello/v2/userloginandstaffclock', request)
+      .subscribe(({status, message}) => {
+        if (status === 0) {
+          this.notificationService.error('操作提示', message);
         } else {
           this.notificationService.success('操作提示', `[ ${user.userNo} - ${user.username} ] 补卡成功`);
-          user.staffClock = response.data;
           this.initStaffClockV2(user);
         }
       });
@@ -162,9 +159,9 @@ export class WelcomeComponent implements OnInit {
    * 查看设备对话框
    */
   showDeviceList(user: User): void {
-    this.http.post('/hello/selectdevicelist', user)
-      .subscribe((response: ResponseBody<AppDeviceRecordPage>) => {
-        this.deviList = response.data.items || [];
+    this.http.post<ResponseBody<AppDeviceRecordPage>>('/hello/selectdevicelist', user)
+      .subscribe(({data}) => {
+        this.deviList = data.items || [];
         this.title = `${user.username} - 设备绑定记录`;
         this.isDeviVisible = true;
       });
@@ -175,10 +172,10 @@ export class WelcomeComponent implements OnInit {
    */
   resetBindDevice(devi: AppDeviceRecord): void {
     const formData = Object.entries(devi).filter(p => !!p[1]).map(c => c.join('=')).join('&');
-    this.http.post('/hello/resetbinddevice', formData, {
+    this.http.post<ResponseBody<AppDeviceRecordPage>>('/hello/resetbinddevice', formData, {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    }).subscribe((response: ResponseBody<AppDeviceRecordPage>) => {
-      this.deviList = response.data.items || [];
+    }).subscribe(({data}) => {
+      this.deviList = data.items || [];
     });
   }
 
@@ -194,9 +191,9 @@ export class WelcomeComponent implements OnInit {
         this.current.dates = null;
       }
     }
-    this.http.post('/hello/selectappstaffclockloglist', user)
-      .subscribe((response: ResponseBody<AppStaffClockLog[]>) => {
-        this.logList = response.data || [];
+    this.http.post<ResponseBody<AppStaffClockLog[]>>('/hello/selectappstaffclockloglist', user)
+      .subscribe(({data}) => {
+        this.logList = data || [];
         this.title = `${user.username} - 打卡记录`;
         this.isLogVisible = true;
       });
@@ -257,14 +254,28 @@ export class WelcomeComponent implements OnInit {
    * 暂停定时任务
    */
   pauseJob(): void {
-    console.log(2);
+    this.http.get<ResponseBody<any>>('/hello/pausejob')
+      .subscribe(({status, message}) => {
+        if (status === 1) {
+          this.notificationService.success('操作提示', message);
+        } else {
+          this.notificationService.error('操作提示', message);
+        }
+      });
   }
 
   /**
    * 恢复定时任务
    */
   resumeJob(): void {
-    console.log(3);
+    this.http.get<ResponseBody<any>>('/hello/resumejob')
+      .subscribe(({status, message}) => {
+        if (status === 1) {
+          this.notificationService.success('操作提示', message);
+        } else {
+          this.notificationService.error('操作提示', message);
+        }
+      });
   }
 
   /**
@@ -303,11 +314,20 @@ export class WelcomeComponent implements OnInit {
         return tmp;
       });
       const request = {users: selected, cronExpression: value.cronExpression};
-      console.log(request);
-      this.setOfCheckedId.clear();
-      this.refreshCheckedStatus();
-      this.resetJobForm();
-      this.isJobVisible = false;
+      this.http.post<ResponseBody<any>>('/hello/savejob', request)
+        .subscribe(({status, message}) => {
+          if (status === 1) {
+            this.notificationService.success('操作提示', message);
+            setTimeout(() => {
+              this.setOfCheckedId.clear();
+              this.refreshCheckedStatus();
+              this.resetJobForm();
+              this.isJobVisible = false;
+            }, 1000);
+          } else {
+            this.notificationService.error('操作提示', message);
+          }
+        });
     }
   }
 
