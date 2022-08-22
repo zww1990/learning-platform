@@ -18,10 +18,12 @@ export class WelcomeComponent implements OnInit {
   isLogVisible = false;
   isAddrVisible = false;
   isDeviVisible = false;
+  isJobVisible = false;
   title: string;
   logList: AppStaffClockLog[];
   deviList: AppDeviceRecord[];
   validateAddrForm: UntypedFormGroup;
+  validateJobForm: UntypedFormGroup;
   current: User;
   checked = false;
   indeterminate = false;
@@ -40,6 +42,9 @@ export class WelcomeComponent implements OnInit {
       longitude: [null, [Validators.required]],
       latitude: [null, [Validators.required]],
       id: null
+    });
+    this.validateJobForm = this.fb.group({
+      cronExpression: [null, [Validators.required]]
     });
   }
 
@@ -89,10 +94,11 @@ export class WelcomeComponent implements OnInit {
    * 添加员工操作
    */
   openUser(): void {
-    this.users = [
-      ...this.users,
-      {userNo: null, username: null, addr: this.addresses[0], status: 1, edited: true}
-    ];
+    const ids = this.users.map(({userNo}) => +userNo);
+    const index = `${Math.max(...ids) + 1}`;
+    this.users.push({userNo: index, username: null, addr: this.addresses[0], status: 1, edited: true});
+    this.users = this.users.slice();
+    this.refreshCheckedStatus();
   }
 
   /**
@@ -239,7 +245,12 @@ export class WelcomeComponent implements OnInit {
    * 创建|更新定时任务
    */
   openJob(): void {
-    console.log(this.users);
+    const selected = this.users.filter(({userNo}) => this.setOfCheckedId.has(userNo));
+    this.title = '';
+    selected.forEach(({userNo, username, addr}) => {
+      this.title += `${userNo} - ${username} - ${addr.address};`;
+    });
+    this.isJobVisible = true;
   }
 
   /**
@@ -269,7 +280,34 @@ export class WelcomeComponent implements OnInit {
     if (this.validateAddrForm.valid) {
       value.id = this.addresses.length + 1;
       this.addresses.push(value);
+      this.resetAddrForm();
       this.isAddrVisible = false;
+    }
+  }
+
+  /**
+   * 提交定时任务表单
+   */
+  submitJobForm(value: any): void {
+    for (const key in this.validateJobForm.controls) {
+      if (this.validateJobForm.controls.hasOwnProperty(key)) {
+        this.validateJobForm.controls[key].markAsDirty();
+        this.validateJobForm.controls[key].updateValueAndValidity();
+      }
+    }
+    if (this.validateJobForm.valid) {
+      const selected = this.users.filter(({userNo}) => this.setOfCheckedId.has(userNo)).map(item => {
+        const tmp = { ...item, ...item.addr };
+        tmp.addr = null;
+        tmp.staffClock = null;
+        return tmp;
+      });
+      const request = {users: selected, cronExpression: value.cronExpression};
+      console.log(request);
+      this.setOfCheckedId.clear();
+      this.refreshCheckedStatus();
+      this.resetJobForm();
+      this.isJobVisible = false;
     }
   }
 
@@ -288,10 +326,24 @@ export class WelcomeComponent implements OnInit {
   }
 
   /**
+   * 重置定时任务表单
+   */
+  resetJobForm(): void {
+    this.isJobVisible = false;
+    this.validateJobForm.reset();
+    for (const key in this.validateJobForm.controls) {
+      if (this.validateJobForm.controls.hasOwnProperty(key)) {
+        this.validateJobForm.controls[key].markAsPristine();
+        this.validateJobForm.controls[key].updateValueAndValidity();
+      }
+    }
+  }
+
+  /**
    * 全选操作
    */
   onAllChecked(checked: boolean): void {
-    this.users.forEach(({ userNo }) => this.updateCheckedSet(userNo, checked));
+    this.users.forEach(({userNo}) => this.updateCheckedSet(userNo, checked));
     this.refreshCheckedStatus();
   }
 
@@ -310,9 +362,8 @@ export class WelcomeComponent implements OnInit {
    * 刷新选中状态
    */
   refreshCheckedStatus(): void {
-    const listOfEnabledData = this.users;
-    this.checked = listOfEnabledData.every(({ userNo }) => this.setOfCheckedId.has(userNo));
-    this.indeterminate = listOfEnabledData.some(({ userNo }) => this.setOfCheckedId.has(userNo)) && !this.checked;
+    this.checked = this.users.every(({userNo}) => this.setOfCheckedId.has(userNo));
+    this.indeterminate = this.users.some(({userNo}) => this.setOfCheckedId.has(userNo)) && !this.checked;
   }
 
   /**

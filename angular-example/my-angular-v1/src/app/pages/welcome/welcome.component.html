@@ -74,6 +74,33 @@
   </tbody>
 </nz-table>
 <nz-modal
+  [(nzVisible)]="isJobVisible"
+  nzTitle="定时任务"
+  nzWidth="400px"
+  (nzOnCancel)="resetJobForm()"
+  (nzOnOk)="submitJobForm(validateJobForm.value)"
+  [nzMaskClosable]="false"
+  [nzOkDisabled]="!validateJobForm.valid">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateJobForm">
+      <nz-form-item>
+        <div *ngFor="let text of title.split(';')">
+          {{text}}
+        </div>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzRequired>cron表达式</nz-form-label>
+        <nz-form-control nzHasFeedback [nzErrorTip]="cronErrorTpl">
+          <input nz-input formControlName="cronExpression" placeholder="请输入cron表达式">
+          <ng-template #cronErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">cron表达式必须填!</ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+<nz-modal
   [(nzVisible)]="isAddrVisible"
   nzTitle="公司地址"
   nzWidth="400px"
