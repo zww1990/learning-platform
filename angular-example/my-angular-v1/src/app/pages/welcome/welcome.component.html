@@ -18,7 +18,7 @@
       <th nzWidth="190px">上班</th>
       <th nzWidth="190px">下班</th>
       <th nzWidth="210px">日期</th>
-      <th nzWidth="280px">操作</th>
+      <th nzWidth="330px">操作</th>
     </tr>
   </thead>
   <tbody>
@@ -26,10 +26,7 @@
       <td [nzChecked]="setOfCheckedId.has(data.userNo)" (nzCheckedChange)="onItemChecked(data.userNo, $event)"></td>
       <td>
         <input nz-input placeholder="员工编号" [(ngModel)]="data.userNo" *ngIf="data.edited; else userno"/>
-        <ng-template #userno>
-          <a (click)="showLogList(data)" *ngIf="data.status === 1; else elseBlockChild">{{data.userNo}}</a>
-          <ng-template #elseBlockChild>{{data.userNo}}</ng-template>
-        </ng-template>
+        <ng-template #userno>{{data.userNo}}</ng-template>
       </td>
       <td>
         <input nz-input placeholder="员工姓名" [(ngModel)]="data.username" *ngIf="data.edited; else username"/>
@@ -65,7 +62,9 @@
           <nz-divider nzType="vertical"></nz-divider>
           <button nz-button (click)="repairWork(data)" nzType="primary" nzDanger>补卡</button>
           <nz-divider nzType="vertical"></nz-divider>
-          <button nz-button (click)="showDeviceList(data)" nzType="primary" nzDanger>查看设备</button>
+          <button nz-button (click)="showDeviceList(data)" nzType="primary" nzDanger>设备</button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button (click)="showLogList(data)" nzType="primary" nzDanger>记录</button>
         </div>
         <ng-template #elseBlock><nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert></ng-template>
       </td>

@@ -165,6 +165,10 @@ export class WelcomeComponent implements OnInit {
    * 查看设备对话框
    */
   showDeviceList(user: User): void {
+    if (!user.userNo || user.userNo.length === 0) {
+      this.notificationService.error('操作提示', '请输入员工编号!');
+      return;
+    }
     this.http.post<ResponseBody<AppDeviceRecordPage>>('/hello/selectdevicelist', user)
       .subscribe(({data}) => {
         this.deviList = data.items || [];
@@ -189,6 +193,10 @@ export class WelcomeComponent implements OnInit {
    * 打卡记录对话框
    */
   showLogList(user: User): void {
+    if (!user.userNo || user.userNo.length === 0) {
+      this.notificationService.error('操作提示', '请输入员工编号!');
+      return;
+    }
     this.current = user;
     if (!!this.current.dateRange) {
       if (this.current.dateRange.length === 2) {
