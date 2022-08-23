@@ -6,6 +6,7 @@ import {NzNotificationService} from 'ng-zorro-antd/notification';
 import {Address, AppDeviceRecord, AppDeviceRecordPage, AppStaffClockLog, User} from './user';
 import {ResponseBody} from '../../shared/response-body';
 import {format} from 'date-fns';
+import {WebsocketService} from '../../shared/websocket.service';
 
 @Component({
   selector: 'app-welcome',
@@ -36,7 +37,8 @@ export class WelcomeComponent implements OnInit {
   constructor(private http: HttpClient,
               private messageService: NzMessageService,
               private notificationService: NzNotificationService,
-              private fb: UntypedFormBuilder) {
+              private fb: UntypedFormBuilder,
+              private wsService: WebsocketService) {
     this.validateAddrForm = this.fb.group({
       address: [null, [Validators.required]],
       longitude: [null, [Validators.required]],
@@ -63,6 +65,10 @@ export class WelcomeComponent implements OnInit {
           });
         }
       });
+    const wsUrl = (await this.http.get<ResponseBody<string>>('/hello/wsurl').toPromise()).data;
+    this.wsService.connect(wsUrl).subscribe(data => {
+      this.initStaffClockV2(this.users.find(({userNo}) => userNo === data));
+    });
   }
 
   /**
@@ -242,7 +248,9 @@ export class WelcomeComponent implements OnInit {
    * 创建|更新定时任务
    */
   openJob(): void {
-    const selected = this.users.filter(({userNo}) => this.setOfCheckedId.has(userNo));
+    const selected = this.users
+      .filter(({userNo}) => !!userNo)
+      .filter(({userNo}) => this.setOfCheckedId.has(userNo));
     this.title = '';
     selected.forEach(({userNo, username, addr}) => {
       this.title += `${userNo} - ${username} - ${addr.address};`;
@@ -307,11 +315,14 @@ export class WelcomeComponent implements OnInit {
       }
     }
     if (this.validateJobForm.valid) {
-      const selected = this.users.filter(({userNo}) => this.setOfCheckedId.has(userNo)).map(item => {
-        const tmp = { ...item, ...item.addr };
-        tmp.addr = null;
-        tmp.staffClock = null;
-        return tmp;
+      const selected = this.users
+        .filter(({userNo}) => !!userNo)
+        .filter(({userNo}) => this.setOfCheckedId.has(userNo))
+        .map(item => {
+          const tmp = { ...item, ...item.addr };
+          tmp.addr = null;
+          tmp.staffClock = null;
+          return tmp;
       });
       const request = {users: selected, cronExpression: value.cronExpression};
       this.http.post<ResponseBody<any>>('/hello/savejob', request)

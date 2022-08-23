@@ -1,25 +1,24 @@
 <button nz-button (click)="openUser()" nzType="primary">添加员工</button>
-&nbsp;
+<nz-divider nzType="vertical"></nz-divider>
 <button nz-button (click)="openAddr()" nzType="primary">添加地址</button>
-&nbsp;
+<nz-divider nzType="vertical"></nz-divider>
 <button nz-button (click)="openJob()" nzType="primary" [disabled]="setOfCheckedId.size === 0">创建|更新定时任务</button>
-&nbsp;
+<nz-divider nzType="vertical"></nz-divider>
 <button nz-button (click)="pauseJob()" nzType="primary">暂停定时任务</button>
-&nbsp;
+<nz-divider nzType="vertical"></nz-divider>
 <button nz-button (click)="resumeJob()" nzType="primary">恢复定时任务</button>
-<br/>
-<br/>
+<nz-divider nzType="horizontal"></nz-divider>
 <nz-table #basicTable [nzData]="users" [nzFrontPagination]="false" [nzShowPagination]="false">
   <thead>
     <tr>
       <th [nzChecked]="checked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="onAllChecked($event)" nzWidth="30px"></th>
-      <th nzWidth="100px">编号</th>
-      <th nzWidth="100px">姓名</th>
+      <th nzWidth="120px">编号</th>
+      <th nzWidth="120px">姓名</th>
       <th nzWidth="200px">地址</th>
-      <th nzWidth="150px">上班</th>
-      <th nzWidth="150px">下班</th>
-      <th nzWidth="200px">日期</th>
-      <th nzWidth="200px">操作</th>
+      <th nzWidth="190px">上班</th>
+      <th nzWidth="190px">下班</th>
+      <th nzWidth="210px">日期</th>
+      <th nzWidth="280px">操作</th>
     </tr>
   </thead>
   <tbody>
@@ -63,9 +62,9 @@
       <td>
         <div *ngIf="data.status === 1; else elseBlock">
           <button nz-button (click)="gotoWork(data)" nzType="primary" nzDanger>打卡</button>
-          &nbsp;
+          <nz-divider nzType="vertical"></nz-divider>
           <button nz-button (click)="repairWork(data)" nzType="primary" nzDanger>补卡</button>
-          &nbsp;
+          <nz-divider nzType="vertical"></nz-divider>
           <button nz-button (click)="showDeviceList(data)" nzType="primary" nzDanger>查看设备</button>
         </div>
         <ng-template #elseBlock><nz-alert nzType="error" [nzMessage]="data.message" nzShowIcon></nz-alert></ng-template>
@@ -84,9 +83,7 @@
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateJobForm">
       <nz-form-item>
-        <div *ngFor="let text of title.split(';')">
-          {{text}}
-        </div>
+        <div *ngFor="let text of title.split(';')">{{text}}</div>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzRequired>cron表达式</nz-form-label>
@@ -179,10 +176,9 @@
 <nz-modal [(nzVisible)]="isLogVisible" [nzTitle]="title" [nzFooter]="null" (nzOnCancel)="handleLogCancel()" (nzOnOk)="handleLogOk()" nzWidth="1440px">
   <ng-container *nzModalContent>
     <nz-range-picker nzBackdrop nzInputReadOnly nzMode="date" [(ngModel)]="current.dateRange"></nz-range-picker>
-    &nbsp;
+    <nz-divider nzType="vertical"></nz-divider>
     <button nz-button nzType="primary" (click)="showLogList(current)">查询</button>
-    <br/>
-    <br/>
+    <nz-divider nzType="horizontal"></nz-divider>
     <nz-table #basicTable [nzData]="logList" nzSize="small" [nzScroll]="{ y: '600px' }" nzShowPagination nzShowQuickJumper nzShowSizeChanger>
       <thead>
         <tr>
