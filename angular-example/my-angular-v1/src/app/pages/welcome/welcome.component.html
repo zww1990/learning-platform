@@ -179,7 +179,15 @@
     <nz-divider nzType="vertical"></nz-divider>
     <button nz-button nzType="primary" (click)="showLogList(current)">查询</button>
     <nz-divider nzType="horizontal"></nz-divider>
-    <nz-table #basicTable [nzData]="logList" nzSize="small" [nzScroll]="{ y: '600px' }" nzShowPagination nzShowQuickJumper nzShowSizeChanger>
+    <nz-table #basicTable
+              [nzData]="logList"
+              [nzTotal]="logList.length"
+              nzSize="small"
+              [nzScroll]="{ y: '600px' }"
+              nzShowPagination
+              nzShowQuickJumper
+              nzShowSizeChanger
+              [nzShowTotal]="totalTemplate">
       <thead>
         <tr>
           <th nzWidth="100px">主键</th>
@@ -205,5 +213,6 @@
         </tr>
       </tbody>
     </nz-table>
+    <ng-template #totalTemplate let-total let-range="range">{{ range[0] }} - {{ range[1] }} 项，共 {{ total }} 项</ng-template>
   </ng-container>
 </nz-modal>
