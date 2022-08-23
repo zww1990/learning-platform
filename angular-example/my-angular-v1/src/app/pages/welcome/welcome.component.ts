@@ -3,9 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {NzMessageService} from 'ng-zorro-antd/message';
 import {NzNotificationService} from 'ng-zorro-antd/notification';
+import {format} from 'date-fns';
 import {Address, AppDeviceRecord, AppDeviceRecordPage, AppStaffClockLog, User} from './user';
 import {ResponseBody} from '../../shared/response-body';
-import {format} from 'date-fns';
 import {WebsocketService} from '../../shared/websocket.service';
 
 @Component({
@@ -74,7 +74,7 @@ export class WelcomeComponent implements OnInit {
   /**
    * 初始化打卡以及地址数据
    */
-  initStaffClockV1(user: User): void {
+  private initStaffClockV1(user: User): void {
     this.http.post<ResponseBody<AppStaffClockLog>>('/hello/initstaffclock', user)
       .subscribe(({message, status, data}) => {
         user.message = message;
@@ -87,7 +87,7 @@ export class WelcomeComponent implements OnInit {
   /**
    * 初始化打卡数据
    */
-  initStaffClockV2(user: User): void {
+  private initStaffClockV2(user: User): void {
     this.http.post<ResponseBody<AppStaffClockLog>>('/hello/initstaffclock', user)
       .subscribe(({message, status, data}) => {
         user.message = message;
@@ -381,7 +381,7 @@ export class WelcomeComponent implements OnInit {
   /**
    * 更新选中集合
    */
-  updateCheckedSet(id: string, checked: boolean): void {
+  private updateCheckedSet(id: string, checked: boolean): void {
     if (checked) {
       this.setOfCheckedId.add(id);
     } else {
@@ -392,7 +392,7 @@ export class WelcomeComponent implements OnInit {
   /**
    * 刷新选中状态
    */
-  refreshCheckedStatus(): void {
+  private refreshCheckedStatus(): void {
     this.checked = this.users.every(({userNo}) => this.setOfCheckedId.has(userNo));
     this.indeterminate = this.users.some(({userNo}) => this.setOfCheckedId.has(userNo)) && !this.checked;
   }
