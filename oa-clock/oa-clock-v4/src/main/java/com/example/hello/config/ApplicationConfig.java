@@ -39,6 +39,7 @@ public class ApplicationConfig {
 	@ToString.Exclude
 	private List<UserInfo> users = new ArrayList<>();
 	private JobConfig jobConfig = new JobConfig();
+	private String hostAddress;
 
 	@Getter
 	@Setter
