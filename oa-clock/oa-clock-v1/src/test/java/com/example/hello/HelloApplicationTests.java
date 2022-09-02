@@ -42,7 +42,7 @@ public class HelloApplicationTests {
 			System.err.println(this.context.getBean(JavaMailSender.class));
 			StringValueResolver resolver = new EmbeddedValueResolver(
 					((GenericWebApplicationContext) this.context).getBeanFactory());
-			System.err.println(resolver.resolveStringValue("${app.cron-expression}"));
+			System.err.println(resolver.resolveStringValue("${app.task.cron}"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

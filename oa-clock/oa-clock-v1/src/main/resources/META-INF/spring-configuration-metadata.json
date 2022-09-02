@@ -53,8 +53,8 @@
       "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
-      "name": "app.cron-expression",
-      "type": "java.lang.String",
+      "name": "app.task",
+      "type": "com.example.hello.config.ApplicationProperties$Task",
       "sourceType": "com.example.hello.config.ApplicationProperties"
     },
     {
