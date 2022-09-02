@@ -41,7 +41,16 @@ public class ApplicationProperties {
 	private List<Address> addresses = new ArrayList<>();
 	@ToString.Exclude
 	private List<UserInfo> users = new ArrayList<>();
-	private String cronExpression;
+	private Task task = new Task();
+
+	@Getter
+	@Setter
+	@ToString
+	public static class Task {
+		private String cron;
+		private Integer amMax;
+		private Integer pmMax;
+	}
 
 	@Getter
 	@Setter

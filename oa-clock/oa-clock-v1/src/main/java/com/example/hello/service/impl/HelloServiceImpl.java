@@ -33,6 +33,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.hello.config.ApplicationProperties;
 import com.example.hello.config.ApplicationProperties.Address;
+import com.example.hello.config.ApplicationProperties.Task;
 import com.example.hello.config.ApplicationProperties.UserInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
@@ -63,7 +64,7 @@ public class HelloServiceImpl implements HelloService {
 	@Resource
 	private MailProperties mailProperties;
 
-	@Scheduled(cron = "${app.cron-expression}")
+	@Scheduled(cron = "${app.task.cron}")
 	public void staffClockJob() {
 		log.info("执行任务");
 		ThreadLocalRandom random = ThreadLocalRandom.current();
@@ -72,6 +73,7 @@ public class HelloServiceImpl implements HelloService {
 		// 当前日期
 		LocalDate date = LocalDate.now();
 		Address addr = this.properties.getAddresses().get(0);
+		Task task = this.properties.getTask();
 		this.properties.getUsers()//
 				.stream()//
 				.filter(p -> p.isEnabled())//
@@ -86,11 +88,11 @@ public class HelloServiceImpl implements HelloService {
 					boolean isClock = false;
 					if (ampm == UserLogin.AM) {
 						user.setClockTime(LocalDateTime.of(date, //
-								LocalTime.of(8, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+								LocalTime.of(8, 30 + random.nextInt(0, task.getAmMax()), random.nextInt(1, 60))));
 						isClock = true;
 					} else if (ampm == UserLogin.PM) {
 						user.setClockTime(LocalDateTime.of(date, //
-								LocalTime.of(18, 30 + random.nextInt(0, 30), random.nextInt(1, 60))));
+								LocalTime.of(18, 30 + random.nextInt(0, task.getPmMax()), random.nextInt(1, 60))));
 						isClock = c.isPmOn();
 					}
 					if (isClock) {
@@ -312,10 +314,8 @@ public class HelloServiceImpl implements HelloService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.set("appid", "oa");
-		ResponseBody<?> body = this.restTemplate
-				.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(), HttpMethod.GET,
-						new HttpEntity<>(headers), ResponseBody.class)
-				.getBody();
+		ResponseBody<?> body = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(),
+				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
 		Map<String, Object> data = (Map<String, Object>) body.getData();
 		if (CollectionUtils.isEmpty(data)) {
 			log.error("定时打卡异常>>>{}", data);

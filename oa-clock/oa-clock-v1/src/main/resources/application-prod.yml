@@ -9,7 +9,10 @@ app:
   reset-bind-device-id-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/resetBindDeviceId
   bi-sql-exec-url: http://api.yuzhilin.net.cn/bisearchserver/bisql/exec
   bi-sql-source-id: 5
-  cron-expression: '0 30 8,18 ? * MON-FRI'
+  task:
+    cron: '0 30 8,18 ? * MON-FRI'
+    am-max: 30
+    pm-max: 5
   users:
   - user-no: 100245
     username: 王哲
