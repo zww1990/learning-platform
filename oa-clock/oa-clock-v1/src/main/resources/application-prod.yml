@@ -29,6 +29,5 @@ app:
   - user-no: 100230
     username: 张维维
     enabled: true
-    pm-on: true
     email: zhangweiwei@yuzhilin.net.cn
 
