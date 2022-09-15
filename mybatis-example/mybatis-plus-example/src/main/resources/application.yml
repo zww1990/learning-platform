@@ -6,8 +6,6 @@ spring:
     - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
     - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
-  datasource:
-    url: jdbc:mysql://192.168.32.33:3306/seata_client?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: zww
-    password: 1qaz2wsx
+  profiles:
+    active: test
 
