@@ -50,6 +50,7 @@ public class ApplicationProperties {
 		private String cron;
 		private Integer amMax;
 		private Integer pmMax;
+		private boolean enabled;
 	}
 
 	@Getter
