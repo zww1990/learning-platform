@@ -66,6 +66,11 @@ public class HelloServiceImpl implements HelloService {
 
 	@Scheduled(cron = "${app.task.cron}")
 	public void staffClockJob() {
+		Task task = this.properties.getTask();
+		if (!task.isEnabled()) {
+			log.debug("未开启定时任务");
+			return;
+		}
 		log.info("执行任务");
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		// 0=(AM)上午，1=(PM)下午
@@ -73,7 +78,6 @@ public class HelloServiceImpl implements HelloService {
 		// 当前日期
 		LocalDate date = LocalDate.now();
 		Address addr = this.properties.getAddresses().get(0);
-		Task task = this.properties.getTask();
 		this.properties.getUsers()//
 				.stream()//
 				.filter(p -> p.isEnabled())//
