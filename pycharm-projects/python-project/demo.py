@@ -3,5 +3,4 @@ def say_hello(text):
 
 
 if __name__ == '__main__':
-    print("请输入你的内容: ")
-    say_hello(input())
+    say_hello(input('请输入你的内容: '))
