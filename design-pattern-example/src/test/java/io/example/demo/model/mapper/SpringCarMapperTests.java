@@ -10,23 +10,23 @@ import io.example.demo.model.CarDto;
 import io.example.demo.model.CarType;
 
 /**
- * CarMapperOfSpringTests
+ * Spring Car Mapper Tests
  * 
  * @author weiwei
  * @version v1
  * @since 2022年9月19日,下午4:24:02
  */
 @SpringBootTest
-public class CarMapperOfSpringTests {
+public class SpringCarMapperTests {
 	@Resource
-	private CarMapperOfSpring carMapperOfSpring;
+	private SpringCarMapper springCarMapper;
 
 	@Test
 	public void testCarToCarDto() {
 		try {
-			Car car = new Car("Morris", 5, CarType.SEDAN);
+			Car car = new Car("一汽大众", 5, CarType.SEDAN);
 			System.err.println(car);
-			CarDto carDto = this.carMapperOfSpring.carToCarDto(car);
+			CarDto carDto = this.springCarMapper.carToCarDto(car);
 			System.err.println(carDto);
 		} catch (Exception e) {
 			e.printStackTrace();
