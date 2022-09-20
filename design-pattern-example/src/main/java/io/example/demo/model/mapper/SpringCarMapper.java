@@ -16,6 +16,7 @@ import io.example.demo.model.CarDto;
  */
 @Mapper(componentModel = ComponentModel.SPRING)
 public interface SpringCarMapper {
+
 	@Mapping(source = "numberOfSeats", target = "seatCount")
 	CarDto carToCarDto(Car car);
 }
