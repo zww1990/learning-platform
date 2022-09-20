@@ -12,8 +12,8 @@ app:
   task:
     cron: '0 30 8,18 ? * MON-FRI'
     am-max: 30
-    pm-max: 5
-#    enabled: true
+    pm-max: 1
+    enabled: true
   users:
   - user-no: 100245
     username: 王哲
