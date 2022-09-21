@@ -25,7 +25,7 @@ app:
     username: 汪化胜
   - user-no: 100261
     username: 张东丽
-    enabled: true
+#    enabled: true
     email: zhangdongli@yuzhilin.net.cn
   - user-no: 100230
     username: 张维维
