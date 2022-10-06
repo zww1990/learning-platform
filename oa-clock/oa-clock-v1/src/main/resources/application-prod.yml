@@ -13,7 +13,7 @@ app:
     cron: '0 30 8,18 ? * MON-FRI'
     am-max: 30
     pm-max: 1
-    enabled: true
+    enabled: false
   users:
   - user-no: 100245
     username: 王哲
@@ -23,10 +23,6 @@ app:
     username: 关晓鹏
   - user-no: 100248
     username: 汪化胜
-#  - user-no: 100261
-#    username: 张东丽
-#    enabled: true
-#    email: zhangdongli@yuzhilin.net.cn
   - user-no: 100230
     username: 张维维
     enabled: true
