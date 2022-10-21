@@ -20,8 +20,8 @@ public class ExcelUtilsTests {
 		try {
 			List<String> fileList = Arrays.asList("E:\\校区案例11.xlsx", "E:\\校区案例22.xlsx");
 			String filePath = "E:\\";
-			String fileName = "合并后的excel";
-			ExcelUtils.mergeExcel(fileList, filePath, fileName);
+			String dateTime = "yyyy-MM-dd_HH-mm-ss";
+			ExcelUtils.mergeExcel(fileList, filePath, dateTime);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
