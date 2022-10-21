@@ -1,10 +1,7 @@
 package io.example.demo.excel;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +13,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -29,59 +27,51 @@ public abstract class ExcelUtils {
 	/**
 	 * 合并多个excel文件
 	 * 
-	 * @param fileList excel文件路径
-	 * @param filePath 目标文件保存目录
-	 * @param fileName 目标文件名称
+	 * @param fileList  excel文件路径
+	 * @param directory 目标文件保存目录
+	 * @param fileName  目标文件名称
 	 */
-	public static void mergeExcel(List<String> fileList, String filePath, String fileName) {
+	public static void mergeExcel(List<String> fileList, String directory, String fileName) {
 		// 创建新的excel工作簿
-		Workbook writeWorkbook = new XSSFWorkbook();
-		// 遍历需要合并的excel文件
-		for (String excelName : fileList) {
-			try (InputStream in = new FileInputStream(excelName);
-					// 读取工作簿
-					Workbook readWorkbook = new XSSFWorkbook(in)) {
-				// 获取工作簿中的Sheet个数
-				int len = readWorkbook.getNumberOfSheets();
-				for (int i = 0; i < len; i++) {
-					Sheet source = readWorkbook.getSheetAt(i);
-					Sheet target = writeWorkbook.getSheet(source.getSheetName());
-					boolean isNew = target == null;
-					if (isNew) {
-						target = writeWorkbook.createSheet(source.getSheetName());
+		try (Workbook writeWorkbook = new XSSFWorkbook()) {
+			// 遍历需要合并的excel文件
+			for (String filePath : fileList) {
+				// 读取工作簿
+				try (Workbook readWorkbook = WorkbookFactory.create(new File(filePath))) {
+					// 获取工作簿中的Sheet个数
+					int len = readWorkbook.getNumberOfSheets();
+					for (int i = 0; i < len; i++) {
+						Sheet source = readWorkbook.getSheetAt(i);
+						Sheet target = writeWorkbook.getSheet(source.getSheetName());
+						boolean isNew = target == null;
+						if (isNew) {
+							target = writeWorkbook.createSheet(source.getSheetName());
+						}
+						// 复制sheet内容
+						copyExcelSheet(writeWorkbook, source, target, isNew);
 					}
-					// 复制sheet内容
-					copyExcelSheet(writeWorkbook, source, target, isNew);
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
-		}
-		// 新生成的excel文件
-		if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls")) {
-			fileName += ".xlsx";
-		}
-		String excelFileName = filePath + File.separator + fileName;
-		// 判断文件是否存在
-		File excelFile = new File(excelFileName);
-		if (excelFile.exists()) {
-			// 存在则删除
-			excelFile.delete();
-		}
-		// 使用输出流写出
-		try (OutputStream out = new FileOutputStream(excelFileName)) {
-			writeWorkbook.write(out);
-			out.flush();
-		} catch (IOException e) {
+			// 新生成的excel文件
+			if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls")) {
+				fileName += ".xlsx";
+			}
+			String fullPath = directory + File.separator + fileName;
+			File file = new File(fullPath);
+			// 判断文件是否存在
+			if (file.exists()) {
+				// 存在则删除
+				file.delete();
+			}
+			// 使用输出流写出
+			try (OutputStream out = new FileOutputStream(file)) {
+				writeWorkbook.write(out);
+				out.flush();
+			}
+			System.err.println(String.format("excel文件合并成功，合并后文件路径 >>> [ %s ]", fullPath));
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				writeWorkbook.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
-		System.err.println(String.format("excel文件合并成功，合并后文件路径 >>> [ %s ]", excelFileName));
 	}
 
 	/**
