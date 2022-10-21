@@ -3,6 +3,11 @@ package io.example.demo.excel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,61 +21,75 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * ExcelUtils
  * 
  * @author zhang weiwei
  * @since 2022年10月21日,下午7:51:12
  */
+@Slf4j
 public abstract class ExcelUtils {
 
 	/**
 	 * 合并多个excel文件
 	 * 
-	 * @param fileList  excel文件路径
-	 * @param directory 目标文件保存目录
-	 * @param fileName  目标文件名称
+	 * @param fileList        excel文件路径
+	 * @param folder          目标文件保存目录
+	 * @param dateTimePattern 日期时间格式
 	 */
-	public static void mergeExcel(List<String> fileList, String directory, String fileName) {
+	public static void mergeExcel(List<String> fileList, String folder, String dateTimePattern) {
 		// 创建新的excel工作簿
 		try (Workbook writeWorkbook = new XSSFWorkbook()) {
+			log.info("开始合并工作簿");
 			// 遍历需要合并的excel文件
 			for (String filePath : fileList) {
+				log.info("正在读取工作簿[ {} ]", filePath);
 				// 读取工作簿
 				try (Workbook readWorkbook = WorkbookFactory.create(new File(filePath))) {
 					// 获取工作簿中的Sheet个数
-					int len = readWorkbook.getNumberOfSheets();
-					for (int i = 0; i < len; i++) {
+					int number = readWorkbook.getNumberOfSheets();
+					log.info("此工作簿[ {} ]总共[ {} ]个工作表", filePath, number);
+					for (int i = 0; i < number; i++) {
 						Sheet source = readWorkbook.getSheetAt(i);
+						log.info("此工作簿[ {} ]正在读取工作表[ {} ]", filePath, source.getSheetName());
 						Sheet target = writeWorkbook.getSheet(source.getSheetName());
 						boolean isNew = target == null;
 						if (isNew) {
+							log.info("此工作簿[ {} ]正在创建工作表[ {} ]", filePath, source.getSheetName());
 							target = writeWorkbook.createSheet(source.getSheetName());
 						}
 						// 复制sheet内容
 						copyExcelSheet(writeWorkbook, source, target, isNew);
+						log.info("此工作表[ {} ]已合并", target.getSheetName());
 					}
 				}
 			}
-			// 新生成的excel文件
-			if (!fileName.endsWith(".xlsx") && !fileName.endsWith(".xls")) {
-				fileName += ".xlsx";
+			Path path = Paths.get(folder);
+			if (Files.notExists(path)) {
+				log.info("正在创建此目录[ {} ]", folder);
+				Files.createDirectory(path);
 			}
-			String fullPath = directory + File.separator + fileName;
+			// 新生成的excel文件
+			String dateTime = DateTimeFormatter.ofPattern(dateTimePattern).format(LocalDateTime.now());
+			String fullPath = String.format("%s%s%s.xlsx", folder, File.separator, dateTime);
 			File file = new File(fullPath);
 			// 判断文件是否存在
 			if (file.exists()) {
+				log.info("正在删除此工作簿[ {} ]", fullPath);
 				// 存在则删除
 				file.delete();
 			}
 			// 使用输出流写出
 			try (OutputStream out = new FileOutputStream(file)) {
+				log.info("正在写入工作簿[ {} ]", fullPath);
 				writeWorkbook.write(out);
 				out.flush();
 			}
-			System.err.println(String.format("excel文件合并成功，合并后文件路径 >>> [ %s ]", fullPath));
+			log.info("工作簿合并完成");
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		}
 	}
 
@@ -86,8 +105,8 @@ public abstract class ExcelUtils {
 		// 合并单元格
 		mergeSheetAllRegion(source, target);
 		// 获取最后一个单元格位置
-		int len = source.getRow(source.getFirstRowNum()).getLastCellNum();
-		for (int i = 0; i < len; i++) {
+		int cellNum = source.getRow(source.getFirstRowNum()).getLastCellNum();
+		for (int i = 0; i < cellNum; i++) {
 			// 设置单元格列宽度
 			target.setColumnWidth(i, source.getColumnWidth(i));
 		}
