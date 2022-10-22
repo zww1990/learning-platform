@@ -44,26 +44,27 @@ public abstract class ExcelUtils {
 		try (Workbook writeWorkbook = new XSSFWorkbook()) {
 			log.info("开始合并工作簿");
 			// 遍历需要合并的excel文件
-			for (String filePath : fileList) {
-				log.info("正在读取工作簿[ {} ]", filePath);
+			for (int j = 0, size = fileList.size(); j < size; j++) {
+				String filePath = fileList.get(j);
+				log.info("正在读取第[ {} ]个工作簿[ {} ]", j + 1, filePath);
 				// 读取工作簿
 				try (Workbook readWorkbook = WorkbookFactory.create(new File(filePath))) {
 					// 获取工作簿中的Sheet个数
 					int number = readWorkbook.getNumberOfSheets();
-					log.info("此工作簿[ {} ]总共[ {} ]个工作表", filePath, number);
+					log.info("工作表总个数[ {} ]", number);
 					for (int i = 0; i < number; i++) {
 						Sheet source = readWorkbook.getSheetAt(i);
-						log.info("此工作簿[ {} ]正在读取工作表[ {} ]", filePath, source.getSheetName());
+						log.info("正在读取工作表[ {} ]", source.getSheetName());
 						Sheet target = writeWorkbook.getSheet(source.getSheetName());
 						boolean isNew = target == null;
 						if (isNew) {
-							log.info("此工作簿[ {} ]正在创建工作表[ {} ]", filePath, source.getSheetName());
+							log.info("正在创建工作表[ {} ]", source.getSheetName());
 							target = writeWorkbook.createSheet(source.getSheetName());
 						}
 						try {
 							// 复制sheet内容
 							copyExcelSheet(writeWorkbook, source, target, isNew);
-							log.info("此工作表[ {} ]已合并", target.getSheetName());
+							log.info("工作表[ {} ]已合并", target.getSheetName());
 						} catch (Exception e) {
 							log.error(e.getLocalizedMessage(), e);
 						}
@@ -72,7 +73,7 @@ public abstract class ExcelUtils {
 			}
 			Path path = Paths.get(folder);
 			if (Files.notExists(path)) {
-				log.info("正在创建此目录[ {} ]", folder);
+				log.info("正在创建目录[ {} ]", folder);
 				Files.createDirectory(path);
 			}
 			// 新生成的excel文件
@@ -81,7 +82,7 @@ public abstract class ExcelUtils {
 			File file = new File(fullPath);
 			// 判断文件是否存在
 			if (file.exists()) {
-				log.info("正在删除此工作簿[ {} ]", fullPath);
+				log.info("正在删除工作簿[ {} ]", fullPath);
 				// 存在则删除
 				file.delete();
 			}
