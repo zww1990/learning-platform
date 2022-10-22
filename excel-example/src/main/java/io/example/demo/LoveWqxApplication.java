@@ -41,8 +41,8 @@ public class LoveWqxApplication implements CommandLineRunner {
 		log.info("{}", this.properties);
 		Path path = Paths.get(this.properties.getReadFolder());
 		if (Files.notExists(path)) {
-			log.info("此文件夹[ {} ]不存在", this.properties.getReadFolder());
-			return;
+			log.info("正在创建此文件夹[ {} ]", this.properties.getReadFolder());
+			Files.createDirectory(path);
 		}
 		List<String> fileList = Files.walk(path).filter(p -> {
 			String tmp = p.toString().toLowerCase();
@@ -52,6 +52,6 @@ public class LoveWqxApplication implements CommandLineRunner {
 			log.info("此文件夹[ {} ]没有待合并的工作簿", this.properties.getReadFolder());
 			return;
 		}
-		ExcelUtils.mergeExcel(fileList, this.properties.getWriteFolder(),this.properties.getDateTimePattern());
+		ExcelUtils.mergeExcel(fileList, this.properties.getWriteFolder(), this.properties.getDateTimePattern());
 	}
 }
