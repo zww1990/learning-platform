@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -73,7 +72,7 @@ public abstract class ExcelUtils {
 			}
 			Path path = Paths.get(folder);
 			if (Files.notExists(path)) {
-				log.info("正在创建目录[ {} ]", folder);
+				log.info("正在创建文件夹[ {} ]", folder);
 				Files.createDirectory(path);
 			}
 			// 新生成的excel文件
@@ -116,9 +115,7 @@ public abstract class ExcelUtils {
 			target.setColumnWidth(i, source.getColumnWidth(i));
 		}
 		// 复制每行内容
-		Iterator<Row> it = source.iterator();
-		while (it.hasNext()) {
-			Row src = it.next();
+		for (Row src : source) {
 			int rowNum;
 			if (isNew) {
 				rowNum = src.getRowNum();
@@ -159,9 +156,7 @@ public abstract class ExcelUtils {
 		// 设置行高
 		target.setHeight(source.getHeight());
 		// 获取所有列
-		Iterator<Cell> it = source.cellIterator();
-		while (it.hasNext()) {
-			Cell src = it.next();
+		for (Cell src : source) {
 			// 创建单元格
 			Cell tar = target.createCell(src.getColumnIndex());
 			// 复制单元格
