@@ -8,7 +8,7 @@ spring:
     - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
 
 app:
-  read-folder: E:\待合并的工作簿
-  write-folder: E:\已合并的工作簿
+  read-folder: D:\待合并的工作簿
+  write-folder: D:\已合并的工作簿
   date-time-pattern: yyyy-MM-dd_HH-mm-ss
 
