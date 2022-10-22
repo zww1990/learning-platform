@@ -98,6 +98,18 @@ public abstract class ExcelUtils {
 	}
 
 	/**
+	 * 合并单元格
+	 * 
+	 * @param srcSheet 来源sheet
+	 * @param tarSheet 目标sheet
+	 */
+	private static void mergeSheetAllRegion(Sheet srcSheet, Sheet tarSheet) {
+		for (int i = 0, num = srcSheet.getNumMergedRegions(); i < num; i++) {
+			tarSheet.addMergedRegion(srcSheet.getMergedRegion(i));
+		}
+	}
+
+	/**
 	 * 复制sheet到新的excel文件中
 	 * 
 	 * @param workbook excel工作簿
@@ -130,18 +142,6 @@ public abstract class ExcelUtils {
 			Row tarRow = tarSheet.createRow(rowNum);
 			// 复制行
 			copyExcelRow(workbook, srcRow, tarRow);
-		}
-	}
-
-	/**
-	 * 合并单元格
-	 * 
-	 * @param srcSheet 来源sheet
-	 * @param tarSheet 目标sheet
-	 */
-	private static void mergeSheetAllRegion(Sheet srcSheet, Sheet tarSheet) {
-		for (int i = 0, num = srcSheet.getNumMergedRegions(); i < num; i++) {
-			tarSheet.addMergedRegion(srcSheet.getMergedRegion(i));
 		}
 	}
 
