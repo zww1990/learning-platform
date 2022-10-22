@@ -40,30 +40,30 @@ public abstract class ExcelUtils {
 	 */
 	public static void mergeExcel(List<String> fileList, String folder, String dateTimePattern) {
 		// 创建新的excel工作簿
-		try (Workbook writeWorkbook = new XSSFWorkbook()) {
+		try (Workbook tarWorkbook = new XSSFWorkbook()) {
 			log.info("开始合并工作簿");
 			// 遍历需要合并的excel文件
 			for (int j = 0, size = fileList.size(); j < size; j++) {
 				String filePath = fileList.get(j);
 				log.info("正在读取第[ {} ]个工作簿[ {} ]", j + 1, filePath);
 				// 读取工作簿
-				try (Workbook readWorkbook = WorkbookFactory.create(new File(filePath))) {
+				try (Workbook srcWorkbook = WorkbookFactory.create(new File(filePath))) {
 					// 获取工作簿中的Sheet个数
-					int number = readWorkbook.getNumberOfSheets();
+					int number = srcWorkbook.getNumberOfSheets();
 					log.info("工作表总个数[ {} ]", number);
 					for (int i = 0; i < number; i++) {
-						Sheet source = readWorkbook.getSheetAt(i);
-						log.info("正在读取工作表[ {} ]", source.getSheetName());
-						Sheet target = writeWorkbook.getSheet(source.getSheetName());
-						boolean isNew = target == null;
+						Sheet srcSheet = srcWorkbook.getSheetAt(i);
+						log.info("正在读取工作表[ {} ]", srcSheet.getSheetName());
+						Sheet tarSheet = tarWorkbook.getSheet(srcSheet.getSheetName());
+						boolean isNew = tarSheet == null;
 						if (isNew) {
-							log.info("正在创建工作表[ {} ]", source.getSheetName());
-							target = writeWorkbook.createSheet(source.getSheetName());
+							log.info("正在创建工作表[ {} ]", srcSheet.getSheetName());
+							tarSheet = tarWorkbook.createSheet(srcSheet.getSheetName());
 						}
 						try {
 							// 复制sheet内容
-							copyExcelSheet(writeWorkbook, source, target, isNew);
-							log.info("工作表[ {} ]已合并", target.getSheetName());
+							copyExcelSheet(tarWorkbook, srcSheet, tarSheet, isNew);
+							log.info("工作表[ {} ]已合并", tarSheet.getSheetName());
 						} catch (Exception e) {
 							log.error(e.getLocalizedMessage(), e);
 						}
@@ -88,7 +88,7 @@ public abstract class ExcelUtils {
 			// 使用输出流写出
 			try (OutputStream out = new FileOutputStream(file)) {
 				log.info("正在写入工作簿[ {} ]", fullPath);
-				writeWorkbook.write(out);
+				tarWorkbook.write(out);
 				out.flush();
 			}
 			log.info("工作簿合并完成");
@@ -101,47 +101,47 @@ public abstract class ExcelUtils {
 	 * 复制sheet到新的excel文件中
 	 * 
 	 * @param workbook excel工作簿
-	 * @param source   来源sheet
-	 * @param target   目标sheet
+	 * @param srcSheet 来源sheet
+	 * @param tarSheet 目标sheet
 	 * @param isNew    是否新建的sheet
 	 */
-	private static void copyExcelSheet(Workbook workbook, Sheet source, Sheet target, boolean isNew) {
+	private static void copyExcelSheet(Workbook workbook, Sheet srcSheet, Sheet tarSheet, boolean isNew) {
 		// 合并单元格
-		mergeSheetAllRegion(source, target);
+		mergeSheetAllRegion(srcSheet, tarSheet);
 		// 获取最后一个单元格位置
-		int cellNum = source.getRow(source.getFirstRowNum()).getLastCellNum();
+		int cellNum = srcSheet.getRow(srcSheet.getFirstRowNum()).getLastCellNum();
 		for (int i = 0; i < cellNum; i++) {
 			// 设置单元格列宽度
-			target.setColumnWidth(i, source.getColumnWidth(i));
+			tarSheet.setColumnWidth(i, srcSheet.getColumnWidth(i));
 		}
 		// 复制每行内容
-		for (Row src : source) {
+		for (Row srcRow : srcSheet) {
 			int rowNum;
 			if (isNew) {
-				rowNum = src.getRowNum();
+				rowNum = srcRow.getRowNum();
 			} else {
-				if (src.getRowNum() == 0) {
+				if (srcRow.getRowNum() == 0) {
 					// 从第二个工作簿开始，遇到表头行，直接跳过
 					continue;
 				}
-				rowNum = target.getLastRowNum() + 1;
+				rowNum = tarSheet.getLastRowNum() + 1;
 			}
 			// 创建新行
-			Row tar = target.createRow(rowNum);
+			Row tarRow = tarSheet.createRow(rowNum);
 			// 复制行
-			copyExcelRow(workbook, src, tar);
+			copyExcelRow(workbook, srcRow, tarRow);
 		}
 	}
 
 	/**
 	 * 合并单元格
 	 * 
-	 * @param source 来源sheet
-	 * @param target 目标sheet
+	 * @param srcSheet 来源sheet
+	 * @param tarSheet 目标sheet
 	 */
-	private static void mergeSheetAllRegion(Sheet source, Sheet target) {
-		for (int i = 0, num = source.getNumMergedRegions(); i < num; i++) {
-			target.addMergedRegion(source.getMergedRegion(i));
+	private static void mergeSheetAllRegion(Sheet srcSheet, Sheet tarSheet) {
+		for (int i = 0, num = srcSheet.getNumMergedRegions(); i < num; i++) {
+			tarSheet.addMergedRegion(srcSheet.getMergedRegion(i));
 		}
 	}
 
@@ -149,18 +149,18 @@ public abstract class ExcelUtils {
 	 * 复制excel中的行到新的sheet中
 	 * 
 	 * @param workbook 目标工作簿
-	 * @param source   来源excel行
-	 * @param target   目标excel行
+	 * @param srcRow   来源excel行
+	 * @param tarRow   目标excel行
 	 */
-	private static void copyExcelRow(Workbook workbook, Row source, Row target) {
+	private static void copyExcelRow(Workbook workbook, Row srcRow, Row tarRow) {
 		// 设置行高
-		target.setHeight(source.getHeight());
+		tarRow.setHeight(srcRow.getHeight());
 		// 获取所有列
-		for (Cell src : source) {
+		for (Cell srcCell : srcRow) {
 			// 创建单元格
-			Cell tar = target.createCell(src.getColumnIndex());
+			Cell tarCell = tarRow.createCell(srcCell.getColumnIndex());
 			// 复制单元格
-			copyExcelCell(workbook, src, tar);
+			copyExcelCell(workbook, srcCell, tarCell);
 		}
 	}
 
@@ -168,35 +168,35 @@ public abstract class ExcelUtils {
 	 * 复制单元格
 	 * 
 	 * @param workbook 目标工作簿
-	 * @param source   来源excel单元格
-	 * @param target   目标excel单元格
+	 * @param srcCell  来源excel单元格
+	 * @param tarCell  目标excel单元格
 	 */
-	private static void copyExcelCell(Workbook workbook, Cell source, Cell target) {
+	private static void copyExcelCell(Workbook workbook, Cell srcCell, Cell tarCell) {
 		CellStyle cellStyle = workbook.createCellStyle();
 		// 复制单元格样式
-		cellStyle.cloneStyleFrom(source.getCellStyle());
+		cellStyle.cloneStyleFrom(srcCell.getCellStyle());
 		// 单元格样式
-		target.setCellStyle(cellStyle);
-		if (source.getCellComment() != null) {
-			target.setCellComment(source.getCellComment());
+		tarCell.setCellStyle(cellStyle);
+		if (srcCell.getCellComment() != null) {
+			tarCell.setCellComment(srcCell.getCellComment());
 		}
 		// 不同数据类型处理
-		CellType cellType = source.getCellTypeEnum();
-		target.setCellType(cellType);
+		CellType cellType = srcCell.getCellTypeEnum();
+		tarCell.setCellType(cellType);
 		if (cellType == CellType.NUMERIC) {
-			if (DateUtil.isCellDateFormatted(source)) {
-				target.setCellValue(source.getDateCellValue());
+			if (DateUtil.isCellDateFormatted(srcCell)) {
+				tarCell.setCellValue(srcCell.getDateCellValue());
 			} else {
-				target.setCellValue(source.getNumericCellValue());
+				tarCell.setCellValue(srcCell.getNumericCellValue());
 			}
 		} else if (cellType == CellType.STRING) {
-			target.setCellValue(source.getRichStringCellValue());
+			tarCell.setCellValue(srcCell.getRichStringCellValue());
 		} else if (cellType == CellType.BOOLEAN) {
-			target.setCellValue(source.getBooleanCellValue());
+			tarCell.setCellValue(srcCell.getBooleanCellValue());
 		} else if (cellType == CellType.ERROR) {
-			target.setCellErrorValue(source.getErrorCellValue());
+			tarCell.setCellErrorValue(srcCell.getErrorCellValue());
 		} else if (cellType == CellType.FORMULA) {
-			target.setCellFormula(source.getCellFormula());
+			tarCell.setCellFormula(srcCell.getCellFormula());
 		} else {
 		}
 	}
