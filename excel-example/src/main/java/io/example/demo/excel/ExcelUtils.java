@@ -203,8 +203,10 @@ public abstract class ExcelUtils {
 					hasValue = true;
 				}
 			} else if (cellType == CellType.FORMULA) {
-				tarCell.setCellFormula(srcCell.getCellFormula());
-				if (StringUtils.hasText(tarCell.getCellFormula())) {
+				srcCell.setCellType(CellType.STRING);
+				tarCell.setCellType(CellType.STRING);
+				tarCell.setCellValue(srcCell.getStringCellValue());
+				if (StringUtils.hasText(tarCell.getStringCellValue())) {
 					hasValue = true;
 				}
 			}
