@@ -8,14 +8,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -179,40 +177,34 @@ public abstract class ExcelUtils {
 			tarCell.setCellType(cellType);
 			if (cellType == CellType.NUMERIC) {
 				if (DateUtil.isCellDateFormatted(srcCell)) {
-					Date tmp = srcCell.getDateCellValue();
-					tarCell.setCellValue(tmp);
-					if (tmp != null) {
+					tarCell.setCellValue(srcCell.getDateCellValue());
+					if (tarCell.getDateCellValue() != null) {
 						hasValue = true;
 					}
 				} else {
-					double tmp = srcCell.getNumericCellValue();
-					tarCell.setCellValue(tmp);
-					if (tmp != 0) {
+					tarCell.setCellValue(srcCell.getNumericCellValue());
+					if (tarCell.getNumericCellValue() != 0) {
 						hasValue = true;
 					}
 				}
 			} else if (cellType == CellType.STRING) {
-				RichTextString tmp = srcCell.getRichStringCellValue();
-				tarCell.setCellValue(tmp);
-				if (tmp.length() != 0) {
+				tarCell.setCellValue(srcCell.getRichStringCellValue());
+				if (tarCell.getRichStringCellValue().length() != 0) {
 					hasValue = true;
 				}
 			} else if (cellType == CellType.BOOLEAN) {
-				boolean tmp = srcCell.getBooleanCellValue();
-				tarCell.setCellValue(tmp);
-				if (tmp) {
+				tarCell.setCellValue(srcCell.getBooleanCellValue());
+				if (tarCell.getBooleanCellValue()) {
 					hasValue = true;
 				}
 			} else if (cellType == CellType.ERROR) {
-				byte tmp = srcCell.getErrorCellValue();
-				tarCell.setCellErrorValue(tmp);
-				if (tmp != 0) {
+				tarCell.setCellErrorValue(srcCell.getErrorCellValue());
+				if (tarCell.getErrorCellValue() != 0) {
 					hasValue = true;
 				}
 			} else if (cellType == CellType.FORMULA) {
-				String tmp = srcCell.getCellFormula();
-				tarCell.setCellFormula(tmp);
-				if (StringUtils.hasText(tmp)) {
+				tarCell.setCellFormula(srcCell.getCellFormula());
+				if (StringUtils.hasText(tarCell.getCellFormula())) {
 					hasValue = true;
 				}
 			}
