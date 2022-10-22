@@ -60,9 +60,13 @@ public abstract class ExcelUtils {
 							log.info("此工作簿[ {} ]正在创建工作表[ {} ]", filePath, source.getSheetName());
 							target = writeWorkbook.createSheet(source.getSheetName());
 						}
-						// 复制sheet内容
-						copyExcelSheet(writeWorkbook, source, target, isNew);
-						log.info("此工作表[ {} ]已合并", target.getSheetName());
+						try {
+							// 复制sheet内容
+							copyExcelSheet(writeWorkbook, source, target, isNew);
+							log.info("此工作表[ {} ]已合并", target.getSheetName());
+						} catch (Exception e) {
+							log.error(e.getLocalizedMessage(), e);
+						}
 					}
 				}
 			}
