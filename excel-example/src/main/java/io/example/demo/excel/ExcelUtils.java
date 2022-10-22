@@ -8,17 +8,20 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -141,7 +144,7 @@ public abstract class ExcelUtils {
 			// 创建新行
 			Row tarRow = tarSheet.createRow(rowNum);
 			// 复制行
-			copyExcelRow(workbook, srcRow, tarRow);
+			copyExcelRow(workbook, srcRow, tarRow, tarSheet);
 		}
 	}
 
@@ -151,53 +154,72 @@ public abstract class ExcelUtils {
 	 * @param workbook 目标工作簿
 	 * @param srcRow   来源excel行
 	 * @param tarRow   目标excel行
+	 * @param tarSheet 目标sheet
 	 */
-	private static void copyExcelRow(Workbook workbook, Row srcRow, Row tarRow) {
+	private static void copyExcelRow(Workbook workbook, Row srcRow, Row tarRow, Sheet tarSheet) {
 		// 设置行高
 		tarRow.setHeight(srcRow.getHeight());
+		// 是否有值
+		boolean hasValue = false;
 		// 获取所有列
 		for (Cell srcCell : srcRow) {
 			// 创建单元格
 			Cell tarCell = tarRow.createCell(srcCell.getColumnIndex());
 			// 复制单元格
-			copyExcelCell(workbook, srcCell, tarCell);
-		}
-	}
-
-	/**
-	 * 复制单元格
-	 * 
-	 * @param workbook 目标工作簿
-	 * @param srcCell  来源excel单元格
-	 * @param tarCell  目标excel单元格
-	 */
-	private static void copyExcelCell(Workbook workbook, Cell srcCell, Cell tarCell) {
-		CellStyle cellStyle = workbook.createCellStyle();
-		// 复制单元格样式
-		cellStyle.cloneStyleFrom(srcCell.getCellStyle());
-		// 单元格样式
-		tarCell.setCellStyle(cellStyle);
-		if (srcCell.getCellComment() != null) {
-			tarCell.setCellComment(srcCell.getCellComment());
-		}
-		// 不同数据类型处理
-		CellType cellType = srcCell.getCellTypeEnum();
-		tarCell.setCellType(cellType);
-		if (cellType == CellType.NUMERIC) {
-			if (DateUtil.isCellDateFormatted(srcCell)) {
-				tarCell.setCellValue(srcCell.getDateCellValue());
-			} else {
-				tarCell.setCellValue(srcCell.getNumericCellValue());
+			CellStyle cellStyle = workbook.createCellStyle();
+			// 复制单元格样式
+			cellStyle.cloneStyleFrom(srcCell.getCellStyle());
+			// 单元格样式
+			tarCell.setCellStyle(cellStyle);
+			if (srcCell.getCellComment() != null) {
+				tarCell.setCellComment(srcCell.getCellComment());
 			}
-		} else if (cellType == CellType.STRING) {
-			tarCell.setCellValue(srcCell.getRichStringCellValue());
-		} else if (cellType == CellType.BOOLEAN) {
-			tarCell.setCellValue(srcCell.getBooleanCellValue());
-		} else if (cellType == CellType.ERROR) {
-			tarCell.setCellErrorValue(srcCell.getErrorCellValue());
-		} else if (cellType == CellType.FORMULA) {
-			tarCell.setCellFormula(srcCell.getCellFormula());
-		} else {
+			// 不同数据类型处理
+			CellType cellType = srcCell.getCellTypeEnum();
+			tarCell.setCellType(cellType);
+			if (cellType == CellType.NUMERIC) {
+				if (DateUtil.isCellDateFormatted(srcCell)) {
+					Date tmp = srcCell.getDateCellValue();
+					tarCell.setCellValue(tmp);
+					if (tmp != null) {
+						hasValue = true;
+					}
+				} else {
+					double tmp = srcCell.getNumericCellValue();
+					tarCell.setCellValue(tmp);
+					if (tmp != 0) {
+						hasValue = true;
+					}
+				}
+			} else if (cellType == CellType.STRING) {
+				RichTextString tmp = srcCell.getRichStringCellValue();
+				tarCell.setCellValue(tmp);
+				if (tmp.length() != 0) {
+					hasValue = true;
+				}
+			} else if (cellType == CellType.BOOLEAN) {
+				boolean tmp = srcCell.getBooleanCellValue();
+				tarCell.setCellValue(tmp);
+				if (tmp) {
+					hasValue = true;
+				}
+			} else if (cellType == CellType.ERROR) {
+				byte tmp = srcCell.getErrorCellValue();
+				tarCell.setCellErrorValue(tmp);
+				if (tmp != 0) {
+					hasValue = true;
+				}
+			} else if (cellType == CellType.FORMULA) {
+				String tmp = srcCell.getCellFormula();
+				tarCell.setCellFormula(tmp);
+				if (StringUtils.hasText(tmp)) {
+					hasValue = true;
+				}
+			}
+		}
+		if (!hasValue) {
+			// 当前行没有一个值，删除当前空白行
+			tarSheet.removeRow(tarRow);
 		}
 	}
 
