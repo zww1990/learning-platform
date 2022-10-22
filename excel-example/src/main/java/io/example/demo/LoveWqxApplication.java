@@ -42,7 +42,7 @@ public class LoveWqxApplication implements CommandLineRunner {
 		Path path = Paths.get(this.properties.getReadFolder());
 		if (Files.notExists(path)) {
 			log.info("正在创建文件夹[ {} ]", this.properties.getReadFolder());
-			Files.createDirectory(path);
+			Files.createDirectories(path);
 		}
 		List<String> fileList = Files.walk(path).filter(p -> {
 			String tmp = p.toString().toLowerCase();
