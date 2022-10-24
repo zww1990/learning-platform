@@ -16,8 +16,8 @@ def make_dirs(dir_name: str):
 
 
 def merge_excel():
-    src_dir = "D:\\合并\\待合并的工作簿"
-    tar_dir = "D:\\合并\\已合并的工作簿"
+    src_dir = r"D:\合并\待合并的工作簿"
+    tar_dir = r"D:\合并\已合并的工作簿"
     make_dirs(src_dir)
     make_dirs(tar_dir)
     files = list(filter(is_excel, os.listdir(src_dir)))
