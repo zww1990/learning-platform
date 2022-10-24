@@ -34,7 +34,7 @@ def merge_excel():
         tar_name = os.path.join(tar_dir, f'{now}.xlsx')
         print(f'正在合并工作簿到[ {tar_name} ]')
         result = pd.concat(dfs)
-        result.to_excel(tar_name, index=False)
+        result.to_excel(tar_name, index=False, header=False)
         print('工作簿合并完成')
 
 
