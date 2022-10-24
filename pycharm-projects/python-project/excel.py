@@ -22,15 +22,20 @@ def merge_excel():
         dfs = []
         for src_name in files:
             full_name = os.path.join(src_dir, src_name)
-            print(full_name)
-            df = pd.read_excel(full_name)
+            print(f'正在读取工作簿[ {full_name} ]')
+            df = pd.read_excel(full_name, header=None, sheet_name=None)
             # print(df.values)
             dfs.extend(df.values())
         now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        if not os.path.exists(tar_dir):
+            print(f'正在创建文件夹[ {tar_dir} ]')
+            os.makedirs(tar_dir)
+            print(f'已创建文件夹[ {tar_dir} ]')
         tar_name = os.path.join(tar_dir, f'{now}.xlsx')
-        print(tar_name)
+        print(f'正在合并工作簿到[ {tar_name} ]')
         result = pd.concat(dfs)
         result.to_excel(tar_name, index=False)
+        print('工作簿已合并')
 
 
 if __name__ == '__main__':
