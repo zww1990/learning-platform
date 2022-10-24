@@ -8,13 +8,18 @@ def is_excel(file_name: str):
     return tmp.endswith('.xls') or tmp.endswith('.xlsx')
 
 
+def make_dirs(dir_name: str):
+    if not os.path.exists(dir_name):
+        print(f'正在创建文件夹[ {dir_name} ]')
+        os.makedirs(dir_name)
+        print(f'已创建文件夹[ {dir_name} ]')
+
+
 def merge_excel():
     src_dir = "D:\\合并\\待合并的工作簿"
     tar_dir = "D:\\合并\\已合并的工作簿"
-    if not os.path.exists(src_dir):
-        print(f'正在创建文件夹[ {src_dir} ]')
-        os.makedirs(src_dir)
-        print(f'已创建文件夹[ {src_dir} ]')
+    make_dirs(src_dir)
+    make_dirs(tar_dir)
     files = list(filter(is_excel, os.listdir(src_dir)))
     if len(files) == 0:
         print(f'文件夹[ {src_dir} ]没有待合并的工作簿')
@@ -24,18 +29,13 @@ def merge_excel():
             full_name = os.path.join(src_dir, src_name)
             print(f'正在读取工作簿[ {full_name} ]')
             df = pd.read_excel(full_name, header=None, sheet_name=None)
-            # print(df.values)
             dfs.extend(df.values())
         now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-        if not os.path.exists(tar_dir):
-            print(f'正在创建文件夹[ {tar_dir} ]')
-            os.makedirs(tar_dir)
-            print(f'已创建文件夹[ {tar_dir} ]')
         tar_name = os.path.join(tar_dir, f'{now}.xlsx')
         print(f'正在合并工作簿到[ {tar_name} ]')
         result = pd.concat(dfs)
         result.to_excel(tar_name, index=False)
-        print('工作簿已合并')
+        print('工作簿合并完成')
 
 
 if __name__ == '__main__':
