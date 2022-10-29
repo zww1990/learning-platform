@@ -40,17 +40,19 @@ def merge_excel():
 
 def writer_excel():
     file_path = r'D:\合并\demo.xlsx'
-    data_1 = [
-        {'姓名': '张三', '性别': '男'},
-        {'姓名': '李四', '性别': '女'}
-    ]
-    data_2 = [
-        {'姓名': '张三风', '性别': '男'},
-        {'姓名': '李四民', '性别': '女'}
-    ]
+    data = {
+        'table-1': [
+            {'姓名': '张三', '性别': '男'},
+            {'姓名': '李四', '性别': '女'}
+        ],
+        'table-2': [
+            {'姓名': '张三风', '性别': '男'},
+            {'姓名': '李四民', '性别': '女'}
+        ]
+    }
     with pd.ExcelWriter(file_path) as writer:
-        pd.DataFrame(data_1).to_excel(writer, sheet_name='table-1', index=False)
-        pd.DataFrame(data_2).to_excel(writer, sheet_name='table-2', index=False)
+        for key, value in data.items():
+            pd.DataFrame(value).to_excel(writer, sheet_name=key, index=False)
     print(f'写入[ {file_path} ]完毕')
 
 
