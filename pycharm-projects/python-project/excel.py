@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import numpy as np
 from _datetime import datetime
 
 
@@ -24,37 +25,24 @@ def merge_excel():
     if len(files) == 0:
         print(f'文件夹[ {src_dir} ]没有待合并的工作簿')
     else:
-        dfs = []
+        data = {}
         for src_name in files:
             full_name = os.path.join(src_dir, src_name)
             print(f'正在读取工作簿[ {full_name} ]')
             df = pd.read_excel(full_name, header=None, sheet_name=None)
-            dfs.extend(df.values())
+            for key, value in df.items():
+                if key in data:
+                    data[key] = np.concatenate((data[key], value.values))
+                else:
+                    data[key] = value.values
         now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         tar_name = os.path.join(tar_dir, f'{now}.xlsx')
         print(f'正在合并工作簿到[ {tar_name} ]')
-        result = pd.concat(dfs)
-        result.to_excel(tar_name, index=False, header=False)
+        with pd.ExcelWriter(tar_name) as writer:
+            for key, value in data.items():
+                pd.DataFrame(value).to_excel(writer, sheet_name=key, index=False, header=False)
         print('工作簿合并完成')
 
 
-def writer_excel():
-    file_path = r'D:\合并\demo.xlsx'
-    data = {
-        'table-1': [
-            {'姓名': '张三', '性别': '男'},
-            {'姓名': '李四', '性别': '女'}
-        ],
-        'table-2': [
-            {'姓名': '张三风', '性别': '男'},
-            {'姓名': '李四民', '性别': '女'}
-        ]
-    }
-    with pd.ExcelWriter(file_path) as writer:
-        for key, value in data.items():
-            pd.DataFrame(value).to_excel(writer, sheet_name=key, index=False)
-    print(f'写入[ {file_path} ]完毕')
-
-
 if __name__ == '__main__':
-    writer_excel()
+    merge_excel()
