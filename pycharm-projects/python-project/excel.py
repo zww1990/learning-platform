@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import numpy as np
+import math
 from _datetime import datetime
 
 
@@ -14,6 +14,13 @@ def make_dirs(dir_name: str):
         print(f'正在创建文件夹[ {dir_name} ]')
         os.makedirs(dir_name)
         print(f'已创建文件夹[ {dir_name} ]')
+
+
+def not_all_nan(items: list):
+    ret = all(isinstance(i, float) and math.isnan(i) for i in items)
+    if ret:
+        print('正在删除空白行')
+    return not ret
 
 
 def merge_excel():
@@ -32,9 +39,9 @@ def merge_excel():
             df = pd.read_excel(full_name, header=None, sheet_name=None)
             for key, value in df.items():
                 if key in data:
-                    data[key] = np.concatenate((data[key], value.values))
+                    data[key].extend(list(filter(not_all_nan, value.values.tolist())))
                 else:
-                    data[key] = value.values
+                    data[key] = list(filter(not_all_nan, value.values.tolist()))
         now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         tar_name = os.path.join(tar_dir, f'{now}.xlsx')
         print(f'正在合并工作簿到[ {tar_name} ]')
