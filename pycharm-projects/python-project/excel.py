@@ -38,5 +38,21 @@ def merge_excel():
         print('工作簿合并完成')
 
 
+def writer_excel():
+    file_path = r'D:\合并\demo.xlsx'
+    data_1 = [
+        {'姓名': '张三', '性别': '男'},
+        {'姓名': '李四', '性别': '女'}
+    ]
+    data_2 = [
+        {'姓名': '张三风', '性别': '男'},
+        {'姓名': '李四民', '性别': '女'}
+    ]
+    with pd.ExcelWriter(file_path) as writer:
+        pd.DataFrame(data_1).to_excel(writer, sheet_name='table-1', index=False)
+        pd.DataFrame(data_2).to_excel(writer, sheet_name='table-2', index=False)
+    print(f'写入[ {file_path} ]完毕')
+
+
 if __name__ == '__main__':
-    merge_excel()
+    writer_excel()
