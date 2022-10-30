@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -39,6 +40,10 @@ public class LoveWqxApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		log.info("{}", this.properties);
+		this.doMergeExcel();
+	}
+
+	private void doMergeExcel() throws Exception {
 		Path path = Paths.get(this.properties.getReadFolder());
 		if (Files.notExists(path)) {
 			log.info("正在创建文件夹[ {} ]", this.properties.getReadFolder());
@@ -54,5 +59,13 @@ public class LoveWqxApplication implements CommandLineRunner {
 		}
 		log.info("文件夹[ {} ]待合并的工作簿总个数[ {} ]", this.properties.getReadFolder(), fileList.size());
 		ExcelUtils.mergeExcel(fileList, this.properties.getWriteFolder(), this.properties.getDateTimePattern());
+		try (Scanner sc = new Scanner(System.in)) {
+			System.out.println("是否继续合并?(Y/N):");
+			if ("Y".equalsIgnoreCase(sc.next())) {
+				this.doMergeExcel();
+			} else {
+				System.out.println("程序运行结束。");
+			}
+		}
 	}
 }
