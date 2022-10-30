@@ -49,6 +49,11 @@ def merge_excel():
             for key, value in data.items():
                 pd.DataFrame(value).to_excel(writer, sheet_name=key, index=False, header=False)
         print('工作簿合并完成')
+    answer = input('是否继续合并?(Y/N): ')
+    if answer.upper() == 'Y':
+        merge_excel()
+    else:
+        print('程序运行结束。')
 
 
 if __name__ == '__main__':
