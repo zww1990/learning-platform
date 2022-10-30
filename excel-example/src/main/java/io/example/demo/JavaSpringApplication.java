@@ -19,17 +19,17 @@ import io.example.demo.excel.ExcelUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * LoveWqxApplication
+ * JavaSpringApplication
  * 
  * @author zhang weiwei
  * @since 2022年8月12日,下午8:45:37
  */
 @SpringBootApplication
 @Slf4j
-public class LoveWqxApplication implements CommandLineRunner {
+public class JavaSpringApplication implements CommandLineRunner {
 
 	public static void main(String[] args) throws Exception {
-		ConfigurableApplicationContext context = SpringApplication.run(LoveWqxApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(JavaSpringApplication.class, args);
 		log.debug("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
