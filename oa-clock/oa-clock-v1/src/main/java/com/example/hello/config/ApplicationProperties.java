@@ -48,6 +48,7 @@ public class ApplicationProperties {
 	@ToString
 	public static class Task {
 		private String cron;
+		private Integer amMin;
 		private Integer amMax;
 		private Integer pmMax;
 		private boolean enabled;

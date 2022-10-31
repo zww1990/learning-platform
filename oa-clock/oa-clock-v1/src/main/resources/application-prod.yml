@@ -11,6 +11,7 @@ app:
   bi-sql-source-id: 5
   task:
     cron: '0 30 8,18 ? * MON-FRI'
+    am-min: 20
     am-max: 30
     pm-max: 1
     enabled: false

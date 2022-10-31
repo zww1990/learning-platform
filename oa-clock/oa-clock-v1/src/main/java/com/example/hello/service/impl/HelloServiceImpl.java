@@ -92,7 +92,8 @@ public class HelloServiceImpl implements HelloService {
 					boolean isClock = false;
 					if (ampm == UserLogin.AM) {
 						user.setClockTime(LocalDateTime.of(date, //
-								LocalTime.of(8, 30 + random.nextInt(0, task.getAmMax()), random.nextInt(1, 60))));
+								LocalTime.of(8, 30 + random.nextInt(task.getAmMin(), task.getAmMax()),
+										random.nextInt(1, 60))));
 						isClock = true;
 					} else if (ampm == UserLogin.PM) {
 						user.setClockTime(LocalDateTime.of(date, //
