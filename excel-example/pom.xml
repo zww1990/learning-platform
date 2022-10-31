@@ -10,11 +10,11 @@
 	</parent>
 	
 	<groupId>io.example</groupId>
-	<artifactId>love-wqx</artifactId>
+	<artifactId>java-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>love-wqx</name>
+	<name>java-app</name>
 	<url>http://maven.apache.org</url>
 	
 	<properties>
@@ -55,7 +55,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>java-app</finalName>
+		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
