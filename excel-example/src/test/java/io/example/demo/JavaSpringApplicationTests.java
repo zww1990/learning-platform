@@ -7,13 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 /**
- * LoveWqxApplicationTests
+ * JavaSpringApplicationTests
  * 
  * @author zhang weiwei
  * @since 2022年8月12日,下午8:44:21
  */
 @SpringBootTest
-public class LoveWqxApplicationTests {
+public class JavaSpringApplicationTests {
 	@Resource
 	private ApplicationContext context;
 
