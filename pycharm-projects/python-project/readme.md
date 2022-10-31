@@ -18,5 +18,5 @@ pip install pyinstaller
 基本用法非常简单，只需针对主脚本运行它：
 
 ```
-pyinstaller -F /path/to/yourscript.py
+pyinstaller -F ./main.py
 ```
