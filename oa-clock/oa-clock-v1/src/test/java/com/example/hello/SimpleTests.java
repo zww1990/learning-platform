@@ -3,6 +3,8 @@ package com.example.hello;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -28,6 +30,24 @@ public class SimpleTests {
 				System.err.println(
 						BigDecimal.valueOf(random.nextFloat()).add(latitude).setScale(7, RoundingMode.HALF_UP));
 				System.err.println();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testThreadLocalRandom1() {
+		try {
+			ThreadLocalRandom random = ThreadLocalRandom.current();
+			LocalDate date = LocalDate.now();
+			for (int i = 0; i < 100; i++) {
+				LocalDateTime am = LocalDateTime.of(date, //
+						LocalTime.of(8, 30 + random.nextInt(20, 30), random.nextInt(1, 60)));
+				LocalDateTime pm = LocalDateTime.of(date, //
+						LocalTime.of(18, 30 + random.nextInt(0, 1), random.nextInt(1, 60)));
+				System.err.println(am + "\t" + pm);
+				System.err.println("-----------------------------------------------------");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
