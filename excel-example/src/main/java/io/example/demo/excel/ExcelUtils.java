@@ -104,11 +104,11 @@ public abstract class ExcelUtils {
 	 * @param srcSheet 来源sheet
 	 * @param tarSheet 目标sheet
 	 */
-	private static void mergeSheetAllRegion(Sheet srcSheet, Sheet tarSheet) {
-		for (int i = 0, num = srcSheet.getNumMergedRegions(); i < num; i++) {
-			tarSheet.addMergedRegion(srcSheet.getMergedRegion(i));
-		}
-	}
+//	private static void mergeSheetAllRegion(Sheet srcSheet, Sheet tarSheet) {
+//		for (int i = 0, num = srcSheet.getNumMergedRegions(); i < num; i++) {
+//			tarSheet.addMergedRegion(srcSheet.getMergedRegion(i));
+//		}
+//	}
 
 	/**
 	 * 复制sheet到新的excel文件中
@@ -120,7 +120,7 @@ public abstract class ExcelUtils {
 	 */
 	private static void copyExcelSheet(Workbook workbook, Sheet srcSheet, Sheet tarSheet, boolean isNew) {
 		// 合并单元格
-		mergeSheetAllRegion(srcSheet, tarSheet);
+//		mergeSheetAllRegion(srcSheet, tarSheet);
 		// 获取最后一个单元格位置
 		int cellNum = srcSheet.getRow(srcSheet.getFirstRowNum()).getLastCellNum();
 		for (int i = 0; i < cellNum; i++) {
@@ -133,10 +133,10 @@ public abstract class ExcelUtils {
 			if (isNew) {
 				rowNum = srcRow.getRowNum();
 			} else {
-				if (srcRow.getRowNum() == 0) {
-					// 从第二个工作簿开始，遇到表头行，直接跳过
-					continue;
-				}
+//				if (srcRow.getRowNum() == 0) {
+//					// 从第二个工作簿开始，遇到表头行，直接跳过
+//					continue;
+//				}
 				rowNum = tarSheet.getLastRowNum() + 1;
 			}
 			// 创建新行
