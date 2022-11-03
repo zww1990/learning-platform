@@ -1,4 +1,5 @@
 import pandas as pd
+from openpyxl import Workbook
 
 
 def writer_excel_1():
@@ -39,6 +40,20 @@ def writer_excel_2():
     print(f'写入[ {file_path} ]完毕')
 
 
+def writer_excel_3():
+    file_path = r'D:\合并\demo-3.xlsx'
+    wb = Workbook()
+    ws1 = wb.create_sheet('table-1')
+    print(ws1.iter_rows())
+    ws2 = wb.create_sheet('table-2')
+    print(ws2.iter_rows())
+    ws3 = wb.create_sheet('table-3')
+    print(ws3.iter_rows())
+    wb.save(file_path)
+    print(f'写入[ {file_path} ]完毕')
+
+
 if __name__ == '__main__':
-    writer_excel_1()
-    writer_excel_2()
+    # writer_excel_1()
+    # writer_excel_2()
+    writer_excel_3()
