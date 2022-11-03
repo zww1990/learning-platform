@@ -1,5 +1,5 @@
 import pandas as pd
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 
 
 def writer_excel_1():
@@ -53,7 +53,14 @@ def writer_excel_3():
     print(f'写入[ {file_path} ]完毕')
 
 
+def writer_excel_4():
+    file_path = r'D:\合并\待合并的工作簿\【拓展校区】FY24预算-北京分校.xlsx'
+    wb = load_workbook(file_path)
+    print(wb.sheetnames)
+
+
 if __name__ == '__main__':
     # writer_excel_1()
     # writer_excel_2()
-    writer_excel_3()
+    # writer_excel_3()
+    writer_excel_4()
