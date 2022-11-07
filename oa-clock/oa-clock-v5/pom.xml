@@ -73,6 +73,15 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- ↓构建过程中，跳过执行单元测试↓ -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- ↑构建过程中，跳过执行单元测试↑ -->
 		</plugins>
 	</build>
 </project>
