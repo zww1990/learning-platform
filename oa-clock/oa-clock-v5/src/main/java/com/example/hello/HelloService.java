@@ -33,7 +33,9 @@ public class HelloService {
 
 	@Scheduled(cron = "${app.task.cron}")
 	public void helloJob() {
+		log.info("开始发送...");
 		this.batchSend("18031360579", "请及时处理EHR系统待办，当前待办已超过99项！");
+		log.info("...发送成功");
 	}
 
 	private void batchSend(String mobile, String text) {
