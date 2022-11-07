@@ -49,14 +49,14 @@ public class HelloService {
 			log.error(e.getLocalizedMessage(), e);
 			return;
 		}
-		log.info("getUrl >> {}", getUrl);
+		log.debug("getUrl >> {}", getUrl);
 		HttpGet method = new HttpGet(getUrl);
-		log.info("method >> {}", method);
+		log.debug("method >> {}", method);
 		try (CloseableHttpClient client = HttpClients.createDefault();
 				CloseableHttpResponse response = client.execute(method);) {
-			log.info("response >> {}", response);
+			log.debug("response >> {}", response);
 			HttpEntity entity = response.getEntity();
-			log.info("entity >> {}", entity);
+			log.debug("entity >> {}", entity);
 			if (entity != null) {
 				String entityText = EntityUtils.toString(entity, ENCODING);
 				log.info("entityText >> {}", entityText);
