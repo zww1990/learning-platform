@@ -1,0 +1,30 @@
+server:
+  port: 6666
+  servlet:
+    jsp:
+      registered: false
+  ssl:
+    enabled: false
+spring:
+  aop:
+    auto: false
+  dao:
+    exceptiontranslation:
+      enabled: false
+  jackson:
+    time-zone: GMT+8
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+
+app:
+  task:
+    cron: "0 0/1 * * * *"
+
