@@ -24,11 +24,11 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.4</spring-boot.version>
-		<spring-boot-admin.version>2.7.5</spring-boot-admin.version>
-        <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
-		<nacos.client.version>2.1.1</nacos.client.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
+		<spring-boot-admin.version>2.7.7</spring-boot-admin.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+		<nacos.client.version>2.1.2</nacos.client.version>
     </properties>
 
     <dependencyManagement>
@@ -75,7 +75,13 @@
 			<dependency>
 			    <groupId>io.github.openfeign</groupId>
 			    <artifactId>feign-httpclient</artifactId>
-			    <version>11.8</version>
+			    <version>11.10</version>
+			</dependency>
+			<!-- dubbo -->
+			<dependency>
+				<groupId>com.alibaba.cloud</groupId>
+				<artifactId>spring-cloud-starter-dubbo</artifactId>
+				<version>2021.0.1.0</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
