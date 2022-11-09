@@ -20,9 +20,9 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.4</spring-boot.version>
-        <spring-cloud.version>2021.0.4</spring-cloud.version>
-        <spring-cloud-tencent.version>1.7.0-2021.0.3</spring-cloud-tencent.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <spring-cloud-tencent.version>1.8.1-2021.0.3</spring-cloud-tencent.version>
     </properties>
 
     <dependencyManagement>
@@ -55,7 +55,7 @@
 			<dependency>
 			    <groupId>io.github.openfeign</groupId>
 			    <artifactId>feign-httpclient</artifactId>
-			    <version>11.8</version>
+			    <version>11.10</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
