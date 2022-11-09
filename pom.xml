@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>super-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>super-parent</name>
+
+	<modules>
+		<module>cas-example/cas-client-a</module>
+		<module>cas-example/cas-client-b</module>
+		<module>cas-example/cas-server-webapp</module>
+		<module>design-pattern-example</module>
+		<module>dubbo-example/spring-dubbo-consumer</module>
+		<module>dubbo-example/spring-dubbo-provider</module>
+		<module>excel-example</module>
+		<module>hibernate-example/hibernate-mysql</module>
+		<module>hibernate-example/hibernate-mysql-service-controller</module>
+		<module>hibernate-example/hibernate-oracle</module>
+		<module>ldap-example/changepwd-v1</module>
+		<!-- 
+		<module>ldap-example/changepwd-v2</module>
+		-->
+		<module>mybatis-example/mybatis-mysql</module>
+		<module>mybatis-example/mybatis-oracle</module>
+		<module>mybatis-example/mybatis-plus-example</module>
+		<module>nacos-example/admin-server</module>
+		<module>nacos-example/dubbo-nacos-consumer</module>
+		<module>nacos-example/dubbo-nacos-provider</module>
+		<module>nacos-example/nacos-consumer</module>
+		<module>nacos-example/nacos-gateway</module>
+		<module>nacos-example/nacos-provider</module>
+		<module>oa-clock/oa-clock-v1</module>
+		<module>oa-clock/oa-clock-v2</module>
+		<module>oa-clock/oa-clock-v3</module>
+		<module>oa-clock/oa-clock-v4</module>
+		<module>oa-clock/oa-clock-v5</module>
+		<module>polaris-example/polaris-consumer</module>
+		<module>polaris-example/polaris-provider</module>
+		<module>reactive-example</module>
+		<module>schedule-example/spring-schedule-v1</module>
+		<module>schedule-example/spring-schedule-v2</module>
+		<module>seata-example/seata-client-a</module>
+		<module>seata-example/seata-client-b</module>
+		<module>seata-example/seata-client-c</module>
+		<module>security-example/spring-security-cas</module>
+		<module>security-example/spring-security-non-cas</module>
+		<module>swagger-example/spring-swagger</module>
+		<module>swagger-example/spring-swagger-knife4j</module>
+		<module>swagger-example/spring-swagger-openapi</module>
+	</modules>
+
+</project>
