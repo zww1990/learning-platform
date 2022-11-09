@@ -101,18 +101,6 @@
             		<skipTests>true</skipTests>
             	</configuration>
             </plugin>
-    		<!-- ↓记录git仓库信息↓ -->
-			<plugin>
-			    <groupId>pl.project13.maven</groupId>
-			    <artifactId>git-commit-id-plugin</artifactId>
-			    <configuration>
-            		<verbose>true</verbose>
-            		<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
-            		<generateGitPropertiesFile>true</generateGitPropertiesFile>
-            		<useNativeGit>true</useNativeGit>
-			    </configuration>
-			</plugin>
-			<!-- ↑记录git仓库信息↑ -->
     	</plugins>
     </build>
 </project>

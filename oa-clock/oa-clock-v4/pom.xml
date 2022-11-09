@@ -164,15 +164,6 @@
 				</configuration>
 			</plugin>
 			<!-- ↑构建过程中，跳过执行单元测试↑ -->
-			<!-- ↓记录git仓库信息↓ -->
-			<plugin>
-			    <groupId>pl.project13.maven</groupId>
-			    <artifactId>git-commit-id-plugin</artifactId>
-			    <configuration>
-			    	<useNativeGit>true</useNativeGit>
-			    </configuration>
-			</plugin>
-			<!-- ↑记录git仓库信息↑ -->
 		</plugins>
 	</build>
 </project>
