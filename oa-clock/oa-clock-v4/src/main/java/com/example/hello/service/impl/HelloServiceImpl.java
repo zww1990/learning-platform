@@ -113,7 +113,28 @@ public class HelloServiceImpl implements HelloService {
 		}
 		log.info("{}", address);
 		this.appConfig.getAddresses().add(address);
-		return new ResponseBody<List<Address>>()//
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(ResponseBody.SUCCESS);
+	}
+
+	@Override
+	public ResponseBody<?> saveUser(UserInfo userInfo) {
+		if (!StringUtils.hasText(userInfo.getUserNo())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(ResponseBody.FAILURE)//
+					.setMessage("[userNo]不能为空");
+		}
+		if (!StringUtils.hasText(userInfo.getUsername())) {
+			return new ResponseBody<>()//
+					.setCode(HttpStatus.BAD_REQUEST.value())//
+					.setStatus(ResponseBody.FAILURE)//
+					.setMessage("[username]不能为空");
+		}
+		log.info("{}", userInfo);
+		this.appConfig.getUsers().add(userInfo);
+		return new ResponseBody<>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(ResponseBody.SUCCESS);
 	}

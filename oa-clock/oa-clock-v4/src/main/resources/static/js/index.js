@@ -192,6 +192,13 @@ new Vue({
         },
         saveUser() {
             if (this.$refs.userForm.validate()) {
+                fetch('/hello/saveuser', {
+                    method: 'POST',
+                    body: JSON.stringify(this.user),
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(res => res.json())
+                .then(res => console.log(res));
                 this.users.push({
                     addr: this.addresses[0],
                     status: 1,
