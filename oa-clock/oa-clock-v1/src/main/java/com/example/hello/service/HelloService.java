@@ -20,6 +20,8 @@ public interface HelloService {
 
 	ResponseBody<?> saveAddress(Address address);
 
+	ResponseBody<?> saveUser(UserInfo userInfo);
+
 	ResponseBody<?> initStaffClock(UserLogin userLogin);
 
 	ResponseBody<?> userLoginAndStaffClockV2(UserLogin userLogin);
