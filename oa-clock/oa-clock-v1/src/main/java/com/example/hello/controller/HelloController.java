@@ -44,6 +44,11 @@ public class HelloController {
 		return this.helloService.saveAddress(address);
 	}
 
+	@PostMapping("/saveuser")
+	public ResponseBody<?> saveUser(@RequestBody UserInfo userInfo) {
+		return this.helloService.saveUser(userInfo);
+	}
+
 	@PostMapping("/initstaffclock")
 	public ResponseBody<?> initStaffClock(@RequestBody UserLogin userLogin) {
 		return this.helloService.initStaffClock(userLogin);
