@@ -192,6 +192,11 @@ new Vue({
         },
         saveUser() {
             if (this.$refs.userForm.validate()) {
+                this.users.push({
+                    addr: this.addresses[0],
+                    status: 1,
+                    ...this.user
+                });
                 fetch('/hello/saveuser', {
                     method: 'POST',
                     body: JSON.stringify(this.user),
@@ -199,11 +204,7 @@ new Vue({
                 })
                 .then(res => res.json())
                 .then(res => console.log(res));
-                this.users.push({
-                    addr: this.addresses[0],
-                    status: 1,
-                    ...this.user
-                });
+	        	this.initStaffClockV2(this.users.find(u => u.userNo === this.user.userNo));
                 this.closeUser();
             }
         },
