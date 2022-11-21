@@ -14,7 +14,7 @@ app:
     am-min: 20
     am-max: 30
     pm-max: 1
-    enabled: true
+    enabled: false
   users:
   - user-no: 100245
     username: 王哲
