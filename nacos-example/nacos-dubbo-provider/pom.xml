@@ -8,19 +8,31 @@
     	<artifactId>nacos-parent</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>admin-server</artifactId>
-    <name>admin-server</name>
+    <artifactId>nacos-dubbo-provider</artifactId>
+    <name>nacos-dubbo-provider</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
     	<!-- spring boot -->
+        <!-- <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency> -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- alibaba cloud -->
         <dependency>
@@ -31,29 +43,21 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!-- spring cloud -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
-		</dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+        <!-- spring cloud -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
-		<!-- spring boot admin -->
-		<dependency>
-		    <groupId>de.codecentric</groupId>
-		    <artifactId>spring-boot-admin-starter-server</artifactId>
-		</dependency>
-		<!-- caffeine -->
-		<dependency>
-			<groupId>com.github.ben-manes.caffeine</groupId>
-			<artifactId>caffeine</artifactId>
-		</dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,6 +80,14 @@
                     	</goals>
                     </execution>
                 </executions>
+                <configuration>
+                	<excludes>
+                		<exclude>
+                			<groupId>org.projectlombok</groupId>
+                			<artifactId>lombok</artifactId>
+                		</exclude>
+                	</excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
