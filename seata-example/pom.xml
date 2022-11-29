@@ -3,6 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.6</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
 
 	<groupId>com.example</groupId>
 	<artifactId>seata-parent</artifactId>
@@ -19,30 +26,18 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.7.5</spring-boot.version>
         <spring-cloud.version>2021.0.5</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 		<nacos.client.version>2.1.2</nacos.client.version>
     	<seata.version>1.5.2</seata.version>
         <kryo.version>4.0.2</kryo.version>
         <kryo-serializers.version>0.45</kryo-serializers.version>
-    	<druid.version>1.2.14</druid.version>
-    	<mysql.version>8.0.31</mysql.version>
-    	<mybatis.version>2.2.2</mybatis.version>
+    	<druid.version>1.2.15</druid.version>
+    	<mybatis.version>2.3.0</mybatis.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-        	<!-- 导入spring boot依赖 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <!-- 导入spring cloud依赖 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -88,12 +83,6 @@
 			    <artifactId>druid-spring-boot-starter</artifactId>
 			    <version>${druid.version}</version>
 			</dependency>
-			<!-- mysql驱动 -->
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.version}</version>
-			</dependency>
 			<!-- mybatis -->
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
@@ -137,55 +126,10 @@
 	</pluginRepositories>
 	
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-	                <groupId>org.springframework.boot</groupId>
-	                <artifactId>spring-boot-maven-plugin</artifactId>
-	                <version>${spring-boot.version}</version>
-	                <executions>
-	                    <execution>
-	                        <id>repackage</id>
-	                        <goals>
-	                            <goal>repackage</goal>
-	                        </goals>
-	                    </execution>
-	                    <execution>
-	                    	<id>build-info</id>
-	                    	<goals>
-	                    		<goal>build-info</goal>
-	                    	</goals>
-	                    </execution>
-	                </executions>
-					<configuration>
-						<excludes>
-							<exclude>
-								<groupId>org.projectlombok</groupId>
-								<artifactId>lombok</artifactId>
-							</exclude>
-						</excludes>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		<plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                    	<compilerArg>-parameters</compilerArg>
-                    </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
             	<artifactId>maven-surefire-plugin</artifactId>
-            	<version>2.22.2</version>
             	<configuration>
             		<skipTests>true</skipTests>
             	</configuration>

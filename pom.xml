@@ -29,12 +29,13 @@
 		<module>mybatis-example/mybatis-mysql</module>
 		<module>mybatis-example/mybatis-oracle</module>
 		<module>mybatis-example/mybatis-plus-example</module>
-		<module>nacos-example/admin-server</module>
-		<module>nacos-example/dubbo-nacos-consumer</module>
-		<module>nacos-example/dubbo-nacos-provider</module>
+		<module>nacos-example/nacos-admin-server</module>
+		<module>nacos-example/nacos-dubbo-consumer</module>
+		<module>nacos-example/nacos-dubbo-provider</module>
 		<module>nacos-example/nacos-consumer</module>
 		<module>nacos-example/nacos-gateway</module>
 		<module>nacos-example/nacos-provider</module>
+		<module>native-example</module>
 		<module>oa-clock/oa-clock-v1</module>
 		<module>oa-clock/oa-clock-v2</module>
 		<module>oa-clock/oa-clock-v3</module>
