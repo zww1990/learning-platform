@@ -96,6 +96,20 @@
 		
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>atlassian</id>
+			<name>atlassian仓库</name>
+			<url>https://packages.atlassian.com/mvn/maven-atlassian-external</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	
 	<build>
 		<finalName>${project.name}</finalName>
 		<plugins>
