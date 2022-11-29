@@ -23,9 +23,7 @@
 		<module>hibernate-example/hibernate-mysql-service-controller</module>
 		<module>hibernate-example/hibernate-oracle</module>
 		<module>ldap-example/changepwd-v1</module>
-		<!-- 
 		<module>ldap-example/changepwd-v2</module>
-		-->
 		<module>mybatis-example/mybatis-mysql</module>
 		<module>mybatis-example/mybatis-oracle</module>
 		<module>mybatis-example/mybatis-plus-example</module>
