@@ -8,8 +8,8 @@
     	<artifactId>nacos-parent</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>dubbo-nacos-provider</artifactId>
-    <name>dubbo-nacos-provider</name>
+    <artifactId>nacos-dubbo-consumer</artifactId>
+    <name>nacos-dubbo-consumer</name>
     <description>Demo project for Spring Boot</description>
 
     <dependencies>
