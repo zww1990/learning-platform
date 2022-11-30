@@ -2,8 +2,7 @@ package com.example.hello.controller;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ import com.example.hello.service.HelloService;
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
-	@Resource
+	@Autowired
 	private HelloService helloService;
 
 	@GetMapping("/users")

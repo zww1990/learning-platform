@@ -1,8 +1,7 @@
 package com.example.hello;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.EmbeddedValueResolver;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.util.StringValueResolver;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
-import com.example.hello.config.ApplicationProperties;
 import com.example.hello.event.MyEvent;
 
 /**
@@ -26,14 +24,12 @@ import com.example.hello.event.MyEvent;
 @SpringBootTest
 @EnableAsync
 public class HelloApplicationTests {
-	@Resource
+	@Autowired
 	private ApplicationContext context;
-	@Resource
+	@Autowired
 	private JavaMailSender mailSender;
-	@Resource
+	@Autowired
 	private MailProperties mailProperties;
-	@Resource
-	private ApplicationProperties appProperties;
 
 	@Test
 	public void testContextLoads() {

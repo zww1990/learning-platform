@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -55,13 +54,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class HelloServiceImpl implements HelloService {
-	@Resource
+	@Autowired
 	private RestTemplate restTemplate;
-	@Resource
+	@Autowired
 	private ApplicationProperties properties;
-	@Resource
+	@Autowired
 	private JavaMailSender mailSender;
-	@Resource
+	@Autowired
 	private MailProperties mailProperties;
 
 	@Scheduled(cron = "${app.task.cron}")
