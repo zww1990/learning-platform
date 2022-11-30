@@ -2,8 +2,7 @@ package com.example.hello;
 
 import java.time.Duration;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,7 +40,7 @@ public class HelloApplication implements CommandLineRunner {
 				.build();
 	}
 
-	@Resource
+	@Autowired
 	private ApplicationProperties properties;
 
 	@Override

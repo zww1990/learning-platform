@@ -2,9 +2,8 @@ package com.example.hello.controller;
 
 import java.io.InputStream;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 
@@ -19,9 +18,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @SpringBootTest
 public class HelloControllerTests {
-	@Resource
+	@Autowired
 	private HelloController controller;
-	@Resource
+	@Autowired
 	private ObjectMapper json;
 
 	@Test
