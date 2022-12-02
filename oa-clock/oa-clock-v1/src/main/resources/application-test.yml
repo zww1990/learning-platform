@@ -1,15 +1,12 @@
 app:
-  staff-clock-url: http://192.168.32.95:38080/appStaffClockLog/staffClock
-  init-staff-clock-url: http://192.168.32.95:38080/appStaffClockLog/initStaffClock?staffNo=
-  create-oa-attend-url: 'http://192.168.32.95:38080/appStaffClockLog/createYesterdayOaAttendTest?staffNos=%s&stratTime=%s&endTime=%s'
-  device-list-url: 'http://192.168.32.95:38080/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo='
-  reset-bind-device-id-url: http://192.168.32.95:38080/appDeviceRecord/resetBindDeviceId
-  bi-sql-exec-url: http://192.168.32.36:18066/bisql/exec
+  staff-db-url: http://192.168.32.95:38080
+  bi-url: http://192.168.32.36:18066
   bi-sql-source-id: 22
   task:
     cron: '*/10 * * * * ?'
     am-max: 30
     pm-max: 30
+    enabled: false
   users:
   - user-no: 100232
     username: 李米盛

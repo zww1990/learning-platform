@@ -9,26 +9,20 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.hello.config.ApplicationProperties;
 import com.example.hello.config.ApplicationProperties.Address;
@@ -36,7 +30,9 @@ import com.example.hello.config.ApplicationProperties.Task;
 import com.example.hello.config.ApplicationProperties.UserInfo;
 import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
+import com.example.hello.service.BisearchServer;
 import com.example.hello.service.HelloService;
+import com.example.hello.service.StaffdbService;
 
 import cn.net.yzl.oa.entity.ClockWorkStatus;
 import cn.net.yzl.oa.entity.SqlExecQueryDTO;
@@ -55,13 +51,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HelloServiceImpl implements HelloService {
 	@Autowired
-	private RestTemplate restTemplate;
-	@Autowired
 	private ApplicationProperties properties;
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
 	private MailProperties mailProperties;
+	@Autowired
+	private BisearchServer bisearchServer;
+	@Autowired
+	private StaffdbService staffdbService;
 
 	@Scheduled(cron = "${app.task.cron}")
 	public void staffClockJob() {
@@ -207,13 +205,8 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("appid", "oa");
-		ResponseBody<Map<String, Object>> body = this.restTemplate
-				.exchange(this.properties.getInitStaffClockUrl() + userLogin.getUserNo(), HttpMethod.GET,
-						new HttpEntity<>(headers), ResponseBody.class)
-				.getBody();
+		Map<String, String> headers = Map.of("appid", "oa");
+		ResponseBody<Map<String, Object>> body = this.staffdbService.initStaffClock(userLogin.getUserNo(), headers);
 		if (!CollectionUtils.isEmpty(body.getData())) {
 			body.getData().remove("wifiList");
 			body.getData().remove("rangeList");
@@ -253,9 +246,7 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[longitude]不能为空");
 		}
 		log.info("补卡>>>{}", userLogin);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("appid", "oa");
+		Map<String, String> headers = Map.of("appid", "oa");
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		AppStaffClockVO vo = new AppStaffClockVO()//
 				.setAddress(userLogin.getAddress())//
@@ -265,14 +256,11 @@ public class HelloServiceImpl implements HelloService {
 						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(Date.from(userLogin.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
-		ResponseBody<?> body = this.restTemplate
-				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
-				.getBody();
+		ResponseBody<?> body = this.staffdbService.staffClock(vo, headers);
 		log.info("{}", body);
 		String time = userLogin.getClockTime().format(DateTimeFormatter.ofPattern(AESUtil.DATEFORMAT));
-		String url = String.format(this.properties.getCreateOaAttendUrl(), userLogin.getUserNo(), time, time);
-		body = this.restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
-		log.info("{} - {}", url, body);
+		body = this.staffdbService.createYesterdayOaAttendTest(userLogin.getUserNo(), time, time, headers);
+		log.info("{}", body);
 		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
 			this.properties.getUsers().add(//
 					new UserInfo()//
@@ -309,9 +297,7 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[longitude]不能为空");
 		}
 		log.info("打卡>>>{}", userLogin);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("appid", "oa");
+		Map<String, String> headers = Map.of("appid", "oa");
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		AppStaffClockVO vo = new AppStaffClockVO()//
 				.setAddress(userLogin.getAddress())//
@@ -321,9 +307,7 @@ public class HelloServiceImpl implements HelloService {
 						RoundingMode.HALF_UP))//
 				.setStaffNo(userLogin.getUserNo())//
 				.setClockTime(new Date());
-		ResponseBody<?> body = this.restTemplate
-				.postForEntity(this.properties.getStaffClockUrl(), new HttpEntity<>(vo, headers), ResponseBody.class)
-				.getBody();
+		ResponseBody<?> body = this.staffdbService.staffClock(vo, headers);
 		log.info("{}", body);
 		if (this.properties.getUsers().stream().noneMatch(p -> p.getUserNo().equals(userLogin.getUserNo()))) {
 			this.properties.getUsers().add(//
@@ -336,11 +320,8 @@ public class HelloServiceImpl implements HelloService {
 
 	private ResponseBody<?> userLoginAndStaffClockV3(UserLogin user) {
 		log.info("定时打卡>>>{}", user);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("appid", "oa");
-		ResponseBody<?> body = this.restTemplate.exchange(this.properties.getInitStaffClockUrl() + user.getUserNo(),
-				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
+		Map<String, String> headers = Map.of("appid", "oa");
+		ResponseBody<?> body = this.staffdbService.initStaffClock(user.getUserNo(), headers);
 		Map<String, Object> data = (Map<String, Object>) body.getData();
 		if (CollectionUtils.isEmpty(data)) {
 			log.error("定时打卡异常>>>{}", data);
@@ -365,8 +346,7 @@ public class HelloServiceImpl implements HelloService {
 								RoundingMode.HALF_UP))//
 						.setStaffNo(user.getUserNo())//
 						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
-				body = this.restTemplate.postForEntity(this.properties.getStaffClockUrl(),
-						new HttpEntity<>(vo, headers), ResponseBody.class).getBody();
+				body = this.staffdbService.staffClock(vo, headers);
 				body.setMessage(String.format("%s打卡成功: [%s]", flagName, body.getData()));
 			} else {
 				log.info("今日已打卡，跳过本次打卡");
@@ -385,9 +365,6 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("appid", "oa");
 		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId());
 		if (userLogin.getDates() != null && userLogin.getDates().length == 2) {
 			sqlExecQuery.setCommand(String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(),
@@ -399,8 +376,8 @@ public class HelloServiceImpl implements HelloService {
 					String.format(this.properties.getSelectAppStaffClockLogSql(), userLogin.getUserNo(), begin, end));
 		}
 		log.info("{}", sqlExecQuery);
-		ResponseBody<?> body = this.restTemplate.postForEntity(this.properties.getBiSqlExecUrl(),
-				new HttpEntity<>(sqlExecQuery, headers), ResponseBody.class).getBody();
+		Map<String, String> headers = Map.of("appid", "oa");
+		ResponseBody<?> body = this.bisearchServer.bisqlExec(sqlExecQuery, headers);
 		return body;
 	}
 
@@ -413,24 +390,19 @@ public class HelloServiceImpl implements HelloService {
 					.setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("appid", "oa");
-		ResponseBody<?> body = this.restTemplate.exchange(this.properties.getDeviceListUrl() + userLogin.getUserNo(),
-				HttpMethod.GET, new HttpEntity<>(headers), ResponseBody.class).getBody();
+		Map<String, String> headers = Map.of("appid", "oa");
+		ResponseBody<?> body = this.staffdbService.getDeviceList(userLogin.getUserNo(), 1, 100, headers);
 		return body;
 	}
 
 	@Override
 	public ResponseBody<?> resetBindDevice(String staffNo, Integer id) {
 		log.info("staffNo={}, id={}", staffNo, id);
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("appid", "oa");
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
-		params.add("staffNo", staffNo);
-		params.add("id", id);
-		ResponseBody<?> body = this.restTemplate.postForObject(this.properties.getResetBindDeviceIdUrl(),
-				new HttpEntity<>(params, headers), ResponseBody.class);
+		Map<String, String> headers = Map.of("appid", "oa");
+		Map<String, Object> params = new HashMap<>();
+		params.put("staffNo", staffNo);
+		params.put("id", id);
+		ResponseBody<?> body = this.staffdbService.resetBindDeviceId(params, headers);
 		log.info("{}", body);
 		if (body.getStatus() != ResponseBody.SUCCESS) {
 			return body;

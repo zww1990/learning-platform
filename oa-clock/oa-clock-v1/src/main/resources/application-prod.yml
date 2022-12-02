@@ -2,12 +2,8 @@ server:
   port: 9999
 
 app:
-  staff-clock-url: http://api.yuzhilin.net.cn/staffDB/appStaffClockLog/staffClock
-  init-staff-clock-url: http://api.yuzhilin.net.cn/staffDB/appStaffClockLog/initStaffClock?staffNo=
-  create-oa-attend-url: 'http://api.yuzhilin.net.cn/staffDB/appStaffClockLog/createYesterdayOaAttendTest?staffNos=%s&stratTime=%s&endTime=%s'
-  device-list-url: 'http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/getDeviceList?pageNo=1&pageSize=100&staffNo='
-  reset-bind-device-id-url: http://api.yuzhilin.net.cn/staffDB/appDeviceRecord/resetBindDeviceId
-  bi-sql-exec-url: http://api.yuzhilin.net.cn/bisearchserver/bisql/exec
+  staff-db-url: http://api.yuzhilin.net.cn/staffDB
+  bi-url: http://api.yuzhilin.net.cn/bisearchserver
   bi-sql-source-id: 5
   task:
     cron: '0 30 8,18 ? * MON-FRI'
