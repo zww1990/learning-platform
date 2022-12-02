@@ -27,13 +27,8 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 public class ApplicationProperties {
-	private String staffClockUrl;
-	private String initStaffClockUrl;
-	private String deviceListUrl;
-	private String resetBindDeviceIdUrl;
-	private String createOaAttendUrl;
-	private String biSqlExecUrl;
-	@ToString.Exclude
+	private String staffDbUrl;
+	private String biUrl;
 	private Integer biSqlSourceId;
 	@ToString.Exclude
 	private String selectAppStaffClockLogSql;

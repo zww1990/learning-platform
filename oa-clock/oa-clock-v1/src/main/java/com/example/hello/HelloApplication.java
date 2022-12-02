@@ -1,18 +1,19 @@
 package com.example.hello;
 
-import java.time.Duration;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import com.example.hello.config.ApplicationProperties;
+import com.example.hello.service.BisearchServer;
+import com.example.hello.service.StaffdbService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,10 +35,17 @@ public class HelloApplication implements CommandLineRunner {
 	}
 
 	@Bean
-	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
-		return restBuilder.setConnectTimeout(Duration.ofSeconds(5))//
-				.setReadTimeout(Duration.ofSeconds(5))//
-				.build();
+	StaffdbService staffdbService() {
+		WebClient client = WebClient.builder().baseUrl(this.properties.getStaffDbUrl()).build();
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
+		return factory.createClient(StaffdbService.class);
+	}
+
+	@Bean
+	BisearchServer bisearchServer() {
+		WebClient client = WebClient.builder().baseUrl(this.properties.getBiUrl()).build();
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
+		return factory.createClient(BisearchServer.class);
 	}
 
 	@Autowired
