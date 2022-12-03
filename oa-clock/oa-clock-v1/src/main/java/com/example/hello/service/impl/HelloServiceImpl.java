@@ -16,7 +16,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -32,6 +31,7 @@ import com.example.hello.model.ResponseBody;
 import com.example.hello.model.UserLogin;
 import com.example.hello.service.BisearchServer;
 import com.example.hello.service.HelloService;
+import com.example.hello.service.SseEmitterService;
 import com.example.hello.service.StaffdbService;
 
 import cn.net.yzl.oa.entity.ClockWorkStatus;
@@ -60,6 +60,8 @@ public class HelloServiceImpl implements HelloService {
 	private BisearchServer bisearchServer;
 	@Autowired
 	private StaffdbService staffdbService;
+	@Autowired
+	private SseEmitterService emitterService;
 
 	@Scheduled(cron = "${app.task.cron}")
 	public void staffClockJob() {
@@ -104,11 +106,13 @@ public class HelloServiceImpl implements HelloService {
 							if (StringUtils.hasText(c.getEmail())) {
 								this.sendMail(c.getEmail(), body.getMessage());
 							}
+							this.emitterService.batchSendMessage(body.getMessage());
 						} catch (Exception e) {
 							log.error(e.getLocalizedMessage(), e);
 							if (StringUtils.hasText(c.getEmail())) {
 								this.sendMail(c.getEmail(), e.getLocalizedMessage());
 							}
+							this.emitterService.batchSendMessage(e.getLocalizedMessage());
 						}
 					}
 				});
@@ -127,82 +131,51 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<List<UserInfo>> getUsers() {
 		log.info("从当前应用中加载配置成功");
-		return new ResponseBody<List<UserInfo>>()//
-				.setCode(HttpStatus.OK.value())//
-				.setStatus(ResponseBody.SUCCESS)//
-				.setData(this.properties.getUsers());
+		return ResponseBody.success().setData(this.properties.getUsers());
 	}
 
 	@Override
 	public ResponseBody<List<Address>> getAddresses() {
 		log.info("从当前应用中加载配置成功");
-		return new ResponseBody<List<Address>>()//
-				.setCode(HttpStatus.OK.value())//
-				.setStatus(ResponseBody.SUCCESS)//
-				.setData(this.properties.getAddresses());
+		return ResponseBody.success().setData(this.properties.getAddresses());
 	}
 
 	@Override
 	public ResponseBody<?> saveAddress(Address address) {
 		if (!StringUtils.hasText(address.getAddress())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[address]不能为空");
+			return ResponseBody.failure().setMessage("[address]不能为空");
 		}
 		if (address.getLatitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[latitude]不能为空");
+			return ResponseBody.failure().setMessage("[latitude]不能为空");
 		}
 		if (address.getLongitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[longitude]不能为空");
+			return ResponseBody.failure().setMessage("[longitude]不能为空");
 		}
 		if (address.getId() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[id]不能为空");
+			return ResponseBody.failure().setMessage("[id]不能为空");
 		}
 		log.info("{}", address);
 		this.properties.getAddresses().add(address);
-		return new ResponseBody<>()//
-				.setCode(HttpStatus.OK.value())//
-				.setStatus(ResponseBody.SUCCESS);
+		return ResponseBody.success();
 	}
 
 	@Override
 	public ResponseBody<?> saveUser(UserInfo userInfo) {
 		if (!StringUtils.hasText(userInfo.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userInfo.getUsername())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[username]不能为空");
+			return ResponseBody.failure().setMessage("[username]不能为空");
 		}
 		log.info("{}", userInfo);
 		this.properties.getUsers().add(userInfo);
-		return new ResponseBody<>()//
-				.setCode(HttpStatus.OK.value())//
-				.setStatus(ResponseBody.SUCCESS);
+		return ResponseBody.success();
 	}
 
 	@Override
 	public ResponseBody<?> initStaffClock(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
 		Map<String, String> headers = Map.of("appid", "oa");
@@ -222,28 +195,16 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<?> userLoginAndStaffClockV2(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getAddress())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[address]不能为空");
+			return ResponseBody.failure().setMessage("[address]不能为空");
 		}
 		if (userLogin.getLatitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[latitude]不能为空");
+			return ResponseBody.failure().setMessage("[latitude]不能为空");
 		}
 		if (userLogin.getLongitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[longitude]不能为空");
+			return ResponseBody.failure().setMessage("[longitude]不能为空");
 		}
 		log.info("补卡>>>{}", userLogin);
 		Map<String, String> headers = Map.of("appid", "oa");
@@ -273,28 +234,16 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<?> userLoginAndStaffClockV1(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		if (!StringUtils.hasText(userLogin.getAddress())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[address]不能为空");
+			return ResponseBody.failure().setMessage("[address]不能为空");
 		}
 		if (userLogin.getLatitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[latitude]不能为空");
+			return ResponseBody.failure().setMessage("[latitude]不能为空");
 		}
 		if (userLogin.getLongitude() == null) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[longitude]不能为空");
+			return ResponseBody.failure().setMessage("[longitude]不能为空");
 		}
 		log.info("打卡>>>{}", userLogin);
 		Map<String, String> headers = Map.of("appid", "oa");
@@ -359,10 +308,7 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<?> selectAppStaffClockLogList(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
 		SqlExecQueryDTO sqlExecQuery = new SqlExecQueryDTO().setSourceId(this.properties.getBiSqlSourceId());
@@ -384,10 +330,7 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<?> selectDeviceList(UserLogin userLogin) {
 		if (!StringUtils.hasText(userLogin.getUserNo())) {
-			return new ResponseBody<>()//
-					.setCode(HttpStatus.BAD_REQUEST.value())//
-					.setStatus(ResponseBody.FAILURE)//
-					.setMessage("[userNo]不能为空");
+			return ResponseBody.failure().setMessage("[userNo]不能为空");
 		}
 		log.info("{}", userLogin);
 		Map<String, String> headers = Map.of("appid", "oa");

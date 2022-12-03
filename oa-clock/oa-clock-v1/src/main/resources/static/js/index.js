@@ -53,6 +53,21 @@ new Vue({
         this.addresses = (await(await fetch('/hello/addresses')).json()).data;
         this.users = (await(await fetch('/hello/users')).json()).data;
         this.users.forEach(user => this.initStaffClockV1(user));
+        if (!window.EventSource) {
+            console.error('浏览器不支持SSE！');
+        } else {
+        	let esId = new Date().getTime();
+	        let eventSource = new EventSource('/sse/connect/' + esId);
+	        eventSource.onopen = function(event) {
+	        	console.log('SSE服务连接成功！');
+	        }
+	        eventSource.onmessage = function(event) {
+	        	console.log('接收服务端消息: ' + event.data);
+	        }
+	        eventSource.onerror = function(event) {
+	        	console.error('SSE服务发生错误！');
+	        }
+        }
     },
     methods: {
 		initStaffClockV1(user) {

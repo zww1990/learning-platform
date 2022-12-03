@@ -19,8 +19,6 @@ spring:
   servlet:
     multipart:
       enabled: false
-  main:
-    web-application-type: servlet
   profiles:
     active: test
   autoconfigure:
