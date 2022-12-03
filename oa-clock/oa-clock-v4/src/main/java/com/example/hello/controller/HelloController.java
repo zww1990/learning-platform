@@ -1,7 +1,6 @@
 package com.example.hello.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -43,8 +42,8 @@ public class HelloController {
 		return new ResponseBody<String>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(ResponseBody.SUCCESS)//
-				.setData(String.format("ws://%s:%s/websocket/%s", this.appConfig.getHostAddress(),
-						this.properties.getPort(), UUID.randomUUID().toString().replace("-", "")));
+				.setData(String.format("ws://%s:%s/websocket", this.appConfig.getHostAddress(),
+						this.properties.getPort()));
 	}
 
 	@GetMapping("/triggers")
