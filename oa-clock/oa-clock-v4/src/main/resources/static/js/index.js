@@ -78,8 +78,9 @@ new Vue({
         if (typeof WebSocket === 'undefined') {
             console.error('浏览器不支持WebSocket！');
         } else {
-	        let wsurl = (await(await fetch('/hello/wsurl')).json()).data;
-	        this.webSocket = new WebSocket(wsurl);
+	        let wsUrl = (await(await fetch('/hello/wsurl')).json()).data;
+	        let wsId = new Date().getTime();
+	        this.webSocket = new WebSocket(wsUrl + '/' + wsId);
 	        this.webSocket.onmessage = (message) => {
 	        	console.log('接收服务端消息: ' + message.data);
 	        	this.initStaffClockV2(this.users.find(user => user.userNo === message.data));
