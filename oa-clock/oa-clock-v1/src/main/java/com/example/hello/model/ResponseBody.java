@@ -1,5 +1,7 @@
 package com.example.hello.model;
 
+import org.springframework.http.HttpStatus;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +18,7 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
+@SuppressWarnings("rawtypes")
 public class ResponseBody<T> {
 	/** 成功 */
 	public static final int SUCCESS = 1;
@@ -25,4 +28,16 @@ public class ResponseBody<T> {
 	private int code;
 	private String message;
 	private T data;
+
+	public static ResponseBody success() {
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.OK.value())//
+				.setStatus(SUCCESS);
+	}
+
+	public static ResponseBody failure() {
+		return new ResponseBody<>()//
+				.setCode(HttpStatus.BAD_REQUEST.value())//
+				.setStatus(FAILURE);
+	}
 }
