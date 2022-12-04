@@ -39,6 +39,8 @@ public class UserLogin {
 	/** 0=(AM)上午，1=(PM)下午 */
 	@JsonIgnore
 	private int ampm;
+	@JsonIgnore
+	private boolean skipped;
 
 	public LocalDateTime getClockTime() {
 		return Optional.ofNullable(this.clockTime).orElseGet(LocalDateTime::now);

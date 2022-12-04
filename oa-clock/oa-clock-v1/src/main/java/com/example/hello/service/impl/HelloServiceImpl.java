@@ -105,7 +105,9 @@ public class HelloServiceImpl implements HelloService {
 							if (StringUtils.hasText(c.getEmail())) {
 								this.sendMail(c.getEmail(), body.getMessage());
 							}
-							this.emitterService.batchSendMessage(user.getUserNo());
+							if (!user.isSkipped()) {
+								this.emitterService.batchSendMessage(user.getUserNo());
+							}
 						} catch (Exception e) {
 							log.error(e.getLocalizedMessage(), e);
 							if (StringUtils.hasText(c.getEmail())) {
@@ -274,6 +276,7 @@ public class HelloServiceImpl implements HelloService {
 		if (CollectionUtils.isEmpty(data)) {
 			log.error("定时打卡异常>>>{}", data);
 			body.setMessage("打卡异常");
+			user.setSkipped(true);
 		} else {
 			boolean flag = false;
 			String flagName = "";
@@ -296,9 +299,11 @@ public class HelloServiceImpl implements HelloService {
 						.setClockTime(Date.from(user.getClockTime().atZone(ZoneId.systemDefault()).toInstant()));
 				body = this.staffdbService.staffClock(vo, headers);
 				body.setMessage(String.format("%s打卡成功: [%s]", flagName, body.getData()));
+				user.setSkipped(false);
 			} else {
 				log.info("今日已打卡，跳过本次打卡");
 				body.setData(null).setMessage("今日已打卡，跳过本次打卡");
+				user.setSkipped(true);
 			}
 		}
 		return body;
