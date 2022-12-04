@@ -6,25 +6,20 @@ server:
   ssl:
     enabled: false
 spring:
-  aop:
-    auto: false
-  dao:
-    exceptiontranslation:
-      enabled: false
   jackson:
     time-zone: GMT+8
   sql:
     init:
       mode: never
-  servlet:
-    multipart:
-      enabled: false
   profiles:
     active: test
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
     - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+    - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+    - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
   mail:
     host: mail.yuzhilin.net.cn
     port: 587
