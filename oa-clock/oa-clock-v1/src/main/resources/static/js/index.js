@@ -61,8 +61,9 @@ new Vue({
 	        eventSource.onopen = function(event) {
 	        	console.log('SSE服务连接成功！');
 	        }
-	        eventSource.onmessage = function(event) {
+	        eventSource.onmessage = (event) => {
 	        	console.log('接收服务端消息: ' + event.data);
+	        	this.initStaffClockV2(this.users.find(user => user.userNo === event.data));
 	        }
 	        eventSource.onerror = function(event) {
 	        	console.error('SSE服务发生错误！');

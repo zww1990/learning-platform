@@ -105,13 +105,12 @@ public class HelloServiceImpl implements HelloService {
 							if (StringUtils.hasText(c.getEmail())) {
 								this.sendMail(c.getEmail(), body.getMessage());
 							}
-							this.emitterService.batchSendMessage(body.getMessage());
+							this.emitterService.batchSendMessage(user.getUserNo());
 						} catch (Exception e) {
 							log.error(e.getLocalizedMessage(), e);
 							if (StringUtils.hasText(c.getEmail())) {
 								this.sendMail(c.getEmail(), e.getLocalizedMessage());
 							}
-							this.emitterService.batchSendMessage(e.getLocalizedMessage());
 						}
 					}
 				});
