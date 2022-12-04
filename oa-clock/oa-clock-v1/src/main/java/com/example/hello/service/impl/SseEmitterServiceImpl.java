@@ -53,7 +53,8 @@ public class SseEmitterServiceImpl implements SseEmitterService {
 						.id(UUID.randomUUID().toString().replace("-", ""))//
 						.data(message, MediaType.TEXT_PLAIN));
 			} catch (Exception e) {
-				log.error("发送消息异常>>>{}", e.getLocalizedMessage());
+				log.error("发送消息异常: {} -> {}", id, e.getLocalizedMessage());
+				this.sseEmitterMap.remove(id);
 			}
 		});
 	}
