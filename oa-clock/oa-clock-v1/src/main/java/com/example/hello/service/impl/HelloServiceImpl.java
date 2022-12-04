@@ -129,14 +129,22 @@ public class HelloServiceImpl implements HelloService {
 	}
 
 	@Override
+	public ResponseBody<Boolean> jobSwitch(Boolean enabled) {
+		Task task = this.properties.getTask();
+		if (enabled != null) {
+			log.info("设置定时任务开关: {}", enabled);
+			task.setEnabled(enabled);
+		}
+		return ResponseBody.<Boolean>success().setData(task.isEnabled());
+	}
+
+	@Override
 	public ResponseBody<List<UserInfo>> getUsers() {
-		log.info("从当前应用中加载配置成功");
 		return ResponseBody.<List<UserInfo>>success().setData(this.properties.getUsers());
 	}
 
 	@Override
 	public ResponseBody<List<Address>> getAddresses() {
-		log.info("从当前应用中加载配置成功");
 		return ResponseBody.<List<Address>>success().setData(this.properties.getAddresses());
 	}
 

@@ -18,6 +18,7 @@
                             <v-col>
                                 <v-btn color="primary" @click="openUser()">添加员工</v-btn>
                                 <v-btn color="primary" @click="openAddr()">添加地址</v-btn>
+                                <v-switch v-model="jobSwitch" label="定时任务开关" @change="switchChange()"></v-switch>
                                 <v-snackbar 
                                 top 
                                 shaped 

@@ -28,6 +28,11 @@ public class HelloController {
 	@Autowired
 	private HelloService helloService;
 
+	@GetMapping("/jobswitch")
+	public ResponseBody<Boolean> jobSwitch(@RequestParam(required = false) Boolean enabled) {
+		return this.helloService.jobSwitch(enabled);
+	}
+
 	@GetMapping("/users")
 	public ResponseBody<List<UserInfo>> getUsers() {
 		return this.helloService.getUsers();
