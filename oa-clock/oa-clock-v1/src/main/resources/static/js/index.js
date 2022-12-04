@@ -41,6 +41,7 @@ new Vue({
         },
         minDate: '2020-01-01',
         maxDate: `${new Date().getFullYear()}-12-31`,
+        jobSwitch: false,
     },
     computed: {
         style() {
@@ -50,6 +51,7 @@ new Vue({
         }
     },
     async mounted() {
+    	this.jobSwitch = (await(await fetch('/hello/jobswitch')).json()).data;
         this.addresses = (await(await fetch('/hello/addresses')).json()).data;
         this.users = (await(await fetch('/hello/users')).json()).data;
         this.users.forEach(user => this.initStaffClockV1(user));
@@ -57,14 +59,14 @@ new Vue({
             console.error('浏览器不支持SSE！');
         } else {
         	let esId = new Date().getTime();
-	        let eventSource = new EventSource('/sse/connect/' + esId);
+	        let eventSource = new EventSource(`/sse/connect/${esId}`);
 	        eventSource.onopen = function(event) {
 	        	if (event.lastEventId) {
 		        	console.log('SSE服务连接成功！');
 	        	}
 	        }
 	        eventSource.onmessage = (event) => {
-	        	console.log('接收服务端消息: ' + event.data);
+	        	console.log(`接收服务端消息: ${event.data}`);
 	        	this.initStaffClockV2(this.users.find(user => user.userNo === event.data));
 	        }
 	        eventSource.onerror = function(event) {
@@ -255,6 +257,11 @@ new Vue({
             .then(res => {
                 this.deviceList = res.data.items || [];
             });
+        },
+        switchChange() {
+        	fetch(`/hello/jobswitch?enabled=${this.jobSwitch}`)
+        	.then(res => res.json())
+        	.then(res => console.log(res));
         }
     }
 });

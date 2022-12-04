@@ -14,6 +14,8 @@ import com.example.hello.model.UserLogin;
  * @date 2021年5月25日,下午4:15:00
  */
 public interface HelloService {
+	ResponseBody<Boolean> jobSwitch(Boolean enabled);
+
 	ResponseBody<List<UserInfo>> getUsers();
 
 	ResponseBody<List<Address>> getAddresses();
