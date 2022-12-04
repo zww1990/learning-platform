@@ -3,7 +3,6 @@ package com.example.hello.service.impl;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -23,49 +22,36 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class SseEmitterServiceImpl implements SseEmitterService {
-	/** 当前连接数 */
-	private static AtomicInteger count = new AtomicInteger(0);
 	/** 使用map对象，便于根据Id来获取对应的SseEmitter */
-	private static Map<String, SseEmitter> sseEmitterMap = new ConcurrentHashMap<>();
+	private Map<String, SseEmitter> sseEmitterMap = new ConcurrentHashMap<>();
 
 	@Override
 	public SseEmitter connect(String id) {
-		SseEmitter sseEmitter = new SseEmitter(0L);
-		// 注册回调
-		sseEmitter.onCompletion(() -> {
-			log.info("结束连接：{}", id);
-		});
-		sseEmitter.onError(t -> {
-			log.error("未知错误>>>{}", t.getLocalizedMessage());
-		});
-		sseEmitter.onTimeout(() -> {
-			log.info("连接超时：{}", id);
-		});
+		SseEmitter sseEmitter = new SseEmitter(-1L);
 		sseEmitterMap.put(id, sseEmitter);
-		// 数量+1
-		count.getAndIncrement();
 		log.info("创建新的sse连接，当前用户：{}", id);
 		return sseEmitter;
 	}
 
 	@Override
-	public void remove(String id) {
-		sseEmitterMap.remove(id);
-		// 数量-1
-		count.getAndDecrement();
-		log.info("移除用户：{}", id);
+	public void removeAll() {
+		sseEmitterMap.forEach((id, sse) -> sse.complete());
+		sseEmitterMap.clear();
+		log.info("当前用户总数：{}", sseEmitterMap.size());
 	}
 
 	@Override
 	public int count() {
-		return count.intValue();
+		return sseEmitterMap.size();
 	}
 
 	@Override
 	public void batchSendMessage(String message) {
-		sseEmitterMap.forEach((id, se) -> {
+		sseEmitterMap.forEach((id, sse) -> {
 			try {
-				se.send(SseEmitter.event().id(UUID.randomUUID().toString()).data(message, MediaType.TEXT_PLAIN));
+				sse.send(SseEmitter.event()//
+						.id(UUID.randomUUID().toString().replace("-", ""))//
+						.data(message, MediaType.TEXT_PLAIN));
 			} catch (Exception e) {
 				log.error("发送消息异常>>>{}", e.getLocalizedMessage());
 			}

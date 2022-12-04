@@ -13,7 +13,7 @@ public interface SseEmitterService {
 
 	SseEmitter connect(String id);
 
-	void remove(String id);
+	void removeAll();
 
 	int count();
 

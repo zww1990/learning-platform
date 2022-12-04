@@ -30,10 +30,15 @@ public class SseEmitterController {
 		return this.emitterService.connect(id);
 	}
 
-	@GetMapping("/close/{id}")
-	public ResponseBody<?> close(@PathVariable String id) {
-		this.emitterService.remove(id);
-		return ResponseBody.success().setMessage("连接关闭！");
+	@GetMapping("/count")
+	public ResponseBody<?> count() {
+		return ResponseBody.success().setData(this.emitterService.count());
+	}
+
+	@GetMapping("/clear")
+	public ResponseBody<?> clear() {
+		this.emitterService.removeAll();
+		return ResponseBody.success().setData(this.emitterService.count()).setMessage("移除所有连接。");
 	}
 
 	@PostMapping("/push")
