@@ -59,7 +59,9 @@ new Vue({
         	let esId = new Date().getTime();
 	        let eventSource = new EventSource('/sse/connect/' + esId);
 	        eventSource.onopen = function(event) {
-	        	console.log('SSE服务连接成功！');
+	        	if (event.lastEventId) {
+		        	console.log('SSE服务连接成功！');
+	        	}
 	        }
 	        eventSource.onmessage = (event) => {
 	        	console.log('接收服务端消息: ' + event.data);

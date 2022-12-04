@@ -29,7 +29,15 @@ public class SseEmitterServiceImpl implements SseEmitterService {
 	public SseEmitter connect(String id) {
 		SseEmitter sseEmitter = new SseEmitter(-1L);
 		sseEmitterMap.put(id, sseEmitter);
-		log.info("创建新的sse连接，当前用户：{}", id);
+		log.info("创建新的SSE连接，当前用户：{}", id);
+		try {
+			sseEmitter.send(SseEmitter.event()//
+					.id(UUID.randomUUID().toString().replace("-", ""))//
+					.name("open")//
+					.data("SSE连接成功！", MediaType.TEXT_PLAIN));
+		} catch (Exception e) {
+			log.error("发送消息异常: {} -> {}", id, e.getLocalizedMessage());
+		}
 		return sseEmitter;
 	}
 
