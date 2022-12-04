@@ -18,7 +18,6 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
-@SuppressWarnings("rawtypes")
 public class ResponseBody<T> {
 	/** 成功 */
 	public static final int SUCCESS = 1;
@@ -29,14 +28,14 @@ public class ResponseBody<T> {
 	private String message;
 	private T data;
 
-	public static ResponseBody success() {
-		return new ResponseBody<>()//
+	public static <T> ResponseBody<T> success() {
+		return new ResponseBody<T>()//
 				.setCode(HttpStatus.OK.value())//
 				.setStatus(SUCCESS);
 	}
 
-	public static ResponseBody failure() {
-		return new ResponseBody<>()//
+	public static <T> ResponseBody<T> failure() {
+		return new ResponseBody<T>()//
 				.setCode(HttpStatus.BAD_REQUEST.value())//
 				.setStatus(FAILURE);
 	}

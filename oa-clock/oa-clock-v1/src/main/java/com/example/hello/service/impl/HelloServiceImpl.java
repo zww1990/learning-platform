@@ -46,7 +46,6 @@ import lombok.extern.slf4j.Slf4j;
  * @author zhangweiwei
  * @date 2021年5月25日,下午4:15:16
  */
-@SuppressWarnings("unchecked")
 @Service
 @Slf4j
 public class HelloServiceImpl implements HelloService {
@@ -131,13 +130,13 @@ public class HelloServiceImpl implements HelloService {
 	@Override
 	public ResponseBody<List<UserInfo>> getUsers() {
 		log.info("从当前应用中加载配置成功");
-		return ResponseBody.success().setData(this.properties.getUsers());
+		return ResponseBody.<List<UserInfo>>success().setData(this.properties.getUsers());
 	}
 
 	@Override
 	public ResponseBody<List<Address>> getAddresses() {
 		log.info("从当前应用中加载配置成功");
-		return ResponseBody.success().setData(this.properties.getAddresses());
+		return ResponseBody.<List<Address>>success().setData(this.properties.getAddresses());
 	}
 
 	@Override
@@ -267,6 +266,7 @@ public class HelloServiceImpl implements HelloService {
 		return this.initStaffClock(userLogin);
 	}
 
+	@SuppressWarnings("unchecked")
 	private ResponseBody<?> userLoginAndStaffClockV3(UserLogin user) {
 		log.info("定时打卡>>>{}", user);
 		Map<String, String> headers = Map.of("appid", "oa");
