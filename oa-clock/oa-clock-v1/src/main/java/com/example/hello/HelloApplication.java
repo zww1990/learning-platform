@@ -36,14 +36,14 @@ public class HelloApplication implements CommandLineRunner {
 
 	@Bean
 	StaffdbService staffdbService() {
-		WebClient client = WebClient.builder().baseUrl(this.properties.getStaffDbUrl()).build();
+		WebClient client = WebClient.create(this.properties.getStaffDbUrl());
 		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
 		return factory.createClient(StaffdbService.class);
 	}
 
 	@Bean
 	BisearchServer bisearchServer() {
-		WebClient client = WebClient.builder().baseUrl(this.properties.getBiUrl()).build();
+		WebClient client = WebClient.create(this.properties.getBiUrl());
 		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builder(WebClientAdapter.forClient(client)).build();
 		return factory.createClient(BisearchServer.class);
 	}
