@@ -1,6 +1,14 @@
 spring:
   main:
     web-application-type: none
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+    - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
+    - org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
   quartz:
     auto-startup: true
     job-store-type: memory
