@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.util.UriUtils;
 
+import com.example.springschedule.service.exchange.CreateNewFileRequest;
+import com.example.springschedule.service.exchange.UpdateFileRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Simple Tests
  * 
@@ -31,6 +35,24 @@ public class SimpleTests {
 			String content = "最伟大的作品";
 			System.err.println(Base64Utils.encodeToString(content.getBytes()));
 			System.err.println(Base64Utils.encodeToString(content.getBytes(StandardCharsets.UTF_8)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testWriteJson() {
+		try {
+			ObjectMapper json = new ObjectMapper();
+			CreateNewFileRequest cnfr = new CreateNewFileRequest();
+			UpdateFileRequest ufr = new UpdateFileRequest();
+			System.err.println(cnfr);
+			System.err.println(json.writerWithDefaultPrettyPrinter()//
+					.writeValueAsString(cnfr));
+			System.err.println("----------------------------------");
+			System.err.println(ufr);
+			System.err.println(json.writerWithDefaultPrettyPrinter()//
+					.writeValueAsString(ufr));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

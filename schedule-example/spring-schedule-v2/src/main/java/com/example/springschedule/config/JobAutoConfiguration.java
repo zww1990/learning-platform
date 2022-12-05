@@ -7,12 +7,14 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import com.example.springschedule.config.ApplicationConfig.JobConfig;
+import com.example.springschedule.service.exchange.GiteeHttpExchange;
 import com.example.springschedule.service.job.GiteeJobService;
 import com.example.springschedule.service.job.JgitJobService;
 
@@ -28,8 +30,10 @@ public class JobAutoConfiguration {
 	private ApplicationConfig appConfig;
 
 	@Bean
-	RestTemplate restTemplate(RestTemplateBuilder restBuilder) {
-		return restBuilder.build();
+	GiteeHttpExchange giteeHttpExchange() {
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory
+				.builder(WebClientAdapter.forClient(WebClient.create())).build();
+		return factory.createClient(GiteeHttpExchange.class);
 	}
 
 	@Bean
