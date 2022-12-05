@@ -32,20 +32,6 @@ public interface GiteeHttpExchange {
 	 * @param path        文件的路径
 	 * @param accessToken 用户授权码
 	 */
-	default ContentResponse defaultGetContent(String owner, String repo, String path, String accessToken,
-			ObjectMapper json) {
-		String content = this.getContent(owner, repo, path, accessToken);
-		if ("[]".equals(content)) {
-			return new ContentResponse();
-		}
-		try {
-			return json.readValue(content, ContentResponse.class);
-		} catch (Exception e) {
-			log.error(e.getLocalizedMessage(), e);
-			return new ContentResponse();
-		}
-	}
-
 	@GetExchange
 	String getContent(//
 			@PathVariable String owner, //
@@ -82,4 +68,19 @@ public interface GiteeHttpExchange {
 			@PathVariable String repo, //
 			@PathVariable String path, //
 			@RequestBody UpdateFileRequest request);
+
+	default ContentResponse defaultGetContent(String owner, String repo, String path, String accessToken,
+			ObjectMapper json) {
+		String content = this.getContent(owner, repo, path, accessToken);
+		if ("[]".equals(content)) {
+			return new ContentResponse();
+		}
+		try {
+			return json.readValue(content, ContentResponse.class);
+		} catch (Exception e) {
+			log.error(e.getLocalizedMessage(), e);
+			return new ContentResponse();
+		}
+	}
+
 }
