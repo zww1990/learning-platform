@@ -1,4 +1,4 @@
-package com.example.springschedule.service;
+package com.example.springschedule.service.job;
 
 import java.io.File;
 import java.nio.file.Files;

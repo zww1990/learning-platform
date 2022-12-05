@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.springschedule.config.ApplicationConfig.JobConfig;
-import com.example.springschedule.service.GiteeJobService;
-import com.example.springschedule.service.JgitJobService;
+import com.example.springschedule.service.job.GiteeJobService;
+import com.example.springschedule.service.job.JgitJobService;
 
 /**
  * Job Auto Configuration
