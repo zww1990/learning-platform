@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslatio
 import org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration;
 import org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration;
 import org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 		SqlInitializationAutoConfiguration.class, //
 		TransactionAutoConfiguration.class, //
 		ProjectInfoAutoConfiguration.class, //
-		AopAutoConfiguration.class })
+		AopAutoConfiguration.class, //
+		RestTemplateAutoConfiguration.class })
 @Slf4j
 public class SpringScheduleApplication {
 

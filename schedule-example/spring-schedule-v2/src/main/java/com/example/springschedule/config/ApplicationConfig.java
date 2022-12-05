@@ -61,9 +61,13 @@ public class ApplicationConfig {
 		private String datePattern = "yyyyMMdd";
 		/** 资源目录 */
 		private String filePattern;
-		/** 新建文件接口地址 */
-		private String createNewFileUrl;
 		/** 用户授权码 */
 		private String accessToken;
+		/** 仓库所属空间地址 */
+		private String owner;
+		/** 仓库路径 */
+		private String repo;
+		/** 文件的路径格式 */
+		private String pathFormat;
 	}
 }
