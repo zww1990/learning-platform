@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-import javax.annotation.Resource;
-
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -17,6 +15,7 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
 
@@ -34,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 @DisallowConcurrentExecution
 @Slf4j
 public class JgitJobService extends QuartzJobBean {
-	@Resource
+	@Autowired
 	private ApplicationConfig appConfig;
 
 	@Override

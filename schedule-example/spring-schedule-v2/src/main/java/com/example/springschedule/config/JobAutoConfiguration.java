@@ -1,12 +1,11 @@
 package com.example.springschedule.config;
 
-import javax.annotation.Resource;
-
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +24,7 @@ import com.example.springschedule.service.JgitJobService;
  */
 @Configuration
 public class JobAutoConfiguration {
-	@Resource
+	@Autowired
 	private ApplicationConfig appConfig;
 
 	@Bean

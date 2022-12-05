@@ -1,8 +1,7 @@
 package com.example.springschedule;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.ApplicationContext;
@@ -16,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @SpringBootTest
 public class SpringScheduleApplicationTests {
-	@Resource
+	@Autowired
 	private ApplicationContext context;
 
 	@Test

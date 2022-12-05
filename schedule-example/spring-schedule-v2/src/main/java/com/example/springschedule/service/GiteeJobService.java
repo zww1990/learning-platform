@@ -6,11 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -34,9 +33,9 @@ import lombok.extern.slf4j.Slf4j;
 @DisallowConcurrentExecution
 @Slf4j
 public class GiteeJobService extends QuartzJobBean {
-	@Resource
+	@Autowired
 	private ApplicationConfig appConfig;
-	@Resource
+	@Autowired
 	private RestTemplate restTemplate;
 
 	@SuppressWarnings("deprecation")
