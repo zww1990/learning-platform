@@ -1,0 +1,8 @@
+﻿Windows Registry Editor Version 5.00
+ 
+[HKEY_CLASSES_ROOT\*\Shell\Idea]
+@="用Idea打开"
+"Icon"="E:\\ProgramFiles\\ideaIU\\bin\\idea.ico"
+ 
+[HKEY_CLASSES_ROOT\*\Shell\Idea\Command]
+@="E:\\ProgramFiles\\ideaIU\\bin\\idea64.exe \"%1\""

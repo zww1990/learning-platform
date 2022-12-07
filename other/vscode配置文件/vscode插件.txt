@@ -1,0 +1,17 @@
+修改插件安装位置：
+创建快捷方式，添加目标参数 --extensions-dir e:\.vscode\extensions
+
+必备插件
+Chinese (Simplified) Language Pack
+Eclipse Keymap
+Prettier
+TSLint
+ESLint
+
+可选插件
+Angular Files
+Angular Language Service
+ng-zorro snippets
+Vetur
+ant design vue helper
+editorconfig
