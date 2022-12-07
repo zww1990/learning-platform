@@ -1,0 +1,7 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\*\Shell\Notepad++]
+@="用Notepad++打开"
+"Icon"="E:\\ProgramFiles\\notepad\\notepad++.exe"
+[HKEY_CLASSES_ROOT\*\Shell\Notepad++\Command]
+@="E:\\ProgramFiles\\notepad\\notepad++.exe \"%1\""

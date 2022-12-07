@@ -1,0 +1,8 @@
+JAVA_HOME		E:\ProgramFiles\jdk-11.0.13
+MAVEN_HOME		E:\ProgramFiles\apache-maven
+NODE_HOME		E:\ProgramFiles\node
+GIT_HOME		E:\ProgramFiles\Git
+MYSQL_HOME		E:\ProgramFiles\mysql
+ERLANG_HOME		E:\ProgramFiles\erl10.5
+PYTHON_HOME		E:\ProgramFiles\python-3.9.0
+PATH			%JAVA_HOME%\bin;%MAVEN_HOME%\bin;%NODE_HOME%;%GIT_HOME%\mingw64\bin;%MYSQL_HOME%\bin;%ERLANG_HOME%\bin;%PYTHON_HOME%;%PYTHON_HOME%\Scripts;

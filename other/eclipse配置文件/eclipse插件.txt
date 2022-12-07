@@ -1,0 +1,22 @@
+devstyle
+Spring Tools - https://download.springsource.com/release/TOOLS/update/3.9.22.RELEASE/e4.23/
+JBoss Tools
+MyBatipse
+MapStruct
+Indent Guide - http://www.certiv.net/updates
+
+以上插件可以通过eclipse marketplace在线方式安装
+
+Axis2 Tools
+CXF Web Services
+EclEmma Java Code Coverage
+JAX-WS DOM Tools
+JAX-WS Tools
+JSF Tools
+JustJ Adoptium OpenJDK Hotspot JRE Complete
+Mylyn
+TM Terminal
+Node.js
+Oomph Setup
+Tip of the Day UI Feature
+以上插件可以删除

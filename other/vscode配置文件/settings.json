@@ -1,0 +1,33 @@
+{
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "editor.minimap.enabled": false,
+    "editor.tabSize": 2,
+    "editor.dragAndDrop": false
+    "git.ignoreMissingGitWarning": true,
+    "git.path": "E:\\ProgramFiles\\Git\\cmd\\git.exe",
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "window.titleBarStyle": "custom",
+    "breadcrumbs.enabled": false,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "prettier.singleQuote": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.jsxBracketSameLine": true,
+    "html.format.endWithNewline": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "update.enableWindowsBackgroundUpdates": false
+}
