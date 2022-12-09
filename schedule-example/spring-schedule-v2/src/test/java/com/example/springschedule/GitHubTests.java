@@ -7,9 +7,8 @@ public class GitHubTests {
 	@Test
 	public void testGitHub() {
 		try {
-			String login = "";
-			String token = "";
-			GitHub connect = GitHub.connect(login, token);
+			String accessToken = "";
+			GitHub connect = GitHub.connectUsingOAuth(accessToken);
 			System.err.println(connect);
 		} catch (Exception e) {
 			e.printStackTrace();
