@@ -27,7 +27,7 @@ app:
     job-key: job-2
     trigger-key: trigger-2
     cron-expression: '*/10 * * * * ?'
-  git-config:
+  jgit-config:
     remote-url: https://gitee.com/zww1990/learning-platform.git
     local-directory: d:/projects/learning-platform
     username: 
@@ -36,6 +36,8 @@ app:
     branch-name: master
     date-pattern: yyyyMMdd
     file-pattern: design-pattern-example/src/main/resources
+  gitee-config:
+    date-pattern: yyyyMMdd
     access-token: 
     owner: zww1990
     repo: learning-platform
