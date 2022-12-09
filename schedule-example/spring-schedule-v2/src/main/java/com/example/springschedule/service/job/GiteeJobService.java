@@ -13,7 +13,7 @@ import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 
 import com.example.springschedule.config.ApplicationConfig;
-import com.example.springschedule.config.ApplicationConfig.GitConfig;
+import com.example.springschedule.config.ApplicationConfig.GiteeConfig;
 import com.example.springschedule.service.exchange.ContentResponse;
 import com.example.springschedule.service.exchange.CreateNewFileRequest;
 import com.example.springschedule.service.exchange.GiteeHttpExchange;
@@ -40,7 +40,7 @@ public class GiteeJobService extends QuartzJobBean {
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		GitConfig gc = this.appConfig.getGitConfig();
+		GiteeConfig gc = this.appConfig.getGiteeConfig();
 		if (!this.validated(gc)) {
 			return;
 		}
@@ -78,21 +78,25 @@ public class GiteeJobService extends QuartzJobBean {
 		}
 	}
 
-	private boolean validated(GitConfig gitConfig) {
-		if (!StringUtils.hasText(gitConfig.getAccessToken())) {
+	private boolean validated(GiteeConfig gc) {
+		if (!StringUtils.hasText(gc.getAccessToken())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置用户授权码"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getOwner())) {
+		if (!StringUtils.hasText(gc.getOwner())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置仓库所属空间地址"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getRepo())) {
+		if (!StringUtils.hasText(gc.getRepo())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置仓库路径"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getPathFormat())) {
+		if (!StringUtils.hasText(gc.getPathFormat())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置文件的路径格式"));
+			return false;
+		}
+		if (!StringUtils.hasText(gc.getDatePattern())) {
+			log.error("属性配置不正确，任务终止", new RuntimeException("请设置日期格式"));
 			return false;
 		}
 		return true;

@@ -24,8 +24,10 @@ public class ApplicationConfig {
 	private JobConfig jgitJob = new JobConfig();
 	/** Gitee任务属性配置 */
 	private JobConfig giteeJob = new JobConfig();
-	/** Git属性配置 */
-	private GitConfig gitConfig = new GitConfig();
+	/** Jgit属性配置 */
+	private JgitConfig jgitConfig = new JgitConfig();
+	/** Gitee属性配置 */
+	private GiteeConfig giteeConfig = new GiteeConfig();
 
 	@Getter
 	@Setter
@@ -44,7 +46,7 @@ public class ApplicationConfig {
 	@Getter
 	@Setter
 	@ToString
-	public static class GitConfig {
+	public static class JgitConfig {
 		/** 远程仓库地址 */
 		private String remoteUrl;
 		/** 本地克隆目录 */
@@ -61,6 +63,12 @@ public class ApplicationConfig {
 		private String datePattern = "yyyyMMdd";
 		/** 资源目录 */
 		private String filePattern;
+	}
+
+	@Getter
+	@Setter
+	@ToString
+	public static class GiteeConfig {
 		/** 用户授权码 */
 		private String accessToken;
 		/** 仓库所属空间地址 */
@@ -69,5 +77,7 @@ public class ApplicationConfig {
 		private String repo;
 		/** 文件的路径格式 */
 		private String pathFormat;
+		/** 日期格式 */
+		private String datePattern = "yyyyMMdd";
 	}
 }

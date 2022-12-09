@@ -20,7 +20,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.util.StringUtils;
 
 import com.example.springschedule.config.ApplicationConfig;
-import com.example.springschedule.config.ApplicationConfig.GitConfig;
+import com.example.springschedule.config.ApplicationConfig.JgitConfig;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,35 +38,34 @@ public class JgitJobService extends QuartzJobBean {
 
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		GitConfig gitConfig = this.appConfig.getGitConfig();
-		if (!this.validated(gitConfig)) {
+		JgitConfig jc = this.appConfig.getJgitConfig();
+		if (!this.validated(jc)) {
 			return;
 		}
 		Git git = null;
 		try {
-			File localRepo = new File(gitConfig.getLocalDirectory());
-			CredentialsProvider cp = new UsernamePasswordCredentialsProvider(gitConfig.getUsername(),
-					gitConfig.getPassword());
+			File localRepo = new File(jc.getLocalDirectory());
+			CredentialsProvider cp = new UsernamePasswordCredentialsProvider(jc.getUsername(), jc.getPassword());
 			if (!localRepo.exists()) {
-				log.info("正在从远程仓库[{}]克隆[{}]分支", gitConfig.getRemoteUrl(), gitConfig.getBranchName());
+				log.info("正在从远程仓库[{}]克隆[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 				git = Git.cloneRepository()//
-						.setURI(gitConfig.getRemoteUrl())//
+						.setURI(jc.getRemoteUrl())//
 						.setCredentialsProvider(cp)//
-						.setBranch(gitConfig.getBranchName())//
+						.setBranch(jc.getBranchName())//
 						.setDirectory(localRepo).call();
-				log.info("已从远程仓库[{}]克隆[{}]分支", gitConfig.getRemoteUrl(), gitConfig.getBranchName());
+				log.info("已从远程仓库[{}]克隆[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 			} else {
-				log.info("正在从远程仓库[{}]拉取[{}]分支", gitConfig.getRemoteUrl(), gitConfig.getBranchName());
+				log.info("正在从远程仓库[{}]拉取[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 				git = Git.open(localRepo);
-				git.pull().setRemoteBranchName(gitConfig.getBranchName()).setCredentialsProvider(cp).call();
-				log.info("已从远程仓库[{}]拉取[{}]分支", gitConfig.getRemoteUrl(), gitConfig.getBranchName());
+				git.pull().setRemoteBranchName(jc.getBranchName()).setCredentialsProvider(cp).call();
+				log.info("已从远程仓库[{}]拉取[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 			}
 			String content = String.format("hello world %s", System.currentTimeMillis());
 			Files.write(Paths.get(//
-					gitConfig.getLocalDirectory(), gitConfig.getFilePattern(), String.format("%s.txt", LocalDate.now()//
-							.format(DateTimeFormatter.ofPattern(gitConfig.getDatePattern())))),
+					jc.getLocalDirectory(), jc.getFilePattern(), String.format("%s.txt", LocalDate.now()//
+							.format(DateTimeFormatter.ofPattern(jc.getDatePattern())))),
 					Arrays.asList(content), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
-			git.add().addFilepattern(gitConfig.getFilePattern()).call();
+			git.add().addFilepattern(jc.getFilePattern()).call();
 			Status status = git.status().call();
 			log.info("Git Added: {}", status.getAdded());
 			log.info("Git Changed: {}", status.getChanged());
@@ -75,8 +74,8 @@ public class JgitJobService extends QuartzJobBean {
 			log.info("Git Untracked: {}", status.getUntracked());
 			git.commit()//
 					.setMessage(content)//
-					.setAuthor(gitConfig.getAuthor(), gitConfig.getUsername())//
-					.setCommitter(gitConfig.getAuthor(), gitConfig.getUsername())//
+					.setAuthor(jc.getAuthor(), jc.getUsername())//
+					.setCommitter(jc.getAuthor(), jc.getUsername())//
 					.call();
 			git.push().setCredentialsProvider(cp).call();
 		} catch (Exception e) {
@@ -86,36 +85,36 @@ public class JgitJobService extends QuartzJobBean {
 		}
 	}
 
-	private boolean validated(GitConfig gitConfig) {
-		if (!StringUtils.hasText(gitConfig.getRemoteUrl())) {
+	private boolean validated(JgitConfig jc) {
+		if (!StringUtils.hasText(jc.getRemoteUrl())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置远程仓库地址"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getLocalDirectory())) {
+		if (!StringUtils.hasText(jc.getLocalDirectory())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置本地克隆目录"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getUsername())) {
+		if (!StringUtils.hasText(jc.getUsername())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置用户名"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getAuthor())) {
+		if (!StringUtils.hasText(jc.getAuthor())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置作者"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getPassword())) {
+		if (!StringUtils.hasText(jc.getPassword())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置密码"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getBranchName())) {
+		if (!StringUtils.hasText(jc.getBranchName())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置分支名"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getDatePattern())) {
+		if (!StringUtils.hasText(jc.getDatePattern())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置日期格式"));
 			return false;
 		}
-		if (!StringUtils.hasText(gitConfig.getFilePattern())) {
+		if (!StringUtils.hasText(jc.getFilePattern())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置资源目录"));
 			return false;
 		}
