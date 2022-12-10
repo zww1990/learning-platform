@@ -2,6 +2,8 @@ package com.example.springschedule;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Base64Utils;
@@ -18,6 +20,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @since 2022年8月11日,下午2:31:25
  */
 public class SimpleTests {
+	@Test
+	public void testDateTimeFormatter() {
+		try {
+			System.err.println(DateTimeFormatter.BASIC_ISO_DATE.format(LocalDateTime.now().withNano(0)));
+			System.err.println(DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(LocalDateTime.now().withNano(0)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void testUrlEncode() {
 		try {
