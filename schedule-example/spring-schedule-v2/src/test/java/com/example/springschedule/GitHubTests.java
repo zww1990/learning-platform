@@ -9,7 +9,7 @@ public class GitHubTests {
 		try {
 			String accessToken = "";
 			GitHub connect = GitHub.connectUsingOAuth(accessToken);
-			System.err.println(connect.listAllPublicRepositories().toList().size());
+			System.err.println(connect.isCredentialValid());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
