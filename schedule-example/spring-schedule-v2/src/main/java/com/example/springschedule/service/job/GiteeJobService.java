@@ -1,7 +1,7 @@
 package com.example.springschedule.service.job;
 
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.quartz.DisallowConcurrentExecution;
@@ -44,13 +44,13 @@ public class GiteeJobService extends QuartzJobBean {
 		if (!this.validated(gc)) {
 			return;
 		}
+		LocalDateTime now = LocalDateTime.now().withNano(0);
 		// 文件的路径
-		String path = String.format(gc.getPathFormat(),
-				LocalDate.now().format(DateTimeFormatter.ofPattern(gc.getDatePattern())));
+		String path = String.format(gc.getPathFormat(), DateTimeFormatter.ofPattern(gc.getDatePattern()).format(now));
 		ContentResponse response = this.giteeHttpExchange.defaultGetContent(gc.getOwner(), gc.getRepo(), path,
 				gc.getAccessToken(), this.objectMapper);
 		// 提交信息
-		String message = String.format("hello world %s", System.currentTimeMillis());
+		String message = String.format("hello world %s", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
 		// 文件内容, 要用 base64 编码
 		String content = Base64Utils.encodeToString(message.getBytes(StandardCharsets.UTF_8));
 		if (response.getSize() == 0) {
