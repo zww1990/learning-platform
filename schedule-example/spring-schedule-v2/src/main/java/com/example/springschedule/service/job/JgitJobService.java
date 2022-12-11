@@ -61,12 +61,12 @@ public class JgitJobService extends QuartzJobBean {
 				log.info("已从远程仓库[{}]拉取[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 			}
 			LocalDateTime now = LocalDateTime.now().withNano(0);
-			String content = String.format("hello world %s", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
-			Files.write(Paths.get(//
-					jc.getLocalDirectory(), jc.getFilePattern(),
-					String.format("%s.txt", DateTimeFormatter.ofPattern(jc.getDatePattern()).format(now))),
-					Arrays.asList(content), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
-			git.add().addFilepattern(jc.getFilePattern()).call();
+			String content = String.format(jc.getContentFormat(), DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
+			String filePattern = String.format(jc.getPathFormat(),
+					DateTimeFormatter.ofPattern(jc.getDatePattern()).format(now));
+			Files.write(Paths.get(jc.getLocalDirectory(), filePattern), Arrays.asList(content),
+					StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+			git.add().addFilepattern(filePattern).call();
 			Status status = git.status().call();
 			log.info("Git Added: {}", status.getAdded());
 			log.info("Git Changed: {}", status.getChanged());
@@ -115,8 +115,12 @@ public class JgitJobService extends QuartzJobBean {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置日期格式"));
 			return false;
 		}
-		if (!StringUtils.hasText(jc.getFilePattern())) {
-			log.error("属性配置不正确，任务终止", new RuntimeException("请设置资源目录"));
+		if (!StringUtils.hasText(jc.getPathFormat())) {
+			log.error("属性配置不正确，任务终止", new RuntimeException("请设置文件的路径格式"));
+			return false;
+		}
+		if (!StringUtils.hasText(jc.getContentFormat())) {
+			log.error("属性配置不正确，任务终止", new RuntimeException("请设置文件的内容格式"));
 			return false;
 		}
 		return true;

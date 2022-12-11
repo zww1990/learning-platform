@@ -24,10 +24,14 @@ public class ApplicationConfig {
 	private JobConfig jgitJob = new JobConfig();
 	/** Gitee任务属性配置 */
 	private JobConfig giteeJob = new JobConfig();
+	/** Github任务属性配置 */
+	private JobConfig githubJob = new JobConfig();
 	/** Jgit属性配置 */
 	private JgitConfig jgitConfig = new JgitConfig();
 	/** Gitee属性配置 */
 	private GiteeConfig giteeConfig = new GiteeConfig();
+	/** Github属性配置 */
+	private GithubConfig githubConfig = new GithubConfig();
 
 	@Getter
 	@Setter
@@ -51,18 +55,20 @@ public class ApplicationConfig {
 		private String remoteUrl;
 		/** 本地克隆目录 */
 		private String localDirectory;
-		/** 用户名 */
-		private String username;
 		/** 作者 */
 		private String author;
+		/** 用户名 */
+		private String username;
 		/** 密码 */
 		private String password;
 		/** 分支名 */
 		private String branchName = "master";
 		/** 日期格式 */
 		private String datePattern = "yyyyMMdd";
-		/** 资源目录 */
-		private String filePattern;
+		/** 文件的路径格式 */
+		private String pathFormat;
+		/** 文件的内容格式 */
+		private String contentFormat;
 	}
 
 	@Getter
@@ -77,6 +83,24 @@ public class ApplicationConfig {
 		private String repo;
 		/** 文件的路径格式 */
 		private String pathFormat;
+		/** 文件的内容格式 */
+		private String contentFormat;
+		/** 日期格式 */
+		private String datePattern = "yyyyMMdd";
+	}
+
+	@Getter
+	@Setter
+	@ToString
+	public static class GithubConfig {
+		/** 用户授权码 */
+		private String accessToken;
+		/** 存储库名称 */
+		private String repositoryName;
+		/** 文件的路径格式 */
+		private String pathFormat;
+		/** 文件的内容格式 */
+		private String contentFormat;
 		/** 日期格式 */
 		private String datePattern = "yyyyMMdd";
 	}
