@@ -5,7 +5,6 @@ import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +15,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import com.example.springschedule.config.ApplicationConfig.JobConfig;
 import com.example.springschedule.service.exchange.GiteeHttpExchange;
 import com.example.springschedule.service.job.GiteeJobService;
+import com.example.springschedule.service.job.GithubJobService;
 import com.example.springschedule.service.job.JgitJobService;
 
 /**
@@ -26,8 +26,6 @@ import com.example.springschedule.service.job.JgitJobService;
  */
 @Configuration
 public class JobAutoConfiguration {
-	@Autowired
-	private ApplicationConfig appConfig;
 
 	@Bean
 	GiteeHttpExchange giteeHttpExchange() {
@@ -36,57 +34,78 @@ public class JobAutoConfiguration {
 		return factory.createClient(GiteeHttpExchange.class);
 	}
 
-	@Bean
+	@Configuration
 	@ConditionalOnProperty(//
 			prefix = ApplicationConfig.APP_CONFIG_PREFIX, //
 			name = "jgit-job.enabled", //
 			havingValue = "true")
-	JobDetail jgitJobDetail() {
-		JobConfig jobConfig = this.appConfig.getJgitJob();
-		return JobBuilder.newJob(JgitJobService.class)//
-				.withIdentity(jobConfig.getJobKey())//
-				.storeDurably()//
-				.build();
+	public static class JgitJobAutoConfiguration {
+		@Bean
+		JobDetail jgitJobDetail(ApplicationConfig appConfig) {
+			return JobBuilder.newJob(JgitJobService.class)//
+					.withIdentity(appConfig.getJgitJob().getJobKey())//
+					.storeDurably()//
+					.build();
+		}
+
+		@Bean
+		Trigger jgitJobTrigger(ApplicationConfig appConfig, JobDetail jgitJobDetail) {
+			JobConfig jc = appConfig.getJgitJob();
+			return TriggerBuilder.newTrigger()//
+					.forJob(jgitJobDetail)//
+					.withIdentity(jc.getTriggerKey())//
+					.withSchedule(CronScheduleBuilder.cronSchedule(jc.getCronExpression()))//
+					.build();
+		}
 	}
 
-	@Bean
-	@ConditionalOnProperty(//
-			prefix = ApplicationConfig.APP_CONFIG_PREFIX, //
-			name = "jgit-job.enabled", //
-			havingValue = "true")
-	Trigger jgitJobTrigger() {
-		JobConfig jobConfig = this.appConfig.getJgitJob();
-		return TriggerBuilder.newTrigger()//
-				.forJob(this.jgitJobDetail())//
-				.withIdentity(jobConfig.getTriggerKey())//
-				.withSchedule(CronScheduleBuilder.cronSchedule(jobConfig.getCronExpression()))//
-				.build();
-	}
-
-	@Bean
-	@ConditionalOnProperty(//
-			prefix = ApplicationConfig.APP_CONFIG_PREFIX, //
-			name = "gitee-job.enabled", //
-			havingValue = "true")
-	JobDetail giteeJobDetail() {
-		JobConfig jobConfig = this.appConfig.getGiteeJob();
-		return JobBuilder.newJob(GiteeJobService.class)//
-				.withIdentity(jobConfig.getJobKey())//
-				.storeDurably()//
-				.build();
-	}
-
-	@Bean
+	@Configuration
 	@ConditionalOnProperty(//
 			prefix = ApplicationConfig.APP_CONFIG_PREFIX, //
 			name = "gitee-job.enabled", //
 			havingValue = "true")
-	Trigger giteeJobTrigger() {
-		JobConfig jobConfig = this.appConfig.getGiteeJob();
-		return TriggerBuilder.newTrigger()//
-				.forJob(this.giteeJobDetail())//
-				.withIdentity(jobConfig.getTriggerKey())//
-				.withSchedule(CronScheduleBuilder.cronSchedule(jobConfig.getCronExpression()))//
-				.build();
+	public static class GiteeJobAutoConfiguration {
+		@Bean
+		JobDetail giteeJobDetail(ApplicationConfig appConfig) {
+			return JobBuilder.newJob(GiteeJobService.class)//
+					.withIdentity(appConfig.getGiteeJob().getJobKey())//
+					.storeDurably()//
+					.build();
+		}
+
+		@Bean
+		Trigger giteeJobTrigger(ApplicationConfig appConfig, JobDetail giteeJobDetail) {
+			JobConfig jc = appConfig.getGiteeJob();
+			return TriggerBuilder.newTrigger()//
+					.forJob(giteeJobDetail)//
+					.withIdentity(jc.getTriggerKey())//
+					.withSchedule(CronScheduleBuilder.cronSchedule(jc.getCronExpression()))//
+					.build();
+		}
+	}
+
+	@Configuration
+	@ConditionalOnProperty(//
+			prefix = ApplicationConfig.APP_CONFIG_PREFIX, //
+			name = "github-job.enabled", //
+			havingValue = "true")
+	public static class GithubJobAutoConfiguration {
+		@Bean
+		JobDetail githubJobDetail(ApplicationConfig appConfig) {
+			return JobBuilder.newJob(GithubJobService.class)//
+					.withIdentity(appConfig.getGithubJob().getJobKey())//
+					.storeDurably()//
+					.build();
+		}
+
+		@Bean
+		Trigger githubTrigger(ApplicationConfig appConfig, JobDetail githubJobDetail) {
+			JobConfig jc = appConfig.getGithubJob();
+			return TriggerBuilder.newTrigger()//
+					.forJob(githubJobDetail)//
+					.withIdentity(jc.getTriggerKey())//
+					.withSchedule(CronScheduleBuilder.cronSchedule(jc.getCronExpression()))//
+					.build();
+		}
 	}
 }

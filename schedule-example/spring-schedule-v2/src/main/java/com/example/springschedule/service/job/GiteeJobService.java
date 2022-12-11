@@ -50,7 +50,7 @@ public class GiteeJobService extends QuartzJobBean {
 		ContentResponse response = this.giteeHttpExchange.defaultGetContent(gc.getOwner(), gc.getRepo(), path,
 				gc.getAccessToken(), this.objectMapper);
 		// 提交信息
-		String message = String.format("hello world %s", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
+		String message = String.format(gc.getContentFormat(), DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
 		// 文件内容, 要用 base64 编码
 		String content = Base64Utils.encodeToString(message.getBytes(StandardCharsets.UTF_8));
 		if (response.getSize() == 0) {
@@ -97,6 +97,10 @@ public class GiteeJobService extends QuartzJobBean {
 		}
 		if (!StringUtils.hasText(gc.getDatePattern())) {
 			log.error("属性配置不正确，任务终止", new RuntimeException("请设置日期格式"));
+			return false;
+		}
+		if (!StringUtils.hasText(gc.getContentFormat())) {
+			log.error("属性配置不正确，任务终止", new RuntimeException("请设置文件的内容格式"));
 			return false;
 		}
 		return true;

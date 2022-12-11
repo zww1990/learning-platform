@@ -2,6 +2,7 @@ package com.example.springschedule;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,6 +21,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @since 2022年8月11日,下午2:31:25
  */
 public class SimpleTests {
+	@Test
+	public void testPaths() {
+		try {
+			System.err.println(Paths.get("d:/projects/learning-platform", "design-pattern-example/src/main/resources",
+					String.format("%s.txt", DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()))));
+			System.err.println(Paths.get("d:/projects/learning-platform",
+					String.format("design-pattern-example/src/main/resources/%s.txt",
+							DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDateTime.now()))));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Test
 	public void testDateTimeFormatter() {
 		try {
