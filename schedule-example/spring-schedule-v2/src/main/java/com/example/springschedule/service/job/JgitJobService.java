@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
@@ -60,10 +60,11 @@ public class JgitJobService extends QuartzJobBean {
 				git.pull().setRemoteBranchName(jc.getBranchName()).setCredentialsProvider(cp).call();
 				log.info("已从远程仓库[{}]拉取[{}]分支", jc.getRemoteUrl(), jc.getBranchName());
 			}
-			String content = String.format("hello world %s", System.currentTimeMillis());
+			LocalDateTime now = LocalDateTime.now().withNano(0);
+			String content = String.format("hello world %s", DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(now));
 			Files.write(Paths.get(//
-					jc.getLocalDirectory(), jc.getFilePattern(), String.format("%s.txt", LocalDate.now()//
-							.format(DateTimeFormatter.ofPattern(jc.getDatePattern())))),
+					jc.getLocalDirectory(), jc.getFilePattern(),
+					String.format("%s.txt", DateTimeFormatter.ofPattern(jc.getDatePattern()).format(now))),
 					Arrays.asList(content), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
 			git.add().addFilepattern(jc.getFilePattern()).call();
 			Status status = git.status().call();
