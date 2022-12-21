@@ -1,8 +1,7 @@
 package com.example.seataclient.service;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Bill;
@@ -14,7 +13,7 @@ import com.example.seataclient.domain.Bill;
  */
 @SpringBootTest
 public class BillServiceTests {
-	@Resource
+	@Autowired
 	private BillService service;
 
 	@Test

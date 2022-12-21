@@ -1,7 +1,6 @@
 package com.example.seataclient.service;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.seataclient.domain.Account;
@@ -21,11 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class AccountServiceImpl implements AccountService {
-	@Resource
+	@Autowired
 	private AccountMapper accountMapper;
-	@Resource
+	@Autowired
 	private FoodService foodService;
-	@Resource
+	@Autowired
 	private BillService billService;
 
 	@Override

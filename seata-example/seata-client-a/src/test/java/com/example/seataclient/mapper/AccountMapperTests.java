@@ -1,8 +1,7 @@
 package com.example.seataclient.mapper;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Account;
@@ -14,7 +13,7 @@ import com.example.seataclient.domain.Account;
  */
 @SpringBootTest
 public class AccountMapperTests {
-	@Resource
+	@Autowired
 	private AccountMapper mapper;
 
 	@Test
