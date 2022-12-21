@@ -1,7 +1,6 @@
 package com.example.seataclient.controller;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FoodController {
 
-	@Resource
+	@Autowired
 	private FoodMapper foodMapper;
 
 	/**

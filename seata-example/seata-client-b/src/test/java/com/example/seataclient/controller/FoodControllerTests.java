@@ -1,8 +1,7 @@
 package com.example.seataclient.controller;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Food;
@@ -14,7 +13,7 @@ import com.example.seataclient.domain.Food;
  */
 @SpringBootTest
 public class FoodControllerTests {
-	@Resource
+	@Autowired
 	private FoodController controller;
 
 	@Test
