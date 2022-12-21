@@ -3,8 +3,7 @@ package com.example.seataclient.controller;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.annotation.Resource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/bill")
 @Slf4j
 public class BillController {
-	@Resource
+	@Autowired
 	private BillMapper billMapper;
 
 	/**

@@ -3,9 +3,8 @@ package com.example.seataclient.mapper;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.seataclient.domain.Bill;
@@ -17,7 +16,7 @@ import com.example.seataclient.domain.Bill;
  */
 @SpringBootTest
 public class BillMapperTests {
-	@Resource
+	@Autowired
 	private BillMapper mapper;
 
 	@Test
