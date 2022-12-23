@@ -1,2 +1,3 @@
 https://paolu.pics/api/v1/client/subscribe?token=1ddb42b2f811ed983d716facca46571b
+https://paolu.pics/api/v1/client/subscribe?token=83c8cfedf6dbff6853b1add82c485a3e
 https://pre.paimon.gq/clash.yaml
