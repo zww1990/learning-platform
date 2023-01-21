@@ -1,0 +1,25 @@
+<html lang="zh">
+	<head>
+		<title>微软AI语音</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<textarea rows="40" cols="100" id="input"></textarea>
+				</td>
+				<td valign="top">
+					<div id="output" style="word-break: break-word;"></div>
+				</td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript">
+		function $(id) {
+			return document.getElementById(id);
+		}
+		$('input').onkeyup = function (event) {
+			$('output').innerHTML = this.value;
+		}
+	</script>
+</html>
