@@ -5,7 +5,7 @@
 	<body>
 		<table>
 			<tr>
-				<td>
+				<td valign="top">
 					<textarea rows="40" cols="100" id="input"></textarea>
 				</td>
 				<td valign="top">
@@ -19,7 +19,7 @@
 			return document.getElementById(id);
 		}
 		$("input").onkeyup = function (event) {
-			$("output").innerHTML = this.value;
+			$("output").innerText = this.value;
 		}
 	</script>
 </html>
