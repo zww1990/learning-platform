@@ -6,7 +6,7 @@
     },
     "editor.minimap.enabled": false,
     "editor.tabSize": 2,
-    "editor.dragAndDrop": false
+    "editor.dragAndDrop": false,
     "git.ignoreMissingGitWarning": true,
     "git.path": "E:\\ProgramFiles\\Git\\cmd\\git.exe",
     "git.autofetch": true,
