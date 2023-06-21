@@ -1,7 +1,5 @@
 package com.example.springreactive.controller;
 
-import javax.annotation.Resource;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -10,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springreactive.model.ClientUser;
 
+import jakarta.annotation.Resource;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -35,7 +34,7 @@ public class UserController {
 		return this.entityTemplate.insert(user);
 	}
 
-	public Mono<Integer> delClientUser(String userId) {
+	public Mono<Long> delClientUser(String userId) {
 		return this.entityTemplate.delete(ClientUser.class)//
 				.matching(Query.query(Criteria.where("userId").is(userId)))//
 				.all();

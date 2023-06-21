@@ -1,7 +1,5 @@
 package com.example.springreactive.controller;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.example.springreactive.model.ClientUser;
+
+import jakarta.annotation.Resource;
 
 /**
  * UserControllerTests

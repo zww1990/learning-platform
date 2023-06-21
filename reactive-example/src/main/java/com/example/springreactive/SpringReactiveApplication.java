@@ -2,8 +2,6 @@ package com.example.springreactive;
 
 import java.util.Arrays;
 
-import javax.annotation.Resource;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,6 +15,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import com.example.springreactive.controller.UserController;
 import com.example.springreactive.model.ClientUser;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -42,7 +41,7 @@ public class SpringReactiveApplication {
 	private UserController userController;
 
 	@Bean
-	public RouterFunction<ServerResponse> routerFunction() {
+	RouterFunction<ServerResponse> routerFunction() {
 		return RouterFunctions.route()//
 				.GET("/", request -> ServerResponse.ok().bodyValue(Arrays.asList("你好，", "世界！")))//
 				.GET("/user/get", request -> ServerResponse.ok().body(userController.getClientUser(), ClientUser.class))
