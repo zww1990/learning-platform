@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -33,7 +34,7 @@ public class SecuritySecureConfig {
 		SavedRequestAwareAuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
 		successHandler.setTargetUrlParameter("redirectTo");
 		successHandler.setDefaultTargetUrl(adminServer.path("/"));
-		return http.authorizeHttpRequests()
+		return http.authorizeHttpRequests(request -> request
 				// 静态文件允许访问
 				.requestMatchers(adminServer.path("/assets/**")).permitAll()
 				.requestMatchers(adminServer.path("/actuator/info")).permitAll()
@@ -41,18 +42,18 @@ public class SecuritySecureConfig {
 				// 登录页面允许访问
 				.requestMatchers(adminServer.path("/login")).permitAll()
 				// 其他所有请求需要登录
-				.anyRequest().authenticated().and()
+				.anyRequest().authenticated())
 				// 登录页面配置，用于替换security默认页面
-				.formLogin().loginPage(adminServer.path("/login")).successHandler(successHandler).and()
+				.formLogin(login -> login.loginPage(adminServer.path("/login")).successHandler(successHandler))
 				// 登出页面配置，用于替换security默认页面
-				.logout().logoutUrl(adminServer.path("/logout")).and()
+				.logout(logout -> logout.logoutUrl(adminServer.path("/logout")))
 				//
-				.httpBasic().and()
+				.httpBasic(Customizer.withDefaults())
 				//
-				.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-				.ignoringRequestMatchers("/instances", "/instances/*", "/actuator/**").and()
+				.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+						.ignoringRequestMatchers("/instances", "/instances/*", "/actuator/**"))
 				//
-				.rememberMe().key(UUID.randomUUID().toString()).tokenValiditySeconds(14 * 24 * 60 * 60).and().build();
+				.rememberMe(me -> me.key(UUID.randomUUID().toString()).tokenValiditySeconds(14 * 24 * 60 * 60)).build();
 	}
 
 	@Bean
