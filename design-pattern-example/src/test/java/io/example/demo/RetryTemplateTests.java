@@ -2,14 +2,13 @@ package io.example.demo;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.retry.support.RetryTemplate;
 
 import io.example.demo.service.RetryService;
+import jakarta.annotation.Resource;
 
 @SpringBootTest
 public class RetryTemplateTests {

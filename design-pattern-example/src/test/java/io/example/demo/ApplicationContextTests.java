@@ -1,10 +1,10 @@
 package io.example.demo;
 
-import javax.annotation.Resource;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+
+import jakarta.annotation.Resource;
 
 /**
  * ApplicationContextTests

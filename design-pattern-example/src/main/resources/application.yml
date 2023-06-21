@@ -5,4 +5,5 @@ spring:
     - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
     - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
     - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
 
