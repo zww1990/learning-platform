@@ -1,7 +1,5 @@
 package com.example.democonsumer.controller;
 
-import javax.annotation.Resource;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.democonsumer.service.DiscoveryCalleeService;
+
+import jakarta.annotation.Resource;
 
 @RestController
 @RequestMapping("/discovery/service/caller")
