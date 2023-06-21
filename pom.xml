@@ -49,6 +49,8 @@
 		<module>seata-example/seata-client-c</module>
 		<module>security-example/spring-security-cas</module>
 		<module>security-example/spring-security-non-cas</module>
+		<module>sentinel-example/sentinel-client-a</module>
+		<module>sentinel-example/sentinel-client-b</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
 		<module>swagger-example/spring-swagger-openapi</module>
