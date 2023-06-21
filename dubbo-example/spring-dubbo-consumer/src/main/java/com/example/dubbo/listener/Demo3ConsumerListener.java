@@ -2,8 +2,6 @@ package com.example.dubbo.listener;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
@@ -12,6 +10,8 @@ import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
+
+import jakarta.annotation.Resource;
 
 /**
  * @author ZhangWeiWei
