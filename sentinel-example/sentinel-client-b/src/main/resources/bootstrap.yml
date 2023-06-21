@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: sentinel-client-b
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+    sentinel:
+      transport:
+        dashboard: localhost:9999
+      eager: true
+
+feign:
+  httpclient:
+    enabled: true
