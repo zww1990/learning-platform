@@ -36,11 +36,13 @@ public class SecuritySecureConfig {
 		successHandler.setDefaultTargetUrl(adminServer.path("/"));
 		return http.authorizeHttpRequests(request -> request
 				// 静态文件允许访问
-				.requestMatchers(adminServer.path("/assets/**")).permitAll()
-				.requestMatchers(adminServer.path("/actuator/info")).permitAll()
-				.requestMatchers(adminServer.path("/actuator/health")).permitAll()
+				.antMatchers(adminServer.path("/assets/**")).permitAll()
+				//
+				.antMatchers(adminServer.path("/actuator/info")).permitAll()
+				//
+				.antMatchers(adminServer.path("/actuator/health")).permitAll()
 				// 登录页面允许访问
-				.requestMatchers(adminServer.path("/login")).permitAll()
+				.antMatchers(adminServer.path("/login")).permitAll()
 				// 其他所有请求需要登录
 				.anyRequest().authenticated())
 				// 登录页面配置，用于替换security默认页面
@@ -51,7 +53,7 @@ public class SecuritySecureConfig {
 				.httpBasic(Customizer.withDefaults())
 				//
 				.csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-						.ignoringRequestMatchers("/instances", "/instances/*", "/actuator/**"))
+						.ignoringAntMatchers("/instances", "/instances/*", "/actuator/**"))
 				//
 				.rememberMe(me -> me.key(UUID.randomUUID().toString()).tokenValiditySeconds(14 * 24 * 60 * 60)).build();
 	}
