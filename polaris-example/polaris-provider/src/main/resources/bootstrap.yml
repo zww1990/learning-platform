@@ -1,12 +1,12 @@
 server:
-  port: 8082
+  port: 8081
 
 spring:
   application:
     name: polaris-provider
   cloud:
     polaris:
-      address: grpc://183.47.111.80:8091
+      address: grpc://119.91.66.223:8091
       namespace: zww
       enabled: true
       loadbalancer:
@@ -17,3 +17,7 @@ spring:
       config:
         enabled: true
         auto-refresh: true
+        groups:
+        - name: ${spring.application.name}
+          files:
+          - teacher.yml

@@ -11,9 +11,9 @@ public class ConfigControllerTests {
 	private ConfigController controller;
 
 	@Test
-	public void testPerson() {
+	public void testTeacher() {
 		try {
-			System.err.println(this.controller.person());
+			System.err.println(this.controller.teacher());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

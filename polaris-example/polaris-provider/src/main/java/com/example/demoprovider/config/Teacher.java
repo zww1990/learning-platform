@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Person {
+public class Teacher {
 	private String name;
 	private int age;
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demoprovider.config.Person;
+import com.example.demoprovider.config.Teacher;
 
 import jakarta.annotation.Resource;
 
@@ -14,10 +14,10 @@ import jakarta.annotation.Resource;
 @RequestMapping("/config")
 public class ConfigController {
 	@Resource
-	private Person person;
+	private Teacher teacher;
 
-	@GetMapping("/person")
-	public String person() {
-		return person.toString();
+	@GetMapping("/teacher")
+	public String teacher() {
+		return teacher.toString();
 	}
 }
