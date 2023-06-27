@@ -24,6 +24,7 @@ dubbo:
   scan:
     base-packages: com.example.dubbo.service
   application:
+    qos-enable: false
     register-mode: instance
     service-discovery:
       migration: FORCE_APPLICATION

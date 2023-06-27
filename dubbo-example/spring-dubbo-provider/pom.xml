@@ -52,6 +52,12 @@
 		    <groupId>org.apache.curator</groupId>
 		    <artifactId>curator-x-discovery</artifactId>
 		</dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -60,6 +66,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                    	<id>build-info</id>
+                    	<goals>
+                    		<goal>build-info</goal>
+                    	</goals>
+                    </execution>
+                </executions>
+                <configuration>
+                	<excludes>
+                		<exclude>
+                			<groupId>org.projectlombok</groupId>
+                			<artifactId>lombok</artifactId>
+                		</exclude>
+                	</excludes>
+                </configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -23,6 +23,7 @@ dubbo:
   registry:
     address: zookeeper://localhost:2181
   application:
+    qos-enable: false
     register-mode: instance
     service-discovery:
       migration: FORCE_APPLICATION
