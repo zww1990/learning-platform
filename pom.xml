@@ -10,6 +10,7 @@
 	<packaging>pom</packaging>
 
 	<name>super-parent</name>
+	<description>Super Parent POM</description>
 
 	<modules>
 		<module>cas-example/cas-client-a</module>
@@ -51,6 +52,9 @@
 		<module>security-example/spring-security-non-cas</module>
 		<module>sentinel-example/sentinel-client-a</module>
 		<module>sentinel-example/sentinel-client-b</module>
+		<module>shardingsphere-example/sharding-database-splitting</module>
+		<module>shardingsphere-example/sharding-readwrite-splitting</module>
+		<module>shardingsphere-example/sharding-table-splitting</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
 		<module>swagger-example/spring-swagger-openapi</module>
