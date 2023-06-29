@@ -17,8 +17,6 @@ public interface UserRepository {
 			""")
 	int insertUser(User user);
 
-	@Select("""
-			select * from t_user
-			""")
+	@Select("select * from t_user")
 	List<User> selectUsers();
 }
