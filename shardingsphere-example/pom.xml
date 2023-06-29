@@ -19,7 +19,9 @@
 	<name>shardingsphere-parent</name>
 
 	<modules>
+		<module>sharding-database-splitting</module>
 		<module>sharding-readwrite-splitting</module>
+		<module>sharding-table-splitting</module>
 	</modules>
 
     <properties>

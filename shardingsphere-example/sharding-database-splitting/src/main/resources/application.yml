@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: sharding-database-splitting
+  shardingsphere:
+    props:
+      sql-show: true
+    mode:
+      type: Standalone
+      repository:
+        type: JDBC
+        props:
+          jdbc_url: jdbc:mysql://localhost:3306/sharding_config?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+          username: root
+          password: root
+    datasource:
+      names: sharding_order_1,sharding_order_2
+      sharding_order_1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/sharding_order_1?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+      sharding_order_2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/sharding_order_2?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+    rules:
+      sharding:
+        tables:
+          t_order_info:
+            actual-data-nodes: sharding_order_$->{1..2}.t_order_info
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: snowflake
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: t_order_info_inline
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+        sharding-algorithms:
+          t_order_info_inline:
+            type: INLINE
+            props:
+              algorithm-expression: sharding_order_$->{user_id % 2 + 1}
+
+mybatis:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    return-instance-for-empty-row: true
+    jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
