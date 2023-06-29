@@ -1,4 +1,5 @@
 create database sharding_config;
+
 create database sharding_order_1;
 
 CREATE TABLE t_order_1 (
