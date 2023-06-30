@@ -22,6 +22,7 @@
 		<module>sharding-database-splitting</module>
 		<module>sharding-readwrite-splitting</module>
 		<module>sharding-table-splitting</module>
+		<module>sharding-example-generator</module>
 	</modules>
 
     <properties>
