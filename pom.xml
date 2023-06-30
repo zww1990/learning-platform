@@ -55,6 +55,7 @@
 		<module>shardingsphere-example/sharding-database-splitting</module>
 		<module>shardingsphere-example/sharding-readwrite-splitting</module>
 		<module>shardingsphere-example/sharding-table-splitting</module>
+		<module>shardingsphere-example/sharding-example-generator</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
 		<module>swagger-example/spring-swagger-openapi</module>
