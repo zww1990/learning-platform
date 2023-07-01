@@ -1,8 +1,11 @@
-package com.runoob.design.chapter1.creational.builder;
+package com.runoob.design.chapter1.creational.pattern4;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 套餐
+ */
 public class Meal {
 	private List<Item> items = new ArrayList<Item>();
 
@@ -19,7 +22,7 @@ public class Meal {
 	}
 
 	public void showItems() {
-		this.items.stream().forEach(item -> {
+		this.items.forEach(item -> {
 			System.out.print("Item : " + item.name());
 			System.out.print(", Packing : " + item.packing().pack());
 			System.out.println(", Price : " + item.price());

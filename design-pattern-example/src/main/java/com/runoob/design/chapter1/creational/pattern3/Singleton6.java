@@ -17,6 +17,4 @@ package com.runoob.design.chapter1.creational.pattern3;
  */
 public enum Singleton6 {
 	INSTANCE;
-	public void whateverMethod() {
-	}
 }

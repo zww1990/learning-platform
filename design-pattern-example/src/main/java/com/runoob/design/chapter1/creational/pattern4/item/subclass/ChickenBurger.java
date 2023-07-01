@@ -1,5 +1,10 @@
-package com.runoob.design.chapter1.creational.builder;
+package com.runoob.design.chapter1.creational.pattern4.item.subclass;
 
+import com.runoob.design.chapter1.creational.pattern4.item.Burger;
+
+/**
+ * 鸡肉汉堡
+ */
 public class ChickenBurger extends Burger {
 
 	@Override
