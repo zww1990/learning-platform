@@ -1,5 +1,10 @@
-package com.runoob.design.pattern1.creational.factory;
+package com.runoob.design.pattern1.creational.factory.impls;
 
+import com.runoob.design.pattern1.creational.factory.Shape;
+
+/**
+ * 矩形
+ */
 public class Rectangle implements Shape {
 
 	@Override

@@ -1,5 +1,5 @@
 /**
- * 行为型模式<br>
- * 这些设计模式特别关注对象之间的通信。
+ * 行为型模式<br><br>
+ * 这些设计模式特别关注对象之间的通信。<br>
  */
 package com.runoob.design.pattern3.behavioral;

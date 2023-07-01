@@ -1,8 +1,11 @@
 package com.runoob.design.pattern1.creational.factory;
 
+import com.runoob.design.pattern1.creational.factory.impls.Circle;
+import com.runoob.design.pattern1.creational.factory.impls.Rectangle;
+import com.runoob.design.pattern1.creational.factory.impls.Square;
+
 /**
- * @author Alienware <br>
- *         创建一个工厂，生成基于给定信息的实体类的对象。
+ * 创建一个工厂，生成基于给定信息的实体类的对象。
  */
 public class ShapeFactory {
 	// 使用 getShape 方法获取形状类型的对象
