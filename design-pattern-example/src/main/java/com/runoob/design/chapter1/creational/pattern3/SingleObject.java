@@ -1,4 +1,4 @@
-package com.runoob.design.chapter1.creational.singleton;
+package com.runoob.design.chapter1.creational.pattern3;
 
 public class SingleObject {
 	// 创建 SingleObject 的一个对象
