@@ -1,5 +1,3 @@
-package com.runoob.design.chapter1.creational.factory;
-
 /**
  * 工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一。<br>
  * 这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>
@@ -28,32 +26,4 @@ package com.runoob.design.chapter1.creational.factory;
  * 有一点需要注意的地方就是复杂对象适合使用工厂模式，而简单对象，特别是只需要通过 new 就可以完成创建的对象，无需使用工厂模式。<br>
  * 如果使用工厂模式，就需要引入一个工厂类，会增加系统的复杂度。<br>
  */
-public class FactoryPatternDemo {
-	/**
-	 * 我们将创建一个 Shape 接口和实现 Shape 接口的实体类。<br>
-	 * 下一步是定义工厂类 ShapeFactory。<br>
-	 * FactoryPatternDemo 类使用 ShapeFactory 来获取 Shape 对象。<br>
-	 * 它将向 ShapeFactory 传递信息（CIRCLE / RECTANGLE / SQUARE），以便获取它所需对象的类型。<br>
-	 */
-	public static void main(String[] args) {
-		ShapeFactory shapeFactory = new ShapeFactory();
-
-		// 获取 Circle 的对象，并调用它的 draw 方法
-		Shape shape1 = shapeFactory.getShape("CIRCLE");
-
-		// 调用 Circle 的 draw 方法
-		shape1.draw();
-
-		// 获取 Rectangle 的对象，并调用它的 draw 方法
-		Shape shape2 = shapeFactory.getShape("RECTANGLE");
-
-		// 调用 Rectangle 的 draw 方法
-		shape2.draw();
-
-		// 获取 Square 的对象，并调用它的 draw 方法
-		Shape shape3 = shapeFactory.getShape("SQUARE");
-
-		// 调用 Square 的 draw 方法
-		shape3.draw();
-	}
-}
+package com.runoob.design.chapter1.creational.pattern1;

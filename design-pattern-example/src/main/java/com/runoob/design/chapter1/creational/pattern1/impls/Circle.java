@@ -1,6 +1,6 @@
-package com.runoob.design.chapter1.creational.factory.impls;
+package com.runoob.design.chapter1.creational.pattern1.impls;
 
-import com.runoob.design.chapter1.creational.factory.Shape;
+import com.runoob.design.chapter1.creational.pattern1.Shape;
 
 /**
  * 圆形

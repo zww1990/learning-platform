@@ -1,4 +1,4 @@
-package com.runoob.design.chapter1.creational.factory;
+package com.runoob.design.chapter1.creational.pattern1;
 
 /**
  * 形状
