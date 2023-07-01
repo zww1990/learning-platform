@@ -5,10 +5,7 @@ package com.runoob.design.chapter1.creational.pattern1;
  */
 public class FactoryPatternDemo {
 	/**
-	 * 我们将创建一个 Shape 接口和实现 Shape 接口的实体类。<br>
-	 * 下一步是定义工厂类 ShapeFactory。<br>
-	 * FactoryPatternDemo 类使用 ShapeFactory 来获取 Shape 对象。<br>
-	 * 它将向 ShapeFactory 传递信息（CIRCLE / RECTANGLE / SQUARE），以便获取它所需对象的类型。<br>
+	 * 使用该工厂，通过传递类型信息来获取实体类的对象。
 	 */
 	public static void main(String[] args) {
 		ShapeFactory shapeFactory = new ShapeFactory();
