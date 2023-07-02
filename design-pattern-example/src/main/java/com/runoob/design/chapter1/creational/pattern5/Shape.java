@@ -1,5 +1,8 @@
-package com.runoob.design.chapter1.creational.prototype;
+package com.runoob.design.chapter1.creational.pattern5;
 
+/**
+ * 形状
+ */
 public abstract class Shape implements Cloneable {
 	private String id;
 	protected String type;
@@ -18,13 +21,11 @@ public abstract class Shape implements Cloneable {
 		this.id = id;
 	}
 
-	public Object clone() {
-		Object clone = null;
+	public Shape clone() {
 		try {
-			clone = super.clone();
+			return (Shape) super.clone();
 		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		return clone;
 	}
 }

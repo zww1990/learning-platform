@@ -1,17 +1,21 @@
-package com.runoob.design.chapter1.creational.prototype;
+package com.runoob.design.chapter1.creational.pattern5;
+
+import com.runoob.design.chapter1.creational.pattern5.shape.Circle;
+import com.runoob.design.chapter1.creational.pattern5.shape.Rectangle;
+import com.runoob.design.chapter1.creational.pattern5.shape.Square;
 
 import java.util.Hashtable;
+import java.util.Map;
 
 /**
- * @author Alienware <br>
- *         创建一个类，从数据库获取实体类，并把它们存储在一个 Hashtable 中。
+ * 创建一个类，从数据库获取实体类，并把它们存储在一个 Hashtable 中。
  */
 public class ShapeCache {
-	private static Hashtable<String, Shape> shapeMap = new Hashtable<String, Shape>();
+	private static Map<String, Shape> shapeMap = new Hashtable<>();
 
 	public static Shape getShape(String shapeId) {
 		Shape cachedShape = shapeMap.get(shapeId);
-		return (Shape) cachedShape.clone();
+		return cachedShape.clone();
 	}
 
 	// 对每种形状都运行数据库查询，并创建该形状
