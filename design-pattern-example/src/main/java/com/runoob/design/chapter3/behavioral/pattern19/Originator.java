@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.memento;
+package com.runoob.design.chapter3.behavioral.pattern19;
 
+/**
+ * 创建 Originator 类。
+ */
 public class Originator {
 	private String state;
 

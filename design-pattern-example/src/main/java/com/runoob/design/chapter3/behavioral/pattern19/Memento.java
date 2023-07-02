@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.memento;
+package com.runoob.design.chapter3.behavioral.pattern19;
 
+/**
+ * 创建 Memento 类。
+ */
 public class Memento {
 	private String state;
 
