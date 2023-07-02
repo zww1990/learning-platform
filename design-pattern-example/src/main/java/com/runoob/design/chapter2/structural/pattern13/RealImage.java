@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.proxy;
+package com.runoob.design.chapter2.structural.pattern13;
 
+/**
+ * 真实图像
+ */
 public class RealImage implements Image {
 	private String fileName;
 
