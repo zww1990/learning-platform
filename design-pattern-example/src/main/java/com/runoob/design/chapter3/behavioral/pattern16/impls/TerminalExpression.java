@@ -1,5 +1,10 @@
-package com.runoob.design.chapter3.behavioral.interpreter;
+package com.runoob.design.chapter3.behavioral.pattern16.impls;
 
+import com.runoob.design.chapter3.behavioral.pattern16.Expression;
+
+/**
+ * 终止表达式
+ */
 public class TerminalExpression implements Expression {
 	private String data;
 
@@ -9,10 +14,7 @@ public class TerminalExpression implements Expression {
 
 	@Override
 	public boolean interpret(String context) {
-		if (context.contains(data)) {
-			return true;
-		}
-		return false;
+		return context.contains(data);
 	}
 
 }

@@ -1,8 +1,13 @@
-package com.runoob.design.chapter3.behavioral.interpreter;
+package com.runoob.design.chapter3.behavioral.pattern16.impls;
 
+import com.runoob.design.chapter3.behavioral.pattern16.Expression;
+
+/**
+ * 或表达式
+ */
 public class OrExpression implements Expression {
-	private Expression expr1 = null;
-	private Expression expr2 = null;
+	private Expression expr1;
+	private Expression expr2;
 
 	public OrExpression(Expression expr1, Expression expr2) {
 		this.expr1 = expr1;
