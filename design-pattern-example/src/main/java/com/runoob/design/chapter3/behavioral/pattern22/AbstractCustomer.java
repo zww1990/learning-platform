@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.nullobject;
+package com.runoob.design.chapter3.behavioral.pattern22;
 
+/**
+ * 创建一个抽象类。
+ */
 public abstract class AbstractCustomer {
 	protected String name;
 
