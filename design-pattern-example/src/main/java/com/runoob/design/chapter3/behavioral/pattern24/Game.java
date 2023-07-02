@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.template;
+package com.runoob.design.chapter3.behavioral.pattern24;
 
+/**
+ * 创建一个抽象类，它的模板方法被设置为 final。
+ */
 public abstract class Game {
 	public abstract void initialize();
 
