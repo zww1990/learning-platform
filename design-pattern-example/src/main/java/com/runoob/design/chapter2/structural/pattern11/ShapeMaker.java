@@ -1,5 +1,12 @@
-package com.runoob.design.chapter2.structural.facade;
+package com.runoob.design.chapter2.structural.pattern11;
 
+import com.runoob.design.chapter2.structural.pattern11.impls.Circle;
+import com.runoob.design.chapter2.structural.pattern11.impls.Rectangle;
+import com.runoob.design.chapter2.structural.pattern11.impls.Square;
+
+/**
+ * 创建一个外观类。
+ */
 public class ShapeMaker {
 	private Shape circle;
 	private Shape rectangle;
