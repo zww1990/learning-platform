@@ -1,8 +1,11 @@
-package com.runoob.design.chapter2.structural.composite;
+package com.runoob.design.chapter2.structural.pattern9;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 员工
+ */
 public class Employee {
 	private String name;
 	private String dept;
@@ -14,7 +17,7 @@ public class Employee {
 		this.name = name;
 		this.dept = dept;
 		this.salary = sal;
-		subordinates = new ArrayList<Employee>();
+		subordinates = new ArrayList<>();
 	}
 
 	public void add(Employee e) {
@@ -30,7 +33,7 @@ public class Employee {
 	}
 
 	public String toString() {
-		return ("Employee :[ Name : " + name + ", dept : " + dept
-				+ ", salary :" + salary + " ]");
+		return "Employee :[ Name : " + name + ", dept : " + dept
+				+ ", salary :" + salary + " ]";
 	}
 }
