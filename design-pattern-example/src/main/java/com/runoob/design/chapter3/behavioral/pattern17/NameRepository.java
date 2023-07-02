@@ -1,7 +1,10 @@
-package com.runoob.design.chapter3.behavioral.iterator;
+package com.runoob.design.chapter3.behavioral.pattern17;
 
+/**
+ * 创建实现了 Container 接口的实体类。该类有实现了 Iterator 接口的内部类 NameIterator。
+ */
 public class NameRepository implements Container {
-	public String names[] = { "Robert", "John", "Julie", "Lora" };
+	public String[] names = { "Robert", "John", "Julie", "Lora" };
 
 	@Override
 	public Iterator getIterator() {
@@ -14,10 +17,7 @@ public class NameRepository implements Container {
 
 		@Override
 		public boolean hasNext() {
-			if (index < names.length) {
-				return true;
-			}
-			return false;
+			return index < names.length;
 		}
 
 		@Override
