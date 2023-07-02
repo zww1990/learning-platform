@@ -1,10 +1,13 @@
-package com.runoob.design.chapter3.behavioral.observer;
+package com.runoob.design.chapter3.behavioral.pattern20;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 创建 Subject 类。
+ */
 public class Subject {
-	private List<Observer> observers = new ArrayList<Observer>();
+	private List<Observer> observers = new ArrayList<>();
 	private int state;
 
 	public int getState() {
@@ -21,8 +24,6 @@ public class Subject {
 	}
 
 	public void notifyAllObservers() {
-		this.observers.stream().forEach(observer -> {
-			observer.update();
-		});
+		this.observers.forEach(Observer::update);
 	}
 }

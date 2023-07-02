@@ -1,4 +1,7 @@
-package com.runoob.design.chapter3.behavioral.observer;
+package com.runoob.design.chapter3.behavioral.pattern20.observer;
+
+import com.runoob.design.chapter3.behavioral.pattern20.Observer;
+import com.runoob.design.chapter3.behavioral.pattern20.Subject;
 
 public class BinaryObserver extends Observer {
 	public BinaryObserver(Subject subject) {
