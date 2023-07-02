@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.decorator;
+package com.runoob.design.chapter2.structural.pattern10;
 
+/**
+ * 创建扩展了 ShapeDecorator 类的实体装饰类。
+ */
 public class RedShapeDecorator extends ShapeDecorator {
 
 	public RedShapeDecorator(Shape decoratedShape) {

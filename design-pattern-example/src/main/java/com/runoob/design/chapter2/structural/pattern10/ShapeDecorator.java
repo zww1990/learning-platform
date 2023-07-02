@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.decorator;
+package com.runoob.design.chapter2.structural.pattern10;
 
+/**
+ * 创建实现了 Shape 接口的抽象装饰类。
+ */
 public abstract class ShapeDecorator implements Shape {
 	protected Shape decoratedShape;
 
