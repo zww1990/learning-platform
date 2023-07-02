@@ -1,4 +1,7 @@
-package com.runoob.design.chapter2.structural.filtercriteria;
+package com.runoob.design.chapter2.structural.pattern8.impls;
+
+import com.runoob.design.chapter2.structural.pattern8.Criteria;
+import com.runoob.design.chapter2.structural.pattern8.Person;
 
 import java.util.List;
 

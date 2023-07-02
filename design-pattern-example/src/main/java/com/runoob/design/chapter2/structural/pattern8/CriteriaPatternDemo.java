@@ -1,22 +1,19 @@
-package com.runoob.design.chapter2.structural.filtercriteria;
+package com.runoob.design.chapter2.structural.pattern8;
+
+import com.runoob.design.chapter2.structural.pattern8.impls.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Alienware <br>
- *         过滤器模式（Filter Pattern）或标准模式（Criteria
- *         Pattern）是一种设计模式，这种模式允许开发人员使用不同的标准来过滤一组对象
- *         ，通过逻辑运算以解耦的方式把它们连接起来。这种类型的设计模式属于结构型模式，它结合多个标准来获得单一标准。
+ * 过滤器模式（Filter Pattern）
  */
 public class CriteriaPatternDemo {
 	/**
-	 * 我们将创建一个 Person 对象、Criteria 接口和实现了该接口的实体类，来过滤 Person
-	 * 对象的列表。CriteriaPatternDemo，我们的演示类使用 Criteria 对象，基于各种标准和它们的结合来过滤 Person
-	 * 对象的列表。
+	 * 使用不同的标准（Criteria）和它们的结合来过滤 Person 对象的列表。
 	 */
 	public static void main(String[] args) {
-		List<Person> persons = new ArrayList<Person>();
+		List<Person> persons = new ArrayList<>();
 
 		persons.add(new Person("Robert", "Male", "Single"));
 		persons.add(new Person("John", "Male", "Married"));
@@ -45,7 +42,7 @@ public class CriteriaPatternDemo {
 	}
 
 	public static void printPersons(List<Person> persons) {
-		persons.stream().forEach(
+		persons.forEach(
 				person -> {
 					System.out.println("Person : [ Name : " + person.getName()
 							+ ", Gender : " + person.getGender()

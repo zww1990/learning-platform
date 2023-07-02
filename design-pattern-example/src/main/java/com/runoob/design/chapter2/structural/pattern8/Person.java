@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.filtercriteria;
+package com.runoob.design.chapter2.structural.pattern8;
 
+/**
+ * 创建一个类，在该类上应用标准。
+ */
 public class Person {
 	private String name;
 	private String gender;
