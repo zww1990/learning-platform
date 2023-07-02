@@ -7,18 +7,14 @@ import java.util.List;
  * 套餐
  */
 public class Meal {
-	private List<Item> items = new ArrayList<Item>();
+	private List<Item> items = new ArrayList<>();
 
 	public void addItem(Item item) {
 		items.add(item);
 	}
 
 	public float getCost() {
-		float cost = 0.0f;
-		for (Item item : items) {
-			cost += item.price();
-		}
-		return cost;
+		return items.stream().map(Item::price).reduce(0f, Float::sum);
 	}
 
 	public void showItems() {

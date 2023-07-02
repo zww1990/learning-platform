@@ -1,5 +1,10 @@
-package com.runoob.design.chapter2.structural.adapter;
+package com.runoob.design.chapter2.structural.pattern6.impls;
 
+import com.runoob.design.chapter2.structural.pattern6.AdvancedMediaPlayer;
+
+/**
+ * vlc播放器
+ */
 public class VlcPlayer implements AdvancedMediaPlayer {
 
 	@Override
@@ -9,6 +14,7 @@ public class VlcPlayer implements AdvancedMediaPlayer {
 
 	@Override
 	public void playMp4(String fileName) {
+		//什么也不做
 	}
 
 }

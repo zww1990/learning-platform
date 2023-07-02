@@ -1,4 +1,4 @@
-package com.runoob.design.chapter2.structural.adapter;
+package com.runoob.design.chapter2.structural.pattern6;
 
 public class AudioPlayer implements MediaPlayer {
 	MediaAdapter mediaAdapter;
