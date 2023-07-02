@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.state;
+package com.runoob.design.chapter3.behavioral.pattern21;
 
+/**
+ * 创建 Context 类。
+ */
 public class Context {
 	private State state;
 

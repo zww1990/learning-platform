@@ -1,5 +1,11 @@
-package com.runoob.design.chapter3.behavioral.state;
+package com.runoob.design.chapter3.behavioral.pattern21.impls;
 
+import com.runoob.design.chapter3.behavioral.pattern21.Context;
+import com.runoob.design.chapter3.behavioral.pattern21.State;
+
+/**
+ * 开始状态
+ */
 public class StartState implements State {
 
 	@Override
