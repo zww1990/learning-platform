@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.chainofresponsibility;
+package com.runoob.design.chapter3.behavioral.pattern14;
 
+/**
+ * 创建抽象的记录器类。
+ */
 public abstract class AbstractLogger {
 	public static int INFO = 1;
 	public static int DEBUG = 2;

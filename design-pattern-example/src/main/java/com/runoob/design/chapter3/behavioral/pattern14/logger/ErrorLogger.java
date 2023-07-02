@@ -1,4 +1,6 @@
-package com.runoob.design.chapter3.behavioral.chainofresponsibility;
+package com.runoob.design.chapter3.behavioral.pattern14.logger;
+
+import com.runoob.design.chapter3.behavioral.pattern14.AbstractLogger;
 
 public class ErrorLogger extends AbstractLogger {
 	public ErrorLogger(int level) {
