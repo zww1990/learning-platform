@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.bridge;
+package com.runoob.design.chapter2.structural.pattern7;
 
+/**
+ * 使用 DrawAPI 接口创建抽象类 Shape。
+ */
 public abstract class Shape {
 	protected DrawAPI drawAPI;
 

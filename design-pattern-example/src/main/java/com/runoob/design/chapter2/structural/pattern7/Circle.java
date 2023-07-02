@@ -1,8 +1,13 @@
-package com.runoob.design.chapter2.structural.bridge;
+package com.runoob.design.chapter2.structural.pattern7;
 
+/**
+ * 创建实现了 Shape 抽象类的实体类。
+ */
 public class Circle extends Shape {
 
-	private int x, y, radius;
+	private int x;
+	private int y;
+	private int radius;
 
 	public Circle(int x, int y, int radius, DrawAPI drawAPI) {
 		super(drawAPI);

@@ -1,5 +1,10 @@
-package com.runoob.design.chapter2.structural.bridge;
+package com.runoob.design.chapter2.structural.pattern7.impls;
 
+import com.runoob.design.chapter2.structural.pattern7.DrawAPI;
+
+/**
+ * 绿圈
+ */
 public class GreenCircle implements DrawAPI {
 
 	@Override
