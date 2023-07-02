@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.mediator;
+package com.runoob.design.chapter3.behavioral.pattern18;
 
+/**
+ * 用户
+ */
 public class User {
 	private String name;
 
