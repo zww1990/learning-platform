@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.command;
+package com.runoob.design.chapter3.behavioral.pattern15;
 
+/**
+ * 创建一个请求类。
+ */
 public class Stock {
 	private String name = "ABC";
 	private int quantity = 10;
