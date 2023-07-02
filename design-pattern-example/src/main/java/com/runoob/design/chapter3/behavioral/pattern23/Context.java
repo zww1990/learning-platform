@@ -1,5 +1,8 @@
-package com.runoob.design.chapter3.behavioral.strategy;
+package com.runoob.design.chapter3.behavioral.pattern23;
 
+/**
+ * 创建 Context 类。
+ */
 public class Context {
 	private Strategy strategy;
 
