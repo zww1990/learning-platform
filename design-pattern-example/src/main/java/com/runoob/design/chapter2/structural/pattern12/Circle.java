@@ -1,5 +1,8 @@
-package com.runoob.design.chapter2.structural.flyweight;
+package com.runoob.design.chapter2.structural.pattern12;
 
+/**
+ * 圆形
+ */
 public class Circle implements Shape {
 	private String color;
 	private int x;
