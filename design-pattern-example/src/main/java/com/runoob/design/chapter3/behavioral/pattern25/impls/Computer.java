@@ -1,7 +1,13 @@
-package com.runoob.design.chapter3.behavioral.visitor;
+package com.runoob.design.chapter3.behavioral.pattern25.impls;
+
+import com.runoob.design.chapter3.behavioral.pattern25.ComputerPart;
+import com.runoob.design.chapter3.behavioral.pattern25.ComputerPartVisitor;
 
 import java.util.Arrays;
 
+/**
+ * 电脑
+ */
 public class Computer implements ComputerPart {
 	ComputerPart[] parts;
 

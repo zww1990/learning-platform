@@ -1,5 +1,13 @@
-package com.runoob.design.chapter3.behavioral.visitor;
+package com.runoob.design.chapter3.behavioral.pattern25;
 
+import com.runoob.design.chapter3.behavioral.pattern25.impls.Computer;
+import com.runoob.design.chapter3.behavioral.pattern25.impls.Keyboard;
+import com.runoob.design.chapter3.behavioral.pattern25.impls.Monitor;
+import com.runoob.design.chapter3.behavioral.pattern25.impls.Mouse;
+
+/**
+ * 创建实现了上述类的实体访问者。
+ */
 public class ComputerPartDisplayVisitor implements ComputerPartVisitor {
 
 	@Override
