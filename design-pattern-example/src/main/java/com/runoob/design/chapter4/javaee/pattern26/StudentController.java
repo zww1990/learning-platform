@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.mvc;
+package com.runoob.design.chapter4.javaee.pattern26;
 
+/**
+ * 学生控制器
+ */
 public class StudentController {
 	private Student model;
 	private StudentView view;

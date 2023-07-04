@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.mvc;
+package com.runoob.design.chapter4.javaee.pattern26;
 
+/**
+ * 学生
+ */
 public class Student {
 	private String rollNo;
 	private String name;
