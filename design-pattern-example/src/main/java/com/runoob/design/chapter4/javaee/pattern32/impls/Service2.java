@@ -1,5 +1,10 @@
-package com.runoob.design.chapter4.javaee.servicelocator;
+package com.runoob.design.chapter4.javaee.pattern32.impls;
 
+import com.runoob.design.chapter4.javaee.pattern32.Service;
+
+/**
+ * 服务2实现
+ */
 public class Service2 implements Service {
 
 	@Override

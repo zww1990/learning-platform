@@ -1,5 +1,11 @@
-package com.runoob.design.chapter4.javaee.servicelocator;
+package com.runoob.design.chapter4.javaee.pattern32;
 
+import com.runoob.design.chapter4.javaee.pattern32.impls.Service1;
+import com.runoob.design.chapter4.javaee.pattern32.impls.Service2;
+
+/**
+ * 初始化上下文
+ */
 public class InitialContext {
 	public Object lookup(String jndiName) {
 		if (jndiName.equalsIgnoreCase("SERVICE1")) {

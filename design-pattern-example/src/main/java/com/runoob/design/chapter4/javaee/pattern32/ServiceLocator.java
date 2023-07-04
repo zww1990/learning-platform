@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.servicelocator;
+package com.runoob.design.chapter4.javaee.pattern32;
 
+/**
+ * 服务定位器
+ */
 public class ServiceLocator {
 	private static Cache cache;
 

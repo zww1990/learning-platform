@@ -1,13 +1,16 @@
-package com.runoob.design.chapter4.javaee.servicelocator;
+package com.runoob.design.chapter4.javaee.pattern32;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 缓存
+ */
 public class Cache {
 	private List<Service> services;
 
 	public Cache() {
-		services = new ArrayList<Service>();
+		services = new ArrayList<>();
 	}
 
 	public Service getService(String serviceName) {
