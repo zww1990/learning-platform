@@ -1,14 +1,17 @@
-package com.runoob.design.chapter4.javaee.dao;
+package com.runoob.design.chapter4.javaee.pattern29;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 学生DAO实现
+ */
 public class StudentDaoImpl implements StudentDao {
 	// 列表是当作一个数据库
 	List<Student> students;
 
 	public StudentDaoImpl() {
-		students = new ArrayList<Student>();
+		students = new ArrayList<>();
 		Student student1 = new Student("Robert", 0);
 		Student student2 = new Student("John", 1);
 		students.add(student1);
