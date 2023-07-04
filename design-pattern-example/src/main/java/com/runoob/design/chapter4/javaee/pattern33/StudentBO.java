@@ -1,14 +1,17 @@
-package com.runoob.design.chapter4.javaee.transferobject;
+package com.runoob.design.chapter4.javaee.pattern33;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 创建业务对象。
+ */
 public class StudentBO {
 	// 列表是当作一个数据库
 	List<StudentVO> students;
 
 	public StudentBO() {
-		students = new ArrayList<StudentVO>();
+		students = new ArrayList<>();
 		StudentVO student1 = new StudentVO("Robert", 0);
 		StudentVO student2 = new StudentVO("John", 1);
 		students.add(student1);

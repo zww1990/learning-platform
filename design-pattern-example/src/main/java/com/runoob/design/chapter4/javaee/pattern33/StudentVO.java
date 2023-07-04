@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.transferobject;
+package com.runoob.design.chapter4.javaee.pattern33;
 
+/**
+ * 创建传输对象。
+ */
 public class StudentVO {
 	private String name;
 	private int rollNo;
