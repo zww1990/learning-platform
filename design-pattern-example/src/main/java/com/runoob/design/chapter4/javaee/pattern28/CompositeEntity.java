@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.compositeentity;
+package com.runoob.design.chapter4.javaee.pattern28;
 
+/**
+ * 创建组合实体。
+ */
 public class CompositeEntity {
 	private CoarseGrainedObject cgo = new CoarseGrainedObject();
 

@@ -1,7 +1,10 @@
-package com.runoob.design.chapter4.javaee.compositeentity;
+package com.runoob.design.chapter4.javaee.pattern28;
 
 import java.util.Arrays;
 
+/**
+ * 创建使用组合实体的客户端类。
+ */
 public class Client {
 	private CompositeEntity compositeEntity = new CompositeEntity();
 
