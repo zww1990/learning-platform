@@ -1,5 +1,11 @@
-package com.runoob.design.chapter4.javaee.frontcontroller;
+package com.runoob.design.chapter4.javaee.pattern30;
 
+import com.runoob.design.chapter4.javaee.pattern30.views.HomeView;
+import com.runoob.design.chapter4.javaee.pattern30.views.StudentView;
+
+/**
+ * 调度器
+ */
 public class Dispatcher {
 	private StudentView studentView;
 	private HomeView homeView;

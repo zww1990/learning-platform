@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.frontcontroller;
+package com.runoob.design.chapter4.javaee.pattern30;
 
+/**
+ * 前端控制器
+ */
 public class FrontController {
 	private Dispatcher dispatcher;
 
