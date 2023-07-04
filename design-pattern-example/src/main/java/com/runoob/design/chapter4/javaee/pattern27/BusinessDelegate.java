@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.businessdelegate;
+package com.runoob.design.chapter4.javaee.pattern27;
 
+/**
+ * 创建业务代表。
+ */
 public class BusinessDelegate {
 	private BusinessLookUp lookupService = new BusinessLookUp();
 	private BusinessService businessService;
