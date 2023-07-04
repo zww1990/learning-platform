@@ -1,10 +1,13 @@
-package com.runoob.design.chapter4.javaee.interceptingfilter;
+package com.runoob.design.chapter4.javaee.pattern31;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 过滤器链
+ */
 public class FilterChain {
-	private List<Filter> filters = new ArrayList<Filter>();
+	private List<Filter> filters = new ArrayList<>();
 	private Target target;
 
 	public void addFilter(Filter filter) {
@@ -12,7 +15,7 @@ public class FilterChain {
 	}
 
 	public void execute(String request) {
-		this.filters.stream().forEach(filter -> {
+		this.filters.forEach(filter -> {
 			filter.execute(request);
 		});
 		target.execute(request);

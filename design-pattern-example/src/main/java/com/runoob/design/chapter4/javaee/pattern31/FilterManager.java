@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.interceptingfilter;
+package com.runoob.design.chapter4.javaee.pattern31;
 
+/**
+ * 过滤器管理器
+ */
 public class FilterManager {
 	FilterChain filterChain;
 

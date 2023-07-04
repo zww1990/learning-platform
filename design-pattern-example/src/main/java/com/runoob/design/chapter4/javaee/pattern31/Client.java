@@ -1,5 +1,8 @@
-package com.runoob.design.chapter4.javaee.interceptingfilter;
+package com.runoob.design.chapter4.javaee.pattern31;
 
+/**
+ * 客户端
+ */
 public class Client {
 	FilterManager filterManager;
 
