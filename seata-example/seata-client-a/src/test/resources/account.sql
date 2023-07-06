@@ -1,3 +1,5 @@
+create database seata_client_a;
+
 CREATE TABLE account (
   user_id int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   user_name varchar(20) NOT NULL COMMENT '姓名',

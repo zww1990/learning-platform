@@ -1,3 +1,5 @@
+create database seata_client_b;
+
 CREATE TABLE food (
   food_id int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
   food_name varchar(20) NOT NULL COMMENT '食品名称',

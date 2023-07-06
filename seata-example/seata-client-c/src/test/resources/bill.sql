@@ -1,3 +1,5 @@
+create database seata_client_c;
+
 CREATE TABLE bill (
   bill_id int(10) NOT NULL AUTO_INCREMENT COMMENT '账单主键',
   bill_num varchar(20) NOT NULL COMMENT '账单编号',
