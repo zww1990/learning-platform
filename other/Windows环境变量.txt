@@ -1,8 +1,11 @@
-JAVA_HOME			E:\ProgramFiles\jdk-11.0.13
+JAVA_HOME			E:\ProgramFiles\jdk-17.0.7
 MAVEN_HOME		E:\ProgramFiles\apache-maven
-NODE_HOME			E:\ProgramFiles\node
+NODE_HOME			E:\ProgramFiles\nodejs
 GIT_HOME				E:\ProgramFiles\Git
-MYSQL_HOME			E:\ProgramFiles\mysql
+MYSQL_HOME			E:\ProgramFiles\mysql-8.0.33
 ERLANG_HOME		E:\ProgramFiles\erl10.5
-PYTHON_HOME		E:\ProgramFiles\python-3.9.0
+PYTHON_HOME		E:\ProgramFiles\python311
 PATH						%JAVA_HOME%\bin;%MAVEN_HOME%\bin;%NODE_HOME%;%GIT_HOME%\mingw64\bin;%MYSQL_HOME%\bin;%ERLANG_HOME%\bin;%PYTHON_HOME%;%PYTHON_HOME%\Scripts;
+IDEA_JDK					E:\ProgramFiles\jbr-17.0.7
+PYCHARM_JDK		%IDEA_JDK%
+WEBIDE_JDK			%IDEA_JDK%
