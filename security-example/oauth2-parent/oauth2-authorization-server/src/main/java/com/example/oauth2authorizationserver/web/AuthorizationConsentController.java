@@ -19,6 +19,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * 授权同意控制器
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午5:45:06
+ */
 @Controller
 public class AuthorizationConsentController {
 	private final RegisteredClientRepository registeredClientRepository;
@@ -37,7 +43,7 @@ public class AuthorizationConsentController {
 			@RequestParam(OAuth2ParameterNames.STATE) String state,
 			@RequestParam(name = OAuth2ParameterNames.USER_CODE, required = false) String userCode) {
 
-		// Remove scopes that were already approved
+		// 删除已批准的作用域
 		Set<String> scopesToApprove = new HashSet<>();
 		Set<String> previouslyApprovedScopes = new HashSet<>();
 		RegisteredClient registeredClient = this.registeredClientRepository.findByClientId(clientId);
@@ -71,7 +77,7 @@ public class AuthorizationConsentController {
 		} else {
 			model.addAttribute("requestURI", "/oauth2/authorize");
 		}
-
+		// 跳转到同意页面
 		return "consent";
 	}
 
@@ -85,15 +91,13 @@ public class AuthorizationConsentController {
 	}
 
 	public static class ScopeWithDescription {
-		private static final String DEFAULT_DESCRIPTION = "UNKNOWN SCOPE - We cannot provide information about this permission, use caution when granting this.";
+		private static final String DEFAULT_DESCRIPTION = "未知范围 - 我们无法提供有关此权限的信息，授予此权限时请谨慎。";
 		private static final Map<String, String> scopeDescriptions = new HashMap<>();
 		static {
-			scopeDescriptions.put(OidcScopes.PROFILE,
-					"This application will be able to read your profile information.");
-			scopeDescriptions.put("message.read", "This application will be able to read your message.");
-			scopeDescriptions.put("message.write",
-					"This application will be able to add new messages. It will also be able to edit and delete existing messages.");
-			scopeDescriptions.put("other.scope", "This is another scope example of a scope description.");
+			scopeDescriptions.put(OidcScopes.PROFILE, "此应用程序将能够读取您的个人资料信息。");
+			scopeDescriptions.put("message.read", "此应用程序将能够读取您的消息。");
+			scopeDescriptions.put("message.write", "此应用程序将能够添加新的消息。它也将能够编辑和删除现有的消息。");
+			scopeDescriptions.put("other.scope", "这是另一个范围示例的范围描述。");
 		}
 
 		public final String scope;
