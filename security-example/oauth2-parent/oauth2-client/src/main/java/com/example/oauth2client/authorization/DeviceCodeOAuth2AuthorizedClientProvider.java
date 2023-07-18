@@ -22,6 +22,12 @@ import org.springframework.util.Assert;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * 设备码OAuth2授权客户端提供者
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午6:35:02
+ */
 public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2AuthorizedClientProvider {
 
 	private OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> accessTokenResponseClient = new OAuth2DeviceAccessTokenResponseClient();
@@ -52,22 +58,15 @@ public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2Aut
 		}
 		OAuth2AuthorizedClient authorizedClient = context.getAuthorizedClient();
 		if (authorizedClient != null && !hasTokenExpired(authorizedClient.getAccessToken())) {
-			// If client is already authorized but access token is NOT expired than no
-			// need for re-authorization
+			// 如果客户端已被授权，但访问令牌未过期，则不需要重新授权
 			return null;
 		}
 		if (authorizedClient != null && authorizedClient.getRefreshToken() != null) {
-			// If client is already authorized but access token is expired and a
-			// refresh token is available, delegate to refresh_token.
+			// 如果客户端已被授权，但访问令牌已过期，且刷新令牌可用，则委托给refresh_token。
 			return null;
 		}
-		// *****************************************************************
-		// Get device_code set via
-		// DefaultOAuth2AuthorizedClientManager#setContextAttributesMapper()
-		// *****************************************************************
 		String deviceCode = context.getAttribute(OAuth2ParameterNames.DEVICE_CODE);
-		// Attempt to authorize the client, which will repeatedly fail until the user
-		// grants authorization
+		// 尝试授权客户端，这将反复失败，直到用户授予权限
 		OAuth2DeviceGrantRequest deviceGrantRequest = new OAuth2DeviceGrantRequest(clientRegistration, deviceCode);
 		OAuth2AccessTokenResponse tokenResponse = getTokenResponse(clientRegistration, deviceGrantRequest);
 		return new OAuth2AuthorizedClient(clientRegistration, context.getPrincipal().getName(),
@@ -92,7 +91,7 @@ public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2Aut
 			HttpServletRequest request = authorizeRequest.getAttribute(HttpServletRequest.class.getName());
 			Assert.notNull(request, "request cannot be null");
 
-			// Obtain device code from request
+			// 从请求中获取设备代码
 			String deviceCode = request.getParameter(OAuth2ParameterNames.DEVICE_CODE);
 			return (deviceCode != null) ? Collections.singletonMap(OAuth2ParameterNames.DEVICE_CODE, deviceCode)
 					: Collections.emptyMap();

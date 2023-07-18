@@ -11,6 +11,12 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
+/**
+ * Spring安全框架配置
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午7:05:15
+ */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class SecurityConfig {
@@ -30,8 +36,7 @@ public class SecurityConfig {
 		OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler = new OidcClientInitiatedLogoutSuccessHandler(
 				clientRegistrationRepository);
 
-		// Set the location that the End-User's User Agent will be redirected to
-		// after the logout has been performed at the Provider
+		// 设置在提供程序执行注销后最终用户的用户代理将被重定向到的位置
 		oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/logged-out");
 
 		return oidcLogoutSuccessHandler;

@@ -20,6 +20,12 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * OAuth2设备访问令牌响应客户端
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午6:36:35
+ */
 public final class OAuth2DeviceAccessTokenResponseClient
 		implements OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> {
 
@@ -42,15 +48,12 @@ public final class OAuth2DeviceAccessTokenResponseClient
 
 		HttpHeaders headers = new HttpHeaders();
 		/*
-		 * This sample demonstrates the use of a public client that does not store
-		 * credentials or authenticate with the authorization server.
+		 * 此示例演示不存储凭据或不通过授权服务器进行身份验证的公共客户端的使用。
 		 *
-		 * See DeviceClientAuthenticationProvider in the authorization server sample for
-		 * an example customization that allows public clients.
+		 * 有关允许公共客户端的自定义示例，请参见授权服务器示例中的DeviceClientAuthenticationProvider。
 		 *
-		 * For a confidential client, change the client-authentication-method to
-		 * client_secret_basic and set the client-secret to send the OAuth 2.0 Token
-		 * Request with a clientId/clientSecret.
+		 * 对于机密客户端，将client-authentication-method更改为client_secret_basic，
+		 * 并将client-secret设置为发送带有clientId/clientSecret的OAuth 2.0令牌请求。
 		 */
 		if (!clientRegistration.getClientAuthenticationMethod().equals(ClientAuthenticationMethod.NONE)) {
 			headers.setBasicAuth(clientRegistration.getClientId(), clientRegistration.getClientSecret());
@@ -69,9 +72,7 @@ public final class OAuth2DeviceAccessTokenResponseClient
 			return this.restOperations.exchange(requestEntity, OAuth2AccessTokenResponse.class).getBody();
 		} catch (RestClientException ex) {
 			OAuth2Error oauth2Error = new OAuth2Error("invalid_token_response",
-					"An error occurred while attempting to retrieve the OAuth 2.0 Access Token Response: "
-							+ ex.getMessage(),
-					null);
+					"尝试检索OAuth 2.0访问令牌响应时出错: " + ex.getMessage(), null);
 			throw new OAuth2AuthorizationException(oauth2Error, ex);
 		}
 	}

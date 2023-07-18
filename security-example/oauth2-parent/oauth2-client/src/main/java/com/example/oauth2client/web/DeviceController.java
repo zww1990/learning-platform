@@ -1,7 +1,5 @@
 package com.example.oauth2client.web;
 
-import static org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
-
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -18,6 +16,7 @@ import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2AuthorizationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
@@ -34,6 +33,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
+/**
+ * 设备控制器
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午7:29:55
+ */
 @Controller
 public class DeviceController {
 
@@ -74,15 +79,12 @@ public class DeviceController {
 				.uri(deviceAuthorizationUri)//
 				.headers(headers -> {
 					/*
-					 * This sample demonstrates the use of a public client that does not store
-					 * credentials or authenticate with the authorization server.
+					 * 此示例演示不存储凭据或不通过授权服务器进行身份验证的公共客户端的使用。
 					 *
-					 * See DeviceClientAuthenticationProvider in the authorization server sample for
-					 * an example customization that allows public clients.
+					 * 有关允许公共客户端的自定义示例，请参见授权服务器示例中的DeviceClientAuthenticationProvider。
 					 *
-					 * For a confidential client, change the client-authentication-method to
-					 * client_secret_basic and set the client-secret to send the OAuth 2.0 Device
-					 * Authorization Request with a clientId/clientSecret.
+					 * 对于机密客户端，请将client-authentication-method更改为client_secret_basic，
+					 * 并将client-secret设置为使用clientId/clientSecret发送OAuth 2.0设备授权请求。
 					 */
 					if (!clientRegistration.getClientAuthenticationMethod().equals(ClientAuthenticationMethod.NONE)) {
 						headers.setBasicAuth(clientRegistration.getClientId(), clientRegistration.getClientSecret());
@@ -103,40 +105,35 @@ public class DeviceController {
 		model.addAttribute("expiresAt", expiresAt);
 		model.addAttribute("userCode", responseParameters.get(OAuth2ParameterNames.USER_CODE));
 		model.addAttribute("verificationUri", responseParameters.get(OAuth2ParameterNames.VERIFICATION_URI));
-		// Note: You could use a QR-code to display this URL
+		// 备注：您可以使用一个QR代码来显示这个URL
 		model.addAttribute("verificationUriComplete",
 				responseParameters.get(OAuth2ParameterNames.VERIFICATION_URI_COMPLETE));
-
+		// 跳转到设备授权页面
 		return "device-authorize";
 	}
 
-	/**
-	 * @see #handleError(OAuth2AuthorizationException)
-	 */
 	@PostMapping("/device_authorize")
 	public ResponseEntity<Void> poll(@RequestParam(OAuth2ParameterNames.DEVICE_CODE) String deviceCode,
 			@RegisteredOAuth2AuthorizedClient("messaging-client-device-code") OAuth2AuthorizedClient authorizedClient) {
 
 		/*
-		 * The client will repeatedly poll until authorization is granted.
+		 * 客户端将重复轮询，直到授权被授予。
 		 *
-		 * The OAuth2AuthorizedClientManager uses the device_code parameter to make a
-		 * token request, which returns authorization_pending until the user has granted
-		 * authorization.
+		 * OAuth2AuthorizedClientManager使用device_code参数发出令牌请求，该请求返回authorization_pending
+		 * ，直到用户授予授权。
 		 *
-		 * If the user has denied authorization, access_denied is returned and polling
-		 * should stop.
+		 * 如果用户拒绝授权，则返回access_denied，轮询应该停止。
 		 *
-		 * If the device code expires, expired_token is returned and polling should
-		 * stop.
+		 * 如果设备代码过期，将返回expired_token，轮询将停止。
 		 *
-		 * This endpoint simply returns 200 OK when the client is authorized.
+		 * 当客户端被授权时，这个端点简单地返回200 OK。
 		 */
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@ExceptionHandler(OAuth2AuthorizationException.class)
 	public ResponseEntity<OAuth2Error> handleError(OAuth2AuthorizationException ex) {
+		// 异常处理
 		String errorCode = ex.getError().getErrorCode();
 		if (DEVICE_GRANT_ERRORS.contains(errorCode)) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getError());
@@ -150,12 +147,13 @@ public class DeviceController {
 
 		String[] messages = this.webClient.get()//
 				.uri(this.messagesBaseUri)//
-				.attributes(oauth2AuthorizedClient(authorizedClient))//
+				.attributes(
+						ServletOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient(authorizedClient))//
 				.retrieve()//
 				.bodyToMono(String[].class)//
 				.block();
 		model.addAttribute("messages", messages);
-
+		// 跳转到首页
 		return "index";
 	}
 

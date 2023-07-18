@@ -13,6 +13,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.oauth2client.authorization.DeviceCodeOAuth2AuthorizedClientProvider;
 
+/**
+ * Web客户端配置
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午7:09:04
+ */
 @Configuration
 public class WebClientConfig {
 
@@ -38,7 +44,7 @@ public class WebClientConfig {
 				clientRegistrationRepository, authorizedClientRepository);
 		authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 
-		// Set a contextAttributesMapper to obtain device_code from the request
+		// 设置contextAttributesMapper从请求中获取device_code
 		authorizedClientManager.setContextAttributesMapper(
 				DeviceCodeOAuth2AuthorizedClientProvider.deviceCodeContextAttributesMapper());
 
