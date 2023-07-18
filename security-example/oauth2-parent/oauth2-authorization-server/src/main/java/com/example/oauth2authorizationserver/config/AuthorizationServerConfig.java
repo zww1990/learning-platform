@@ -39,6 +39,12 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 
+/**
+ * 授权服务配置
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午7:49:15
+ */
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
 	private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
@@ -52,19 +58,14 @@ public class AuthorizationServerConfig {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
 		/*
-		 * This sample demonstrates the use of a public client that does not store
-		 * credentials or authenticate with the authorization server.
+		 * 此示例演示不存储凭据或不通过授权服务器进行身份验证的公共客户端的使用。
 		 *
-		 * The following components show how to customize the authorization server to
-		 * allow for device clients to perform requests to the OAuth 2.0 Device
-		 * Authorization Endpoint and Token Endpoint without a clientId/clientSecret.
+		 * 以下组件显示如何自定义授权服务器，以允许设备客户端在没有clientId/clientSecret的情况下执行对OAuth
+		 * 2.0设备授权端点和令牌端点的请求。
 		 *
-		 * CAUTION: These endpoints will not require any authentication, and can be
-		 * accessed by any client that has a valid clientId.
+		 * 注意事项：这些端点不需要任何身份验证，具有有效clientId的任何客户端都可以访问这些端点。
 		 *
-		 * It is therefore RECOMMENDED to carefully monitor the use of these endpoints
-		 * and employ any additional protections as needed, which is outside the scope
-		 * of this sample.
+		 * 因此，建议仔细监视这些端点的使用，并根据需要使用任何额外的保护，这超出了本示例的范围。
 		 */
 		DeviceClientAuthenticationConverter deviceClientAuthenticationConverter = new DeviceClientAuthenticationConverter(
 				authorizationServerSettings.getDeviceAuthorizationEndpoint());
@@ -117,7 +118,7 @@ public class AuthorizationServerConfig {
 				.scope("message.write")//
 				.build();
 
-		// Save registered client's in db as if in-memory
+		// 将注册的客户端保存在数据库中，就像在内存中一样
 		MyJdbcRegisteredClientRepository registeredClientRepository = new MyJdbcRegisteredClientRepository(
 				jdbcTemplate);
 		registeredClientRepository.save(registeredClient);
@@ -135,7 +136,7 @@ public class AuthorizationServerConfig {
 	@Bean
 	OAuth2AuthorizationConsentService authorizationConsentService(JdbcTemplate jdbcTemplate,
 			RegisteredClientRepository registeredClientRepository) {
-		// Will be used by the ConsentController
+		// 将由同意控制器使用
 		return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
 	}
 

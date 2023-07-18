@@ -18,6 +18,12 @@ import com.example.oauth2authorizationserver.authentication.DeviceClientAuthenti
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * 设备客户端身份验证转换器
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午8:11:49
+ */
 public final class DeviceClientAuthenticationConverter implements AuthenticationConverter {
 	private final RequestMatcher deviceAuthorizationRequestMatcher;
 	private final RequestMatcher deviceAccessTokenRequestMatcher;

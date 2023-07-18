@@ -18,6 +18,12 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import com.example.oauth2authorizationserver.federation.FederatedIdentityAuthenticationSuccessHandler;
 
+/**
+ * Spring安全框架配置
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午7:54:08
+ */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class DefaultSecurityConfig {

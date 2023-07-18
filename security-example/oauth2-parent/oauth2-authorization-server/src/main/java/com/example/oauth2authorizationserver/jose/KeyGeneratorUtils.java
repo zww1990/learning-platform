@@ -11,6 +11,12 @@ import java.security.spec.EllipticCurve;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+/**
+ * 密钥生成器工具
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午8:05:47
+ */
 final class KeyGeneratorUtils {
 
 	private KeyGeneratorUtils() {
