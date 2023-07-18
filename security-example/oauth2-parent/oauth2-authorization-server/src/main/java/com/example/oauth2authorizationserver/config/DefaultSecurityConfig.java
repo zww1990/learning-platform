@@ -1,5 +1,7 @@
 package com.example.oauth2authorizationserver.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +11,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
@@ -37,13 +39,16 @@ public class DefaultSecurityConfig {
 
 	@SuppressWarnings("deprecation")
 	@Bean
-	UserDetailsService users() {
+	UserDetailsService users(DataSource dataSource) {
+		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
 		UserDetails user = User.withDefaultPasswordEncoder()//
 				.username("user1")//
 				.password("password")//
 				.roles("USER")//
 				.build();
-		return new InMemoryUserDetailsManager(user);
+		manager.deleteUser(user.getUsername());
+		manager.createUser(user);
+		return manager;
 	}
 
 	@Bean
