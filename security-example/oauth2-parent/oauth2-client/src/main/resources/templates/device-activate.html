@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring Authorization Server sample</title>
+    <title>Spring客户端示例</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.css" th:href="@{/webjars/bootstrap/css/bootstrap.css}" />
 </head>
 <body>
@@ -11,12 +11,12 @@
 <div class="container">
     <div class="row py-5">
         <div class="col-md-5">
-            <h2>Activation Required</h2>
-            <p>You must activate this device.</p>
-            <a th:href="@{/device_authorize}" class="btn btn-primary" role="button">Activate</a>
+            <h2>需要激活</h2>
+            <p>您必须激活此设备。</p>
+            <a th:href="@{/device_authorize}" class="btn btn-primary" role="button">激活</a>
         </div>
         <div class="col-md-7">
-            <img src="/assets/img/devices.png" th:src="@{/assets/img/devices.png}" class="img-responsive" alt="Devices">
+            <img src="/assets/img/devices.png" th:src="@{/assets/img/devices.png}" class="img-responsive" alt="设备">
         </div>
     </div>
 </div>
