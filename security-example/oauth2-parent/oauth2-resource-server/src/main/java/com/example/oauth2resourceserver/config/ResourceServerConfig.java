@@ -7,6 +7,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * 资源服务配置
+ * 
+ * @author zhang weiwei
+ * @since 2023年7月18日,下午6:06:55
+ */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class ResourceServerConfig {
