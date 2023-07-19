@@ -39,7 +39,8 @@ public class SpringSecurityConfig {
 				.csrf(csrf -> csrf.disable())//
 				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.addFilterAfter(requestHeaderAuthenticationFilter(), HeaderWriterFilter.class)
-				.authorizeHttpRequests(request -> request.requestMatchers("/api/**").authenticated())
+				.authorizeHttpRequests(request -> request.requestMatchers("/api/**").authenticated()
+						.requestMatchers("/demo/**").permitAll())
 				.exceptionHandling(handling -> handling.authenticationEntryPoint(
 						(request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)));
 		return httpSecurity.build();

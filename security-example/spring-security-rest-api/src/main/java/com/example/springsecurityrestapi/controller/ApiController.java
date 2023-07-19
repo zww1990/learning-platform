@@ -3,7 +3,6 @@ package com.example.springsecurityrestapi.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,10 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023年7月19日,下午1:46:03
  */
 @RestController
-@RequestMapping("/api")
 public class ApiController {
-	@GetMapping("/hello")
+	@GetMapping("/api/hello")
 	public Object hello() {
 		return List.of("hello world");
+	}
+
+	@GetMapping("/demo/hello")
+	public Object hello2() {
+		return List.of("你好世界！");
 	}
 }
