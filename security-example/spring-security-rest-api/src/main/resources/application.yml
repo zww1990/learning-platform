@@ -2,6 +2,9 @@ server:
   servlet:
     context-path: /app
   port: 8088
+  ssl:
+    key-store: classpath:tomcat.ks
+    key-store-password: springboot
 
 spring:
   application:
