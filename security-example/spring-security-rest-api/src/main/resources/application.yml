@@ -1,0 +1,14 @@
+server:
+  servlet:
+    context-path: /app
+  port: 8088
+
+spring:
+  application:
+    name: spring-security-rest-api
+
+api:
+  auth:
+    header-name: X-API-KEY
+    header-value: hello
+
