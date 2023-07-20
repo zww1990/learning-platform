@@ -45,9 +45,6 @@ public class DeviceController {
 	private static final Set<String> DEVICE_GRANT_ERRORS = new HashSet<>(
 			Arrays.asList("authorization_pending", "slow_down", "access_denied", "expired_token"));
 
-	private static final ParameterizedTypeReference<Map<String, Object>> TYPE_REFERENCE = new ParameterizedTypeReference<>() {
-	};
-
 	private final ClientRegistrationRepository clientRegistrationRepository;
 
 	private final WebClient webClient;
@@ -93,7 +90,7 @@ public class DeviceController {
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)//
 				.body(BodyInserters.fromFormData(requestParameters))//
 				.retrieve()//
-				.bodyToMono(TYPE_REFERENCE)//
+				.bodyToMono(ParameterizedTypeReference.<Map<String, Object>>forType(Map.class))//
 				.block();
 
 		Objects.requireNonNull(responseParameters, "Device Authorization Response cannot be null");
