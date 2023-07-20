@@ -31,8 +31,9 @@ public class DefaultSecurityConfig {
 
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/assets/**", "/webjars/**", "/login")
-				.permitAll().anyRequest().authenticated())//
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers("/assets/**", "/webjars/**", "/login", "/favicon.ico")
+						.permitAll().anyRequest().authenticated())//
 				.formLogin(formLogin -> formLogin.loginPage("/login"))//
 				.oauth2Login(
 						oauth2Login -> oauth2Login.loginPage("/login").successHandler(authenticationSuccessHandler()));
