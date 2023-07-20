@@ -3,6 +3,8 @@ package com.example.oauth2authorizationserver.federation;
 import java.io.IOException;
 import java.util.function.Consumer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -22,9 +24,11 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public final class FederatedIdentityAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+	private static final Logger log = LoggerFactory.getLogger(FederatedIdentityAuthenticationSuccessHandler.class);
 	private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 
 	private Consumer<OAuth2User> oauth2UserHandler = (user) -> {
+		log.warn("{}", user);
 	};
 
 	private Consumer<OidcUser> oidcUserHandler = (user) -> this.oauth2UserHandler.accept(user);
