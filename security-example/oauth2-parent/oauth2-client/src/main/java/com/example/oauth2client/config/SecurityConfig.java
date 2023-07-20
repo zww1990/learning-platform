@@ -24,8 +24,9 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http,
 			ClientRegistrationRepository clientRegistrationRepository) throws Exception {
-		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/webjars/**", "/assets/**", "/logged-out")
-				.permitAll().anyRequest().authenticated())//
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers("/webjars/**", "/assets/**", "/logged-out", "/favicon.ico")
+						.permitAll().anyRequest().authenticated())//
 				.oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/messaging-client-oidc"))//
 				.oauth2Client(withDefaults())//
 				.logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository)));
