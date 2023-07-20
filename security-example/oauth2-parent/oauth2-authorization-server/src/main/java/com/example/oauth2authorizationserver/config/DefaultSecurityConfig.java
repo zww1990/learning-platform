@@ -11,6 +11,7 @@ import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -43,13 +44,14 @@ public class DefaultSecurityConfig {
 		return new FederatedIdentityAuthenticationSuccessHandler();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Bean
 	UserDetailsService users(DataSource dataSource) {
 		JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
-		UserDetails user = User.withDefaultPasswordEncoder()//
-				.username("user1")//
-				.password("password")//
+		// 此处为了方便演示，初始化了一个用户
+		UserDetails user = User.builder()//
+				.passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)//
+				.username("test")//
+				.password("123456")//
 				.roles("USER")//
 				.build();
 		manager.deleteUser(user.getUsername());
