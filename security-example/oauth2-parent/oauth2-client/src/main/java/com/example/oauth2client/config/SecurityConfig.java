@@ -1,9 +1,8 @@
 package com.example.oauth2client.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
@@ -28,7 +27,7 @@ public class SecurityConfig {
 				authorize -> authorize.requestMatchers("/webjars/**", "/assets/**", "/logged-out", "/favicon.ico")
 						.permitAll().anyRequest().authenticated())//
 				.oauth2Login(oauth2Login -> oauth2Login.loginPage("/oauth2/authorization/messaging-client-oidc"))//
-				.oauth2Client(withDefaults())//
+				.oauth2Client(Customizer.withDefaults())//
 				.logout(logout -> logout.logoutSuccessHandler(oidcLogoutSuccessHandler(clientRegistrationRepository)));
 		return http.build();
 	}
