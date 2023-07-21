@@ -68,7 +68,7 @@ public abstract class ExcelUtils {
 				writeWorkbook.write(out);
 				out.flush();
 			}
-			System.err.println(String.format("excel文件合并成功，合并后文件路径 >>> [ %s ]", fullPath));
+			System.err.printf("excel文件合并成功，合并后文件路径 >>> [ %s ]%n", fullPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,9 +92,7 @@ public abstract class ExcelUtils {
 			target.setColumnWidth(i, source.getColumnWidth(i));
 		}
 		// 复制每行内容
-		Iterator<Row> it = source.iterator();
-		while (it.hasNext()) {
-			Row src = it.next();
+		for (Row src : source) {
 			int rowNum;
 			if (isNew) {
 				rowNum = src.getRowNum();
@@ -178,7 +176,6 @@ public abstract class ExcelUtils {
 			target.setCellErrorValue(source.getErrorCellValue());
 		} else if (cellType == CellType.FORMULA) {
 			target.setCellFormula(source.getCellFormula());
-		} else {
 		}
 	}
 

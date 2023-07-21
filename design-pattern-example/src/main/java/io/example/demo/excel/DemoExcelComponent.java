@@ -59,9 +59,8 @@ public class DemoExcelComponent implements ExcelComponent {
 		try (InputStream is = new ClassPathResource("menu-list.json").getInputStream()) {
 			List<MenuData> menuList = json.readValue(is,
 					json.getTypeFactory().constructParametricType(List.class, MenuData.class));
-			Map<String, List<MenuData>> menuMap = menuList.stream()
+			return menuList.stream()
 					.collect(Collectors.groupingBy(MenuData::getComponent));
-			return menuMap;
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage(), e);
 			return Collections.emptyMap();
