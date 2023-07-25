@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mybatis-fluent
+    name: mybatis-fluent-example
   jmx:
     enabled: false
   autoconfigure:
