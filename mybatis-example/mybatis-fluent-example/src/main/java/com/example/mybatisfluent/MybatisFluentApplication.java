@@ -15,7 +15,7 @@ public class MybatisFluentApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(MybatisFluentApplication.class, args);
 		log.info("Get Bean Definition Count = {}", context.getBeanDefinitionCount());
-		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
 
 	@Bean
