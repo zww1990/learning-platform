@@ -38,7 +38,7 @@ public class EntityGeneratorDemo {
 			//
 			alphabetOrder = false,
 			//
-			isLombok = false,
+			isLombok = true, isSetterChain = true,
 			//
 			isRichEntity = false,
 			// 设置哪些表要生成Entity文件

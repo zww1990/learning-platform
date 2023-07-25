@@ -17,11 +17,11 @@ import lombok.experimental.Accessors;
  * @author Powered By Fluent Mybatis
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-@FluentMybatis(table = "hello_world", schema = "example", suffix = "", useDao = false, desc = "简单演示表")
 @ToString
 @Getter
 @Setter
 @Accessors(chain = true)
+@FluentMybatis(table = "hello_world", schema = "example", suffix = "", useDao = false, desc = "简单演示表")
 public class HelloWorld extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
