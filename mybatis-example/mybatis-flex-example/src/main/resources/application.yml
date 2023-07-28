@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: mybatis-flex-example
+  jmx:
+    enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+  sql:
+    init:
+      mode: never
+  datasource:
+    url: jdbc:mysql://localhost:3306/example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+mybatis-flex:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    return-instance-for-empty-row: true
+    jdbc-type-for-null: null
+    nullable-on-for-each: true
+    arg-name-based-constructor-auto-mapping: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
