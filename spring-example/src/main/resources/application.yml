@@ -6,4 +6,8 @@ spring:
     - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
     - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
     - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+    - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
+    - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+  application:
+    name: spring-example
 

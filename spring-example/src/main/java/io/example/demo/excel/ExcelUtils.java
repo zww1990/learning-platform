@@ -15,6 +15,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ExcelUtils
@@ -23,6 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @since 2022年10月21日,下午7:51:12
  */
 public abstract class ExcelUtils {
+	public static Logger log = LoggerFactory.getLogger(ExcelUtils.class);
 
 	/**
 	 * 合并多个excel文件
@@ -70,7 +73,7 @@ public abstract class ExcelUtils {
 			}
 			System.err.printf("excel文件合并成功，合并后文件路径 >>> [ %s ]%n", fullPath);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.getLocalizedMessage(), e);
 		}
 	}
 

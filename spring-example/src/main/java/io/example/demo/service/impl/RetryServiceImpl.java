@@ -15,14 +15,14 @@ import lombok.extern.slf4j.Slf4j;
  * RetryServiceImpl
  * 
  * @author zhangweiwei
- * @date 2021年6月17日,下午1:08:51
+ * @since 2021年6月17日,下午1:08:51
  */
 @Service
 @Slf4j
 public class RetryServiceImpl implements RetryService {
 
 	@Override
-	@Retryable(value = Exception.class, maxAttempts = 3)
+	@Retryable(retryFor = Exception.class, maxAttempts = 4)
 	public void doRetry(AtomicInteger times) {
 		log.info("当前调用次数: {}", times.incrementAndGet());
 		throw new RuntimeException("调用方法发生异常(doRetry): " + times.get());
@@ -34,7 +34,7 @@ public class RetryServiceImpl implements RetryService {
 	}
 
 	@Override
-	@Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(value = 3000))
+	@Retryable(retryFor = Exception.class, maxAttempts = 4, backoff = @Backoff(value = 3000))
 	public void doRetryForBackOff(AtomicInteger times) {
 		log.info("当前调用次数: {}", times.incrementAndGet());
 		throw new RuntimeException("调用方法发生异常(doRetryForBackOff): " + times.get());
@@ -42,7 +42,7 @@ public class RetryServiceImpl implements RetryService {
 
 	@Override
 	public void doRetryTemplate(AtomicInteger times) {
-		RetryTemplate template = RetryTemplate.builder().maxAttempts(3).fixedBackoff(3000).retryOn(Exception.class)
+		RetryTemplate template = RetryTemplate.builder().maxAttempts(4).fixedBackoff(3000).retryOn(Exception.class)
 				.build();
 		template.execute(ctx -> {
 			log.info("当前调用次数: {}", times.incrementAndGet());
