@@ -1,4 +1,4 @@
-1、生成类和方法注释
+1、生成类或方法注释
 **
  * $title$$param$$return$
  * @author $user$
@@ -11,3 +11,23 @@
  user: user()
  date: date("yyyy-MM-dd HH:mm:ss")
  
+ 2、声明slf4j成员变量
+ public static org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger($class_name$.class);
+$END$
+
+class_name: className()
+
+3、生成junit5测试方法
+@org.junit.jupiter.api.Test
+public void test$END$() {
+    try {
+        System.err.println();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+4、将方法形参名称和值打印到 log.info
+log.info($format$);
+
+format: groovyScript("'\"' + _2 + '(): ' + (_1.isEmpty() ? '\"' : _1.withIndex().collect { el, index -> el + ' = {}' }.join(', ') + '\", ' + _1.withIndex().collect { el, index -> el }.join(', '))", methodParameters(), methodName())
