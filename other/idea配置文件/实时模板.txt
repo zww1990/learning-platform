@@ -57,9 +57,9 @@ public Object $method_name$() {
     return "$return$";
 }
 
-path: 
-method_name: path
-return: path
+method_name: "get"
+path: groovyScript("_1.toLowerCase()", methodName())
+return: methodName()
 
 7、声明@PostMapping方法
 快捷键：post
@@ -69,9 +69,9 @@ public Object $method_name$() {
     return "$return$";
 }
 
-path: 
-method_name: path
-return: path
+method_name: "post"
+path: groovyScript("_1.toLowerCase()", methodName())
+return: methodName()
 
 8、声明@PutMapping方法
 快捷键：put
@@ -81,9 +81,9 @@ public Object $method_name$() {
     return "$return$";
 }
 
-path: 
-method_name: path
-return: path
+method_name: "put"
+path: groovyScript("_1.toLowerCase()", methodName())
+return: methodName()
 
 9、声明@DeleteMapping方法
 快捷键：del
@@ -93,6 +93,16 @@ public Object $method_name$() {
     return "$return$";
 }
 
-path: 
-method_name: path
-return: path
+method_name: "delete"
+path: groovyScript("_1.toLowerCase()", methodName())
+return: methodName()
+
+10、生成try-catch语句
+快捷键：tryc
+
+try {
+    $END$
+} catch (Exception e) {
+    log.error(e.getLocalizedMessage(), e);
+}
+
