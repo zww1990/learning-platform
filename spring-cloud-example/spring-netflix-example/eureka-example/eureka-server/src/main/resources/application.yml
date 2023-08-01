@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: eureka-server
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+
+eureka:
+  instance:
+    # 主机名，如果可以在配置时确定的话（否则将从操作系统中猜测）。
+    hostname: localhost
+    # 标志，表示在猜测主机名时，应该优先使用服务器的IP地址，而不是操作系统报告的主机名。
+    prefer-ip-address: true
+    # 获取要在eureka中注册的这个实例的唯一ID（在appName的范围内）。
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    # 获取此实例所在的区域（在AWS数据中心中使用）。
+    region: cn-beijing-1
+    # 指示此实例是否应向eureka服务器注册其信息以供其他人发现。在某些情况下，您不希望自己的实例被发现，而只希望发现其他实例。
+    register-with-eureka: false
+    # 指示此客户端是否应从eureka服务器获取eureka注册信息。
+    fetch-registry: false
+    # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
