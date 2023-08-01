@@ -11,7 +11,11 @@ spring:
     multipart:
       enabled: false
   profiles:
-    active: cluster
+    active:
+    # 集群模式
+#    - cluster
+    # 独立模式
+    - standalone
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
