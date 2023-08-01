@@ -1,7 +1,3 @@
-spring:
-  application:
-    name: eureka-server-01
-
 # 集群模式
 eureka:
   instance:
