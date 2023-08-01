@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HelloController {
 	@GetMapping("/say")
 	public List<String> say(@RequestParam String name) {
-		log.info("say(): name = {}", name);
+		log.info("提供者：say(): name = {}", name);
 		return List.of("你好，[" + name + "]! ");
 	}
 }
