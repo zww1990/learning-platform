@@ -1,0 +1,28 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: eureka-consumer
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+
+eureka:
+  client:
+    # 获取此实例所在的区域（在AWS数据中心中使用）。
+    region: cn-beijing-1
+    # 指示此实例是否应向eureka服务器注册其信息以供其他人发现。在某些情况下，您不希望自己的实例被发现，而只希望发现其他实例。
+    register-with-eureka: false
+    # 指示从eureka服务器获取注册信息的频率（以秒为单位）。
+    registry-fetch-interval-seconds: 10
+    # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+
