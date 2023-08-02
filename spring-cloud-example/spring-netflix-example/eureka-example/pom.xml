@@ -28,6 +28,7 @@
 		<module>eureka-server</module>
 		<module>eureka-server-02</module>
 		<module>eureka-provider</module>
+		<module>eureka-provider-api</module>
 		<module>eureka-consumer</module>
 	</modules>
 
@@ -50,6 +51,11 @@
       					<artifactId>spring-boot-starter-tomcat</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.example</groupId>
+				<artifactId>eureka-provider-api</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
