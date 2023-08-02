@@ -1,11 +1,13 @@
 package com.example.eurekaprovider.controller;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.provider.api.domain.Hello;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,9 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/hello")
 @Slf4j
 public class HelloController {
-	@GetMapping("/say")
-	public List<String> say(@RequestParam String name) {
-		log.info("提供者：say(): name = {}", name);
-		return List.of("你好，[" + name + "]! ");
+	@GetMapping("/get")
+	public Hello get(@RequestParam String name) {
+		log.info("提供者：get(): name = {}", name);
+		return new Hello()//
+				.setId(System.currentTimeMillis())//
+				.setAge(18)//
+				.setBirthday(LocalDate.now().minusYears(18))//
+				.setName(name);
 	}
 }
