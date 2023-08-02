@@ -26,12 +26,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-            	<exclusion>
-	            	<groupId>org.springframework.boot</groupId>
-	      			<artifactId>spring-boot-starter-tomcat</artifactId>
-            	</exclusion>
-            </exclusions>
         </dependency>
         <dependency>
         	<groupId>org.springframework.boot</groupId>
@@ -74,28 +68,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                    	<id>build-info</id>
-                    	<goals>
-                    		<goal>build-info</goal>
-                    	</goals>
-                    </execution>
-                </executions>
-                <configuration>
-                	<excludes>
-                		<exclude>
-                			<groupId>org.projectlombok</groupId>
-                			<artifactId>lombok</artifactId>
-                		</exclude>
-                	</excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
