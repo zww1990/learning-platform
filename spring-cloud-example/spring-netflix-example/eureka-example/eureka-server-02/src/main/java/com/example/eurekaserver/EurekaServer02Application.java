@@ -11,6 +11,12 @@ import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Eureka注册中心启动类
+ * 
+ * @author zhang weiwei
+ * @since 2023年8月1日,下午8:56:31
+ */
 @SpringBootApplication
 @EnableEurekaServer
 @Slf4j

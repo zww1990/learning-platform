@@ -19,7 +19,7 @@ public class EurekaServerApplicationTests {
 	private ApplicationContext context;
 
 	@Test
-	public void contextLoads() {
+	public void testContextLoads() {
 		String[] names = this.context.getBeanDefinitionNames();
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
