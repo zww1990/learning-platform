@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>spring-dubbo-provider-api</artifactId>
+	<artifactId>dubbo-provider-api</artifactId>
 	<packaging>jar</packaging>
-	<name>spring-dubbo-provider-api</name>
+	<name>dubbo-provider-api</name>
 
 	<parent>
 		<groupId>com.example</groupId>
