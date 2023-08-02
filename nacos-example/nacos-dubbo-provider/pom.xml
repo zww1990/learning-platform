@@ -14,12 +14,6 @@
 
     <dependencies>
     	<!-- spring boot -->
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -39,14 +33,16 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        <!-- dubbo-spring-boot-starter -->
 		<dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
+		    <groupId>org.apache.dubbo</groupId>
+		    <artifactId>dubbo-spring-boot-starter</artifactId>
+		</dependency>
+		<!-- dubbo-registry-nacos -->
+		<dependency>
+		    <groupId>org.apache.dubbo</groupId>
+		    <artifactId>dubbo-registry-nacos</artifactId>
+		</dependency>
         <!-- spring cloud -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -66,28 +62,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                    	<id>build-info</id>
-                    	<goals>
-                    		<goal>build-info</goal>
-                    	</goals>
-                    </execution>
-                </executions>
-                <configuration>
-                	<excludes>
-                		<exclude>
-                			<groupId>org.projectlombok</groupId>
-                			<artifactId>lombok</artifactId>
-                		</exclude>
-                	</excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
