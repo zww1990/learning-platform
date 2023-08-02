@@ -14,12 +14,6 @@
 
     <dependencies>
     	<!-- spring boot -->
-        <!-- <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -67,28 +61,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                    	<id>build-info</id>
-                    	<goals>
-                    		<goal>build-info</goal>
-                    	</goals>
-                    </execution>
-                </executions>
-                <configuration>
-                	<excludes>
-                		<exclude>
-                			<groupId>org.projectlombok</groupId>
-                			<artifactId>lombok</artifactId>
-                		</exclude>
-                	</excludes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
