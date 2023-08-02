@@ -4,13 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.support.WebClientAdapter;
-import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-
-import com.example.eurekaconsumer.service.HelloService;
 
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
@@ -23,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023年8月1日,下午9:20:25
  */
 @SpringBootApplication
+@EnableFeignClients
 @Slf4j
 public class EurekaConsumerApplication implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
@@ -42,17 +38,4 @@ public class EurekaConsumerApplication implements WebServerFactoryCustomizer<Und
 		});
 	}
 
-	/**
-	 * 创建接口实例
-	 * 
-	 * @author zhang weiwei
-	 * @since 2023年8月1日,下午10:09:14
-	 * @return
-	 */
-	@Bean
-	HelloService helloService() {
-		HttpServiceProxyFactory factory = HttpServiceProxyFactory
-				.builder(WebClientAdapter.forClient(WebClient.create())).build();
-		return factory.createClient(HelloService.class);
-	}
 }

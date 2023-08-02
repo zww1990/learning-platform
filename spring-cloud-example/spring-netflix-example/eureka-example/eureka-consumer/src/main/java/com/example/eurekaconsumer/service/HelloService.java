@@ -2,9 +2,9 @@ package com.example.eurekaconsumer.service;
 
 import java.util.List;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.service.annotation.GetExchange;
-import org.springframework.web.service.annotation.HttpExchange;
 
 /**
  * 示例服务接口
@@ -12,8 +12,8 @@ import org.springframework.web.service.annotation.HttpExchange;
  * @author zhang weiwei
  * @since 2023年8月1日,下午9:53:26
  */
-@HttpExchange(url = "http://localhost:9091/hello")
+@FeignClient(name = "eureka-provider", path = "/hello")
 public interface HelloService {
-	@GetExchange(url = "/say")
+	@GetMapping("/say")
 	List<String> say(@RequestParam String name);
 }
