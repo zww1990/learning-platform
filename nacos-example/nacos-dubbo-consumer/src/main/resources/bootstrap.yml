@@ -2,8 +2,6 @@ server:
   port: 8084
 
 spring:
-  main:
-    allow-circular-references: true
   application:
     name: dubbo-nacos-consumer
   cloud:
@@ -15,12 +13,15 @@ spring:
         context-path: /nacos
         namespace: 
         file-extension: yml
-      discovery:
-        namespace: public
 
 dubbo:
-  protocol:
-    name: dubbo
-    port: -1
+  registry:
+    address: nacos://localhost:8848
   scan:
     base-packages: com.example.demo
+  application:
+    qos-enable: false
+    qos-enable-compatible: false
+    register-mode: instance
+    service-discovery:
+      migration: FORCE_APPLICATION
