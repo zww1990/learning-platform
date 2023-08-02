@@ -22,6 +22,7 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.4</spring-cloud.version>
 		<spring-boot.version>3.1.2</spring-boot.version>
+		<feign-hc5.version>12.4</feign-hc5.version>
 	</properties>
 
 	<modules>
@@ -51,6 +52,12 @@
       					<artifactId>spring-boot-starter-tomcat</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<!-- feign-hc5 -->
+			<dependency>
+			    <groupId>io.github.openfeign</groupId>
+			    <artifactId>feign-hc5</artifactId>
+			    <version>${feign-hc5.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.example</groupId>

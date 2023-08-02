@@ -15,6 +15,10 @@ spring:
     - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
   cloud:
     openfeign:
+      httpclient:
+        hc5:
+          # 支持使用Feign的Apache HTTP Client 5。
+          enabled: true
       client:
         config:
           default:
