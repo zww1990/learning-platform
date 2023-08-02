@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author zhang weiwei
  * @since 2023年8月1日,下午9:53:26
  */
-@FeignClient(name = "eureka-provider", path = "/hello")
+@FeignClient(name = "eureka-provider")
 public interface HelloService {
-	@GetMapping("/say")
+	@GetMapping("/hello/say")
 	List<String> say(@RequestParam String name);
 }

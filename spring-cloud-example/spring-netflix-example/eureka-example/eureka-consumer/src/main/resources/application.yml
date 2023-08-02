@@ -13,6 +13,16 @@ spring:
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            # 记录请求和响应的标头、正文和元数据。
+            logger-level: FULL
+          # URL 不在注解@FeignClient中提供，但在配置属性中提供。
+#          eureka-provider:
+#            url: http://localhost:9091
 
 eureka:
   client:
