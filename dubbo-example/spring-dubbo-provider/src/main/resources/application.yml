@@ -4,16 +4,19 @@ server:
 spring:
   application:
     name: demo-dubbo-provider
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-    time-zone: Asia/Shanghai
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: 
-    password: 
-    virtual-host: 
-    publisher-returns: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: 
+#    password: 
+#    virtual-host: 
+#    publisher-returns: true
+  servlet:
+    multipart:
+      enabled: false
+  sql:
+    init:
+      mode: never
 
 dubbo:
   protocol:
@@ -29,5 +32,5 @@ dubbo:
     service-discovery:
       migration: FORCE_APPLICATION
 
-rabbitmq:
-  enable: false
+#rabbitmq:
+#  enable: false
