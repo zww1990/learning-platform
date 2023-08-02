@@ -62,6 +62,11 @@
 		<module>shardingsphere-example/sharding-readwrite-splitting</module>
 		<module>shardingsphere-example/sharding-table-splitting</module>
 		<module>shardingsphere-example/sharding-example-generator</module>
+		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-consumer</module>
+		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider</module>
+		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider-api</module>
+		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server</module>
+		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server-02</module>
 		<module>spring-example</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
