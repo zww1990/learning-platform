@@ -5,6 +5,10 @@ spring:
   application:
     name: sentinel-client-b
   cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
     nacos:
       server-addr: localhost:8848
       username: nacos
@@ -30,6 +34,3 @@ spring:
             data-type: json
             rule-type: flow
 
-feign:
-  httpclient:
-    enabled: true
