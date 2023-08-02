@@ -19,6 +19,7 @@
 		<module>design-pattern-example</module>
 		<module>dubbo-example/spring-dubbo-consumer</module>
 		<module>dubbo-example/spring-dubbo-provider</module>
+		<module>dubbo-example/spring-dubbo-provider-api</module>
 		<module>excel-example</module>
 		<module>hibernate-example/hibernate-mysql</module>
 		<module>hibernate-example/hibernate-mysql-service-controller</module>
