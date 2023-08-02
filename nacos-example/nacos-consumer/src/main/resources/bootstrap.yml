@@ -7,6 +7,10 @@ spring:
   application:
     name: nacos-consumer
   cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
     nacos:
       server-addr: localhost:8848
       username: nacos
@@ -23,10 +27,6 @@ spring:
         url: http://localhost:8080
         username: admin
         password: admin@2022
-
-feign:
-  httpclient:
-    enabled: true
 
 management:
   endpoints:

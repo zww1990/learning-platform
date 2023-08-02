@@ -66,10 +66,10 @@
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
 		</dependency>
-		<!-- feign-httpclient -->
+		<!-- feign-hc5 -->
 		<dependency>
 		    <groupId>io.github.openfeign</groupId>
-		    <artifactId>feign-httpclient</artifactId>
+		    <artifactId>feign-hc5</artifactId>
 		</dependency>
     </dependencies>
 
