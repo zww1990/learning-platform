@@ -18,7 +18,8 @@ import lombok.extern.slf4j.Slf4j;
  * @since 2023年8月1日,下午9:20:25
  */
 @SpringBootApplication
-@EnableFeignClients
+//要扫描注解组件的基本包。
+@EnableFeignClients(basePackages = "com.example.provider.api.service")
 @Slf4j
 public class EurekaConsumerApplication implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
