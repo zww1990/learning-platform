@@ -50,11 +50,17 @@
                 <version>${dubbo.version}</version>
                 <type>pom</type>
             </dependency>
+            <dependency>
+				<groupId>com.example</groupId>
+				<artifactId>dubbo-provider-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<modules>
 		<module>spring-dubbo-provider</module>
+		<module>spring-dubbo-provider-api</module>
 		<module>spring-dubbo-consumer</module>
 	</modules>
 	
