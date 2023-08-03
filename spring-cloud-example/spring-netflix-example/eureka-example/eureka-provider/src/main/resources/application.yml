@@ -29,3 +29,15 @@ eureka:
     service-url:
       defaultZone: http://${eureka.instance.hostname}:8081/eureka/
 
+management:
+  endpoint:
+    shutdown:
+      # 启用关闭端点
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        # 包含的端点
+        include:
+        - shutdown
+
