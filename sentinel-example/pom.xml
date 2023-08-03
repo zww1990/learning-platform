@@ -28,7 +28,6 @@
         <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
 		<nacos.client.version>2.2.4</nacos.client.version>
-		<feign-hc5.version>12.4</feign-hc5.version>
     </properties>
 
     <dependencyManagement>
@@ -54,12 +53,6 @@
 			    <groupId>com.alibaba.nacos</groupId>
 			    <artifactId>nacos-client</artifactId>
 			    <version>${nacos.client.version}</version>
-			</dependency>
-			<!-- feign-hc5 -->
-			<dependency>
-			    <groupId>io.github.openfeign</groupId>
-			    <artifactId>feign-hc5</artifactId>
-			    <version>${feign-hc5.version}</version>
 			</dependency>
         </dependencies>
     </dependencyManagement>
