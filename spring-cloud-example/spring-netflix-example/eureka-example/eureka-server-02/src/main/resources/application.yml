@@ -13,6 +13,12 @@ spring:
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+  security:
+    user:
+      # 用户名
+      name: admin
+      # 密码
+      password: admin
 
 # 集群模式
 eureka:
@@ -32,5 +38,5 @@ eureka:
     fetch-registry: true
     # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:8081/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8081/eureka/
 
