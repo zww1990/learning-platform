@@ -38,5 +38,5 @@ eureka:
     registry-fetch-interval-seconds: 10
     # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
     service-url:
-      defaultZone: http://localhost:8081/eureka/
+      defaultZone: http://admin:admin@localhost:8081/eureka/
 
