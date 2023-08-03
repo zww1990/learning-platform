@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: reactive-provider
+  sql:
+    init:
+      mode: never
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+    - org.springframework.boot.autoconfigure.web.reactive.ReactiveMultipartAutoConfiguration
+

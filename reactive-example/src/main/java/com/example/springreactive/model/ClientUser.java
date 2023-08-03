@@ -13,7 +13,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * ClientUser
+ * 用户模型
  * 
  * @author weiwei
  * @version v1
@@ -24,15 +24,22 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString
 public class ClientUser {
+	/** 序列 */
 	@Id
 	private Integer sequence;
+	/** 用户唯一标识 */
 	private String userId;
+	/** 姓名 */
 	private String username;
+	/** 手机号 */
 	private String phoneNumber;
+	/** 性别 */
 	private Integer gender;
+	/** 创建时间 */
 	@ReadOnlyProperty
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private LocalDateTime createdDate;
+	/** 最后修改时间 */
 	@ReadOnlyProperty
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private LocalDateTime modifiedDate;
