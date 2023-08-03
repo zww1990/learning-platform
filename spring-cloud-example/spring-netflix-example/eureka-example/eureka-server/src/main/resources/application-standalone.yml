@@ -16,5 +16,5 @@ eureka:
     fetch-registry: false
     # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
 

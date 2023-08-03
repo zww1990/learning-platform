@@ -6,6 +6,11 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 import io.undertow.server.DefaultByteBufferPool;
 import io.undertow.websockets.jsr.WebSocketDeploymentInfo;
@@ -19,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @SpringBootApplication
 @EnableEurekaServer
+@EnableWebSecurity
 @Slf4j
 public class EurekaServerApplication implements WebServerFactoryCustomizer<UndertowServletWebServerFactory> {
 
@@ -36,6 +42,19 @@ public class EurekaServerApplication implements WebServerFactoryCustomizer<Under
 			webSocketDeploymentInfo.setBuffers(new DefaultByteBufferPool(false, 1024));
 			deploymentInfo.addServletContextAttribute(WebSocketDeploymentInfo.ATTRIBUTE_NAME, webSocketDeploymentInfo);
 		});
+	}
+
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		return http//
+				.httpBasic(Customizer.withDefaults())//
+				.formLogin(Customizer.withDefaults())//
+				.logout(Customizer.withDefaults())//
+				.sessionManagement(Customizer.withDefaults())//
+				.rememberMe(Customizer.withDefaults())//
+				.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())//
+				.csrf(csrf -> csrf.disable())//
+				.build();
 	}
 
 }
