@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: mybatis-plus-example
+  jmx:
+    enabled: false
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
@@ -6,6 +10,18 @@ spring:
     - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
     - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
   profiles:
-    active: test
+    active: local
+
+mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    return-instance-for-empty-row: true
+    jdbc-type-for-null: null
+    nullable-on-for-each: true
+    arg-name-based-constructor-auto-mapping: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
