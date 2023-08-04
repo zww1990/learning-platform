@@ -4,13 +4,6 @@ server:
 spring:
   application:
     name: demo-dubbo-provider
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: 
-#    password: 
-#    virtual-host: 
-#    publisher-returns: true
   servlet:
     multipart:
       enabled: false
@@ -32,5 +25,3 @@ dubbo:
     service-discovery:
       migration: FORCE_APPLICATION
 
-#rabbitmq:
-#  enable: false

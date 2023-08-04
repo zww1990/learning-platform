@@ -10,17 +10,6 @@ spring:
   servlet:
     multipart:
       enabled: false
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: 
-#    password: 
-#    virtual-host: 
-#    listener:
-#      direct:
-#        acknowledge-mode: manual
-#      simple:
-#        acknowledge-mode: manual
 
 dubbo:
   registry:
@@ -31,5 +20,3 @@ dubbo:
     service-discovery:
       migration: FORCE_APPLICATION
 
-#rabbitmq:
-#  enable: false
