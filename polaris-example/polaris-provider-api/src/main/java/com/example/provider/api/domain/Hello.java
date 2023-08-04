@@ -1,6 +1,9 @@
 package com.example.provider.api.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,5 +28,9 @@ public class Hello {
 	/** 年龄 */
 	private int age;
 	/** 生日 */
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthday;
+	/** 创建时间 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	private LocalDateTime createtime;
 }
