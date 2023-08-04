@@ -50,8 +50,6 @@ public class EurekaServerApplication implements WebServerFactoryCustomizer<Under
 				.httpBasic(Customizer.withDefaults())//
 				.formLogin(Customizer.withDefaults())//
 				.logout(Customizer.withDefaults())//
-				.sessionManagement(Customizer.withDefaults())//
-				.rememberMe(Customizer.withDefaults())//
 				.authorizeHttpRequests(auth -> auth.anyRequest().authenticated())//
 				.csrf(csrf -> csrf.disable())//
 				.build();
