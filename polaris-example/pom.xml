@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>polaris-provider</module>
+		<module>polaris-provider-api</module>
 		<module>polaris-consumer</module>
 	</modules>
 
@@ -59,6 +60,13 @@
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>
+	        
+	        <dependency>
+				<groupId>com.example</groupId>
+				<artifactId>polaris-provider-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
         </dependencies>
     </dependencyManagement>
 
