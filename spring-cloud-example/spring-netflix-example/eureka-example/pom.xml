@@ -28,6 +28,7 @@
 		<module>eureka-server</module>
 		<module>eureka-server-02</module>
 		<module>eureka-provider</module>
+		<module>eureka-provider-02</module>
 		<module>eureka-provider-api</module>
 		<module>eureka-consumer</module>
 	</modules>
