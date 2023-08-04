@@ -106,3 +106,8 @@ try {
     log.error(e.getLocalizedMessage(), e);
 }
 
+11、快速添加 @RestController 和 @RequestMapping
+快捷键：rest
+
+@org.springframework.web.bind.annotation.RestController
+@org.springframework.web.bind.annotation.RequestMapping("/$path$")
