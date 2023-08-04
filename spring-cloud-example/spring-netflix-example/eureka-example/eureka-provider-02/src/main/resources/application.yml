@@ -1,0 +1,43 @@
+server:
+  port: 9093
+  
+spring:
+  application:
+    name: eureka-provider
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+
+eureka:
+  instance:
+    # 主机名，如果可以在配置时确定的话（否则将从操作系统中猜测）。
+    hostname: localhost
+    # 标志，表示在猜测主机名时，应该优先使用服务器的IP地址，而不是操作系统报告的主机名。
+    prefer-ip-address: true
+    # 获取要在eureka中注册的这个实例的唯一ID（在appName的范围内）。
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    # 获取此实例所在的区域（在AWS数据中心中使用）。
+    region: cn-beijing-1
+    # 与eureka服务器通信的完全限定url列表的可用性区域映射。每个值可以是单个URL或逗号分隔的替代位置列表。
+    service-url:
+      defaultZone: http://admin:admin@localhost:8081/eureka/
+
+management:
+  endpoint:
+    shutdown:
+      # 启用关闭端点
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        # 包含的端点
+        include:
+        - shutdown
+
