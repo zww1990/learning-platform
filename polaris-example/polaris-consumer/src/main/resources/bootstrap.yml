@@ -4,6 +4,15 @@ server:
 spring:
   application:
     name: polaris-consumer
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
   cloud:
     polaris:
       address: grpc://119.91.66.223:8091
