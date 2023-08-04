@@ -1,19 +1,18 @@
-package com.example.demoprovider.controller;
+package com.example.polarisprovider.controller;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import jakarta.annotation.Resource;
 
 @SpringBootTest
 public class ConfigControllerTests {
-	@Resource
+	@Autowired
 	private ConfigController controller;
 
 	@Test
 	public void testTeacher() {
 		try {
-			System.err.println(this.controller.teacher());
+			System.err.println(this.controller.get());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

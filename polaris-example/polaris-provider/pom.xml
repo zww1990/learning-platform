@@ -60,6 +60,12 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        
+        <dependency>
+			<groupId>com.example</groupId>
+			<artifactId>polaris-provider-api</artifactId>
+		</dependency>
+		
     </dependencies>
 
     <build>
