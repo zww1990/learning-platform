@@ -8,7 +8,7 @@ import org.springframework.retry.annotation.EnableRetry;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * SpringExampleApplication
+ * RetryExampleApplication
  * 
  * @author zhang weiwei
  * @since 2022年8月12日,下午8:45:37
@@ -16,10 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootApplication
 @EnableRetry
 @Slf4j
-public class SpringExampleApplication {
+public class RetryExampleApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SpringExampleApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(RetryExampleApplication.class, args);
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
