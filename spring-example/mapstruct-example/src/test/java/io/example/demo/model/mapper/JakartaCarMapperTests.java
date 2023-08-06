@@ -1,7 +1,6 @@
 package io.example.demo.model.mapper;
 
-import javax.inject.Inject;
-
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,16 +9,16 @@ import io.example.demo.model.CarDto;
 import io.example.demo.model.CarType;
 
 /**
- * Jsr Car Mapper Tests
+ * Jakarta Car Mapper Tests
  * 
  * @author weiwei
  * @version v1
  * @since 2022年9月20日,上午11:26:38
  */
 @SpringBootTest
-public class JsrCarMapperTests {
+public class JakartaCarMapperTests {
 	@Inject
-	private JsrCarMapper jsrCarMapper;
+	private JakartaCarMapper jsrCarMapper;
 
 	@Test
 	public void testCarToCarDto() {

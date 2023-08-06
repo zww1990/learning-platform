@@ -15,7 +15,7 @@ import io.example.demo.model.CarDto;
  * @version v1
  * @since 2022年9月19日,下午3:01:51
  */
-@Mapper(componentModel = ComponentModel.DEFAULT)
+@Mapper
 public interface DefaultCarMapper {
 	DefaultCarMapper INSTANCE = Mappers.getMapper(DefaultCarMapper.class);
 

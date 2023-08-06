@@ -1,12 +1,12 @@
 package io.example.demo.model.mapper;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import io.example.demo.model.Car;
 import io.example.demo.model.CarDto;
 import io.example.demo.model.CarType;
-import jakarta.annotation.Resource;
 
 /**
  * Spring Car Mapper Tests
@@ -17,7 +17,7 @@ import jakarta.annotation.Resource;
  */
 @SpringBootTest
 public class SpringCarMapperTests {
-	@Resource
+	@Autowired
 	private SpringCarMapper springCarMapper;
 
 	@Test

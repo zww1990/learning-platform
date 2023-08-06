@@ -1,10 +1,9 @@
 package io.example.demo;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-
-import jakarta.annotation.Resource;
 
 /**
  * ApplicationContextTests
@@ -14,7 +13,7 @@ import jakarta.annotation.Resource;
  */
 @SpringBootTest
 public class ApplicationContextTests {
-	@Resource
+	@Autowired
 	private ApplicationContext context;
 
 	@Test
