@@ -48,6 +48,7 @@
 		<module>polaris-example/polaris-consumer</module>
 		<module>polaris-example/polaris-provider</module>
 		<module>polaris-example/polaris-provider-api</module>
+		<module>polaris-example/polaris-ratelimit</module>
 		<module>reactive-example</module>
 		<module>schedule-example/spring-schedule-v1</module>
 		<module>schedule-example/spring-schedule-v2</module>
