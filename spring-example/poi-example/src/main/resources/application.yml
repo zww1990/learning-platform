@@ -9,5 +9,5 @@ spring:
     - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
     - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
   application:
-    name: spring-example
+    name: poi-example
 
