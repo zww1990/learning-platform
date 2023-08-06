@@ -72,7 +72,10 @@
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider-api</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server-02</module>
-		<module>spring-example</module>
+		<module>spring-example/druid-example</module>
+		<module>spring-example/mapstruct-example</module>
+		<module>spring-example/poi-example</module>
+		<module>spring-example/retry-example</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
 		<module>swagger-example/spring-swagger-openapi</module>
