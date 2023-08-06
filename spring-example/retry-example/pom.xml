@@ -12,9 +12,6 @@
 	<artifactId>retry-example</artifactId>
 	<packaging>jar</packaging>
 	<name>retry-example</name>
-	
-	<properties>
-	</properties>
 
 	<dependencies>
 		<dependency>
@@ -41,7 +38,6 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 	</dependencies>
 
 	<build>
