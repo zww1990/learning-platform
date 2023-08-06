@@ -1,0 +1,27 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: polaris-ratelimit
+  sql:
+    init:
+      mode: never
+  servlet:
+    multipart:
+      enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration
+  cloud:
+    polaris:
+      address: grpc://119.91.66.223:8091
+      namespace: zww
+      enabled: true
+      ratelimit:
+        enabled: true
+      loadbalancer:
+        enabled: true
+      discovery:
+        enabled: true
+        register: true

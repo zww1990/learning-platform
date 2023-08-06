@@ -19,9 +19,10 @@
 	<name>polaris-parent</name>
 
 	<modules>
+		<module>polaris-consumer</module>
 		<module>polaris-provider</module>
 		<module>polaris-provider-api</module>
-		<module>polaris-consumer</module>
+		<module>polaris-ratelimit</module>
 	</modules>
 
     <properties>
