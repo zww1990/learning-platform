@@ -1,4 +1,4 @@
-package io.example.demo;
+package io.example.poi;
 
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
+import io.example.poi.excel.AreaExcelComponent;
+import io.example.poi.excel.MenuExcelComponent;
 import org.junit.jupiter.api.Test;
 
-import io.example.demo.excel.AreaExcelComponent;
-import io.example.demo.excel.DemoExcelComponent;
-import io.example.demo.excel.ExcelUtils;
-import io.example.demo.excel.MenuExcelComponent;
+import io.example.poi.excel.DemoExcelComponent;
+import io.example.poi.excel.ExcelUtils;
 
 /**
  * ExcelComponentTests

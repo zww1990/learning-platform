@@ -1,4 +1,4 @@
-package io.example.demo.excel;
+package io.example.poi.excel;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * MenuData
+ * ExcelData
  * 
  * @author zww1990@foxmail.com
  * @since 2022年1月8日,下午4:51:46
@@ -15,8 +15,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MenuData {
-	private String menuName;
-	private String component;
-	private List<MenuData> childrens;
+public class ExcelData {
+	private String cellValue;
+	private List<ExcelData> childrens;
 }
