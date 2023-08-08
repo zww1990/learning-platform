@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: retry-example
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
@@ -8,6 +10,4 @@ spring:
     - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
     - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
     - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
-  application:
-    name: retry-example
 
