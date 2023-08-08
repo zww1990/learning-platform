@@ -111,3 +111,11 @@ try {
 
 @org.springframework.web.bind.annotation.RestController
 @org.springframework.web.bind.annotation.RequestMapping("/$path$")
+
+12、快速添加@Getter | @Setter | @ToString | @Accessors
+快捷键：gsta
+
+@lombok.Getter
+@lombok.Setter
+@lombok.ToString
+@lombok.experimental.Accessors(chain = true)
