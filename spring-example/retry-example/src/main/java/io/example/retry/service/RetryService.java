@@ -1,4 +1,4 @@
-package io.example.demo.service;
+package io.example.retry.service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

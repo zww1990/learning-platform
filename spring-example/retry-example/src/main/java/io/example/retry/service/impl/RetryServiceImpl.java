@@ -1,4 +1,4 @@
-package io.example.demo.service.impl;
+package io.example.retry.service.impl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -8,7 +8,7 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 
-import io.example.demo.service.RetryService;
+import io.example.retry.service.RetryService;
 import lombok.extern.slf4j.Slf4j;
 
 /**

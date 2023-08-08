@@ -1,4 +1,4 @@
-package io.example.demo;
+package io.example.retry;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import io.example.demo.service.RetryService;
+import io.example.retry.service.RetryService;
 
 @SpringBootTest
 public class RetryTemplateTests {
