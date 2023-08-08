@@ -1,4 +1,4 @@
-package io.example.demo;
+package io.example.mapstruct;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

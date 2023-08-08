@@ -1,4 +1,4 @@
-package io.example.demo.model;
+package io.example.mapstruct.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

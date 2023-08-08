@@ -1,12 +1,11 @@
-package io.example.demo.model.mapper;
+package io.example.mapstruct.model.mapper;
 
+import io.example.mapstruct.model.Car;
+import io.example.mapstruct.model.CarDto;
+import io.example.mapstruct.model.CarType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import io.example.demo.model.Car;
-import io.example.demo.model.CarDto;
-import io.example.demo.model.CarType;
 
 /**
  * Spring Car Mapper Tests

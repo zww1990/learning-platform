@@ -1,11 +1,11 @@
-package io.example.demo.model.mapper;
+package io.example.mapstruct.model.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants.ComponentModel;
 
-import io.example.demo.model.Car;
-import io.example.demo.model.CarDto;
+import io.example.mapstruct.model.Car;
+import io.example.mapstruct.model.CarDto;
 
 /**
  * Spring Car Mapper
