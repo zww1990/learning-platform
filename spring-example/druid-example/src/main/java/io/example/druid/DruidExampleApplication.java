@@ -1,4 +1,4 @@
-package io.example.demo;
+package io.example.druid;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import lombok.extern.slf4j.Slf4j;
