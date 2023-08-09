@@ -19,6 +19,6 @@ public class PoiExampleApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(PoiExampleApplication.class, args);
 		log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
-//		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
+//		java.util.stream.Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
 	}
 }
