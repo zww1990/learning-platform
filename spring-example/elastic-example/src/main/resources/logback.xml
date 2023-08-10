@@ -19,6 +19,15 @@
 	<logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
 	<logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
 	<logger name="org.springframework.boot.actuate.endpoint.jmx" level="WARN"/>
+
 	<!-- 打印es请求日志 -->
-	<logger name="org.apache.http.wire" level="debug"/>
+
+	<!-- 方案一：精简请求信息 -->
+	<!--<logger name="org.elasticsearch.client.RestClient" level="debug"/>-->
+
+	<!-- 方案二：较详细请求信息 -->
+	<logger name="tracer" level="trace"/>
+
+	<!-- 方案三：详细请求信息 -->
+	<!--<logger name="org.apache.http.wire" level="debug"/>-->
 </configuration>
