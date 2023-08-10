@@ -9,10 +9,12 @@ For further reference, please consider the following sections:
 * [Spring Configuration Processor](https://docs.spring.io/spring-boot/docs/3.1.2/reference/htmlsinge/index.html#appendix.configuration-metadata.annotation-processor)
 * [Spring Data Elasticsearch (Access+Driver)](https://docs.spring.io/spring-boot/docs/3.1.2/reference/htmlsinge/index.html#data.nosql.elasticsearch)
 * [Spring Data Redis (Access+Driver)](https://docs.spring.io/spring-boot/docs/3.1.2/reference/htmlsinge/index.html#data.nosql.redis)
+* [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/3.1.2/reference/htmlsinge/index.html#data.nosql.mongodb)
 
 ### Guides
 The following guides illustrate how to use some features concretely:
 
 * [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
 * [Messaging with Redis](https://spring.io/guides/gs/messaging-redis/)
+* [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
 

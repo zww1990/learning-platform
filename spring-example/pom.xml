@@ -26,6 +26,7 @@
 		<module>druid-example</module>
 		<module>elastic-example</module>
 		<module>mapstruct-example</module>
+		<module>mongo-example</module>
 		<module>poi-example</module>
 		<module>redis-example</module>
 		<module>retry-example</module>
