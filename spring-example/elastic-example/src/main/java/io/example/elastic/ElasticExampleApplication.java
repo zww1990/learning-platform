@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.elasticsearch.config.EnableElasticsearchAuditing;
 
 /**
  * Elastic Example Application
@@ -11,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author zww
  * @since 2023-08-08 16:25:28
  */
+@EnableElasticsearchAuditing
 @SpringBootApplication
 @Slf4j
 public class ElasticExampleApplication {
