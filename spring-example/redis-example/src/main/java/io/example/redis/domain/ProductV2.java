@@ -4,8 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.redis.core.RedisHash;
+
+import java.time.LocalDateTime;
 
 /**
  * 产品
@@ -20,9 +24,13 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash(value = "products")
 public class ProductV2 {
     /**
-     * 产品编码
+     * 主键，自动生成
      */
     @Id
+    private String id;
+    /**
+     * 产品编码
+     */
     private String sku;
     /**
      * 产品名称
@@ -32,4 +40,14 @@ public class ProductV2 {
      * 产品价格
      */
     private Double price;
+    /**
+     * 创建时间
+     */
+    @CreatedDate
+    private LocalDateTime createdDate;
+    /**
+     * 最后修改时间
+     */
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 }

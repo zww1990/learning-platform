@@ -1,11 +1,13 @@
 package io.example.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.example.redis.eventlistener.KeyValueEventApplicationListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -41,5 +43,10 @@ public class RedisExampleApplication implements CommandLineRunner {
         this.redisTemplate.setHashKeySerializer(this.redisTemplate.getStringSerializer());
         this.redisTemplate.setValueSerializer(redisSerializer);
         this.redisTemplate.setHashValueSerializer(redisSerializer);
+    }
+
+    @Bean
+    KeyValueEventApplicationListener keyValueEventApplicationListener() {
+        return new KeyValueEventApplicationListener();
     }
 }

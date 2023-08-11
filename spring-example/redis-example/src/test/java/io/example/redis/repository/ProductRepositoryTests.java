@@ -28,4 +28,14 @@ public class ProductRepositoryTests {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testDelete() {
+        try {
+            this.productRepository.deleteAll();
+            System.err.println("done");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
