@@ -25,7 +25,7 @@ public class ProductRepositoryTests {
     @Test
     public void testGet() {
         try {
-            System.err.println(this.productRepository.findAll());
+            this.productRepository.findAll().forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
