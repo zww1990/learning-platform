@@ -34,11 +34,12 @@ public class ProductRepositoryTests {
     @Test
     public void testUpdate() {
         try {
-            System.err.println(this.productRepository.saveAll(
-                    this.productRepository.findAll()
-                            .stream()
-                            .peek(m -> m.setPrice(m.getPrice() + 1))
-                            .collect(Collectors.toList())));
+            this.productRepository.saveAll(
+                            this.productRepository.findAll()
+                                    .stream()
+                                    .peek(m -> m.setPrice(m.getPrice() + 1))
+                                    .collect(Collectors.toList()))
+                    .forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
