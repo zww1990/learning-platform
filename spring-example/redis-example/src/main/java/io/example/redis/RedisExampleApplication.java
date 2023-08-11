@@ -2,6 +2,8 @@ package io.example.redis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.example.redis.eventlistener.KeyValueEventApplicationListener;
+import io.example.redis.eventlistener.handler.BeforeInsertEventHandler;
+import io.example.redis.eventlistener.handler.BeforeUpdateEventHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -48,5 +50,15 @@ public class RedisExampleApplication implements CommandLineRunner {
     @Bean
     KeyValueEventApplicationListener keyValueEventApplicationListener() {
         return new KeyValueEventApplicationListener();
+    }
+
+    @Bean(name = BeforeInsertEventHandler.BEAN_NAME)
+    BeforeInsertEventHandler beforeInsertEventHandler() {
+        return new BeforeInsertEventHandler();
+    }
+
+    @Bean(name = BeforeUpdateEventHandler.BEAN_NAME)
+    BeforeUpdateEventHandler beforeUpdateEventHandler() {
+        return new BeforeUpdateEventHandler();
     }
 }
