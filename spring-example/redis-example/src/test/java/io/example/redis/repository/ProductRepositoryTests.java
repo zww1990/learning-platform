@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.stream.Collectors;
+
 @SpringBootTest
 public class ProductRepositoryTests {
     @Autowired
@@ -23,7 +25,21 @@ public class ProductRepositoryTests {
     @Test
     public void testGet() {
         try {
-            System.err.println(this.productRepository.findAll());
+            this.productRepository.findAll().forEach(System.err::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testUpdate() {
+        try {
+            this.productRepository.saveAll(
+                            this.productRepository.findAll()
+                                    .stream()
+                                    .peek(p -> p.setPrice(p.getPrice() + 1))
+                                    .collect(Collectors.toList()))
+                    .forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }

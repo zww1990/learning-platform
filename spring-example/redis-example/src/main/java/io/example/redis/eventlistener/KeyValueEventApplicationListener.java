@@ -19,7 +19,7 @@ public class KeyValueEventApplicationListener implements ApplicationListener<Key
     @Override
     public void onApplicationEvent(KeyValueEvent<Object> event) {
         if (event instanceof KeyValueEvent.BeforeInsertEvent<Object> beforeInsert) {
-            log.info("插入前事件 - 开始：key = {}, keyspace = {}, payload = {}, timstamp = {}, type = {}",
+            log.info("插入前事件 - 开始：keyspace = {}, key = {}, payload = {}, timstamp = {}, type = {}",
                     beforeInsert.getKey(),
                     beforeInsert.getKeyspace(),
                     beforeInsert.getPayload(),
@@ -44,7 +44,7 @@ public class KeyValueEventApplicationListener implements ApplicationListener<Key
                 log.info("插入前事件 - 结束");
             }
         } else if (event instanceof KeyValueEvent.BeforeUpdateEvent<Object> beforeUpdate) {
-            log.info("更新前事件 - 开始：key = {}, keyspace = {}, payload = {}, timstamp = {}, type = {}",
+            log.info("更新前事件 - 开始：keyspace = {}, key = {}, payload = {}, timstamp = {}, type = {}",
                     beforeUpdate.getKey(),
                     beforeUpdate.getKeyspace(),
                     beforeUpdate.getPayload(),
