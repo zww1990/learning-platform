@@ -1,4 +1,4 @@
-package com.example.springreactive;
+package io.example.reactive;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 /**
- * SpringReactiveApplicationTests
+ * ReactiveExampleApplicationTests
  * 
  * @author weiwei
  * @version v1
@@ -16,7 +16,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
  */
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class SpringReactiveApplicationTests {
+public class ReactiveExampleApplicationTests {
 	@Autowired
 	private WebTestClient webClient;
 	@Autowired

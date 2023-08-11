@@ -1,13 +1,11 @@
-package com.example.springreactive.controller;
+package io.example.reactive.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.example.reactive.model.ClientUser;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Service;
-
-import com.example.springreactive.model.ClientUser;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,8 +19,11 @@ import reactor.core.publisher.Mono;
  */
 @Service
 public class UserController {
-	@Autowired
-	private R2dbcEntityTemplate entityTemplate;
+	private final R2dbcEntityTemplate entityTemplate;
+
+	public UserController(R2dbcEntityTemplate entityTemplate) {
+		this.entityTemplate = entityTemplate;
+	}
 
 	/**
 	 * 查询所有用户，并按userId排序

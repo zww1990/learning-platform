@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>io.example</groupId>
+		<artifactId>spring-example-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	
-	<groupId>com.example</groupId>
-	<artifactId>spring-reactive</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-reactive</name>
-	<description>Demo project for Spring Boot</description>
-	
-	<properties>
-		<java.version>17</java.version>
-	</properties>
+	<artifactId>reactive-example</artifactId>
+	<name>reactive-example</name>
+	<packaging>jar</packaging>
 	
 	<dependencies>
 		<!-- spring boot -->
@@ -60,57 +54,13 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>aliyunmaven</id>
-			<name>阿里云公共仓库</name>
-			<url>https://maven.aliyun.com/repository/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>aliyunmaven</id>
-			<name>阿里云公共仓库</name>
-			<url>https://maven.aliyun.com/repository/public</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
-	
 	<build>
 		<finalName>${project.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
-			<!-- ↓构建过程中，跳过执行单元测试↓ -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<!-- ↑构建过程中，跳过执行单元测试↑ -->
 		</plugins>
 	</build>
 

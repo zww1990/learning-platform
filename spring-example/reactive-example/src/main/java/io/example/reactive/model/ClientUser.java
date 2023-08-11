@@ -1,9 +1,8 @@
-package com.example.springreactive.model;
+package io.example.reactive.model;
 
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.ReadOnlyProperty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -36,11 +35,9 @@ public class ClientUser {
 	/** 性别 */
 	private Integer gender;
 	/** 创建时间 */
-	@ReadOnlyProperty
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private LocalDateTime createdDate;
 	/** 最后修改时间 */
-	@ReadOnlyProperty
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private LocalDateTime modifiedDate;
 }

@@ -28,6 +28,7 @@
 		<module>mapstruct-example</module>
 		<module>mongo-example</module>
 		<module>poi-example</module>
+		<module>reactive-example</module>
 		<module>redis-example</module>
 		<module>retry-example</module>
 	</modules>

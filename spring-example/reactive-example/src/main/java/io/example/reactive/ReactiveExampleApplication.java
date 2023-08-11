@@ -1,8 +1,8 @@
-package com.example.springreactive;
+package io.example.reactive;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.example.reactive.model.ClientUser;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,8 +11,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import com.example.springreactive.controller.UserController;
-import com.example.springreactive.model.ClientUser;
+import io.example.reactive.controller.UserController;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,23 +24,25 @@ import lombok.extern.slf4j.Slf4j;
  */
 @SpringBootApplication
 @Slf4j
-public class SpringReactiveApplication {
+public class ReactiveExampleApplication {
+	private final UserController userController;
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SpringReactiveApplication.class, args);
-		log.info("工厂中定义的 bean 数量 = {}", context.getBeanDefinitionCount());
-//		java.util.stream.Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
+	public ReactiveExampleApplication(UserController userController) {
+		this.userController = userController;
 	}
 
-	@Autowired
-	private UserController userController;
+	public static void main(String[] args) {
+		ConfigurableApplicationContext context = SpringApplication.run(ReactiveExampleApplication.class, args);
+		log.info("工厂中定义的 bean 数量 = {}", context.getBeanDefinitionCount());
+		java.util.stream.Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
+	}
 
 	/**
 	 * 定义路由
 	 * 
 	 * @author zhang weiwei
 	 * @since 2023年8月3日,下午1:53:20
-	 * @return
+	 * @return {@link RouterFunction}
 	 */
 	@Bean
 	RouterFunction<ServerResponse> routerFunction() {
@@ -49,10 +50,10 @@ public class SpringReactiveApplication {
 				.GET("/", request -> ServerResponse.ok().bodyValue(List.of("你好，", "世界！")))//
 				.GET("/user/get", request -> ServerResponse.ok().body(userController.getClientUser(), ClientUser.class))
 				.POST("/user/add", request -> request.bodyToMono(ClientUser.class)//
-						.flatMap(i -> userController.addClientUser(i))//
+						.flatMap(userController::addClientUser)//
 						.flatMap(p -> ServerResponse.ok().bodyValue(p)))
 				.PUT("/user/update", request -> request.bodyToMono(ClientUser.class)//
-						.flatMap(i -> userController.updateClientUser(i))//
+						.flatMap(userController::updateClientUser)//
 						.flatMap(p -> ServerResponse.ok().bodyValue(p)))
 				.DELETE("/user/del/{userId}",
 						request -> ServerResponse.ok()
