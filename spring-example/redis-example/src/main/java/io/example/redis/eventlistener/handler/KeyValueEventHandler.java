@@ -40,9 +40,17 @@ public interface KeyValueEventHandler {
      */
     default Object setFieldValue(Field field) {
         log.debug("字段类型：{}", field.getType());
-        if (ClassUtils.isAssignable(field.getType(), long.class)
-                || ClassUtils.isAssignable(field.getType(), Long.class)) {
-            return System.currentTimeMillis();
+        if (ClassUtils.isAssignable(field.getType(), Instant.class)) {
+            return Instant.now();
+        }
+        if (ClassUtils.isAssignable(field.getType(), LocalDateTime.class)) {
+            return LocalDateTime.now();
+        }
+        if (ClassUtils.isAssignable(field.getType(), LocalDate.class)) {
+            return LocalDate.now();
+        }
+        if (ClassUtils.isAssignable(field.getType(), LocalTime.class)) {
+            return LocalTime.now();
         }
         if (ClassUtils.isAssignable(field.getType(), java.util.Date.class)) {
             return new java.util.Date(System.currentTimeMillis());
@@ -56,17 +64,9 @@ public interface KeyValueEventHandler {
         if (ClassUtils.isAssignable(field.getType(), Time.class)) {
             return new Time(System.currentTimeMillis());
         }
-        if (ClassUtils.isAssignable(field.getType(), Instant.class)) {
-            return Instant.now();
-        }
-        if (ClassUtils.isAssignable(field.getType(), LocalDateTime.class)) {
-            return LocalDateTime.now();
-        }
-        if (ClassUtils.isAssignable(field.getType(), LocalDate.class)) {
-            return LocalDate.now();
-        }
-        if (ClassUtils.isAssignable(field.getType(), LocalTime.class)) {
-            return LocalTime.now();
+        if (ClassUtils.isAssignable(field.getType(), long.class)
+                || ClassUtils.isAssignable(field.getType(), Long.class)) {
+            return System.currentTimeMillis();
         }
         log.debug("未知的字段类型");
         return null;
