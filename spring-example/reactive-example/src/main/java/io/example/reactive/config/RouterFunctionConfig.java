@@ -29,34 +29,24 @@ public class RouterFunctionConfig {
 
     @Bean
     RouterFunction<ServerResponse> routerFunction() {
-        return RouterFunctions.route()//
-                .GET("/", request -> ServerResponse.ok().bodyValue(List.of("你好，", "世界！")))//
-                .GET("/user/get", request -> ServerResponse.ok().body(userController.getClientUser(), ClientUser.class))
-                .GET("/v2/user/get", request -> ServerResponse.ok().body(userControllerV2.getClientUser(), ClientUser.class))
-                .POST("/user/add", request -> request.bodyToMono(ClientUser.class)//
-                        .flatMap(userController::addClientUser)//
-                        .flatMap(p -> ServerResponse.ok().bodyValue(p)))
-                .POST("/v2/user/add", request -> request.bodyToMono(ClientUser.class)//
-                        .flatMap(userControllerV2::addClientUser)//
-                        .flatMap(p -> ServerResponse.ok().bodyValue(p)))
-                .PUT("/user/update", request -> request.bodyToMono(ClientUser.class)//
-                        .flatMap(userController::updateClientUser)//
-                        .flatMap(p -> ServerResponse.ok().bodyValue(p)))
-                .PUT("/v2/user/update", request -> request.bodyToMono(ClientUser.class)//
-                        .flatMap(userControllerV2::updateClientUser)//
-                        .flatMap(p -> ServerResponse.ok().bodyValue(p)))
-                .DELETE("/user/del/{userId}",
-                        request -> ServerResponse.ok()
-                                .body(userController.delClientUser(request.pathVariable("userId")), Long.class))
-                .DELETE("/v2/user/del/{userId}",
-                        request -> ServerResponse.ok()
-                                .body(userControllerV2.delClientUser(request.pathVariable("userId")), Long.class))
-                .GET("/user/get/{userId}",
-                        request -> ServerResponse.ok().body(
-                                userController.getClientUserByUserId(request.pathVariable("userId")), ClientUser.class))
-                .GET("/v2/user/get/{userId}",
-                        request -> ServerResponse.ok().body(
-                                userControllerV2.getClientUserByUserId(request.pathVariable("userId")), ClientUser.class))
-                .build();
+        RouterFunction<ServerResponse> a = RouterFunctions.route()
+                .path("/user", builder -> builder
+                        .GET("/get", request -> ServerResponse.ok().body(userController.getClientUser(), ClientUser.class))
+                        .POST("/add", request -> request.bodyToMono(ClientUser.class).flatMap(userController::addClientUser).flatMap(p -> ServerResponse.ok().bodyValue(p)))
+                        .PUT("/update", request -> request.bodyToMono(ClientUser.class).flatMap(userController::updateClientUser).flatMap(p -> ServerResponse.ok().bodyValue(p)))
+                        .DELETE("/del/{userId}", request -> ServerResponse.ok().body(userController.delClientUser(request.pathVariable("userId")), Long.class))
+                        .GET("/get/{userId}", request -> ServerResponse.ok().body(userController.getClientUserByUserId(request.pathVariable("userId")), ClientUser.class))
+                ).build();
+        RouterFunction<ServerResponse> b = RouterFunctions.route()
+                .path("/v2/user", builder -> builder
+                        .GET("/get", request -> ServerResponse.ok().body(userControllerV2.getClientUser(), ClientUser.class))
+                        .POST("/add", request -> request.bodyToMono(ClientUser.class).flatMap(userControllerV2::addClientUser).flatMap(p -> ServerResponse.ok().bodyValue(p)))
+                        .PUT("/update", request -> request.bodyToMono(ClientUser.class).flatMap(userControllerV2::updateClientUser).flatMap(p -> ServerResponse.ok().bodyValue(p)))
+                        .DELETE("/del/{userId}", request -> ServerResponse.ok().body(userControllerV2.delClientUser(request.pathVariable("userId")), Long.class))
+                        .GET("/get/{userId}", request -> ServerResponse.ok().body(userControllerV2.getClientUserByUserId(request.pathVariable("userId")), ClientUser.class))
+                ).build();
+        return RouterFunctions.route()
+                .GET("/", request -> ServerResponse.ok().bodyValue(List.of("你好，", "世界！")))
+                .add(a).add(b).build();
     }
 }
