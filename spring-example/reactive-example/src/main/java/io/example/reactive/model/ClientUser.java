@@ -1,15 +1,14 @@
 package io.example.reactive.model;
 
-import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
+
+import java.time.LocalDateTime;
 
 /**
  * 用户模型
@@ -36,8 +35,10 @@ public class ClientUser {
 	private Integer gender;
 	/** 创建时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@ReadOnlyProperty
 	private LocalDateTime createdDate;
 	/** 最后修改时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	@ReadOnlyProperty
 	private LocalDateTime modifiedDate;
 }

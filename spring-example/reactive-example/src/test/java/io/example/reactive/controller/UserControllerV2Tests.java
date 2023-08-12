@@ -12,19 +12,19 @@ import org.springframework.test.web.reactive.server.WebTestClient;
  * UserControllerTests
  *
  * @author weiwei
- * @version v1
+ * @version v2
  * @since 2022年4月26日, 下午5:17:49
  */
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class UserControllerTests {
+public class UserControllerV2Tests {
     @Autowired
     private WebTestClient webClient;
 
     @Test
     public void testGetClientUser() {
         System.err.println(this.webClient.get()//
-                .uri("/user/get")//
+                .uri("/v2/user/get")//
                 .exchange()//
                 .expectStatus()//
                 .isOk()//
@@ -36,7 +36,7 @@ public class UserControllerTests {
     public void testGetClientUserByUserId() {
         String userId = "1001";
         System.err.println(this.webClient.get()//
-                .uri("/user/get/{userId}", userId)//
+                .uri("/v2/user/get/{userId}", userId)//
                 .exchange()//
                 .expectStatus()//
                 .isOk()//
@@ -52,7 +52,7 @@ public class UserControllerTests {
                 .setUserId("1001")//
                 .setUsername("张无忌");
         System.err.println(this.webClient.post()//
-                .uri("/user/add")//
+                .uri("/v2/user/add")//
                 .contentType(MediaType.APPLICATION_JSON)//
                 .bodyValue(user)//
                 .exchange()//
@@ -66,7 +66,7 @@ public class UserControllerTests {
     public void testDelClientUser() {
         String userId = "1001";
         System.err.println(this.webClient.delete()//
-                .uri("/user/del/{userId}", userId)//
+                .uri("/v2/user/del/{userId}", userId)//
                 .exchange()//
                 .expectStatus()//
                 .isOk()//
@@ -78,7 +78,7 @@ public class UserControllerTests {
     public void testUpdateClientUser() {
         String userId = "1001";
         ClientUser user = this.webClient.get()//
-                .uri("/user/get/{userId}", userId)//
+                .uri("/v2/user/get/{userId}", userId)//
                 .exchange()//
                 .expectStatus()//
                 .isOk()//
@@ -90,10 +90,10 @@ public class UserControllerTests {
             return;
         }
         user.setGender(1)//
-                .setPhoneNumber("999999991")//
-                .setUsername("李小龙1");
+                .setPhoneNumber("999999992")//
+                .setUsername("李小龙2");
         System.err.println(this.webClient.put()//
-                .uri("/user/update")//
+                .uri("/v2/user/update")//
                 .contentType(MediaType.APPLICATION_JSON)//
                 .bodyValue(user)//
                 .exchange()//
