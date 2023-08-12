@@ -5,7 +5,7 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Mono;
 
 /**
- * User Repository
+ * 用户数据访问对象接口
  *
  * @author zww
  * @since 2023-08-12 13:37:46
