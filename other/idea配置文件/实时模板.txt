@@ -9,7 +9,7 @@
 
 title: groovyScript("_1 ? _1 : _2", capitalize(spaceSeparated(methodName())), capitalize(spaceSeparated(className())))
 param: groovyScript("def result = ''; _1.eachWithIndex { item, index -> result += System.lineSeparator() + ' * @param ' + item + ' ' + item + index.next() }; return result;", methodParameters())
-return: groovyScript("_1 && _1 != 'void' ? System.lineSeparator() + ' * @return ' + _1 : null", methodReturnType())
+return: groovyScript("_1 && _1 != 'void' ? System.lineSeparator() + ' * @return {@link ' + _1 + '}' : null", methodReturnType())
 user: user()
 date: date("yyyy-MM-dd HH:mm:ss")
  
