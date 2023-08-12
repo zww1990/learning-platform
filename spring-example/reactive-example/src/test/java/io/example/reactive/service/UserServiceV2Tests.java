@@ -1,4 +1,4 @@
-package io.example.reactive.controller;
+package io.example.reactive.service;
 
 import io.example.reactive.model.ClientUser;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 /**
- * UserControllerTests
+ * UserServiceV2Tests
  *
  * @author weiwei
  * @version v2
@@ -17,7 +17,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
  */
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class UserControllerV2Tests {
+public class UserServiceV2Tests {
     @Autowired
     private WebTestClient webClient;
 

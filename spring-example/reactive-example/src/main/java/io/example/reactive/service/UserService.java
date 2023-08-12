@@ -1,26 +1,28 @@
-package io.example.reactive.controller;
+package io.example.reactive.service;
 
 import io.example.reactive.model.ClientUser;
-import io.example.reactive.repository.UserRepository;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.data.relational.core.query.Criteria;
+import org.springframework.data.relational.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * 用户控制器
+ * 用户服务实现
  *
  * @author weiwei
- * @version v2
+ * @version v1
  * @since 2022年4月26日, 下午4:14:03
  */
 @Service
-public class UserControllerV2 {
-    private final UserRepository userRepository;
+public class UserService {
+    private final R2dbcEntityTemplate entityTemplate;
 
-    public UserControllerV2(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(R2dbcEntityTemplate entityTemplate) {
+        this.entityTemplate = entityTemplate;
     }
 
     /**
@@ -31,7 +33,9 @@ public class UserControllerV2 {
      * @since 2023年8月3日, 下午1:24:12
      */
     public Flux<ClientUser> getClientUser() {
-        return this.userRepository.findAll(Sort.by("userId"));
+        return this.entityTemplate.select(ClientUser.class)//
+                .matching(Query.empty().sort(Sort.by("userId")))//
+                .all();
     }
 
     /**
@@ -43,7 +47,7 @@ public class UserControllerV2 {
      * @since 2023年8月3日, 下午1:36:02
      */
     public Mono<ClientUser> addClientUser(ClientUser user) {
-        return this.userRepository.save(user);
+        return this.entityTemplate.insert(user);
     }
 
     /**
@@ -55,7 +59,9 @@ public class UserControllerV2 {
      * @since 2023年8月3日, 下午1:37:27
      */
     public Mono<Long> delClientUser(String userId) {
-        return this.userRepository.deleteByUserId(userId);
+        return this.entityTemplate.delete(ClientUser.class)//
+                .matching(Query.query(Criteria.where("userId").is(userId)))//
+                .all();
     }
 
     /**
@@ -67,7 +73,9 @@ public class UserControllerV2 {
      * @since 2023年8月3日, 下午1:39:56
      */
     public Mono<ClientUser> getClientUserByUserId(String userId) {
-        return this.userRepository.findOne(Example.of(new ClientUser().setUserId(userId)));
+        return this.entityTemplate.selectOne(//
+                Query.query(Criteria.where("userId").is(userId)), //
+                ClientUser.class);
     }
 
     /**
@@ -79,6 +87,6 @@ public class UserControllerV2 {
      * @since 2023年8月3日, 下午1:41:03
      */
     public Mono<ClientUser> updateClientUser(ClientUser user) {
-        return this.userRepository.save(user);
+        return this.entityTemplate.update(user);
     }
 }
