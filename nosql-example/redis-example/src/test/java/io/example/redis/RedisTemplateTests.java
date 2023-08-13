@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -20,7 +21,7 @@ public class RedisTemplateTests {
         try {
             Product product = new Product().setSku("bk-1").setName("City bike").setPrice(123.4);
             BoundValueOperations<String, List<Product>> valueOps = this.redisTemplate.boundValueOps("products");
-            valueOps.set(List.of(product, product));
+            valueOps.set(Arrays.asList(product, product));
             System.err.println(valueOps.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +32,7 @@ public class RedisTemplateTests {
     public void testGet() {
         try {
             BoundValueOperations<String, List<Product>> valueOps = this.redisTemplate.boundValueOps("products");
-            System.err.println(valueOps.get());
+            valueOps.get().forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
