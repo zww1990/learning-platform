@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 /**
@@ -21,11 +22,14 @@ public class ReactiveExampleApplicationTests {
 	private WebTestClient webClient;
 	@Autowired
 	private R2dbcEntityTemplate entityTemplate;
+	@Autowired
+	private DatabaseClient databaseClient;
 
 	@Test
 	public void testContextLoads() {
 		System.err.println(this.webClient);
 		System.err.println(this.entityTemplate);
+		System.err.println(this.databaseClient);
 	}
 
 }
