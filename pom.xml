@@ -40,6 +40,9 @@
 		<module>nacos-example/nacos-consumer</module>
 		<module>nacos-example/nacos-gateway</module>
 		<module>nacos-example/nacos-provider</module>
+		<module>nosql-example/elastic-example</module>
+		<module>nosql-example/mongo-example</module>
+		<module>nosql-example/redis-example</module>
 		<module>oa-clock/oa-clock-v1</module>
 		<module>oa-clock/oa-clock-v2</module>
 		<module>oa-clock/oa-clock-v3</module>
@@ -49,7 +52,6 @@
 		<module>polaris-example/polaris-provider</module>
 		<module>polaris-example/polaris-provider-api</module>
 		<module>polaris-example/polaris-ratelimit</module>
-		<module>reactive-example</module>
 		<module>schedule-example/spring-schedule-v1</module>
 		<module>schedule-example/spring-schedule-v2</module>
 		<module>seata-example/seata-client-a</module>
@@ -76,6 +78,7 @@
 		<module>spring-example/druid-example</module>
 		<module>spring-example/mapstruct-example</module>
 		<module>spring-example/poi-example</module>
+		<module>spring-example/reactive-example</module>
 		<module>spring-example/retry-example</module>
 		<module>swagger-example/spring-swagger</module>
 		<module>swagger-example/spring-swagger-knife4j</module>
