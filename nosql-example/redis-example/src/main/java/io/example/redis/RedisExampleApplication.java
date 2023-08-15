@@ -1,5 +1,6 @@
 package io.example.redis;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,13 +17,10 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  */
 @SpringBootApplication
 @Slf4j
+@AllArgsConstructor
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class RedisExampleApplication implements CommandLineRunner {
     private final RedisTemplate redisTemplate;
-
-    public RedisExampleApplication(RedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(RedisExampleApplication.class, args);
