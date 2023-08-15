@@ -1,6 +1,5 @@
 package com.example.polarisconsumer.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.polarisconsumer.config.Student;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,11 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/config")
 @Slf4j
+@AllArgsConstructor
 public class ConfigController {
-	@Autowired
-	private Student student;
-	@Autowired
-	private ServerProperties server;
+	private final Student student;
+	private final ServerProperties server;
 
 	@GetMapping("/get")
 	public String get() {

@@ -3,7 +3,6 @@ package com.example.polarisprovider.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.provider.api.domain.Hello;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -23,9 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/hello")
 @Slf4j
+@AllArgsConstructor
 public class HelloController {
-	@Autowired
-	private ServerProperties server;
+	private final ServerProperties server;
 
 	@GetMapping("/get")
 	public Hello get(@RequestParam String name) {
