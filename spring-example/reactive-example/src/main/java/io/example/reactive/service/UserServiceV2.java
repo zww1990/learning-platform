@@ -2,6 +2,7 @@ package io.example.reactive.service;
 
 import io.example.reactive.model.ClientUser;
 import io.example.reactive.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,9 @@ import reactor.core.publisher.Mono;
  * @since 2022年4月26日, 下午4:14:03
  */
 @Service
+@AllArgsConstructor
 public class UserServiceV2 {
     private final UserRepository userRepository;
-
-    public UserServiceV2(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     /**
      * 查询所有用户，并按userId排序

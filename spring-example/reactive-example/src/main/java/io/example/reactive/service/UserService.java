@@ -1,6 +1,7 @@
 package io.example.reactive.service;
 
 import io.example.reactive.model.ClientUser;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.relational.core.query.Criteria;
@@ -18,12 +19,9 @@ import reactor.core.publisher.Mono;
  * @since 2022年4月26日, 下午4:14:03
  */
 @Service
+@AllArgsConstructor
 public class UserService {
     private final R2dbcEntityTemplate entityTemplate;
-
-    public UserService(R2dbcEntityTemplate entityTemplate) {
-        this.entityTemplate = entityTemplate;
-    }
 
     /**
      * 查询所有用户，并按userId排序

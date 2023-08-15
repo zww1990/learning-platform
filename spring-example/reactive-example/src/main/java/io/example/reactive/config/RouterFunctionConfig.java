@@ -3,6 +3,7 @@ package io.example.reactive.config;
 import io.example.reactive.service.UserService;
 import io.example.reactive.service.UserServiceV2;
 import io.example.reactive.model.ClientUser;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -18,14 +19,10 @@ import java.util.List;
  * @since 2023-08-12 13:39:52
  */
 @Configuration
+@AllArgsConstructor
 public class RouterFunctionConfig {
     private final UserService userService;
     private final UserServiceV2 userServiceV2;
-
-    public RouterFunctionConfig(UserService userService, UserServiceV2 userServiceV2) {
-        this.userService = userService;
-        this.userServiceV2 = userServiceV2;
-    }
 
     @Bean
     RouterFunction<ServerResponse> routerFunction() {
