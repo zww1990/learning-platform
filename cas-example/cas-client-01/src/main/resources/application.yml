@@ -1,0 +1,46 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /client-01
+
+cas:
+  server-url-prefix: http://localhost:8080/cas
+  server-login-url: ${cas.server-url-prefix}/login
+  client-host-url: http://localhost:${server.port}
+  validation-type: CAS
+  
+spring:
+  jmx:
+    enabled: false
+  aop:
+    auto: false
+  data:
+    redis:
+      repositories:
+        enabled: false
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+    - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
+    - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+  servlet:
+    multipart:
+      enabled: false
+#  session:
+#    store-type: redis
+#    redis:
+#      namespace: cas:spring:session
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
+#    lettuce:
+#      pool:
+#        max-idle: 10
+#        min-idle: 0
+#        max-active: 10
+
