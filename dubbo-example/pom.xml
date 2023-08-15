@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>spring-dubbo-parent</artifactId>
+	<artifactId>dubbo-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>spring-dubbo-parent</name>
+	<name>dubbo-example-parent</name>
 	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -59,9 +59,9 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>spring-dubbo-provider</module>
-		<module>spring-dubbo-provider-api</module>
-		<module>spring-dubbo-consumer</module>
+		<module>dubbo-provider</module>
+		<module>dubbo-provider-api</module>
+		<module>dubbo-consumer</module>
 	</modules>
 	
 	<repositories>
