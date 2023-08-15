@@ -5,6 +5,7 @@ import io.example.graphql.domain.Book;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,5 +48,12 @@ public class BookService implements CommandLineRunner {
         authorMap.put(b1.getId(), List.of(a1, a2));
         authorMap.put(b2.getId(), List.of(a3, a4));
         authorMap.put(b3.getId(), List.of(a5, a6));
+    }
+
+    public List<Book> queryBooks() {
+        return bookMap.values()
+                .stream()
+                .map(m -> m.setAuthor(authorMap.getOrDefault(m.getId(), Collections.emptyList())))
+                .toList();
     }
 }

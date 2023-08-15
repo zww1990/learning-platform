@@ -13,6 +13,7 @@ type Book {
 
 type BookQuery {
     bookById(id: ID): Book
+    bookList: [Book]
 }
 
 schema {
