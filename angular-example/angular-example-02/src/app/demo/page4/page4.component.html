@@ -1,0 +1,32 @@
+<form
+  nz-form
+  id="validateForm"
+  [formGroup]="validateForm"
+  (ngSubmit)="submitForm()"
+  nzLayout="horizontal"
+>
+  <nz-form-item>
+    <nz-form-control nzSpan="12">
+      <textarea
+        nz-input
+        formControlName="text"
+        id="text"
+        name="text"
+        rows="4"
+        placeholder="请输入文字"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzSpan="12">
+      <nz-select formControlName="language" name="language">
+        <nz-option nzLabel="汉语" nzValue="zh"> </nz-option>
+        <nz-option nzLabel="英语" nzValue="en"> </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <button nzType="primary" nz-button [disabled]="!validateForm.valid">
+    文字转语音
+  </button>
+  <br />
+</form>

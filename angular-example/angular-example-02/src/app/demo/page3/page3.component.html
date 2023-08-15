@@ -1,0 +1,37 @@
+<button nz-button (click)="addRow()" class="editable-add-btn" nzType="primary">添加</button>&nbsp;
+<button nz-button (click)="delAllRow()" class="editable-add-btn" nzType="danger" [disabled]="disabledButton">批量删除</button>
+<nz-table #editRowTable nzBordered [nzData]="dataSet">
+  <thead>
+    <tr>
+      <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+      <th nzWidth="30%">姓名</th>
+      <th>年龄</th>
+      <th>地址</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of editRowTable.data">
+      <td nzShowCheckbox [(nzChecked)]="data.checked" (nzCheckedChange)="refreshStatus()"></td>
+      <td>
+        <div class="editable-cell">
+          <div class="editable-cell-text-wrapper">
+            <ng-container *ngIf="!editCache[data.key].edit">
+              {{data.name}}
+              <i nz-icon nzType="edit" class="editable-cell-icon" (click)="startEdit(data.key)"></i>
+            </ng-container>
+            <ng-container *ngIf="editCache[data.key].edit">
+              <input type="text" nz-input [(ngModel)]="editCache[data.key].name">
+              <i nz-icon nzType="check" class="editable-cell-icon-check" (click)="finishEdit(data.key)"></i>
+            </ng-container>
+          </div>
+        </div>
+      </td>
+      <td>{{data.age}}</td>
+      <td>{{data.address}}</td>
+      <td>
+        <a nz-popconfirm nzPopconfirmTitle="确定要删除吗?" (nzOnConfirm)="deleteRow(data.key)">删除</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

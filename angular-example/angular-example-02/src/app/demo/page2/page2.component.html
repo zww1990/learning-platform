@@ -1,0 +1,94 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">纯文本</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-form-text>{{now | date:'yyyy-MM-dd HH:mm:ss'}}</nz-form-text>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="6" [nzRequired]="true">自动完成框</nz-form-label>
+    <nz-form-control nzSpan="14" nzHasFeedback>
+      <input nz-input formControlName="auto_text" placeholder="请输入内容" [nzAutocomplete]="textAuto">
+      <nz-autocomplete nzBackfill #textAuto [nzDataSource]="auto_item"></nz-autocomplete>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">单选下拉框</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
+      <nz-select formControlName="select" nzPlaceHolder="请选择一个项目">
+        <nz-option *ngFor="let item of select_single" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">多选下拉框</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
+      <nz-select formControlName="select_multiple" nzMode="multiple" nzPlaceHolder="至少选择一个项目">
+        <nz-option *ngFor="let item of select_multiple" [nzLabel]="item.label" [nzValue]="item.value"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">日期选择框</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
+      <nz-date-picker formControlName="datepicker"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">时间选择框</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzHasFeedback>
+      <nz-time-picker formControlName="timepicker"></nz-time-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">数字输入框</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-input-number formControlName="input_number" [nzStep]="1" [nzMax]="4" [nzMin]="1" nzPlaceHolder="请输入任意数字" style="width: 150px"></nz-input-number>
+      <nz-form-text> 次数</nz-form-text>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">开关</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-switch formControlName="switch"></nz-switch>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">滑动输入条</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-slider formControlName="slider" [nzMarks]="marks"></nz-slider>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">单选框</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="radio_group">
+        <label nz-radio *ngFor="let item of radio_group" [nzValue]="item.value">
+          <span>{{item.label}}</span>
+        </label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">单选按钮</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="radio_button">
+        <label nz-radio-button *ngFor="let item of radio_button" [nzValue]="item.value">
+          <span>{{item.label}}</span>
+        </label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true" [nzSpan]="6">多选框</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-checkbox-group [(ngModel)]="check_group" formControlName="check_group"></nz-checkbox-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzOffset]="6">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid">提交</button>
+      <button (click)="resetForm($event)" nz-button>重置</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

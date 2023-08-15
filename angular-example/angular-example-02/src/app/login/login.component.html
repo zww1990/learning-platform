@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="wrap">
+    <div class="top">
+      <div class="head">
+        <img class="logo" src="./assets/images/angular.svg">
+        <span class="title">ngular {{version.major}}</span>
+      </div>
+      <div class="desc">欢迎使用Angular {{version.full}}</div>
+    </div>
+    <div class="login-form">
+      <form nz-form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入您的用户名!">
+            <nz-input-group [nzPrefix]="prefixUser">
+              <input type="text" nz-input formControlName="username" placeholder="用户名">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="请输入您的密码!">
+            <nz-input-group [nzPrefix]="prefixLock">
+              <input type="password" nz-input formControlName="password" placeholder="密码">
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary" [disabled]="!loginForm.valid" style="width: 100%;">登录</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <ng-template #prefixUser><i nz-icon nzType="user"></i></ng-template>
+      <ng-template #prefixLock><i nz-icon nzType="lock"></i></ng-template>
+    </div>
+  </div>
+</div>

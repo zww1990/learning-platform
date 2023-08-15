@@ -1,0 +1,38 @@
+[
+  {
+    "menuId": 1,
+    "menuName": "加班",
+    "menuIcon": "appstore",
+    "parentMenuId": null
+  },
+  {
+    "menuId": 11,
+    "menuName": "我的加班",
+    "menuUrl": "/demo/page1",
+    "parentMenuId": 1
+  },
+  {
+    "menuId": 2,
+    "menuName": "示例2",
+    "menuIcon": "appstore",
+    "parentMenuId": null
+  },
+  {
+    "menuId": 21,
+    "menuName": "示例2.1",
+    "menuUrl": "/demo/page2",
+    "parentMenuId": 2
+  },
+  {
+    "menuId": 22,
+    "menuName": "示例2.2",
+    "menuUrl": "/demo/page3",
+    "parentMenuId": 2
+  },
+  {
+    "menuId": 23,
+    "menuName": "示例2.3",
+    "menuUrl": "/demo/page4",
+    "parentMenuId": 2
+  }
+]
