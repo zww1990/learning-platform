@@ -1,6 +1,5 @@
 package com.example.eurekaconsumer.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.provider.api.domain.Hello;
 import com.example.provider.api.service.HelloService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -20,9 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/hello")
 @Slf4j
+@AllArgsConstructor
 public class HelloController {
-	@Autowired
-	private HelloService helloService;
+	private final HelloService helloService;
 
 	@GetMapping("/get")
 	public Hello get(@RequestParam String name) {
