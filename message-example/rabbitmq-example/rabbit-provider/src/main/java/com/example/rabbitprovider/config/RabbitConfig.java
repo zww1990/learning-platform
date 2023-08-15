@@ -10,13 +10,14 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.AllArgsConstructor;
 
 /**
  * RabbitMQ配置类
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Configuration
 public class RabbitConfig {
+
 	@Bean
 	MessageConverter messageConverter(ObjectMapper jsonObjectMapper) {
 		return new Jackson2JsonMessageConverter(jsonObjectMapper);
@@ -33,7 +35,10 @@ public class RabbitConfig {
 
 	@Configuration
 	@ConditionalOnProperty(prefix = "spring.rabbitmq", name = "dynamic", matchIfMissing = true)
+	@AllArgsConstructor
 	static class RabbitAutoDeclaringConfig implements CommandLineRunner {
+
+		private final AmqpAdmin amqpAdmin;
 
 		@Bean
 		Queue queueA() {
@@ -64,8 +69,5 @@ public class RabbitConfig {
 		public void run(String... args) throws Exception {
 			((RabbitAdmin) this.amqpAdmin).initialize();
 		}
-
-		@Autowired
-		AmqpAdmin amqpAdmin;
 	}
 }
