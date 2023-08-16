@@ -34,4 +34,9 @@ public class BookController {
     public Book createBook(@Argument Book book) {
         return bookService.createBook(book);
     }
+
+    @SchemaMapping(typeName = "BookMutation", field = "updateBook")
+    public Book updateBook(@Argument Book book) {
+        return bookService.updateBook(book);
+    }
 }

@@ -19,6 +19,9 @@ public class BookService implements CommandLineRunner {
     private final Map<Long, List<Author>> authorMap = new HashMap<>();
 
     public Book queryBook(Long id) {
+        if (id == null) {
+            return null;
+        }
         Book book = bookMap.get(id);
         if (book == null) {
             return null;
@@ -62,6 +65,18 @@ public class BookService implements CommandLineRunner {
                         .stream()
                         .peek(c -> c.setId(UUID.randomUUID().toString()))
                         .toList());
+        return book;
+    }
+
+    public Book updateBook(Book book) {
+        if (book == null || book.getId() == null) {
+            return null;
+        }
+        if (!bookMap.containsKey(book.getId())) {
+            return null;
+        }
+        bookMap.put(book.getId(), book);
+        authorMap.put(book.getId(), book.getAuthor());
         return book;
     }
 }
