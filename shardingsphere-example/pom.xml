@@ -12,16 +12,16 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>shardingsphere-parent</artifactId>
+	<artifactId>sharding-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>shardingsphere-parent</name>
+	<name>sharding-example-parent</name>
 
 	<modules>
-		<module>sharding-database-splitting</module>
-		<module>sharding-readwrite-splitting</module>
-		<module>sharding-table-splitting</module>
+		<module>sharding-example-01</module>
+		<module>sharding-example-02</module>
+		<module>sharding-example-03</module>
 		<module>sharding-example-generator</module>
 	</modules>
 
@@ -76,6 +76,36 @@
 	</pluginRepositories>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+	                <executions>
+	                    <execution>
+	                        <id>repackage</id>
+	                        <goals>
+	                            <goal>repackage</goal>
+	                        </goals>
+	                    </execution>
+	                    <execution>
+	                    	<id>build-info</id>
+	                    	<goals>
+	                    		<goal>build-info</goal>
+	                    	</goals>
+	                    </execution>
+	                </executions>
+					<configuration>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
