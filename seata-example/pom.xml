@@ -12,16 +12,16 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>seata-parent</artifactId>
+	<artifactId>seata-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>seata-parent</name>
+	<name>seata-example-parent</name>
 
 	<modules>
-		<module>seata-client-a</module>
-		<module>seata-client-b</module>
-		<module>seata-client-c</module>
+		<module>seata-client-01</module>
+		<module>seata-client-02</module>
+		<module>seata-client-03</module>
 	</modules>
 
     <properties>
