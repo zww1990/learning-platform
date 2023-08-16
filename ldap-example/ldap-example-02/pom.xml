@@ -12,10 +12,10 @@
 	</parent>
 	
 	<groupId>com.stampede</groupId>
-	<artifactId>changepwd-v2</artifactId>
+	<artifactId>ldap-example-02</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>changepwd-v2</name>
+	<name>ldap-example-02</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
