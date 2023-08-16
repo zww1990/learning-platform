@@ -1,4 +1,4 @@
-# my-vue
+# vue-example-04
 
 > A Vue.js project
 
