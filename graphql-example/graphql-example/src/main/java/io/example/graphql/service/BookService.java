@@ -79,4 +79,16 @@ public class BookService implements CommandLineRunner {
         authorMap.put(book.getId(), book.getAuthor());
         return book;
     }
+
+    public Boolean deleteById(Long id) {
+        if (id == null) {
+            return false;
+        }
+        if (!bookMap.containsKey(id)) {
+            return false;
+        }
+        bookMap.remove(id);
+        authorMap.remove(id);
+        return true;
+    }
 }

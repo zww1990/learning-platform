@@ -39,4 +39,9 @@ public class BookController {
     public Book updateBook(@Argument Book book) {
         return bookService.updateBook(book);
     }
+
+    @SchemaMapping(typeName = "BookMutation", field = "deleteById")
+    public Boolean deleteById(@Argument Long id) {
+        return bookService.deleteById(id);
+    }
 }

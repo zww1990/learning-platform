@@ -1,134 +1,74 @@
-"""
-输出：作者数据模型
-"""
+"输出：作者数据模型"
 type Author {
-    """
-    作者主键
-    """
+    "作者主键"
     id: ID
-    """
-    姓氏
-    """
+    "姓氏"
     firstName: String
-    """
-    名字
-    """
+    "名字"
     lastName: String
 }
-"""
-输出：图书数据模型
-"""
+"输出：图书数据模型"
 type Book {
-    """
-    图书主键
-    """
+    "图书主键"
     id: ID
-    """
-    书名
-    """
+    "书名"
     name: String
-    """
-    页数
-    """
+    "页数"
     pageCount: Int
-    """
-    作者
-    """
+    "作者"
     author: [Author]
 }
-"""
-输入：作者数据模型
-"""
+"输入：作者数据模型"
 input CreateAuthor {
-    """
-    姓氏
-    """
+    "姓氏"
     firstName: String!
-    """
-    名字
-    """
+    "名字"
     lastName: String!
 }
-"""
-输入：图书数据模型
-"""
+"输入：图书数据模型"
 input CreateBook {
-    """
-    书名
-    """
+    "书名"
     name: String!
-    """
-    页数
-    """
+    "页数"
     pageCount: Int!
-    """
-    作者
-    """
+    "作者"
     author: [CreateAuthor!]!
 }
-"""
-输入：作者数据模型
-"""
+"输入：作者数据模型"
 input UpdateAuthor {
-    """
-    作者主键
-    """
+    "作者主键"
     id: ID!
-    """
-    姓氏
-    """
+    "姓氏"
     firstName: String!
-    """
-    名字
-    """
+    "名字"
     lastName: String!
 }
-"""
-输入：图书数据模型
-"""
+"输入：图书数据模型"
 input UpdateBook {
-    """
-    图书主键
-    """
+    "图书主键"
     id: ID!
-    """
-    书名
-    """
+    "书名"
     name: String!
-    """
-    页数
-    """
+    "页数"
     pageCount: Int!
-    """
-    作者
-    """
+    "作者"
     author: [UpdateAuthor!]!
 }
-"""
-查询操作
-"""
+"查询操作"
 type BookQuery {
-    """
-    按主键查询数据
-    """
+    "按主键查询数据"
     bookById(id: ID!): Book
-    """
-    查询所有数据
-    """
+    "查询所有数据"
     bookList: [Book]
 }
-"""
-更新操作
-"""
+"更新操作"
 type BookMutation {
-    """
-    新增数据
-    """
-    createBook(book: CreateBook): Book
-    """
-    修改数据
-    """
-    updateBook(book: UpdateBook): Book
+    "新增数据"
+    createBook(book: CreateBook!): Book!
+    "修改数据"
+    updateBook(book: UpdateBook!): Book
+    "按主键删除数据"
+    deleteById(id: ID!): Boolean
 }
 
 schema {
