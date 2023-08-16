@@ -12,9 +12,9 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>eureka-parent</artifactId>
+	<artifactId>eureka-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eureka-parent</name>
+	<name>eureka-example-parent</name>
 	<packaging>pom</packaging>
 	<description>Demo project for Spring Boot</description>
 
