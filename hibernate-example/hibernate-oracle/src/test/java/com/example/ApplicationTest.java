@@ -1,4 +1,4 @@
-package com;
+package com.example;
 
 import javax.annotation.Resource;
 import org.junit.Test;

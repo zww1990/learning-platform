@@ -1,4 +1,4 @@
-package com;
+package com.demo;
 
 import javax.persistence.EntityManager;
 import org.slf4j.Logger;
