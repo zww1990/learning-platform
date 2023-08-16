@@ -11,9 +11,9 @@
 	</parent>
 	
 	<groupId>com.example</groupId>
-	<artifactId>spring-security-cas</artifactId>
+	<artifactId>security-example-01</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-security-cas</name>
+	<name>security-example-01</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
