@@ -5,10 +5,7 @@ import io.example.graphql.domain.Book;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Book Service
@@ -39,12 +36,12 @@ public class BookService implements CommandLineRunner {
         bookMap.put(b1.getId(), b1);
         bookMap.put(b2.getId(), b2);
         bookMap.put(b3.getId(), b3);
-        Author a1 = new Author().setId(11L).setFirstName("张").setLastName("大");
-        Author a2 = new Author().setId(22L).setFirstName("张").setLastName("二");
-        Author a3 = new Author().setId(33L).setFirstName("张").setLastName("三");
-        Author a4 = new Author().setId(44L).setFirstName("李").setLastName("大");
-        Author a5 = new Author().setId(55L).setFirstName("李").setLastName("二");
-        Author a6 = new Author().setId(66L).setFirstName("李").setLastName("三");
+        Author a1 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("大");
+        Author a2 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("二");
+        Author a3 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("三");
+        Author a4 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("大");
+        Author a5 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("二");
+        Author a6 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("三");
         authorMap.put(b1.getId(), List.of(a1, a2));
         authorMap.put(b2.getId(), List.of(a3, a4));
         authorMap.put(b3.getId(), List.of(a5, a6));
@@ -55,5 +52,16 @@ public class BookService implements CommandLineRunner {
                 .stream()
                 .map(m -> m.setAuthor(authorMap.getOrDefault(m.getId(), Collections.emptyList())))
                 .toList();
+    }
+
+    public Book createBook(Book book) {
+        book.setId(bookMap.size() + 1L);
+        bookMap.put(book.getId(), book);
+        authorMap.put(book.getId(),
+                book.getAuthor()
+                        .stream()
+                        .peek(c -> c.setId(UUID.randomUUID().toString()))
+                        .toList());
+        return book;
     }
 }

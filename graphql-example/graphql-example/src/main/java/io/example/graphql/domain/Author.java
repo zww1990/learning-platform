@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @ToString
 @Accessors(chain = true)
 public class Author {
-    private Long id;
+    private String id;
     private String firstName;
     private String lastName;
 }

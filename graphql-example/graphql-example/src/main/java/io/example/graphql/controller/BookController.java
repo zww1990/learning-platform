@@ -29,4 +29,9 @@ public class BookController {
     public List<Book> bookList() {
         return bookService.queryBooks();
     }
+
+    @SchemaMapping(typeName = "BookMutation", field = "createBook")
+    public Book createBook(@Argument Book book) {
+        return bookService.createBook(book);
+    }
 }
