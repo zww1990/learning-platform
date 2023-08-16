@@ -13,19 +13,23 @@
 	<description>Super Parent POM</description>
 
 	<modules>
-		<module>cas-example/cas-client-a</module>
-		<module>cas-example/cas-client-b</module>
+		<module>cas-example/cas-client-01</module>
+		<module>cas-example/cas-client-02</module>
 		<module>cas-example/cas-server-webapp</module>
 		<module>design-pattern-example</module>
-		<module>dubbo-example/spring-dubbo-consumer</module>
-		<module>dubbo-example/spring-dubbo-provider</module>
-		<module>dubbo-example/spring-dubbo-provider-api</module>
+		<module>dubbo-example/dubbo-consumer</module>
+		<module>dubbo-example/dubbo-provider</module>
+		<module>dubbo-example/dubbo-provider-api</module>
 		<module>excel-example</module>
-		<module>hibernate-example/hibernate-mysql</module>
-		<module>hibernate-example/hibernate-mysql-service-controller</module>
+		<module>graphql-example/graphql-example</module>
+		<module>hibernate-example/hibernate-mysql-01</module>
+		<module>hibernate-example/hibernate-mysql-02</module>
 		<module>hibernate-example/hibernate-oracle</module>
-		<module>ldap-example/changepwd-v1</module>
-		<module>ldap-example/changepwd-v2</module>
+		<module>ldap-example/ldap-example-01</module>
+		<module>ldap-example/ldap-example-02</module>
+		<module>message-example/activemq-example/active-consumer</module>
+		<module>message-example/activemq-example/active-provider</module>
+		<module>message-example/activemq-example/active-provider-api</module>
 		<module>message-example/rabbitmq-example/rabbit-consumer</module>
 		<module>message-example/rabbitmq-example/rabbit-provider</module>
 		<module>message-example/rabbitmq-example/rabbit-provider-api</module>
@@ -43,31 +47,31 @@
 		<module>nosql-example/elastic-example</module>
 		<module>nosql-example/mongo-example</module>
 		<module>nosql-example/redis-example</module>
-		<module>oa-clock/oa-clock-v1</module>
-		<module>oa-clock/oa-clock-v2</module>
-		<module>oa-clock/oa-clock-v3</module>
-		<module>oa-clock/oa-clock-v4</module>
-		<module>oa-clock/oa-clock-v5</module>
+		<module>oa-clock/oa-clock-01</module>
+		<module>oa-clock/oa-clock-02</module>
+		<module>oa-clock/oa-clock-03</module>
+		<module>oa-clock/oa-clock-04</module>
+		<module>oa-clock/oa-clock-05</module>
 		<module>polaris-example/polaris-consumer</module>
 		<module>polaris-example/polaris-provider</module>
 		<module>polaris-example/polaris-provider-api</module>
 		<module>polaris-example/polaris-ratelimit</module>
-		<module>schedule-example/spring-schedule-v1</module>
-		<module>schedule-example/spring-schedule-v2</module>
-		<module>seata-example/seata-client-a</module>
-		<module>seata-example/seata-client-b</module>
-		<module>seata-example/seata-client-c</module>
-		<module>security-example/oauth2-parent/oauth2-authorization-server</module>
-		<module>security-example/oauth2-parent/oauth2-client</module>
-		<module>security-example/oauth2-parent/oauth2-resource-server</module>
-		<module>security-example/spring-security-cas</module>
-		<module>security-example/spring-security-non-cas</module>
-		<module>security-example/spring-security-rest-api</module>
-		<module>sentinel-example/sentinel-client-a</module>
-		<module>sentinel-example/sentinel-client-b</module>
-		<module>shardingsphere-example/sharding-database-splitting</module>
-		<module>shardingsphere-example/sharding-readwrite-splitting</module>
-		<module>shardingsphere-example/sharding-table-splitting</module>
+		<module>schedule-example/schedule-quartz-01</module>
+		<module>schedule-example/schedule-quartz-02</module>
+		<module>seata-example/seata-client-01</module>
+		<module>seata-example/seata-client-02</module>
+		<module>seata-example/seata-client-03</module>
+		<module>security-example/oauth2-example-parent/oauth2-authorization-server</module>
+		<module>security-example/oauth2-example-parent/oauth2-client</module>
+		<module>security-example/oauth2-example-parent/oauth2-resource-server</module>
+		<module>security-example/security-example-01</module>
+		<module>security-example/security-example-02</module>
+		<module>security-example/security-example-03</module>
+		<module>sentinel-example/sentinel-client-01</module>
+		<module>sentinel-example/sentinel-client-02</module>
+		<module>shardingsphere-example/sharding-example-01</module>
+		<module>shardingsphere-example/sharding-example-02</module>
+		<module>shardingsphere-example/sharding-example-03</module>
 		<module>shardingsphere-example/sharding-example-generator</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-consumer</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider</module>
@@ -80,9 +84,9 @@
 		<module>spring-example/poi-example</module>
 		<module>spring-example/reactive-example</module>
 		<module>spring-example/retry-example</module>
-		<module>swagger-example/spring-swagger</module>
-		<module>swagger-example/spring-swagger-knife4j</module>
-		<module>swagger-example/spring-swagger-openapi</module>
+		<module>swagger-example/swagger-example</module>
+		<module>swagger-example/swagger-knife4j</module>
+		<module>swagger-example/swagger-openapi</module>
 	</modules>
 
 </project>
