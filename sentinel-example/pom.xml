@@ -12,15 +12,15 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>sentinel-parent</artifactId>
+	<artifactId>sentinel-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>sentinel-parent</name>
+	<name>sentinel-example-parent</name>
 
 	<modules>
-		<module>sentinel-client-a</module>
-		<module>sentinel-client-b</module>
+		<module>sentinel-client-01</module>
+		<module>sentinel-client-02</module>
 	</modules>
 
     <properties>

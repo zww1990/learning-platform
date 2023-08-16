@@ -1,0 +1,36 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: sentinel-client-02
+  cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          enabled: true
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      config:
+        context-path: /nacos
+        namespace: 
+        file-extension: yml
+      discovery:
+        namespace: public
+    sentinel:
+      transport:
+        dashboard: localhost:9999
+      eager: true
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            data-id: sentinel-client-02
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+
