@@ -12,11 +12,11 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>polaris-parent</artifactId>
+	<artifactId>polaris-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>polaris-parent</name>
+	<name>polaris-example-parent</name>
 
 	<modules>
 		<module>polaris-consumer</module>

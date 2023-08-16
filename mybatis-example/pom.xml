@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -10,33 +9,26 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
+	
 	<groupId>com.example</groupId>
-	<artifactId>rabbit-example-parent</artifactId>
+	<artifactId>mybatis-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rabbit-example-parent</name>
 	<packaging>pom</packaging>
-	<description>Demo project for Spring Boot</description>
 
+	<name>mybatis-example-parent</name>
+	<url>http://maven.apache.org</url>
+	
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 
 	<modules>
-		<module>rabbit-provider</module>
-		<module>rabbit-provider-api</module>
-		<module>rabbit-consumer</module>
+		<module>mybatis-flex-example</module>
+		<module>mybatis-fluent-example</module>
+		<module>mybatis-mysql</module>
+		<module>mybatis-oracle</module>
+		<module>mybatis-plus-example</module>
 	</modules>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.example</groupId>
-				<artifactId>rabbit-provider-api</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<repositories>
 		<repository>
@@ -97,14 +89,15 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-surefire-plugin</artifactId>
-            	<configuration>
-            		<skipTests>true</skipTests>
-            	</configuration>
-            </plugin>
+			<!-- ↓构建过程中，跳过执行单元测试↓ -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			<!-- ↑构建过程中，跳过执行单元测试↑ -->
 		</plugins>
 	</build>
-
 </project>

@@ -12,11 +12,11 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>nacos-parent</artifactId>
+	<artifactId>nacos-example-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>nacos-parent</name>
+	<name>nacos-example-parent</name>
 
 	<modules>
 		<module>nacos-provider</module>

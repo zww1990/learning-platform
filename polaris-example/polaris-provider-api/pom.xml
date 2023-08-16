@@ -6,7 +6,7 @@
 
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>polaris-parent</artifactId>
+		<artifactId>polaris-example-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
