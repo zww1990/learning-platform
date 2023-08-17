@@ -158,12 +158,6 @@ public class BookService implements CommandLineRunner {
     }
 
     private Connection<Author> emptyConnection() {
-        return new DefaultConnection<>(
-                Collections.emptyList(),
-                new DefaultPageInfo(
-                        new DefaultConnectionCursor("<empty>"),
-                        new DefaultConnectionCursor("<empty>"),
-                        false,
-                        false));
+        return new DefaultConnection<>(Collections.emptyList(), new DefaultPageInfo(null, null, false, false));
     }
 }

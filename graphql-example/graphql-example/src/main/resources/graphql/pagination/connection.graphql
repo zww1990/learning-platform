@@ -1,4 +1,7 @@
+"连接"
 type Connection {
+    "Edge列表"
     edges: [Edge]
+    "分页信息"
     pageInfo: PageInfo
 }
