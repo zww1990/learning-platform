@@ -19,3 +19,7 @@ spring:
     schema:
       printer:
         enabled: false
+      file-extensions:
+        - .graphqls
+        - .graphql
+        - .gqls

@@ -1,0 +1,9 @@
+"更新操作"
+type BookMutation {
+    "新增数据"
+    createBook(book: CreateBook!): Book!
+    "修改数据"
+    updateBook(book: UpdateBook!): Book
+    "按主键删除数据"
+    deleteById(id: ID!): Boolean
+}

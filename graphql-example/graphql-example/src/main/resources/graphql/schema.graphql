@@ -1,0 +1,5 @@
+"包含：增删改查"
+schema {
+    query: BookQuery
+    mutation: BookMutation
+}
