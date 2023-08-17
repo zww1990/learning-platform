@@ -1,5 +1,7 @@
 package io.example.graphql.controller;
 
+import graphql.relay.Connection;
+import io.example.graphql.domain.Author;
 import io.example.graphql.domain.Book;
 import io.example.graphql.service.BookService;
 import lombok.AllArgsConstructor;
@@ -43,5 +45,10 @@ public class BookController {
     @SchemaMapping(typeName = "BookMutation", field = "deleteById")
     public Boolean deleteById(@Argument Long id) {
         return bookService.deleteById(id);
+    }
+
+    @SchemaMapping(typeName = "BookQuery", field = "authorPage")
+    public Connection<Author> authorPage(@Argument Integer first, @Argument String after) {
+        return bookService.queryAuthorPage(first, after);
     }
 }

@@ -1,11 +1,16 @@
 package io.example.graphql.service;
 
+import graphql.relay.*;
 import io.example.graphql.domain.Author;
 import io.example.graphql.domain.Book;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Book Service
@@ -14,9 +19,10 @@ import java.util.*;
  * @since 2023-08-14 18:05:20
  */
 @Service
+@Slf4j
 public class BookService implements CommandLineRunner {
     private final Map<Long, Book> bookMap = new HashMap<>();
-    private final Map<Long, List<Author>> authorMap = new HashMap<>();
+    private final List<Author> authorList = new ArrayList<>();
 
     public Book queryBook(Long id) {
         if (id == null) {
@@ -26,8 +32,9 @@ public class BookService implements CommandLineRunner {
         if (book == null) {
             return null;
         }
-        List<Author> authors = authorMap.get(id);
-        book.setAuthor(authors);
+        book.setAuthor(authorList.stream()
+                .filter(f -> id.equals(f.getBookId()))
+                .toList());
         return book;
     }
 
@@ -39,32 +46,36 @@ public class BookService implements CommandLineRunner {
         bookMap.put(b1.getId(), b1);
         bookMap.put(b2.getId(), b2);
         bookMap.put(b3.getId(), b3);
-        Author a1 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("大");
-        Author a2 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("二");
-        Author a3 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("三");
-        Author a4 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("大");
-        Author a5 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("二");
-        Author a6 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("三");
-        authorMap.put(b1.getId(), List.of(a1, a2));
-        authorMap.put(b2.getId(), List.of(a3, a4));
-        authorMap.put(b3.getId(), List.of(a5, a6));
+        Author a1 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("大").setBookId(b1.getId());
+        Author a2 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("二").setBookId(b1.getId());
+        Author a3 = new Author().setId(UUID.randomUUID().toString()).setFirstName("张").setLastName("三").setBookId(b2.getId());
+        Author a4 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("大").setBookId(b2.getId());
+        Author a5 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("二").setBookId(b3.getId());
+        Author a6 = new Author().setId(UUID.randomUUID().toString()).setFirstName("李").setLastName("三").setBookId(b3.getId());
+        authorList.add(a1);
+        authorList.add(a2);
+        authorList.add(a3);
+        authorList.add(a4);
+        authorList.add(a5);
+        authorList.add(a6);
     }
 
     public List<Book> queryBooks() {
         return bookMap.values()
                 .stream()
-                .map(m -> m.setAuthor(authorMap.getOrDefault(m.getId(), Collections.emptyList())))
+                .map(m -> m.setAuthor(authorList.stream()
+                        .filter(f -> f.getBookId().equals(m.getId()))
+                        .toList()))
                 .toList();
     }
 
     public Book createBook(Book book) {
         book.setId(bookMap.size() + 1L);
         bookMap.put(book.getId(), book);
-        authorMap.put(book.getId(),
-                book.getAuthor()
-                        .stream()
-                        .peek(c -> c.setId(UUID.randomUUID().toString()))
-                        .toList());
+        book.getAuthor().forEach(f -> {
+            f.setId(UUID.randomUUID().toString()).setBookId(book.getId());
+            authorList.add(f);
+        });
         return book;
     }
 
@@ -76,7 +87,13 @@ public class BookService implements CommandLineRunner {
             return null;
         }
         bookMap.put(book.getId(), book);
-        authorMap.put(book.getId(), book.getAuthor());
+        Map<String, Author> authorMap = authorList.stream().collect(Collectors.toMap(Author::getId, Function.identity()));
+        book.getAuthor().forEach(f ->
+                Optional.ofNullable(authorMap.get(f.getId()))
+                        .ifPresentOrElse(m ->
+                                        m.setFirstName(f.getFirstName())
+                                                .setLastName(f.getLastName()),
+                                () -> log.error("不存在: {}", f)));
         return book;
     }
 
@@ -88,7 +105,65 @@ public class BookService implements CommandLineRunner {
             return false;
         }
         bookMap.remove(id);
-        authorMap.remove(id);
+        authorList.removeIf(p -> id.equals(p.getBookId()));
         return true;
+    }
+
+    public Connection<Author> queryAuthorPage(Integer first, String after) {
+        if (first == null) {
+            first = 2;
+        }
+        if (StringUtils.hasText(after)) {
+            Author author = authorList.stream().filter(f -> f.getId().equals(after)).findFirst().orElse(null);
+            if (author == null) {
+                return this.emptyConnection();
+            }
+            int index = authorList.indexOf(author);
+            if (index == -1) {
+                return this.emptyConnection();
+            }
+            int toIndex = index + first;
+            if (toIndex > authorList.size()) {
+                toIndex = authorList.size();
+            }
+            List<Author> tmp = authorList.subList(index, toIndex);
+            String start = tmp.get(0).getId();
+            String end = tmp.get(tmp.size() - 1).getId();
+            boolean hasPreviousPage = index > 0;
+            boolean hasNextPage = toIndex < authorList.size();
+            return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
+        }
+        List<Author> tmp = authorList.stream().limit(first).toList();
+        String start = tmp.get(0).getId();
+        String end = tmp.get(tmp.size() - 1).getId();
+        boolean hasPreviousPage = false;
+        boolean hasNextPage = tmp.size() < authorList.size();
+        return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
+    }
+
+    private Connection<Author> buildConnection(List<Author> edges,
+                                               String startCursor,
+                                               String endCursor,
+                                               boolean hasPreviousPage,
+                                               boolean hasNextPage) {
+        return new DefaultConnection<>(
+                edges.stream()
+                        .map(author -> new DefaultEdge<>(author, new DefaultConnectionCursor(author.getId())))
+                        .collect(Collectors.toList()),
+                new DefaultPageInfo(
+                        new DefaultConnectionCursor(startCursor),
+                        new DefaultConnectionCursor(endCursor),
+                        hasPreviousPage,
+                        hasNextPage));
+    }
+
+    private Connection<Author> emptyConnection() {
+        return new DefaultConnection<>(
+                Collections.emptyList(),
+                new DefaultPageInfo(
+                        new DefaultConnectionCursor("<empty>"),
+                        new DefaultConnectionCursor("<empty>"),
+                        false,
+                        false));
     }
 }

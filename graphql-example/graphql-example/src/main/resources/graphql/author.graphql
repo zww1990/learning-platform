@@ -1,7 +1,7 @@
 "输出：作者数据模型"
-type Author {
+type Author implements Node {
     "作者主键"
-    id: ID
+    id: ID!
     "姓氏"
     firstName: String
     "名字"

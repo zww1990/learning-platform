@@ -1,0 +1,4 @@
+type Edge {
+    node: Node
+    cursor: Cursor
+}

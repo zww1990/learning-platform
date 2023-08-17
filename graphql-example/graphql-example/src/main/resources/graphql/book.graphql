@@ -1,7 +1,7 @@
 "输出：图书数据模型"
-type Book {
+type Book implements Node {
     "图书主键"
-    id: ID
+    id: ID!
     "书名"
     name: String
     "页数"
