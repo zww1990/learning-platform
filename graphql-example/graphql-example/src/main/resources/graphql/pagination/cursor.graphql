@@ -1,5 +1,0 @@
-"游标"
-type Cursor {
-    "值"
-    value: String
-}

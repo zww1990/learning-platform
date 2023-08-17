@@ -3,5 +3,5 @@ type Edge {
     "节点"
     node: Node
     "游标"
-    cursor: Cursor
+    cursor: String
 }
