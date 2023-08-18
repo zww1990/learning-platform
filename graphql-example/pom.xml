@@ -23,6 +23,7 @@
 	</properties>
 
 	<modules>
+		<module>dgs-example</module>
 		<module>graphql-example</module>
 	</modules>
 

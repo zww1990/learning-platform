@@ -1,0 +1,7 @@
+"Edge"
+type Edge {
+    "节点"
+    node: Node
+    "游标"
+    cursor: String
+}
