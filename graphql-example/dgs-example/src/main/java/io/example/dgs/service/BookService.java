@@ -26,14 +26,12 @@ public class BookService implements CommandLineRunner {
         if (id == null) {
             return null;
         }
-        Book book = bookMap.get(id);
-        if (book == null) {
-            return null;
-        }
-        book.setAuthor(authorList.stream()
-                .filter(f -> id.equals(f.getBookId()))
-                .toList());
-        return book;
+        return bookMap.get(id);
+    }
+
+    public List<Author> queryAuthorsByBookId(Long bookId) {
+        log.info("queryAuthorsByBookId(): bookId = {}", bookId);
+        return authorList.stream().filter(f -> f.getBookId().equals(bookId)).toList();
     }
 
     @Override
@@ -59,12 +57,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public List<Book> queryBooks() {
-        return bookMap.values()
-                .stream()
-                .map(m -> m.setAuthor(authorList.stream()
-                        .filter(f -> f.getBookId().equals(m.getId()))
-                        .toList()))
-                .toList();
+        return bookMap.values().stream().toList();
     }
 
     public Book createBook(Book book) {

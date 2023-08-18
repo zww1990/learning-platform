@@ -2,7 +2,9 @@ package io.example.dgs.controller;
 
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsData;
+import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
 import com.netflix.graphql.dgs.InputArgument;
+import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import io.example.dgs.service.BookService;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,12 @@ public class BookController {
     @DgsData(parentType = "BookQuery", field = "bookById")
     public Book bookById(@InputArgument Long id) {
         return bookService.queryBook(id);
+    }
+
+    @DgsData(parentType = "Book", field = "author")
+    public List<Author> authorsByBookId(DgsDataFetchingEnvironment env) {
+        Book book = env.getSource();
+        return bookService.queryAuthorsByBookId(book.getId());
     }
 
     @DgsData(parentType = "BookQuery", field = "bookList")
