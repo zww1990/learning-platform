@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 @Accessors(chain = true)
 public class Book {
-    private Long id;
+    private Integer id;
     private String name;
     private Integer pageCount;
     private List<Author> authors;

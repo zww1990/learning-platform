@@ -1,7 +1,7 @@
 "输入：作者数据模型"
 input UpdateAuthor {
     "作者主键"
-    id: ID!
+    id: String!
     "姓氏"
     firstName: String!
     "名字"

@@ -10,6 +10,8 @@ import io.example.dgs.service.BookService;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Book Controller
@@ -23,7 +25,7 @@ public class BookController {
     private final BookService bookService;
 
     @DgsData(parentType = "BookQuery", field = "bookById")
-    public Book bookById(@InputArgument Long id) {
+    public Book bookById(@InputArgument Integer id) {
         return bookService.queryBook(id);
     }
 
@@ -44,12 +46,23 @@ public class BookController {
     }
 
     @DgsData(parentType = "BookMutation", field = "updateBook")
-    public Book updateBook(@InputArgument Book book) {
-        return bookService.updateBook(book);
+    public Book updateBook(@InputArgument Map<String, Object> book) {
+        Book tmp = new Book()
+                .setId((int) book.get("id"))
+                .setName((String) book.get("name"))
+                .setPageCount((int) book.get("pageCount"))
+                .setAuthors(((List<Map<String, String>>) book.get("authors"))
+                        .stream()
+                        .map(m -> new Author()
+                                .setId(m.get("id"))
+                                .setFirstName(m.get("firstName"))
+                                .setLastName(m.get("lastName")))
+                        .collect(Collectors.toList()));
+        return bookService.updateBook(tmp);
     }
 
     @DgsData(parentType = "BookMutation", field = "deleteById")
-    public Boolean deleteById(@InputArgument Long id) {
+    public Boolean deleteById(@InputArgument Integer id) {
         return bookService.deleteById(id);
     }
 

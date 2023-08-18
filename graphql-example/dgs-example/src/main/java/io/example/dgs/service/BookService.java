@@ -19,26 +19,26 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class BookService implements CommandLineRunner {
-    private final Map<Long, Book> bookMap = new HashMap<>();
+    private final Map<Integer, Book> bookMap = new HashMap<>();
     private final List<Author> authorList = new ArrayList<>();
 
-    public Book queryBook(Long id) {
+    public Book queryBook(Integer id) {
         if (id == null) {
             return null;
         }
         return bookMap.get(id);
     }
 
-    public List<Author> queryAuthorsByBookId(Long bookId) {
+    public List<Author> queryAuthorsByBookId(Integer bookId) {
         log.info("queryAuthorsByBookId(): bookId = {}", bookId);
         return authorList.stream().filter(f -> f.getBookId().equals(bookId)).toList();
     }
 
     @Override
     public void run(String... args) {
-        Book b1 = new Book().setId(1L).setName("java基础").setPageCount(100);
-        Book b2 = new Book().setId(2L).setName("java进阶").setPageCount(200);
-        Book b3 = new Book().setId(3L).setName("java实战").setPageCount(300);
+        Book b1 = new Book().setId(1).setName("java基础").setPageCount(100);
+        Book b2 = new Book().setId(2).setName("java进阶").setPageCount(200);
+        Book b3 = new Book().setId(3).setName("java实战").setPageCount(300);
         bookMap.put(b1.getId(), b1);
         bookMap.put(b2.getId(), b2);
         bookMap.put(b3.getId(), b3);
@@ -61,7 +61,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Book createBook(Book book) {
-        book.setId(bookMap.size() + 1L);
+        book.setId(bookMap.size() + 1);
         bookMap.put(book.getId(), book);
         book.getAuthors().forEach(f -> {
             f.setId(UUID.randomUUID().toString()).setBookId(book.getId());
@@ -81,14 +81,13 @@ public class BookService implements CommandLineRunner {
         Map<String, Author> authorMap = authorList.stream().collect(Collectors.toMap(Author::getId, Function.identity()));
         book.getAuthors().forEach(f ->
                 Optional.ofNullable(authorMap.get(f.getId()))
-                        .ifPresentOrElse(m ->
-                                        m.setFirstName(f.getFirstName())
-                                                .setLastName(f.getLastName()),
+                        .ifPresentOrElse(m -> m.setFirstName(f.getFirstName())
+                                        .setLastName(f.getLastName()),
                                 () -> log.error("不存在: {}", f)));
         return book;
     }
 
-    public Boolean deleteById(Long id) {
+    public Boolean deleteById(Integer id) {
         if (id == null) {
             return false;
         }
