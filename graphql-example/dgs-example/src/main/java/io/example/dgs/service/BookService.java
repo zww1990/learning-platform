@@ -63,7 +63,7 @@ public class BookService implements CommandLineRunner {
     public Book createBook(Book book) {
         book.setId(bookMap.size() + 1L);
         bookMap.put(book.getId(), book);
-        book.getAuthor().forEach(f -> {
+        book.getAuthors().forEach(f -> {
             f.setId(UUID.randomUUID().toString()).setBookId(book.getId());
             authorList.add(f);
         });
@@ -79,7 +79,7 @@ public class BookService implements CommandLineRunner {
         }
         bookMap.put(book.getId(), book);
         Map<String, Author> authorMap = authorList.stream().collect(Collectors.toMap(Author::getId, Function.identity()));
-        book.getAuthor().forEach(f ->
+        book.getAuthors().forEach(f ->
                 Optional.ofNullable(authorMap.get(f.getId()))
                         .ifPresentOrElse(m ->
                                         m.setFirstName(f.getFirstName())

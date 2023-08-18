@@ -21,5 +21,5 @@ public class Book {
     private Long id;
     private String name;
     private Integer pageCount;
-    private List<Author> author;
+    private List<Author> authors;
 }

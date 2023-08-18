@@ -27,7 +27,7 @@ public class BookController {
         return bookService.queryBook(id);
     }
 
-    @DgsData(parentType = "Book", field = "author")
+    @DgsData(parentType = "Book", field = "authors")
     public List<Author> authorsByBookId(DgsDataFetchingEnvironment env) {
         Book book = env.getSource();
         return bookService.queryAuthorsByBookId(book.getId());
