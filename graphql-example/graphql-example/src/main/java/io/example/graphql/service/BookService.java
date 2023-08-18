@@ -32,7 +32,7 @@ public class BookService implements CommandLineRunner {
         if (book == null) {
             return null;
         }
-        book.setAuthor(authorList.stream()
+        book.setAuthors(authorList.stream()
                 .filter(f -> id.equals(f.getBookId()))
                 .toList());
         return book;
@@ -63,7 +63,7 @@ public class BookService implements CommandLineRunner {
     public List<Book> queryBooks() {
         return bookMap.values()
                 .stream()
-                .map(m -> m.setAuthor(authorList.stream()
+                .map(m -> m.setAuthors(authorList.stream()
                         .filter(f -> f.getBookId().equals(m.getId()))
                         .toList()))
                 .toList();
@@ -72,7 +72,7 @@ public class BookService implements CommandLineRunner {
     public Book createBook(Book book) {
         book.setId(bookMap.size() + 1L);
         bookMap.put(book.getId(), book);
-        book.getAuthor().forEach(f -> {
+        book.getAuthors().forEach(f -> {
             f.setId(UUID.randomUUID().toString()).setBookId(book.getId());
             authorList.add(f);
         });
@@ -88,7 +88,7 @@ public class BookService implements CommandLineRunner {
         }
         bookMap.put(book.getId(), book);
         Map<String, Author> authorMap = authorList.stream().collect(Collectors.toMap(Author::getId, Function.identity()));
-        book.getAuthor().forEach(f ->
+        book.getAuthors().forEach(f ->
                 Optional.ofNullable(authorMap.get(f.getId()))
                         .ifPresentOrElse(m ->
                                         m.setFirstName(f.getFirstName())

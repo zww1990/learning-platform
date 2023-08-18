@@ -7,5 +7,5 @@ input UpdateBook {
     "页数"
     pageCount: Int!
     "作者"
-    author: [UpdateAuthor!]!
+    authors: [UpdateAuthor!]!
 }

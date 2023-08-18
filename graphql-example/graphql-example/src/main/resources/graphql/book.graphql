@@ -7,5 +7,5 @@ type Book implements Node {
     "页数"
     pageCount: Int
     "作者"
-    author: [Author]
+    authors: [Author]
 }
