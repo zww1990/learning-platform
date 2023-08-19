@@ -1,6 +1,7 @@
 package io.example.dgs.controller;
 
 import com.netflix.graphql.dgs.*;
+import graphql.relay.Connection;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import io.example.dgs.service.BookService;
@@ -66,8 +67,8 @@ public class BookController {
         return bookService.deleteById(id);
     }
 
-//    @SchemaMapping(typeName = "BookQuery", field = "authorPage")
-//    public Connection<Author> authorPage(@Argument Integer first, @Argument String after) {
-//        return bookService.queryAuthorPage(first, after);
-//    }
+    @DgsQuery(field = "authorPage")
+    public Connection<Author> authorPage(@InputArgument Integer first, @InputArgument String after) {
+        return bookService.queryAuthorPage(first, after);
+    }
 }

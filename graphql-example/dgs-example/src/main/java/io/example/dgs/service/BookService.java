@@ -1,10 +1,12 @@
 package io.example.dgs.service;
 
+import graphql.relay.*;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.function.Function;
@@ -23,6 +25,7 @@ public class BookService implements CommandLineRunner {
     private final List<Author> authorList = new ArrayList<>();
 
     public Book queryBook(Integer id) {
+        log.info("queryBook(): id = {}", id);
         if (id == null) {
             return null;
         }
@@ -54,13 +57,16 @@ public class BookService implements CommandLineRunner {
         authorList.add(a4);
         authorList.add(a5);
         authorList.add(a6);
+        log.info("run(): 数据初始化完成");
     }
 
     public List<Book> queryBooks() {
+        log.info("queryBooks(): ");
         return bookMap.values().stream().toList();
     }
 
     public Book createBook(Book book) {
+        log.info("createBook(): book = {}", book);
         book.setId(bookMap.size() + 1);
         bookMap.put(book.getId(), book);
         book.getAuthors().forEach(f -> {
@@ -71,6 +77,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Book updateBook(Book book) {
+        log.info("updateBook(): book = {}", book);
         if (book == null || book.getId() == null) {
             return null;
         }
@@ -88,6 +95,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Boolean deleteById(Integer id) {
+        log.info("deleteById(): id = {}", id);
         if (id == null) {
             return false;
         }
@@ -99,55 +107,56 @@ public class BookService implements CommandLineRunner {
         return true;
     }
 
-//    public Connection<Author> queryAuthorPage(Integer first, String after) {
-//        if (first == null) {
-//            first = 2;
-//        }
-//        if (StringUtils.hasText(after)) {
-//            Author author = authorList.stream().filter(f -> f.getId().equals(after)).findFirst().orElse(null);
-//            if (author == null) {
-//                return this.emptyConnection();
-//            }
-//            int index = authorList.indexOf(author);
-//            if (index == -1) {
-//                return this.emptyConnection();
-//            }
-//            int toIndex = index + first;
-//            if (toIndex > authorList.size()) {
-//                toIndex = authorList.size();
-//            }
-//            List<Author> tmp = authorList.subList(index, toIndex);
-//            String start = tmp.get(0).getId();
-//            String end = tmp.get(tmp.size() - 1).getId();
-//            boolean hasPreviousPage = index > 0;
-//            boolean hasNextPage = toIndex < authorList.size();
-//            return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
-//        }
-//        List<Author> tmp = authorList.stream().limit(first).toList();
-//        String start = tmp.get(0).getId();
-//        String end = tmp.get(tmp.size() - 1).getId();
-//        boolean hasPreviousPage = false;
-//        boolean hasNextPage = tmp.size() < authorList.size();
-//        return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
-//    }
+    public Connection<Author> queryAuthorPage(Integer first, String after) {
+        log.info("queryAuthorPage(): first = {}, after = {}", first, after);
+        if (first == null) {
+            first = 2;
+        }
+        if (StringUtils.hasText(after)) {
+            Author author = authorList.stream().filter(f -> f.getId().equals(after)).findFirst().orElse(null);
+            if (author == null) {
+                return this.emptyConnection();
+            }
+            int index = authorList.indexOf(author);
+            if (index == -1) {
+                return this.emptyConnection();
+            }
+            int toIndex = index + first;
+            if (toIndex > authorList.size()) {
+                toIndex = authorList.size();
+            }
+            List<Author> tmp = authorList.subList(index, toIndex);
+            String start = tmp.get(0).getId();
+            String end = tmp.get(tmp.size() - 1).getId();
+            boolean hasPreviousPage = index > 0;
+            boolean hasNextPage = toIndex < authorList.size();
+            return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
+        }
+        List<Author> tmp = authorList.stream().limit(first).toList();
+        String start = tmp.get(0).getId();
+        String end = tmp.get(tmp.size() - 1).getId();
+        boolean hasPreviousPage = false;
+        boolean hasNextPage = tmp.size() < authorList.size();
+        return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
+    }
 
-//    private Connection<Author> buildConnection(List<Author> edges,
-//                                               String startCursor,
-//                                               String endCursor,
-//                                               boolean hasPreviousPage,
-//                                               boolean hasNextPage) {
-//        return new DefaultConnection<>(
-//                edges.stream()
-//                        .map(author -> new DefaultEdge<>(author, new DefaultConnectionCursor(author.getId())))
-//                        .collect(Collectors.toList()),
-//                new DefaultPageInfo(
-//                        new DefaultConnectionCursor(startCursor),
-//                        new DefaultConnectionCursor(endCursor),
-//                        hasPreviousPage,
-//                        hasNextPage));
-//    }
+    private Connection<Author> buildConnection(List<Author> edges,
+                                               String startCursor,
+                                               String endCursor,
+                                               boolean hasPreviousPage,
+                                               boolean hasNextPage) {
+        return new DefaultConnection<>(
+                edges.stream()
+                        .map(author -> new DefaultEdge<>(author, new DefaultConnectionCursor(author.getId())))
+                        .collect(Collectors.toList()),
+                new DefaultPageInfo(
+                        new DefaultConnectionCursor(startCursor),
+                        new DefaultConnectionCursor(endCursor),
+                        hasPreviousPage,
+                        hasNextPage));
+    }
 
-//    private Connection<Author> emptyConnection() {
-//        return new DefaultConnection<>(Collections.emptyList(), new DefaultPageInfo(null, null, false, false));
-//    }
+    private Connection<Author> emptyConnection() {
+        return new DefaultConnection<>(Collections.emptyList(), new DefaultPageInfo(null, null, false, false));
+    }
 }
