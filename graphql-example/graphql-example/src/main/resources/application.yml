@@ -12,7 +12,7 @@ spring:
     - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
   servlet:
     multipart:
-      enabled: false
+      enabled: true
   graphql:
     graphiql:
       enabled: false
@@ -23,3 +23,11 @@ spring:
         - .graphqls
         - .graphql
         - .gqls
+
+multipart:
+  springboot:
+    patch-schema:
+      enabled: true
+    webmvc:
+      server:
+        enabled: true

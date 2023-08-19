@@ -7,7 +7,8 @@ import io.example.graphql.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.BatchMapping;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -24,32 +25,32 @@ import java.util.Map;
 public class BookController {
     private final BookService bookService;
 
-    @SchemaMapping(typeName = "BookQuery", field = "bookById")
+    @QueryMapping("bookById")
     public Book bookById(@Argument Long id) {
         return bookService.queryBook(id);
     }
 
-    @SchemaMapping(typeName = "BookQuery", field = "bookList")
+    @QueryMapping("bookList")
     public List<Book> bookList() {
         return bookService.queryBooks();
     }
 
-    @SchemaMapping(typeName = "BookMutation", field = "createBook")
+    @MutationMapping("createBook")
     public Book createBook(@Argument Book book) {
         return bookService.createBook(book);
     }
 
-    @SchemaMapping(typeName = "BookMutation", field = "updateBook")
+    @MutationMapping("updateBook")
     public Book updateBook(@Argument Book book) {
         return bookService.updateBook(book);
     }
 
-    @SchemaMapping(typeName = "BookMutation", field = "deleteById")
+    @MutationMapping("deleteById")
     public Boolean deleteById(@Argument Long id) {
         return bookService.deleteById(id);
     }
 
-    @SchemaMapping(typeName = "BookQuery", field = "authorPage")
+    @QueryMapping("authorPage")
     public Connection<Author> authorPage(@Argument Integer first, @Argument String after) {
         return bookService.queryAuthorPage(first, after);
     }

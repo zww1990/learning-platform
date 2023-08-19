@@ -1,9 +1,13 @@
 "更新操作"
-type BookMutation {
+type Mutation {
     "新增数据"
     createBook(book: CreateBook!): Book!
     "修改数据"
     updateBook(book: UpdateBook!): Book
     "按主键删除数据"
     deleteById(id: ID!): Boolean
+    "单文件上传"
+    fileUpload(file: Upload!): Boolean
+    "多文件上传"
+    multiFileUpload(files: [Upload!]!): Boolean
 }
