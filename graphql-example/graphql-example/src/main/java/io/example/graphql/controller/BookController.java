@@ -10,6 +10,7 @@ import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class BookController {
     }
 
     @BatchMapping(typeName = "Book", field = "authors")
-    public Map<Book, List<Author>> authorMap(List<Book> books) {
-        return bookService.queryAuthorMap(books);
+    public Mono<Map<Book, List<Author>>> authorMap(List<Book> books) {
+        return Mono.just(bookService.queryAuthorMap(books));
     }
 }

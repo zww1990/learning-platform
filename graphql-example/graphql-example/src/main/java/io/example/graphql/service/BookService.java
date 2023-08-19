@@ -25,6 +25,7 @@ public class BookService implements CommandLineRunner {
     private final List<Author> authorList = new ArrayList<>();
 
     public Book queryBook(Long id) {
+        log.info("queryBook(): id = {}", id);
         if (id == null) {
             return null;
         }
@@ -51,13 +52,16 @@ public class BookService implements CommandLineRunner {
         authorList.add(a4);
         authorList.add(a5);
         authorList.add(a6);
+        log.info("run(): 数据初始化完成");
     }
 
     public List<Book> queryBooks() {
+        log.info("queryBooks(): ");
         return bookMap.values().stream().toList();
     }
 
     public Book createBook(Book book) {
+        log.info("createBook(): book = {}", book);
         book.setId(bookMap.size() + 1L);
         bookMap.put(book.getId(), book);
         book.getAuthors().forEach(f -> {
@@ -68,6 +72,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Book updateBook(Book book) {
+        log.info("updateBook(): book = {}", book);
         if (book == null || book.getId() == null) {
             return null;
         }
@@ -86,6 +91,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Boolean deleteById(Long id) {
+        log.info("deleteById(): id = {}", id);
         if (id == null) {
             return false;
         }
@@ -98,6 +104,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Connection<Author> queryAuthorPage(Integer first, String after) {
+        log.info("queryAuthorPage(): first = {}, after = {}", first, after);
         if (first == null) {
             first = 2;
         }
@@ -150,6 +157,7 @@ public class BookService implements CommandLineRunner {
     }
 
     public Map<Book, List<Author>> queryAuthorMap(List<Book> books) {
+        log.info("queryAuthorMap(): books size = {}", books.size());
         return books.stream()
                 .collect(Collectors.toMap(
                         Function.identity(),
