@@ -1,5 +1,5 @@
 "查询操作"
-type BookQuery {
+type Query {
     "按主键查询图书数据"
     bookById(id: ID!): Book
     "查询所有图书数据"

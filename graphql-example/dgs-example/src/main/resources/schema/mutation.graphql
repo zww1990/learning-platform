@@ -1,5 +1,5 @@
 "更新操作"
-type BookMutation {
+type Mutation {
     "新增数据"
     createBook(book: CreateBook!): Book!
     "修改数据"

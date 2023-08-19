@@ -1,7 +1,7 @@
 "输入：图书数据模型"
 input UpdateBook {
     "图书主键"
-    id: Int!
+    id: ID!
     "书名"
     name: String!
     "页数"

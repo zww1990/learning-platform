@@ -1,9 +1,6 @@
 package io.example.dgs.controller;
 
-import com.netflix.graphql.dgs.DgsComponent;
-import com.netflix.graphql.dgs.DgsData;
-import com.netflix.graphql.dgs.DgsDataFetchingEnvironment;
-import com.netflix.graphql.dgs.InputArgument;
+import com.netflix.graphql.dgs.*;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import io.example.dgs.service.BookService;
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
 public class BookController {
     private final BookService bookService;
 
-    @DgsData(parentType = "BookQuery", field = "bookById")
+    @DgsQuery(field = "bookById")
     public Book bookById(@InputArgument Integer id) {
         return bookService.queryBook(id);
     }
@@ -35,20 +32,20 @@ public class BookController {
         return bookService.queryAuthorsByBookId(book.getId());
     }
 
-    @DgsData(parentType = "BookQuery", field = "bookList")
+    @DgsQuery(field = "bookList")
     public List<Book> bookList() {
         return bookService.queryBooks();
     }
 
-    @DgsData(parentType = "BookMutation", field = "createBook")
+    @DgsMutation(field = "createBook")
     public Book createBook(@InputArgument Book book) {
         return bookService.createBook(book);
     }
 
-    @DgsData(parentType = "BookMutation", field = "updateBook")
+    @DgsMutation(field = "updateBook")
     public Book updateBook(@InputArgument Map<String, Object> book) {
         Book tmp = new Book()
-                .setId((int) book.get("id"))
+                .setId(Integer.parseInt((String) book.get("id")))
                 .setName((String) book.get("name"))
                 .setPageCount((int) book.get("pageCount"))
                 .setAuthors(((List<Map<String, String>>) book.get("authors"))
@@ -61,7 +58,7 @@ public class BookController {
         return bookService.updateBook(tmp);
     }
 
-    @DgsData(parentType = "BookMutation", field = "deleteById")
+    @DgsMutation(field = "deleteById")
     public Boolean deleteById(@InputArgument Integer id) {
         return bookService.deleteById(id);
     }
