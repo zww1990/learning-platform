@@ -1,5 +1,0 @@
-"节点"
-interface Node {
-    "主键"
-    id: ID!
-}

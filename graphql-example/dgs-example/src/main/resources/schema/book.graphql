@@ -1,5 +1,5 @@
 "输出：图书数据模型"
-type Book implements Node {
+type Book {
     "图书主键"
     id: ID!
     "书名"
