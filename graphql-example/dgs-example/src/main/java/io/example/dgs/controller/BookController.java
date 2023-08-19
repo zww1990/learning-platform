@@ -5,9 +5,11 @@ import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import io.example.dgs.service.BookService;
 import lombok.AllArgsConstructor;
+import org.dataloader.DataLoader;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -27,9 +29,10 @@ public class BookController {
     }
 
     @DgsData(parentType = "Book", field = "authors")
-    public List<Author> authorsByBookId(DgsDataFetchingEnvironment env) {
+    public CompletableFuture<Author> authors(DgsDataFetchingEnvironment env) {
         Book book = env.getSource();
-        return bookService.queryAuthorsByBookId(book.getId());
+        DataLoader<Integer, Author> dataLoader = env.getDataLoader(AuthorsDataLoader.class);
+        return dataLoader.load(book.getId());
     }
 
     @DgsQuery(field = "bookList")

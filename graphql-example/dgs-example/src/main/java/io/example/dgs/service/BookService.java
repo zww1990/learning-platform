@@ -29,9 +29,9 @@ public class BookService implements CommandLineRunner {
         return bookMap.get(id);
     }
 
-    public List<Author> queryAuthorsByBookId(Integer bookId) {
-        log.info("queryAuthorsByBookId(): bookId = {}", bookId);
-        return authorList.stream().filter(f -> f.getBookId().equals(bookId)).toList();
+    public Map<Integer, List<Author>> queryAuthorMapList(Set<Integer> bookIds) {
+        log.info("queryAuthorMapList(): bookIds = {}", bookIds);
+        return authorList.stream().collect(Collectors.groupingBy(Author::getBookId));
     }
 
     @Override
