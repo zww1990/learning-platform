@@ -6,10 +6,12 @@ import io.example.graphql.domain.Book;
 import io.example.graphql.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Book Controller
@@ -50,5 +52,10 @@ public class BookController {
     @SchemaMapping(typeName = "BookQuery", field = "authorPage")
     public Connection<Author> authorPage(@Argument Integer first, @Argument String after) {
         return bookService.queryAuthorPage(first, after);
+    }
+
+    @BatchMapping(typeName = "Book", field = "authors")
+    public Map<Book, List<Author>> authorMap(List<Book> books) {
+        return bookService.queryAuthorMap(books);
     }
 }
