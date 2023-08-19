@@ -5,5 +5,5 @@ type Query {
     "查询所有图书数据"
     bookList: [Book]
     "分页查询作者数据"
-    authorPage(first: Int, after: String): Connection
+    authorPage(first: Int, after: String): AuthorConnection
 }

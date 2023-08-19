@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Graphql Example Application
@@ -21,4 +22,8 @@ public class GraphqlExampleApplication {
 //        java.util.stream.Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
+    @Bean
+    PaginationTypeDefinitionRegistry paginationTypeDefinitionRegistry() {
+        return new PaginationTypeDefinitionRegistry();
+    }
 }
