@@ -1,13 +1,13 @@
 package io.example.kickstart.controller;
 
 import graphql.kickstart.tools.GraphQLResolver;
-import graphql.schema.DataFetchingEnvironment;
 import io.example.kickstart.domain.Author;
 import io.example.kickstart.domain.Book;
+import io.example.kickstart.service.BookService;
 import lombok.AllArgsConstructor;
-import org.dataloader.DataLoader;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -19,11 +19,10 @@ import java.util.concurrent.CompletableFuture;
 @Component
 @AllArgsConstructor
 public class BookController implements GraphQLResolver<Book> {
+    private final BookService bookService;
 
-    public CompletableFuture<Author> authors(DataFetchingEnvironment env) {
-        Book book = env.getSource();
-        DataLoader<Integer, Author> dataLoader = env.getDataLoader("authorsDataLoader");
-        return dataLoader.load(book.getId());
+    public CompletableFuture<List<Author>> authors(Book book) {
+        return CompletableFuture.supplyAsync(() -> bookService.queryAuthorByBookId(book.getId()));
     }
 
 }
