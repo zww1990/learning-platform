@@ -22,10 +22,8 @@ spring:
     schema:
       printer:
         enabled: false
-      file-extensions:
-        - .graphqls
-        - .graphql
-        - .gqls
+      file-extensions: .graphql
+      locations: classpath:schema/**/
 
 multipart:
   springboot:
