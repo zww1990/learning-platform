@@ -25,6 +25,7 @@
 	<modules>
 		<module>dgs-example</module>
 		<module>graphql-example</module>
+		<module>kickstart-example</module>
 	</modules>
 
 	<repositories>

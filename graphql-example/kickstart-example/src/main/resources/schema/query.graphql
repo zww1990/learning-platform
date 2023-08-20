@@ -1,0 +1,9 @@
+"查询操作"
+type Query {
+    "按主键查询图书数据"
+    bookById(id: ID!): Book
+    "查询所有图书数据"
+    bookList: [Book]
+#    "分页查询作者数据"
+#    authorPage(first: Int, after: String): AuthorConnection @connection(for: "Author")
+}

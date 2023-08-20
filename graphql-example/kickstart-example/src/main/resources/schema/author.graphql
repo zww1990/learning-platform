@@ -1,0 +1,9 @@
+"输出：作者数据模型"
+type Author {
+    "作者主键"
+    id: ID!
+    "姓氏"
+    firstName: String
+    "名字"
+    lastName: String
+}
