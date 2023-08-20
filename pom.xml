@@ -21,7 +21,9 @@
 		<module>dubbo-example/dubbo-provider</module>
 		<module>dubbo-example/dubbo-provider-api</module>
 		<module>excel-example</module>
+		<module>graphql-example/dgs-example</module>
 		<module>graphql-example/graphql-example</module>
+		<module>graphql-example/kickstart-example</module>
 		<module>hibernate-example/hibernate-mysql-01</module>
 		<module>hibernate-example/hibernate-mysql-02</module>
 		<module>hibernate-example/hibernate-oracle</module>
