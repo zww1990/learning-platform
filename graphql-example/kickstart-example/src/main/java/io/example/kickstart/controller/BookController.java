@@ -21,9 +21,8 @@ import java.util.concurrent.CompletableFuture;
 public class BookController implements GraphQLResolver<Book> {
 
     public CompletableFuture<Author> authors(DataFetchingEnvironment env) {
-        System.err.println("env = " + env);
         Book book = env.getSource();
-        DataLoader<Integer, Author> dataLoader = env.getDataLoader("AuthorsDataLoader");
+        DataLoader<Integer, Author> dataLoader = env.getDataLoader("authorsDataLoader");
         return dataLoader.load(book.getId());
     }
 
