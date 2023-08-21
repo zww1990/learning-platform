@@ -3,12 +3,10 @@ package io.example.graphql.controller;
 import graphql.relay.Connection;
 import io.example.graphql.domain.Author;
 import io.example.graphql.domain.Book;
+import io.example.graphql.security.AuthenticationContext;
 import io.example.graphql.service.BookService;
 import lombok.AllArgsConstructor;
-import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.BatchMapping;
-import org.springframework.graphql.data.method.annotation.MutationMapping;
-import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.graphql.data.method.annotation.*;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
 
@@ -47,7 +45,8 @@ public class BookController {
     }
 
     @MutationMapping("deleteById")
-    public Boolean deleteById(@Argument Long id) {
+    public Boolean deleteById(@Argument Long id, @ContextValue AuthenticationContext authenticationContext) {
+        authenticationContext.ensureAuthenticated();
         return bookService.deleteById(id);
     }
 
