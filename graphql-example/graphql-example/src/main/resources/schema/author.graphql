@@ -1,5 +1,5 @@
 "输出：作者数据模型"
-type Author @connection {
+type Author {
     "作者主键"
     id: ID!
     "姓氏"
