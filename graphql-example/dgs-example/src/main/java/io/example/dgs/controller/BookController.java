@@ -9,9 +9,8 @@ import lombok.AllArgsConstructor;
 import org.dataloader.DataLoader;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 /**
  * Book Controller
@@ -47,19 +46,11 @@ public class BookController {
     }
 
     @DgsMutation(field = "updateBook")
-    public Book updateBook(@InputArgument Map<String, Object> book) {
-        Book tmp = new Book()
-                .setId(Integer.parseInt((String) book.get("id")))
-                .setName((String) book.get("name"))
-                .setPageCount((int) book.get("pageCount"))
-                .setAuthors(((List<Map<String, String>>) book.get("authors"))
-                        .stream()
-                        .map(m -> new Author()
-                                .setId(m.get("id"))
-                                .setFirstName(m.get("firstName"))
-                                .setLastName(m.get("lastName")))
-                        .collect(Collectors.toList()));
-        return bookService.updateBook(tmp);
+    public Book updateBook(@InputArgument Integer id, @InputArgument Book book) {
+        return bookService.updateBook(
+                Optional.ofNullable(book)
+                        .map(bk -> bk.setId(id))
+                        .orElseGet(Book::new));
     }
 
     @DgsMutation(field = "deleteById")
