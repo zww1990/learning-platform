@@ -3,6 +3,8 @@ package io.example.graphql.security;
 import io.example.graphql.domain.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
 
 /**
  * Authentication Context
@@ -18,10 +20,10 @@ public class AuthenticationContext {
 
     public void ensureAuthenticated() {
         if (tokenInvalid) {
-            throw new RuntimeException("令牌无效！");
+            throw new HttpClientErrorException(HttpStatus.FORBIDDEN, "令牌无效！");
         }
         if (user == null) {
-            throw new RuntimeException("未登录，请先登录！");
+            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "未登录，请先登录！");
         }
     }
 }

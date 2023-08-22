@@ -1,12 +1,19 @@
 package io.example.graphql.security;
 
+import graphql.ErrorClassification;
+import graphql.GraphQLError;
+import graphql.schema.DataFetchingEnvironment;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.graphql.data.method.annotation.GraphQlExceptionHandler;
+import org.springframework.graphql.execution.ErrorType;
 import org.springframework.graphql.server.WebGraphQlInterceptor;
 import org.springframework.graphql.server.WebGraphQlRequest;
 import org.springframework.graphql.server.WebGraphQlResponse;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 import reactor.core.publisher.Mono;
 
 import java.util.Collections;
@@ -17,7 +24,7 @@ import java.util.Collections;
  * @author zww
  * @since 2023-08-21 21:05:57
  */
-@Component
+@ControllerAdvice
 @Slf4j
 public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
 
@@ -46,5 +53,24 @@ public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
         request.configureExecutionInput((executionInput, builder) ->
                 builder.graphQLContext(Collections.singletonMap("authenticationContext", context)).build());
         return chain.next(request);
+    }
+
+    @GraphQlExceptionHandler
+    public GraphQLError handle(HttpClientErrorException ex, DataFetchingEnvironment env) {
+        ErrorClassification errorType = ErrorType.INTERNAL_ERROR;
+        if (ex.getStatusCode() instanceof HttpStatus status) {
+            errorType = switch (status) {
+                case BAD_REQUEST -> ErrorType.BAD_REQUEST;
+                case UNAUTHORIZED -> ErrorType.UNAUTHORIZED;
+                case FORBIDDEN -> ErrorType.FORBIDDEN;
+                case NOT_FOUND -> ErrorType.NOT_FOUND;
+                default -> ErrorType.INTERNAL_ERROR;
+            };
+        }
+        return GraphQLError.newError()
+                .errorType(errorType)
+                .message(ex.getLocalizedMessage())
+                .path(env.getExecutionStepInfo().getPath())
+                .build();
     }
 }
