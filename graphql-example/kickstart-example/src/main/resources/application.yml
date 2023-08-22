@@ -24,6 +24,9 @@ graphql:
     enabled: true
   altair:
     enabled: true
+    options:
+      initial-settings:
+        language: zh-CN
   playground:
     enabled: true
   voyager:
