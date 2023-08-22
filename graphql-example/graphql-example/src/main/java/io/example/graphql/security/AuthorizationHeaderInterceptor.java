@@ -71,6 +71,7 @@ public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
                 .errorType(errorType)
                 .message(ex.getLocalizedMessage())
                 .path(env.getExecutionStepInfo().getPath())
+                .location(env.getField().getSourceLocation())
                 .build();
     }
 }
