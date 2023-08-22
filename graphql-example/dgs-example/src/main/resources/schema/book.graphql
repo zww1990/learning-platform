@@ -9,3 +9,23 @@ type Book {
     "作者"
     authors: [Author]
 }
+
+"输入：图书数据模型"
+input CreateBook {
+    "书名"
+    name: String!
+    "页数"
+    pageCount: Int!
+    "作者"
+    authors: [CreateAuthor!]!
+}
+
+"输入：图书数据模型"
+input UpdateBook {
+    "书名"
+    name: String!
+    "页数"
+    pageCount: Int!
+    "作者"
+    authors: [UpdateAuthor!]!
+}
