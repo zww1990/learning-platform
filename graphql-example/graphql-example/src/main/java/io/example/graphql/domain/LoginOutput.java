@@ -6,18 +6,17 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
- * User
+ * Login Output
  *
  * @author zww
- * @since 2023-08-21 21:05:45
+ * @since 2023-08-22 16:42:16
  */
 @Getter
 @Setter
 @ToString
 @Accessors(chain = true)
-public class User {
+public class LoginOutput {
     private Integer userId;
     private String username;
-    private String password;
-    private String email;
+    private String token;
 }

@@ -18,7 +18,7 @@ import java.util.Map;
 public final class JwtContext {
     private static final String ISSUER = "java hero";
     private static final String USER_ID = "userId";
-    private static final String USER_NAME = "userName";
+    private static final String USERNAME = "username";
     private static final String SECRET = "hello world";
     private static final long AMOUNT_TO_ADD = 1L;
     private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
@@ -30,7 +30,7 @@ public final class JwtContext {
         return JWT.create()
                 .withIssuer(ISSUER)
                 .withClaim(USER_ID, user.getUserId())
-                .withClaim(USER_NAME, user.getUserName())
+                .withClaim(USERNAME, user.getUsername())
                 .withExpiresAt(Instant.now().plus(AMOUNT_TO_ADD, ChronoUnit.HOURS))
                 .sign(ALGORITHM);
     }
@@ -43,6 +43,6 @@ public final class JwtContext {
                 .getClaims();
         return new User()
                 .setUserId(claims.get(USER_ID).asInt())
-                .setUserName(claims.get(USER_NAME).asString());
+                .setUsername(claims.get(USERNAME).asString());
     }
 }

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -21,8 +23,8 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class BookService implements CommandLineRunner {
-    private final Map<Long, Book> bookMap = new HashMap<>();
-    private final List<Author> authorList = new ArrayList<>();
+    private final Map<Long, Book> bookMap = new ConcurrentHashMap<>();
+    private final List<Author> authorList = new CopyOnWriteArrayList<>();
 
     public Book queryBook(Long id) {
         log.info("queryBook(): id = {}", id);

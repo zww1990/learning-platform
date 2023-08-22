@@ -1,7 +1,0 @@
-"输入：作者数据模型"
-input CreateAuthor {
-    "姓氏"
-    firstName: String!
-    "名字"
-    lastName: String!
-}

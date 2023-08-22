@@ -1,0 +1,39 @@
+"输出：用户数据模型"
+type User {
+    "用户主键"
+    userId: ID!
+    "用户名"
+    username: String
+    "密码"
+    password: String
+    "电子邮箱"
+    email: String
+}
+
+"输入：用户数据模型"
+input CreateUser {
+    "用户名"
+    username: String!
+    "密码"
+    password: String!
+    "电子邮箱"
+    email: String
+}
+
+"输入：用户登录"
+input LoginInput {
+    "用户名"
+    username: String!
+    "密码"
+    password: String!
+}
+
+"输出：用户登录"
+type LoginOutput {
+    "用户主键"
+    userId: ID!
+    "用户名"
+    username: String!
+    "JWT口令"
+    token: String!
+}

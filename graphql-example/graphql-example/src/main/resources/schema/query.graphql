@@ -6,4 +6,8 @@ type Query {
     bookList: [Book]
     "分页查询作者数据"
     authorPage(first: Int, after: String): AuthorConnection
+    "查询所有用户数据"
+    userList: [User]
+    "用户登录"
+    login(loginInput: LoginInput!): LoginOutput!
 }

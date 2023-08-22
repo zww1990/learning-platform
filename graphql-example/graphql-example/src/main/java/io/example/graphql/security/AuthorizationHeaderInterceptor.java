@@ -27,14 +27,15 @@ import java.util.Collections;
 @ControllerAdvice
 @Slf4j
 public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
+    private static final String BEARER = "Bearer ";
 
     @Override
     public Mono<WebGraphQlResponse> intercept(WebGraphQlRequest request, Chain chain) {
         AuthenticationContext context = new AuthenticationContext();
         if (request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
             String value = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-            if (StringUtils.hasText(value) && value.startsWith("Bearer ")) {
-                value = value.replace("Bearer ", "");
+            if (StringUtils.hasText(value) && value.startsWith(BEARER)) {
+                value = value.replace(BEARER, "");
                 log.info("JWT token = {}", value);
                 try {
                     context.setUser(JwtContext.verifyToken(value));
@@ -64,6 +65,7 @@ public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
                 case UNAUTHORIZED -> ErrorType.UNAUTHORIZED;
                 case FORBIDDEN -> ErrorType.FORBIDDEN;
                 case NOT_FOUND -> ErrorType.NOT_FOUND;
+                case NO_CONTENT -> AuthorizationErrorType.NO_CONTENT;
                 default -> ErrorType.INTERNAL_ERROR;
             };
         }
@@ -73,5 +75,9 @@ public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
                 .path(env.getExecutionStepInfo().getPath())
                 .location(env.getField().getSourceLocation())
                 .build();
+    }
+
+    enum AuthorizationErrorType implements ErrorClassification {
+        NO_CONTENT
     }
 }
