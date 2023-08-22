@@ -4,6 +4,12 @@ import io.example.graphql.domain.User;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Authentication Context
+ *
+ * @author zww
+ * @since 2023-08-22 14:19:14
+ */
 @Getter
 @Setter
 public class AuthenticationContext {
