@@ -16,11 +16,8 @@ spring:
   servlet:
     multipart:
       enabled: false
-  web:
-    resources:
-      static-locations: classpath:/graphiql/
 
 dgs:
   graphql:
     graphiql:
-      title: DGS-示例
+      enabled: false
