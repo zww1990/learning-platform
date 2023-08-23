@@ -19,5 +19,8 @@ spring:
 
 dgs:
   graphql:
+    header:
+      validation:
+        enabled: false
     graphiql:
       enabled: false
