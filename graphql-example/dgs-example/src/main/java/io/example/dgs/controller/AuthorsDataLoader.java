@@ -21,7 +21,7 @@ import java.util.concurrent.CompletionStage;
 @DgsDataLoader(name = "authors")
 @AllArgsConstructor
 public class AuthorsDataLoader implements MappedBatchLoader<Integer, List<Author>> {
-    private BookService bookService;
+    private final BookService bookService;
 
     @Override
     public CompletionStage<Map<Integer, List<Author>>> load(Set<Integer> keys) {
