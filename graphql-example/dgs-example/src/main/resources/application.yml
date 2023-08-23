@@ -15,7 +15,7 @@ spring:
     - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
   servlet:
     multipart:
-      enabled: false
+      enabled: true
 
 dgs:
   graphql:
