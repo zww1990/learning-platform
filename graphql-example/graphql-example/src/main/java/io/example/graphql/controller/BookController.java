@@ -1,6 +1,8 @@
 package io.example.graphql.controller;
 
 import graphql.relay.Connection;
+import graphql.relay.SimpleListConnection;
+import graphql.schema.DataFetchingEnvironment;
 import io.example.graphql.domain.Author;
 import io.example.graphql.domain.Book;
 import io.example.graphql.security.Authentication;
@@ -56,8 +58,8 @@ public class BookController {
     }
 
     @QueryMapping("authorPage")
-    public Connection<Author> authorPage(@Argument Integer first, @Argument String after) {
-        return bookService.queryAuthorPage(first, after);
+    public Connection<Author> authorPage(DataFetchingEnvironment env) {
+        return new SimpleListConnection<>(bookService.queryAuthorList()).get(env);
     }
 
     @BatchMapping(typeName = "Book", field = "authors")
