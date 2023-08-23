@@ -1,12 +1,10 @@
 package io.example.dgs.service;
 
-import graphql.relay.*;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.function.Function;
@@ -107,56 +105,8 @@ public class BookService implements CommandLineRunner {
         return true;
     }
 
-    public Connection<Author> queryAuthorPage(Integer first, String after) {
-        log.info("queryAuthorPage(): first = {}, after = {}", first, after);
-        if (first == null) {
-            first = 2;
-        }
-        if (StringUtils.hasText(after)) {
-            Author author = authorList.stream().filter(f -> f.getId().equals(after)).findFirst().orElse(null);
-            if (author == null) {
-                return this.emptyConnection();
-            }
-            int index = authorList.indexOf(author);
-            if (index == -1) {
-                return this.emptyConnection();
-            }
-            int toIndex = index + first;
-            if (toIndex > authorList.size()) {
-                toIndex = authorList.size();
-            }
-            List<Author> tmp = authorList.subList(index, toIndex);
-            String start = tmp.get(0).getId();
-            String end = tmp.get(tmp.size() - 1).getId();
-            boolean hasPreviousPage = index > 0;
-            boolean hasNextPage = toIndex < authorList.size();
-            return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
-        }
-        List<Author> tmp = authorList.stream().limit(first).toList();
-        String start = tmp.get(0).getId();
-        String end = tmp.get(tmp.size() - 1).getId();
-        boolean hasPreviousPage = false;
-        boolean hasNextPage = tmp.size() < authorList.size();
-        return this.buildConnection(tmp, start, end, hasPreviousPage, hasNextPage);
+    public List<Author> queryAuthorList() {
+        return authorList;
     }
 
-    private Connection<Author> buildConnection(List<Author> edges,
-                                               String startCursor,
-                                               String endCursor,
-                                               boolean hasPreviousPage,
-                                               boolean hasNextPage) {
-        return new DefaultConnection<>(
-                edges.stream()
-                        .map(author -> new DefaultEdge<>(author, new DefaultConnectionCursor(author.getId())))
-                        .collect(Collectors.toList()),
-                new DefaultPageInfo(
-                        new DefaultConnectionCursor(startCursor),
-                        new DefaultConnectionCursor(endCursor),
-                        hasPreviousPage,
-                        hasNextPage));
-    }
-
-    private Connection<Author> emptyConnection() {
-        return new DefaultConnection<>(Collections.emptyList(), new DefaultPageInfo(null, null, false, false));
-    }
 }

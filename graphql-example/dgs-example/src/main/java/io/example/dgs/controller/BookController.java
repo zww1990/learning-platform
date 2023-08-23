@@ -2,6 +2,8 @@ package io.example.dgs.controller;
 
 import com.netflix.graphql.dgs.*;
 import graphql.relay.Connection;
+import graphql.relay.SimpleListConnection;
+import graphql.schema.DataFetchingEnvironment;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
 import io.example.dgs.service.BookService;
@@ -59,7 +61,7 @@ public class BookController {
     }
 
     @DgsQuery(field = "authorPage")
-    public Connection<Author> authorPage(@InputArgument Integer first, @InputArgument String after) {
-        return bookService.queryAuthorPage(first, after);
+    public Connection<Author> authorPage(DataFetchingEnvironment env) {
+        return new SimpleListConnection<>(bookService.queryAuthorList()).get(env);
     }
 }
