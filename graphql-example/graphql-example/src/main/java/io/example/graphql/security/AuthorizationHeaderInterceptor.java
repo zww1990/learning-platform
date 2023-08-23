@@ -53,6 +53,7 @@ public class AuthorizationHeaderInterceptor implements WebGraphQlInterceptor {
         }
         request.configureExecutionInput((executionInput, builder) ->
                 builder.graphQLContext(Collections.singletonMap("authenticationContext", context)).build());
+        AuthenticationContext.set(context);
         return chain.next(request);
     }
 

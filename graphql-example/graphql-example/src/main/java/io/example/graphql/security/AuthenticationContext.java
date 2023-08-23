@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 @Getter
 @Setter
 public class AuthenticationContext {
+    private static final ThreadLocal<AuthenticationContext> THREAD_LOCAL = new ThreadLocal<>();
     private User user;
     private boolean tokenInvalid;
 
@@ -25,5 +26,17 @@ public class AuthenticationContext {
         if (user == null) {
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "未登录，请先登录！");
         }
+    }
+
+    public static void clear() {
+        THREAD_LOCAL.remove();
+    }
+
+    public static void set(AuthenticationContext context) {
+        THREAD_LOCAL.set(context);
+    }
+
+    public static AuthenticationContext get() {
+        return THREAD_LOCAL.get();
     }
 }
