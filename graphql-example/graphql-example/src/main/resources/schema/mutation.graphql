@@ -7,9 +7,9 @@ type Mutation {
     "按主键删除图书数据"
     deleteById(id: ID!): Boolean
     "单文件上传"
-    fileUpload(file: Upload!): Boolean
+    fileUpload(file: Upload!): FileInfo
     "多文件上传"
-    multiFileUpload(files: [Upload!]!): Boolean
+    multiFileUpload(files: [Upload!]!): [FileInfo]
     "新增用户数据"
     createUser(user: CreateUser!): User!
 }

@@ -1,0 +1,13 @@
+"输出：文件信息"
+type FileInfo {
+    "主键"
+    id: ID!
+    "文件名"
+    name: String,
+    "文件类型"
+    contentType: String,
+    "原始文件名"
+    originalFilename: String,
+    "文件大小"
+    size: Float
+}
