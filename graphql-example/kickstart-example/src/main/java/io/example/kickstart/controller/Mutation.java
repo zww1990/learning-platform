@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * Mutation
+ *
+ * @author zww
+ * @since 2023-08-24 21:12:59
+ */
 @Component
 @AllArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
