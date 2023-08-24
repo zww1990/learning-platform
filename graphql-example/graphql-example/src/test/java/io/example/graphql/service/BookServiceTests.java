@@ -1,13 +1,17 @@
 package io.example.graphql.service;
 
-import graphql.relay.*;
+import graphql.relay.Connection;
+import graphql.relay.SimpleListConnection;
+import graphql.schema.DataFetchingEnvironment;
+import graphql.schema.DataFetchingEnvironmentImpl;
 import io.example.graphql.domain.Author;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class BookServiceTests {
     private final List<Author> authorList = new ArrayList<>();
@@ -30,37 +34,16 @@ public class BookServiceTests {
 
     @Test
     public void testQueryAuthors() {
-        int first = 2;
-        String after = "e";
-        System.err.println("-----------------原始集合---------------------");
-        authorList.forEach(System.err::println);
-        int index = authorList.indexOf(authorList.stream().filter(f -> f.getId().equals(after)).findFirst().orElse(null));
-        if (index == -1) {
-            return;
-        }
-        int toindex = index + first;
-        if (toindex > authorList.size()) {
-            toindex = authorList.size();
-        }
-        List<Author> tmp = authorList.subList(index, toindex);
-        System.err.println("--first=" + first + ", after=" + after + ", index=" + index + ", toIndex=" + toindex + "------------");
-        tmp.forEach(System.err::println);
-        String start = tmp.get(0).getId();
-        String end = tmp.get(tmp.size() - 1).getId();
-        List<Edge<Author>> edges = tmp
-                .stream()
-                .map(au -> new DefaultEdge<>(au, new DefaultConnectionCursor(au.getId())))
-                .collect(Collectors.toList());
-        PageInfo page = new DefaultPageInfo(
-                new DefaultConnectionCursor(start),
-                new DefaultConnectionCursor(end),
-                index > 0,
-                toindex < authorList.size()
-        );
-        Connection<Author> connection = new DefaultConnection<>(edges, page);
-        System.err.println("-----------------getEdges()-------------------");
+        Map<String, Object> args = new HashMap<>();
+        args.put("after", null);
+        args.put("before", null);
+        args.put("first", 2);
+        args.put("last", 2);
+        DataFetchingEnvironment env = new DataFetchingEnvironmentImpl.Builder()
+                .arguments(args)
+                .build();
+        Connection<Author> connection = new SimpleListConnection<>(authorList).get(env);
         connection.getEdges().forEach(System.err::println);
-        System.err.println("--------------getPageInfo()-------------------");
         System.err.println(connection.getPageInfo());
     }
 }

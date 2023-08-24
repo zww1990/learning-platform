@@ -9,7 +9,7 @@ public class JwtContextTests {
     public void testCreateToken() {
         System.out.println(JwtContext.createToken(new User()
                 .setUserId(1001)
-                .setUserName("张三")));
+                .setUsername("张三")));
     }
 
     @Test
