@@ -6,6 +6,7 @@ import graphql.relay.SimpleListConnection;
 import graphql.schema.DataFetchingEnvironment;
 import io.example.dgs.domain.Author;
 import io.example.dgs.domain.Book;
+import io.example.dgs.security.Authentication;
 import io.example.dgs.service.BookService;
 import lombok.AllArgsConstructor;
 import org.dataloader.DataLoader;
@@ -43,11 +44,13 @@ public class BookController {
     }
 
     @DgsMutation(field = "createBook")
+    @Authentication
     public Book createBook(@InputArgument Book book) {
         return bookService.createBook(book);
     }
 
     @DgsMutation(field = "updateBook")
+    @Authentication
     public Book updateBook(@InputArgument Integer id, @InputArgument Book book) {
         return bookService.updateBook(
                 Optional.ofNullable(book)
@@ -56,6 +59,7 @@ public class BookController {
     }
 
     @DgsMutation(field = "deleteById")
+    @Authentication
     public Boolean deleteById(@InputArgument Integer id) {
         return bookService.deleteById(id);
     }

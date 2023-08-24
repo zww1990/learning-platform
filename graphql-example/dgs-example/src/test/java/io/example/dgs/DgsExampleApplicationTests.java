@@ -2,6 +2,7 @@ package io.example.dgs;
 
 import com.netflix.graphql.dgs.mvc.DgsGraphQLRequestHeaderValidator;
 import com.netflix.graphql.dgs.mvc.GraphQLRequestHeaderValidationRule;
+import graphql.execution.DataFetcherExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ public class DgsExampleApplicationTests {
         Map<String, GraphQLRequestHeaderValidationRule> ruleMap = this.applicationContext.getBeansOfType(GraphQLRequestHeaderValidationRule.class);
         System.err.println(validator);
         System.err.println(ruleMap);
+        System.err.println(this.applicationContext.getBean(DataFetcherExceptionHandler.class));
     }
 
 }

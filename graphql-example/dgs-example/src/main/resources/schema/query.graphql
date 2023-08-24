@@ -14,4 +14,8 @@ type Query {
         last: Int,
         "结束游标，与last搭配使用"
         before: String): AuthorConnection
+    "查询所有用户数据"
+    userList: [User]
+    "用户登录"
+    login(loginInput: LoginInput!): LoginOutput!
 }

@@ -1,13 +1,15 @@
 "更新操作"
 type Mutation {
-    "新增数据"
+    "新增图书数据"
     createBook(book: CreateBook!): Book!
-    "修改数据"
+    "修改图书数据"
     updateBook(
         "图书主键"
         id: ID!,
         "输入：图书数据模型"
         book: UpdateBook!): Book
-    "按主键删除数据"
+    "按主键删除图书数据"
     deleteById(id: ID!): Boolean
+    "新增用户数据"
+    createUser(user: CreateUser!): User!
 }
