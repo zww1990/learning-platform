@@ -1,5 +1,5 @@
-"表示文件的自定义标量"
-scalar Upload
+#"表示文件的自定义标量"
+#scalar Upload
 
 "输出：文件信息"
 type FileInfo {

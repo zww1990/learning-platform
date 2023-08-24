@@ -2,7 +2,10 @@ package io.example.dgs.controller;
 
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
+import com.netflix.graphql.dgs.DgsTypeDefinitionRegistry;
 import com.netflix.graphql.dgs.InputArgument;
+import graphql.language.ScalarTypeDefinition;
+import graphql.schema.idl.TypeDefinitionRegistry;
 import io.example.dgs.domain.FileInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
@@ -57,5 +60,14 @@ public class FileController {
                     .setContentType(contentType)
                     .setOriginalFilename(originalFilename);
         }).toList();
+    }
+
+    @DgsTypeDefinitionRegistry
+    public TypeDefinitionRegistry typeDefinitionRegistry() {
+        TypeDefinitionRegistry registry = new TypeDefinitionRegistry();
+        registry.add(ScalarTypeDefinition.newScalarTypeDefinition()
+                .name("Upload")
+                .build());
+        return registry;
     }
 }
