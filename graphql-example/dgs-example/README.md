@@ -8,7 +8,7 @@ curl -X POST http://localhost:8082/graphql --header "graphql-require-preflight:t
 ```
 
 使用 Altair GraphQL 浏览器插件进行测试，访问地址（http://localhost:8082/altair/index.html）
-需要添加请求头（graphql-require-preflight:true），查询代码如下：
+需要添加请求头（graphql-require-preflight:true）查询代码如下：
 
 ```
 mutation ($file: Upload!) {
@@ -26,7 +26,7 @@ curl -X POST http://localhost:8082/graphql --header "graphql-require-preflight:t
 ```
 
 使用 Altair GraphQL 浏览器插件进行测试，访问地址（http://localhost:8082/altair/index.html）
-需要添加请求头（graphql-require-preflight:true），查询代码如下：
+需要添加请求头（graphql-require-preflight:true）查询代码如下：
 
 ```
 mutation ($files: [Upload!]!) {
