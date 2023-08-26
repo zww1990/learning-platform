@@ -29,6 +29,18 @@ public class FileController {
         if (file == null) {
             return new FileInfo();
         }
+        return this.buildFileInfo(file);
+    }
+
+    @DgsMutation(field = "multiFileUpload")
+    public List<FileInfo> multiFileUpload(@InputArgument List<MultipartFile> files) {
+        if (CollectionUtils.isEmpty(files)) {
+            return Collections.emptyList();
+        }
+        return files.stream().map(this::buildFileInfo).toList();
+    }
+
+    private FileInfo buildFileInfo(MultipartFile file) {
         String contentType = file.getContentType();
         String name = file.getName();
         String originalFilename = file.getOriginalFilename();
@@ -40,26 +52,6 @@ public class FileController {
                 .setSize(size)
                 .setContentType(contentType)
                 .setOriginalFilename(originalFilename);
-    }
-
-    @DgsMutation(field = "multiFileUpload")
-    public List<FileInfo> multiFileUpload(@InputArgument List<MultipartFile> files) {
-        if (CollectionUtils.isEmpty(files)) {
-            return Collections.emptyList();
-        }
-        return files.stream().map(file -> {
-            String contentType = file.getContentType();
-            String name = file.getName();
-            String originalFilename = file.getOriginalFilename();
-            long size = file.getSize();
-            log.info("contentType = {}, name = {}, originalFilename = {}, size = {}", contentType, name, originalFilename, size);
-            return new FileInfo()
-                    .setId(UUID.randomUUID().toString())
-                    .setName(name)
-                    .setSize(size)
-                    .setContentType(contentType)
-                    .setOriginalFilename(originalFilename);
-        }).toList();
     }
 
     @DgsTypeDefinitionRegistry
