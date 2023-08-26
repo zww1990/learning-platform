@@ -34,3 +34,4 @@ graphql:
   servlet:
     exception-handlers-enabled: true
     cors-enabled: false
+  extended-scalars: DateTime, Date, Time, LocalTime
