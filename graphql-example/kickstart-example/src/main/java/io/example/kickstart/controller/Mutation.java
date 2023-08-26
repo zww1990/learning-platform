@@ -43,36 +43,27 @@ public class Mutation implements GraphQLMutationResolver {
         if (file == null) {
             return new FileInfo();
         }
-        String contentType = file.getContentType();
-        String name = file.getName();
-        String originalFilename = file.getSubmittedFileName();
-        long size = file.getSize();
-        log.info("contentType = {}, name = {}, originalFilename = {}, size = {}", contentType, name, originalFilename, size);
-        return new FileInfo()
-                .setId(UUID.randomUUID().toString())
-                .setName(name)
-                .setSize(size)
-                .setContentType(contentType)
-                .setOriginalFilename(originalFilename);
+        return this.buildFileInfo(file);
     }
 
     public List<FileInfo> multiFileUpload(List<Part> files) {
         if (CollectionUtils.isEmpty(files)) {
             return Collections.emptyList();
         }
-        return files.stream().map(file -> {
-            String contentType = file.getContentType();
-            String name = file.getName();
-            String originalFilename = file.getSubmittedFileName();
-            long size = file.getSize();
-            log.info("contentType = {}, name = {}, originalFilename = {}, size = {}", contentType, name, originalFilename, size);
-            return new FileInfo()
-                    .setId(UUID.randomUUID().toString())
-                    .setName(name)
-                    .setSize(size)
-                    .setContentType(contentType)
-                    .setOriginalFilename(originalFilename);
-        }).toList();
+        return files.stream().map(this::buildFileInfo).toList();
     }
 
+    private FileInfo buildFileInfo(Part file) {
+        String contentType = file.getContentType();
+        String name = file.getName();
+        String submittedFileName = file.getSubmittedFileName();
+        long size = file.getSize();
+        log.info("contentType = {}, name = {}, submittedFileName = {}, size = {}", contentType, name, submittedFileName, size);
+        return new FileInfo()
+                .setId(UUID.randomUUID().toString())
+                .setName(name)
+                .setSize(size)
+                .setContentType(contentType)
+                .setSubmittedFileName(submittedFileName);
+    }
 }

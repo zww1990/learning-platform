@@ -19,6 +19,6 @@ public class FileInfo {
     private String id;
     private String name;
     private String contentType;
-    private String originalFilename;
+    private String submittedFileName;
     private Long size;
 }
