@@ -25,7 +25,7 @@ public class KickstartExampleApplication {
     }
 
     @Bean
-    GraphQLScalarType uploadScalarType(){
+    GraphQLScalarType uploadScalarType() {
         return ApolloScalars.Upload;
     }
 }
