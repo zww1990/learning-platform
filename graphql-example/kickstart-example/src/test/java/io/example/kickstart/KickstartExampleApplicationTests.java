@@ -1,6 +1,7 @@
 package io.example.kickstart;
 
 import graphql.kickstart.servlet.context.GraphQLServletContextBuilder;
+import graphql.kickstart.servlet.core.GraphQLServletListener;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,9 +17,8 @@ public class KickstartExampleApplicationTests {
 
     @Test
     public void testContextLoads() {
-        applicationContext.getBeansOfType(GraphQLServletContextBuilder.class).forEach((k, v) -> {
-            System.err.println(k + " = " + v);
-        });
+        System.err.println(applicationContext.getBean(GraphQLServletContextBuilder.class));
+        System.err.println(applicationContext.getBean(GraphQLServletListener.class));
         System.err.println(applicationContext.getEnvironment().getProperty("graphql.extended-scalars", Collection.class, Collections.emptySet()));
     }
 
