@@ -1,11 +1,9 @@
 package io.example.kickstart.controller;
 
 import graphql.kickstart.execution.context.GraphQLKickstartContext;
-import graphql.kickstart.servlet.context.GraphQLServletContextBuilder;
+import graphql.kickstart.servlet.context.DefaultGraphQLServletContextBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.websocket.Session;
-import jakarta.websocket.server.HandshakeRequest;
 import lombok.AllArgsConstructor;
 import org.dataloader.DataLoaderFactory;
 import org.dataloader.DataLoaderRegistry;
@@ -22,7 +20,7 @@ import java.util.Map;
  */
 @Component
 @AllArgsConstructor
-public class DataLoaderContextBuilder implements GraphQLServletContextBuilder {
+public class DataLoaderContextBuilder extends DefaultGraphQLServletContextBuilder {
     private final AuthorsDataLoader authorsDataLoader;
 
     @Override
@@ -31,16 +29,6 @@ public class DataLoaderContextBuilder implements GraphQLServletContextBuilder {
         map.put(HttpServletRequest.class, request);
         map.put(HttpServletResponse.class, response);
         return GraphQLKickstartContext.of(this.buildDataLoaderRegistry(), map);
-    }
-
-    @Override
-    public GraphQLKickstartContext build(Session session, HandshakeRequest handshakeRequest) {
-        throw new IllegalStateException("不支持此方法");
-    }
-
-    @Override
-    public GraphQLKickstartContext build() {
-        throw new IllegalStateException("不支持此方法");
     }
 
     private DataLoaderRegistry buildDataLoaderRegistry() {
