@@ -1,5 +1,6 @@
 package io.example.redis;
 
+import io.example.redis.eventlistener.handler.KeyValueEventHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,10 @@ public class RedisExampleApplicationTests {
         System.err.println("keyValueTemplate = " + keyValueTemplate);
         RedisKeyValueTemplate redisKeyValueTemplate = this.applicationContext.getBean(RedisKeyValueTemplate.class);
         System.err.println("redisKeyValueTemplate = " + redisKeyValueTemplate);
+        System.out.println("------------------------------------------------------------------------------------");
+        applicationContext.getBeansOfType(KeyValueEventHandler.class).forEach((k, v) -> {
+            System.err.println(k + " = " + v);
+        });
     }
 
 }

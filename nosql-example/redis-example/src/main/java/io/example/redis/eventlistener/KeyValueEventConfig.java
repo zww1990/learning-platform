@@ -2,6 +2,9 @@ package io.example.redis.eventlistener;
 
 import io.example.redis.eventlistener.handler.BeforeInsertEventHandler;
 import io.example.redis.eventlistener.handler.BeforeUpdateEventHandler;
+import io.example.redis.eventlistener.handler.KeyValueEventHandlerFactory;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.config.ServiceLocatorFactoryBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -37,4 +40,11 @@ public class KeyValueEventConfig {
         return new BeforeUpdateEventHandler();
     }
 
+    @Bean
+    @SuppressWarnings("rawtypes")
+    FactoryBean keyValueEventHandlerFactory() {
+        ServiceLocatorFactoryBean factoryBean = new ServiceLocatorFactoryBean();
+        factoryBean.setServiceLocatorInterface(KeyValueEventHandlerFactory.class);
+        return factoryBean;
+    }
 }
