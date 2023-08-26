@@ -1,9 +1,12 @@
 package io.example.kickstart;
 
+import graphql.kickstart.servlet.apollo.ApolloScalars;
+import graphql.schema.GraphQLScalarType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 /**
  * Kickstart Example Application
@@ -21,4 +24,8 @@ public class KickstartExampleApplication {
 //        java.util.stream.Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
+    @Bean
+    GraphQLScalarType uploadScalarType(){
+        return ApolloScalars.Upload;
+    }
 }
