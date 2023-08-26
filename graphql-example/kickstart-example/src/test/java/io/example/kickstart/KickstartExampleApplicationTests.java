@@ -1,5 +1,6 @@
 package io.example.kickstart;
 
+import graphql.kickstart.execution.error.GraphQLErrorHandler;
 import graphql.kickstart.servlet.context.GraphQLServletContextBuilder;
 import graphql.kickstart.servlet.core.GraphQLServletListener;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ public class KickstartExampleApplicationTests {
     public void testContextLoads() {
         System.err.println(applicationContext.getBean(GraphQLServletContextBuilder.class));
         System.err.println(applicationContext.getBean(GraphQLServletListener.class));
+        System.err.println(applicationContext.getBean(GraphQLErrorHandler.class));
         System.err.println(applicationContext.getEnvironment().getProperty("graphql.extended-scalars", Collection.class, Collections.emptySet()));
     }
 
