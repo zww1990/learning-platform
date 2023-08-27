@@ -12,6 +12,12 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * User Service
+ *
+ * @author zww
+ * @since 2023-08-27 10:53:37
+ */
 @Service
 @Slf4j
 public class UserService {

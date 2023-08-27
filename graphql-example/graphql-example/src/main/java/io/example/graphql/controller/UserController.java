@@ -12,6 +12,12 @@ import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+/**
+ * User Controller
+ *
+ * @author zww
+ * @since 2023-08-27 10:56:49
+ */
 @Controller
 @AllArgsConstructor
 public class UserController {
