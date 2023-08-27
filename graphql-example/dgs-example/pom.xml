@@ -14,10 +14,6 @@
 	<name>dgs-example</name>
 	<packaging>jar</packaging>
 
-	<properties>
-		<dgs.codegen.skip>true</dgs.codegen.skip>
-	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -110,26 +106,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>io.github.deweyjose</groupId>
-				<artifactId>graphqlcodegen-maven-plugin</artifactId>
-				<version>1.39</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<packageName>io.example.dgs.generated</packageName>
-					<schemaPaths>
-						<param>src/main/resources/schema</param>
-					</schemaPaths>
-					<generateBoxedTypes>true</generateBoxedTypes>
-					<outputDir>${project.basedir}/target/generated-sources/annotations</outputDir>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
