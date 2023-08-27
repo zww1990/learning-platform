@@ -29,6 +29,10 @@ graphql:
         language: zh-CN
   playground:
     enabled: true
+    settings:
+      schema:
+        polling:
+          enable: false
   voyager:
     enabled: true
   servlet:
