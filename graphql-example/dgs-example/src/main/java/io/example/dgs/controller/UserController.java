@@ -12,6 +12,12 @@ import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+/**
+ * User Controller
+ *
+ * @author zww
+ * @since 2023-08-27 10:55:59
+ */
 @DgsComponent
 @AllArgsConstructor
 public class UserController {
