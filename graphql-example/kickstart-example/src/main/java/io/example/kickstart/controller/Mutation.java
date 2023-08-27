@@ -2,8 +2,10 @@ package io.example.kickstart.controller;
 
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import io.example.kickstart.domain.Book;
+import io.example.kickstart.domain.User;
 import io.example.kickstart.security.Authentication;
 import io.example.kickstart.service.BookService;
+import io.example.kickstart.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ import java.util.concurrent.CompletableFuture;
 @AllArgsConstructor
 public class Mutation implements GraphQLMutationResolver {
     private final BookService bookService;
+    private final UserService userService;
 
     @Authentication
     public CompletableFuture<Book> createBook(Book book) {
@@ -33,6 +36,10 @@ public class Mutation implements GraphQLMutationResolver {
     @Authentication
     public CompletableFuture<Boolean> deleteById(Integer id) {
         return CompletableFuture.supplyAsync(() -> bookService.deleteById(id));
+    }
+
+    public CompletableFuture<User> createUser(User user) {
+        return CompletableFuture.supplyAsync(() -> userService.createUser(user));
     }
 
 }

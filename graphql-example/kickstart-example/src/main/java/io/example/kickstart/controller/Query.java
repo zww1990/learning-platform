@@ -4,9 +4,9 @@ import graphql.kickstart.tools.GraphQLQueryResolver;
 import graphql.relay.Connection;
 import graphql.relay.SimpleListConnection;
 import graphql.schema.DataFetchingEnvironment;
-import io.example.kickstart.domain.Author;
-import io.example.kickstart.domain.Book;
+import io.example.kickstart.domain.*;
 import io.example.kickstart.service.BookService;
+import io.example.kickstart.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +23,7 @@ import java.util.concurrent.CompletableFuture;
 @AllArgsConstructor
 public class Query implements GraphQLQueryResolver {
     private final BookService bookService;
+    private final UserService userService;
 
     public CompletableFuture<Book> bookById(Integer id) {
         return CompletableFuture.supplyAsync(() -> bookService.queryBook(id));
@@ -32,7 +33,25 @@ public class Query implements GraphQLQueryResolver {
         return CompletableFuture.supplyAsync(bookService::queryBooks);
     }
 
-    public CompletableFuture<Connection<Author>> authorPage(int first, String after, DataFetchingEnvironment env) {
+    public CompletableFuture<Connection<Author>> authorPage(
+            // 指定取游标后的多少个数据，与after搭配使用
+            Integer first,
+            // 开始游标，与first搭配使用
+            String after,
+            // 指定取游标前的多少个数据，与before搭配使用
+            Integer last,
+            // 结束游标，与last搭配使用
+            String before,
+            DataFetchingEnvironment env) {
         return CompletableFuture.supplyAsync(() -> new SimpleListConnection<>(bookService.queryAuthorList()).get(env));
     }
+
+    public CompletableFuture<List<User>> userList() {
+        return CompletableFuture.supplyAsync(userService::queryUsers);
+    }
+
+    public CompletableFuture<LoginOutput> login(LoginInput loginInput) {
+        return CompletableFuture.supplyAsync(() -> userService.userLogin(loginInput));
+    }
+
 }
