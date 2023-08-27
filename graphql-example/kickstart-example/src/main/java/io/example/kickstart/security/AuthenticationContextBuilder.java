@@ -44,7 +44,7 @@ public class AuthenticationContextBuilder implements GraphQLServletListener {
                 context.setTokenInvalid(true);
             }
         } else {
-            log.error("用户未认证！");
+            log.debug("用户未认证！");
         }
         AuthenticationContext.set(context);
         return GraphQLServletListener.super.onRequest(request, response);

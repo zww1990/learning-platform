@@ -49,7 +49,7 @@ public class AuthenticationContextBuilder implements DgsCustomContextBuilderWith
                 context.setTokenInvalid(true);
             }
         } else {
-            log.error("用户未认证！");
+            log.debug("用户未认证！");
         }
         AuthenticationContext.set(context);
         return context;
