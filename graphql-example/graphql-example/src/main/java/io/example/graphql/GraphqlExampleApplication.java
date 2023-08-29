@@ -26,7 +26,7 @@ public class GraphqlExampleApplication {
     }
 
     @Bean
-    public GraphQlSourceBuilderCustomizer graphQlSourceBuilderCustomizer() {
+    GraphQlSourceBuilderCustomizer graphQlSourceBuilderCustomizer() {
         return builder ->
                 builder.configureRuntimeWiring(config ->
                         config.scalar(ExtendedScalars.DateTime)
