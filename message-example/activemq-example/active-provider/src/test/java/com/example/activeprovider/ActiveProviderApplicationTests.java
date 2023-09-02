@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.jms.core.JmsTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @SpringBootTest
 public class ActiveProviderApplicationTests {
 	@Autowired
@@ -19,6 +21,8 @@ public class ActiveProviderApplicationTests {
 		JmsMessagingTemplate messagingTemplate = context.getBean(JmsMessagingTemplate.class);
 		System.err.println(messagingTemplate.getMessageConverter());
 		System.err.println(messagingTemplate.getJmsMessageConverter());
+		ObjectMapper json = context.getBean(ObjectMapper.class);
+		System.err.println(json);
 	}
 
 }
