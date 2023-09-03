@@ -54,20 +54,20 @@ public class JmsTemplateTests {
 	public void testSendMessage2() {
 		try {
 			Message obj = new Message()//
-					.setAlarmLogId("1")//
-					.setPicPath("2")//
-					.setDepartmentName("3")//
-					.setVideoPath("4")//
-					.setAlarmType("5")//
-					.setCameraNo("6")//
-					.setAlarmTypeCN("7")//
-					.setWorkshopName("8")//
-					.setAlarmTime("9")//
-					.setRtsp("10")//
-					.setAlarmMessage("11")//
-					.setCameraName("12")//
-					.setWorkshopId("13")//
-					.setDepartmentId("14");
+					.setAlarmLogId("f4620473-c892-43da-b276-38a10bc774ea")//
+					.setPicPath("http://192.168.10.245/fire/dutyqueue/hzmt003/92422680w.jpg")//
+					.setDepartmentName("法务风控部")//
+					.setVideoPath("http://192.168.10.245/fire/crossing_boundary/test009/f4620473-c892-43da-b276-38a10bc774ea.mp4")//
+					.setAlarmType("11")//
+					.setCameraNo("JCCJ-17")//
+					.setAlarmTypeCN("人员入侵")//
+					.setWorkshopName("化产二车间")//
+					.setAlarmTime("2021-08-13 11:13:37")//
+					.setRtsp("rtsp://admin:admin123@192.168.20.200:554/cam/realmonitor?channel=1&subtype=0")//
+					.setAlarmMessage("您好：化产二车间化工蒸馏装置监控点位在 2021-08-13 11:13:47 发生人员入侵，请相关人员加强巡检，安排相关人员立即处理！")//
+					.setCameraName("化工蒸馏装置")//
+					.setWorkshopId("1111")//
+					.setDepartmentId("2222");
 			this.jmsTemplate.convertAndSend(new ActiveMQQueue("fire_alarm_queue1"), obj);
 			System.err.println(obj);
 		} catch (Exception e) {
@@ -79,20 +79,20 @@ public class JmsTemplateTests {
 	public void testSendMessage3() {
 		try {
 			Message obj = new Message()//
-					.setAlarmLogId("1")//
-					.setPicPath("2")//
-					.setDepartmentName("3")//
-					.setVideoPath("4")//
-					.setAlarmType("5")//
-					.setCameraNo("6")//
-					.setAlarmTypeCN("7")//
-					.setWorkshopName("8")//
-					.setAlarmTime("9")//
-					.setRtsp("10")//
-					.setAlarmMessage("11")//
-					.setCameraName("12")//
-					.setWorkshopId("13")//
-					.setDepartmentId("14");
+					.setAlarmLogId("f4620473-c892-43da-b276-38a10bc774ea")//
+					.setPicPath("http://192.168.10.245/fire/dutyqueue/hzmt003/92422680w.jpg")//
+					.setDepartmentName("法务风控部")//
+					.setVideoPath("http://192.168.10.245/fire/crossing_boundary/test009/f4620473-c892-43da-b276-38a10bc774ea.mp4")//
+					.setAlarmType("11")//
+					.setCameraNo("JCCJ-17")//
+					.setAlarmTypeCN("人员入侵")//
+					.setWorkshopName("化产二车间")//
+					.setAlarmTime("2021-08-13 11:13:37")//
+					.setRtsp("rtsp://admin:admin123@192.168.20.200:554/cam/realmonitor?channel=1&subtype=0")//
+					.setAlarmMessage("您好：化产二车间化工蒸馏装置监控点位在 2021-08-13 11:13:47 发生人员入侵，请相关人员加强巡检，安排相关人员立即处理！")//
+					.setCameraName("化工蒸馏装置")//
+					.setWorkshopId("1111")//
+					.setDepartmentId("2222");
 			String json = this.objectMapper.writeValueAsString(obj);
 			this.jmsTemplate.convertAndSend(new ActiveMQQueue("fire_alarm_queue1"), json);
 			System.err.println(json);
