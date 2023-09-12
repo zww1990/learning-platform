@@ -2,6 +2,11 @@ package com.example.eurekaconsumer;
 
 import java.io.InputStream;
 
+import javax.net.ssl.HttpsURLConnection;
+
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.ssl.SSLContexts;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +28,12 @@ public class HelloServiceTests {
 	@Test
 	public void testUpload() {
 		try {
+			HttpsURLConnection.setDefaultHostnameVerifier(NoopHostnameVerifier.INSTANCE);
+			HttpsURLConnection.setDefaultSSLSocketFactory(//
+					SSLContexts.custom()//
+							.loadTrustMaterial(null, TrustAllStrategy.INSTANCE)//
+							.build()//
+							.getSocketFactory());
 			String url = "https://pics0.baidu.com/feed/b64543a98226cffcc2fdd49639b80c9cf703ea01.jpeg";
 			UrlResource resource = new UrlResource(url);
 			System.err.println(resource);
