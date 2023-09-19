@@ -20,8 +20,4 @@ public class MyObject {
         log.info("destroy(): 线程名={}, 对象名={}", Thread.currentThread().getName(), this.name);
     }
 
-    public boolean isValid() {
-        log.info("isValid(): 线程名={}, 对象名={}", Thread.currentThread().getName(), this.name);
-        return true;
-    }
 }

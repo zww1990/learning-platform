@@ -24,8 +24,4 @@ public class MyObjectFactory extends BasePooledObjectFactory<MyObject> {
         p.getObject().destroy();
     }
 
-    @Override
-    public boolean validateObject(PooledObject<MyObject> p) {
-        return p.getObject().isValid();
-    }
 }
