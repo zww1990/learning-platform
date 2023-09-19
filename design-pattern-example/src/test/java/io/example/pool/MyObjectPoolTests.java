@@ -15,8 +15,8 @@ public class MyObjectPoolTests {
     }
 
     private static void numActiveAndIdle(MyObjectPool pool) {
-        log.info("numActiveAndIdle(): ThreadName={}, NumActive={}, NumIdle={}",
-                Thread.currentThread().getName(), pool.getNumActive(), pool.getNumIdle());
+        log.info("numActiveAndIdle(): 线程名={}, 借用的实例数={}, 空闲的实例数={}, 等待的实例数={}",
+                Thread.currentThread().getName(), pool.getNumActive(), pool.getNumIdle(), pool.getNumWaiters());
     }
 
     private static void testSingle() throws Exception {
@@ -26,7 +26,7 @@ public class MyObjectPoolTests {
         Thread.sleep(1000);
         MyObject object = pool.borrowObject();
 
-        log.info("ThreadName={}, borrowed={}", Thread.currentThread().getName(), object);
+        log.info("线程名={}, 借用对象={}", Thread.currentThread().getName(), object);
 
         Thread.sleep(1000);
         numActiveAndIdle(pool);
@@ -34,7 +34,7 @@ public class MyObjectPoolTests {
         Thread.sleep(1000);
         pool.returnObject(object);
 
-        log.info("ThreadName={}, returned={}", Thread.currentThread().getName(), object);
+        log.info("线程名={}, 归还对象={}", Thread.currentThread().getName(), object);
 
         Thread.sleep(1000);
         numActiveAndIdle(pool);

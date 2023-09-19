@@ -2,6 +2,8 @@ package io.example.pool;
 
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public enum MyObjectPool {
     INSTANCE;
@@ -18,6 +20,9 @@ public enum MyObjectPool {
         config.setTestOnCreate(true);
         config.setTestOnReturn(true);
         config.setTestWhileIdle(true);
+        config.setJmxEnabled(false);
+        Logger log = LoggerFactory.getLogger(this.getClass());
+        log.info("MyObjectPool(): PoolConfig={}", config);
         MyObjectFactory factory = new MyObjectFactory();
         this.pool = new GenericObjectPool<>(factory, config);
     }
@@ -36,5 +41,9 @@ public enum MyObjectPool {
 
     public int getNumIdle() {
         return this.pool.getNumIdle();
+    }
+
+    public int getNumWaiters() {
+        return this.pool.getNumWaiters();
     }
 }
