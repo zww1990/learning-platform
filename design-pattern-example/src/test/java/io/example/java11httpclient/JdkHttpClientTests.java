@@ -5,6 +5,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+/**
+ * Java 11 新特性：http client api
+ */
 public class JdkHttpClientTests {
     public static void main(String[] args) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
