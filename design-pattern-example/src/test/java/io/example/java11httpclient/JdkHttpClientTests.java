@@ -1,4 +1,4 @@
-package io.example;
+package io.example.java11httpclient;
 
 import java.net.URI;
 import java.net.http.HttpClient;
