@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    c3p0:
+      driver-class: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://10.31.3.55:3306/bangand_cloud?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+      user: bangand_cloud
+      password: bangand1234_
