@@ -23,13 +23,14 @@
 	</properties>
 
 	<modules>
+		<module>c3p0-spring-boot-starter</module>
+		<module>c3p0-starter-example</module>
 		<module>druid-example</module>
 		<module>mapstruct-example</module>
 		<module>poi-example</module>
 		<module>reactive-example</module>
 		<module>retry-example</module>
-		<module>c3p0-spring-boot-starter</module>
-		<module>c3p0-starter-example</module>
+		<module>statemachine-example</module>
 	</modules>
 
 	<repositories>
