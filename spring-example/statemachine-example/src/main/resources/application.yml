@@ -1,3 +1,10 @@
+server:
+  servlet:
+    jsp:
+      registered: false
+  ssl:
+    enabled: false
+
 spring:
   application:
     name: statemachine-example
@@ -16,9 +23,5 @@ spring:
   servlet:
     multipart:
       enabled: false
-  data:
-    redis:
-      host: 10.31.3.55
-      port: 6379
-      database: 15
-      password: bangand1234!
+  profiles:
+    active: local

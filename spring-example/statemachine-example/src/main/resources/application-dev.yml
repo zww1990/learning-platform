@@ -1,0 +1,7 @@
+spring:
+  data:
+    redis:
+      host: 10.31.3.55
+      port: 6379
+      database: 15
+      password: bangand1234!
