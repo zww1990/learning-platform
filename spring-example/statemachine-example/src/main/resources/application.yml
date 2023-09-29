@@ -27,6 +27,9 @@ spring:
       enabled: false
   profiles:
     active: local
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 mybatis:
   configuration:
