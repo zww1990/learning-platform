@@ -12,43 +12,45 @@ import io.example.statemachine.domain.Order;
 import io.example.statemachine.service.OrderService;
 import lombok.AllArgsConstructor;
 
+/**
+ * 订单控制器
+ *
+ * @author 张维维
+ * @since 2023-09-29 18:17:43
+ */
 @RestController
 @RequestMapping(path = "/order")
 @AllArgsConstructor
 public class OrderController {
-	private final OrderService orderService;
+    private final OrderService orderService;
 
-	@GetMapping("/get")
-	public Order get(@RequestParam Long id) {
-		// 根据id查询订单
-		return orderService.get(id);
-	}
+    @GetMapping("/get")
+    public Order get(@RequestParam Long id) {
+        // 根据id查询订单
+        return orderService.get(id);
+    }
 
-	@PostMapping("/create")
-	public String create(@RequestBody Order order) {
-		// 创建订单
-		orderService.create(order);
-		return "success";
-	}
+    @PostMapping("/create")
+    public Order create(@RequestBody Order order) {
+        // 创建订单
+        return orderService.create(order);
+    }
 
-	@PutMapping("/pay")
-	public String pay(@RequestParam Long id) {
-		// 对订单进行支付
-		orderService.pay(id);
-		return "success";
-	}
+    @PutMapping("/pay")
+    public Order pay(@RequestParam Long id) {
+        // 对订单进行支付
+        return orderService.pay(id);
+    }
 
-	@PutMapping("/deliver")
-	public String deliver(@RequestParam Long id) {
-		// 对订单进行确认发货
-		orderService.deliver(id);
-		return "success";
-	}
+    @PutMapping("/deliver")
+    public Order deliver(@RequestParam Long id) {
+        // 对订单进行确认发货
+        return orderService.deliver(id);
+    }
 
-	@PutMapping("/receive")
-	public String receive(@RequestParam Long id) {
-		// 对订单进行确认收货
-		orderService.receive(id);
-		return "success";
-	}
+    @PutMapping("/receive")
+    public Order receive(@RequestParam Long id) {
+        // 对订单进行确认收货
+        return orderService.receive(id);
+    }
 }

@@ -7,3 +7,7 @@ spring:
       lettuce:
         pool:
           enabled: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/example?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root

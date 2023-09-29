@@ -3,8 +3,8 @@ CREATE TABLE `tb_order` (
     `order_code` varchar(128) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '订单编码',
     `status` smallint(3) DEFAULT NULL COMMENT '订单状态',
     `price` decimal(12,2) DEFAULT NULL COMMENT '价格',
-    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
-    `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '更新时间',
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `create_user` varchar(32) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '创建人',
     `update_user` varchar(32) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '更新人',
     PRIMARY KEY (`id`)

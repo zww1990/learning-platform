@@ -25,61 +25,70 @@ import io.example.statemachine.constant.OrderStatus;
 import io.example.statemachine.constant.OrderStatusChangeEvent;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 订单状态机配置类
+ *
+ * @author 张维维
+ * @since 2023-09-29 18:30:58
+ */
 @Configuration
 @EnableStateMachine(name = "orderStateMachine")
 @Slf4j
 public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<OrderStatus, OrderStatusChangeEvent> {
-	@Override
-	public void configure(StateMachineStateConfigurer<OrderStatus, OrderStatusChangeEvent> states) throws Exception {
-		states.withStates()//
-				.initial(OrderStatus.WAIT_PAYMENT)//
-				.states(EnumSet.allOf(OrderStatus.class));
-	}
+    @Override
+    public void configure(StateMachineStateConfigurer<OrderStatus, OrderStatusChangeEvent> states) throws Exception {
+        // 配置状态
+        states.withStates()//
+                .initial(OrderStatus.WAIT_PAYMENT)//
+                .states(EnumSet.allOf(OrderStatus.class));
+    }
 
-	@Override
-	public void configure(StateMachineTransitionConfigurer<OrderStatus, OrderStatusChangeEvent> transitions)
-			throws Exception {
-		transitions
-				// 支付事件:待支付-》待发货
-				.withExternal().source(OrderStatus.WAIT_PAYMENT).target(OrderStatus.WAIT_DELIVER)
-				.event(OrderStatusChangeEvent.PAYED).and()
-				// 发货事件:待发货-》待收货
-				.withExternal().source(OrderStatus.WAIT_DELIVER).target(OrderStatus.WAIT_RECEIVE)
-				.event(OrderStatusChangeEvent.DELIVERY).and()
-				// 收货事件:待收货-》已完成
-				.withExternal().source(OrderStatus.WAIT_RECEIVE).target(OrderStatus.FINISH)
-				.event(OrderStatusChangeEvent.RECEIVED);
-	}
+    @Override
+    public void configure(StateMachineTransitionConfigurer<OrderStatus, OrderStatusChangeEvent> transitions)
+            throws Exception {
+        // 配置状态转换事件关系
+        transitions
+                // 支付事件: 待支付->>待发货
+                .withExternal().source(OrderStatus.WAIT_PAYMENT).target(OrderStatus.WAIT_DELIVER)
+                .event(OrderStatusChangeEvent.PAYED).and()
+                // 发货事件: 待发货->>待收货
+                .withExternal().source(OrderStatus.WAIT_DELIVER).target(OrderStatus.WAIT_RECEIVE)
+                .event(OrderStatusChangeEvent.DELIVERY).and()
+                // 收货事件: 待收货->>已完成
+                .withExternal().source(OrderStatus.WAIT_RECEIVE).target(OrderStatus.FINISH)
+                .event(OrderStatusChangeEvent.RECEIVED);
+    }
 
-	@Bean(name = "stateMachineMemPersister")
-	static <S, E, T> StateMachinePersister<S, E, T> stateMachineMemPersister(ObjectMapper json) {
-		return new DefaultStateMachinePersister<S, E, T>(//
-				new StateMachinePersist<S, E, T>() {
-					private Map<T, StateMachineContext<S, E>> map = new HashMap<>();
+    @Bean(name = "stateMachineMemPersister")
+    static <S, E, T> StateMachinePersister<S, E, T> stateMachineMemPersister(ObjectMapper json) {
+        // 持久化到内存中
+        return new DefaultStateMachinePersister<>(//
+                new StateMachinePersist<>() {
+                    private final Map<T, StateMachineContext<S, E>> map = new HashMap<>();
 
-					@Override
-					public void write(StateMachineContext<S, E> context, T contextObj) throws Exception {
-						log.info("持久化状态机, context:{}, contextObj:{}", json.writeValueAsString(context),
-								json.writeValueAsString(contextObj));
-						map.put(contextObj, context);
-					}
+                    @Override
+                    public void write(StateMachineContext<S, E> context, T contextObj) throws Exception {
+                        log.info("持久化状态机, context:{}, contextObj:{}", json.writeValueAsString(context),
+                                json.writeValueAsString(contextObj));
+                        map.put(contextObj, context);
+                    }
 
-					@Override
-					public StateMachineContext<S, E> read(T contextObj) throws Exception {
-						log.info("获取状态机, contextObj:{}", json.writeValueAsString(contextObj));
-						StateMachineContext<S, E> stateMachineContext = map.get(contextObj);
-						log.info("获取状态机结果, stateMachineContext:{}", json.writeValueAsString(stateMachineContext));
-						return stateMachineContext;
-					}
-				});
-	}
+                    @Override
+                    public StateMachineContext<S, E> read(T contextObj) throws Exception {
+                        log.info("获取状态机, contextObj:{}", json.writeValueAsString(contextObj));
+                        StateMachineContext<S, E> stateMachineContext = map.get(contextObj);
+                        log.info("获取状态机结果, stateMachineContext:{}", json.writeValueAsString(stateMachineContext));
+                        return stateMachineContext;
+                    }
+                });
+    }
 
-	@Bean(name = "stateMachineRedisPersister")
-	<S, E> RedisStateMachinePersister<S, E> stateMachineRedisPersister(//
-			RedisConnectionFactory redisConnectionFactory) {
-		return new RedisStateMachinePersister<>(//
-				new RepositoryStateMachinePersist<>(//
-						new RedisStateMachineContextRepository<>(//
-								redisConnectionFactory)));
-	}
+    @Bean(name = "stateMachineRedisPersister")
+    <S, E> RedisStateMachinePersister<S, E> stateMachineRedisPersister(RedisConnectionFactory redisConnectionFactory) {
+        // 持久化到redis中
+        return new RedisStateMachinePersister<>(//
+                new RepositoryStateMachinePersist<>(//
+                        new RedisStateMachineContextRepository<>(//
+                                redisConnectionFactory)));
+    }
 }
