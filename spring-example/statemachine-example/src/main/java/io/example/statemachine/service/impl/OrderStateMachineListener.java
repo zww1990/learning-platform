@@ -11,6 +11,8 @@ import org.springframework.messaging.Message;
 import org.springframework.statemachine.annotation.WithStateMachine;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @WithStateMachine(name = "orderStateMachine")
 @Slf4j
@@ -25,8 +27,9 @@ public class OrderStateMachineListener {
             throw new RuntimeException("订单不存在！");
         }
         log.info("确认支付，状态机反馈信息：{}", message.getHeaders());
-        //更新订单
+        // 更新订单
         order.setStatus(OrderStatus.WAIT_DELIVER.getCode());
+        order.setUpdateTime(LocalDateTime.now());
         orderMapper.updateById(order);
     }
 
@@ -37,8 +40,9 @@ public class OrderStateMachineListener {
             throw new RuntimeException("订单不存在！");
         }
         log.info("确认发货，状态机反馈信息：{}", message.getHeaders());
-        //更新订单
+        // 更新订单
         order.setStatus(OrderStatus.WAIT_RECEIVE.getCode());
+        order.setUpdateTime(LocalDateTime.now());
         orderMapper.updateById(order);
     }
 
@@ -49,8 +53,9 @@ public class OrderStateMachineListener {
             throw new RuntimeException("订单不存在！");
         }
         log.info("确认收货，状态机反馈信息：{}", message.getHeaders());
-        //更新订单
+        // 更新订单
         order.setStatus(OrderStatus.FINISH.getCode());
+        order.setUpdateTime(LocalDateTime.now());
         orderMapper.updateById(order);
     }
 }

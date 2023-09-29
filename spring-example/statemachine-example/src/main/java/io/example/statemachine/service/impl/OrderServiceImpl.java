@@ -12,6 +12,9 @@ import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.persist.StateMachinePersister;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 /**
  * 订单服务接口实现类
  *
@@ -36,7 +39,11 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             order = new Order();
         }
+        order.setOrderCode(UUID.randomUUID().toString().replace("-", ""));
         order.setStatus(OrderStatus.WAIT_PAYMENT.getCode());
+        order.setUpdateUser(order.getCreateUser());
+        order.setCreateTime(LocalDateTime.now());
+        order.setUpdateTime(order.getCreateTime());
         orderMapper.insert(order);
         return order;
     }
