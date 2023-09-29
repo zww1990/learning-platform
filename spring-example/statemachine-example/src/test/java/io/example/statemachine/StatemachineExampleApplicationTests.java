@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @SpringBootTest
 public class StatemachineExampleApplicationTests {
     @Autowired
@@ -21,6 +23,8 @@ public class StatemachineExampleApplicationTests {
             System.err.println(v.getHashKeySerializer());
             System.err.println(v.getHashValueSerializer());
         });
+        
+        System.err.println(this.applicationContext.getBean(ObjectMapper.class));
     }
 
 }

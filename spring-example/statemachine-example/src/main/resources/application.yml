@@ -17,6 +17,8 @@ spring:
       - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
       - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
       - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
   sql:
     init:
       mode: never
