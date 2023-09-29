@@ -18,9 +18,8 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @SpringBootApplication
 @Slf4j
 @AllArgsConstructor
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class RedisExampleApplication implements CommandLineRunner {
-    private final RedisTemplate redisTemplate;
+    private final RedisTemplate<Object, Object> redisTemplate;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(RedisExampleApplication.class, args);
