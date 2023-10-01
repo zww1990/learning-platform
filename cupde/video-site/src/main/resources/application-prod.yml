@@ -1,0 +1,6 @@
+# 生产环境配置
+spring:
+  datasource:
+    url: xxx
+    username: xxx
+    password: xxx
