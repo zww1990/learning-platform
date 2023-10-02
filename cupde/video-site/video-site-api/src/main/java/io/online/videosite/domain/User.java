@@ -1,7 +1,10 @@
 package io.online.videosite.domain;
 
 import io.online.videosite.constant.UserType;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,14 +19,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 public class User extends BaseEntity {
-    /**
-     * 主键
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     /**
      * 用户名
      */

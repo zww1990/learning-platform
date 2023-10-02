@@ -1,6 +1,7 @@
 package io.online.videosite.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,14 +16,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 public class Comment extends BaseEntity {
-    /**
-     * 主键
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     /**
      * 评论内容
      */

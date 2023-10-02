@@ -1,5 +1,9 @@
 package io.online.videosite.domain;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,10 +16,17 @@ import java.time.LocalDateTime;
  * @author 张维维
  * @since 2023-10-02 13:04:53
  */
+@MappedSuperclass
 @Getter
 @Setter
 @ToString
 public abstract class BaseEntity {
+    /**
+     * 主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     /**
      * 创建时间
      */
