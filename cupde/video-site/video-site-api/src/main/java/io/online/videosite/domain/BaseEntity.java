@@ -1,8 +1,5 @@
 package io.online.videosite.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,12 +16,6 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public abstract class BaseEntity {
-    /**
-     * 主键
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
     /**
      * 创建时间
      */

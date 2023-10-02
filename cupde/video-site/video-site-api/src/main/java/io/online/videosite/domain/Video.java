@@ -1,9 +1,7 @@
 package io.online.videosite.domain;
 
 import io.online.videosite.constant.AuditStatus;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,10 +15,17 @@ import java.time.LocalDateTime;
  * @since 2023-10-02 13:32:54
  */
 @Table(name = "t_video")
+@Entity
 @Getter
 @Setter
 @ToString
 public class Video extends BaseEntity {
+    /**
+     * 主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     /**
      * 视频名称
      */

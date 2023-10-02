@@ -1,6 +1,6 @@
 package io.online.videosite.domain;
 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,10 +12,17 @@ import lombok.ToString;
  * @since 2023-10-02 13:44:37
  */
 @Table(name = "t_comment")
+@Entity
 @Getter
 @Setter
 @ToString
 public class Comment extends BaseEntity {
+    /**
+     * 主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     /**
      * 评论内容
      */

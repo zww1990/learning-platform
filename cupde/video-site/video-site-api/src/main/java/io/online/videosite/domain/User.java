@@ -1,9 +1,7 @@
 package io.online.videosite.domain;
 
 import io.online.videosite.constant.UserType;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,10 +13,17 @@ import lombok.ToString;
  * @since 2023-10-02 12:39:13
  */
 @Table(name = "t_user")
+@Entity
 @Getter
 @Setter
 @ToString
 public class User extends BaseEntity {
+    /**
+     * 主键
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     /**
      * 用户名
      */
