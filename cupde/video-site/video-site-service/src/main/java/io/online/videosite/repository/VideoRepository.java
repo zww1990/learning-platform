@@ -4,7 +4,7 @@ import io.online.videosite.domain.Video;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * 视频实体 - 数据访问对象接口
+ * 视频数据访问对象接口
  *
  * @author 张维维
  * @since 2023-10-02 13:57:38
