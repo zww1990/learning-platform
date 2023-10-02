@@ -21,7 +21,9 @@ create table if not exists t_category
     created_date  datetime    not null comment '创建时间',
     creator       varchar(64) not null comment '创建人',
     modified_date datetime    not null comment '修改时间',
-    modifier      varchar(64) not null comment '修改人'
+    modifier      varchar(64) not null comment '修改人',
+    foreign key creator_fk (creator) references t_user (username),
+    foreign key modifier_fk (modifier) references t_user (username)
 ) comment '视频类别表';
 
 create table if not exists t_video
@@ -40,7 +42,10 @@ create table if not exists t_video
     audited_date  datetime comment '审核时间',
     auditor       varchar(64) comment '审核人',
     audit_reason  varchar(256) comment '审核不通过原因',
-    foreign key category_id_fk (category_id) references t_category (id)
+    foreign key category_id_fk (category_id) references t_category (id),
+    foreign key creator_fk (creator) references t_user (username),
+    foreign key modifier_fk (modifier) references t_user (username),
+    foreign key auditor_fk (auditor) references t_user (username)
 ) comment '视频表';
 
 create table if not exists t_comment
@@ -52,5 +57,7 @@ create table if not exists t_comment
     creator       varchar(64)  not null comment '创建人',
     modified_date datetime     not null comment '修改时间',
     modifier      varchar(64)  not null comment '修改人',
-    foreign key video_id_fk (video_id) references t_video (id)
+    foreign key video_id_fk (video_id) references t_video (id),
+    foreign key creator_fk (creator) references t_user (username),
+    foreign key modifier_fk (modifier) references t_user (username)
 ) comment '视频评论表';
