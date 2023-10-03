@@ -1,5 +1,7 @@
 package io.online.videosite.api;
 
+import io.online.videosite.domain.User;
+
 /**
  * 用户服务接口
  *
@@ -7,4 +9,13 @@ package io.online.videosite.api;
  * @since 2023-10-02 14:15:46
  */
 public interface UserService {
+    /**
+     * 按用户名查询用户信息
+     *
+     * @param user {@link User}
+     * @return {@link User}
+     * @author 张维维
+     * @since 2023-10-03 20:16:51
+     */
+    User query(User user);
 }

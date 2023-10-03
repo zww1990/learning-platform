@@ -26,14 +26,26 @@ import java.util.List;
 public class IndexController {
     private final VideoService videoService;
 
+    /**
+     * 跳转到主页
+     */
     @GetMapping(path = {"", "/"})
     public ModelAndView index(HttpSession session) {
+        // 从会话中获取当前登录用户
         User user = (User) session.getAttribute(Constants.SESSION_USER_KEY);
-        log.info("index(): user = {}", user);
         List<Video> videos = this.videoService.query(AuditStatus.PASSED);
+        log.info("index(): user = {}, video size = {}", user, videos.size());
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         mav.addObject("videos", videos);
         return mav;
+    }
+
+    /**
+     * 跳转到登录页
+     */
+    @GetMapping("/login")
+    public ModelAndView login() {
+        return new ModelAndView("login").addObject("user", new User());
     }
 }

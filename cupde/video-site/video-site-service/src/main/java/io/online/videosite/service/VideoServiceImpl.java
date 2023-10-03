@@ -31,7 +31,7 @@ public class VideoServiceImpl implements VideoService {
             if (auditStatus.length == 0) {
                 return query.getRestriction();
             }
-            return builder.and(root.get("auditStatus").in(auditStatus));
+            return root.get("auditStatus").in(auditStatus);
         }, Sort.by(Direction.DESC, "videoHits"));
     }
 }

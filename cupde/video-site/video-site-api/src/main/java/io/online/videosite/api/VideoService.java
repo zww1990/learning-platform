@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface VideoService {
     /**
-     * 按审核状态查询视频
+     * 按审核状态查询视频，并按点击量进行降序排序
      *
      * @param auditStatus {@link AuditStatus}
      * @return {@link List<Video>}

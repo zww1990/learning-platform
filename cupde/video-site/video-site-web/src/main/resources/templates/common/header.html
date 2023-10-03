@@ -1,10 +1,11 @@
-<head th:fragment="header">
+<head th:fragment="header(title,links)">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>我的视频网站</title>
+    <title th:replace="${title}">我的视频网站</title>
     <link rel="icon" href="/img/favicon.png" type="image/png">
     <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/webjars/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/theme.css">
+    <th:block th:replace="${links}" />
 </head>

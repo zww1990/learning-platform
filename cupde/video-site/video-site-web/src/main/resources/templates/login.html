@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head th:replace="~{common/header :: header(~{::title},~{::link})}">
+    <title>我的视频网站 - 登录</title>
+    <link href="/css/login.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <form class="form-signin" method="post" action="/user/login" th:object="${user}">
+      <img class="mb-4" src="/img/favicon.png" alt="我的logo" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+      <span th:text="${error}" style="color: red;font-weight: bold"></span>
+      <label for="username" class="sr-only">用户名</label>
+      <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="请输入用户名" required>
+      <label for="password" class="sr-only">密码</label>
+      <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="请输入密码" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      <p class="mt-5 mb-3 text-muted"></p>
+      <footer th:replace="~{common/footer :: footer}"></footer>
+    </form>
+  </body>
+</html>

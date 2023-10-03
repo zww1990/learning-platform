@@ -31,6 +31,9 @@ public class VideoSiteApplication {
         Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
+    /**
+     * 注册密码编码器实例
+     */
     @Bean
     static PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

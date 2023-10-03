@@ -1,6 +1,7 @@
 package io.online.videosite.service;
 
 import io.online.videosite.api.UserService;
+import io.online.videosite.domain.User;
 import io.online.videosite.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,4 +16,9 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+
+    @Override
+    public User query(User user) {
+        return this.userRepository.findByUsername(user.getUsername());
+    }
 }
