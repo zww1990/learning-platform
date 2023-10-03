@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import java.util.List;
 
@@ -44,8 +45,26 @@ public class IndexController {
     /**
      * 跳转到登录页
      */
-    @GetMapping("/login")
+    @GetMapping(path = "/login")
     public ModelAndView login() {
-        return new ModelAndView("login").addObject("user", new User());
+        return new ModelAndView("user/login").addObject("user", new User());
+    }
+
+    /**
+     * 跳转到注册页
+     */
+    @GetMapping(path = "/register")
+    public ModelAndView register() {
+        return new ModelAndView("user/register").addObject("user", new User());
+    }
+
+    /**
+     * 跳转到主页
+     */
+    @GetMapping(path = "/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        // 重定向
+        return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/";
     }
 }

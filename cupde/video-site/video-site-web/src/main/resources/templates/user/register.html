@@ -1,20 +1,31 @@
 <!doctype html>
 <html lang="en">
   <head th:replace="~{common/header :: header(~{::title},~{::link})}">
-    <title>我的视频网站 - 登录</title>
+    <title>我的视频网站 - 注册</title>
     <link href="/css/login.css" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin" method="post" action="/user/login" th:object="${user}">
+    <form class="form-signin" method="post" action="/user/register" th:object="${user}">
       <img class="mb-4" src="/img/favicon.png" alt="我的logo" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+      <h1 class="h3 mb-3 font-weight-normal">请注册</h1>
+      <br>
       <span th:text="${error}" style="color: red;font-weight: bold"></span>
+      <br>
       <label for="username" class="sr-only">用户名</label>
       <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="请输入用户名" required>
+      <br>
+      <label for="nickname" class="sr-only">昵称</label>
+      <input type="text" id="nickname" th:field="*{nickname}" class="form-control" placeholder="请输入昵称" required>
+      <br>
       <label for="password" class="sr-only">密码</label>
       <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="请输入密码" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      <br>
+      <label for="password2" class="sr-only">确认密码</label>
+      <input type="password" id="password2" th:field="*{password2}" class="form-control" placeholder="再次确认密码" required>
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
       <p class="mt-5 mb-3 text-muted"></p>
+
       <footer th:replace="~{common/footer :: footer}"></footer>
     </form>
   </body>

@@ -18,4 +18,13 @@ public interface UserService {
      * @since 2023-10-03 20:16:51
      */
     User query(User user);
+
+    /**
+     * 添加新用户
+     *
+     * @param user {@link User}
+     * @author 张维维
+     * @since 2023-10-03 22:26:25
+     */
+    void save(User user);
 }

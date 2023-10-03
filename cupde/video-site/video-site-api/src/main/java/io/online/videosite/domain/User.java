@@ -1,10 +1,7 @@
 package io.online.videosite.domain;
 
 import io.online.videosite.constant.UserType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,6 +30,11 @@ public class User extends BaseEntity {
      * 密码
      */
     private String password;
+    /**
+     * 确认密码
+     */
+    @Transient
+    private String password2;
     /**
      * 用户类型
      */
