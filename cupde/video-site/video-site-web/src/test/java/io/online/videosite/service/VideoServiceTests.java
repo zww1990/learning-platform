@@ -14,10 +14,11 @@ public class VideoServiceTests {
     @Test
     public void testQuery() {
         try {
-            this.videoService.query().forEach(System.err::println);
-            this.videoService.query(AuditStatus.PENDING).forEach(System.err::println);
-            this.videoService.query(AuditStatus.PENDING, AuditStatus.PASSED).forEach(System.err::println);
-            this.videoService.query(AuditStatus.PENDING, AuditStatus.PASSED, AuditStatus.UNPASSED).forEach(System.err::println);
+            Integer categoryId = 1;
+            this.videoService.query(categoryId).forEach(System.err::println);
+            this.videoService.query(categoryId, AuditStatus.PENDING).forEach(System.err::println);
+            this.videoService.query(categoryId, AuditStatus.PENDING, AuditStatus.PASSED).forEach(System.err::println);
+            this.videoService.query(categoryId, AuditStatus.PENDING, AuditStatus.PASSED, AuditStatus.UNPASSED).forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }

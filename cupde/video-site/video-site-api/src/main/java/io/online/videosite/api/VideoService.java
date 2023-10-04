@@ -16,12 +16,13 @@ public interface VideoService {
     /**
      * 按审核状态查询视频，并按点击量进行降序排序
      *
+     * @param categoryId  类别主键
      * @param auditStatus {@link AuditStatus}
      * @return {@link List<Video>}
      * @author 张维维
      * @since 2023-10-03 16:33:50
      */
-    List<Video> query(AuditStatus... auditStatus);
+    List<Video> query(Integer categoryId, AuditStatus... auditStatus);
 
     /**
      * 查询此用户所有的视频

@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
@@ -37,11 +38,13 @@ public class IndexController {
     @GetMapping(path = {"", "/"})
     public ModelAndView index(
             // 从会话中获取当前登录用户
-            @SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user) {
+            @SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user,
+            @RequestParam(required = false) Integer categoryId) {
         // 查询所有用户审核通过的视频
-        List<Video> videos = this.videoService.query(AuditStatus.PASSED);
+        List<Video> videos = this.videoService.query(categoryId, AuditStatus.PASSED);
         List<Category> categories = this.categoryService.query();
-        log.info("index(): 用户 = {}, 视频数量 = {}, 类别数量 = {}", user, videos.size(), categories.size());
+        log.info("index(): 用户 = {}, 视频数量 = {}, 类别数量 = {}, 类别主键 = {}",
+                user, videos.size(), categories.size(), categoryId);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         mav.addObject("videos", videos);
