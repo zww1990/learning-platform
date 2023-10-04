@@ -20,17 +20,10 @@
 							</button>
 							<div class="collapse navbar-collapse" id="navbarsExplore">
 								<ul class="navbar-nav">
-									<li class="nav-item"><a class="nav-link" href="#">Lifestyle</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Food</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Lifestyle</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Food</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
-									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
-									<li class="nav-item dropdown">
+									<li class="nav-item" th:each="cate : ${categories}">
+										<a class="nav-link" th:href="'?categoryId=' + ${cate.id}" th:text="${cate.categoryName}">类别名称</a>
+									</li>
+									<li class="nav-item dropdown" th:if="${categoryMoreList} != null">
 										<a class="nav-link dropdown-toggle"
 										   href="#"
 										   id="dropdown01"
@@ -38,30 +31,10 @@
 										   aria-haspopup="true"
 										   aria-expanded="false">更多</a>
 										<div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
-											<a class="dropdown-item" href="#">Astronomy</a>
-											<a class="dropdown-item" href="#">Nature</a>
-											<a class="dropdown-item" href="#">Cooking</a>
-											<a class="dropdown-item" href="#">Fashion</a>
-											<a class="dropdown-item" href="#">Wellness</a>
-											<a class="dropdown-item" href="#">Dieting</a>
-											<a class="dropdown-item" href="#">Astronomy</a>
-											<a class="dropdown-item" href="#">Nature</a>
-											<a class="dropdown-item" href="#">Cooking</a>
-											<a class="dropdown-item" href="#">Fashion</a>
-											<a class="dropdown-item" href="#">Wellness</a>
-											<a class="dropdown-item" href="#">Dieting</a>
-											<a class="dropdown-item" href="#">Astronomy</a>
-											<a class="dropdown-item" href="#">Nature</a>
-											<a class="dropdown-item" href="#">Cooking</a>
-											<a class="dropdown-item" href="#">Fashion</a>
-											<a class="dropdown-item" href="#">Wellness</a>
-											<a class="dropdown-item" href="#">Dieting</a>
-											<a class="dropdown-item" href="#">Astronomy</a>
-											<a class="dropdown-item" href="#">Nature</a>
-											<a class="dropdown-item" href="#">Cooking</a>
-											<a class="dropdown-item" href="#">Fashion</a>
-											<a class="dropdown-item" href="#">Wellness</a>
-											<a class="dropdown-item" href="#">Dieting</a>
+											<a class="dropdown-item"
+											   th:each="cate : ${categoryMoreList}"
+											   th:href="'?categoryId=' + ${cate.id}"
+											   th:text="${cate.categoryName}">类别名称</a>
 										</div>
 									</li>
 								</ul>

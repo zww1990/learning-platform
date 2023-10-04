@@ -45,7 +45,13 @@ public class IndexController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("index");
         mav.addObject("videos", videos);
-        mav.addObject("categories", categories);
+        int limit = 10;// 控制类别展示数量
+        if (categories.size() > limit) {
+            mav.addObject("categories", categories.subList(0, limit));
+            mav.addObject("categoryMoreList", categories.subList(limit, categories.size()));
+        } else {
+            mav.addObject("categories", categories);
+        }
         return mav;
     }
 
