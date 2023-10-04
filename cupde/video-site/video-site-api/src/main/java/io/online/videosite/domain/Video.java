@@ -1,10 +1,7 @@
 package io.online.videosite.domain;
 
 import io.online.videosite.constant.AuditStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,6 +40,11 @@ public class Video extends BaseEntity {
      * 视频类别主键
      */
     private Integer categoryId;
+    /**
+     * 视频类别名称
+     */
+    @Transient
+    private String categoryName;
     /**
      * 审核状态
      */

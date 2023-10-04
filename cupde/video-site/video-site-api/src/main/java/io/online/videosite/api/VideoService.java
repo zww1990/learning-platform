@@ -33,4 +33,14 @@ public interface VideoService {
      * @since 2023-10-04 11:27:51
      */
     List<Video> queryForUser(User user);
+
+    /**
+     * 按主键查询
+     *
+     * @param id 主键
+     * @return {@link Video}
+     * @author 张维维
+     * @since 2023-10-04 21:13:49
+     */
+    Video queryOne(Integer id);
 }

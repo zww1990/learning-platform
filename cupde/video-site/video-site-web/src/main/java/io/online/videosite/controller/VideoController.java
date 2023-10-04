@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,6 +45,23 @@ public class VideoController {
         log.info("list(): 视频数量 = {}", videos.size());
         mav.addObject("videos", videos);
         mav.setViewName("video/list");
+        return mav;
+    }
+
+    /**
+     * 跳转到查看页面
+     */
+    @GetMapping("/show/{id}")
+    public ModelAndView show(@PathVariable Integer id) {
+        ModelAndView mav = new ModelAndView();
+        Video video = this.videoService.queryOne(id);
+        if (video == null) {
+            mav.setStatus(HttpStatus.NOT_FOUND);
+            mav.setViewName("error/404");
+            return mav;
+        }
+        mav.addObject("video", video);
+        mav.setViewName("video/show");
         return mav;
     }
 }

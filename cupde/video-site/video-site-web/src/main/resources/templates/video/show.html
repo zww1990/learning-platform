@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head th:replace="~{common/header :: header(~{::title},_)}">
+		<title>我的视频网站 - [[${video.videoName}]]</title>
+	</head>
+	<body>
+		<nav th:replace="~{common/navbar :: navbar}"></nav>
+		<main role="main">
+			<section class="bg-gray200 pt-5 pb-5">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-7">
+							<article class="card">
+								<video class="card-img-top mb-2" controls
+									   th:src="${video.videoLink}"
+									   th:poster="${video.videoLogo}"></video>
+								<div class="card-body">
+									<h1 class="card-title display-4" th:text="${video.videoName}">标题</h1>
+									<ul>
+										<li>点击量：[[${video.videoHits}]]</li>
+										<li>类别：[[${video.categoryName}]]</li>
+										<li>状态：[[${video.auditStatus.desc}]]</li>
+										<li>审核人：[[${video.auditor}]]</li>
+										<li>审核时间：[[${video.auditedDate}]]</li>
+									</ul>
+									<small class="d-block">
+										<a class="btn btn-sm btn-gray200" href="/video/list">
+											<i class="fa fa-arrow-left"></i> 返回列表
+										</a>
+									</small>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer th:replace="~{common/footer :: footer}"></footer>
+		<th:block th:replace="~{common/script :: script}" />
+	</body>
+</html>

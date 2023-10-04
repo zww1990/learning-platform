@@ -3,8 +3,10 @@ package io.online.videosite.service;
 import io.online.videosite.api.VideoService;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.UserType;
+import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import io.online.videosite.repository.CategoryRepository;
 import io.online.videosite.repository.VideoRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ import java.util.List;
 @Slf4j
 public class VideoServiceImpl implements VideoService {
     private final VideoRepository videoRepository;
+    private final CategoryRepository categoryRepository;
 
     @Override
     public List<Video> query(Integer categoryId, AuditStatus... auditStatus) {
@@ -55,5 +58,18 @@ public class VideoServiceImpl implements VideoService {
             }
             return builder.equal(root.get("creator"), user.getUsername());
         }, Sort.by(Direction.DESC, "id"));
+    }
+
+    @Override
+    public Video queryOne(Integer id) {
+        log.info("queryOne(): id = {}", id);
+        return this.videoRepository.findById(id).map(m -> {
+            // 增加点击量
+            m.setVideoHits(m.getVideoHits() + 1);
+            this.videoRepository.save(m);
+            m.setCategoryName(this.categoryRepository.findById(m.getCategoryId())
+                    .map(Category::getCategoryName).orElseGet(String::new));
+            return m;
+        }).orElse(null);
     }
 }
