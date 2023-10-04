@@ -2,6 +2,8 @@ package io.online.videosite.service;
 
 import io.online.videosite.api.VideoService;
 import io.online.videosite.constant.AuditStatus;
+import io.online.videosite.constant.UserType;
+import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.repository.VideoRepository;
 import lombok.AllArgsConstructor;
@@ -28,10 +30,23 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> query(AuditStatus... auditStatus) {
         log.info("query(): auditStatus = {}", (Object) auditStatus);
         return this.videoRepository.findAll((root, query, builder) -> {
+            // 如果没有指定审核状态，查询所有视频
             if (auditStatus.length == 0) {
                 return query.getRestriction();
             }
             return root.get("auditStatus").in(auditStatus);
         }, Sort.by(Direction.DESC, "videoHits"));
+    }
+
+    @Override
+    public List<Video> queryForUser(User user) {
+        log.info("queryForUser(): user = {}", user);
+        return this.videoRepository.findAll((root, query, builder) -> {
+            // 如果是管理员，查询所有视频
+            if (user.getUserType() == UserType.ADMIN) {
+                return query.getRestriction();
+            }
+            return builder.equal(root.get("creator"), user.getUsername());
+        }, Sort.by(Direction.DESC, "id"));
     }
 }

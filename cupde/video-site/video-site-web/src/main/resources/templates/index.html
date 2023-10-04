@@ -28,6 +28,8 @@
 									<li class="nav-item"><a class="nav-link" href="#">Food</a></li>
 									<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
 									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Travel</a></li>
 									<li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle"
 										   href="#"
@@ -36,6 +38,24 @@
 										   aria-haspopup="true"
 										   aria-expanded="false">更多</a>
 										<div class="dropdown-menu shadow-lg" aria-labelledby="dropdown01">
+											<a class="dropdown-item" href="#">Astronomy</a>
+											<a class="dropdown-item" href="#">Nature</a>
+											<a class="dropdown-item" href="#">Cooking</a>
+											<a class="dropdown-item" href="#">Fashion</a>
+											<a class="dropdown-item" href="#">Wellness</a>
+											<a class="dropdown-item" href="#">Dieting</a>
+											<a class="dropdown-item" href="#">Astronomy</a>
+											<a class="dropdown-item" href="#">Nature</a>
+											<a class="dropdown-item" href="#">Cooking</a>
+											<a class="dropdown-item" href="#">Fashion</a>
+											<a class="dropdown-item" href="#">Wellness</a>
+											<a class="dropdown-item" href="#">Dieting</a>
+											<a class="dropdown-item" href="#">Astronomy</a>
+											<a class="dropdown-item" href="#">Nature</a>
+											<a class="dropdown-item" href="#">Cooking</a>
+											<a class="dropdown-item" href="#">Fashion</a>
+											<a class="dropdown-item" href="#">Wellness</a>
+											<a class="dropdown-item" href="#">Dieting</a>
 											<a class="dropdown-item" href="#">Astronomy</a>
 											<a class="dropdown-item" href="#">Nature</a>
 											<a class="dropdown-item" href="#">Cooking</a>
@@ -52,203 +72,12 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="card-columns">
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1489743342057-3448cc7c3bb9.webp" alt="Card image">
+							<div class="card card-pin" th:each="video : ${videos}">
+								<img class="card-img" th:src="${video.videoLogo}" th:alt="${video.videoName}">
 								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
+									<h2 class="card-title title" th:text="${video.videoName}">视频名称</h2>
 									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1519996521430-02b798c1d881.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1505210512658-3ae58ae08744.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1488353816557-87cd574cea04.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1518450757707-d21c8c53c8df.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1483190656465-2c49e54d29f3.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1501813531019-338a4182efb0.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1518542331925-4e91e9aa0074.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1513028179155-324cfec2566c.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1516601255109-506725109807.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1509233631037-deb7efd36207.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1416879595882-3373a0480b5b.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1485627658391-1365e4e0dbfe.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1502550900787-e956c314a221.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1466692476868-aef1dfb1e735.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1509885903707-b68568db61ed.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1518707399486-6d702a84ff00.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1519408299519-b7a0274f7d67.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1506706435692-290e0c5b4505.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-									</div>
-								</div>
-							</div>
-							<div class="card card-pin">
-								<img class="card-img" src="/photo/photo-1512355144108-e94a235b10af.webp" alt="Card image">
-								<div class="overlay">
-									<h2 class="card-title title">Cool Title</h2>
-									<div class="more">
-										<a href="post.html">
-										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
+										<a href="post.html"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 查看 </a>
 									</div>
 								</div>
 							</div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head th:replace="~{common/header :: header(~{::title},_)}">
+		<title>我的视频网站 - 作品</title>
+	</head>
+	<body>
+		<nav th:replace="~{common/navbar :: navbar}"></nav>
+		<main role="main">
+			<div class="jumbotron border-round-0" style="background-color: unset;padding: 3rem 2rem;"></div>
+			<div class="container mb-4">
+				<img src="/img/av.png" class="mt-neg100 mb-4 rounded-circle" width="128">
+				<h1 class="font-weight-bold title" th:text="${session.CURRENT_USER?.nickname}">作者</h1>
+				<p>点击“+”添加新作品</p>
+			</div>
+			<div class="container-fluid mb-5">
+				<div class="row">
+					<div class="card-columns">
+						<div class="card card-pin" style="text-align: center" th:if="${videos.size} > 20">
+							<i class="bi bi-plus-square" style="font-size: 10rem;cursor: pointer"></i>
+						</div>
+						<div class="card card-pin" th:each="video : ${videos}">
+							<img class="card-img" th:src="${video.videoLogo}" th:alt="${video.videoName}">
+							<div class="overlay">
+								<h2 class="card-title title" th:text="${video.videoName}">视频名称</h2>
+								<div class="more">
+									<a href="post.html"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 查看 </a>
+								</div>
+							</div>
+						</div>
+						<div class="card card-pin" style="text-align: center">
+							<i class="bi bi-plus-square" style="font-size: 10rem;cursor: pointer"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer th:replace="~{common/footer :: footer}"></footer>
+		<th:block th:replace="~{common/script :: script}" />
+	</body>
+</html>

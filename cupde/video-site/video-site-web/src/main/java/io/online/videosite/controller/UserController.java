@@ -6,6 +6,7 @@ import io.online.videosite.domain.User;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -40,16 +41,19 @@ public class UserController {
         ModelAndView mav = new ModelAndView("user/login");
         if (!StringUtils.hasText(user.getUsername())) {
             mav.addObject("error", "请输入用户名！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         if (!StringUtils.hasText(user.getPassword())) {
             mav.addObject("error", "请输入密码！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         User entity = this.userService.query(user);
         if (entity == null) {
             log.info("login(): 此用户 {} 不存在！", user.getUsername());
             mav.addObject("error", "用户名或密码不正确！");
+            mav.setStatus(HttpStatus.UNAUTHORIZED);
             return mav;
         }
         // 验证密码
@@ -57,6 +61,7 @@ public class UserController {
         if (!matches) {
             log.info("login(): 此用户 {} 密码不正确！", user.getUsername());
             mav.addObject("error", "用户名或密码不正确！");
+            mav.setStatus(HttpStatus.UNAUTHORIZED);
             return mav;
         }
         entity.setPassword(null);// 清除密码
@@ -75,28 +80,34 @@ public class UserController {
         ModelAndView mav = new ModelAndView("user/register");
         if (!StringUtils.hasText(user.getUsername())) {
             mav.addObject("error", "请输入用户名！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         if (!StringUtils.hasText(user.getNickname())) {
             mav.addObject("error", "请输入昵称！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         if (!StringUtils.hasText(user.getPassword())) {
             mav.addObject("error", "请输入密码！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         if (!StringUtils.hasText(user.getPassword2())) {
             mav.addObject("error", "请再次确认密码！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         if (!user.getPassword().equals(user.getPassword2())) {
             mav.addObject("error", "两次输入的密码不一致！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         User entity = this.userService.query(user);
         if (entity != null) {
             log.info("login(): 此用户 {} 已存在！", user.getUsername());
             mav.addObject("error", String.format("此用户 %s 已存在！", user.getUsername()));
+            mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
         user.setPassword(this.passwordEncoder.encode(user.getPassword()));// 密码加密

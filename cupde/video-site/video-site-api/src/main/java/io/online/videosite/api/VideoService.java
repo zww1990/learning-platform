@@ -1,6 +1,7 @@
 package io.online.videosite.api;
 
 import io.online.videosite.constant.AuditStatus;
+import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 
 import java.util.List;
@@ -21,4 +22,14 @@ public interface VideoService {
      * @since 2023-10-03 16:33:50
      */
     List<Video> query(AuditStatus... auditStatus);
+
+    /**
+     * 查询此用户所有的视频
+     *
+     * @param user {@link User}
+     * @return {@link List<Video>}
+     * @author 张维维
+     * @since 2023-10-04 11:27:51
+     */
+    List<Video> queryForUser(User user);
 }
