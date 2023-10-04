@@ -20,10 +20,29 @@
 						</div>
 						<div class="card card-pin" th:each="video : ${videos}">
 							<img class="card-img" th:src="${video.videoLogo}" th:alt="${video.videoName}">
-							<div class="overlay">
+							<div class="overlay"
+								 data-toggle="modal"
+								 data-target="#exampleModal"
+								 th:data-name="${video.videoName}"
+								 th:data-logo="${video.videoLogo}">
 								<h2 class="card-title title" th:text="${video.videoName}">视频名称</h2>
 								<div class="more">
-									<a href="post.html"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 查看 </a>
+									<a th:href="'/video/show/' + ${video.id}">
+										<i class="fa fa-eye" aria-hidden="true"></i> 查看([[${video.videoHits}]])
+									</a>
+									<a th:href="'/video/audit/' + ${video.id}"
+									   th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'">
+										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 审核
+									</a>
+									<th:block th:if="${session.CURRENT_USER.username} eq ${video.creator}">
+										<a th:href="'/video/edit/' + ${video.id}"
+										   th:if="${video.auditStatus.name} ne 'PASSED'">
+											<i class="fa fa-edit" aria-hidden="true"></i> 编辑
+										</a>
+										<a th:href="'/video/delete/' + ${video.id}">
+											<i class="fa fa-remove" aria-hidden="true"></i> 删除
+										</a>
+									</th:block>
 								</div>
 							</div>
 						</div>
@@ -34,6 +53,24 @@
 				</div>
 			</div>
 		</main>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">标题</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<img>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<footer th:replace="~{common/footer :: footer}"></footer>
 		<th:block th:replace="~{common/script :: script}" />
 	</body>

@@ -36,4 +36,14 @@ $( document ).ready(function() {
            $(a).removeClass("active");
        }
    });
+   // 对话框事件绑定
+   $('#exampleModal').on('show.bs.modal', function (event) {
+     var div = $(event.relatedTarget);
+     var name = div.data('name');
+     var logo = div.data('logo');
+     console.log(name, logo);
+     var modal = $(this);
+     modal.find('.modal-title').text(name);
+     modal.find('.modal-body img').prop('src', logo);
+   });
 });
