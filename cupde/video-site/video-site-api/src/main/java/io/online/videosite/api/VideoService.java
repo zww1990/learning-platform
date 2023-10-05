@@ -43,4 +43,14 @@ public interface VideoService {
      * @since 2023-10-04 21:13:49
      */
     Video queryOne(Integer id);
+
+    /**
+     * 按主键查询，并增加点击量
+     *
+     * @param id 主键
+     * @return {@link Video}
+     * @author 张维维
+     * @since 2023-10-04 21:13:49
+     */
+    Video queryOneAndAddHits(Integer id);
 }

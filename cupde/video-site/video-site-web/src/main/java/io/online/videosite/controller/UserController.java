@@ -119,7 +119,7 @@ public class UserController {
     /**
      * 跳转到成功页
      */
-    @GetMapping("/success")
+    @GetMapping(path = "/success")
     public String success() {
         return "user/success";
     }

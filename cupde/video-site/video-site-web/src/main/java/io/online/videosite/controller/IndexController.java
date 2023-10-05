@@ -50,6 +50,7 @@ public class IndexController {
         mav.addObject("videos", videos);
         int limit = 10;// 控制类别展示数量
         if (categories.size() > limit) {
+            // 如果超过指定的数量，就截取
             mav.addObject("categories", categories.subList(0, limit));
             mav.addObject("categoryMoreList", categories.subList(limit, categories.size()));
         } else {

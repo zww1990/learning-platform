@@ -66,6 +66,12 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public Video queryOne(Integer id) {
         log.info("queryOne(): id = {}", id);
+        return this.videoRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Video queryOneAndAddHits(Integer id) {
+        log.info("queryOneAndAddHits(): id = {}", id);
         return this.videoRepository.findById(id).map(m -> {
             // 增加点击量
             m.setVideoHits(m.getVideoHits() + 1);
