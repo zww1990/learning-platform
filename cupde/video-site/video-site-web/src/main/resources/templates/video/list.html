@@ -31,7 +31,8 @@
 										<i class="fa fa-eye" aria-hidden="true"></i> 查看([[${video.videoHits}]])
 									</a>
 									<a th:href="'/video/audit/' + ${video.id}"
-									   th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'">
+									   th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'
+									   		and ${video.auditStatus.name} eq 'PENDING'">
 										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 审核
 									</a>
 									<th:block th:if="${session.CURRENT_USER.username} eq ${video.creator}">

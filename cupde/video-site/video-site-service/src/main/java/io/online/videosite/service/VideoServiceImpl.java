@@ -9,6 +9,7 @@ import io.online.videosite.domain.Video;
 import io.online.videosite.repository.CategoryRepository;
 import io.online.videosite.repository.UserRepository;
 import io.online.videosite.repository.VideoRepository;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -64,8 +66,20 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video queryOne(Integer id) {
-        log.info("queryOne(): id = {}", id);
+    public Video queryOne(Integer id, FetchType fetchType) {
+        log.info("queryOne(): id = {}, fetchType = {}", id, fetchType);
+        if (fetchType == FetchType.EAGER) {
+            return this.videoRepository.findById(id).map(m -> {
+                m.setCategoryName(this.categoryRepository.findById(m.getCategoryId())
+                        .map(Category::getCategoryName).orElseGet(String::new));
+                m.setCreatorNick(this.userRepository.findByUsername(m.getCreator())
+                        .map(User::getNickname).orElseGet(String::new));
+                Optional.ofNullable(m.getAuditor()).ifPresent(c ->
+                        m.setAuditorNick(this.userRepository.findByUsername(c)
+                                .map(User::getNickname).orElseGet(String::new)));
+                return m;
+            }).orElse(null);
+        }
         return this.videoRepository.findById(id).orElse(null);
     }
 
@@ -85,5 +99,15 @@ public class VideoServiceImpl implements VideoService {
                             .map(User::getNickname).orElseGet(String::new)));
             return m;
         }).orElse(null);
+    }
+
+    @Override
+    public void audit(Video video, User user) {
+        log.info("audit(): video = {}, user = {}", video, user);
+        video.setAuditor(user.getUsername());
+        video.setAuditedDate(LocalDateTime.now());
+        video.setModifiedDate(video.getAuditedDate());
+        video.setModifier(user.getUsername());
+        this.videoRepository.save(video);
     }
 }

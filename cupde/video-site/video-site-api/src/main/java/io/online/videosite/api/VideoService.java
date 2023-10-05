@@ -3,6 +3,7 @@ package io.online.videosite.api;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import jakarta.persistence.FetchType;
 
 import java.util.List;
 
@@ -37,12 +38,13 @@ public interface VideoService {
     /**
      * 按主键查询
      *
-     * @param id 主键
+     * @param id        主键
+     * @param fetchType {@link FetchType}
      * @return {@link Video}
      * @author 张维维
      * @since 2023-10-04 21:13:49
      */
-    Video queryOne(Integer id);
+    Video queryOne(Integer id, FetchType fetchType);
 
     /**
      * 按主键查询，并增加点击量
@@ -53,4 +55,14 @@ public interface VideoService {
      * @since 2023-10-04 21:13:49
      */
     Video queryOneAndAddHits(Integer id);
+
+    /**
+     * 视频审核
+     *
+     * @param video {@link Video}
+     * @param user  {@link User}
+     * @author 张维维
+     * @since 2023-10-05 17:04:25
+     */
+    void audit(Video video, User user);
 }

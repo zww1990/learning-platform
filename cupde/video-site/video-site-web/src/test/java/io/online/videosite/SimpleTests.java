@@ -1,5 +1,6 @@
 package io.online.videosite;
 
+import io.online.videosite.constant.AuditStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,16 @@ public class SimpleTests {
             System.err.println(list.size());
             System.err.println(list.subList(0, limit));
             System.err.println(list.subList(limit, list.size()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testAuditStatus() {
+        try {
+            AuditStatus status = null;
+            System.err.println(status == AuditStatus.PENDING);
         } catch (Exception e) {
             e.printStackTrace();
         }
