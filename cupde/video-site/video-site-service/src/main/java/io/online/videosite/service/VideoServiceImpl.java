@@ -7,6 +7,7 @@ import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.repository.CategoryRepository;
+import io.online.videosite.repository.UserRepository;
 import io.online.videosite.repository.VideoRepository;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 视频服务接口实现类
@@ -30,6 +32,7 @@ import java.util.List;
 public class VideoServiceImpl implements VideoService {
     private final VideoRepository videoRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<Video> query(Integer categoryId, AuditStatus... auditStatus) {
@@ -69,6 +72,11 @@ public class VideoServiceImpl implements VideoService {
             this.videoRepository.save(m);
             m.setCategoryName(this.categoryRepository.findById(m.getCategoryId())
                     .map(Category::getCategoryName).orElseGet(String::new));
+            m.setCreatorNick(this.userRepository.findByUsername(m.getCreator())
+                    .map(User::getNickname).orElseGet(String::new));
+            Optional.ofNullable(m.getAuditor()).ifPresent(c ->
+                    m.setAuditorNick(this.userRepository.findByUsername(c)
+                            .map(User::getNickname).orElseGet(String::new)));
             return m;
         }).orElse(null);
     }

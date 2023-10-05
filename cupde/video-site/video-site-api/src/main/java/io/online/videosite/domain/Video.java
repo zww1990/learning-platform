@@ -59,6 +59,11 @@ public class Video extends BaseEntity {
      */
     private String auditor;
     /**
+     * 审核人昵称
+     */
+    @Transient
+    private String auditorNick;
+    /**
      * 审核不通过原因
      */
     private String auditReason;

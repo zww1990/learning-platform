@@ -20,8 +20,10 @@
 										<li>点击量：[[${video.videoHits}]]</li>
 										<li>类别：[[${video.categoryName}]]</li>
 										<li>状态：[[${video.auditStatus.desc}]]</li>
-										<li>审核人：[[${video.auditor}]]</li>
-										<li>审核时间：[[${video.auditedDate}]]</li>
+										<li>作者：[[${video.creatorNick}]]</li>
+										<li>创建时间：[[${#temporals.format(video.createdDate, 'yyyy-MM-dd HH:mm:ss')}]]</li>
+										<li>审核人：[[${video.auditorNick}]]</li>
+										<li>审核时间：[[${#temporals.format(video.auditedDate, 'yyyy-MM-dd HH:mm:ss')}]]</li>
 									</ul>
 									<small class="d-block">
 										<a class="btn btn-sm btn-gray200" href="/video/list">

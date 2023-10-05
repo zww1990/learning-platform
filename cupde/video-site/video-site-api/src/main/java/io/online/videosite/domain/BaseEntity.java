@@ -1,9 +1,6 @@
 package io.online.videosite.domain;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -35,6 +32,11 @@ public abstract class BaseEntity {
      * 创建人
      */
     private String creator;
+    /**
+     * 创建人昵称
+     */
+    @Transient
+    private String creatorNick;
     /**
      * 修改时间
      */
