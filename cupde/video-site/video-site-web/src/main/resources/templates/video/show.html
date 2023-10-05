@@ -38,7 +38,7 @@
 								<a class="list-group-item list-group-item-action" th:each="comment : ${comments}">
 									<div class="d-flex w-100 justify-content-between">
 										<img class="rounded-circle mr-2" src="/img/av.png" width="30">
-										<h5 class="mb-1" style="width: 66%" th:text="${comment.creator}">评论人</h5>
+										<h5 class="mb-1" style="width: 66%" th:text="${comment.creatorNick}">评论人</h5>
 										<small th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm:ss')}">时间</small>
 									</div>
 									<p class="mb-1 mt-2" th:text="${comment.content}">评论内容</p>

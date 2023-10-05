@@ -1,6 +1,7 @@
 package io.online.videosite.api;
 
 import io.online.videosite.domain.Comment;
+import io.online.videosite.domain.User;
 
 import java.util.List;
 
@@ -20,4 +21,14 @@ public interface CommentService {
      * @since 2023-10-05 11:31:30
      */
     List<Comment> queryByVideoId(Integer videoId);
+
+    /**
+     * 添加评论
+     *
+     * @param comment {@link Comment}
+     * @param user    {@link User}
+     * @author 张维维
+     * @since 2023-10-05 14:42:12
+     */
+    void save(Comment comment, User user);
 }
