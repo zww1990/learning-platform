@@ -26,7 +26,7 @@ import java.util.List;
  * @since 2023-10-02 14:30:37
  */
 @Controller
-@RequestMapping(path = "/video")
+@RequestMapping(path = "/videohub")
 @AllArgsConstructor
 @Slf4j
 public class VideoController {
@@ -110,6 +110,6 @@ public class VideoController {
             video.setAuditStatus(param.getAuditStatus());
             this.videoService.audit(video, user);
         }
-        return String.format("%s/video/audit/%s", UrlBasedViewResolver.REDIRECT_URL_PREFIX, param.getId());
+        return String.format("%s/videohub/audit/%s", UrlBasedViewResolver.REDIRECT_URL_PREFIX, param.getId());
     }
 }

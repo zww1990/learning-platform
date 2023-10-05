@@ -5,9 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.stream.Stream;
 
@@ -31,11 +28,4 @@ public class VideoSiteApplication {
         Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
-    /**
-     * 注册密码编码器实例
-     */
-    @Bean
-    static PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
 }

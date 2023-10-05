@@ -49,7 +49,7 @@ public class CommentController {
             }
             this.commentService.save(comment, user);
         }
-        return String.format("%s/video/show/%s",
+        return String.format("%s/videohub/show/%s",
                 UrlBasedViewResolver.REDIRECT_URL_PREFIX, comment.getVideoId());
     }
 }

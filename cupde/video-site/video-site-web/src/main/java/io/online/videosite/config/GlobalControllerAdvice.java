@@ -1,4 +1,4 @@
-package io.online.videosite.controller;
+package io.online.videosite.config;
 
 import io.online.videosite.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;

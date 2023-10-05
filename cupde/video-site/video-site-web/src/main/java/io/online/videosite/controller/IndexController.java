@@ -76,12 +76,12 @@ public class IndexController {
     }
 
     /**
-     * 跳转到主页
+     * 注销登录
      */
     @GetMapping(path = "/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        // 重定向
+        // 重定向到主页
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/";
     }
 }
