@@ -46,4 +46,9 @@ $( document ).ready(function() {
      modal.find('.modal-title').text(name);
      modal.find('.modal-body img').prop('src', logo);
    });
+   $('.videohubshow').on('click', function(event){
+       event.stopPropagation();
+       var url = $(this).data('url');
+       location.replace(url);
+   });
 });
