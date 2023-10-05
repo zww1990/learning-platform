@@ -1,7 +1,9 @@
 package io.online.videosite.controller;
 
+import io.online.videosite.api.CommentService;
 import io.online.videosite.api.VideoService;
 import io.online.videosite.constant.Constants;
+import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import lombok.AllArgsConstructor;
@@ -28,6 +30,7 @@ import java.util.List;
 @Slf4j
 public class VideoController {
     private final VideoService videoService;
+    private final CommentService commentService;
 
     /**
      * 跳转到用户的视频列表页
@@ -60,7 +63,10 @@ public class VideoController {
             mav.setViewName("error/404");
             return mav;
         }
+        List<Comment> comments = this.commentService.queryByVideoId(id);
+        log.info("show(): 视频主键 = {}, 视频评论数量 = {}", id, comments.size());
         mav.addObject("video", video);
+        mav.addObject("comments", comments);
         mav.setViewName("video/show");
         return mav;
     }

@@ -19,7 +19,7 @@
                     <span class="align-middle">主页</span>
                 </a>
             </li>
-            <th:block th:if="${session.CURRENT_USER} != null">
+            <th:block th:if="${session.CURRENT_USER} ne null">
                 <li class="nav-item">
                     <a class="nav-link" href="/video/list">
                         <img class="rounded-circle mr-2" src="/img/av.png" width="30">
@@ -33,7 +33,7 @@
                     </a>
                 </li>
             </th:block>
-            <th:block th:if="${session.CURRENT_USER} == null">
+            <th:block th:if="${session.CURRENT_USER} eq null">
                 <li class="nav-item">
                     <a href="/register" class="nav-link">
                         <i class="fa fa-user-plus"></i>

@@ -23,7 +23,7 @@
 									<li class="nav-item" th:each="cate : ${categories}">
 										<a class="nav-link" th:href="'?categoryId=' + ${cate.id}" th:text="${cate.categoryName}">类别名称</a>
 									</li>
-									<li class="nav-item dropdown" th:if="${categoryMoreList} != null">
+									<li class="nav-item dropdown" th:if="${categoryMoreList} ne null">
 										<a class="nav-link dropdown-toggle"
 										   href="#"
 										   id="dropdown01"
