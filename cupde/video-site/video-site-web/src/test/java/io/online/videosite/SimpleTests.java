@@ -2,12 +2,40 @@ package io.online.videosite;
 
 import io.online.videosite.constant.AuditStatus;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.server.PathContainer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.util.pattern.PathPattern;
+import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.util.List;
 
 public class SimpleTests {
+    @Test
+    public void testHttpStatus() {
+        try {
+            HttpStatusCode code = HttpStatusCode.valueOf(HttpStatus.NOT_FOUND.value());
+            System.err.println(code == HttpStatus.NOT_FOUND);
+            System.err.println(code == HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testPathPatternParser() {
+        try {
+            PathPatternParser parser = PathPatternParser.defaultInstance;
+            PathPattern pattern = parser.parse("/videohub/**");
+            System.err.println(pattern.matches(PathContainer.parsePath("/videohub/audit")));
+            System.err.println(pattern.matches(PathContainer.parsePath("/videohub/audit/132131")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void testPasswordEncoder() {
         try {

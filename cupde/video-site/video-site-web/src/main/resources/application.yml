@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: video-site
+    name: video-site-app
     admin:
       enabled: false
   sql:
@@ -34,3 +34,14 @@ spring:
       - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
       - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
       - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+
+video-site-app:
+  include-path-patterns:
+    - /category/**
+    - /comment/**
+    - /videohub/**
+  exclude-path-patterns:
+    - /videohub/show/**
+  admin-path-patterns:
+    - /category/**
+    - /videohub/audit/**

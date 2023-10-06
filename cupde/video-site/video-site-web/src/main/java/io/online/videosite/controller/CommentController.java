@@ -6,7 +6,6 @@ import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
-import io.online.videosite.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
@@ -37,10 +36,6 @@ public class CommentController {
     @PostMapping(path = "/add")
     public String add(@ModelAttribute Comment comment,
                       @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
-        // 用户不存在
-        if (user == null) {
-            throw new UserNotFoundException("此用户不存在");
-        }
         if (comment.getVideoId() != null && StringUtils.hasText(comment.getContent())) {
             Video video = this.videoService.queryOne(comment.getVideoId(), FetchType.LAZY);
             // 如果视频不存在

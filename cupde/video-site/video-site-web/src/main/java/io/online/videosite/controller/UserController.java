@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -114,13 +113,5 @@ public class UserController {
         this.userService.save(user);
         mav.setViewName(UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/user/success");// 重定向到成功页
         return mav;
-    }
-
-    /**
-     * 跳转到成功页
-     */
-    @GetMapping(path = "/success")
-    public String success() {
-        return "user/success";
     }
 }

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="~{common/header :: header(~{::title},~{::link})}">
+    <title>我的视频网站 - 403</title>
+    <link href="/css/login.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <div class="form-signin">
+      <i class="bi bi-emoji-frown" style="font-size: 20rem;color: #bd081c" aria-hidden="true"></i>
+      <h1 class="h3 mb-3 font-weight-normal">对不起，您权限不足！</h1>
+
+      <p class="mt-5 mb-3 text-muted">
+        <a href="/login" class="btn btn-success" th:if="${session.CURRENT_USER} eq null">
+          <i class="fa fa-sign-in"></i> 请登录
+        </a>
+        <a th:if="${session.CURRENT_USER} ne null">请联系管理员</a>
+      </p>
+
+      <footer th:replace="~{common/footer :: footer}"></footer>
+    </div>
+  </body>
+</html>

@@ -33,9 +33,7 @@
 								</div>
 							</article>
 						</div>
-						<div class="col-4" th:if="${session.CURRENT_USER} ne null
-												and ${session.CURRENT_USER.userType.name} eq 'ADMIN'
-												and ${video.auditStatus.name} eq 'PENDING'">
+						<div class="col-4" th:if="${video.auditStatus.name} eq 'PENDING'">
 							<form method="post" action="/videohub/audit" th:object="${video}">
 								<input type="hidden" th:field="*{id}">
 								<input type="radio" th:field="*{auditStatus}" value="PASSED" required>

@@ -7,7 +7,6 @@ import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
-import io.online.videosite.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
@@ -38,10 +37,6 @@ public class VideoController {
      */
     @GetMapping(path = "/list")
     public ModelAndView list(@SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user) {
-        // 用户不存在
-        if (user == null) {
-            throw new UserNotFoundException("此用户不存在");
-        }
         // 查询此用户所有的视频
         List<Video> videos = this.videoService.queryForUser(user);
         log.info("list(): 视频数量 = {}", videos.size());
@@ -91,10 +86,6 @@ public class VideoController {
      */
     @PostMapping(path = "/audit")
     public String handleAudit(@ModelAttribute Video param, @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
-        // 用户不存在
-        if (user == null) {
-            throw new UserNotFoundException("此用户不存在");
-        }
         Video video = this.videoService.queryOne(param.getId(), FetchType.LAZY);
         // 如果视频不存在
         if (video == null) {
