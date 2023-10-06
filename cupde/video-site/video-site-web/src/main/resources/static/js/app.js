@@ -36,19 +36,39 @@ $( document ).ready(function() {
            $(a).removeClass("active");
        }
    });
-   // 对话框事件绑定
-   $('#exampleModal').on('show.bs.modal', function (event) {
-     var div = $(event.relatedTarget);
-     var name = div.data('name');
-     var logo = div.data('logo');
-     console.log(name, logo);
-     var modal = $(this);
-     modal.find('.modal-title').text(name);
-     modal.find('.modal-body img').prop('src', logo);
-   });
-   $('.videohubshow').on('click', function(event){
-       event.stopPropagation();
-       var url = $(this).data('url');
-       location.replace(url);
-   });
+    // 对话框事件绑定
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var div = $(event.relatedTarget);
+        var name = div.data('name');
+        var logo = div.data('logo');
+        var modal = $(this);
+        modal.find('.modal-title').text(name);
+        modal.find('.modal-body img').prop('src', logo);
+    });
+    // 视频查看
+    $('.videohubshow').on('click', function(event){
+        event.stopPropagation();
+        var url = $(this).data('url');
+        location.replace(url);
+    });
+    // 视频审核
+    $('.videohubaudit').on('click', function(event){
+        event.stopPropagation();
+        var url = $(this).data('url');
+        location.replace(url);
+    });
+    // 视频删除
+    $('.videohubdelete').on('click', function(event){
+        event.stopPropagation();
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+        $('#exampleModal2').find('.modal-title').text(name);
+        $('#exampleModal2').find('.modal-body input').val(id);
+        $('#exampleModal2').modal('toggle');
+    });
+    // 视频删除确定操作
+    $('#exampleModal2 button.btn.btn-primary').on('click', function(event){
+        var id = $('#exampleModal2').find('.modal-body input').val();
+        location.replace('/videohub/delete/' + id);
+    });
 });

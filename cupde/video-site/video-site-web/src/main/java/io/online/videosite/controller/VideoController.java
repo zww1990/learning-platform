@@ -11,8 +11,10 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -102,5 +104,22 @@ public class VideoController {
             this.videoService.audit(video, user);
         }
         return String.format("%s/videohub/audit/%s", UrlBasedViewResolver.REDIRECT_URL_PREFIX, param.getId());
+    }
+
+    /**
+     * 处理删除
+     */
+    @GetMapping(path = "/delete/{id}")
+    public String delete(@PathVariable Integer id, @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
+        Video video = this.videoService.queryOne(id, FetchType.LAZY);
+        // 如果视频不存在
+        if (video == null) {
+            throw new EntityNotFoundException("此视频不存在");
+        }
+        // 如果视频不是自己创建的，不允许删除
+        if (!video.getCreator().equals(user.getUsername())) {
+            throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
+        }
+        return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list";
     }
 }

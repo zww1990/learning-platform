@@ -30,7 +30,7 @@
 									<a th:data-url="'/videohub/show/' + ${video.id}" class="videohubshow" style="cursor: pointer">
 										<i class="fa fa-eye" aria-hidden="true"></i> 查看([[${video.videoHits}]])
 									</a>
-									<a th:href="'/videohub/audit/' + ${video.id}"
+									<a th:data-url="'/videohub/audit/' + ${video.id}" class="videohubaudit" style="cursor: pointer"
 									   th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'
 									   		and ${video.auditStatus.name} eq 'PENDING'">
 										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 审核
@@ -40,7 +40,10 @@
 										   th:if="${video.auditStatus.name} ne 'PASSED'">
 											<i class="fa fa-edit" aria-hidden="true"></i> 编辑
 										</a>
-										<a th:href="'/videohub/delete/' + ${video.id}">
+										<a th:data-id="${video.id}"
+										   th:data-name="${video.videoName}"
+										   style="cursor: pointer"
+										   class="videohubdelete">
 											<i class="fa fa-remove" aria-hidden="true"></i> 删除
 										</a>
 									</th:block>
@@ -68,6 +71,26 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel2">标题</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="关闭">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>是否确定要删除此视频？</p>
+						<input type="hidden">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary">确定</button>
 					</div>
 				</div>
 			</div>
