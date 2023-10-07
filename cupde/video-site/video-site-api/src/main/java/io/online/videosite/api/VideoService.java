@@ -3,6 +3,7 @@ package io.online.videosite.api;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import io.online.videosite.model.VideoModel;
 import jakarta.persistence.FetchType;
 
 import java.util.List;
@@ -65,4 +66,14 @@ public interface VideoService {
      * @since 2023-10-05 17:04:25
      */
     void audit(Video video, User user);
+
+    /**
+     * 添加视频
+     *
+     * @param model {@link VideoModel}
+     * @param user  {@link User}
+     * @author 张维维
+     * @since 2023-10-07 20:32:06
+     */
+    void save(VideoModel model, User user);
 }

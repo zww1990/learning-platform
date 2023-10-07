@@ -30,4 +30,20 @@ public class VideoSiteAppProperties {
      * 需要管理员身份的路径模式
      */
     private String[] adminPathPatterns = {"/category/**", "/videohub/audit/**"};
+    /**
+     * 图片格式模式
+     */
+    private String[] imageMimePatterns = {"image/*"};
+    /**
+     * 视频格式模式
+     */
+    private String[] videoMimePatterns = {"video/*"};
+    /**
+     * 图片上传目录
+     */
+    private String imageUploadFolder = "/upload/images";
+    /**
+     * 视频上传目录
+     */
+    private String videoUploadFolder = "/upload/videos";
 }

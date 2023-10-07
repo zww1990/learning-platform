@@ -7,12 +7,27 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.server.PathContainer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.util.pattern.PathPattern;
 import org.springframework.web.util.pattern.PathPatternParser;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 public class SimpleTests {
+    @Test
+    public void testFileName() {
+        try {
+            String path = "微信头像.jpg";
+            System.err.println(StringUtils.getFilename(path));
+            System.err.println(StringUtils.getFilenameExtension(path));
+            System.err.println(StringUtils.stripFilenameExtension(path));
+            System.err.println(Paths.get("/a/b", path));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void testHttpStatus() {
         try {

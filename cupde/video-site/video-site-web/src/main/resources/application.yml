@@ -34,6 +34,10 @@ spring:
       - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
       - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
       - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
 
 video-site-app:
   include-path-patterns:
@@ -45,3 +49,7 @@ video-site-app:
   admin-path-patterns:
     - /category/**
     - /videohub/audit/**
+  image-mime-patterns: image/*
+  video-mime-patterns: video/*
+  image-upload-folder: /upload/images
+  video-upload-folder: /upload/videos

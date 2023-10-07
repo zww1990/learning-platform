@@ -9,7 +9,7 @@
       <img class="mb-4" src="/img/favicon.png" alt="我的logo" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
       <br>
-      <span th:text="${error}" style="color: red;font-weight: bold"></span>
+      <span th:if="${error} ne null" th:text="${error}" style="color: red;font-weight: bold"></span>
       <br>
       <label for="username" class="sr-only">用户名</label>
       <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="请输入用户名" required>

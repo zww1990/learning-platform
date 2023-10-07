@@ -6,6 +6,7 @@ import io.online.videosite.constant.UserType;
 import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import io.online.videosite.model.VideoModel;
 import io.online.videosite.repository.CategoryRepository;
 import io.online.videosite.repository.UserRepository;
 import io.online.videosite.repository.VideoRepository;
@@ -107,6 +108,23 @@ public class VideoServiceImpl implements VideoService {
         video.setAuditor(user.getUsername());
         video.setAuditedDate(LocalDateTime.now());
         video.setModifiedDate(video.getAuditedDate());
+        video.setModifier(user.getUsername());
+        this.videoRepository.save(video);
+    }
+
+    @Override
+    public void save(VideoModel model, User user) {
+        log.info("save(): model = {}, user = {}", model, user);
+        Video video = new Video();
+        video.setVideoName(model.getVideoName());
+        video.setCategoryId(model.getCategoryId());
+        video.setVideoHits(0);
+        video.setVideoLogo(model.getVideoLogoPath());
+        video.setVideoLink(model.getVideoLinkPath());
+        video.setAuditStatus(AuditStatus.PENDING);
+        video.setCreatedDate(LocalDateTime.now());
+        video.setModifiedDate(video.getCreatedDate());
+        video.setCreator(user.getUsername());
         video.setModifier(user.getUsername());
         this.videoRepository.save(video);
     }

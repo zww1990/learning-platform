@@ -3,24 +3,34 @@ package io.online.videosite.controller;
 import io.online.videosite.api.CategoryService;
 import io.online.videosite.api.CommentService;
 import io.online.videosite.api.VideoService;
+import io.online.videosite.config.VideoSiteAppProperties;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Category;
 import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import io.online.videosite.model.VideoModel;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.PathContainer;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.util.pattern.PathPatternParser;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Stream;
 
 /**
  * 视频控制器
@@ -36,6 +46,8 @@ public class VideoController {
     private final VideoService videoService;
     private final CommentService commentService;
     private final CategoryService categoryService;
+    private final PathPatternParser pathPatternParser;
+    private final VideoSiteAppProperties appProps;
 
     /**
      * 跳转到用户的视频列表页
@@ -90,7 +102,8 @@ public class VideoController {
      * 处理审核
      */
     @PostMapping(path = "/audit")
-    public String handleAudit(@ModelAttribute Video param, @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
+    public String handleAudit(@ModelAttribute Video param,
+                              @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
         Video video = this.videoService.queryOne(param.getId(), FetchType.LAZY);
         // 如果视频不存在
         if (video == null) {
@@ -131,9 +144,91 @@ public class VideoController {
      */
     @GetMapping(path = "/add")
     public ModelAndView add() {
+        return this.create(new VideoModel());
+    }
+
+    /**
+     * 处理添加
+     */
+    @PostMapping(path = "/add")
+    public ModelAndView handleAdd(@ModelAttribute VideoModel model,
+                                  @SessionAttribute(Constants.SESSION_USER_KEY) User user) throws IOException {
+        if (!StringUtils.hasText(model.getVideoName())) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "请输入视频名称！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        if (model.getCategoryId() == null) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "请选择视频类别！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        if (model.getVideoLogo().isEmpty()) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "请上传视频标志！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        if (model.getVideoLink().isEmpty()) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "请上传视频文件！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        // 如果上传视频标志的格式不正确
+        if (!this.isMatch(this.appProps.getImageMimePatterns(), model.getVideoLogo().getContentType())) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "上传视频标志的格式不正确，请重新上传！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        // 如果上传视频文件的格式不正确
+        if (!this.isMatch(this.appProps.getVideoMimePatterns(), model.getVideoLink().getContentType())) {
+            ModelAndView mav = this.create(model)
+                    .addObject("error", "上传视频文件的格式不正确，请重新上传！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        log.info("handleAdd(): VideoLogo = {}, VideoLink = {}",
+                model.getVideoLogo().getOriginalFilename(), model.getVideoLink().getOriginalFilename());
+        Path imagePath = Paths.get(this.appProps.getImageUploadFolder(),
+                this.makeFileName(model.getVideoLogo().getOriginalFilename()));
+        Path videoPath = Paths.get(this.appProps.getVideoUploadFolder(),
+                this.makeFileName(model.getVideoLink().getOriginalFilename()));
+        // 写入文件
+        model.getVideoLogo().transferTo(imagePath);
+        model.getVideoLink().transferTo(videoPath);
+        model.setVideoLogoPath(imagePath.toString());
+        model.setVideoLinkPath(videoPath.toString());
+        this.videoService.save(model, user);
+        return new ModelAndView(UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list");
+    }
+
+    private boolean isMatch(String[] patterns, String contentType) {
+        log.info("isMatch(): patterns = {}, contentType = {}", patterns, contentType);
+        if (!StringUtils.hasText(contentType)) {
+            return false;
+        }
+        return Stream.of(patterns).anyMatch(pattern ->
+                this.pathPatternParser.parse(pattern)
+                        .matches(PathContainer.parsePath(contentType)));
+    }
+
+    private String makeFileName(String originFileName) {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        if (!StringUtils.hasText(originFileName)) {
+            return uuid;
+        }
+        return String.format("%s.%s", uuid, StringUtils.getFilenameExtension(originFileName));
+    }
+
+    private ModelAndView create(VideoModel model) {
         List<Category> categories = this.categoryService.query();
         return new ModelAndView("video/add")
-                .addObject("video", new Video())
+                .addObject("video", model)
                 .addObject("categories", categories);
     }
+
 }
