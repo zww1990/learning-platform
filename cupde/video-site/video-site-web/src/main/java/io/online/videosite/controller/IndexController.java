@@ -2,6 +2,7 @@ package io.online.videosite.controller;
 
 import io.online.videosite.api.CategoryService;
 import io.online.videosite.api.VideoService;
+import io.online.videosite.config.VideoSiteAppProperties;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Category;
@@ -10,13 +11,17 @@ import io.online.videosite.domain.Video;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.PathResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -31,6 +36,7 @@ import java.util.List;
 public class IndexController {
     private final VideoService videoService;
     private final CategoryService categoryService;
+    private final VideoSiteAppProperties appProps;
 
     /**
      * 跳转到主页
@@ -83,5 +89,25 @@ public class IndexController {
         session.invalidate();
         // 重定向到主页
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/";
+    }
+
+    /**
+     * 加载图片资源
+     */
+    @GetMapping(path = "${video-site-app.image-upload-folder}/{filename}")
+    public ResponseEntity<PathResource> loadImage(@PathVariable String filename) {
+        log.info("loadImage(): filename = {}", filename);
+        return ResponseEntity.ok().body(
+                new PathResource(Paths.get(this.appProps.getImageUploadFolder(), filename)));
+    }
+
+    /**
+     * 加载视频资源
+     */
+    @GetMapping(path = "${video-site-app.video-upload-folder}/{filename}")
+    public ResponseEntity<PathResource> loadVideo(@PathVariable String filename) {
+        log.info("loadVideo(): filename = {}", filename);
+        return ResponseEntity.ok().body(
+                new PathResource(Paths.get(this.appProps.getVideoUploadFolder(), filename)));
     }
 }
