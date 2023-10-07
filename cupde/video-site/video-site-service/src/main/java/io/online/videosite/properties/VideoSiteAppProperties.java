@@ -1,4 +1,4 @@
-package io.online.videosite.config;
+package io.online.videosite.properties;
 
 import lombok.Getter;
 import lombok.Setter;

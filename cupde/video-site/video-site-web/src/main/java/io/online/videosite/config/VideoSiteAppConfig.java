@@ -1,5 +1,6 @@
 package io.online.videosite.config;
 
+import io.online.videosite.properties.VideoSiteAppProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
