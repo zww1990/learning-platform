@@ -76,4 +76,13 @@ public interface VideoService {
      * @since 2023-10-07 20:32:06
      */
     void save(VideoModel model, User user);
+
+    /**
+     * 删除视频相关数据
+     *
+     * @param video {@link Video}
+     * @author 张维维
+     * @since 2023-10-07 22:04:26
+     */
+    void delete(Video video);
 }

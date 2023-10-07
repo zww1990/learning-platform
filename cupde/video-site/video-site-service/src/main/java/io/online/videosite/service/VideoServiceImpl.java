@@ -8,6 +8,7 @@ import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.model.VideoModel;
 import io.online.videosite.repository.CategoryRepository;
+import io.online.videosite.repository.CommentRepository;
 import io.online.videosite.repository.UserRepository;
 import io.online.videosite.repository.VideoRepository;
 import jakarta.persistence.FetchType;
@@ -17,7 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,7 @@ public class VideoServiceImpl implements VideoService {
     private final VideoRepository videoRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public List<Video> query(Integer categoryId, AuditStatus... auditStatus) {
@@ -127,5 +132,26 @@ public class VideoServiceImpl implements VideoService {
         video.setCreator(user.getUsername());
         video.setModifier(user.getUsername());
         this.videoRepository.save(video);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void delete(Video video) {
+        log.info("delete(): video = {}", video);
+        // 先删除视频标志、链接文件
+        try {
+            Files.deleteIfExists(Paths.get(video.getVideoLogo()));
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+        }
+        try {
+            Files.deleteIfExists(Paths.get(video.getVideoLink()));
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+        }
+        // 然后在删除视频评论、视频数据
+        this.commentRepository.delete((root, query, builder) ->
+                builder.equal(root.get("videoId"), video.getId()));
+        this.videoRepository.delete(video);
     }
 }

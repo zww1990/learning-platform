@@ -136,6 +136,7 @@ public class VideoController {
         if (!video.getCreator().equals(user.getUsername())) {
             throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
         }
+        this.videoService.delete(video);
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list";
     }
 
