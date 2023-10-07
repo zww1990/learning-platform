@@ -72,3 +72,21 @@ $( document ).ready(function() {
         location.replace('/videohub/delete/' + id);
     });
 });
+// 用于在存在无效字段时禁用表单提交
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // 获取我们要应用自定义Bootstrap验证样式的所有表单
+    var forms = document.getElementsByClassName('needs-validation');
+    // 循环它们并防止提交
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();

@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.util.UrlPathHelper;
 
 /**
  * 自定义Spring MVC配置类
@@ -34,6 +36,13 @@ public class VideoSiteAppConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/user/success").setStatusCode(HttpStatus.OK).setViewName("user/success");
+    }
+
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        UrlPathHelper urlPathHelper = new UrlPathHelper();
+        urlPathHelper.setRemoveSemicolonContent(false);
+        configurer.setUrlPathHelper(urlPathHelper);
     }
 
     /**

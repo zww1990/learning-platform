@@ -1,9 +1,11 @@
 package io.online.videosite.controller;
 
+import io.online.videosite.api.CategoryService;
 import io.online.videosite.api.CommentService;
 import io.online.videosite.api.VideoService;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.Constants;
+import io.online.videosite.domain.Category;
 import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
@@ -33,6 +35,7 @@ import java.util.List;
 public class VideoController {
     private final VideoService videoService;
     private final CommentService commentService;
+    private final CategoryService categoryService;
 
     /**
      * 跳转到用户的视频列表页
@@ -121,5 +124,16 @@ public class VideoController {
             throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
         }
         return UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list";
+    }
+
+    /**
+     * 跳转到添加页面
+     */
+    @GetMapping(path = "/add")
+    public ModelAndView add() {
+        List<Category> categories = this.categoryService.query();
+        return new ModelAndView("video/add")
+                .addObject("video", new Video())
+                .addObject("categories", categories);
     }
 }
