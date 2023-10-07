@@ -3,7 +3,7 @@ package io.online.videosite.controller;
 import io.online.videosite.api.CategoryService;
 import io.online.videosite.api.CommentService;
 import io.online.videosite.api.VideoService;
-import io.online.videosite.properties.VideoSiteAppProperties;
+import io.online.videosite.config.VideoSiteAppProperties;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Category;

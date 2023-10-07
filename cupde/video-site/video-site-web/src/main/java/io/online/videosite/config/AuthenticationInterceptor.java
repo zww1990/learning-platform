@@ -3,7 +3,6 @@ package io.online.videosite.config;
 import io.online.videosite.constant.Constants;
 import io.online.videosite.constant.UserType;
 import io.online.videosite.domain.User;
-import io.online.videosite.properties.VideoSiteAppProperties;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
