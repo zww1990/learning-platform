@@ -27,6 +27,12 @@
                         <span class="align-middle" th:text="${session.CURRENT_USER.nickname}">作者</span>
                     </a>
                 </li>
+                <li class="nav-item" th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'">
+                    <a class="nav-link" href="/category/add">
+                        <i class="fa fa-plus-circle"></i>
+                        <span class="align-middle">添加视频类别</span>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">
                         <i class="fa fa-sign-out"></i>
