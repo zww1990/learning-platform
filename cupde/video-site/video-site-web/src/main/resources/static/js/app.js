@@ -75,7 +75,13 @@ $( document ).ready(function() {
     $('#videoLogo').on('change', function(){
         var file = this.files[0];
         var src = URL.createObjectURL(file);
-        $('#videoLogoPreview').prop('src', src);
+        $('#videoLogoPreview').html(`<img src="${src}" style="margin-top: 0.5rem;width: 50%">`);
+    });
+    // 视频预览
+    $('#videoLink').on('change', function(){
+        var file = this.files[0];
+        var src = URL.createObjectURL(file);
+        $('#videoLinkPreview').html(`<video src="${src}" style="margin-top: 0.5rem;width: 100%" controls></video>`);
     });
 });
 // 用于在存在无效字段时禁用表单提交
