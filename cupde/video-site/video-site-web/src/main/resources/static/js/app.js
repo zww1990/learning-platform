@@ -71,6 +71,12 @@ $( document ).ready(function() {
         var id = $('#exampleModal2').find('.modal-body input').val();
         location.replace('/videohub/delete/' + id);
     });
+    // 图片预览
+    $('#videoLogo').on('change', function(){
+        var file = this.files[0];
+        var src = URL.createObjectURL(file);
+        $('#videoLogoPreview').prop('src', src);
+    });
 });
 // 用于在存在无效字段时禁用表单提交
 (function() {
