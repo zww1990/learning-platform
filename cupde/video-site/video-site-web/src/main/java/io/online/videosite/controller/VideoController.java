@@ -207,6 +207,22 @@ public class VideoController {
         return new ModelAndView(UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list");
     }
 
+    /**
+     * 跳转到编辑页面
+     */
+    @GetMapping(path = "/edit/{id}")
+    public ModelAndView edit(@PathVariable Integer id) {
+        Video video = this.videoService.queryOne(id, FetchType.LAZY);
+        // 如果视频不存在
+        if (video == null) {
+            throw new EntityNotFoundException("此视频不存在");
+        }
+        List<Category> categories = this.categoryService.query();
+        return new ModelAndView("video/edit")
+                .addObject("video", video)
+                .addObject("categories", categories);
+    }
+
     private boolean isMatch(String[] patterns, String contentType) {
         log.info("isMatch(): patterns = {}, contentType = {}", patterns, contentType);
         if (!StringUtils.hasText(contentType)) {

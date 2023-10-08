@@ -45,14 +45,8 @@ $( document ).ready(function() {
         modal.find('.modal-title').text(name);
         modal.find('.modal-body img').prop('src', logo);
     });
-    // 视频查看
-    $('.videohubshow').on('click', function(event){
-        event.stopPropagation();
-        var url = $(this).data('url');
-        location.replace(url);
-    });
-    // 视频审核
-    $('.videohubaudit').on('click', function(event){
+    // 视频查看、审核、编辑
+    $('.videoclick').on('click', function(event){
         event.stopPropagation();
         var url = $(this).data('url');
         location.replace(url);

@@ -29,16 +29,16 @@
 								 th:data-logo="${video.videoLogo}">
 								<h2 class="card-title title" th:text="${video.videoName}">视频名称</h2>
 								<div class="more">
-									<a th:data-url="'/videohub/show/' + ${video.id}" class="videohubshow" style="cursor: pointer">
+									<a th:data-url="'/videohub/show/' + ${video.id}" class="videoclick" style="cursor: pointer">
 										<i class="fa fa-eye" aria-hidden="true"></i> 查看([[${video.videoHits}]])
 									</a>
-									<a th:data-url="'/videohub/audit/' + ${video.id}" class="videohubaudit" style="cursor: pointer"
+									<a th:data-url="'/videohub/audit/' + ${video.id}" class="videoclick" style="cursor: pointer"
 									   th:if="${session.CURRENT_USER.userType.name} eq 'ADMIN'
 									   		and ${video.auditStatus.name} eq 'PENDING'">
 										<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> 审核
 									</a>
 									<th:block th:if="${session.CURRENT_USER.username} eq ${video.creator}">
-										<a th:href="'/videohub/edit/' + ${video.id}"
+										<a th:data-url="'/videohub/edit/' + ${video.id}" class="videoclick" style="cursor: pointer"
 										   th:if="${video.auditStatus.name} ne 'PASSED'">
 											<i class="fa fa-edit" aria-hidden="true"></i> 编辑
 										</a>
