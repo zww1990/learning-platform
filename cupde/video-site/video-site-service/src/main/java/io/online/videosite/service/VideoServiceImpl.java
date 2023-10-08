@@ -7,6 +7,7 @@ import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.model.VideoModel;
+import io.online.videosite.properties.VideoSiteAppProperties;
 import io.online.videosite.repository.CategoryRepository;
 import io.online.videosite.repository.CommentRepository;
 import io.online.videosite.repository.UserRepository;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * 视频服务接口实现类
@@ -41,6 +43,7 @@ public class VideoServiceImpl implements VideoService {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final VideoSiteAppProperties appProps;
 
     @Override
     public List<Video> query(Integer categoryId, AuditStatus... auditStatus) {
@@ -56,7 +59,11 @@ public class VideoServiceImpl implements VideoService {
                 list.add(builder.equal(root.get("categoryId"), categoryId));
             }
             return query.where(list.toArray(Predicate[]::new)).getRestriction();
-        }, Sort.by(Direction.DESC, "videoHits"));
+        }, Sort.by(Direction.DESC, "videoHits")).stream().peek(p -> {
+            // 组装视频标志、文件在服务器的存储路径
+            p.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), p.getVideoLogo()));
+            p.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), p.getVideoLink()));
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -68,7 +75,11 @@ public class VideoServiceImpl implements VideoService {
                 return query.getRestriction();
             }
             return builder.equal(root.get("creator"), user.getUsername());
-        }, Sort.by(Direction.DESC, "id"));
+        }, Sort.by(Direction.DESC, "id")).stream().peek(p -> {
+            // 组装视频标志、文件在服务器的存储路径
+            p.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), p.getVideoLogo()));
+            p.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), p.getVideoLink()));
+        }).collect(Collectors.toList());
     }
 
     @Override
@@ -83,10 +94,18 @@ public class VideoServiceImpl implements VideoService {
                 Optional.ofNullable(m.getAuditor()).ifPresent(c ->
                         m.setAuditorNick(this.userRepository.findByUsername(c)
                                 .map(User::getNickname).orElseGet(String::new)));
+                // 组装视频标志、文件在服务器的存储路径
+                m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
+                m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
                 return m;
             }).orElse(null);
         }
-        return this.videoRepository.findById(id).orElse(null);
+        return this.videoRepository.findById(id).map(m -> {
+            // 组装视频标志、文件在服务器的存储路径
+            m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
+            m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
+            return m;
+        }).orElse(null);
     }
 
     @Override
@@ -103,6 +122,9 @@ public class VideoServiceImpl implements VideoService {
             Optional.ofNullable(m.getAuditor()).ifPresent(c ->
                     m.setAuditorNick(this.userRepository.findByUsername(c)
                             .map(User::getNickname).orElseGet(String::new)));
+            // 组装视频标志、文件在服务器的存储路径
+            m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
+            m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
             return m;
         }).orElse(null);
     }
@@ -114,6 +136,12 @@ public class VideoServiceImpl implements VideoService {
         video.setAuditedDate(LocalDateTime.now());
         video.setModifiedDate(video.getAuditedDate());
         video.setModifier(user.getUsername());
+        video.setVideoLogo(video.getVideoLogo()
+                .replace(this.appProps.getImageUploadFolder(), "")
+                .replace("/", ""));
+        video.setVideoLink(video.getVideoLink()
+                .replace(this.appProps.getVideoUploadFolder(), "")
+                .replace("/", ""));
         this.videoRepository.save(video);
     }
 

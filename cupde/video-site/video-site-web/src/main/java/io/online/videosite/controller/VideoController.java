@@ -3,7 +3,6 @@ package io.online.videosite.controller;
 import io.online.videosite.api.CategoryService;
 import io.online.videosite.api.CommentService;
 import io.online.videosite.api.VideoService;
-import io.online.videosite.config.VideoSiteAppProperties;
 import io.online.videosite.constant.AuditStatus;
 import io.online.videosite.constant.Constants;
 import io.online.videosite.domain.Category;
@@ -11,6 +10,7 @@ import io.online.videosite.domain.Comment;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.model.VideoModel;
+import io.online.videosite.properties.VideoSiteAppProperties;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
@@ -26,7 +26,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
@@ -194,15 +193,11 @@ public class VideoController {
         }
         log.info("handleAdd(): VideoLogo = {}, VideoLink = {}",
                 model.getVideoLogo().getOriginalFilename(), model.getVideoLink().getOriginalFilename());
-        Path imagePath = Paths.get(this.appProps.getImageUploadFolder(),
-                this.makeFileName(model.getVideoLogo().getOriginalFilename()));
-        Path videoPath = Paths.get(this.appProps.getVideoUploadFolder(),
-                this.makeFileName(model.getVideoLink().getOriginalFilename()));
+        model.setVideoLogoPath(this.makeFileName(model.getVideoLogo().getOriginalFilename()));
+        model.setVideoLinkPath(this.makeFileName(model.getVideoLink().getOriginalFilename()));
         // 写入文件
-        model.getVideoLogo().transferTo(imagePath);
-        model.getVideoLink().transferTo(videoPath);
-        model.setVideoLogoPath(imagePath.toString());
-        model.setVideoLinkPath(videoPath.toString());
+        model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
+        model.getVideoLink().transferTo(Paths.get(this.appProps.getVideoUploadFolder(), model.getVideoLinkPath()));
         this.videoService.save(model, user);
         return new ModelAndView(UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list");
     }
