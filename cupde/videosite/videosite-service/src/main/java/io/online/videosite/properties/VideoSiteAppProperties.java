@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @since 2023-10-06 09:36:39
  */
 @Configuration
-@ConfigurationProperties(ignoreInvalidFields = true, prefix = "video-site-app")
+@ConfigurationProperties(ignoreInvalidFields = true, prefix = "videosite-app")
 @Getter
 @Setter
 @ToString

@@ -6,19 +6,19 @@
 	
 	<parent>
 		<groupId>io.online</groupId>
-		<artifactId>video-site</artifactId>
+		<artifactId>videosite</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>video-site-web</artifactId>
-	<name>video-site-web</name>
+	<artifactId>videosite-web</artifactId>
+	<name>videosite-web</name>
 	<description>web 模块，对应 MVC 的 V 概念，存放视图层的逻辑</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>io.online</groupId>
-			<artifactId>video-site-service</artifactId>
+			<artifactId>videosite-service</artifactId>
 		</dependency>
 
 		<dependency>

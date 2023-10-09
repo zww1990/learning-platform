@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: video-site-app
+    name: videosite-app
     admin:
       enabled: false
   sql:
@@ -39,7 +39,7 @@ spring:
       max-request-size: 100MB
       max-file-size: 100MB
 
-video-site-app:
+videosite-app:
   include-path-patterns:
     - /category/**
     - /comment/**

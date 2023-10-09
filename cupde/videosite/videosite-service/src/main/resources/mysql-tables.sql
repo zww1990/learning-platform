@@ -1,5 +1,5 @@
 -- 视频网站数据库
-create database if not exists video_site;
+create database if not exists videosite;
 
 create table if not exists t_user
 (

@@ -6,13 +6,13 @@
 	
 	<parent>
 		<groupId>io.online</groupId>
-		<artifactId>video-site</artifactId>
+		<artifactId>videosite</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>video-site-api</artifactId>
-	<name>video-site-api</name>
+	<artifactId>videosite-api</artifactId>
+	<name>videosite-api</name>
 	<description>服务API的定义在这个项目中</description>
 
 	<dependencies>

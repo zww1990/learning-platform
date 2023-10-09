@@ -11,32 +11,32 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>video-site</artifactId>
-	<name>video-site</name>
+	<artifactId>videosite</artifactId>
+	<name>videosite</name>
 	<packaging>pom</packaging>
 	<description>一个基于 Spring Boot 开发的在线视频网站</description>
 
 	<modules>
-        <module>video-site-api</module>
-        <module>video-site-service</module>
-        <module>video-site-web</module>
+        <module>videosite-api</module>
+        <module>videosite-service</module>
+        <module>videosite-web</module>
     </modules>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.online</groupId>
-				<artifactId>video-site-api</artifactId>
+				<artifactId>videosite-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.online</groupId>
-				<artifactId>video-site-service</artifactId>
+				<artifactId>videosite-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.online</groupId>
-				<artifactId>video-site-web</artifactId>
+				<artifactId>videosite-web</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
