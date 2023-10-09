@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -181,5 +182,43 @@ public class VideoServiceImpl implements VideoService {
         this.commentRepository.delete((root, query, builder) ->
                 builder.equal(root.get("videoId"), video.getId()));
         this.videoRepository.delete(video);
+    }
+
+    @Override
+    public void update(VideoModel model, User user, Video video) {
+        log.info("update(): model = {}, user = {}, video = {}", model, user, video);
+        if (StringUtils.hasText(model.getVideoLogoPath())) {
+            try {
+                // 删除之前的视频标志
+                Files.deleteIfExists(Paths.get(video.getVideoLogo()));
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage());
+            }
+            video.setVideoLogo(model.getVideoLogoPath());
+        } else {
+            video.setVideoLogo(video.getVideoLogo()
+                    .replace(this.appProps.getImageUploadFolder(), "")
+                    .replace("/", ""));
+        }
+        if (StringUtils.hasText(model.getVideoLinkPath())) {
+            try {
+                // 删除之前的视频文件
+                Files.deleteIfExists(Paths.get(video.getVideoLink()));
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage(), e);
+            }
+            video.setVideoLink(model.getVideoLinkPath());
+        } else {
+            video.setVideoLink(video.getVideoLink()
+                    .replace(this.appProps.getVideoUploadFolder(), "")
+                    .replace("/", ""));
+        }
+        video.setVideoName(model.getVideoName());
+        video.setCategoryId(model.getCategoryId());
+        video.setVideoHits(0);
+        video.setAuditStatus(AuditStatus.PENDING);
+        video.setModifiedDate(LocalDateTime.now());
+        video.setModifier(user.getUsername());
+        this.videoRepository.save(video);
     }
 }

@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 public class VideoModel {
     /**
+     * 主键
+     */
+    private Integer id;
+    /**
      * 视频名称
      */
     private String videoName;

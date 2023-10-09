@@ -212,10 +212,65 @@ public class VideoController {
         if (video == null) {
             throw new EntityNotFoundException("此视频不存在");
         }
-        List<Category> categories = this.categoryService.query();
-        return new ModelAndView("video/edit")
-                .addObject("video", video)
-                .addObject("categories", categories);
+        return this.create(video);
+    }
+
+    /**
+     * 处理编辑
+     */
+    @PostMapping(path = "/edit")
+    public ModelAndView handleEdit(@SessionAttribute(Constants.SESSION_USER_KEY) User user,
+                                   @ModelAttribute VideoModel model) throws IOException {
+        if (model.getId() == null) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        }
+        Video video = this.videoService.queryOne(model.getId(), FetchType.LAZY);
+        // 如果视频不存在
+        if (video == null) {
+            throw new EntityNotFoundException("此视频不存在");
+        }
+        if (!StringUtils.hasText(model.getVideoName())) {
+            ModelAndView mav = this.create(video)
+                    .addObject("error", "请输入视频名称！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        if (model.getCategoryId() == null) {
+            ModelAndView mav = this.create(video)
+                    .addObject("error", "请选择视频类别！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        // 如果重新上传了视频标志
+        if (!model.getVideoLogo().isEmpty()) {
+            // 如果上传视频标志的格式不正确
+            if (!this.isMatch(this.appProps.getImageMimePatterns(), model.getVideoLogo().getContentType())) {
+                ModelAndView mav = this.create(video)
+                        .addObject("error", "上传视频标志的格式不正确，请重新上传！");
+                mav.setStatus(HttpStatus.BAD_REQUEST);
+                return mav;
+            }
+            log.info("handleEdit(): VideoLogo = {}", model.getVideoLogo().getOriginalFilename());
+            model.setVideoLogoPath(this.makeFileName(model.getVideoLogo().getOriginalFilename()));
+            // 写入文件
+            model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
+        }
+        // 如果重新上传了视频文件
+        if (!model.getVideoLink().isEmpty()) {
+            // 如果上传视频文件的格式不正确
+            if (!this.isMatch(this.appProps.getVideoMimePatterns(), model.getVideoLink().getContentType())) {
+                ModelAndView mav = this.create(video)
+                        .addObject("error", "上传视频文件的格式不正确，请重新上传！");
+                mav.setStatus(HttpStatus.BAD_REQUEST);
+                return mav;
+            }
+            log.info("handleEdit(): VideoLink = {}", model.getVideoLink().getOriginalFilename());
+            model.setVideoLinkPath(this.makeFileName(model.getVideoLink().getOriginalFilename()));
+            // 写入文件
+            model.getVideoLink().transferTo(Paths.get(this.appProps.getVideoUploadFolder(), model.getVideoLinkPath()));
+        }
+        this.videoService.update(model, user, video);
+        return new ModelAndView(UrlBasedViewResolver.REDIRECT_URL_PREFIX + "/videohub/list");
     }
 
     private boolean isMatch(String[] patterns, String contentType) {
@@ -240,6 +295,13 @@ public class VideoController {
         List<Category> categories = this.categoryService.query();
         return new ModelAndView("video/add")
                 .addObject("video", model)
+                .addObject("categories", categories);
+    }
+
+    private ModelAndView create(Video video) {
+        List<Category> categories = this.categoryService.query();
+        return new ModelAndView("video/edit")
+                .addObject("video", video)
                 .addObject("categories", categories);
     }
 
