@@ -54,3 +54,6 @@ create table if not exists t_comment
     modifier      varchar(64)  not null comment '修改人',
     foreign key video_id_fk (video_id) references t_video (id)
 ) comment '视频评论表';
+
+insert into t_user (username, nickname, password, user_type, created_date, creator, modified_date, modifier)
+values ('admin', '管理员', '{bcrypt}$2a$10$GG/O6kejMQvT/nVQAzCduuUqukadG/nSLZOUIyuNLRm./FwvqEiQC', 'ADMIN', now(), 'admin', now(), 'admin');
