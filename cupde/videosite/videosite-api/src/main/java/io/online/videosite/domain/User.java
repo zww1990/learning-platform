@@ -29,10 +29,12 @@ public class User extends BaseEntity {
     /**
      * 密码
      */
+    @ToString.Exclude
     private String password;
     /**
      * 确认密码
      */
+    @ToString.Exclude
     @Transient
     private String password2;
     /**
