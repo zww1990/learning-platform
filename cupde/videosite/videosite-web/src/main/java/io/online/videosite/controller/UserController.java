@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import java.util.regex.Pattern;
+
 /**
  * 用户控制器
  *
@@ -29,6 +31,8 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 public class UserController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    // 匹配非大小写字母、数字、下划线
+    private final Pattern pattern = Pattern.compile("\\W");
 
     /**
      * 处理用户登录
@@ -79,6 +83,11 @@ public class UserController {
         ModelAndView mav = new ModelAndView("user/register");
         if (!StringUtils.hasText(user.getUsername())) {
             mav.addObject("error", "请输入用户名！");
+            mav.setStatus(HttpStatus.BAD_REQUEST);
+            return mav;
+        }
+        if (this.pattern.matcher(user.getUsername()).find()) {
+            mav.addObject("error", "只允许输入：大写或小写字母、数字、下划线！");
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }

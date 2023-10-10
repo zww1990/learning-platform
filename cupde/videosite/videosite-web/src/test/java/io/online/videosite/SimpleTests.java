@@ -13,8 +13,21 @@ import org.springframework.web.util.pattern.PathPatternParser;
 
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SimpleTests {
+    @Test
+    public void testRegex() {
+        try {
+            String regex = "\\W";
+            String text = "zww_1";
+            Pattern p = Pattern.compile(regex);
+            System.err.println(p.matcher(text).find());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void testFileName() {
         try {
