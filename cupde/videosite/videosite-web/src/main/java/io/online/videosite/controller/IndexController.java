@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.PathResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -105,9 +107,12 @@ public class IndexController {
      * 加载视频资源
      */
     @GetMapping(path = "${video-site-app.video-upload-folder}/{filename}")
-    public ResponseEntity<PathResource> loadVideo(@PathVariable String filename) {
+    public ResponseEntity<byte[]> loadVideo(@PathVariable String filename) throws IOException {
         log.info("loadVideo(): filename = {}", filename);
-        return ResponseEntity.ok().body(
-                new PathResource(Paths.get(this.appProps.getVideoUploadFolder(), filename)));
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(
+                new PathResource(Paths.get(this.appProps.getVideoUploadFolder(), filename))
+                        .getContentAsByteArray());
     }
 }
