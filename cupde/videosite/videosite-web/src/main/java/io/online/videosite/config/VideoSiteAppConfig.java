@@ -55,7 +55,6 @@ public class VideoSiteAppConfig implements WebMvcConfigurer, CommandLineRunner {
                 .allowCredentials(true)
                 .allowedHeaders(CorsConfiguration.ALL)
                 .allowedMethods(CorsConfiguration.ALL)
-                .allowedOrigins(CorsConfiguration.ALL)
                 .allowedOriginPatterns(CorsConfiguration.ALL)
                 .exposedHeaders(CorsConfiguration.ALL);
     }
