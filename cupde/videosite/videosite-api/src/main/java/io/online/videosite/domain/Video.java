@@ -29,7 +29,7 @@ public class Video extends BaseEntity {
      */
     private String videoLink;
     /**
-     * 视频标志
+     * 视频封面
      */
     private String videoLogo;
     /**

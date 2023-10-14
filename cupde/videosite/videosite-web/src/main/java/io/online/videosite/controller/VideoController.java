@@ -167,7 +167,7 @@ public class VideoController {
         }
         if (model.getVideoLogo().isEmpty()) {
             ModelAndView mav = this.create(model)
-                    .addObject("error", "请上传视频标志！");
+                    .addObject("error", "请上传视频封面！");
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
@@ -177,10 +177,10 @@ public class VideoController {
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
-        // 如果上传视频标志的格式不正确
+        // 如果上传视频封面的格式不正确
         if (!this.isMatch(this.appProps.getImageMimePatterns(), model.getVideoLogo().getContentType())) {
             ModelAndView mav = this.create(model)
-                    .addObject("error", "上传视频标志的格式不正确，请重新上传！");
+                    .addObject("error", "上传视频封面的格式不正确，请重新上传！");
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
@@ -241,12 +241,12 @@ public class VideoController {
             mav.setStatus(HttpStatus.BAD_REQUEST);
             return mav;
         }
-        // 如果重新上传了视频标志
+        // 如果重新上传了视频封面
         if (!model.getVideoLogo().isEmpty()) {
-            // 如果上传视频标志的格式不正确
+            // 如果上传视频封面的格式不正确
             if (!this.isMatch(this.appProps.getImageMimePatterns(), model.getVideoLogo().getContentType())) {
                 ModelAndView mav = this.create(video)
-                        .addObject("error", "上传视频标志的格式不正确，请重新上传！");
+                        .addObject("error", "上传视频封面的格式不正确，请重新上传！");
                 mav.setStatus(HttpStatus.BAD_REQUEST);
                 return mav;
             }

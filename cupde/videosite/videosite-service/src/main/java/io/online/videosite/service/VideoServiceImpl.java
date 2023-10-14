@@ -61,7 +61,7 @@ public class VideoServiceImpl implements VideoService {
             }
             return query.where(list.toArray(Predicate[]::new)).getRestriction();
         }, Sort.by(Direction.DESC, "videoHits")).stream().peek(p -> {
-            // 组装视频标志、文件在服务器的存储路径
+            // 组装视频封面、文件在服务器的存储路径
             p.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), p.getVideoLogo()));
             p.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), p.getVideoLink()));
         }).collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class VideoServiceImpl implements VideoService {
             }
             return builder.equal(root.get("creator"), user.getUsername());
         }, Sort.by(Direction.DESC, "id")).stream().peek(p -> {
-            // 组装视频标志、文件在服务器的存储路径
+            // 组装视频封面、文件在服务器的存储路径
             p.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), p.getVideoLogo()));
             p.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), p.getVideoLink()));
         }).collect(Collectors.toList());
@@ -95,14 +95,14 @@ public class VideoServiceImpl implements VideoService {
                 Optional.ofNullable(m.getAuditor()).ifPresent(c ->
                         m.setAuditorNick(this.userRepository.findByUsername(c)
                                 .map(User::getNickname).orElseGet(String::new)));
-                // 组装视频标志、文件在服务器的存储路径
+                // 组装视频封面、文件在服务器的存储路径
                 m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
                 m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
                 return m;
             }).orElse(null);
         }
         return this.videoRepository.findById(id).map(m -> {
-            // 组装视频标志、文件在服务器的存储路径
+            // 组装视频封面、文件在服务器的存储路径
             m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
             m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
             return m;
@@ -123,7 +123,7 @@ public class VideoServiceImpl implements VideoService {
             Optional.ofNullable(m.getAuditor()).ifPresent(c ->
                     m.setAuditorNick(this.userRepository.findByUsername(c)
                             .map(User::getNickname).orElseGet(String::new)));
-            // 组装视频标志、文件在服务器的存储路径
+            // 组装视频封面、文件在服务器的存储路径
             m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
             m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
             return m;
@@ -167,7 +167,7 @@ public class VideoServiceImpl implements VideoService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Video video) {
         log.info("delete(): video = {}", video);
-        // 先删除视频标志、链接文件
+        // 先删除视频封面、链接文件
         try {
             Files.deleteIfExists(Paths.get(video.getVideoLogo()));
         } catch (Exception e) {
@@ -189,7 +189,7 @@ public class VideoServiceImpl implements VideoService {
         log.info("update(): model = {}, user = {}, video = {}", model, user, video);
         if (StringUtils.hasText(model.getVideoLogoPath())) {
             try {
-                // 删除之前的视频标志
+                // 删除之前的视频封面
                 Files.deleteIfExists(Paths.get(video.getVideoLogo()));
             } catch (Exception e) {
                 log.error(e.getLocalizedMessage());

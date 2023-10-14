@@ -29,7 +29,7 @@ create table if not exists t_video
     id            int(11) auto_increment primary key comment '主键',
     video_name    varchar(128) not null comment '视频名称',
     video_link    varchar(256) not null comment '视频链接',
-    video_logo    varchar(256) not null comment '视频标志',
+    video_logo    varchar(256) not null comment '视频封面',
     video_hits    int          not null comment '视频点击率',
     category_id   int          not null comment '视频类别主键',
     created_date  datetime     not null comment '创建时间',

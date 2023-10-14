@@ -32,7 +32,7 @@ public class VideoModel {
      */
     private MultipartFile videoLink;
     /**
-     * 视频标志
+     * 视频封面
      */
     private MultipartFile videoLogo;
     /**
@@ -40,7 +40,7 @@ public class VideoModel {
      */
     private String videoLinkPath;
     /**
-     * 视频标志路径
+     * 视频封面路径
      */
     private String videoLogoPath;
 }
