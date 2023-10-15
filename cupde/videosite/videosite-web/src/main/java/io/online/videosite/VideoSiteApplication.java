@@ -21,7 +21,7 @@ public class VideoSiteApplication {
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(VideoSiteApplication.class);
-        application.setBannerMode(Banner.Mode.OFF);
+//        closePrintBanner(application);
         ConfigurableApplicationContext context = application.run(args);
         log.info("Spring Bean Definition Count = {}", context.getBeanDefinitionCount());
 //        printBeans(context);
@@ -31,4 +31,7 @@ public class VideoSiteApplication {
         Stream.of(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
+    static void closePrintBanner(SpringApplication application) {
+        application.setBannerMode(Banner.Mode.OFF);
+    }
 }
