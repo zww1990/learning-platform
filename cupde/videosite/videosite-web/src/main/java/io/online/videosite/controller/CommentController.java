@@ -11,10 +11,7 @@ import jakarta.persistence.FetchType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 /**
@@ -35,7 +32,8 @@ public class CommentController {
      */
     @PostMapping(path = "/add")
     public String add(@ModelAttribute Comment comment,
-                      @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
+                      @SessionAttribute(Constants.SESSION_USER_KEY) User user,
+                      @RequestParam String redirect) {
         if (comment.getVideoId() != null && StringUtils.hasText(comment.getContent())) {
             Video video = this.videoService.queryOne(comment.getVideoId(), FetchType.LAZY);
             // 如果视频不存在
@@ -44,7 +42,7 @@ public class CommentController {
             }
             this.commentService.save(comment, user);
         }
-        return String.format("%s/videohub/show/%s",
-                UrlBasedViewResolver.REDIRECT_URL_PREFIX, comment.getVideoId());
+        return String.format("%s/videohub/show/%s?redirect=%s",
+                UrlBasedViewResolver.REDIRECT_URL_PREFIX, comment.getVideoId(), redirect);
     }
 }
