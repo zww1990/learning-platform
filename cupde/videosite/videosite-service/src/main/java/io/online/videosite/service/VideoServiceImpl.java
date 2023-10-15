@@ -155,11 +155,18 @@ public class VideoServiceImpl implements VideoService {
         video.setVideoHits(0);
         video.setVideoLogo(model.getVideoLogoPath());
         video.setVideoLink(model.getVideoLinkPath());
-        video.setAuditStatus(AuditStatus.PENDING);
         video.setCreatedDate(LocalDateTime.now());
         video.setModifiedDate(video.getCreatedDate());
         video.setCreator(user.getUsername());
         video.setModifier(user.getUsername());
+        if (user.getUserType() == UserType.ADMIN) {
+            // 如果是管理员用户添加视频，直接审核通过
+            video.setAuditStatus(AuditStatus.PASSED);
+            video.setAuditedDate(video.getCreatedDate());
+            video.setAuditor(user.getUsername());
+        } else {
+            video.setAuditStatus(AuditStatus.PENDING);
+        }
         this.videoRepository.save(video);
     }
 
