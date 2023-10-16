@@ -1,4 +1,5 @@
 import MyComponent from './my-component.js'
+
 const { createApp } = Vue
 const { createVuetify } = Vuetify
 

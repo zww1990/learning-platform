@@ -1,4 +1,4 @@
-const {  ref } = Vue
+const { ref } = Vue
 export default {
   setup() {
     const count = ref(0)
