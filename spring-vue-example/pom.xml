@@ -24,6 +24,7 @@
 		<ant-design-vue.version>4.0.3</ant-design-vue.version>
 		<dayjs.version>1.11.9</dayjs.version>
 		<vuetify.version>3.3.8</vuetify.version>
+		<mdi__font.version>7.2.96</mdi__font.version>
 	</properties>
 
 	<dependencyManagement>
@@ -163,6 +164,12 @@
 				<groupId>org.webjars.npm</groupId>
 				<artifactId>vuetify</artifactId>
 				<version>${vuetify.version}</version>
+			</dependency>
+			<!-- mdi__font -->
+			<dependency>
+				<groupId>org.webjars.npm</groupId>
+				<artifactId>mdi__font</artifactId>
+				<version>${mdi__font.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
