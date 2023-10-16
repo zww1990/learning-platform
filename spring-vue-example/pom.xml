@@ -23,6 +23,7 @@
 		<vue.version>3.3.4</vue.version>
 		<ant-design-vue.version>4.0.3</ant-design-vue.version>
 		<dayjs.version>1.11.9</dayjs.version>
+		<vuetify.version>3.3.8</vuetify.version>
 	</properties>
 
 	<dependencyManagement>
@@ -156,6 +157,12 @@
 				<groupId>org.webjars.npm</groupId>
 				<artifactId>dayjs</artifactId>
 				<version>${dayjs.version}</version>
+			</dependency>
+			<!-- vuetify -->
+			<dependency>
+				<groupId>org.webjars.npm</groupId>
+				<artifactId>vuetify</artifactId>
+				<version>${vuetify.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
