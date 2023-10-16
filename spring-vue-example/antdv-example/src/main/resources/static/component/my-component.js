@@ -1,8 +1,7 @@
 const { ref } = Vue
 export default {
   setup() {
-    const count = ref(0)
-    return { count }
+    return {  }
   },
-  template: `<div>count is {{ count }}<a-button>Add</a-button></div>`
+  template: `<a-button>这是一个按钮</a-button>`
 }
