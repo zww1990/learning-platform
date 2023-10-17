@@ -22,9 +22,9 @@
 		<java.version>17</java.version>
 		<vue.version>3.3.4</vue.version>
 		<ant-design-vue.version>4.0.3</ant-design-vue.version>
-		<dayjs.version>1.11.9</dayjs.version>
-		<vuetify.version>3.3.8</vuetify.version>
-		<mdi__font.version>7.2.96</mdi__font.version>
+		<dayjs.version>1.11.10</dayjs.version>
+		<vuetify.version>3.3.21</vuetify.version>
+		<mdi__font.version>7.3.67</mdi__font.version>
 	</properties>
 
 	<dependencyManagement>
@@ -180,7 +180,7 @@
 		<module>tdesign-example</module>
 		<module>vuetify-example</module>
 	</modules>
-
+<!-- 
 	<repositories>
 		<repository>
 			<id>aliyunmaven</id>
@@ -207,7 +207,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
+ -->
 	<build>
 		<pluginManagement>
 			<plugins>
