@@ -10,8 +10,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>vuetify-example</artifactId>
-	<name>vuetify-example</name>
+	<artifactId>tdesign-example</artifactId>
+	<name>tdesign-example</name>
 	<description>Demo project for Spring Boot</description>
 	
 	<dependencies>
@@ -27,16 +27,6 @@
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>vue</artifactId>
-		</dependency>
-		<!-- vuetify -->
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>vuetify</artifactId>
-		</dependency>
-		<!-- mdi__font -->
-		<dependency>
-			<groupId>org.webjars.npm</groupId>
-			<artifactId>mdi__font</artifactId>
 		</dependency>
 
 		<dependency>
