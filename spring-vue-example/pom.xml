@@ -176,6 +176,7 @@
 
 	<modules>
 		<module>antdv-example</module>
+		<module>naiveui-example</module>
 		<module>tdesign-example</module>
 		<module>vuetify-example</module>
 	</modules>
