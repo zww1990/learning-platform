@@ -25,6 +25,7 @@
 		<dayjs.version>1.11.10</dayjs.version>
 		<vuetify.version>3.3.21</vuetify.version>
 		<mdi__font.version>7.3.67</mdi__font.version>
+		<element-plus.version>2.1.10</element-plus.version>
 	</properties>
 
 	<dependencyManagement>
@@ -171,11 +172,80 @@
 				<artifactId>mdi__font</artifactId>
 				<version>${mdi__font.version}</version>
 			</dependency>
+			<!-- element-plus -->
+			<dependency>
+				<groupId>org.webjars.npm</groupId>
+				<artifactId>element-plus</artifactId>
+				<version>${element-plus.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>async-validator</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>memoize-one</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>dayjs</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>lodash-unified</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>escape-html</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>vueuse__core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>types__lodash-es</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>lodash</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>element-plus__icons-vue</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>normalize-wheel-es</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>popperjs__core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>ctrl__tinycolor</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>lodash-es</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>types__lodash</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.webjars.npm</groupId>
+						<artifactId>floating-ui__dom</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<modules>
 		<module>antdv-example</module>
+		<module>elementplus-example</module>
 		<module>naiveui-example</module>
 		<module>tdesign-example</module>
 		<module>vuetify-example</module>
