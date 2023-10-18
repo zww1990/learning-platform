@@ -21,7 +21,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<vue.version>3.3.4</vue.version>
-		<ant-design-vue.version>4.0.3</ant-design-vue.version>
+		<ant-design-vue.version>4.0.4</ant-design-vue.version>
 		<dayjs.version>1.11.10</dayjs.version>
 		<vuetify.version>3.3.21</vuetify.version>
 		<mdi__font.version>7.3.67</mdi__font.version>
