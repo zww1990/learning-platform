@@ -253,6 +253,7 @@
 	<modules>
 		<module>antdv-example</module>
 		<module>elementplus-example</module>
+		<module>iviewui-example</module>
 		<module>naiveui-example</module>
 		<module>tdesign-example</module>
 		<module>tinyvue-example</module>
