@@ -29,9 +29,14 @@
 			<artifactId>vue</artifactId>
 		</dependency>
 		<!-- element-plus -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>element-plus</artifactId>
+		</dependency>-->
+		<!-- element-plus__icons-vue -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>element-plus__icons-vue</artifactId>
 		</dependency>
 
 		<dependency>

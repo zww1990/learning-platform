@@ -26,6 +26,7 @@
 		<vuetify.version>3.3.22</vuetify.version>
 		<mdi__font.version>7.3.67</mdi__font.version>
 		<element-plus.version>2.1.10</element-plus.version>
+		<element-plus__icons-vue.version>2.1.0</element-plus__icons-vue.version>
 	</properties>
 
 	<dependencyManagement>
@@ -239,6 +240,12 @@
 						<artifactId>floating-ui__dom</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+			<!-- element-plus__icons-vue -->
+			<dependency>
+				<groupId>org.webjars.npm</groupId>
+				<artifactId>element-plus__icons-vue</artifactId>
+				<version>${element-plus__icons-vue.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
