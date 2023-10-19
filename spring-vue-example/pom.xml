@@ -255,6 +255,7 @@
 		<module>elementplus-example</module>
 		<module>naiveui-example</module>
 		<module>tdesign-example</module>
+		<module>tinyvue-example</module>
 		<module>vuetify-example</module>
 	</modules>
 <!-- 
