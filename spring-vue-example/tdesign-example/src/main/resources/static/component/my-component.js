@@ -22,7 +22,10 @@ export default {
         </t-head-menu>
       </t-header>
       <t-content>
-        <div>Content</div>
+        <div>
+            <t-date-picker enableTimePicker />
+            <t-icon name="image-error" style="height: 2em;width: 2em;" />
+        </div>
       </t-content>
       <t-footer> Copyright @ 2019-{{ new Date().getFullYear() }} Tencent. All Rights Reserved </t-footer>
     </t-layout>
