@@ -16,6 +16,9 @@
 		<module>cas-example/cas-client-01</module>
 		<module>cas-example/cas-client-02</module>
 		<module>cas-example/cas-server-webapp</module>
+		<module>cupde/videosite/videosite-api</module>
+		<module>cupde/videosite/videosite-service</module>
+		<module>cupde/videosite/videosite-web</module>
 		<module>design-pattern-example</module>
 		<module>dubbo-example/dubbo-consumer</module>
 		<module>dubbo-example/dubbo-provider</module>
@@ -81,11 +84,21 @@
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider-api</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server-02</module>
+		<module>spring-example/c3p0-spring-boot-starter</module>
+		<module>spring-example/c3p0-starter-example</module>
 		<module>spring-example/druid-example</module>
 		<module>spring-example/mapstruct-example</module>
 		<module>spring-example/poi-example</module>
 		<module>spring-example/reactive-example</module>
 		<module>spring-example/retry-example</module>
+		<module>spring-example/statemachine-example</module>
+		<module>spring-vue-example/antdv-example</module>
+		<module>spring-vue-example/elementplus-example</module>
+		<module>spring-vue-example/iviewui-example</module>
+		<module>spring-vue-example/naiveui-example</module>
+		<module>spring-vue-example/tdesign-example</module>
+		<module>spring-vue-example/tinyvue-example</module>
+		<module>spring-vue-example/vuetify-example</module>
 		<module>swagger-example/swagger-example</module>
 		<module>swagger-example/swagger-knife4j</module>
 		<module>swagger-example/swagger-openapi</module>
