@@ -174,7 +174,11 @@ public class VideoServiceImpl implements VideoService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Video video) {
         log.info("delete(): video = {}", video);
-        // 先删除视频封面、链接文件
+        // 先删除视频评论、视频数据
+        this.commentRepository.delete((root, query, builder) ->
+                builder.equal(root.get("videoId"), video.getId()));
+        this.videoRepository.delete(video);
+        // 然后再删除视频封面、链接文件，避免删除失败，误删。
         try {
             Files.deleteIfExists(Paths.get(video.getVideoLogo()));
         } catch (Exception e) {
@@ -185,35 +189,23 @@ public class VideoServiceImpl implements VideoService {
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
         }
-        // 然后在删除视频评论、视频数据
-        this.commentRepository.delete((root, query, builder) ->
-                builder.equal(root.get("videoId"), video.getId()));
-        this.videoRepository.delete(video);
     }
 
     @Override
     public void update(VideoModel model, User user, Video video) {
         log.info("update(): model = {}, user = {}, video = {}", model, user, video);
+        String logoPath = null;
         if (StringUtils.hasText(model.getVideoLogoPath())) {
-            try {
-                // 删除之前的视频封面
-                Files.deleteIfExists(Paths.get(video.getVideoLogo()));
-            } catch (Exception e) {
-                log.error(e.getLocalizedMessage());
-            }
+            logoPath = video.getVideoLogo();
             video.setVideoLogo(model.getVideoLogoPath());
         } else {
             video.setVideoLogo(video.getVideoLogo()
                     .replace(this.appProps.getImageUploadFolder(), "")
                     .replace("/", ""));
         }
+        String linkPath = null;
         if (StringUtils.hasText(model.getVideoLinkPath())) {
-            try {
-                // 删除之前的视频文件
-                Files.deleteIfExists(Paths.get(video.getVideoLink()));
-            } catch (Exception e) {
-                log.error(e.getLocalizedMessage(), e);
-            }
+            linkPath = video.getVideoLink();
             video.setVideoLink(model.getVideoLinkPath());
         } else {
             video.setVideoLink(video.getVideoLink()
@@ -233,6 +225,24 @@ public class VideoServiceImpl implements VideoService {
         } else {
             video.setAuditStatus(AuditStatus.PENDING);
         }
+        // 先保存数据
         this.videoRepository.save(video);
+        // 然后再删除之前的视频封面、文件，避免保存失败，误删。
+        if (logoPath != null) {
+            try {
+                // 删除之前的视频封面
+                Files.deleteIfExists(Paths.get(logoPath));
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage());
+            }
+        }
+        if (linkPath != null) {
+            try {
+                // 删除之前的视频文件
+                Files.deleteIfExists(Paths.get(linkPath));
+            } catch (Exception e) {
+                log.error(e.getLocalizedMessage(), e);
+            }
+        }
     }
 }

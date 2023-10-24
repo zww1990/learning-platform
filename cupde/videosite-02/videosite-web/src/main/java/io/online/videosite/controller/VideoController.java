@@ -181,10 +181,11 @@ public class VideoController {
                 model.getVideoLogo().getOriginalFilename(), model.getVideoLink().getOriginalFilename());
         model.setVideoLogoPath(this.makeFileName(model.getVideoLogo().getOriginalFilename()));
         model.setVideoLinkPath(this.makeFileName(model.getVideoLink().getOriginalFilename()));
-        // 写入文件
+        // 先保存数据
+        this.videoService.save(model, user);
+        // 然后再写入文件，避免保存失败，上传临时文件。
         model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
         model.getVideoLink().transferTo(Paths.get(this.appProps.getVideoUploadFolder(), model.getVideoLinkPath()));
-        this.videoService.save(model, user);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("添加成功！");
@@ -210,7 +211,9 @@ public class VideoController {
     public ResponseEntity<?> handleEdit(@SessionAttribute(Constants.SESSION_USER_KEY) User user,
                                         @ModelAttribute VideoModel model) throws IOException {
         if (model.getId() == null) {
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("视频id不能为空！");
         }
         Video video = this.videoService.queryOne(model.getId(), FetchType.LAZY);
         // 如果视频不存在
@@ -237,8 +240,6 @@ public class VideoController {
             }
             log.info("handleEdit(): VideoLogo = {}", model.getVideoLogo().getOriginalFilename());
             model.setVideoLogoPath(this.makeFileName(model.getVideoLogo().getOriginalFilename()));
-            // 写入文件
-            model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
         }
         // 如果重新上传了视频文件
         if (!model.getVideoLink().isEmpty()) {
@@ -250,10 +251,18 @@ public class VideoController {
             }
             log.info("handleEdit(): VideoLink = {}", model.getVideoLink().getOriginalFilename());
             model.setVideoLinkPath(this.makeFileName(model.getVideoLink().getOriginalFilename()));
+        }
+        // 先保存数据
+        this.videoService.update(model, user, video);
+        // 然后再写入视频封面、文件，避免保存失败，上传临时文件。
+        if (!model.getVideoLogo().isEmpty()) {
+            // 写入文件
+            model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
+        }
+        if (!model.getVideoLink().isEmpty()) {
             // 写入文件
             model.getVideoLink().transferTo(Paths.get(this.appProps.getVideoUploadFolder(), model.getVideoLinkPath()));
         }
-        this.videoService.update(model, user, video);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("编辑成功！");
