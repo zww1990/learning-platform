@@ -44,6 +44,9 @@ public class CategoryController {
                 .body("添加成功！");
     }
 
+    /**
+     * 类别列表
+     */
     @GetMapping(path = "/list")
     public ResponseEntity<?> list() {
         return ResponseEntity.ok(this.categoryService.query());
