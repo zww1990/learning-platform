@@ -91,9 +91,14 @@ public class VideoController {
     /**
      * 处理审核
      */
-    @PostMapping(path = "/audit")
+    @PutMapping(path = "/audit")
     public ResponseEntity<?> handleAudit(@RequestBody Video param,
                                          @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
+        if (param.getId() == null) {
+            return ResponseEntity.badRequest()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("视频id不能为空！");
+        }
         Video video = this.videoService.queryOne(param.getId(), FetchType.LAZY);
         // 如果视频不存在
         if (video == null) {
@@ -117,7 +122,7 @@ public class VideoController {
     /**
      * 处理删除
      */
-    @GetMapping(path = "/delete/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id, @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
         Video video = this.videoService.queryOne(id, FetchType.LAZY);
         // 如果视频不存在
@@ -201,7 +206,7 @@ public class VideoController {
     /**
      * 处理编辑
      */
-    @PostMapping(path = "/edit")
+    @PutMapping(path = "/edit")
     public ResponseEntity<?> handleEdit(@SessionAttribute(Constants.SESSION_USER_KEY) User user,
                                         @ModelAttribute VideoModel model) throws IOException {
         if (model.getId() == null) {
