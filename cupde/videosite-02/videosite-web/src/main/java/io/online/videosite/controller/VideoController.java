@@ -155,12 +155,12 @@ public class VideoController {
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("请选择视频类别！");
         }
-        if (model.getVideoLogo().isEmpty()) {
+        if (model.getVideoLogo() == null || model.getVideoLogo().isEmpty()) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("请上传视频封面！");
         }
-        if (model.getVideoLink().isEmpty()) {
+        if (model.getVideoLink() == null || model.getVideoLink().isEmpty()) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body("请上传视频文件！");
