@@ -4,10 +4,9 @@ dayjs.locale('zh-cn')
 
 const routes = []
 const router = VueRouter.createRouter({
-    history: VueRouter.createWebHashHistory(),
+    history: VueRouter.createWebHistory('/'),
     routes
 })
-console.log(router)
 
 Vue.createApp(Layout)
    .use(antd)

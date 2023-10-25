@@ -6,6 +6,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
+import org.springframework.boot.web.server.ErrorPageRegistry;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,6 +41,12 @@ public class VideoSiteApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(ex.getLocalizedMessage())
         ));
+    }
+
+    @Test
+    public void testErrorPage() throws Exception {
+        System.err.println(this.applicationContext.getBeansOfType(ErrorPageRegistrar.class));
+        System.err.println(this.applicationContext.getBean(ErrorPageRegistry.class));
     }
 
 }

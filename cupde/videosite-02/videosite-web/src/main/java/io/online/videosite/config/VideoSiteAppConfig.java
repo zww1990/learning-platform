@@ -4,8 +4,12 @@ import io.online.videosite.properties.VideoSiteAppProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.ErrorPageRegistrar;
+import org.springframework.boot.web.server.ErrorPageRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -28,7 +32,7 @@ import java.nio.file.Paths;
 @Configuration
 @AllArgsConstructor
 @Slf4j
-public class VideoSiteAppConfig implements WebMvcConfigurer, CommandLineRunner {
+public class VideoSiteAppConfig implements WebMvcConfigurer, CommandLineRunner, ErrorPageRegistrar {
     private final VideoSiteAppProperties appProps;
 
     @Override
@@ -84,5 +88,10 @@ public class VideoSiteAppConfig implements WebMvcConfigurer, CommandLineRunner {
             // 创建上传视频目录
             Files.createDirectories(video);
         }
+    }
+
+    @Override
+    public void registerErrorPages(ErrorPageRegistry registry) {
+        registry.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/index.html"));
     }
 }
