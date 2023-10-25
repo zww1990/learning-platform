@@ -1,0 +1,13 @@
+export default {
+  data() {
+    return {
+      message: 'hello'
+    }
+  },
+  methods: {
+  },
+  mounted() {
+    console.log(this.message)
+  },
+  template: `{{message}}, home页面`
+}
