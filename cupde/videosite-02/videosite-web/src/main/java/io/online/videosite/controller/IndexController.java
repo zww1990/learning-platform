@@ -38,8 +38,8 @@ public class IndexController {
     /**
      * 跳转到主页
      */
-    @GetMapping(path = {"", "/"})
-    public ResponseEntity<?> index(
+    @GetMapping(path = "/home")
+    public ResponseEntity<?> home(
             // 从会话中获取当前登录用户
             @SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user,
             @RequestParam(required = false) Integer categoryId) {
