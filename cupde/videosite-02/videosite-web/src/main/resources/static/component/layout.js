@@ -1,16 +1,20 @@
-const { ref } = Vue
-const locale = antd.locales.zh_CN
-
 export default {
-  setup() {
-    const selectedKeys = ref(['home']);
-    const currentUser = JSON.parse(localStorage.getItem('CURRENT_USER'));
-
-    function handleClick(url) {
-        console.log(url);
+  data() {
+    return {
+      selectedKeys: ['home'],
+      locale: antd.locales.zh_CN,
+      currentUser: {}
     }
-
-    return { selectedKeys, locale, handleClick, currentUser }
+  },
+  methods: {
+    handleClick(url) {
+        this.currentUser = { nickname: '周杰伦', userType: 'ADMIN' }
+        localStorage.setItem('CURRENT_USER', JSON.stringify(this.currentUser))
+        console.log(url, this.currentUser)
+    }
+  },
+  mounted() {
+    this.currentUser = JSON.parse(localStorage.getItem('CURRENT_USER'))
   },
   template: `
     <a-config-provider :locale="locale">
