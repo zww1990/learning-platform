@@ -20,6 +20,7 @@
 		<ant-design-vue.version>4.0.6</ant-design-vue.version>
 		<dayjs.version>1.11.10</dayjs.version>
 		<webjars-locator-core.version>0.54</webjars-locator-core.version>
+		<font-awesome.version>4.7.0</font-awesome.version>
 	</properties>
 
 	<dependencies>
@@ -182,6 +183,12 @@
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>dayjs</artifactId>
 			<version>${dayjs.version}</version>
+		</dependency>
+		<!-- font-awesome -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>${font-awesome.version}</version>
 		</dependency>
 	</dependencies>
 
