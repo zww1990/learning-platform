@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      message: 'hello'
+      message: 'hello, 注册页面'
     }
   },
   methods: {
@@ -9,5 +9,5 @@ export default {
   mounted() {
     console.log(this.message)
   },
-  template: `{{message}}, 注册页面`
+  template: `{{message}}`
 }
