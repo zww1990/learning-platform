@@ -23,7 +23,7 @@
 	<modules>
 		<module>videosite</module>
 	</modules>
-
+<!-- 
 	<repositories>
 		<repository>
 			<id>aliyunmaven</id>
@@ -50,7 +50,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
+ -->
 	<build>
 		<pluginManagement>
 			<plugins>

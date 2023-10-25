@@ -17,6 +17,7 @@
 
 	<properties>
 		<vue.version>3.3.6</vue.version>
+		<vue-router.version>4.1.6</vue-router.version>
 		<ant-design-vue.version>4.0.6</ant-design-vue.version>
 		<dayjs.version>1.11.10</dayjs.version>
 		<webjars-locator-core.version>0.54</webjars-locator-core.version>
@@ -79,6 +80,18 @@
 				<exclusion>
 					<groupId>org.webjars.npm</groupId>
 					<artifactId>vue__compiler-sfc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- vue-router -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>vue-router</artifactId>
+			<version>${vue-router.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars.npm</groupId>
+					<artifactId>vue__devtools-api</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>

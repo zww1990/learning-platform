@@ -1,9 +1,15 @@
 import Layout from './layout.js'
 
-const { createApp } = Vue
-
 dayjs.locale('zh-cn')
 
-createApp(Layout)
-.use(antd)
-.mount('#app')
+const routes = []
+const router = VueRouter.createRouter({
+    history: VueRouter.createWebHashHistory(),
+    routes
+})
+console.log(router)
+
+Vue.createApp(Layout)
+   .use(antd)
+   .use(router)
+   .mount('#app')
