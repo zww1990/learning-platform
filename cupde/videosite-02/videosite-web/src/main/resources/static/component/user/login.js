@@ -1,4 +1,4 @@
-import { loginApi } from '/component/api.js'
+import { loginApi } from '../api.js'
 
 const { ref, reactive } = Vue
 const { message } = antd
