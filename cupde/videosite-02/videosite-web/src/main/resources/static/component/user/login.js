@@ -1,13 +1,10 @@
+const { ref } = Vue
+
 export default {
-  data() {
-    return {
-      message: 'hello, 登录页面'
-    }
-  },
-  methods: {
-  },
-  mounted() {
-    console.log(this.message)
+  setup() {
+    const message = ref( 'hello, 登录页面' )
+    console.log(message.value)
+    return { message }
   },
   template: `{{message}}`
 }

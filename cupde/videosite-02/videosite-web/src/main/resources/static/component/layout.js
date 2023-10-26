@@ -11,7 +11,6 @@ export default {
     function handleClick({ item, key, keyPath }) {
 //      currentUser.value = { nickname: '周杰伦', userType: 'ADMIN' }
 //      localStorage.setItem('CURRENT_USER', JSON.stringify(currentUser.value))
-      console.log( currentUser.value, key, keyPath )
       router.push(key)
     }
 
