@@ -9,8 +9,6 @@ export default {
     const route = VueRouter.useRoute()
 
     const handleClick = ({ item, key, keyPath }) => {
-//      currentUser.value = { nickname: '周杰伦', userType: 'ADMIN' }
-//      localStorage.setItem('CURRENT_USER', JSON.stringify(currentUser.value))
       router.push(key)
     }
 

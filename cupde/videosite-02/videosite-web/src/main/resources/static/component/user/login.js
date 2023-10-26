@@ -1,10 +1,22 @@
+import { loginApi } from '/component/api.js'
+
 const { ref, reactive } = Vue
+const { message } = antd
 
 export default {
   setup() {
+    const router = VueRouter.useRouter()
     const formState = reactive({ username: '', password: '' })
-    const onFinish = values => {
+    const onFinish = async values => {
       console.log('Success:', values)
+      const res = await loginApi(values)
+      if(res.ok){
+        const currentUser = await res.json()
+        localStorage.setItem('CURRENT_USER', JSON.stringify(currentUser))
+        router.push('/')
+      }else{
+        message.error(await res.text())
+      }
     }
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo)
