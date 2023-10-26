@@ -1,5 +1,3 @@
 import MyComponent from './my-component.js'
 
-const app = Vue.createApp(MyComponent)
-app.use(naive)
-app.mount('#app')
+Vue.createApp(MyComponent).use(naive).mount('#app')

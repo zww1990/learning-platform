@@ -1,7 +1,6 @@
 import MyComponent from './my-component.js'
 
-const { createApp } = Vue
-const app = createApp(MyComponent)
+const app = Vue.createApp(MyComponent)
 
 app.use(ElementPlus, { locale: ElementPlusLocaleZhCn })
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

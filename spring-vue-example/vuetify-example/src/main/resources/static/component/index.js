@@ -1,9 +1,6 @@
 import MyComponent from './my-component.js'
 
-const { createApp } = Vue
-const { createVuetify } = Vuetify
-
-const vuetify = createVuetify({
+const vuetify = Vuetify.createVuetify({
     locale: {
         locale: 'zhHans'
     },
@@ -12,5 +9,4 @@ const vuetify = createVuetify({
     }
 })
 
-const app = createApp(MyComponent)
-app.use(vuetify).mount('#app')
+Vue.createApp(MyComponent).use(vuetify).mount('#app')
