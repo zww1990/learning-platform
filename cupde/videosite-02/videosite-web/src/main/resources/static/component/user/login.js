@@ -1,10 +1,50 @@
-const { ref } = Vue
+const { ref, reactive } = Vue
 
 export default {
   setup() {
-    const message = ref( 'hello, 登录页面' )
-    console.log(message.value)
-    return { message }
+    const formState = reactive({ username: '', password: '' })
+    const onFinish = values => {
+      console.log('Success:', values)
+    }
+    const onFinishFailed = errorInfo => {
+      console.log('Failed:', errorInfo)
+    }
+    return { onFinish, onFinishFailed, formState }
   },
-  template: `{{message}}`
+  template: `
+    <a-form
+      :model="formState"
+      name="basic"
+      :label-col="{ span: 10 }"
+      :wrapper-col="{ span: 4 }"
+      autocomplete="off"
+      @finish="onFinish"
+      @finishFailed="onFinishFailed"
+    >
+      <a-form-item></a-form-item>
+      <a-form-item></a-form-item>
+      <a-form-item></a-form-item>
+      <a-form-item
+        has-feedback
+        label="用户名"
+        name="username"
+        :rules="[{ required: true, message: '请输入您的用户名!' }]"
+      >
+        <a-input v-model:value="formState.username" />
+      </a-form-item>
+
+      <a-form-item
+        has-feedback
+        label="密码"
+        name="password"
+        :rules="[{ required: true, message: '请输入您的密码!' }]"
+      >
+        <a-input-password v-model:value="formState.password" />
+      </a-form-item>
+
+      <a-form-item :wrapper-col="{ offset: 10, span: 4 }">
+        <a-button type="primary" html-type="submit">登录</a-button>
+      </a-form-item>
+    </a-form>
+  `
 }
