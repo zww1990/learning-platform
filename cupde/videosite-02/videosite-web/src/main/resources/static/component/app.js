@@ -8,6 +8,7 @@ const router = VueRouter.createRouter({
     { path: '/', component: () => import('./home.js') },
     { path: '/login', component: () => import('./user/login.js') },
     { path: '/register', component: () => import('./user/register.js') },
+    { path: '/:pathMatch(.*)*', redirect: '/' }
   ]
 })
 

@@ -1,22 +1,21 @@
+const { ref } = Vue
+const locale = antd.locales.zh_CN
+
 export default {
-  data() {
-    return {
-      selectedKeys: [],
-      locale: antd.locales.zh_CN,
-      currentUser: {}
+  setup() {
+    const selectedKeys = ref( [location.pathname] )
+    let currentUser = ref( JSON.parse(localStorage.getItem('CURRENT_USER')) )
+    const router = VueRouter.useRouter()
+    const route = VueRouter.useRoute()
+
+    function handleClick({ item, key, keyPath }) {
+//      currentUser.value = { nickname: '周杰伦', userType: 'ADMIN' }
+//      localStorage.setItem('CURRENT_USER', JSON.stringify(currentUser.value))
+      console.log( currentUser.value, key, keyPath )
+      router.push(key)
     }
-  },
-  methods: {
-    handleClick({ item, key, keyPath }) {
-//      this.currentUser = { nickname: '周杰伦', userType: 'ADMIN' }
-//      localStorage.setItem('CURRENT_USER', JSON.stringify(this.currentUser))
-      console.log( key, keyPath )
-      this.$router.push(key)
-    }
-  },
-  mounted() {
-    this.currentUser = JSON.parse(localStorage.getItem('CURRENT_USER'))
-    this.selectedKeys = [location.pathname]
+
+    return { selectedKeys, locale, currentUser, handleClick }
   },
   template: `
     <a-config-provider :locale="locale">
