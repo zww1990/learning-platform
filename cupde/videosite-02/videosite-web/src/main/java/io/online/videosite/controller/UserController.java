@@ -83,7 +83,7 @@ public class UserController {
         if (this.pattern.matcher(user.getUsername()).find()) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body("只允许输入：大写或小写字母、数字、下划线！");
+                    .body("用户名只允许输入：大写或小写字母、数字、下划线！");
         }
         if (!StringUtils.hasText(user.getNickname())) {
             return ResponseEntity.badRequest()

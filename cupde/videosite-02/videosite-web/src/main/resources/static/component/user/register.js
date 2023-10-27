@@ -1,15 +1,26 @@
+import { registerApi } from '../api.js'
+
 const { ref, reactive } = Vue
+const { message } = antd
 
 export default {
   setup() {
+    const router = VueRouter.useRouter()
     const formState = reactive({
       username: '',
       nickname: '',
       password: '',
       password2: ''
     })
-    const onFinish = values => {
+    const onFinish = async values => {
       console.log('Success:', values)
+      const res = await registerApi(values)
+      if(res.ok){
+        console.log(await res.text())
+        router.push('/success')
+      }else{
+        message.error(await res.text())
+      }
     }
     const onFinishFailed = errorInfo => {
       console.log('Failed:', errorInfo)
@@ -23,7 +34,16 @@ export default {
         return Promise.resolve();
       }
     }
-    return { onFinish, onFinishFailed, formState, validatePass2 }
+    const validateName = async (_rule, value) => {
+      if (value === '') {
+        return Promise.reject('请输入您的用户名!');
+      } else if (/\W/.test(value)) {
+        return Promise.reject("只允许输入：大写或小写字母、数字、下划线!");
+      } else {
+        return Promise.resolve();
+      }
+    }
+    return { onFinish, onFinishFailed, formState, validatePass2, validateName }
   },
   template: `
     <a-form
@@ -41,7 +61,7 @@ export default {
         has-feedback
         label="用户名"
         name="username"
-        :rules="[{ required: true, message: '请输入您的用户名!' }]"
+        :rules="[{ required: true, validator: validateName, trigger: 'change' }]"
       >
         <a-input v-model:value="formState.username" />
       </a-form-item>
@@ -68,7 +88,7 @@ export default {
         has-feedback
         label="确认密码"
         name="password2"
-        :rules="[{ validator: validatePass2, trigger: 'change' }]"
+        :rules="[{ required: true, validator: validatePass2, trigger: 'change' }]"
       >
         <a-input-password v-model:value="formState.password2" />
       </a-form-item>
