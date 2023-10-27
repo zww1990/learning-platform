@@ -18,4 +18,14 @@ const registerApi = params => fetch('/user/register', {
 
 const logoutApi = () => fetch('/user/logout')
 
-export { loginApi, logoutApi, registerApi, categoryAddApi }
+function homeApi() {
+  let url = '/home'
+  if(arguments.length > 0){
+    const params = new URLSearchParams()
+    params.append('categoryId', arguments[0])
+    url = `${url}?${params.toString()}`
+  }
+  return fetch(url)
+}
+
+export { loginApi, logoutApi, registerApi, categoryAddApi, homeApi }
