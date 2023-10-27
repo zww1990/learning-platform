@@ -1,10 +1,11 @@
+import { store } from './store.js'
+
 const { ref } = Vue
 const locale = antd.locales.zh_CN
 
 export default {
   setup() {
     const selectedKeys = ref( [location.pathname] )
-    let currentUser = ref( JSON.parse(localStorage.getItem('CURRENT_USER')) )
     const router = VueRouter.useRouter()
     const route = VueRouter.useRoute()
 
@@ -12,7 +13,7 @@ export default {
       router.push(key)
     }
 
-    return { selectedKeys, locale, currentUser, handleClick }
+    return { selectedKeys, locale, handleClick, store }
   },
   template: `
     <a-config-provider :locale="locale">
@@ -25,7 +26,7 @@ export default {
            <a-menu-item key="/">
             <i class="fa fa-home"></i>主页
            </a-menu-item>
-           <template v-if="!currentUser">
+           <template v-if="!store.user">
              <a-menu-item key="/register">
               <i class="fa fa-user-plus"></i>注册
              </a-menu-item>
@@ -35,9 +36,9 @@ export default {
            </template>
            <template v-else>
              <a-menu-item key="/videohub/list">
-              <a-avatar src="/img/av.png" />{{ currentUser.nickname }}
+              <a-avatar src="/img/av.png" />{{ store.user.nickname }}
              </a-menu-item>
-             <a-menu-item key="/category/add" v-if="currentUser.userType === 'ADMIN'">
+             <a-menu-item key="/category/add" v-if="store.user.userType === 'ADMIN'">
               <i class="fa fa-plus-circle"></i>添加视频类别
              </a-menu-item>
              <a-menu-item key="/logout">

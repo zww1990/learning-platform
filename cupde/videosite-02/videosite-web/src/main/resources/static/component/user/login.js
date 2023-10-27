@@ -1,4 +1,5 @@
 import { loginApi } from '../api.js'
+import { store } from '../store.js'
 
 const { ref, reactive } = Vue
 const { message } = antd
@@ -12,7 +13,7 @@ export default {
       const res = await loginApi(values)
       if(res.ok){
         const currentUser = await res.json()
-        localStorage.setItem('CURRENT_USER', JSON.stringify(currentUser))
+        store.setUser(currentUser)
         router.push('/')
       }else{
         message.error(await res.text())
