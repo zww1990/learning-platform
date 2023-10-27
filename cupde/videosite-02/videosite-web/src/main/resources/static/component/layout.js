@@ -10,7 +10,11 @@ export default {
     const route = VueRouter.useRoute()
 
     const handleClick = ({ item, key, keyPath }) => {
-      router.push(key)
+      if(key === '/logout'){
+        store.clearUser()
+      }else{
+        router.push(key)
+      }
     }
 
     return { selectedKeys, locale, handleClick, store }

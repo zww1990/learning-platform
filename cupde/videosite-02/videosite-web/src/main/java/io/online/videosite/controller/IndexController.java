@@ -8,11 +8,9 @@ import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
 import io.online.videosite.properties.VideoSiteAppProperties;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.PathResource;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,17 +57,6 @@ public class IndexController {
             mav.put("categories", categories);
         }
         return ResponseEntity.ok(mav);
-    }
-
-    /**
-     * 注销登录
-     */
-    @GetMapping(path = "/logout")
-    public ResponseEntity<?> logout(HttpSession session) {
-        session.invalidate();
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("注销成功！");
     }
 
     /**

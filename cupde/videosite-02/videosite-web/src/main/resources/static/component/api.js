@@ -4,4 +4,6 @@ const loginApi = params => fetch('/user/login', {
   headers: { 'Content-Type': 'application/json' }
 })
 
-export { loginApi }
+const logoutApi = () => fetch('/user/logout')
+
+export { loginApi, logoutApi }
