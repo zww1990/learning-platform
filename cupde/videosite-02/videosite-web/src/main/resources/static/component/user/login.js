@@ -1,5 +1,5 @@
-import { loginApi } from '../api.js'
-import { store } from '../store.js'
+import { loginApi } from '../utils/api.js'
+import { store } from '../utils/store.js'
 
 const { ref, reactive } = Vue
 const { message } = antd

@@ -1,4 +1,4 @@
-import { store } from './store.js'
+import { store } from './utils/store.js'
 
 const { ref } = Vue
 const locale = antd.locales.zh_CN
