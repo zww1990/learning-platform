@@ -13,18 +13,14 @@ export default {
       password2: ''
     })
     const onFinish = async values => {
-      console.log('Success:', values)
       const res = await registerApi(values)
       if(res.ok){
-        console.log(await res.text())
         router.push('/success')
       }else{
         message.error(await res.text())
       }
     }
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo)
-    }
+    const onFinishFailed = errorInfo => {}
     const validatePass2 = async (_rule, value) => {
       if (value === '') {
         return Promise.reject('请再次确认您的密码!');

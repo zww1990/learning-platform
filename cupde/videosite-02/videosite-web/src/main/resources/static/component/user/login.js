@@ -9,7 +9,6 @@ export default {
     const router = VueRouter.useRouter()
     const formState = reactive({ username: '', password: '' })
     const onFinish = async values => {
-      console.log('Success:', values)
       const res = await loginApi(values)
       if(res.ok){
         const currentUser = await res.json()
@@ -19,9 +18,7 @@ export default {
         message.error(await res.text())
       }
     }
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo)
-    }
+    const onFinishFailed = errorInfo => {}
     return { onFinish, onFinishFailed, formState }
   },
   template: `

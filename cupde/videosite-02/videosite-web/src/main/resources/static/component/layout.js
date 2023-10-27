@@ -1,6 +1,6 @@
 import { store } from './utils/store.js'
 
-const { ref } = Vue
+const { ref, watch } = Vue
 const locale = antd.locales.zh_CN
 
 export default {
@@ -9,9 +9,18 @@ export default {
     const router = VueRouter.useRouter()
     const route = VueRouter.useRoute()
 
+    watch(
+      () => router.currentRoute.value.path,
+      (newValue, oldValue) => {
+        selectedKeys.value = [newValue]
+      },
+      { immediate: true }
+    )
+
     const handleClick = ({ item, key, keyPath }) => {
       if(key === '/logout'){
         store.clearUser()
+        router.push('/')
       }else{
         router.push(key)
       }

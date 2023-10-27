@@ -8,18 +8,14 @@ export default {
     const router = VueRouter.useRouter()
     const formState = reactive({ categoryName: '' })
     const onFinish = async values => {
-      console.log('Success:', values)
       const res = await categoryAddApi(values)
       if(res.ok){
-        console.log(await res.text())
         router.push('/cate/success')
       }else{
         message.error(await res.text())
       }
     }
-    const onFinishFailed = errorInfo => {
-      console.log('Failed:', errorInfo)
-    }
+    const onFinishFailed = errorInfo => {}
     return { onFinish, onFinishFailed, formState }
   },
   template: `
