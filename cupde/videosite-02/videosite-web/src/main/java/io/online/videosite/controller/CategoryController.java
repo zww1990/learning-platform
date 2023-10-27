@@ -36,7 +36,7 @@ public class CategoryController {
         if (this.categoryService.checkExist(category)) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body("此视频类别名称已存在！");
+                    .body(String.format("此 %s 已存在！", category.getCategoryName()));
         }
         this.categoryService.save(category, user);
         return ResponseEntity.ok()

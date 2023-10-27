@@ -39,10 +39,10 @@ export default {
              </a-menu-item>
            </template>
            <template v-else>
-             <a-menu-item key="/videohub/list">
+             <a-menu-item key="/video/list">
               <a-avatar src="/img/av.png" />{{ store.user.nickname }}
              </a-menu-item>
-             <a-menu-item key="/category/add" v-if="store.user.userType === 'ADMIN'">
+             <a-menu-item key="/cate/add" v-if="store.user.userType === 'ADMIN'">
               <i class="fa fa-plus-circle"></i>添加视频类别
              </a-menu-item>
              <a-menu-item key="/logout">
