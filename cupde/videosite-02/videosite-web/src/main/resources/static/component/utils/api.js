@@ -18,14 +18,28 @@ const registerApi = params => fetch('/user/register', {
 
 const logoutApi = () => fetch('/user/logout')
 
-function homeApi() {
+async function homeApi() {
   let url = '/home'
   if(arguments.length > 0){
     const params = new URLSearchParams()
     params.append('categoryId', arguments[0])
     url = `${url}?${params.toString()}`
   }
-  return fetch(url)
+  return await(await fetch(url)).json()
 }
 
-export { loginApi, logoutApi, registerApi, categoryAddApi, homeApi }
+const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {
+  method: 'DELETE'
+})
+
+const videoShowApi = id => fetch(`/videohub/show/${id}`)
+
+export {
+  loginApi,
+  logoutApi,
+  registerApi,
+  categoryAddApi,
+  homeApi,
+  videoDelApi,
+  videoShowApi,
+}

@@ -12,6 +12,7 @@ const router = createRouter({
     { path: '/success', component: () => import('./user/success.js') },
     { path: '/cate/add', component: () => import('./category/add.js') },
     { path: '/cate/success', component: () => import('./category/success.js') },
+    { path: '/video/show/:id', component: () => import('./video/show.js') },
     { path: '/:pathMatch(.*)*', redirect: '/' }
   ]
 })

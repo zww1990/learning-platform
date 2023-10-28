@@ -13,7 +13,8 @@ export const store = reactive({
   clearUser() {
     this.user = null
     sessionStorage.removeItem('CURRENT_USER')
-    logoutApi().then(res => res.text())
-               .then(res => console.log(res))
+    logoutApi()
+      .then(res => res.text())
+      .then(res => console.log(res))
   }
 })

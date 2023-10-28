@@ -10,10 +10,7 @@ export default {
     return { goCategoryAdd, goHome }
   },
   template: `
-    <a-result
-      status="success"
-      title="视频类别添加成功！"
-    >
+    <a-result status="success" title="视频类别添加成功！">
       <template #extra>
         <a-button @click="goCategoryAdd" type="primary">继续添加</a-button>
         <a-button @click="goHome">返回主页</a-button>
