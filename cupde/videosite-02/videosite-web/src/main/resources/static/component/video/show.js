@@ -12,9 +12,9 @@ export default {
       content: ''
     })
     const res = await videoShowApi(comment.value.id)
-    let video = {}
+    const data = ref({})
     if(res.ok){
-      video = await res.json()
+      data.value = await res.json()
     }else{
       message.error(await res.text())
     }
@@ -24,27 +24,35 @@ export default {
         message.error('请输入评论内容！')
         return
       }
-      console.log(comment.value)
+      console.log(comment.value, store.user)
+      data.value.comments = [
+        {
+          creatorNick: store.user.nickname,
+          content: comment.value.content,
+          createdDate: new Date()
+        },
+        ...data.value.comments
+      ]
     }
-    return { ...video, avatarImg, comment, handleSubmit, dayjs, store }
+    return { data, avatarImg, comment, handleSubmit, dayjs, store }
   },
   template: `
     <a-row :gutter="[16,8]">
       <a-col :span="16">
         <a-card hoverable>
           <template #cover>
-            <video controls :height="600" :src="video.videoLink" :poster="video.videoLogo"></video>
+            <video controls :height="600" :src="data.video.videoLink" :poster="data.video.videoLogo"></video>
           </template>
-          <a-card-meta :title="video.videoName">
+          <a-card-meta :title="data.video.videoName">
             <template #description>
               <ul>
-                <li>点击量：{{video.videoHits}}</li>
-                <li>类别：{{video.categoryName}}</li>
-                <li>状态：{{video.auditStatusDesc}}</li>
-                <li>作者：{{video.creatorNick}}</li>
-                <li>创建时间：{{video.createdDate}}</li>
-                <li>审核人：{{video.auditorNick}}</li>
-                <li>审核时间：{{video.auditedDate}}</li>
+                <li>点击量：{{data.video.videoHits}}</li>
+                <li>类别：{{data.video.categoryName}}</li>
+                <li>状态：{{data.video.auditStatusDesc}}</li>
+                <li>作者：{{data.video.creatorNick}}</li>
+                <li>创建时间：{{data.video.createdDate}}</li>
+                <li>审核人：{{data.video.auditorNick}}</li>
+                <li>审核时间：{{data.video.auditedDate}}</li>
               </ul>
             </template>
           </a-card-meta>
@@ -52,9 +60,9 @@ export default {
       </a-col>
       <a-col :span="8">
         <a-list
-          v-if="comments.length"
-          :data-source="comments"
-          :header="comments.length + ' 条评论'"
+          v-if="data.comments.length"
+          :data-source="data.comments"
+          :header="data.comments.length + ' 条评论'"
           item-layout="horizontal"
         >
           <template #renderItem="{ item }">
