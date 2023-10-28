@@ -1,6 +1,7 @@
 import Layout from './layout.js'
 
 dayjs.locale('zh-cn')
+dayjs.extend(window.dayjs_plugin_relativeTime)
 
 const { createRouter, createWebHashHistory, createWebHistory } = VueRouter
 const router = createRouter({

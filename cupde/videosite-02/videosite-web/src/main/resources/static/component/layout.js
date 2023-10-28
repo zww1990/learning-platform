@@ -35,7 +35,12 @@ export default {
          <div class="logo" :style="{ float:'left', width:'60px', height:'64px', background:'white', paddingLeft:'10px' }">
           <img src="/img/favicon.png" width="40" height="40">
          </div>
-         <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" :style="{ lineHeight: '64px' }" @click="handleClick">
+         <a-menu
+           v-model:selectedKeys="selectedKeys"
+           theme="light"
+           mode="horizontal"
+           :style="{ lineHeight: '64px' }"
+           @click="handleClick">
            <a-menu-item key="/">
             <i class="fa fa-home"></i>主页
            </a-menu-item>

@@ -1,4 +1,5 @@
 import { videoShowApi } from '../utils/api.js'
+import { store } from '../utils/store.js'
 
 const { message } = antd
 const { ref, reactive } = Vue
@@ -25,7 +26,7 @@ export default {
       }
       console.log(comment.value)
     }
-    return { ...video, avatarImg, comment, handleSubmit }
+    return { ...video, avatarImg, comment, handleSubmit, dayjs, store }
   },
   template: `
     <a-row :gutter="[16,8]">
@@ -58,11 +59,15 @@ export default {
         >
           <template #renderItem="{ item }">
             <a-list-item>
-              <a-comment :author="item.creatorNick" :avatar="avatarImg" :content="item.content" :datetime="item.createdDate"/>
+              <a-comment
+                :author="item.creatorNick"
+                :avatar="avatarImg"
+                :content="item.content"
+                :datetime="dayjs(item.createdDate).fromNow()"/>
             </a-list-item>
           </template>
         </a-list>
-        <a-comment>
+        <a-comment v-if="!!store.user">
           <template #avatar>
             <a-avatar :src="avatarImg" />
           </template>
