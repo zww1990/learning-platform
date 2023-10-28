@@ -27,7 +27,9 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -49,7 +51,7 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<Video> query(Integer categoryId, AuditStatus... auditStatus) {
         log.info("query(): categoryId = {}, auditStatus = {}", categoryId, auditStatus);
-        return this.videoRepository.findAll((root, query, builder) -> {
+        List<Video> videos = this.videoRepository.findAll((root, query, builder) -> {
             List<Predicate> list = new ArrayList<>();
             // 如果指定审核状态
             if (auditStatus.length != 0) {
@@ -60,11 +62,19 @@ public class VideoServiceImpl implements VideoService {
                 list.add(builder.equal(root.get("categoryId"), categoryId));
             }
             return query.where(list.toArray(Predicate[]::new)).getRestriction();
-        }, Sort.by(Direction.DESC, "videoHits")).stream().peek(p -> {
+        }, Sort.by(Direction.DESC, "videoHits"));
+        // 收集视频作者
+        List<String> creators = videos.stream().map(Video::getCreator).distinct().toList();
+        Map<String, User> userMap = this.userRepository.findAll((root, query, builder) -> root.get("username").in(creators))
+                .stream().collect(Collectors.toMap(User::getUsername, Function.identity()));
+        videos.forEach(f -> {
             // 组装视频封面、文件在服务器的存储路径
-            p.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), p.getVideoLogo()));
-            p.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), p.getVideoLink()));
-        }).collect(Collectors.toList());
+            f.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), f.getVideoLogo()));
+            f.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), f.getVideoLink()));
+            // 设置作者昵称
+            f.setCreatorNick(userMap.get(f.getCreator()).getNickname());
+        });
+        return videos;
     }
 
     @Override
