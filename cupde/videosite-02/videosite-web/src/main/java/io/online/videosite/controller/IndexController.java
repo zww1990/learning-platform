@@ -38,7 +38,6 @@ public class IndexController {
      */
     @GetMapping(path = "/home")
     public ResponseEntity<?> home(
-            // 从会话中获取当前登录用户
             @SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user,
             @RequestParam(required = false) Integer categoryId) {
         // 查询所有用户审核通过的视频

@@ -58,6 +58,9 @@ export default {
              <a-menu-item key="/cate/add" v-if="store.user.userType === 'ADMIN'">
               <i class="fa fa-plus-circle"></i>添加视频类别
              </a-menu-item>
+             <a-menu-item key="/video/add">
+              <i class="fa fa-plus-circle"></i>添加视频
+             </a-menu-item>
              <a-menu-item key="/logout">
               <i class="fa fa-sign-out"></i>退出
              </a-menu-item>

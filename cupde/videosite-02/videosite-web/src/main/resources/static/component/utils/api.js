@@ -40,6 +40,8 @@ const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {
 
 const videoShowApi = id => fetch(`/videohub/show/${id}`)
 
+const videoListApi = id => fetch('/videohub/list')
+
 export {
   loginApi,
   logoutApi,
@@ -49,4 +51,5 @@ export {
   videoDelApi,
   videoShowApi,
   commentAddApi,
+  videoListApi,
 }

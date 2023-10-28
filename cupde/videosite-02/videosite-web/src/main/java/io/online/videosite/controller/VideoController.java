@@ -50,7 +50,7 @@ public class VideoController {
      * 跳转到用户的视频列表页
      */
     @GetMapping(path = "/list")
-    public ResponseEntity<?> list(@SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user) {
+    public ResponseEntity<?> list(@SessionAttribute(Constants.SESSION_USER_KEY) User user) {
         // 查询此用户所有的视频
         List<Video> videos = this.videoService.queryForUser(user);
         log.info("list(): 视频数量 = {}", videos.size());
@@ -123,7 +123,8 @@ public class VideoController {
      * 处理删除
      */
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Integer id, @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
+    public ResponseEntity<?> delete(@PathVariable Integer id,
+                                    @SessionAttribute(Constants.SESSION_USER_KEY) User user) {
         Video video = this.videoService.queryOne(id, FetchType.LAZY);
         // 如果视频不存在
         if (video == null) {
