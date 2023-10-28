@@ -25,7 +25,7 @@ async function homeApi() {
     params.append('categoryId', arguments[0])
     url = `${url}?${params.toString()}`
   }
-  return await(await fetch(url)).json()
+  return await (await fetch(url)).json()
 }
 
 const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {

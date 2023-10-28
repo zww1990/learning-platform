@@ -1,6 +1,8 @@
 package io.online.videosite.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.online.videosite.constant.AuditStatus;
+import io.online.videosite.constant.Constants;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,9 +52,19 @@ public class Video extends BaseEntity {
      */
     @Enumerated(EnumType.STRING)
     private AuditStatus auditStatus;
+
+    /**
+     * 审核状态描述
+     */
+    @Transient
+    public String getAuditStatusDesc() {
+        return this.auditStatus.getDesc();
+    }
+
     /**
      * 审核时间
      */
+    @JsonFormat(pattern = Constants.JSONFORMAT_DATETIME, timezone = Constants.JSONFORMAT_TIMEZONE)
     private LocalDateTime auditedDate;
     /**
      * 审核人
