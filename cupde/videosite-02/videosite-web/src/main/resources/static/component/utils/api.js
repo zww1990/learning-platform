@@ -4,6 +4,12 @@ const categoryAddApi = params => fetch('/category/add', {
   headers: { 'Content-Type': 'application/json' }
 })
 
+const commentAddApi = params => fetch('/comment/add', {
+  method: 'POST',
+  body: JSON.stringify(params),
+  headers: { 'Content-Type': 'application/json' }
+})
+
 const loginApi = params => fetch('/user/login', {
   method: 'POST',
   body: JSON.stringify(params),
@@ -42,4 +48,5 @@ export {
   homeApi,
   videoDelApi,
   videoShowApi,
+  commentAddApi,
 }

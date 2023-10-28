@@ -7,7 +7,6 @@ export default {
   setup() {
     const selectedKeys = ref( [location.pathname] )
     const router = VueRouter.useRouter()
-//    const route = VueRouter.useRoute()
 
     watch(
       () => router.currentRoute.value.path,

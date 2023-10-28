@@ -1,17 +1,17 @@
-import { videoShowApi } from '../utils/api.js'
+import { videoShowApi, commentAddApi } from '../utils/api.js'
 import { store } from '../utils/store.js'
 
-const { message } = antd
+const { message, notification } = antd
 const { ref, reactive } = Vue
 
 export default {
   async setup() {
     const route = VueRouter.useRoute()
     const comment = ref({
-      id: +route.params.id,
+      videoId: +route.params.id,
       content: ''
     })
-    const res = await videoShowApi(comment.value.id)
+    const res = await videoShowApi(comment.value.videoId)
     const data = ref({})
     if(res.ok){
       data.value = await res.json()
@@ -19,20 +19,24 @@ export default {
       message.error(await res.text())
     }
     const avatarImg = '/img/av.png'
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       if (!comment.value.content) {
-        message.error('请输入评论内容！')
+        notification.error({ message: '操作错误', description: '请输入评论内容！' })
         return
       }
-      console.log(comment.value, store.user)
-      data.value.comments = [
-        {
-          creatorNick: store.user.nickname,
-          content: comment.value.content,
-          createdDate: new Date()
-        },
-        ...data.value.comments
-      ]
+      const res2 = await commentAddApi(comment.value)
+      if(res2.ok){
+        data.value.comments = [
+          {
+            creatorNick: store.user.nickname,
+            content: comment.value.content,
+            createdDate: new Date()
+          },
+          ...data.value.comments
+        ]
+      }else{
+        notification.error({ message: '操作错误', description: await res2.text() })
+      }
     }
     return { data, avatarImg, comment, handleSubmit, dayjs, store }
   },
@@ -60,7 +64,7 @@ export default {
       </a-col>
       <a-col :span="8">
         <a-list
-          v-if="data.comments.length"
+          v-if="data.comments.length > 0"
           :data-source="data.comments"
           :header="data.comments.length + ' 条评论'"
           item-layout="horizontal"
@@ -75,6 +79,7 @@ export default {
             </a-list-item>
           </template>
         </a-list>
+        <a-empty description="暂无评论" v-else/>
         <a-comment v-if="!!store.user">
           <template #avatar>
             <a-avatar :src="avatarImg" />
