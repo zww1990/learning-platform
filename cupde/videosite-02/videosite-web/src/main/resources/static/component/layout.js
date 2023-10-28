@@ -63,7 +63,9 @@ export default {
        <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
          <nav class="ant-breadcrumb" style="margin: 10px 0px;"></nav>
          <div :style="{ background: '#fff', padding: '24px', minHeight: '604px' }">
-          <router-view></router-view>
+           <Suspense>
+            <router-view></router-view>
+           </Suspense>
          </div>
        </a-layout-content>
        <a-layout-footer :style="{ textAlign: 'center' }">

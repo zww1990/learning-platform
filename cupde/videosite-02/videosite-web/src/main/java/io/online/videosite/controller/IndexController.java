@@ -48,14 +48,7 @@ public class IndexController {
                 user, videos.size(), categories.size(), categoryId);
         Map<String, Object> mav = new HashMap<>();
         mav.put("videos", videos);
-        int limit = 10;// 控制类别展示数量
-        if (categories.size() > limit) {
-            // 如果超过指定的数量，就截取
-            mav.put("categories", categories.subList(0, limit));
-            mav.put("categoryMoreList", categories.subList(limit, categories.size()));
-        } else {
-            mav.put("categories", categories);
-        }
+        mav.put("categories", categories);
         return ResponseEntity.ok(mav);
     }
 
