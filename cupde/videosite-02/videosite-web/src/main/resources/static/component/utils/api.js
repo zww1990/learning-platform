@@ -28,7 +28,7 @@ const logoutApi = () => fetch('/user/logout')
 
 const homeApi = async (id) => {
   let url = '/home'
-  if(id !== undefined && id !== null){
+  if(id){
     const params = new URLSearchParams()
     params.append('categoryId', id)
     url = `${url}?${params.toString()}`
@@ -57,6 +57,25 @@ const videoAddApi = params => {
   })
 }
 
+const videoHandleEditApi = params => {
+  const formData = new FormData()
+  Object.entries(params).forEach(([ k, v ]) => {
+    if(v){
+      formData.append(k, v)
+    }
+  })
+  return fetch('/videohub/edit', {
+    method: 'PUT',
+    body: formData,
+  })
+}
+
+const videoHandleAuditApi = params => fetch('/videohub/edit', {
+  method: 'PUT',
+  body: JSON.stringify(params),
+  headers: { 'Content-Type': 'application/json' }
+})
+
 export {
   loginApi,
   logoutApi,
@@ -71,4 +90,6 @@ export {
   videoAddApi,
   videoAuditApi,
   videoEditApi,
+  videoHandleAuditApi,
+  videoHandleEditApi,
 }

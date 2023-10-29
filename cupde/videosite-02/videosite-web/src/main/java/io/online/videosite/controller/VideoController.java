@@ -219,6 +219,10 @@ public class VideoController {
         if (video == null) {
             throw new EntityNotFoundException("此视频不存在");
         }
+        // 如果视频不是自己创建的，不允许编辑
+        if (!video.getCreator().equals(user.getUsername())) {
+            throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
+        }
         if (!StringUtils.hasText(model.getVideoName())) {
             return ResponseEntity.badRequest()
                     .contentType(MediaType.APPLICATION_JSON)
@@ -230,7 +234,7 @@ public class VideoController {
                     .body("请选择视频类别！");
         }
         // 如果重新上传了视频封面
-        if (!model.getVideoLogo().isEmpty()) {
+        if (model.getVideoLogo() != null && !model.getVideoLogo().isEmpty()) {
             // 如果上传视频封面的格式不正确
             if (!this.isMatch(this.appProps.getImageMimePatterns(), model.getVideoLogo().getContentType())) {
                 return ResponseEntity.badRequest()
@@ -241,7 +245,7 @@ public class VideoController {
             model.setVideoLogoPath(this.makeFileName(model.getVideoLogo().getOriginalFilename()));
         }
         // 如果重新上传了视频文件
-        if (!model.getVideoLink().isEmpty()) {
+        if (model.getVideoLink() != null && !model.getVideoLink().isEmpty()) {
             // 如果上传视频文件的格式不正确
             if (!this.isMatch(this.appProps.getVideoMimePatterns(), model.getVideoLink().getContentType())) {
                 return ResponseEntity.badRequest()
@@ -254,11 +258,11 @@ public class VideoController {
         // 先保存数据
         this.videoService.update(model, user, video);
         // 然后再写入视频封面、文件，避免保存失败，上传临时文件。
-        if (!model.getVideoLogo().isEmpty()) {
+        if (model.getVideoLogo() != null && !model.getVideoLogo().isEmpty()) {
             // 写入文件
             model.getVideoLogo().transferTo(Paths.get(this.appProps.getImageUploadFolder(), model.getVideoLogoPath()));
         }
-        if (!model.getVideoLink().isEmpty()) {
+        if (model.getVideoLink() != null && !model.getVideoLink().isEmpty()) {
             // 写入文件
             model.getVideoLink().transferTo(Paths.get(this.appProps.getVideoUploadFolder(), model.getVideoLinkPath()));
         }
