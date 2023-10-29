@@ -13,13 +13,12 @@ export default {
       videoLink: null,
     })
     const onFinish = async values => {
-      console.log(values)
-//      const res = await videoAddApi(values)
-//      if(res.ok){
-//        router.push('/video/success')
-//      }else{
-//        message.error(await res.text())
-//      }
+      const res = await videoAddApi(values)
+      if(res.ok){
+        router.push('/video/success')
+      }else{
+        message.error(await res.text())
+      }
     }
     const categories = (await categoryListApi()).map(({ id, categoryName }) => {
       return { label: categoryName, value: id }

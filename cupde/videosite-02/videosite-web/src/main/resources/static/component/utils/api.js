@@ -50,7 +50,6 @@ const videoAddApi = params => {
   return fetch('/videohub/add', {
     method: 'POST',
     body: formData,
-    headers: { 'Content-Type': 'multipart/form-data' }
   })
 }
 
