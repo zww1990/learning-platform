@@ -45,7 +45,7 @@ export default {
       <a-col :span="16">
         <a-card hoverable>
           <template #cover>
-            <video controls :height="600" :src="data.video.videoLink" :poster="data.video.videoLogo"></video>
+            <video controls style="width: 100%" :src="data.video.videoLink" :poster="data.video.videoLogo"></video>
           </template>
           <a-card-meta :title="data.video.videoName">
             <template #description>

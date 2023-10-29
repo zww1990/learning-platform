@@ -24,7 +24,7 @@ export default {
     const categories = (await categoryListApi()).map(({ id, categoryName }) => {
       return { label: categoryName, value: id }
     })
-    const getFileSize = (number) => {
+    const getFileSize = number => {
       if (number < 1024) {
         return `${number} bytes`
       } else if (number >= 1024 && number < 1048576) {
@@ -59,10 +59,37 @@ export default {
       formState.videoLink = file
       return false
     }
-    const videoHandlePreview = file => {
-      console.log(file)
+    const setCursor = () => {
+      document.querySelectorAll('span.ant-upload-list-item-name').forEach(el => el.style.cursor = 'pointer')
     }
-    return { onFinish, formState, categories, imageBeforeUpload, videoBeforeUpload, videoHandlePreview }
+    const modalState = reactive({
+      previewVisible: false,
+      previewTitle: '',
+      previewUrl: '',
+      isVideo: false,
+    })
+    const handleCancel = () => {
+      modalState.previewVisible = false
+      modalState.previewTitle = ''
+      modalState.previewUrl = ''
+    }
+    const handlePreview = (file, isVideo) => {
+      setCursor()
+      modalState.previewVisible = true
+      modalState.previewTitle = file.name
+      modalState.previewUrl = URL.createObjectURL(file.originFileObj)
+      modalState.isVideo = isVideo
+    }
+    return {
+      onFinish,
+      formState,
+      categories,
+      imageBeforeUpload,
+      videoBeforeUpload,
+      handlePreview,
+      handleCancel,
+      modalState
+    }
   },
   template: `
     <a-form
@@ -73,6 +100,8 @@ export default {
       autocomplete="off"
       @finish="onFinish"
     >
+      <a-form-item></a-form-item>
+      <a-form-item></a-form-item>
       <a-form-item
         has-feedback
         label="视频名称"
@@ -102,8 +131,8 @@ export default {
           :before-upload="imageBeforeUpload"
           :maxCount="1"
           accept="image/*"
-          list-type="picture"
-          @preview="file => console.log(file)">
+          @preview="file => handlePreview(file, false)"
+          :showUploadList="{ showRemoveIcon: false }">
           <a-button>选择文件</a-button>
         </a-upload>
       </a-form-item>
@@ -119,8 +148,8 @@ export default {
           :before-upload="videoBeforeUpload"
           :maxCount="1"
           accept="video/*"
-          list-type="picture"
-          @preview="videoHandlePreview">
+          @preview="file => handlePreview(file, true)"
+          :showUploadList="{ showRemoveIcon: false }">
           <a-button>选择文件</a-button>
         </a-upload>
       </a-form-item>
@@ -129,5 +158,15 @@ export default {
         <a-button type="primary" html-type="submit">添加</a-button>
       </a-form-item>
     </a-form>
+    <a-modal
+      :open="modalState.previewVisible"
+      :title="modalState.previewTitle"
+      :footer="null"
+      @cancel="handleCancel"
+      width="900px"
+      centered>
+      <video controls style="width: 100%" :src="modalState.previewUrl" v-if="modalState.isVideo"></video>
+      <img style="width: 100%" :src="modalState.previewUrl" v-else/>
+    </a-modal>
   `
 }
