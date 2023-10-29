@@ -15,8 +15,7 @@ export default {
         message.error(await res.text())
       }
     }
-    const onFinishFailed = errorInfo => {}
-    return { onFinish, onFinishFailed, formState }
+    return { onFinish, formState }
   },
   template: `
     <a-form
@@ -26,7 +25,6 @@ export default {
       :wrapper-col="{ span: 4 }"
       autocomplete="off"
       @finish="onFinish"
-      @finishFailed="onFinishFailed"
     >
       <a-form-item></a-form-item>
       <a-form-item></a-form-item>

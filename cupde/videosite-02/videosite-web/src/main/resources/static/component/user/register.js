@@ -20,7 +20,6 @@ export default {
         message.error(await res.text())
       }
     }
-    const onFinishFailed = errorInfo => {}
     const validatePass2 = async (_rule, value) => {
       if (value === '') {
         return Promise.reject('请再次确认您的密码!');
@@ -39,7 +38,7 @@ export default {
         return Promise.resolve();
       }
     }
-    return { onFinish, onFinishFailed, formState, validatePass2, validateName }
+    return { onFinish, formState, validatePass2, validateName }
   },
   template: `
     <a-form
@@ -49,7 +48,6 @@ export default {
       :wrapper-col="{ span: 4 }"
       autocomplete="off"
       @finish="onFinish"
-      @finishFailed="onFinishFailed"
     >
       <a-form-item></a-form-item>
       <a-form-item></a-form-item>

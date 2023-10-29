@@ -16,6 +16,7 @@ const router = createRouter({
     { path: '/video/show/:id', component: () => import('./video/show.js') },
     { path: '/video/list', component: () => import('./video/list.js') },
     { path: '/video/add', component: () => import('./video/add.js') },
+    { path: '/video/success', component: () => import('./video/success.js') },
     { path: '/:pathMatch(.*)*', redirect: '/' }
   ]
 })

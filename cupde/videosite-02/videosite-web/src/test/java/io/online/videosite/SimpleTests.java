@@ -8,6 +8,8 @@ import org.springframework.http.server.PathContainer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
+import org.springframework.util.unit.DataSize;
+import org.springframework.util.unit.DataUnit;
 import org.springframework.web.util.pattern.PathPattern;
 import org.springframework.web.util.pattern.PathPatternParser;
 
@@ -16,6 +18,16 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class SimpleTests {
+    @Test
+    public void testDataSize() {
+        try {
+            System.err.println(DataSize.parse("100", DataUnit.MEGABYTES));
+            System.err.println(DataSize.parse("100MB"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void testRegex() {
         try {

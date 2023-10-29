@@ -46,6 +46,7 @@ videosite-app:
     - /videohub/**
   exclude-path-patterns:
     - /videohub/show/**
+    - /category/list
   admin-path-patterns:
     - /category/**
     - /videohub/audit/**

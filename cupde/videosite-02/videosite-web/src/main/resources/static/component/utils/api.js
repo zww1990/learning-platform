@@ -4,6 +4,8 @@ const categoryAddApi = params => fetch('/category/add', {
   headers: { 'Content-Type': 'application/json' }
 })
 
+const categoryListApi = async () => await (await fetch('/category/list')).json()
+
 const commentAddApi = params => fetch('/comment/add', {
   method: 'POST',
   body: JSON.stringify(params),
@@ -24,11 +26,11 @@ const registerApi = params => fetch('/user/register', {
 
 const logoutApi = () => fetch('/user/logout')
 
-async function homeApi() {
+const homeApi = async (id) => {
   let url = '/home'
-  if(arguments.length > 0){
+  if(id !== undefined && id !== null){
     const params = new URLSearchParams()
-    params.append('categoryId', arguments[0])
+    params.append('categoryId', id)
     url = `${url}?${params.toString()}`
   }
   return await (await fetch(url)).json()
@@ -40,16 +42,28 @@ const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {
 
 const videoShowApi = id => fetch(`/videohub/show/${id}`)
 
-const videoListApi = id => fetch('/videohub/list')
+const videoListApi = () => fetch('/videohub/list')
+
+const videoAddApi = params => {
+  const formData = new FormData()
+  Object.entries(params).forEach(([ k, v ]) => formData.append(k, v))
+  return fetch('/videohub/add', {
+    method: 'POST',
+    body: formData,
+    headers: { 'Content-Type': 'multipart/form-data' }
+  })
+}
 
 export {
   loginApi,
   logoutApi,
   registerApi,
   categoryAddApi,
+  categoryListApi,
   homeApi,
+  commentAddApi,
   videoDelApi,
   videoShowApi,
-  commentAddApi,
   videoListApi,
+  videoAddApi,
 }
