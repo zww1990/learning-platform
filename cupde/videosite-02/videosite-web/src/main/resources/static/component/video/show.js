@@ -35,7 +35,7 @@ export default {
   },
   template: `
     <a-row :gutter="[16,8]">
-      <a-col :span="16">
+      <a-col :span="data.video.auditStatus === 'PASSED' ? 16 : 24">
         <a-card hoverable>
           <template #cover>
             <video controls style="width: 100%" :src="data.video.videoLink" :poster="data.video.videoLogo"></video>
@@ -55,7 +55,7 @@ export default {
           </a-card-meta>
         </a-card>
       </a-col>
-      <a-col :span="8">
+      <a-col :span="8" v-if="data.video.auditStatus === 'PASSED'">
         <a-list
           v-if="data.comments.length > 0"
           :data-source="data.comments"
