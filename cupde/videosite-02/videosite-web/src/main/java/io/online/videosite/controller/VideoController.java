@@ -135,9 +135,7 @@ public class VideoController {
             throw new HttpClientErrorException(HttpStatus.FORBIDDEN);
         }
         this.videoService.delete(video);
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("删除成功！");
+        return ResponseEntity.ok(this.videoService.queryForUser(user));
     }
 
     /**

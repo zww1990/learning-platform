@@ -49,8 +49,6 @@ public class CommentController {
             throw new EntityNotFoundException("此视频不存在");
         }
         this.commentService.save(comment, user);
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body("评论成功！");
+        return ResponseEntity.ok(this.commentService.queryByVideoId(comment.getVideoId()));
     }
 }

@@ -26,14 +26,7 @@ export default {
       }
       const res2 = await commentAddApi(comment.value)
       if(res2.ok){
-        data.value.comments = [
-          {
-            creatorNick: store.user.nickname,
-            content: comment.value.content,
-            createdDate: new Date()
-          },
-          ...data.value.comments
-        ]
+        data.value.comments = await res2.json()
       }else{
         notification.error({ message: '操作错误', description: await res2.text() })
       }
