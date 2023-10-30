@@ -70,7 +70,7 @@ const videoHandleEditApi = params => {
   })
 }
 
-const videoHandleAuditApi = params => fetch('/videohub/edit', {
+const videoHandleAuditApi = params => fetch('/videohub/audit', {
   method: 'PUT',
   body: JSON.stringify(params),
   headers: { 'Content-Type': 'application/json' }
