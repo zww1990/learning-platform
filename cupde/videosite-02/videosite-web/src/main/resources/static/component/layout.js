@@ -58,7 +58,7 @@ export default {
               <a-avatar :src="avatarImg" />{{ store.user.nickname }}
              </a-menu-item>
              <template v-if="!!store.user && store.user.userType === 'ADMIN'">
-               <a-menu-item key="/user/list">
+               <a-menu-item key="/users">
                 <i class="fa fa-users"></i>用户列表
                </a-menu-item>
                <a-menu-item key="/cate/add">
