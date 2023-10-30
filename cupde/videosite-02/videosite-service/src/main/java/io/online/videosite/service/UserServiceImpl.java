@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 用户服务接口实现类
@@ -33,5 +34,10 @@ public class UserServiceImpl implements UserService {
         user.setModifiedDate(user.getCreatedDate());
         user.setUserType(UserType.NORMAL);
         this.userRepository.save(user);
+    }
+
+    @Override
+    public List<User> queryUsers() {
+        return this.userRepository.findAll();
     }
 }

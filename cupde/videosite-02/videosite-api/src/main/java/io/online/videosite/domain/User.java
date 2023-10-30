@@ -1,5 +1,6 @@
 package io.online.videosite.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.online.videosite.constant.UserType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -30,11 +31,13 @@ public class User extends BaseEntity {
      * 密码
      */
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     /**
      * 确认密码
      */
     @ToString.Exclude
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Transient
     private String password2;
     /**

@@ -44,12 +44,14 @@ videosite-app:
     - /category/**
     - /comment/**
     - /videohub/**
+    - /user/list
   exclude-path-patterns:
     - /videohub/show/**
     - /category/list
   admin-path-patterns:
     - /category/**
     - /videohub/audit/**
+    - /user/list
   image-mime-patterns: image/*
   video-mime-patterns: video/*
   image-upload-folder: /upload/images

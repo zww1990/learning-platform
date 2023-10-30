@@ -21,15 +21,15 @@ public class VideoSiteAppProperties {
     /**
      * 拦截器包括的路径模式
      */
-    private String[] includePathPatterns = {"/category/**", "/comment/**", "/videohub/**"};
+    private String[] includePathPatterns = {"/category/**", "/comment/**", "/videohub/**", "/user/list"};
     /**
      * 拦截器排除的路径模式
      */
-    private String[] excludePathPatterns = {"/videohub/show/**"};
+    private String[] excludePathPatterns = {"/videohub/show/**", "/category/list"};
     /**
      * 需要管理员身份的路径模式
      */
-    private String[] adminPathPatterns = {"/category/**", "/videohub/audit/**"};
+    private String[] adminPathPatterns = {"/category/**", "/videohub/audit/**", "/user/list"};
     /**
      * 图片格式模式
      */

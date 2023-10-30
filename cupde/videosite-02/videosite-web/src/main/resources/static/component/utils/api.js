@@ -26,6 +26,8 @@ const registerApi = params => fetch('/user/register', {
 
 const logoutApi = () => fetch('/user/logout')
 
+const userListApi = () => fetch('/user/list')
+
 const homeApi = async (id) => {
   let url = '/home'
   if(id){
@@ -80,6 +82,7 @@ export {
   loginApi,
   logoutApi,
   registerApi,
+  userListApi,
   categoryAddApi,
   categoryListApi,
   homeApi,

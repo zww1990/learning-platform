@@ -57,9 +57,14 @@ export default {
              <a-menu-item key="/video/list" v-if="!!store.user">
               <a-avatar :src="avatarImg" />{{ store.user.nickname }}
              </a-menu-item>
-             <a-menu-item key="/cate/add" v-if="!!store.user && store.user.userType === 'ADMIN'">
-              <i class="fa fa-plus-circle"></i>添加视频类别
-             </a-menu-item>
+             <template v-if="!!store.user && store.user.userType === 'ADMIN'">
+               <a-menu-item key="/user/list">
+                <i class="fa fa-users"></i>用户列表
+               </a-menu-item>
+               <a-menu-item key="/cate/add">
+                <i class="fa fa-plus-circle"></i>添加视频类别
+               </a-menu-item>
+             </template>
              <a-menu-item key="/video/add">
               <i class="fa fa-plus-circle"></i>添加视频
              </a-menu-item>

@@ -2,6 +2,8 @@ package io.online.videosite.api;
 
 import io.online.videosite.domain.User;
 
+import java.util.List;
+
 /**
  * 用户服务接口
  *
@@ -27,4 +29,13 @@ public interface UserService {
      * @since 2023-10-03 22:26:25
      */
     void save(User user);
+
+    /**
+     * 查询所有用户
+     *
+     * @return {@link List<User>}
+     * @author 张维维
+     * @since 2023-10-30 20:29:07
+     */
+    List<User> queryUsers();
 }

@@ -130,4 +130,11 @@ public class UserController {
                 .body("注销成功！");
     }
 
+    /**
+     * 用户列表
+     */
+    @GetMapping(path = "/list")
+    public ResponseEntity<?> list() {
+        return ResponseEntity.ok(this.userService.queryUsers());
+    }
 }
