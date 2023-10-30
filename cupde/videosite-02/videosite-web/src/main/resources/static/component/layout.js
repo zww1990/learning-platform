@@ -54,10 +54,10 @@ export default {
              </a-menu-item>
            </template>
            <template v-else>
-             <a-menu-item key="/video/list">
+             <a-menu-item key="/video/list" v-if="!!store.user">
               <a-avatar :src="avatarImg" />{{ store.user.nickname }}
              </a-menu-item>
-             <a-menu-item key="/cate/add" v-if="store.user.userType === 'ADMIN'">
+             <a-menu-item key="/cate/add" v-if="!!store.user && store.user.userType === 'ADMIN'">
               <i class="fa fa-plus-circle"></i>添加视频类别
              </a-menu-item>
              <a-menu-item key="/video/add">

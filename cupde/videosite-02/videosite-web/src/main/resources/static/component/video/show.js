@@ -82,9 +82,7 @@ export default {
               <a-textarea v-model:value="comment.content" :rows="4" placeholder="请输入评论内容"/>
             </a-form-item>
             <a-form-item>
-              <a-button html-type="submit" type="primary" @click="handleSubmit">
-                添加评论
-              </a-button>
+              <a-button html-type="submit" type="primary" @click="handleSubmit">添加评论</a-button>
             </a-form-item>
           </template>
         </a-comment>

@@ -33,31 +33,36 @@ export default {
   },
   template: `
     <a-row :gutter="[8,8]">
-      <a-col :span="4" v-for="card in state.cards" :key="card.id">
-        <a-card hoverable>
-          <template #cover>
-            <a-image :alt="card.videoName" :src="card.videoLogo" :fallback="fallbackImg" />
-          </template>
-          <template #actions>
-            <i class="fa fa-eye" @click="handleClick(card, 'show')">查看({{card.videoHits}})</i>
-            <i class="fa fa-arrow-circle-o-right"
-               v-if="store.user.userType === 'ADMIN' && card.auditStatus === 'PENDING'"
-               @click="handleClick(card, 'audit')">审核</i>
-            <template v-if="store.user.username === card.creator">
-              <i class="fa fa-edit"
-                 v-if="card.auditStatus !== 'PASSED'"
-                 @click="handleClick(card, 'edit')">编辑</i>
-              <a-popconfirm title="是否确定要删除此视频？" @confirm="handleDelete(card)">
-                <i class="fa fa-remove">删除</i>
-              </a-popconfirm>
+      <template v-if="state.cards.length > 0">
+        <a-col :span="4" v-for="card in state.cards" :key="card.id">
+          <a-card hoverable>
+            <template #cover>
+              <a-image :alt="card.videoName" :src="card.videoLogo" :fallback="fallbackImg" />
             </template>
-          </template>
-          <a-card-meta :title="card.creatorNick" :description="card.videoName">
-            <template #avatar>
-              <a-avatar :src="avatarImg" />
+            <template #actions>
+              <i class="fa fa-eye" @click="handleClick(card, 'show')">查看({{card.videoHits}})</i>
+              <i class="fa fa-arrow-circle-o-right"
+                 v-if="!!store.user && store.user.userType === 'ADMIN' && card.auditStatus === 'PENDING'"
+                 @click="handleClick(card, 'audit')">审核</i>
+              <template v-if="!!store.user && store.user.username === card.creator">
+                <i class="fa fa-edit"
+                   v-if="card.auditStatus !== 'PASSED'"
+                   @click="handleClick(card, 'edit')">编辑</i>
+                <a-popconfirm title="是否确定要删除此视频？" @confirm="handleDelete(card)">
+                  <i class="fa fa-remove">删除</i>
+                </a-popconfirm>
+              </template>
             </template>
-          </a-card-meta>
-        </a-card>
+            <a-card-meta :title="card.creatorNick" :description="card.videoName">
+              <template #avatar>
+                <a-avatar :src="avatarImg" />
+              </template>
+            </a-card-meta>
+          </a-card>
+        </a-col>
+      </template>
+      <a-col :span="24" v-else>
+        <a-empty />
       </a-col>
     </a-row>
   `
