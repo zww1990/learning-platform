@@ -1,5 +1,6 @@
 package io.example.demo.excel;
 
+import io.example.demo.config.ApplicationProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -26,11 +27,10 @@ public abstract class ExcelUtils {
     /**
      * 合并多个excel文件
      *
-     * @param fileList        excel文件路径
-     * @param folder          目标文件保存目录
-     * @param dateTimePattern 日期时间格式
+     * @param fileList   excel文件路径
+     * @param properties 应用程序配置
      */
-    public static void mergeExcel(List<String> fileList, String folder, String dateTimePattern) {
+    public static void mergeExcel(List<String> fileList, ApplicationProperties properties) {
         // 创建新的excel工作簿
         try (Workbook tarWorkbook = new XSSFWorkbook()) {
             log.info("开始合并工作簿");
@@ -45,6 +45,10 @@ public abstract class ExcelUtils {
                     log.info("工作表总个数[ {} ]", number);
                     for (int i = 0; i < number; i++) {
                         Sheet srcSheet = srcWorkbook.getSheetAt(i);
+                        if (properties.getExcludeSheets().contains(srcSheet.getSheetName())) {
+                            log.info("跳过此工作表[ {} ]", srcSheet.getSheetName());
+                            continue;
+                        }
                         log.info("正在读取工作表[ {} ]", srcSheet.getSheetName());
                         Sheet tarSheet = tarWorkbook.getSheet(srcSheet.getSheetName());
                         boolean isNew = tarSheet == null;
@@ -62,14 +66,14 @@ public abstract class ExcelUtils {
                     }
                 }
             }
-            Path path = Paths.get(folder);
+            Path path = Paths.get(properties.getWriteFolder());
             if (Files.notExists(path)) {
-                log.info("正在创建文件夹[ {} ]", folder);
+                log.info("正在创建文件夹[ {} ]", properties.getWriteFolder());
                 Files.createDirectory(path);
             }
             // 新生成的excel文件
-            String dateTime = DateTimeFormatter.ofPattern(dateTimePattern).format(LocalDateTime.now());
-            String fullPath = String.format("%s%s%s.xlsx", folder, File.separator, dateTime);
+            String dateTime = DateTimeFormatter.ofPattern(properties.getDateTimePattern()).format(LocalDateTime.now());
+            String fullPath = String.format("%s%s%s.xlsx", properties.getWriteFolder(), File.separator, dateTime);
             File file = new File(fullPath);
             // 判断文件是否存在
             if (file.exists()) {

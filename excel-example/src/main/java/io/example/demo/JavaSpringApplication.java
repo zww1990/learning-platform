@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * JavaSpringApplication
+ * 应用程序启动类
  *
  * @author zhang weiwei
  * @since 2022年8月12日, 下午8:45:37
@@ -56,7 +56,7 @@ public class JavaSpringApplication implements CommandLineRunner {
             return;
         }
         log.info("文件夹[ {} ]待合并的工作簿总个数[ {} ]", this.properties.getReadFolder(), fileList.size());
-        ExcelUtils.mergeExcel(fileList, this.properties.getWriteFolder(), this.properties.getDateTimePattern());
+        ExcelUtils.mergeExcel(fileList, this.properties);
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("是否继续合并?(Y/N):");
             if ("Y".equalsIgnoreCase(sc.next())) {
