@@ -15,7 +15,3 @@ app:
   read-folder: D:\合并\待合并的工作簿
   write-folder: D:\合并\已合并的工作簿
   date-time-pattern: yyyy-MM-dd_HH-mm-ss
-  exclude-sheets:
-    - 新扩装修标准
-    - 改造装修标准
-
