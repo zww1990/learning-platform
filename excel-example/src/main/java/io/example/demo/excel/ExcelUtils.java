@@ -4,7 +4,6 @@ import io.example.demo.config.ApplicationProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -43,12 +42,10 @@ public abstract class ExcelUtils {
                     // 获取工作簿中的Sheet个数
                     int number = srcWorkbook.getNumberOfSheets();
                     log.info("工作表总个数[ {} ]", number);
+                    // 创建一个公式计算器
+                    FormulaEvaluator evaluator = srcWorkbook.getCreationHelper().createFormulaEvaluator();
                     for (int i = 0; i < number; i++) {
                         Sheet srcSheet = srcWorkbook.getSheetAt(i);
-                        if (properties.getExcludeSheets().contains(srcSheet.getSheetName())) {
-                            log.info("跳过此工作表[ {} ]", srcSheet.getSheetName());
-                            continue;
-                        }
                         log.info("正在读取工作表[ {} ]", srcSheet.getSheetName());
                         Sheet tarSheet = tarWorkbook.getSheet(srcSheet.getSheetName());
                         boolean isNew = tarSheet == null;
@@ -58,7 +55,7 @@ public abstract class ExcelUtils {
                         }
                         try {
                             // 复制sheet内容
-                            copyExcelSheet(tarWorkbook, srcSheet, tarSheet, isNew);
+                            copyExcelSheet(srcSheet, tarSheet, isNew, evaluator);
                             log.info("工作表[ {} ]已合并", tarSheet.getSheetName());
                         } catch (Exception e) {
                             log.error(e.getLocalizedMessage(), e);
@@ -96,12 +93,12 @@ public abstract class ExcelUtils {
     /**
      * 复制sheet到新的excel文件中
      *
-     * @param workbook excel工作簿
-     * @param srcSheet 来源sheet
-     * @param tarSheet 目标sheet
-     * @param isNew    是否新建的sheet
+     * @param srcSheet  来源sheet
+     * @param tarSheet  目标sheet
+     * @param isNew     是否新建的sheet
+     * @param evaluator 公式计算器
      */
-    private static void copyExcelSheet(Workbook workbook, Sheet srcSheet, Sheet tarSheet, boolean isNew) {
+    private static void copyExcelSheet(Sheet srcSheet, Sheet tarSheet, boolean isNew, FormulaEvaluator evaluator) {
         // 获取最后一个单元格位置
         int cellNum = srcSheet.getRow(srcSheet.getFirstRowNum()).getLastCellNum();
         for (int i = 0; i < cellNum; i++) {
@@ -119,19 +116,19 @@ public abstract class ExcelUtils {
             // 创建新行
             Row tarRow = tarSheet.createRow(rowNum);
             // 复制行
-            copyExcelRow(workbook, srcRow, tarRow, tarSheet);
+            copyExcelRow(srcRow, tarRow, tarSheet, evaluator);
         }
     }
 
     /**
      * 复制excel中的行到新的sheet中
      *
-     * @param workbook 目标工作簿
-     * @param srcRow   来源excel行
-     * @param tarRow   目标excel行
-     * @param tarSheet 目标sheet
+     * @param srcRow    来源excel行
+     * @param tarRow    目标excel行
+     * @param tarSheet  目标sheet
+     * @param evaluator 公式计算器
      */
-    private static void copyExcelRow(Workbook workbook, Row srcRow, Row tarRow, Sheet tarSheet) {
+    private static void copyExcelRow(Row srcRow, Row tarRow, Sheet tarSheet, FormulaEvaluator evaluator) {
         // 设置行高
         tarRow.setHeight(srcRow.getHeight());
         // 是否有值
@@ -140,12 +137,6 @@ public abstract class ExcelUtils {
         for (Cell srcCell : srcRow) {
             // 创建单元格
             Cell tarCell = tarRow.createCell(srcCell.getColumnIndex());
-            // 复制单元格
-            CellStyle cellStyle = workbook.createCellStyle();
-            // 复制单元格样式
-            cellStyle.cloneStyleFrom(srcCell.getCellStyle());
-            // 单元格样式
-            tarCell.setCellStyle(cellStyle);
             if (srcCell.getCellComment() != null) {
                 tarCell.setCellComment(srcCell.getCellComment());
             }
@@ -179,8 +170,18 @@ public abstract class ExcelUtils {
                     hasValue = true;
                 }
             } else if (cellType == CellType.FORMULA) {
-                tarCell.setCellFormula(srcCell.getCellFormula());
-                if (StringUtils.hasText(tarCell.getCellFormula())) {
+                CellValue evaluate = evaluator.evaluate(srcCell);
+                if (evaluate.getCellType() == CellType.BOOLEAN) {
+                    tarCell.setCellValue(evaluate.getBooleanValue());
+                    hasValue = true;
+                } else if (evaluate.getCellType() == CellType.NUMERIC) {
+                    tarCell.setCellValue(evaluate.getNumberValue());
+                    hasValue = true;
+                } else if (evaluate.getCellType() == CellType.STRING) {
+                    tarCell.setCellValue(evaluate.getStringValue());
+                    hasValue = true;
+                } else if (evaluate.getCellType() == CellType.FORMULA) {
+                    tarCell.setCellValue(evaluate.formatAsString());
                     hasValue = true;
                 }
             }

@@ -6,9 +6,6 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 应用程序配置
  *
@@ -33,8 +30,4 @@ public class ApplicationProperties {
      * 指定日期时间格式
      */
     private String dateTimePattern = "yyyy-MM-dd_HH-mm-ss";
-    /**
-     * 指定要排除的sheet工作表
-     */
-    private List<String> excludeSheets = new ArrayList<>();
 }
