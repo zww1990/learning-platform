@@ -21,9 +21,9 @@
 	
 	<dependencies>
 		<dependency>
-			<groupId>io.example</groupId>
+			<groupId>io.gitlab.zww1990</groupId>
 			<artifactId>c3p0-spring-boot-starter</artifactId>
-			<version>${project.version}</version>
+			<version>1.0.0-RELEASE</version>
 		</dependency>
 		
 		<dependency>
