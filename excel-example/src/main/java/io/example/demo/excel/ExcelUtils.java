@@ -180,9 +180,6 @@ public abstract class ExcelUtils {
                 } else if (evaluate.getCellType() == CellType.STRING) {
                     tarCell.setCellValue(evaluate.getStringValue());
                     hasValue = true;
-                } else if (evaluate.getCellType() == CellType.FORMULA) {
-                    tarCell.setCellValue(evaluate.formatAsString());
-                    hasValue = true;
                 }
             }
         }

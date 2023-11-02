@@ -36,10 +36,12 @@ public class ExcelUtilsTests {
 
     @Test
     public void testReadExcel() {
-        File file = new File("D:\\待合并的工作簿\\【拓展校区】TY24预算-北京分校.xlsx");
+        File file = new File("D:\\合并\\待合并的工作簿\\【拓展校区】FY25预算-石家庄分校.xlsx");
         try (Workbook wb = WorkbookFactory.create(file)) {
+            FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             List<List<Object>> data = new ArrayList<>();
             for (Sheet sheet : wb) {
+                System.err.println("正在读取: " + sheet.getSheetName());
                 for (Row row : sheet) {
                     List<Object> item = new ArrayList<>();
                     item.add(row.getRowNum());
@@ -60,11 +62,19 @@ public class ExcelUtilsTests {
                             }
                             value = tmp;
                         } else if (cellType == CellType.FORMULA) {
-                            String tmp = cell.getCellFormula();
-                            if (StringUtils.hasText(tmp)) {
+                            CellValue cellValue = evaluator.evaluate(cell);
+                            if (cellValue.getCellType() == CellType.BOOLEAN) {
+                                value = cellValue.getBooleanValue();
                                 hasValue = true;
+                            } else if (cellValue.getCellType() == CellType.NUMERIC) {
+                                value = cellValue.getNumberValue();
+                                hasValue = true;
+                            } else if (cellValue.getCellType() == CellType.STRING) {
+                                value = cellValue.getStringValue();
+                                hasValue = true;
+                            } else {
+                                hasValue = false;
                             }
-                            value = tmp;
                         } else if (cellType == CellType.NUMERIC) {
                             double tmp = cell.getNumericCellValue();
                             if (tmp != 0) {
@@ -80,6 +90,7 @@ public class ExcelUtilsTests {
                         }
                         item.add(value);
                     }
+                    System.err.println(item);
 //					System.err.println(String.format(
 //							"RowNum=%s, FirstCellNum=%s, LastCellNum=%s, PhysicalNumberOfCells=%s, hasValue=%s",
 //							row.getRowNum(), row.getFirstCellNum(), row.getLastCellNum(),
@@ -89,7 +100,7 @@ public class ExcelUtilsTests {
                     }
                 }
             }
-            data.forEach(System.err::println);
+//            data.forEach(System.err::println);
         } catch (Exception e) {
             e.printStackTrace();
         }
