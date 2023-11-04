@@ -47,6 +47,13 @@ public abstract class ExcelUtils {
                     for (int i = 0; i < number; i++) {
                         Sheet srcSheet = srcWorkbook.getSheetAt(i);
                         log.info("正在读取工作表[ {} ]", srcSheet.getSheetName());
+                        // 如果是一个空sheet，不进行复制
+                        if (srcSheet.getFirstRowNum() == -1
+                                && srcSheet.getLastRowNum() == -1
+                                && srcSheet.getPhysicalNumberOfRows() == 0) {
+                            log.info("工作表[ {} ]没有数据，不合并", srcSheet.getSheetName());
+                            continue;
+                        }
                         Sheet tarSheet = tarWorkbook.getSheet(srcSheet.getSheetName());
                         boolean isNew = tarSheet == null;
                         if (isNew) {

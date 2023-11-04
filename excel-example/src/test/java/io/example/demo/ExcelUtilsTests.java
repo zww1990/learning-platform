@@ -36,12 +36,15 @@ public class ExcelUtilsTests {
 
     @Test
     public void testReadExcel() {
-        File file = new File("D:\\合并\\待合并的工作簿\\【拓展校区】FY25预算-石家庄分校.xlsx");
+        File file = new File("D:\\合并\\待合并的工作簿\\【拓展校区】FY25预算-长沙分校.xlsx");
         try (Workbook wb = WorkbookFactory.create(file)) {
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             List<List<Object>> data = new ArrayList<>();
             for (Sheet sheet : wb) {
-                System.err.println("正在读取: " + sheet.getSheetName());
+                System.err.println("正在读取: " + sheet.getSheetName() +
+                        ", getFirstRowNum: " + sheet.getFirstRowNum() +
+                        ", getLastRowNum: " + sheet.getLastRowNum() +
+                        ", getPhysicalNumberOfRows: " + sheet.getPhysicalNumberOfRows());
                 for (Row row : sheet) {
                     List<Object> item = new ArrayList<>();
                     item.add(row.getRowNum());
@@ -90,7 +93,7 @@ public class ExcelUtilsTests {
                         }
                         item.add(value);
                     }
-                    System.err.println(item);
+//                    System.err.println(item);
 //					System.err.println(String.format(
 //							"RowNum=%s, FirstCellNum=%s, LastCellNum=%s, PhysicalNumberOfCells=%s, hasValue=%s",
 //							row.getRowNum(), row.getFirstCellNum(), row.getLastCellNum(),
