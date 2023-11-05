@@ -36,7 +36,7 @@ public class ExcelUtilsTests {
 
     @Test
     public void testReadExcel() {
-        File file = new File("D:\\合并\\待合并的工作簿\\【拓展校区】FY25预算-长沙分校.xlsx");
+        File file = new File("\\合并\\待合并的工作簿\\【拓展校区】FY25预算-长沙分校.xlsx");
         try (Workbook wb = WorkbookFactory.create(file)) {
             FormulaEvaluator evaluator = wb.getCreationHelper().createFormulaEvaluator();
             List<List<Object>> data = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ExcelUtilsTests {
                     item.add(row.getRowNum());
                     boolean hasValue = false;
                     for (Cell cell : row) {
-                        CellType cellType = cell.getCellType();
+                        CellType cellType = cell.getCellTypeEnum();
                         Object value = null;
                         if (cellType == CellType.BOOLEAN) {
                             boolean tmp = cell.getBooleanCellValue();
@@ -66,13 +66,13 @@ public class ExcelUtilsTests {
                             value = tmp;
                         } else if (cellType == CellType.FORMULA) {
                             CellValue cellValue = evaluator.evaluate(cell);
-                            if (cellValue.getCellType() == CellType.BOOLEAN) {
+                            if (cellValue.getCellTypeEnum() == CellType.BOOLEAN) {
                                 value = cellValue.getBooleanValue();
                                 hasValue = true;
-                            } else if (cellValue.getCellType() == CellType.NUMERIC) {
+                            } else if (cellValue.getCellTypeEnum() == CellType.NUMERIC) {
                                 value = cellValue.getNumberValue();
                                 hasValue = true;
-                            } else if (cellValue.getCellType() == CellType.STRING) {
+                            } else if (cellValue.getCellTypeEnum() == CellType.STRING) {
                                 value = cellValue.getStringValue();
                                 hasValue = true;
                             } else {

@@ -48,8 +48,8 @@ public abstract class ExcelUtils {
                         Sheet srcSheet = srcWorkbook.getSheetAt(i);
                         log.info("正在读取工作表[ {} ]", srcSheet.getSheetName());
                         // 如果是一个空sheet，不进行复制
-                        if (srcSheet.getFirstRowNum() == -1
-                                && srcSheet.getLastRowNum() == -1
+                        if (srcSheet.getFirstRowNum() == 0
+                                && srcSheet.getLastRowNum() == 0
                                 && srcSheet.getPhysicalNumberOfRows() == 0) {
                             log.info("工作表[ {} ]没有数据，不合并", srcSheet.getSheetName());
                             continue;
@@ -148,7 +148,7 @@ public abstract class ExcelUtils {
                 tarCell.setCellComment(srcCell.getCellComment());
             }
             // 不同数据类型处理
-            CellType cellType = srcCell.getCellType();
+            CellType cellType = srcCell.getCellTypeEnum();
             if (cellType == CellType.NUMERIC) {
                 if (DateUtil.isCellDateFormatted(srcCell)) {
                     tarCell.setCellValue(srcCell.getDateCellValue());
@@ -178,13 +178,13 @@ public abstract class ExcelUtils {
                 }
             } else if (cellType == CellType.FORMULA) {
                 CellValue evaluate = evaluator.evaluate(srcCell);
-                if (evaluate.getCellType() == CellType.BOOLEAN) {
+                if (evaluate.getCellTypeEnum() == CellType.BOOLEAN) {
                     tarCell.setCellValue(evaluate.getBooleanValue());
                     hasValue = true;
-                } else if (evaluate.getCellType() == CellType.NUMERIC) {
+                } else if (evaluate.getCellTypeEnum() == CellType.NUMERIC) {
                     tarCell.setCellValue(evaluate.getNumberValue());
                     hasValue = true;
-                } else if (evaluate.getCellType() == CellType.STRING) {
+                } else if (evaluate.getCellTypeEnum() == CellType.STRING) {
                     tarCell.setCellValue(evaluate.getStringValue());
                     hasValue = true;
                 }
