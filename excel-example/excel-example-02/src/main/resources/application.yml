@@ -1,6 +1,6 @@
 spring:
   application:
-    name: java-app
+    name: excel-example-02
   autoconfigure:
     exclude:
     - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: excel-example-01
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+    - org.springframework.boot.autoconfigure.sql.init.SqlInitializationAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration
+    - org.springframework.boot.autoconfigure.task.TaskSchedulingAutoConfiguration
+    - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
+    - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
+    - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+
+app:
+  read-folder: /合并/待合并的工作簿
+  write-folder: /合并/已合并的工作簿
+  date-time-pattern: yyyy-MM-dd_HH-mm-ss

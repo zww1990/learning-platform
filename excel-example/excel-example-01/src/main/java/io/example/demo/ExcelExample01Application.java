@@ -25,10 +25,10 @@ import java.util.stream.Collectors;
 @SpringBootApplication
 @Slf4j
 @AllArgsConstructor
-public class JavaSpringApplication implements CommandLineRunner {
+public class ExcelExample01Application implements CommandLineRunner {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(JavaSpringApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(ExcelExample01Application.class, args);
         log.debug("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
