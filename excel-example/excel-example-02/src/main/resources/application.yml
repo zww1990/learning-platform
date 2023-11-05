@@ -10,6 +10,7 @@ spring:
     - org.springframework.boot.autoconfigure.aop.AopAutoConfiguration
     - org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration
     - org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration
+    - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
 
 app:
   read-folder: /合并/待合并的工作簿

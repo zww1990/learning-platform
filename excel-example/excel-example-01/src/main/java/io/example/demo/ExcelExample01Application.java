@@ -29,7 +29,7 @@ public class ExcelExample01Application implements CommandLineRunner {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ExcelExample01Application.class, args);
-        log.debug("当前容器中的bean总数={}", context.getBeanDefinitionCount());
+        log.info("当前容器中的bean总数={}", context.getBeanDefinitionCount());
 //		java.util.Arrays.stream(context.getBeanDefinitionNames()).forEach(System.err::println);
     }
 
