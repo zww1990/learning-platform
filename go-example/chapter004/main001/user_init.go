@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-example/chapter004/trans"
+	"go-example/chapter004/main001/trans"
 )
 
 var twoPi = 2 * trans.Pi
