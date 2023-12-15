@@ -13,5 +13,5 @@ func function1() {
 }
 
 func function2() {
-	fmt.Printf("函数2：延迟到调用函数结束！")
+	fmt.Printf("函数2：延迟到调用函数结束！\n")
 }
