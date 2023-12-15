@@ -7,6 +7,6 @@ func main() {
 
 	for i >= 0 {
 		i = i - 1
-		fmt.Printf("The variable i is now: %d\n", i)
+		fmt.Printf("变量i现在是: %d\n", i)
 	}
 }

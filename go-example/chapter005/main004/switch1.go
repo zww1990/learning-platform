@@ -7,10 +7,10 @@ func main() {
 
 	switch num1 {
 	case 98, 99:
-		fmt.Println("It's equal to 98")
+		fmt.Println("它等于98")
 	case 100:
-		fmt.Println("It's equal to 100")
+		fmt.Println("它等于100")
 	default:
-		fmt.Println("It's not equal to 98 or 100")
+		fmt.Println("它不等于98或100")
 	}
 }

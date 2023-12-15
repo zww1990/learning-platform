@@ -7,10 +7,10 @@ func main() {
 
 	switch {
 	case num1 < 0:
-		fmt.Println("Number is negative")
+		fmt.Println("数字为负")
 	case num1 > 0 && num1 < 10:
-		fmt.Println("Number is between 0 and 10")
+		fmt.Println("数字介于0和10之间")
 	default:
-		fmt.Println("Number is 10 or greater")
+		fmt.Println("数字为10或更大")
 	}
 }
