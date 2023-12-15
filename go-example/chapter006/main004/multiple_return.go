@@ -8,7 +8,7 @@ var numx2, numx3 int
 func main() {
 	numx2, numx3 = getX2AndX3(num)
 	PrintValues()
-	numx2, numx3 = getX2AndX3_2(num)
+	numx2, numx3 = getX2AndX3V2(num)
 	PrintValues()
 }
 
@@ -21,7 +21,7 @@ func getX2AndX3(input int) (int, int) {
 	return 2 * input, 3 * input
 }
 
-func getX2AndX3_2(input int) (x2 int, x3 int) {
+func getX2AndX3V2(input int) (x2 int, x3 int) {
 	// 命名返回值：return语句中可以不用指定返回的值，return关键字一定要有
 	x2 = 2 * input
 	x3 = 3 * input
