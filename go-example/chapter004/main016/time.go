@@ -15,14 +15,14 @@ func main() {
 	t = time.Now().UTC()
 	fmt.Println(t)          // Wed Dec 21 08:52:14 +0000 UTC 2011
 	fmt.Println(time.Now()) // Wed Dec 21 09:52:14 +0100 RST 2011
-	// calculating times:
-	week = 60 * 60 * 24 * 7 * 1e9 // must be in nanosec
+	// 计算时间:
+	week = 60 * 60 * 24 * 7 * 1e9 // 必须以纳秒为单位
 	weekFromNow := t.Add(week)
 	fmt.Println(weekFromNow) // Wed Dec 28 08:52:14 +0000 UTC 2011
-	// formatting times:
+	// 格式化时间:
 	fmt.Println(t.Format(time.RFC822)) // 21 Dec 11 0852 UTC
 	fmt.Println(t.Format(time.ANSIC))  // Wed Dec 21 08:56:34 2011
-	// The time must be 2006-01-02 15:04:05
+	// 时间一定是 2006-01-02 15:04:05
 	fmt.Println(t.Format("02 Jan 2006 15:04")) // 21 Dec 2011 08:52
 	s := t.Format("20060102")
 	fmt.Println(t, "=>", s)

@@ -10,11 +10,11 @@ func main() {
 	var an int
 	var newS string
 
-	fmt.Printf("The size of ints is: %d\n", strconv.IntSize)
+	fmt.Printf("int的大小为: %d\n", strconv.IntSize)
 
 	an, _ = strconv.Atoi(orig)
-	fmt.Printf("The integer is: %d\n", an)
+	fmt.Printf("该整数为: %d\n", an)
 	an = an + 5
 	newS = strconv.Itoa(an)
-	fmt.Printf("The new string is: %s\n", newS)
+	fmt.Printf("新的字符串是: %s\n", newS)
 }

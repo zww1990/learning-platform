@@ -10,5 +10,5 @@ func main() {
 	var newS string
 
 	newS = strings.Repeat(origS, 3)
-	fmt.Printf("The new repeated string is: %s\n", newS)
+	fmt.Printf("新的重复字符串是: %s\n", newS)
 }

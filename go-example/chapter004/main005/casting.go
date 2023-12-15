@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	var n int16 = 34
 	var m int32
-	// compiler error: cannot use n (type int16) as type int32 in assignment
+	// 编译器错误:无法在赋值中将n（类型int16）用作类型int32
 	//m = n
 	m = int32(n)
 
