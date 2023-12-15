@@ -5,6 +5,6 @@ import "fmt"
 func main() {
 	// 无限循环
 	for i := 0; ; i++ {
-		fmt.Println("Value of i is now:", i)
+		fmt.Println("i的值现在是:", i)
 	}
 }

@@ -10,7 +10,7 @@ LABEL1:
 			if j == 4 {
 				continue LABEL1
 			}
-			fmt.Printf("i is: %d, and j is: %d\n", i, j)
+			fmt.Printf("i的值是: %d, j的值是: %d\n", i, j)
 		}
 	}
 
