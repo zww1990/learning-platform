@@ -5,8 +5,8 @@ import "fmt"
 func main() {
 	bool1 := true
 	if bool1 {
-		fmt.Printf("The value is true\n")
+		fmt.Printf("该值为 true\n")
 	} else {
-		fmt.Printf("The value is false\n")
+		fmt.Printf("该值为 false\n")
 	}
 }
