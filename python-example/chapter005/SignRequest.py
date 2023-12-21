@@ -89,8 +89,8 @@ class SignRequest:
         sign_str = sign_str + uri + "\n"
         # HTTP ContentType
         sign_str = sign_str + header_map['Content-Type'] + "\n"
-        # CanonicalQueryString
-        sign_str = sign_str + self.__sorted_query(query_params) + "\n" + "\n"
+        # 对查询字符串进行排序
+        sign_str = sign_str + self.__sorted_query(query_params) + "\n\n"
         return sign_str
 
     # 生成签名并写入请求头
