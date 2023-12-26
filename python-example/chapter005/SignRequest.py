@@ -3,21 +3,25 @@ import hmac
 import json
 import requests
 
-# supOS地址
-supos_url = "http://192.168.60.21:8080"
-# 获取应用的ak
-app_ak = "aeb6e087881ca5639a919312bfba0d0c"
-# 获取应用的sk
-app_sk = "1e0d361aa22af5563b5be7ad7ce86507"
-
 
 class SignRequest:
     __authorize_uri = "/inter-api/auth/v1/oauth2/authorize"
     __token_uri = "/open-api/auth/v2/oauth2/token"
+    supos_url = ''
+    app_ak = ''
+    app_sk = ''
+
+    def __init__(self, url, ak, sk):
+        self.supos_url = url
+        self.app_ak = ak
+        self.app_sk = sk
+        print('url:', self.supos_url)
+        print('ak:', self.app_ak)
+        print('sk:', self.app_sk)
 
     def authorize(self, redirect_uri, state):
         auth_url = self.__authorize_uri + "?responseType=code&state=" + state + "&redirectUri=" + redirect_uri
-        return supos_url + auth_url
+        return self.supos_url + auth_url
 
     def access_token(self, access_code, logout_url):
         token_dict = {'grantType': 'authorization_code', 'code': access_code, 'logoutUri': logout_url}
@@ -37,7 +41,7 @@ class SignRequest:
 
     def __do_request(self, api_url, method_name, query_dict, request_dict):
         headers = {"Content-Type": 'application/json;charset=utf-8'}
-        whole_url = supos_url + api_url
+        whole_url = self.supos_url + api_url
         self.__sign_header(api_url, method_name, query_dict, headers)
         response = None
         if "GET" == method_name:
@@ -97,8 +101,8 @@ class SignRequest:
     def __sign_header(self, uri, method_name, query_params, header_map):
         sign_str = self.__build_sign_str(uri, method_name, query_params, header_map)
         print("签名源内容：========开始======>>\n" + sign_str)
-        signature = hmac.new(app_sk.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
-        final_signature = "Sign " + app_ak + "-" + signature
+        signature = hmac.new(self.app_sk.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
+        final_signature = "Sign " + self.app_ak + "-" + signature
         print("签名源内容：<<========结束======")
         print('签名结果：' + final_signature)
         header_map['Authorization'] = final_signature
