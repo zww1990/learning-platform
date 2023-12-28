@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+	<head th:replace="~{common/header :: header(~{::title},_)}">
+		<title>我的视频网站 - 添加新作品</title>
+	</head>
+	<body>
+		<nav th:replace="~{common/navbar :: navbar}"></nav>
+		<main role="main">
+			<section class="bg-gray200 pt-3 pb-3">
+				<div class="container-fluid">
+					<div class="row justify-content-center">
+						<div class="col-4">
+							<h1 class="h3 mb-3 font-weight-normal">发布新作品</h1>
+							<div class="mb-3"
+								 style="color: red;font-weight: bold"
+								 th:if="${error} ne null"
+								 th:text="${error}"></div>
+							<form class="needs-validation" novalidate
+								  method="post"
+								  enctype="multipart/form-data"
+								  action="/videohub/add"
+								  th:object="${video}">
+								<div class="mb-3">
+									<label for="videoName">视频名称</label>
+									<input type="text" class="form-control" th:field="*{videoName}" placeholder="请输入视频名称" required>
+									<div class="invalid-feedback">请输入视频名称！</div>
+								</div>
+
+								<div class="mb-3">
+									<label for="categoryId">视频类别</label>
+									<select class="form-control" th:field="*{categoryId}" required>
+										<option value="">请选择视频类别...</option>
+										<option th:each="cate : ${categories}"
+												th:value="${cate.id}"
+												th:text="${cate.categoryName}">类别名称</option>
+									</select>
+									<div class="invalid-feedback">请选择视频类别！</div>
+								</div>
+
+								<div class="mb-3">
+									<label for="videoLogo">视频封面</label>
+									<input type="file" class="form-control" th:field="*{videoLogo}" required accept="image/*">
+									<div class="invalid-feedback">请上传视频封面！</div>
+									<div id="videoLogoPreview"></div>
+								</div>
+
+								<div class="mb-3">
+									<label for="videoLink">视频文件</label>
+									<input type="file" class="form-control" th:field="*{videoLink}" required accept="video/*">
+									<div class="invalid-feedback">请上传视频文件！</div>
+									<div id="videoLinkPreview"></div>
+								</div>
+
+								<div class="mt-3">
+									<button class="btn btn-primary" type="submit">添加</button>
+									<button class="btn btn-secondary" type="button" onclick="location.reload()">清空</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer th:replace="~{common/footer :: footer}"></footer>
+		<th:block th:replace="~{common/script :: script}" />
+	</body>
+</html>

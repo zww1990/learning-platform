@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org">
+	<head th:replace="~{common/header :: header(~{::title},_)}">
+		<title>我的视频网站 - [[${video.videoName}]]</title>
+	</head>
+	<body>
+		<nav th:replace="~{common/navbar :: navbar}"></nav>
+		<main role="main">
+			<section class="bg-gray200 pt-3 pb-3">
+				<div class="container-fluid">
+					<div class="row justify-content-center">
+						<div class="col-8">
+							<article class="card">
+								<video class="card-img-top mb-2" controls height="600px"
+									   th:src="${video.videoLink}"
+									   th:poster="${video.videoLogo}"></video>
+								<div class="card-body">
+									<h1 class="card-title display-4" th:text="${video.videoName}">标题</h1>
+									<ul>
+										<li>点击量：[[${video.videoHits}]]</li>
+										<li>类别：[[${video.categoryName}]]</li>
+										<li>状态：[[${video.auditStatus.desc}]]</li>
+										<li>作者：[[${video.creatorNick}]]</li>
+										<li>创建时间：[[${#temporals.format(video.createdDate, 'yyyy-MM-dd HH:mm:ss')}]]</li>
+										<li>审核人：[[${video.auditorNick}]]</li>
+										<li>审核时间：[[${#temporals.format(video.auditedDate, 'yyyy-MM-dd HH:mm:ss')}]]</li>
+									</ul>
+									<small class="d-block">
+										<a class="btn btn-sm btn-gray200" th:with="redirect=${param.redirect}" th:href="${redirect}">
+											<i class="fa fa-arrow-left"></i> 返回
+										</a>
+									</small>
+								</div>
+							</article>
+						</div>
+						<div class="col-4" th:if="${video.auditStatus.name} eq 'PASSED'">
+							<div class="list-group">
+								<a class="list-group-item list-group-item-action" th:if="${comments.empty}">
+									<div class="d-flex w-100 justify-content-between">
+										<h5 class="mb-1">暂无评论</h5>
+									</div>
+								</a>
+								<a class="list-group-item list-group-item-action" th:each="comment : ${comments}">
+									<div class="d-flex w-100 justify-content-between">
+										<img class="rounded-circle mr-2" src="/img/av.png" width="30">
+										<h5 class="mb-1" style="width: 66%" th:text="${comment.creatorNick}">评论人</h5>
+										<small th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm:ss')}">时间</small>
+									</div>
+									<p class="mb-1 mt-2" th:text="${comment.content}">评论内容</p>
+								</a>
+							</div>
+							<form class="mt-2 needs-validation" novalidate method="post" action="/comment/add" th:if="${session.CURRENT_USER} ne null">
+								<input type="hidden" name="videoId" th:value="${video.id}">
+								<input type="hidden" name="redirect" th:value="${param.redirect}">
+								<textarea name="content" style="width: 100%;height: 100px" required placeholder="请输入评论内容" class="form-control"></textarea>
+								<button class="mt-2 btn btn-primary" type="submit">评论</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer th:replace="~{common/footer :: footer}"></footer>
+		<th:block th:replace="~{common/script :: script}" />
+	</body>
+</html>
