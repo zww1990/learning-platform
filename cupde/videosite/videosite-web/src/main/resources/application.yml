@@ -49,6 +49,7 @@ videosite-app:
     - /user/list
   exclude-path-patterns:
     - /videohub/show/**
+    - /videohub/addhits/**
     - /category/list
   admin-path-patterns:
     - /category/**

@@ -48,14 +48,13 @@ public interface VideoService {
     Video queryOne(Integer id, FetchType fetchType);
 
     /**
-     * 按主键查询，并增加播放量
+     * 增加播放量
      *
      * @param id 主键
-     * @return {@link Video}
      * @author 张维维
      * @since 2023-10-04 21:13:49
      */
-    Video queryOneAndAddHits(Integer id);
+    void addHits(Integer id);
 
     /**
      * 视频审核

@@ -120,24 +120,14 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Video queryOneAndAddHits(Integer id) {
-        log.info("queryOneAndAddHits(): id = {}", id);
-        return this.videoRepository.findById(id).map(m -> {
+    public void addHits(Integer id) {
+        log.info("addHits(): id = {}", id);
+        this.videoRepository.findById(id).map(m -> {
             // 增加播放量
             m.setVideoHits(m.getVideoHits() + 1);
             this.videoRepository.save(m);
-            m.setCategoryName(this.categoryRepository.findById(m.getCategoryId())
-                    .map(Category::getCategoryName).orElseGet(String::new));
-            m.setCreatorNick(this.userRepository.findByUsername(m.getCreator())
-                    .map(User::getNickname).orElseGet(String::new));
-            Optional.ofNullable(m.getAuditor()).ifPresent(c ->
-                    m.setAuditorNick(this.userRepository.findByUsername(c)
-                            .map(User::getNickname).orElseGet(String::new)));
-            // 组装视频封面、文件在服务器的存储路径
-            m.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), m.getVideoLogo()));
-            m.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), m.getVideoLink()));
             return m;
-        }).orElse(null);
+        });
     }
 
     @Override

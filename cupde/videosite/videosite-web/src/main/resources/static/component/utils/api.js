@@ -42,6 +42,10 @@ const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {
   method: 'DELETE'
 })
 
+const videoAddHitsApi = id => fetch(`/videohub/addhits/${id}`, {
+  method: 'PUT'
+})
+
 const videoShowApi = id => fetch(`/videohub/show/${id}`)
 
 const videoEditApi = id => fetch(`/videohub/edit/${id}`)
@@ -88,6 +92,7 @@ export {
   homeApi,
   commentAddApi,
   videoDelApi,
+  videoAddHitsApi,
   videoShowApi,
   videoListApi,
   videoAddApi,

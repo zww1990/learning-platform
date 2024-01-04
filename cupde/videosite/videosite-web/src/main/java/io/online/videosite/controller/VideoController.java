@@ -62,7 +62,7 @@ public class VideoController {
      */
     @GetMapping(path = "/show/{id}")
     public ResponseEntity<?> show(@PathVariable Integer id) {
-        Video video = this.videoService.queryOneAndAddHits(id);
+        Video video = this.videoService.queryOne(id, FetchType.EAGER);
         // 如果视频不存在
         if (video == null) {
             throw new EntityNotFoundException("此视频不存在");
@@ -73,6 +73,22 @@ public class VideoController {
         mav.put("video", video);
         mav.put("comments", comments);
         return ResponseEntity.ok(mav);
+    }
+
+    /**
+     * 增加播放量
+     */
+    @PutMapping(path = "/addhits/{id}")
+    public Object addHits(@PathVariable Integer id) {
+        Video video = this.videoService.queryOne(id, FetchType.LAZY);
+        // 如果视频不存在
+        if (video == null) {
+            throw new EntityNotFoundException("此视频不存在");
+        }
+        this.videoService.addHits(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body("更新成功！");
     }
 
     /**

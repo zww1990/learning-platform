@@ -1,4 +1,4 @@
-import { videoShowApi, commentAddApi } from '../utils/api.js'
+import { videoShowApi, videoAddHitsApi, commentAddApi } from '../utils/api.js'
 import { store } from '../utils/store.js'
 
 const { message, notification } = antd
@@ -31,14 +31,22 @@ export default {
         notification.error({ message: '操作错误', description: await res2.text() })
       }
     }
-    return { data, avatarImg, comment, handleSubmit, dayjs, store }
+    const handlePlaying = () => {
+        videoAddHitsApi(comment.value.videoId)
+          .then(res => res.text())
+          .then(res => console.log(res))
+    }
+    return { data, avatarImg, comment, handleSubmit, dayjs, store, handlePlaying }
   },
   template: `
     <a-row :gutter="[16,8]">
       <a-col :span="data.video.auditStatus === 'PASSED' ? 16 : 24">
         <a-card hoverable>
           <template #cover>
-            <video controls style="width: 100%" :src="data.video.videoLink" :poster="data.video.videoLogo"></video>
+            <video controls style="width: 100%"
+              :src="data.video.videoLink"
+              :poster="data.video.videoLogo"
+              @playing="handlePlaying"></video>
           </template>
           <a-card-meta :title="data.video.videoName">
             <template #description>
