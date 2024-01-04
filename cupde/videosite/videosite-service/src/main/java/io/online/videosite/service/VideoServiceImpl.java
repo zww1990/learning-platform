@@ -123,7 +123,7 @@ public class VideoServiceImpl implements VideoService {
     public Video queryOneAndAddHits(Integer id) {
         log.info("queryOneAndAddHits(): id = {}", id);
         return this.videoRepository.findById(id).map(m -> {
-            // 增加点击量
+            // 增加播放量
             m.setVideoHits(m.getVideoHits() + 1);
             this.videoRepository.save(m);
             m.setCategoryName(this.categoryRepository.findById(m.getCategoryId())

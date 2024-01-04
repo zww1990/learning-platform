@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface VideoService {
     /**
-     * 按审核状态查询视频，并按点击量进行降序排序
+     * 按审核状态查询视频，并按播放量进行降序排序
      *
      * @param categoryId  类别主键
      * @param auditStatus {@link AuditStatus}
@@ -48,7 +48,7 @@ public interface VideoService {
     Video queryOne(Integer id, FetchType fetchType);
 
     /**
-     * 按主键查询，并增加点击量
+     * 按主键查询，并增加播放量
      *
      * @param id 主键
      * @return {@link Video}

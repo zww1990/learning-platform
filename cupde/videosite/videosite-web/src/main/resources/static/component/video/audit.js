@@ -52,7 +52,7 @@ export default {
           <a-card-meta :title="video.videoName">
             <template #description>
               <ul>
-                <li>点击量：{{video.videoHits}}</li>
+                <li>播放量：{{video.videoHits}}</li>
                 <li>类别：{{video.categoryName}}</li>
                 <li>状态：{{video.auditStatusDesc}}</li>
                 <li>作者：{{video.creatorNick}}</li>

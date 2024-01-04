@@ -30,7 +30,7 @@ create table if not exists t_video
     video_name    varchar(128) not null comment '视频名称',
     video_link    varchar(256) not null comment '视频链接',
     video_logo    varchar(256) not null comment '视频封面',
-    video_hits    int          not null comment '视频点击率',
+    video_hits    int          not null comment '视频播放量',
     category_id   int          not null comment '视频类别主键',
     created_date  datetime     not null comment '创建时间',
     creator       varchar(64)  not null comment '创建人',

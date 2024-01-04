@@ -35,7 +35,7 @@ public class Video extends BaseEntity {
      */
     private String videoLogo;
     /**
-     * 视频点击率
+     * 视频播放量
      */
     private Integer videoHits;
     /**
