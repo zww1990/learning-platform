@@ -50,11 +50,12 @@ public interface VideoService {
     /**
      * 增加播放量
      *
-     * @param id 主键
+     * @param id   视频主键
+     * @param user {@link User}
      * @author 张维维
      * @since 2023-10-04 21:13:49
      */
-    void addHits(Integer id);
+    void addHits(Integer id, User user);
 
     /**
      * 视频审核

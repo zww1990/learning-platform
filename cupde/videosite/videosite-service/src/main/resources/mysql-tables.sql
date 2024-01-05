@@ -43,6 +43,19 @@ create table if not exists t_video
     foreign key category_id_fk (category_id) references t_category (id)
 ) comment '视频表';
 
+create table if not exists t_video_history
+(
+    id            int(11) auto_increment primary key comment '主键',
+    video_id      int          not null comment '视频主键',
+    play_count    int          not null comment '视频播放量',
+    created_date  datetime     not null comment '创建时间',
+    creator       varchar(64)  not null comment '创建人',
+    modified_date datetime     not null comment '修改时间',
+    modifier      varchar(64)  not null comment '修改人',
+    foreign key video_id_fk (video_id) references t_video (id),
+    unique key video_id_uk (video_id, creator, modifier)
+) comment '视频观看历史表';
+
 create table if not exists t_comment
 (
     id            int(11) auto_increment primary key comment '主键',

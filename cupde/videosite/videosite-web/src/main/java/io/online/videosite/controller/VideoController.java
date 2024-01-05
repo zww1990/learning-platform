@@ -79,13 +79,14 @@ public class VideoController {
      * 增加播放量
      */
     @PutMapping(path = "/addhits/{id}")
-    public Object addHits(@PathVariable Integer id) {
+    public Object addHits(@PathVariable Integer id,
+                          @SessionAttribute(name = Constants.SESSION_USER_KEY, required = false) User user) {
         Video video = this.videoService.queryOne(id, FetchType.LAZY);
         // 如果视频不存在
         if (video == null) {
             throw new EntityNotFoundException("此视频不存在");
         }
-        this.videoService.addHits(id);
+        this.videoService.addHits(id, user);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body("更新成功！");

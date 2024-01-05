@@ -6,12 +6,10 @@ import io.online.videosite.constant.UserType;
 import io.online.videosite.domain.Category;
 import io.online.videosite.domain.User;
 import io.online.videosite.domain.Video;
+import io.online.videosite.domain.VideoHistory;
 import io.online.videosite.model.VideoModel;
 import io.online.videosite.properties.VideoSiteAppProperties;
-import io.online.videosite.repository.CategoryRepository;
-import io.online.videosite.repository.CommentRepository;
-import io.online.videosite.repository.UserRepository;
-import io.online.videosite.repository.VideoRepository;
+import io.online.videosite.repository.*;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
@@ -43,6 +41,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class VideoServiceImpl implements VideoService {
     private final VideoRepository videoRepository;
+    private final VideoHistoryRepository videoHistoryRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
@@ -65,7 +64,8 @@ public class VideoServiceImpl implements VideoService {
         }, Sort.by(Direction.DESC, "videoHits"));
         // 收集视频作者
         List<String> creators = videos.stream().map(Video::getCreator).distinct().toList();
-        Map<String, User> userMap = this.userRepository.findAll((root, query, builder) -> root.get("username").in(creators))
+        Map<String, User> userMap = this.userRepository.findAll(
+                        (root, query, builder) -> root.get("username").in(creators))
                 .stream().collect(Collectors.toMap(User::getUsername, Function.identity()));
         videos.forEach(f -> {
             // 组装视频封面、文件在服务器的存储路径
@@ -120,12 +120,32 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public void addHits(Integer id) {
-        log.info("addHits(): id = {}", id);
+    public void addHits(Integer id, User user) {
+        log.info("addHits(): id = {}, user = {}", id, user);
         this.videoRepository.findById(id).map(m -> {
             // 增加播放量
             m.setVideoHits(m.getVideoHits() + 1);
             this.videoRepository.save(m);
+            // 如果是登录状态，记录用户观看历史
+            Optional.ofNullable(user).ifPresent(c -> {
+                // 按视频主键、观影人查询一条历史记录
+                VideoHistory vh = this.videoHistoryRepository.findOne(
+                        (root, query, builder) -> builder.and(
+                                builder.equal(root.get("videoId"), id),
+                                builder.equal(root.get("creator"), user.getUsername())
+                        )).orElseGet(() -> {
+                    VideoHistory tmp = new VideoHistory();
+                    tmp.setPlayCount(0);
+                    tmp.setVideoId(id);
+                    tmp.setCreatedDate(LocalDateTime.now());
+                    tmp.setCreator(user.getUsername());
+                    return tmp;
+                });
+                vh.setPlayCount(vh.getPlayCount() + 1);
+                vh.setModifiedDate(LocalDateTime.now());
+                vh.setModifier(user.getUsername());
+                this.videoHistoryRepository.save(vh);
+            });
             return m;
         });
     }
