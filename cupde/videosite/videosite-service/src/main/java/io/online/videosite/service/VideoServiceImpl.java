@@ -194,9 +194,13 @@ public class VideoServiceImpl implements VideoService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Video video) {
         log.info("delete(): video = {}", video);
-        // 先删除视频评论、视频数据
+        // 删除视频评论
         this.commentRepository.delete((root, query, builder) ->
                 builder.equal(root.get("videoId"), video.getId()));
+        // 删除视频观看历史
+        this.videoHistoryRepository.delete((root, query, builder) ->
+                builder.equal(root.get("videoId"), video.getId()));
+        // 删除视频数据
         this.videoRepository.delete(video);
         // 然后再删除视频封面、链接文件，避免删除失败，误删。
         try {
