@@ -15,7 +15,7 @@ export default {
     const onFinish = async values => {
       const res = await videoAddApi(values)
       if(res.ok){
-        router.push('/video/success')
+        router.push('/video/addsuc')
       }else{
         message.error(await res.text())
       }

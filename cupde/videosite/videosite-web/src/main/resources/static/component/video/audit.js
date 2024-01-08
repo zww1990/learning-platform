@@ -35,7 +35,7 @@ export default {
       }
       const res2 = await videoHandleAuditApi(audit.value)
       if(res2.ok){
-        router.push(`/video/show/${audit.value.id}`)
+        router.push('/video/auditsuc')
       }else{
         notification.error({ message: '操作错误', description: await res2.text() })
       }

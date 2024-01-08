@@ -39,7 +39,7 @@ export default {
     const onFinish = async values => {
       const res = await videoHandleEditApi(formState)
       if(res.ok){
-        router.push(`/video/show/${formState.id}`)
+        router.push('/video/editsuc')
       }else{
         message.error(await res.text())
       }
