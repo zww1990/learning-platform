@@ -36,12 +36,7 @@ export default {
          <div class="logo" :style="{ float:'left', width:'60px', height:'64px', background:'white', paddingLeft:'10px' }">
           <img :src="faviconImg" width="40" height="40">
          </div>
-         <a-menu
-           v-model:selectedKeys="selectedKeys"
-           theme="light"
-           mode="horizontal"
-           :style="{ lineHeight: '64px' }"
-           @click="handleClick">
+         <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="horizontal" :style="{ lineHeight: '64px' }" @click="handleClick">
            <a-menu-item key="/">
             <i class="fa fa-home"></i>主页
            </a-menu-item>
@@ -82,9 +77,7 @@ export default {
            </Suspense>
          </div>
        </a-layout-content>
-       <a-layout-footer :style="{ textAlign: 'center' }">
-         Copyright &copy; 2020 - 2023 关于网站 网站推广 联系我们 帮助中心
-       </a-layout-footer>
+       <a-layout-footer :style="{ textAlign: 'center' }">Copyright &copy; 2020 - 2023 关于网站 网站推广 联系我们 帮助中心</a-layout-footer>
       </a-layout>
     </a-config-provider>
   `
