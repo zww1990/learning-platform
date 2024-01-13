@@ -35,7 +35,13 @@ export const store = reactive({
       menus.push({ key: '/video/add', title: '添加视频', icon: 'fa fa-plus-circle', type: 'text' })
       menus.push({ key: '/logout', title: '退出', icon: 'fa fa-sign-out', type: 'text' })
     }
-//    console.log(menus)
+    const router = VueRouter.useRouter()
+    const path = router.currentRoute.value.path
+    menus.forEach(it => {
+      if(it.key === path){
+        it.type = 'link'
+      }
+    })
     return menus
   }
 })
