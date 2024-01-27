@@ -46,7 +46,7 @@ export default {
                  @click="handleClick(card, 'audit')">审核</i>
               <template v-if="!!store.user && store.user.username === card.creator">
                 <i class="fa fa-edit"
-                   v-if="card.auditStatus !== 'PASSED'"
+                   v-if="card.auditStatus !== 'PASSED' || store.user.userType === 'ADMIN'"
                    @click="handleClick(card, 'edit')">编辑</i>
                 <a-popconfirm title="是否确定要删除此视频？" @confirm="handleDelete(card)">
                   <i class="fa fa-remove">删除</i>
