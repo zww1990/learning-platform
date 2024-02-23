@@ -6,6 +6,7 @@ if __name__ == '__main__':
                       password='admin@2024',
                       decode_responses=True)
 
+    # 执行命令
     res = rdb.execute_command('info')
     print('redis_version:', res['redis_version'])
 
