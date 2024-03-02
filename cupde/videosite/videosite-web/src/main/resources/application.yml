@@ -50,6 +50,7 @@ videosite-app:
   exclude-path-patterns:
     - /videohub/show/**
     - /videohub/addhits/**
+    - /videohub/search
     - /category/list
   admin-path-patterns:
     - /category/**

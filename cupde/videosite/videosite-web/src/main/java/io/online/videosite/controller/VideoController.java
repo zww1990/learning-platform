@@ -58,6 +58,16 @@ public class VideoController {
     }
 
     /**
+     * 按关键字查询审核通过的视频
+     */
+    @GetMapping(path = "/search")
+    public ResponseEntity<?> search(@RequestParam String keyword) {
+        List<Video> videos = this.videoService.queryForKeyword(keyword);
+        log.info("search(): 视频数量 = {}", videos.size());
+        return ResponseEntity.ok(videos);
+    }
+
+    /**
      * 跳转到查看页面
      */
     @GetMapping(path = "/show/{id}")

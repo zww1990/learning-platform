@@ -1,6 +1,7 @@
 import { store } from './utils/store.js'
 
 const { ref, reactive, watch } = Vue
+const { message } = antd
 const locale = antd.locales.zh_CN
 
 export default {
@@ -23,6 +24,7 @@ export default {
       if(key === '/logout'){
         store.clearUser()
         router.push('/')
+        message.success('您已安全退出系统。')
       }else{
         router.push(key)
       }
@@ -30,7 +32,8 @@ export default {
 
     const handleSearch = ( keyword ) => {
         if(keyword && keyword.trim()){
-            console.log(keyword)
+            store.setVideos(keyword)
+            router.push('/video/search')
         }
     }
 

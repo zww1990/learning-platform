@@ -23,4 +23,13 @@ public class VideoServiceTests {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testQueryForKeyword() {
+        try {
+            this.videoService.queryForKeyword("中方").forEach(System.err::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -178,8 +178,10 @@ export default {
       :title="modalState.previewTitle"
       :footer="null"
       @cancel="handleCancel"
-      width="900px"
-      centered>
+      :bodyStyle="{ textAlign: 'center' }"
+      width="800px"
+      centered
+      destroyOnClose>
       <video controls style="width: 100%" :src="modalState.previewUrl" v-if="modalState.isVideo"></video>
       <img style="width: 100%" :src="modalState.previewUrl" v-else/>
     </a-modal>

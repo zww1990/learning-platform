@@ -30,6 +30,35 @@ export default {
   template: `
     <a-row>
       <a-col :span="24">
+        <span :style="{ marginRight: '8px' }">推荐:</span>
+      </a-col>
+    </a-row>
+    <a-divider />
+    <a-row :gutter="[8,8]">
+      <template v-if="state.cards.length > 0">
+        <a-col :span="4" v-for="card in state.cards" :key="card.id">
+          <a-card hoverable>
+            <template #cover>
+              <a-image :alt="card.videoName" :src="card.videoLogo" :fallback="fallbackImg" />
+            </template>
+            <template #actions>
+              <i class="fa fa-eye" @click="handleClick(card)">查看({{card.videoHits}})</i>
+            </template>
+            <a-card-meta :title="card.creatorNick" :description="card.videoName">
+              <template #avatar>
+                <a-avatar :src="avatarImg" />
+              </template>
+            </a-card-meta>
+          </a-card>
+        </a-col>
+      </template>
+      <a-col :span="24" v-else>
+        <a-empty />
+      </a-col>
+    </a-row>
+    <a-divider />
+    <a-row>
+      <a-col :span="24">
         <span :style="{ marginRight: '8px' }">类别:</span>
         <template v-for="tag in state.tags" :key="tag.id">
           <a-checkable-tag

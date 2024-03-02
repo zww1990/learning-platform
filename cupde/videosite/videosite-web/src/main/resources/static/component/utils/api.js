@@ -38,6 +38,16 @@ const homeApi = async (id) => {
   return await (await fetch(url)).json()
 }
 
+const videoSearchApi = async (keyword) => {
+  let url = '/videohub/search'
+  if(keyword){
+    const params = new URLSearchParams()
+    params.append('keyword', keyword)
+    url = `${url}?${params.toString()}`
+  }
+  return await (await fetch(url)).json()
+}
+
 const videoDelApi = params => fetch(`/videohub/delete/${params.id}`, {
   method: 'DELETE'
 })
@@ -91,6 +101,7 @@ export {
   categoryListApi,
   homeApi,
   commentAddApi,
+  videoSearchApi,
   videoDelApi,
   videoAddHitsApi,
   videoShowApi,

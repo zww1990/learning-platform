@@ -43,22 +43,22 @@ export default {
       <a-col :span="data.video.auditStatus === 'PASSED' ? 16 : 24">
         <a-card hoverable>
           <template #cover>
-            <video controls style="width: 100%"
+            <video controls style="height: 394px"
               :src="data.video.videoLink"
               :poster="data.video.videoLogo"
               @playing="handlePlaying"></video>
           </template>
-          <a-card-meta :title="data.video.videoName">
+          <a-card-meta>
             <template #description>
-              <ul>
-                <li>播放量：{{data.video.videoHits}}</li>
-                <li>类别：{{data.video.categoryName}}</li>
-                <li>状态：{{data.video.auditStatusDesc}}</li>
-                <li>作者：{{data.video.creatorNick}}</li>
-                <li>创建时间：{{data.video.createdDate}}</li>
-                <li>审核人：{{data.video.auditorNick}}</li>
-                <li>审核时间：{{data.video.auditedDate}}</li>
-              </ul>
+              <a-descriptions :title="data.video.videoName" :column="4">
+                <a-descriptions-item label="播放量">{{data.video.videoHits}}</a-descriptions-item>
+                <a-descriptions-item label="类别">{{data.video.categoryName}}</a-descriptions-item>
+                <a-descriptions-item label="状态">{{data.video.auditStatusDesc}}</a-descriptions-item>
+                <a-descriptions-item label="作者">{{data.video.creatorNick}}</a-descriptions-item>
+                <a-descriptions-item label="创建时间">{{data.video.createdDate}}</a-descriptions-item>
+                <a-descriptions-item label="审核人">{{data.video.auditorNick}}</a-descriptions-item>
+                <a-descriptions-item label="审核时间">{{data.video.auditedDate}}</a-descriptions-item>
+              </a-descriptions>
             </template>
           </a-card-meta>
         </a-card>

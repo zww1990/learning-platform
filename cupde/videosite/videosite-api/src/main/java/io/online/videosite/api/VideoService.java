@@ -37,6 +37,16 @@ public interface VideoService {
     List<Video> queryForUser(User user);
 
     /**
+     * 按关键字查询审核通过的视频
+     *
+     * @param keyword 关键字
+     * @return {@link List<Video>}
+     * @author 张维维
+     * @since 2024-03-02 16:09:26
+     */
+    List<Video> queryForKeyword(String keyword);
+
+    /**
      * 按主键查询
      *
      * @param id        主键

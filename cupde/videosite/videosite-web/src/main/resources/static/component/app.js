@@ -20,6 +20,7 @@ const router = createRouter({
     { path: '/video/audit/:id', component: () => import('./video/audit.js') },
     { path: '/video/auditsuc', component: () => import('./video/auditsuc.js') },
     { path: '/video/list', component: () => import('./video/list.js') },
+    { path: '/video/search', component: () => import('./video/search.js') },
     { path: '/video/add', component: () => import('./video/add.js') },
     { path: '/video/addsuc', component: () => import('./video/addsuc.js') },
     { path: '/:pathMatch(.*)*', redirect: '/' }

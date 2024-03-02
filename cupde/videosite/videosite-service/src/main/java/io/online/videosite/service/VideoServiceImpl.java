@@ -94,6 +94,31 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
+    public List<Video> queryForKeyword(String keyword) {
+        log.info("queryForKeyword(): keyword = {}", keyword);
+        List<Video> videos = this.videoRepository.findAll((root, query, builder) ->
+                        builder.and(builder.equal(root.get("auditStatus"), AuditStatus.PASSED),
+                                builder.like(root.get("videoName"), "%" + keyword + "%")),
+                Sort.by(Direction.DESC, "id"));
+        if (videos.isEmpty()) {
+            return videos;
+        }
+        // 收集视频作者
+        List<String> creators = videos.stream().map(Video::getCreator).distinct().toList();
+        Map<String, User> userMap = this.userRepository.findAll(
+                        (root, query, builder) -> root.get("username").in(creators))
+                .stream().collect(Collectors.toMap(User::getUsername, Function.identity()));
+        videos.forEach(f -> {
+            // 组装视频封面、文件在服务器的存储路径
+            f.setVideoLogo(String.format("%s/%s", this.appProps.getImageUploadFolder(), f.getVideoLogo()));
+            f.setVideoLink(String.format("%s/%s", this.appProps.getVideoUploadFolder(), f.getVideoLink()));
+            // 设置作者昵称
+            f.setCreatorNick(userMap.get(f.getCreator()).getNickname());
+        });
+        return videos;
+    }
+
+    @Override
     public Video queryOne(Integer id, FetchType fetchType) {
         log.info("queryOne(): id = {}, fetchType = {}", id, fetchType);
         if (fetchType == FetchType.EAGER) {

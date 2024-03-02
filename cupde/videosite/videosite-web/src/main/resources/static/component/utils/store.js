@@ -1,9 +1,15 @@
-import { logoutApi } from './api.js'
+import { logoutApi, videoSearchApi } from './api.js'
 
 const { ref, reactive } = Vue
 
 export const store = reactive({
   user: JSON.parse(sessionStorage.getItem('CURRENT_USER')),
+  videos: [],
+
+  async setVideos(keyword){
+    const videos = await videoSearchApi(keyword)
+    this.videos = videos
+  },
 
   setUser(currentUser) {
     this.user = currentUser
