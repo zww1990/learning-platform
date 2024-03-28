@@ -52,11 +52,6 @@
 		<module>nosql-example/elastic-example</module>
 		<module>nosql-example/mongo-example</module>
 		<module>nosql-example/redis-example</module>
-		<module>oa-clock/oa-clock-01</module>
-		<module>oa-clock/oa-clock-02</module>
-		<module>oa-clock/oa-clock-03</module>
-		<module>oa-clock/oa-clock-04</module>
-		<module>oa-clock/oa-clock-05</module>
 		<module>polaris-example/polaris-consumer</module>
 		<module>polaris-example/polaris-provider</module>
 		<module>polaris-example/polaris-provider-api</module>
