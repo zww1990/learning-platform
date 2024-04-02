@@ -1,4 +1,4 @@
-import influxdb_client
+from influxdb_client import InfluxDBClient
 
 if __name__ == '__main__':
     token = 'MWVDv_lckN49s24GEgkb61jgntxCZ6KoJduqc8-YFn5jEFBSMwBl9M6d_2wMk16fUSt06WMTUdJGuZNvCCVQxQ=='
@@ -6,7 +6,7 @@ if __name__ == '__main__':
     url = 'http://localhost:8086/'
     bucket = 'test_1'
 
-    client = influxdb_client.InfluxDBClient(url=url, token=token, org=org)
+    client = InfluxDBClient(url=url, token=token, org=org)
     query_api = client.query_api()
 
     query = f"""
@@ -14,7 +14,7 @@ if __name__ == '__main__':
                 |> range(start: -12h)
                 |> filter(fn: (r) => r._measurement == "measurement1")
             """
-    tables = query_api.query(query, org=org)
+    tables = query_api.query(query)
 
     for table in tables:
         for record in table.records:
