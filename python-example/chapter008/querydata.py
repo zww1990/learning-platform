@@ -19,3 +19,5 @@ if __name__ == '__main__':
     for table in tables:
         for record in table.records:
             print(record)
+
+    client.close()

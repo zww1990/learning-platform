@@ -19,3 +19,5 @@ if __name__ == '__main__':
         )
         print('point:', point)
         write_api.write(bucket=bucket, record=point)
+
+    write_client.close()
