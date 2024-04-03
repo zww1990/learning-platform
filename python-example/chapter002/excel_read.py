@@ -6,4 +6,5 @@ if __name__ == '__main__':
     df = pd.read_excel(full_name, header=None, sheet_name=None)
     values = df.get('Sheet2').values
     newList = [dict(zip(values[0], item)) for item in values[1:]]
+    print(len(newList))
     print(json.dumps(newList, indent=2))
