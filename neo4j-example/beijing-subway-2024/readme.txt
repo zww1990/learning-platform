@@ -33,3 +33,19 @@ merge (from) - [:八号线 {length: toInteger(row.length), line: row.line}] -> (
 load csv with headers from 'file:///line9.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:九号线 {length: toInteger(row.length), line: row.line}] -> (to);
+
+load csv with headers from 'file:///line10.csv' as row
+match (from: Station {name: row.startname}), (to: Station {name: row.endname})
+merge (from) - [:十号线 {length: toInteger(row.length), line: row.line}] -> (to);
+
+load csv with headers from 'file:///line11.csv' as row
+match (from: Station {name: row.startname}), (to: Station {name: row.endname})
+merge (from) - [:十一号线 {length: toInteger(row.length), line: row.line}] -> (to);
+
+load csv with headers from 'file:///line13.csv' as row
+match (from: Station {name: row.startname}), (to: Station {name: row.endname})
+merge (from) - [:十三号线 {length: toInteger(row.length), line: row.line}] -> (to);
+
+load csv with headers from 'file:///line14.csv' as row
+match (from: Station {name: row.startname}), (to: Station {name: row.endname})
+merge (from) - [:十四号线 {length: toInteger(row.length), line: row.line}] -> (to);
