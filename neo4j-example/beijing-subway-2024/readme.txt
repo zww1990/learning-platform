@@ -63,6 +63,10 @@ load csv with headers from 'file:///line17.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:十七号线 {length: toInteger(row.length), line: row.line}] -> (to);
 
+load csv with headers from 'file:///line19.csv' as row
+match (from: Station {name: row.startname}), (to: Station {name: row.endname})
+merge (from) - [:十九号线 {length: toInteger(row.length), line: row.line}] -> (to);
+
 load csv with headers from 'file:///lineDXJC.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:大兴机场线 {length: toInteger(row.length), line: row.line}] -> (to);
