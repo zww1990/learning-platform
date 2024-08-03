@@ -3,17 +3,17 @@
 LOAD CSV WITH HEADERS FROM 'file:///station.csv' AS row
 MERGE (:Station {id: toInteger(row.id), name: row.name});
 
-load csv with headers from 'file:///line1.csv' as row
+load csv with headers from 'file:///line1-lineBT.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
-merge (from) - [:一号线 {length: toInteger(row.length), line: row.line}] -> (to);
+merge (from) - [:一号线八通线 {length: toInteger(row.length), line: row.line}] -> (to);
 
 load csv with headers from 'file:///line2.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:二号线 {length: toInteger(row.length), line: row.line}] -> (to);
 
-load csv with headers from 'file:///line4.csv' as row
+load csv with headers from 'file:///line4-lineDX.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
-merge (from) - [:四号线 {length: toInteger(row.length), line: row.line}] -> (to);
+merge (from) - [:四号线大兴线 {length: toInteger(row.length), line: row.line}] -> (to);
 
 load csv with headers from 'file:///line5.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
@@ -83,10 +83,6 @@ load csv with headers from 'file:///lineYF.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:燕房线 {length: toInteger(row.length), line: row.line}] -> (to);
 
-load csv with headers from 'file:///lineDX.csv' as row
-match (from: Station {name: row.startname}), (to: Station {name: row.endname})
-merge (from) - [:大兴线 {length: toInteger(row.length), line: row.line}] -> (to);
-
 load csv with headers from 'file:///lineCP.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:昌平线 {length: toInteger(row.length), line: row.line}] -> (to);
@@ -98,10 +94,6 @@ merge (from) - [:房山线 {length: toInteger(row.length), line: row.line}] -> (
 load csv with headers from 'file:///lineYZ.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
 merge (from) - [:亦庄线 {length: toInteger(row.length), line: row.line}] -> (to);
-
-load csv with headers from 'file:///lineBT.csv' as row
-match (from: Station {name: row.startname}), (to: Station {name: row.endname})
-merge (from) - [:八通线 {length: toInteger(row.length), line: row.line}] -> (to);
 
 load csv with headers from 'file:///lineSDJC.csv' as row
 match (from: Station {name: row.startname}), (to: Station {name: row.endname})
