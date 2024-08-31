@@ -67,7 +67,7 @@ public class RenameFileNameTests {
                                     } catch (IOException e) {
                                         throw new RuntimeException(e);
                                     }
-                                },() -> System.err.println(filename + "\t文件已重命名"));
+                                }, () -> System.err.println(filename + "\t文件已重命名"));
                     });
                 }
                 System.err.println("done");
