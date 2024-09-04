@@ -1,4 +1,8 @@
-CREATE TABLE client_user (
+-- 创建数据库
+create database if not exists example;
+
+-- 创建表
+CREATE TABLE if not exists client_user (
   sequence 		int(10) 	NOT NULL 					PRIMARY KEY AUTO_INCREMENT 	COMMENT '序列',
   user_id 		varchar(64) NOT NULL 					UNIQUE KEY					COMMENT '用户唯一标识',
   username 		varchar(64) DEFAULT NULL 											COMMENT '姓名',
