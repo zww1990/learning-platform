@@ -23,7 +23,7 @@ public class RouterFunctionConfig {
 
     @Bean
     RouterFunction<ServerResponse> routerFunction() {
-        RouterFunction<ServerResponse> rf2 = RouterFunctions.route()
+        RouterFunction<ServerResponse> rf = RouterFunctions.route()
                 .path("/v2/user", builder -> builder
                         .GET("/get", this.userServiceV3::getClientUser)
                         .POST("/add", this.userServiceV3::addClientUser)
@@ -33,6 +33,6 @@ public class RouterFunctionConfig {
                 ).build();
         return RouterFunctions.route()
                 .GET("/", request -> ServerResponse.ok().bodyValue(List.of("你好，", "世界！")))
-                .add(rf2).build();
+                .add(rf).build();
     }
 }
