@@ -148,7 +148,7 @@ public abstract class ExcelUtils {
                 tarCell.setCellComment(srcCell.getCellComment());
             }
             // 不同数据类型处理
-            CellType cellType = srcCell.getCellTypeEnum();
+            CellType cellType = srcCell.getCellType();
             if (cellType == CellType.NUMERIC) {
                 if (DateUtil.isCellDateFormatted(srcCell)) {
                     tarCell.setCellValue(srcCell.getDateCellValue());
@@ -178,13 +178,13 @@ public abstract class ExcelUtils {
                 }
             } else if (cellType == CellType.FORMULA) {
                 CellValue evaluate = evaluator.evaluate(srcCell);
-                if (evaluate.getCellTypeEnum() == CellType.BOOLEAN) {
+                if (evaluate.getCellType() == CellType.BOOLEAN) {
                     tarCell.setCellValue(evaluate.getBooleanValue());
                     hasValue = true;
-                } else if (evaluate.getCellTypeEnum() == CellType.NUMERIC) {
+                } else if (evaluate.getCellType() == CellType.NUMERIC) {
                     tarCell.setCellValue(evaluate.getNumberValue());
                     hasValue = true;
-                } else if (evaluate.getCellTypeEnum() == CellType.STRING) {
+                } else if (evaluate.getCellType() == CellType.STRING) {
                     tarCell.setCellValue(evaluate.getStringValue());
                     hasValue = true;
                 }

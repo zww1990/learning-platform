@@ -50,7 +50,7 @@ public class ExcelUtilsTests {
                     item.add(row.getRowNum());
                     boolean hasValue = false;
                     for (Cell cell : row) {
-                        CellType cellType = cell.getCellTypeEnum();
+                        CellType cellType = cell.getCellType();
                         Object value = null;
                         if (cellType == CellType.BOOLEAN) {
                             boolean tmp = cell.getBooleanCellValue();
@@ -66,13 +66,13 @@ public class ExcelUtilsTests {
                             value = tmp;
                         } else if (cellType == CellType.FORMULA) {
                             CellValue cellValue = evaluator.evaluate(cell);
-                            if (cellValue.getCellTypeEnum() == CellType.BOOLEAN) {
+                            if (cellValue.getCellType() == CellType.BOOLEAN) {
                                 value = cellValue.getBooleanValue();
                                 hasValue = true;
-                            } else if (cellValue.getCellTypeEnum() == CellType.NUMERIC) {
+                            } else if (cellValue.getCellType() == CellType.NUMERIC) {
                                 value = cellValue.getNumberValue();
                                 hasValue = true;
-                            } else if (cellValue.getCellTypeEnum() == CellType.STRING) {
+                            } else if (cellValue.getCellType() == CellType.STRING) {
                                 value = cellValue.getStringValue();
                                 hasValue = true;
                             } else {
