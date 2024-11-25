@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: lims-scheduler
+    admin:
+      enabled: false
+  profiles:
+    active: prod
+  sql:
+    init:
+      mode: never
+  jmx:
+    enabled: false
+  main:
+    banner-mode: off
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
+      - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration

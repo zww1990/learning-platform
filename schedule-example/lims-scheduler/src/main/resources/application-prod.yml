@@ -1,0 +1,15 @@
+spring:
+  multi:
+    datasources:
+      FIRST:
+        url: jdbc:mysql://localhost:3306/xxx?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: 
+        password: 
+      SECOND:
+        url: jdbc:oracle:thin:@localhost:1521:xxx
+        username: 
+        password: 
+  task:
+    scheduling:
+      pool:
+        size: 8
