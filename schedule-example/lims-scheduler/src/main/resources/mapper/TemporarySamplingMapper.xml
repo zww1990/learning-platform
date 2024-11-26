@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.risun.lims.scheduler.mapper.TemporarySamplingMapper">
+
+    <select id="selectList" resultType="com.risun.lims.scheduler.domain.TemporarySamplingItem">
+        select
+            b.shiyangbianhao as temp_code,
+            b.meiyangmingchen as temp_name,
+            b.meizhong as material,
+            b.quanfenxi as full_analysis,
+            b.gzhi as g_value,
+            b.yzhi as y_value,
+            b.yanxiang as lithofacies,
+            b.tiexiangmei as iron_box_coal,
+            b.lims_yesno as iron_box_coke,
+            b.jishiliudongdu as ddpm,
+            b.yanghuadu as aos,
+            b.aoyapengzhangdu as arnu
+        from temporary_sampling a
+                 right join temporary_sampling_item b
+                            on a.id = b.TemporarySampling_id
+        where a.verifystate = 2
+          and a.audit_time >= date_sub(current_date, interval 0 day)
+    </select>
+</mapper>

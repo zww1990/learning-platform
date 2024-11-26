@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.risun.lims.scheduler.mapper.LimsLsjyMapper">
+
+    <select id="selectList" resultType="java.lang.String">
+        SELECT distinct LS_CODE
+        FROM lims_lsjy
+        where LS_CODE in
+            <foreach collection="codeSet" item="code" open="(" separator="," close=")">
+                #{code}
+            </foreach>
+    </select>
+
+    <insert id="insertOne">
+        insert into LIMS_LSJY
+            (LS_CODE, LS_MNAME, LS_MZ, LS_MALL, LS_G, LS_Y, LS_YX, LS_TXM, LS_TXJ, LS_LDD, LS_PZD, LS_OHD, LS_NOTE)
+        VALUES
+            (#{tempCode}, #{tempName}, #{material}, #{fullAnalysis}, #{gvalue}, #{yvalue}, #{lithofacies}, #{ironBoxCoal}, #{ironBoxCoke}, #{ddpm}, #{arnu}, #{aos}, 'remark')
+    </insert>
+</mapper>

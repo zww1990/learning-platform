@@ -2,14 +2,20 @@ spring:
   multi:
     datasources:
       FIRST:
-        url: jdbc:mysql://localhost:3306/xxx?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        url: jdbc:mysql://localhost:3306/lims_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
         username: 
         password: 
       SECOND:
-        url: jdbc:oracle:thin:@localhost:1521:xxx
+        url: jdbc:oracle:thin:@localhost:1521:lims
         username: 
         password: 
   task:
     scheduling:
       pool:
         size: 8
+
+jobs:
+  from-temporarysampling-to-limslsjy:
+    cron: 0 */10 * * * *
+    enabled: true
+
