@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * 定时任务处理类
+ * @author 张维维
+ * @since 2024-11-26 15:17:27
+ */
 @Component
 @Slf4j
 @ConditionalOnProperty(name = "jobs.from-temporarysampling-to-limslsjy.enabled", havingValue = "true")

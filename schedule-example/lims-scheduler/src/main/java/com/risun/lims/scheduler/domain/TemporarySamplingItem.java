@@ -5,6 +5,11 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+/**
+ * 数据库表映射实体类
+ * @author 张维维
+ * @since 2024-11-26 15:17:01
+ */
 @Getter
 @Setter
 @ToString

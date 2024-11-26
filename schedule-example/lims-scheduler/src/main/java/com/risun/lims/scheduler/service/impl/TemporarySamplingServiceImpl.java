@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 服务接口实现类
+ * @author 张维维
+ * @since 2024-11-26 15:20:37
+ */
 @Service
 @AllArgsConstructor
 @DataSource(DataSourceKey.FIRST)

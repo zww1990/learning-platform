@@ -8,6 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * 启动类
+ * @author 张维维
+ * @since 2024-11-26 15:16:00
+ */
 @SpringBootApplication
 @Slf4j
 @MapperScan(annotationClass = Mapper.class)
