@@ -13,7 +13,7 @@
 		</encoder>
 	</appender>
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	<!--<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<encoder>
 			<pattern>${FILE_LOG_PATTERN}</pattern>
 			<charset>${FILE_LOG_CHARSET}</charset>
@@ -26,19 +26,19 @@
 			<totalSizeCap>0</totalSizeCap>
 			<maxHistory>7</maxHistory>
 		</rollingPolicy>
-	</appender>
+	</appender>-->
 
 	<appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
 		<appender-ref ref="CONSOLE" />
 	</appender>
 
-	<appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+	<!--<appender name="FILE_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
 		<appender-ref ref="FILE" />
-	</appender>
+	</appender>-->
 
 	<root level="info">
 		<appender-ref ref="ASYNC" />
-		<appender-ref ref="FILE_ASYNC" />
+		<!--<appender-ref ref="FILE_ASYNC" />-->
 	</root>
 
 	<logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
