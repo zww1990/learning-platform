@@ -21,11 +21,17 @@ public class HomeController {
     }
 
     @GetMapping(path = "/{filename}")
-    public ResponseEntity<PathResource> loadFile(@PathVariable String filename) {
-        log.info("loadFile(): filename = {}", filename);
-        PathResource body = new PathResource(Paths.get(".", filename));
+    public ResponseEntity<?> loadFile(@PathVariable String filename) {
+        log.debug("loadFile(): filename = {}", filename);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
+        PathResource body = new PathResource(Paths.get(".", filename));
+        if (!body.exists()) {
+            return new ResponseEntity<>(String.format("此文件[%s]不存在！", filename), headers, HttpStatus.OK);
+        }
+        if (!body.isReadable()) {
+            return new ResponseEntity<>(String.format("此文件[%s]不可读！", filename), headers, HttpStatus.OK);
+        }
         return new ResponseEntity<>(body, headers, HttpStatus.OK);
     }
 }
