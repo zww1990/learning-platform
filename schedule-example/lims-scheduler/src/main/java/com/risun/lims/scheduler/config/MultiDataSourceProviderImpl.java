@@ -1,5 +1,6 @@
 package com.risun.lims.scheduler.config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +25,7 @@ public class MultiDataSourceProviderImpl implements MultiDataSourceProvider {
     public Map<DataSourceKey, DataSource> loadDataSources() {
         if (dataSourceProperties.getDatasources() != null) {
             Map<DataSourceKey, DataSource> dataSources = new HashMap<>(dataSourceProperties.getDatasources().size());
-            dataSourceProperties.getDatasources().forEach((k, v) -> dataSources.put(k, v.initializeDataSourceBuilder().build()));
+            dataSourceProperties.getDatasources().forEach((k, v) -> dataSources.put(k, new HikariDataSource(v)));
             return dataSources;
         }
         return Collections.emptyMap();

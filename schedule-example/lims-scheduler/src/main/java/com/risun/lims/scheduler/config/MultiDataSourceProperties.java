@@ -1,8 +1,8 @@
 package com.risun.lims.scheduler.config;
 
+import com.zaxxer.hikari.HikariConfig;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
@@ -19,5 +19,5 @@ public class MultiDataSourceProperties {
     /**
      * 多数据源配置
      */
-    private Map<DataSourceKey, DataSourceProperties> datasources;
+    private Map<DataSourceKey, HikariConfig> datasources;
 }
