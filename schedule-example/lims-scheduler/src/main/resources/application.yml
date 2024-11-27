@@ -1,3 +1,16 @@
+server:
+  servlet:
+    jsp:
+      registered: false
+    encoding:
+      force: true
+      force-request: true
+      force-response: true
+  ssl:
+    enabled: false
+  compression:
+    enabled: true
+
 spring:
   application:
     name: lims-scheduler
@@ -16,6 +29,10 @@ spring:
     exclude:
       - org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration
       - org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration
+      - org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration
+      - org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration
+      - org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration
 
 mybatis:
   configuration:

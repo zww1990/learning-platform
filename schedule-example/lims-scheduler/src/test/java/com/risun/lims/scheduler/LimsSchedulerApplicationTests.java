@@ -9,18 +9,21 @@ import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.Map;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class LimsSchedulerApplicationTests {
 	@Autowired
 	private ApplicationContext context;
 
 	@Test
 	public void contextLoads() {
-//		String[] beanDefinitionNames = this.context.getBeanDefinitionNames();
-//		System.err.println(beanDefinitionNames.length);
-//		Arrays.stream(beanDefinitionNames).forEach(System.err::println);
+		String[] beanDefinitionNames = this.context.getBeanDefinitionNames();
+		System.err.println(beanDefinitionNames.length);
+		Arrays.stream(beanDefinitionNames).forEach(System.err::println);
+	}
+
+	@Test
+	public void testGetBeansOfType() {
 		Map<String, DataSource> beans = this.context.getBeansOfType(DataSource.class);
 		System.err.println(beans);
 	}
-
 }

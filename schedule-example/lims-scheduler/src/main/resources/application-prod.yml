@@ -1,3 +1,6 @@
+server:
+  port: 44444
+
 spring:
   multi:
     datasources:
@@ -23,3 +26,4 @@ jobs:
   demo:
     cron: 0/10 * * * * *
     enabled: false
+
