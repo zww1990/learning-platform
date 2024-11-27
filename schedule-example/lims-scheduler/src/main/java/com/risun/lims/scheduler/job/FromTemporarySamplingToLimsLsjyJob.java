@@ -52,7 +52,11 @@ public class FromTemporarySamplingToLimsLsjyJob {
                     return this.limsLsjyService.insertOne(item);
                 }
             }).sum();
-            log.info("execute(): Insert Rows = {}", sum);
+            if (sum == 0) {
+                log.info("execute(): 没有待处理的数据。");
+            } else {
+                log.info("execute(): Insert Rows = {}", sum);
+            }
         }
     }
 }
