@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.nio.file.Paths;
 
+/**
+ * Home控制器类
+ * @author 张维维
+ * @since 2024-11-28 08:58:07
+ */
 @Controller
 @Slf4j
 public class HomeController {
