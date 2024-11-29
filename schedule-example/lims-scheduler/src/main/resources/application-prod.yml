@@ -5,15 +5,15 @@ spring:
   multi:
     datasources:
       FIRST:
-        jdbc-url: jdbc:mysql://172.24.13.29:3306/lims_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-        username: oper_dc
-        password: nq4P6URP44unRtr
+        jdbc-url: jdbc:mysql://localhost:3306/lims_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: 
+        password: 
         connection-test-query: select 1
         max-lifetime: 600000
       SECOND:
-        jdbc-url: jdbc:oracle:thin:@10.32.1.132:1521:lims
-        username: lims
-        password: limsxt
+        jdbc-url: jdbc:oracle:thin:@localhost:1521:lims
+        username: 
+        password: 
         connection-test-query: select 1 from dual
         max-lifetime: 600000
   task:
