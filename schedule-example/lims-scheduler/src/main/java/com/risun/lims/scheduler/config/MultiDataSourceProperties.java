@@ -1,6 +1,6 @@
 package com.risun.lims.scheduler.config;
 
-import com.zaxxer.hikari.HikariConfig;
+import com.alibaba.druid.pool.DruidDataSource;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,5 +19,5 @@ public class MultiDataSourceProperties {
     /**
      * 多数据源配置
      */
-    private Map<DataSourceKey, HikariConfig> datasources;
+    private Map<DataSourceKey, DruidDataSource> datasources;
 }

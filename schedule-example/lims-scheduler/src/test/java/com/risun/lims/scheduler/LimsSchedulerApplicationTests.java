@@ -1,5 +1,6 @@
 package com.risun.lims.scheduler;
 
+import com.alibaba.druid.filter.Filter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +24,8 @@ public class LimsSchedulerApplicationTests {
 
 	@Test
 	public void testGetBeansOfType() {
-		Map<String, DataSource> beans = this.context.getBeansOfType(DataSource.class);
+//		Map<String, DataSource> beans = this.context.getBeansOfType(DataSource.class);
+		Map<String, Filter> beans = this.context.getBeansOfType(Filter.class);
 		System.err.println(beans);
 	}
 }
