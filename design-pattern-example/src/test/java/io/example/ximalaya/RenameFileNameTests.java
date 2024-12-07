@@ -2,9 +2,6 @@ package io.example.ximalaya;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StringUtils;
 
@@ -77,16 +74,5 @@ public class RenameFileNameTests {
             System.err.println(playlistfile);
             System.err.println("文件不存在！");
         }
-    }
-
-    @Getter
-    @Setter
-    @ToString
-    public static class Player {
-        private Integer index;
-        private Integer trackId;
-        private String trackName;
-        private String fileName;
-        private String fileExt;
     }
 }
