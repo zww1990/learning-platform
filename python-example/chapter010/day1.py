@@ -2,6 +2,7 @@ import requests
 import json
 from os.path import expanduser
 from requests.auth import HTTPBasicAuth
+from time import sleep
 
 def login():
     with open(expanduser('brain_credentials.txt')) as f:
@@ -13,6 +14,34 @@ def login():
 
     print(response.status_code)
     print(response.json())
+    return session
+
+def simulate(session):
+    simulation_data = {
+        'type': 'REGULAR',
+        'settings': {
+            'instrumentType': 'EQUITY',
+            'region': 'USA',
+            'universe': 'TOP3000',
+            'delay': 1,
+            'decay': 0,
+            'neutralization': 'INDUSTRY',
+            'truncation': 0.08,
+            'pasteurization': 'ON',
+            'unitHandling': 'VERIFY',
+            'nanHandling': 'OFF',
+            'language': 'FASTEXPR',
+            'visualization': False,
+            # 'testPeriod': 'P0D'
+        },
+        'regular': 'liabilities/assets'
+    }
+    params = json.dumps(simulation_data)
+    print(params)
+    headers = { 'Content-Type': 'application/json' }
+    response = session.post('https://api.worldquantbrain.com/simulations', data=params, headers=headers)
+    print(response.status_code)
+    print(response.headers['Location'])
 
 if __name__ == '__main__':
-    login()
+    simulate(login())
