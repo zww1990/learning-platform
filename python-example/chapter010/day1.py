@@ -31,8 +31,7 @@ def simulate(session):
             'unitHandling': 'VERIFY',
             'nanHandling': 'OFF',
             'language': 'FASTEXPR',
-            'visualization': False,
-            # 'testPeriod': 'P0D'
+            'visualization': False
         },
         'regular': 'liabilities/assets'
     }
