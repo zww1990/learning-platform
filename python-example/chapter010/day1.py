@@ -12,7 +12,7 @@ def login():
     session.auth = HTTPBasicAuth(username, password)
     response = session.post('https://api.worldquantbrain.com/authentication')
 
-    print(response.status_code)
+    # print(response.status_code)
     print(response.json())
     return session
 
@@ -37,10 +37,10 @@ def simulate(session):
         'regular': 'liabilities/assets'
     }
     params = json.dumps(simulation_data)
-    print(params)
+    # print(params)
     headers = { 'Content-Type': 'application/json' }
     response = session.post('https://api.worldquantbrain.com/simulations', data=params, headers=headers)
-    print(response.status_code)
+    # print(response.status_code)
     sim_progress_url = response.headers['Location']
     print(sim_progress_url)
 
