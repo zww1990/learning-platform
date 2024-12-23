@@ -19,7 +19,7 @@
 	</parent>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8</java.version>
 		<swagger.version>1.6.9</swagger.version>
 		<springfox.version>3.0.0</springfox.version>
 		<knife4j.version>3.0.3</knife4j.version>
