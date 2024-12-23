@@ -1,0 +1,21 @@
+server:
+  port: 8081
+  ssl:
+    enabled: false
+  servlet:
+    jsp:
+      registered: false
+    encoding:
+      force: true
+      force-request: true
+      force-response: true
+  compression:
+    enabled: true
+
+spring:
+  application:
+    name: swagger-openapi
+    admin:
+      enabled: false
+  jmx:
+    enabled: false
