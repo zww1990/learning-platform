@@ -79,7 +79,6 @@
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-provider-api</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server</module>
 		<module>spring-cloud-example/spring-netflix-example/eureka-example/eureka-server-02</module>
-		<module>spring-example/c3p0-spring-boot-starter</module>
 		<module>spring-example/c3p0-starter-example</module>
 		<module>spring-example/druid-example</module>
 		<module>spring-example/mapstruct-example</module>
