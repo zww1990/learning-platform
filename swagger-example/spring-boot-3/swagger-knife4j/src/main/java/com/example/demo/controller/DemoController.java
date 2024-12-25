@@ -30,7 +30,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/demo")
-@Tag(description = "API示例", name = "DemoController")
+@Tag(name = "API示例")
 public class DemoController {
 	public static Logger log = LoggerFactory.getLogger(DemoController.class);
 
