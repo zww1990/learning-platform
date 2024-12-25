@@ -36,9 +36,9 @@ public class DemoController {
 
 	@GetMapping("/get")
 	@Operation(summary = "查询用户信息", description = "按id查询用户信息")
-	@Parameters({ // NOSONAR
-			@Parameter(name = "id", description = "用户id"), // NOSONAR
-			@Parameter(name = "token", description = "密钥"),// NOSONAR
+	@Parameters({
+			@Parameter(name = "id", description = "用户id"),
+			@Parameter(name = "token", description = "密钥"),
 	})
 	public UserModel get(@RequestParam Integer id, @Parameter(hidden = true) String text, @RequestHeader String token) {
 		log.info("text：{}", text);
@@ -52,14 +52,14 @@ public class DemoController {
 
 	@PostMapping(path = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Operation(summary = "文件上传", description = "上传多媒体文件")
-	@Parameters({ // NOSONAR
-			@Parameter(name = "userId", description = "用户ID", required = true, in = ParameterIn.QUERY), // NOSONAR
-			@Parameter(name = "userName", description = "用户名", required = true, in = ParameterIn.QUERY),// NOSONAR
+	@Parameters({
+			@Parameter(name = "userId", description = "用户ID", required = true, in = ParameterIn.QUERY),
+			@Parameter(name = "userName", description = "用户名", required = true, in = ParameterIn.QUERY),
 	})
-	public List<Object> upload(// NOSONAR
-							   @Parameter(description = "文件", required = true) @RequestPart MultipartFile file, // NOSONAR
-							   @Valid UserModel user, // NOSONAR
-							   @Parameter(description = "密钥", required = true) @RequestHeader String token// NOSONAR
+	public List<Object> upload(
+							   @Parameter(description = "文件", required = true) @RequestPart MultipartFile file,
+							   @Valid UserModel user,
+							   @Parameter(description = "密钥", required = true) @RequestHeader String token
 	) {
 		log.info("文件参数：{}, {}, {}, {}, {}", file.isEmpty(), file.getContentType(), file.getName(),
 				file.getOriginalFilename(), file.getSize());
@@ -71,8 +71,8 @@ public class DemoController {
 
 	@PutMapping("/update")
 	@Operation(summary = "更新用户信息", description = "按id更新用户信息")
-	@Parameters({ // NOSONAR
-			@Parameter(name = "token", description = "密钥"),// NOSONAR
+	@Parameters({
+			@Parameter(name = "token", description = "密钥"),
 	})
 	public UserModel update(@Valid @RequestBody UserModel user, @RequestHeader String token) {
 		log.info("用户ID：{}，用户名：{}", user.getUserId(), user.getUserName());
@@ -82,9 +82,9 @@ public class DemoController {
 
 	@DeleteMapping("/delete/{id}")
 	@Operation(summary = "删除用户信息", description = "按id删除用户信息")
-	@Parameters({ // NOSONAR
-			@Parameter(name = "id", description = "用户ID"), // NOSONAR
-			@Parameter(name = "token", description = "密钥"),// NOSONAR
+	@Parameters({
+			@Parameter(name = "id", description = "用户ID"),
+			@Parameter(name = "token", description = "密钥"),
 	})
 	public String delete(@PathVariable Integer id, @RequestHeader String token) {
 		log.info("id：{}", id);
