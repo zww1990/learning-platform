@@ -1,0 +1,294 @@
+{
+  "code": 0,
+  "data": {
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826208731,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826232615,
+      "value": "true"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826210088,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826209965,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707A_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826186715,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601D_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826213919,
+      "value": "true"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_FAL_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_FAL_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709A_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80709B_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707E_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601A_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_POSA_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707F_POSA_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503A_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826226549,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707D_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80503B_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704B_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826216287,
+      "value": "true"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707B_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601B_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826193647,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80707C_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826230631,
+      "value": "false"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80704A_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826225188,
+      "value": "true"
+    },
+    "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_POSB_DV": {
+      "name": "system.mes.BMDCS.system.BMDCS_BeiMeiChuYun_Device1_DI_M80601C_POSB_DV",
+      "status": "0",
+      "timeStamp": 1738826240050,
+      "value": "true"
+    }
+  },
+  "msg": ""
+}
