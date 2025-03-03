@@ -1,7 +1,7 @@
 import requests
 import json
 
-if __name__ == '__main__':
+def domain():
     products = {
         'IIU': 'IntelliJ IDEA Ultimate',
         # 'IIC': 'IntelliJ IDEA Community',
@@ -58,3 +58,11 @@ if __name__ == '__main__':
                 nd = '\t' * 2
             mb = '\t' * 2
             print(f'{name}{nd}{date}\t{version}\t{majorVersion}{mb}{build}')
+    answer = input('是否重新运行?(Y/N): ')
+    if answer.upper() == 'Y':
+        domain()
+    else:
+        print('程序运行结束。')
+
+if __name__ == '__main__':
+    domain()
