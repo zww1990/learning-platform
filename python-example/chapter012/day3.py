@@ -1,4 +1,5 @@
 import requests
+import json
 
 if __name__ == '__main__':
     products = {
@@ -22,6 +23,13 @@ if __name__ == '__main__':
             for key, value in products.items():
                 items = data.get(key, [{}])
                 item = items[0]
+                item.pop('patches')
+                item.pop('uninstallFeedbackLinks')
+                item.pop('whatsnew')
+                item.pop('notesLink')
+                item.pop('printableReleaseType')
+                item.pop('licenseRequired')
+                item['name'] = value
                 info = {
                     'name': value,
                     'date': item.get('date'),
@@ -31,6 +39,8 @@ if __name__ == '__main__':
                 }
                 ides.append(info)
                 # print(key, '=', info)
+            with open('data.json', 'w') as file:
+                file.write(json.dumps(data, indent=2, ensure_ascii=False))
         else:
             raise Exception(f'请求{url}接口错误')
     except Exception as err:
