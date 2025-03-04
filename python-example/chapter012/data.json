@@ -1,4 +1,130 @@
 {
+  "RR": [
+    {
+      "date": "2025-02-25",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.tar.gz",
+          "size": 1099171800,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.tar.gz",
+          "size": 1100481666,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.5-third-party-libraries.json",
+          "size": 62669,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.5-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.exe",
+          "size": 808583664,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.exe.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.exe",
+          "size": 760439920,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.exe.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.dmg",
+          "size": 1062164241,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.dmg.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.dmg",
+          "size": 1075929036,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.dmg.sha256"
+        }
+      },
+      "version": "2024.3.5",
+      "majorVersion": "2024.3",
+      "build": "243.24978.86",
+      "name": "RustRover"
+    }
+  ],
+  "RS": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharper.2024.3.6.web.exe",
+          "size": 68902048,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharper.2024.3.6.web.exe.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.ReSharper-2024.3.6-third-party-libraries.json",
+          "size": 34889,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.ReSharper-2024.3.6-third-party-libraries.json.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "ReSharper"
+    }
+  ],
+  "IIC": [
+    {
+      "date": "2025-02-27",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.tar.gz",
+          "size": 991848711,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "sourcesArchive": {
+          "link": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.39.zip",
+          "size": 0,
+          "checksumLink": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.39.zip.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.tar.gz",
+          "size": 991962918,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4-third-party-libraries.json",
+          "size": 55249,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.exe",
+          "size": 727966864,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.win.zip",
+          "size": 1023859499,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.exe",
+          "size": 691037264,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.dmg",
+          "size": 958586673,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.dmg",
+          "size": 948933560,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.39",
+      "name": "IntelliJ IDEA Community"
+    }
+  ],
   "DG": [
     {
       "date": "2025-02-20",
@@ -51,6 +177,568 @@
       "name": "DataGrip"
     }
   ],
+  "PS": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.tar.gz",
+          "size": 1040498037,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.tar.gz",
+          "size": 1041160633,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/webide/PhpStorm-2024.3.4-third-party-libraries.json",
+          "size": 65029,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/webide/PhpStorm-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.exe",
+          "size": 792839440,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.win.zip",
+          "size": 1059267360,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.exe",
+          "size": 755849560,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.dmg",
+          "size": 1001854130,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.dmg",
+          "size": 992113444,
+          "checksumLink": "https://download.jetbrains.com/webide/PhpStorm-2024.3.4-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.45",
+      "name": "PhpStorm"
+    }
+  ],
+  "FL": [
+    {
+      "date": "2025-02-19",
+      "type": "preview",
+      "downloads": {
+        "windows_aarch64": {
+          "link": "https://download.jetbrains.com/fleet/installers/windows_aarch64/Fleet-1.46.97-aarch64.exe",
+          "size": 175888584,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/windows_aarch64/Fleet-1.46.97-aarch64.exe.sha256"
+        },
+        "windows_zip_x64": {
+          "link": "https://download.jetbrains.com/fleet/installers/windows_x64/Fleet-1.46.97.zip",
+          "size": 260702739,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/windows_x64/Fleet-1.46.97.zip.sha256"
+        },
+        "windows_zip_aarch64": {
+          "link": "https://download.jetbrains.com/fleet/installers/windows_aarch64/Fleet-1.46.97-aarch64.zip",
+          "size": 256615628,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/windows_aarch64/Fleet-1.46.97-aarch64.zip.sha256"
+        },
+        "macos_x64": {
+          "link": "https://download.jetbrains.com/fleet/installers/macos_x64/Fleet-1.46.97.dmg",
+          "size": 243712084,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/macos_x64/Fleet-1.46.97.dmg.sha256"
+        },
+        "macos_targz_x64": {
+          "link": "https://download.jetbrains.com/fleet/installers/macos_x64/Fleet-1.46.97.tar.gz",
+          "size": 258527228,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/macos_x64/Fleet-1.46.97.tar.gz.sha256"
+        },
+        "macos_targz_aarch64": {
+          "link": "https://download.jetbrains.com/fleet/installers/macos_aarch64/Fleet-1.46.97-aarch64.tar.gz",
+          "size": 255706822,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/macos_aarch64/Fleet-1.46.97-aarch64.tar.gz.sha256"
+        },
+        "windows_x64": {
+          "link": "https://download.jetbrains.com/fleet/installers/windows_x64/Fleet-1.46.97.exe",
+          "size": 179188936,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/windows_x64/Fleet-1.46.97.exe.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/fleet/fleet-1.46.97-third-party-libraries.json",
+          "size": 187162,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/fleet/fleet-1.46.97-third-party-libraries.json.sha256"
+        },
+        "linux_x64": {
+          "link": "https://download.jetbrains.com/fleet/installers/linux_x64/Fleet-1.46.97.tar.gz",
+          "size": 273812521,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/linux_x64/Fleet-1.46.97.tar.gz.sha256"
+        },
+        "linux_aarch64": {
+          "link": "https://download.jetbrains.com/fleet/installers/linux_aarch64/Fleet-1.46.97-aarch64.tar.gz",
+          "size": 269966495,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/linux_aarch64/Fleet-1.46.97-aarch64.tar.gz.sha256"
+        },
+        "macos_aarch64": {
+          "link": "https://download.jetbrains.com/fleet/installers/macos_aarch64/Fleet-1.46.97-aarch64.dmg",
+          "size": 241007369,
+          "checksumLink": "https://download.jetbrains.com/fleet/installers/macos_aarch64/Fleet-1.46.97-aarch64.dmg.sha256"
+        }
+      },
+      "version": "1.46.97",
+      "majorVersion": "1.46",
+      "build": "1.46.97",
+      "name": "Fleet"
+    }
+  ],
+  "GO": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.tar.gz",
+          "size": 1108954980,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4.tar.gz",
+          "size": 1109282670,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/go/goland-2024.3.4-third-party-libraries.json",
+          "size": 61303,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/go/goland-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4.exe",
+          "size": 840252208,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4.win.zip",
+          "size": 1127141988,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.exe",
+          "size": 803518560,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4.dmg",
+          "size": 1067629048,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.dmg",
+          "size": 1058365935,
+          "checksumLink": "https://download.jetbrains.com/go/goland-2024.3.4-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.52",
+      "name": "GoLand"
+    }
+  ],
+  "CL": [
+    {
+      "date": "2025-02-27",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.tar.gz",
+          "size": 1571827579,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4.tar.gz",
+          "size": 1577157869,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/cpp/CLion-2024.3.4-third-party-libraries.json",
+          "size": 70117,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/cpp/CLion-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4.exe",
+          "size": 1392146664,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4.win.zip",
+          "size": 1911425040,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.exe",
+          "size": 1301085608,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4.dmg",
+          "size": 1526332287,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.dmg",
+          "size": 1549370736,
+          "checksumLink": "https://download.jetbrains.com/cpp/CLion-2024.3.4-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.42",
+      "name": "CLion"
+    }
+  ],
+  "DM": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.2024.3.6.web.exe",
+          "size": 68902048,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.2024.3.6.web.exe.sha256"
+        },
+        "windows64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotMemory.UI.64.2024.3.6.exe",
+          "size": 271631800,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotMemory.UI.64.2024.3.6.exe.sha256"
+        },
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.linux-arm64.2024.3.6.tar.gz",
+          "size": 133229094,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.linux-arm64.2024.3.6.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.linux-x64.2024.3.6.tar.gz",
+          "size": 137096117,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.linux-x64.2024.3.6.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotMemory-2024.3.6-third-party-libraries.json",
+          "size": 51972,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotMemory-2024.3.6-third-party-libraries.json.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotMemory.UI.64a.2024.3.6.exe",
+          "size": 271615416,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotMemory.UI.64a.2024.3.6.exe.sha256"
+        },
+        "macARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.macos-arm64.2024.3.6.dmg",
+          "size": 138965511,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.macos-arm64.2024.3.6.dmg.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.macos-x64.2024.3.6.dmg",
+          "size": 140221253,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotMemory.macos-x64.2024.3.6.dmg.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "dotMemory"
+    }
+  ],
+  "DP": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.2024.3.6.web.exe",
+          "size": 68902032,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.2024.3.6.web.exe.sha256"
+        },
+        "windows64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace64.2024.3.6.exe",
+          "size": 331541848,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace64.2024.3.6.exe.sha256"
+        },
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.linux-arm64.2024.3.6.tar.gz",
+          "size": 185820915,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.linux-arm64.2024.3.6.tar.gz.sha256"
+        },
+        "windows32": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace32.2024.3.6.exe",
+          "size": 331412312,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace32.2024.3.6.exe.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.linux-x64.2024.3.6.tar.gz",
+          "size": 191614732,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.linux-x64.2024.3.6.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotTrace-2024.3.6-third-party-libraries.json",
+          "size": 52044,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotTrace-2024.3.6-third-party-libraries.json.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace64a.2024.3.6.exe",
+          "size": 331525472,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/dotTrace64a.2024.3.6.exe.sha256"
+        },
+        "macARM64": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.macos-arm64.2024.3.6.dmg",
+          "size": 194771854,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.macos-arm64.2024.3.6.dmg.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.macos-x64.2024.3.6.dmg",
+          "size": 194035724,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotTrace.macos-x64.2024.3.6.dmg.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "dotTrace"
+    }
+  ],
+  "DS": [
+    {
+      "date": "2025-02-27",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.tar.gz",
+          "size": 1185032656,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2.tar.gz",
+          "size": 1184538958,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dataspell/dataspell-2024.3.2-third-party-libraries.json",
+          "size": 368706,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dataspell/dataspell-2024.3.2-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2.exe",
+          "size": 930226160,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2.exe.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.exe",
+          "size": 901680720,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2.dmg",
+          "size": 1168775154,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.dmg",
+          "size": 1159555842,
+          "checksumLink": "https://download.jetbrains.com/python/dataspell-2024.3.2-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.2",
+      "majorVersion": "2024.3",
+      "build": "243.25659.44",
+      "name": "DataSpell"
+    }
+  ],
+  "QA": [
+    {
+      "date": "2025-01-24",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.tar.gz",
+          "size": 1077325995,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2.tar.gz",
+          "size": 1077154153,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/aqua/aqua-2024.3.2-third-party-libraries.json",
+          "size": 68408,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/aqua/aqua-2024.3.2-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2.exe",
+          "size": 778054112,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2.exe.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.exe",
+          "size": 749261640,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.exe.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.dmg",
+          "size": 1029961397,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2-aarch64.dmg.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/aqua/aqua-2024.3.2.dmg",
+          "size": 1039127577,
+          "checksumLink": "https://download.jetbrains.com/aqua/aqua-2024.3.2.dmg.sha256"
+        }
+      },
+      "version": "2024.3.2",
+      "majorVersion": "2024.3",
+      "build": "243.23654.154",
+      "name": "Aqua"
+    }
+  ],
+  "PCC": [
+    {
+      "date": "2025-02-27",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.tar.gz",
+          "size": 790505353,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.tar.gz",
+          "size": 790295298,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/python/pycharmPC-2024.3.4-third-party-libraries.json",
+          "size": 49435,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/python/pycharmPC-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.exe",
+          "size": 598273504,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.win.zip",
+          "size": 832127209,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.exe",
+          "size": 561600240,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.dmg",
+          "size": 777072588,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.dmg",
+          "size": 767558876,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.dmg.sha256"
+        },
+        "windowsZipARM64": {
+          "link": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.win.zip",
+          "size": 790210307,
+          "checksumLink": "https://download.jetbrains.com/python/pycharm-community-2024.3.4-aarch64.win.zip.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.43",
+      "name": "PyCharm Community"
+    }
+  ],
+  "RC": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharperCpp.2024.3.6.web.exe",
+          "size": 68902072,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharperCpp.2024.3.6.web.exe.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.ReSharperCpp-2024.3.6-third-party-libraries.json",
+          "size": 30914,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.ReSharperCpp-2024.3.6-third-party-libraries.json.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "ReSharper C++"
+    }
+  ],
+  "RD": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.tar.gz",
+          "size": 1897856920,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.tar.gz",
+          "size": 1907343120,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.Rider-2024.3.6-third-party-libraries.json",
+          "size": 135321,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.Rider-2024.3.6-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.exe",
+          "size": 1545876928,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.win.zip",
+          "size": 2073958580,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.exe",
+          "size": 1561147992,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.dmg",
+          "size": 1804896529,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.dmg",
+          "size": 1836293195,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.dmg.sha256"
+        },
+        "windowsZipARM64": {
+          "link": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.win.zip",
+          "size": 2123377548,
+          "checksumLink": "https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.6-aarch64.win.zip.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "243.25659.34",
+      "name": "Rider"
+    }
+  ],
   "IIU": [
     {
       "date": "2025-02-27",
@@ -101,6 +789,90 @@
       "majorVersion": "2024.3",
       "build": "243.25659.39",
       "name": "IntelliJ IDEA Ultimate"
+    }
+  ],
+  "RSU": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotUltimate.2024.3.6.web.exe",
+          "size": 68901992,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotUltimate.2024.3.6.web.exe.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotUltimate.2024.3.6.exe",
+          "size": 3176421184,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotUltimate.2024.3.6.exe.sha256"
+        },
+        "windowsWebLP": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/Installers/id1/JetBrains.dotUltimate.2024.3.6.Installer.exe",
+          "size": 68901960,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/Installers/id1/JetBrains.dotUltimate.2024.3.6.Installer.exe.sha256"
+        },
+        "toolboxWindows": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharper.2024.3.6.exe",
+          "size": 849331096,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.ReSharper.2024.3.6.exe.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "ReSharper Ultimate"
+    }
+  ],
+  "RM": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "linuxARM64": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.tar.gz",
+          "size": 1024232261,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.tar.gz.sha256"
+        },
+        "linux": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.tar.gz",
+          "size": 1024576786,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.tar.gz.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/ruby/RubyMine-2024.3.4-third-party-libraries.json",
+          "size": 64278,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/ruby/RubyMine-2024.3.4-third-party-libraries.json.sha256"
+        },
+        "windows": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.exe",
+          "size": 775349816,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.exe.sha256"
+        },
+        "windowsZip": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.win.zip",
+          "size": 1051307666,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.win.zip.sha256"
+        },
+        "windowsARM64": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.exe",
+          "size": 738616128,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.exe.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.dmg",
+          "size": 985515432,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.dmg",
+          "size": 975898496,
+          "checksumLink": "https://download.jetbrains.com/ruby/RubyMine-2024.3.4-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2024.3.4",
+      "majorVersion": "2024.3",
+      "build": "243.25659.41",
+      "name": "RubyMine"
     }
   ],
   "PCP": [
@@ -210,6 +982,28 @@
       "majorVersion": "2024.3",
       "build": "243.25659.40",
       "name": "WebStorm"
+    }
+  ],
+  "DC": [
+    {
+      "date": "2025-02-28",
+      "type": "release",
+      "downloads": {
+        "windowsWeb": {
+          "link": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotCover.2024.3.6.web.exe",
+          "size": 68902032,
+          "checksumLink": "https://download.jetbrains.com/resharper/dotUltimate.2024.3.6/JetBrains.dotCover.2024.3.6.web.exe.sha256"
+        },
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotCover-2024.3.6-third-party-libraries.json",
+          "size": 35592,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/dotnet/JetBrains.dotCover-2024.3.6-third-party-libraries.json.sha256"
+        }
+      },
+      "version": "2024.3.6",
+      "majorVersion": "2024.3",
+      "build": "2024.3.6.65536",
+      "name": "dotCover"
     }
   ]
 }
