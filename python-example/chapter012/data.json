@@ -68,6 +68,33 @@
       "name": "ReSharper"
     }
   ],
+  "AC": [
+    {
+      "date": "2024-06-12",
+      "type": "release",
+      "downloads": {
+        "thirdPartyLibrariesJson": {
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/objc/AppCode-2023.1.5-third-party-libraries.json",
+          "size": 75564,
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/objc/AppCode-2023.1.5-third-party-libraries.json.sha256"
+        },
+        "mac": {
+          "link": "https://download.jetbrains.com/objc/AppCode-2023.1.5.dmg",
+          "size": 2013792426,
+          "checksumLink": "https://download.jetbrains.com/objc/AppCode-2023.1.5.dmg.sha256"
+        },
+        "macM1": {
+          "link": "https://download.jetbrains.com/objc/AppCode-2023.1.5-aarch64.dmg",
+          "size": 2004791662,
+          "checksumLink": "https://download.jetbrains.com/objc/AppCode-2023.1.5-aarch64.dmg.sha256"
+        }
+      },
+      "version": "2023.1.5",
+      "majorVersion": "2023.1",
+      "build": "231.9423.10",
+      "name": "AppCode"
+    }
+  ],
   "IIC": [
     {
       "date": "2025-02-27",

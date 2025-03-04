@@ -3,6 +3,7 @@ import json
 
 def domain():
     products = {
+        'AC': 'AppCode',
         'QA': 'Aqua',
         'CL': 'CLion',
         'DG': 'DataGrip',
@@ -73,7 +74,7 @@ def domain():
             build = ide.get('build')
             _type = ide.get('type')
             nd = '\t'
-            if len(name) <= 6:
+            if len(name) <= 7:
                 nd = '\t' * 3
             elif len(name) <= 15:
                 nd = '\t' * 2
