@@ -1,5 +1,7 @@
 import requests
 import json
+import os
+from _datetime import datetime
 
 def domain():
     products = {
@@ -31,6 +33,8 @@ def domain():
     url = f'https://data.services.jetbrains.com/products/releases?code={join}&latest=true&type=release,preview'
     # print(url)
     ides = []
+    now = datetime.now().strftime('%Y-%m-%d')
+    save_file = f'data_{now}.json'
     print('正在检查JetBrains开发者工具版本:')
     try:
         response = requests.get(url)
@@ -57,13 +61,14 @@ def domain():
                 }
                 ides.append(info)
                 # print(key, '=', info)
-            with open('data.json', 'w') as file:
+            with open(save_file, 'w') as file:
                 file.write(json.dumps(data, indent=2, ensure_ascii=False))
         else:
             raise Exception(f'请求{url}接口错误')
     except Exception as err:
         print(err)
     else:
+        print('-' * 95)
         print('Name\t\t\tDate\t\tVersion\t\tMajorVersion\tBuild\t\tType')
         for ide in ides:
             name = ide.get('name')
@@ -86,6 +91,9 @@ def domain():
             if len(build) <= 7:
                 bt = '\t' * 2
             print(f'{name}{nd}{date}\t{version}{vm}{major_version}{mb}{build}{bt}{_type}')
+    print('-' * 95)
+    print('JetBrains开发者工具数据保存在:')
+    print(os.path.abspath(save_file))
     answer = input('是否重新运行?(Y/N): ')
     if answer.upper() == 'Y':
         domain()

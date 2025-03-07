@@ -1,48 +1,48 @@
 {
   "RR": [
     {
-      "date": "2025-02-25",
+      "date": "2025-03-04",
       "type": "release",
       "downloads": {
         "linuxARM64": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.tar.gz",
-          "size": 1099171800,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.tar.gz",
+          "size": 1099371233,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.tar.gz.sha256"
         },
         "linux": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.tar.gz",
-          "size": 1100481666,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.tar.gz",
+          "size": 1100693242,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.tar.gz.sha256"
         },
         "thirdPartyLibrariesJson": {
-          "link": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.5-third-party-libraries.json",
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.6-third-party-libraries.json",
           "size": 62669,
-          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.5-third-party-libraries.json.sha256"
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/rustrover/RustRover-2024.3.6-third-party-libraries.json.sha256"
         },
         "windows": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.exe",
-          "size": 808583664,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.exe.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.exe",
+          "size": 808717432,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.exe.sha256"
         },
         "windowsARM64": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.exe",
-          "size": 760439920,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.exe.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.exe",
+          "size": 760571344,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.exe.sha256"
         },
         "macM1": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.dmg",
-          "size": 1062164241,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5-aarch64.dmg.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.dmg",
+          "size": 1062681929,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6-aarch64.dmg.sha256"
         },
         "mac": {
-          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.dmg",
-          "size": 1075929036,
-          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.5.dmg.sha256"
+          "link": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.dmg",
+          "size": 1076242831,
+          "checksumLink": "https://download.jetbrains.com/rustrover/RustRover-2024.3.6.dmg.sha256"
         }
       },
-      "version": "2024.3.5",
+      "version": "2024.3.6",
       "majorVersion": "2024.3",
-      "build": "243.24978.86",
+      "build": "243.25659.54",
       "name": "RustRover"
     }
   ],
@@ -97,58 +97,58 @@
   ],
   "IIC": [
     {
-      "date": "2025-02-27",
+      "date": "2025-03-05",
       "type": "release",
       "downloads": {
         "linuxARM64": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.tar.gz",
-          "size": 991848711,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.tar.gz",
+          "size": 991760984,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.tar.gz.sha256"
         },
         "sourcesArchive": {
-          "link": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.39.zip",
+          "link": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.59.zip",
           "size": 0,
-          "checksumLink": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.39.zip.sha256"
+          "checksumLink": "https://github.com/JetBrains/intellij-community/archive/idea/243.25659.59.zip.sha256"
         },
         "linux": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.tar.gz",
-          "size": 991962918,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.tar.gz",
+          "size": 991888395,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.tar.gz.sha256"
         },
         "thirdPartyLibrariesJson": {
-          "link": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4-third-party-libraries.json",
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4.1-third-party-libraries.json",
           "size": 55249,
-          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4-third-party-libraries.json.sha256"
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIC-2024.3.4.1-third-party-libraries.json.sha256"
         },
         "windows": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.exe",
-          "size": 727966864,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.exe.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.exe",
+          "size": 727918472,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.exe.sha256"
         },
         "windowsZip": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.win.zip",
-          "size": 1023859499,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.win.zip.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.win.zip",
+          "size": 1023811648,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.win.zip.sha256"
         },
         "windowsARM64": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.exe",
-          "size": 691037264,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.exe.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.exe",
+          "size": 690989144,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.exe.sha256"
         },
         "mac": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.dmg",
-          "size": 958586673,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.dmg.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.dmg",
+          "size": 958448476,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1.dmg.sha256"
         },
         "macM1": {
-          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.dmg",
-          "size": 948933560,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4-aarch64.dmg.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.dmg",
+          "size": 948923018,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIC-2024.3.4.1-aarch64.dmg.sha256"
         }
       },
-      "version": "2024.3.4",
+      "version": "2024.3.4.1",
       "majorVersion": "2024.3",
-      "build": "243.25659.39",
+      "build": "243.25659.59",
       "name": "IntelliJ IDEA Community"
     }
   ],
@@ -768,53 +768,53 @@
   ],
   "IIU": [
     {
-      "date": "2025-02-27",
+      "date": "2025-03-05",
       "type": "release",
       "downloads": {
         "linuxARM64": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.tar.gz",
-          "size": 1587680935,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.tar.gz",
+          "size": 1587650836,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.tar.gz.sha256"
         },
         "linux": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.tar.gz",
-          "size": 1588341291,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.tar.gz.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.tar.gz",
+          "size": 1588329007,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.tar.gz.sha256"
         },
         "thirdPartyLibrariesJson": {
-          "link": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIU-2024.3.4-third-party-libraries.json",
+          "link": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIU-2024.3.4.1-third-party-libraries.json",
           "size": 73210,
-          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIU-2024.3.4-third-party-libraries.json.sha256"
+          "checksumLink": "https://resources.jetbrains.com/storage/third-party-libraries/idea/ideaIU-2024.3.4.1-third-party-libraries.json.sha256"
         },
         "windows": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.exe",
-          "size": 1214117224,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.exe.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.exe",
+          "size": 1214076400,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.exe.sha256"
         },
         "windowsZip": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.win.zip",
-          "size": 1606886755,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.win.zip.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.win.zip",
+          "size": 1606823880,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.win.zip.sha256"
         },
         "windowsARM64": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.exe",
-          "size": 1177127400,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.exe.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.exe",
+          "size": 1177086488,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.exe.sha256"
         },
         "mac": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.dmg",
-          "size": 1532367591,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.dmg.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.dmg",
+          "size": 1532342244,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1.dmg.sha256"
         },
         "macM1": {
-          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.dmg",
-          "size": 1523062488,
-          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4-aarch64.dmg.sha256"
+          "link": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.dmg",
+          "size": 1522821568,
+          "checksumLink": "https://download.jetbrains.com/idea/ideaIU-2024.3.4.1-aarch64.dmg.sha256"
         }
       },
-      "version": "2024.3.4",
+      "version": "2024.3.4.1",
       "majorVersion": "2024.3",
-      "build": "243.25659.39",
+      "build": "243.25659.59",
       "name": "IntelliJ IDEA Ultimate"
     }
   ],
