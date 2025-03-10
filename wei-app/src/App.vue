@@ -16,7 +16,7 @@
         </a-space>
       </a-col>
     </a-row>
-    <a-table :dataSource="dataSource" :columns="columns" :pagination="false" table-layout="fixed" size="middle">
+    <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
       <template #expandedRowRender="{ record }">
         <li v-for="(value, key) in removeUselessKey(record.downloads)">
           {{key}} - {{value.link}} - <a :href="value.link">下载</a>
@@ -24,10 +24,19 @@
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'other'">
-          <a-button @click="showDialog">查看</a-button>
+          <a-button @click="showDialog(record)">查看</a-button>
         </template>
       </template>
     </a-table>
+    <a-modal v-model:open="open" :title="title" @ok="handleOk" width="800px" :centered="true">
+      <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
+        <template #expandedRowRender="{ record }">
+          <li v-for="(value, key) in removeUselessKey(record.downloads)">
+            {{key}} - {{value.link}} - <a :href="value.link">下载</a>
+          </li>
+        </template>
+      </a-table>
+    </a-modal>
   </a-config-provider>
 </template>
 
@@ -35,10 +44,11 @@
 import axios from "axios";
 import dayjs from "dayjs";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import {message} from "ant-design-vue";
-import {ref} from "vue";
+import { message } from "ant-design-vue";
+import { ref } from "vue";
 import { saveAs } from 'file-saver';
 
+const today = dayjs().format('YYYY年MM月DD日, dddd');
 const products = {
   'AC': 'AppCode',
   'QA': 'Aqua',
@@ -62,11 +72,11 @@ const products = {
   'RR': 'RustRover',
   'WS': 'WebStorm',
   'FL': 'Fleet',
+  'TBA': 'Toolbox App',
 }
 const join = Object.keys(products).join(',');
-const url = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`
-const today = dayjs().format('YYYY年MM月DD日, dddd');
-const columns = [
+const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`
+const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
   { title: '发布日期', dataIndex: 'date' },
   { title: '发行版本', dataIndex: 'version' },
@@ -75,13 +85,13 @@ const columns = [
   { title: '版本类型', dataIndex: 'type' },
   { title: '其他版本', dataIndex: 'other' },
 ]
-const dataSource = ref([])
-axios.get(url).then(res => {
+const latestDataSource = ref([])
+axios.get(latestUrl).then(res => {
   for (const key in products) {
     let value = res.data[key][0]
     value['name'] = products[key]
     value['key'] = key
-    dataSource.value.push(value)
+    latestDataSource.value.push(value)
   }
 }).catch(err => {
   message.error(err.message)
@@ -98,13 +108,33 @@ function reload() {
 }
 
 function download() {
-  const data = JSON.stringify(dataSource.value);
+  const data = JSON.stringify(latestDataSource.value);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `data-${now}.json`)
 }
 
-function showDialog() {
-  message.warn('暂未实现，敬请期待！')
+const otherColumns = [
+  { title: '发布日期', dataIndex: 'date' },
+  { title: '发行版本', dataIndex: 'version' },
+  { title: '季度版本', dataIndex: 'majorVersion' },
+  { title: '构建版本', dataIndex: 'build' },
+]
+const otherDataSource = ref([])
+const open = ref(false);
+const title = ref('');
+function showDialog(rowData) {
+  open.value = true
+  title.value = `${rowData.name}其他版本`
+  const otherUrl = `https://data.services.jetbrains.com/products/releases?code=${rowData.key}&type=${rowData.type}`
+  axios.get(otherUrl).then(res => {
+    otherDataSource.value = res.data[rowData.key]
+        .filter(it => Object.keys(it.downloads).length > 0)
+  }).catch(err => {
+    message.error(err.message)
+  })
+}
+function handleOk() {
+  open.value= false
 }
 </script>
