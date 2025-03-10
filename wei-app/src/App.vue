@@ -6,11 +6,14 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="20">
+      <a-col :span="18">
         <h2>正在检查JetBrains开发者工具版本: </h2>
       </a-col>
-      <a-col :span="4" style="text-align: right">
-        <a-button type="primary" @click="reload">重新加载</a-button>
+      <a-col :span="6" style="text-align: right">
+        <a-space>
+          <a-button type="primary" @click="reload">重新加载</a-button>
+          <a-button type="default" @click="download">下载数据</a-button>
+        </a-space>
       </a-col>
     </a-row>
     <a-table :dataSource="dataSource" :columns="columns" :pagination="false" table-layout="fixed" size="middle">
@@ -29,6 +32,7 @@ import dayjs from "dayjs";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import {message} from "ant-design-vue";
 import {ref} from "vue";
+import { saveAs } from 'file-saver';
 
 const products = {
   'AC': 'AppCode',
@@ -85,5 +89,12 @@ function removeUselessKey(downloads) {
 
 function reload() {
   location.reload()
+}
+
+function download() {
+  const data = JSON.stringify(dataSource.value);
+  const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+  const now = dayjs().format('YYYYMMDDHHmmss');
+  saveAs(blob, `data-${now}.json`)
 }
 </script>
