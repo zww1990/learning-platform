@@ -22,6 +22,11 @@
           {{key}} - {{value.link}} - <a :href="value.link">下载</a>
         </li>
       </template>
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.dataIndex === 'other'">
+          <a-button @click="showDialog">查看</a-button>
+        </template>
+      </template>
     </a-table>
   </a-config-provider>
 </template>
@@ -68,6 +73,7 @@ const columns = [
   { title: '季度版本', dataIndex: 'majorVersion' },
   { title: '构建版本', dataIndex: 'build' },
   { title: '版本类型', dataIndex: 'type' },
+  { title: '其他版本', dataIndex: 'other' },
 ]
 const dataSource = ref([])
 axios.get(url).then(res => {
@@ -96,5 +102,9 @@ function download() {
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `data-${now}.json`)
+}
+
+function showDialog() {
+  message.warn('暂未实现，敬请期待！')
 }
 </script>
