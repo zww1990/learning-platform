@@ -52,8 +52,9 @@ import { saveAs } from 'file-saver';
 
 const progress = ref(0); // 下载进度
 const isDownloading = ref(false); // 是否正在下载
-const status = ref('')
-const current = ref('')
+const status = ref(''); // 下载状态
+const current = ref(''); // 当前正在下载的文件名
+
 // 监听下载进度
 window.electron.onDownloadProgress((event, newProgress, filename) => {
   isDownloading.value = true;
