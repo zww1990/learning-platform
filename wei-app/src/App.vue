@@ -24,7 +24,7 @@
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'other'">
-          <a-button @click="showDialog(record)">查看</a-button>
+          <a-button @click="otherDialog(record)">查看</a-button>
         </template>
       </template>
     </a-table>
@@ -123,7 +123,7 @@ const otherColumns = [
 const otherDataSource = ref([])
 const otherOpen = ref(false);
 const otherTitle = ref('');
-function showDialog(rowData) {
+function otherDialog(rowData) {
   otherTitle.value = `${rowData.name}其他版本`
   const otherUrl = `https://data.services.jetbrains.com/products/releases?code=${rowData.key}&type=${rowData.type}`
   axios.get(otherUrl).then(res => {
