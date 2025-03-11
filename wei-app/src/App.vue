@@ -28,7 +28,7 @@
         </template>
       </template>
     </a-table>
-    <a-modal v-model:open="open" :title="title" @ok="handleOk" ok-text="下载数据" cancel-text="关闭" width="800px" :centered="true" :destroy-on-close="true">
+    <a-modal v-model:open="otherOpen" :title="otherTitle" @ok="otherHandleOk" ok-text="下载数据" cancel-text="关闭" width="800px" :centered="true" :destroy-on-close="true">
       <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
         <template #expandedRowRender="{ record }">
           <li v-for="(value, key) in removeUselessKey(record.downloads)">
@@ -121,23 +121,23 @@ const otherColumns = [
   { title: '构建版本', dataIndex: 'build' },
 ]
 const otherDataSource = ref([])
-const open = ref(false);
-const title = ref('');
+const otherOpen = ref(false);
+const otherTitle = ref('');
 function showDialog(rowData) {
-  title.value = `${rowData.name}其他版本`
+  otherTitle.value = `${rowData.name}其他版本`
   const otherUrl = `https://data.services.jetbrains.com/products/releases?code=${rowData.key}&type=${rowData.type}`
   axios.get(otherUrl).then(res => {
     otherDataSource.value = res.data[rowData.key]
         .filter(it => Object.keys(it.downloads).length > 0)
-    open.value = true
+    otherOpen.value = true
   }).catch(err => {
     message.error(err.message)
   })
 }
-function handleOk() {
+function otherHandleOk() {
   const data = JSON.stringify(otherDataSource.value);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
-  saveAs(blob, `${title.value}-${now}.json`)
+  saveAs(blob, `${otherTitle.value}-${now}.json`)
 }
 </script>
