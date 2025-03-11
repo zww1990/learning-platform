@@ -28,7 +28,7 @@
         </template>
       </template>
     </a-table>
-    <a-modal v-model:open="open" :title="title" @ok="handleOk" width="800px" :centered="true">
+    <a-modal v-model:open="open" :title="title" @ok="handleOk" ok-text="下载数据" width="800px" :centered="true" :destroy-on-close="true">
       <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
         <template #expandedRowRender="{ record }">
           <li v-for="(value, key) in removeUselessKey(record.downloads)">
@@ -135,6 +135,10 @@ function showDialog(rowData) {
   })
 }
 function handleOk() {
-  open.value= false
+  // open.value = false
+  const data = JSON.stringify(otherDataSource.value);
+  const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+  const now = dayjs().format('YYYYMMDDHHmmss');
+  saveAs(blob, `${title.value}-${now}.json`)
 }
 </script>
