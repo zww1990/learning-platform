@@ -111,7 +111,7 @@ function download() {
   const data = JSON.stringify(latestDataSource.value);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
-  saveAs(blob, `data-${now}.json`)
+  saveAs(blob, `JetBrains开发者工具版本-${now}.json`)
 }
 
 const otherColumns = [
