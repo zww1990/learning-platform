@@ -20,7 +20,7 @@
       <template #expandedRowRender="{ record }">
         <li v-for="(value, key) in removeUselessKey(record.downloads)">
           {{key}} - {{value.link}} - <a @click="downloadFile(value)">下载</a>
-          <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading"/>
+          <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
         </li>
       </template>
       <template #bodyCell="{ column, record }">
@@ -52,12 +52,13 @@ import { saveAs } from 'file-saver';
 const progress = ref(0); // 下载进度
 const isDownloading = ref(false); // 是否正在下载
 const status = ref('')
+const current = ref('')
 // 监听下载进度
 window.electron.onDownloadProgress((event, newProgress, filename) => {
   isDownloading.value = true;
   progress.value = newProgress;
   status.value = 'active';
-  console.log(newProgress, filename)
+  current.value = filename
 });
 
 // 监听下载完成

@@ -32,12 +32,10 @@ const createWindow = () => {
 
   // 监听下载事件
   mainWindow.webContents.session.on('will-download', (event, item, webContents) => {
-    console.log('getFilename=', item.getFilename())
 
     item.on('updated', (event, state) => {
       if (state === 'progressing') {
         const progress = Number((Number((item.getReceivedBytes() / item.getTotalBytes()).toFixed(2)) * 100).toFixed());
-        console.log('progress=', progress)
         webContents.send('download-progress', progress, item.getFilename());
       }
     })
