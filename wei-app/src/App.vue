@@ -12,14 +12,15 @@
       <a-col :span="6" style="text-align: right">
         <a-space>
           <a-button type="primary" @click="reload">重新加载</a-button>
-          <a-button type="default" @click="download">下载数据</a-button>
+          <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
       </a-col>
     </a-row>
     <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
       <template #expandedRowRender="{ record }">
         <li v-for="(value, key) in removeUselessKey(record.downloads)">
-          {{key}} - {{value.link}} - <a :href="value.link">下载</a>
+          {{key}} - {{value.link}} - <a @click="downloadFile(value)">下载</a>
+          <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading"/>
         </li>
       </template>
       <template #bodyCell="{ column, record }">
@@ -47,6 +48,29 @@ import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import { message } from "ant-design-vue";
 import { ref } from "vue";
 import { saveAs } from 'file-saver';
+
+const progress = ref(0); // 下载进度
+const isDownloading = ref(false); // 是否正在下载
+const status = ref('')
+// 监听下载进度
+window.electron.onDownloadProgress((event, newProgress, filename) => {
+  isDownloading.value = true;
+  progress.value = newProgress;
+  status.value = 'active';
+  console.log(newProgress, filename)
+});
+
+// 监听下载完成
+window.electron.onDownloadComplete(() => {
+  status.value = 'success';
+  message.success('下载完成!');
+});
+
+// 监听下载失败
+window.electron.onDownloadFailed(() => {
+  status.value = 'exception';
+  message.error('下载失败!');
+});
 
 const today = dayjs().format('YYYY年MM月DD日, dddd');
 const products = {
@@ -107,11 +131,19 @@ function reload() {
   location.reload()
 }
 
-function download() {
+function downloadJson() {
   const data = JSON.stringify(latestDataSource.value);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `JetBrains开发者工具版本-${now}.json`)
+}
+
+function downloadFile(value) {
+  const link = document.createElement('a');
+  link.href = value.link;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 const otherColumns = [
