@@ -34,6 +34,7 @@
         <template #expandedRowRender="{ record }">
           <li v-for="(value, key) in removeUselessKey(record.downloads)">
             {{key}} - {{value.link}} - <a :href="value.link">下载</a>
+            <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
           </li>
         </template>
       </a-table>
@@ -62,13 +63,13 @@ window.electron.onDownloadProgress((event, newProgress, filename) => {
 });
 
 // 监听下载完成
-window.electron.onDownloadComplete(() => {
+window.electron.onDownloadComplete((event, savePath) => {
   status.value = 'success';
-  message.success('下载完成!');
+  message.success(`下载完成! 文件保存至[ ${savePath} ]`);
 });
 
 // 监听下载失败
-window.electron.onDownloadFailed(() => {
+window.electron.onDownloadFailed((event) => {
   status.value = 'exception';
   message.error('下载失败!');
 });

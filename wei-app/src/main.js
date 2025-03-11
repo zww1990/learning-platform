@@ -42,7 +42,7 @@ const createWindow = () => {
 
     item.once('done', (event, state) => {
       if (state === 'completed') {
-        webContents.send('download-complete');
+        webContents.send('download-complete', item.getSavePath());
       } else {
         webContents.send('download-failed');
       }
