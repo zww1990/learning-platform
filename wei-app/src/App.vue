@@ -6,12 +6,13 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="10">
-        <h2>正在检查JetBrains开发者工具版本: </h2>
+      <a-col :span="9">
+        <h2>检查JetBrains开发者工具版本:</h2>
       </a-col>
-      <a-col :span="14" style="text-align: right">
+      <a-col :span="15">
         <a-space>
-          <a-select v-model:value="selected" :options="options" style="width: 300px; text-align: left" mode="multiple" placeholder="全部" :max-tag-count="1"></a-select>
+          <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"></a-select>
+          <a-button type="default" @click="saveSelect">保存</a-button>
           <a-button type="default" @click="reload">重新加载</a-button>
           <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
@@ -116,20 +117,28 @@ const latestDataSource = ref([])
 const selected = ref([])
 
 watch(selected, (newValue, oldValue) => {
-  const join = newValue.join(',');
-  const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
-  axios.get(latestUrl).then(res => {
+  if (newValue.length > 0) {
+    const join = newValue.join(',');
+    const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
+    axios.get(latestUrl).then(res => {
+      latestDataSource.value = []
+      for (const key of newValue) {
+        let value = res.data[key][0]
+        value['name'] = products[key]
+        value['key'] = key
+        latestDataSource.value.push(value)
+      }
+    }).catch(err => {
+      message.error(err.message)
+    })
+  } else {
     latestDataSource.value = []
-    for (const key of newValue) {
-      let value = res.data[key][0]
-      value['name'] = products[key]
-      value['key'] = key
-      latestDataSource.value.push(value)
-    }
-  }).catch(err => {
-    message.error(err.message)
-  })
+  }
 })
+
+function saveSelect() {
+  console.log(JSON.stringify(selected.value))
+}
 
 function removeUselessKey(downloads) {
   Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson')
