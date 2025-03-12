@@ -6,13 +6,12 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="9">
+      <a-col :span="11">
         <h2>检查JetBrains开发者工具版本:</h2>
       </a-col>
-      <a-col :span="15">
+      <a-col :span="13">
         <a-space>
           <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"></a-select>
-          <a-button type="default" @click="saveSelect">保存</a-button>
           <a-button type="default" @click="reload">重新加载</a-button>
           <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
@@ -135,10 +134,6 @@ watch(selected, (newValue, oldValue) => {
     latestDataSource.value = []
   }
 })
-
-function saveSelect() {
-  console.log(JSON.stringify(selected.value))
-}
 
 function removeUselessKey(downloads) {
   Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson')

@@ -30,18 +30,11 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
-  // console.log('appData=', app.getPath('appData'))
-  // console.log('userData=', app.getPath('userData'))
-  // console.log('sessionData=', app.getPath('sessionData'))
-  // console.log('AppPath=', app.getAppPath())
-  // console.log('exe=', app.getPath('exe'))
-  // console.log('home=', app.getPath('home'))
-
   // 监听下载事件
   mainWindow.webContents.session.on('will-download', (event, item, webContents) => {
     // 设置文件保存位置后，界面就不再弹出对话框
-    const filePath = path.join(app.getPath('downloads'), item.getFilename());
-    item.setSavePath(filePath);
+    const savePath = path.join(app.getPath('downloads'), item.getFilename());
+    item.setSavePath(savePath);
 
     item.on('updated', (event, state) => {
       if (state === 'progressing') {
