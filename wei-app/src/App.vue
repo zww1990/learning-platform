@@ -11,7 +11,7 @@
       </a-col>
       <a-col :span="14" style="text-align: right">
         <a-space>
-          <a-select v-model:value="selected" :options="options" style="width: 250px; text-align: left" mode="multiple" placeholder="全部" :max-tag-count="1"></a-select>
+          <a-select v-model:value="selected" :options="options" style="width: 300px; text-align: left" mode="multiple" placeholder="全部" :max-tag-count="1"></a-select>
           <a-button type="default" @click="reload">重新加载</a-button>
           <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
@@ -103,8 +103,7 @@ const products = {
   'TBA': 'Toolbox App',
 }
 const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } })
-const join = Object.keys(products).join(',');
-const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`
+
 const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
   { title: '发布日期', dataIndex: 'date' },
@@ -117,17 +116,19 @@ const latestColumns = [
 const latestDataSource = ref([])
 const selected = ref([])
 watch(selected, (newValue, oldValue) => {
-  console.log(newValue)
-})
-axios.get(latestUrl).then(res => {
-  for (const key in products) {
-    let value = res.data[key][0]
-    value['name'] = products[key]
-    value['key'] = key
-    latestDataSource.value.push(value)
-  }
-}).catch(err => {
-  message.error(err.message)
+  const join = newValue.join(',');
+  const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
+  axios.get(latestUrl).then(res => {
+    latestDataSource.value = []
+    for (const key of newValue) {
+      let value = res.data[key][0]
+      value['name'] = products[key]
+      value['key'] = key
+      latestDataSource.value.push(value)
+    }
+  }).catch(err => {
+    message.error(err.message)
+  })
 })
 
 function removeUselessKey(downloads) {
