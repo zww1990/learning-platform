@@ -32,6 +32,9 @@ const createWindow = () => {
 
   // 监听下载事件
   mainWindow.webContents.session.on('will-download', (event, item, webContents) => {
+    // 设置文件保存位置后，界面就不再弹出对话框
+    const filePath = path.join(app.getPath('downloads'), item.getFilename());
+    item.setSavePath(filePath);
 
     item.on('updated', (event, state) => {
       if (state === 'progressing') {
