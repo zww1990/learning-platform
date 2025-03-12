@@ -103,7 +103,6 @@ const products = {
   'TBA': 'Toolbox App',
 }
 const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } })
-
 const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
   { title: '发布日期', dataIndex: 'date' },
@@ -115,6 +114,7 @@ const latestColumns = [
 ]
 const latestDataSource = ref([])
 const selected = ref([])
+
 watch(selected, (newValue, oldValue) => {
   const join = newValue.join(',');
   const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
@@ -165,6 +165,7 @@ const otherColumns = [
 const otherDataSource = ref([])
 const otherOpen = ref(false);
 const otherTitle = ref('');
+
 function otherDialog(rowData) {
   otherTitle.value = `${rowData.name}其他版本`
   const otherUrl = `https://data.services.jetbrains.com/products/releases?code=${rowData.key}&type=${rowData.type}`
@@ -176,6 +177,7 @@ function otherDialog(rowData) {
     message.error(err.message)
   })
 }
+
 function otherHandleOk() {
   const data = JSON.stringify(otherDataSource.value);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
