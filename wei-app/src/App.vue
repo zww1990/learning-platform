@@ -6,12 +6,13 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="18">
+      <a-col :span="10">
         <h2>正在检查JetBrains开发者工具版本: </h2>
       </a-col>
-      <a-col :span="6" style="text-align: right">
+      <a-col :span="14" style="text-align: right">
         <a-space>
-          <a-button type="primary" @click="reload">重新加载</a-button>
+          <a-select v-model:value="selected" :options="options" style="width: 250px; text-align: left" mode="multiple" placeholder="全部" :max-tag-count="1"></a-select>
+          <a-button type="default" @click="reload">重新加载</a-button>
           <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
       </a-col>
@@ -47,7 +48,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import { message } from "ant-design-vue";
-import { ref } from "vue";
+import {ref, watch} from "vue";
 import { saveAs } from 'file-saver';
 
 const progress = ref(0); // 下载进度
@@ -101,6 +102,7 @@ const products = {
   'FL': 'Fleet',
   'TBA': 'Toolbox App',
 }
+const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } })
 const join = Object.keys(products).join(',');
 const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`
 const latestColumns = [
@@ -113,6 +115,10 @@ const latestColumns = [
   { title: '其他版本', dataIndex: 'other' },
 ]
 const latestDataSource = ref([])
+const selected = ref([])
+watch(selected, (newValue, oldValue) => {
+  console.log(newValue)
+})
 axios.get(latestUrl).then(res => {
   for (const key in products) {
     let value = res.data[key][0]
