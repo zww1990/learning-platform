@@ -6,12 +6,13 @@
       </a-col>
     </a-row>
     <a-row>
-      <a-col :span="11">
+      <a-col :span="9">
         <h2>检查JetBrains开发者工具版本:</h2>
       </a-col>
-      <a-col :span="13">
+      <a-col :span="15">
         <a-space>
           <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"></a-select>
+          <a-button type="default" @click="saveSetting">保存设置</a-button>
           <a-button type="default" @click="reload">重新加载</a-button>
           <a-button type="default" @click="downloadJson">下载数据</a-button>
         </a-space>
@@ -115,6 +116,13 @@ const latestColumns = [
 const latestDataSource = ref([])
 const selected = ref([])
 
+window.electron.readFile('setting.json').then(content => selected.value = content);
+
+function saveSetting() {
+  window.electron.writeFile('setting.json', JSON.stringify(selected.value, null, 2))
+      .then(() => message.success('设置成功!'));
+}
+
 watch(selected, (newValue, oldValue) => {
   if (newValue.length > 0) {
     const join = newValue.join(',');
@@ -146,7 +154,7 @@ function reload() {
 }
 
 function downloadJson() {
-  const data = JSON.stringify(latestDataSource.value);
+  const data = JSON.stringify(latestDataSource.value, null, 2);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `JetBrains开发者工具版本-${now}.json`)
@@ -183,7 +191,7 @@ function otherDialog(rowData) {
 }
 
 function otherHandleOk() {
-  const data = JSON.stringify(otherDataSource.value);
+  const data = JSON.stringify(otherDataSource.value, null, 2);
   const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `${otherTitle.value}-${now}.json`)

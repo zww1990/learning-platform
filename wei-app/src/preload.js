@@ -8,4 +8,6 @@ contextBridge.exposeInMainWorld('electron', {
     onDownloadProgress: (callback) => ipcRenderer.on('download-progress', callback),
     onDownloadComplete: (callback) => ipcRenderer.on('download-complete', callback),
     onDownloadFailed: (callback) => ipcRenderer.on('download-failed', callback),
+    readFile: (fileName) => ipcRenderer.invoke('read-file', fileName),
+    writeFile: (fileName, fileContent) => ipcRenderer.invoke('write-file', fileName, fileContent),
 });
