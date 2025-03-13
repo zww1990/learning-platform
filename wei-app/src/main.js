@@ -83,7 +83,7 @@ app.on('window-all-closed', () => {
 // code. You can also put them in separate files and import them here.
 // 监听渲染进程的请求
 ipcMain.handle('read-file', async (event, fileName) => {
-  const filePath = path.join(app.getAppPath(), '/', fileName)
+  const filePath = path.join(app.getPath('home'), '/', fileName)
   try {
     const data = fs.readFileSync(filePath, 'utf-8');
     return JSON.parse(data);
@@ -93,7 +93,7 @@ ipcMain.handle('read-file', async (event, fileName) => {
   }
 });
 ipcMain.handle('write-file', (event, fileName, fileContent) => {
-  const filePath = path.join(app.getAppPath(), '/', fileName)
+  const filePath = path.join(app.getPath('home'), '/', fileName)
   fs.writeFile(filePath, fileContent, 'utf-8', err => {
     if (err) {
       console.error('Error writing file:', err)
