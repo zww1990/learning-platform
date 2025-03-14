@@ -29,6 +29,13 @@
         <template v-if="column.dataIndex === 'other'">
           <a-button @click="otherDialog(record)">查看</a-button>
         </template>
+        <template v-else-if="column.dataIndex === 'name'">
+          {{record.name}}
+          <a-popover v-if="isNew(record.date)">
+            <template #content><span v-html="record.whatsnew"></span></template>
+            <a-tag color="error">new</a-tag>
+          </a-popover>
+        </template>
       </template>
     </a-table>
     <a-modal v-model:open="otherOpen" :title="otherTitle" @ok="otherHandleOk" ok-text="下载数据" cancel-text="关闭" width="800px" :centered="true" :destroy-on-close="true">
@@ -110,8 +117,8 @@ const latestColumns = [
   { title: '发行版本', dataIndex: 'version' },
   { title: '季度版本', dataIndex: 'majorVersion' },
   { title: '构建版本', dataIndex: 'build' },
-  { title: '版本类型', dataIndex: 'type' },
-  { title: '其他版本', dataIndex: 'other' },
+  { title: '版本类型', dataIndex: 'type', width: '100px' },
+  { title: '其他版本', dataIndex: 'other', width: '100px' },
 ]
 const latestDataSource = ref([])
 const selected = ref([])
@@ -147,6 +154,13 @@ function removeUselessKey(downloads) {
   Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson')
   Reflect.deleteProperty(downloads, 'sourcesArchive')
   return downloads
+}
+
+function isNew(date) {
+  const now = dayjs()
+  const other = dayjs(date)
+  const day = Math.abs(other.diff(now, 'day'));
+  return day <= 1
 }
 
 function reload() {
