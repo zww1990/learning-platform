@@ -41,14 +41,17 @@ const createWindow = () => {
       if (state === 'progressing') {
         const progress = Number((Number((item.getReceivedBytes() / item.getTotalBytes()).toFixed(2)) * 100).toFixed());
         webContents.send('download-progress', progress, item.getFilename());
+        mainWindow.setProgressBar(progress); // 设置下载进度值
       }
     })
 
     item.once('done', (event, state) => {
       if (state === 'completed') {
         webContents.send('download-complete', item.getSavePath());
+        mainWindow.setProgressBar(-1); // 下载完成，隐藏进度条
       } else {
         webContents.send('download-failed');
+        mainWindow.setProgressBar(0); // 下载失败，重置进度条
       }
     })
 
