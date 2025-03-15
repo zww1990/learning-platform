@@ -39,9 +39,10 @@ const createWindow = () => {
 
     item.on('updated', (event, state) => {
       if (state === 'progressing') {
-        const progress = Number((Number((item.getReceivedBytes() / item.getTotalBytes()).toFixed(2)) * 100).toFixed());
+        const num = Number((item.getReceivedBytes() / item.getTotalBytes()).toFixed(2));
+        const progress = Number((num * 100).toFixed());
         webContents.send('download-progress', progress, item.getFilename());
-        mainWindow.setProgressBar(progress); // 设置下载进度值
+        mainWindow.setProgressBar(num); // 设置下载进度值
       }
     })
 
