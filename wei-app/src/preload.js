@@ -10,4 +10,5 @@ contextBridge.exposeInMainWorld('electron', {
     onDownloadFailed: (callback) => ipcRenderer.on('download-failed', callback),
     readFile: (fileName) => ipcRenderer.invoke('read-file', fileName),
     writeFile: (fileName, fileContent) => ipcRenderer.invoke('write-file', fileName, fileContent),
+    toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
 });

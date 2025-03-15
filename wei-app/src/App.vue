@@ -71,11 +71,13 @@ document.body.style.backgroundColor = 'black';
 const themeStyle = ref('dark');
 const fontColor = ref('white')
 const algorithm = ref(theme.darkAlgorithm);
+
 function changeTheme(checked) {
   themeStyle.value = checked ? 'dark' : 'light';
   algorithm.value = checked ? theme.darkAlgorithm : theme.defaultAlgorithm;
   fontColor.value = checked ? 'white' : 'black';
   document.body.style.backgroundColor = checked ? 'black' : 'white';
+  window.electron.toggle();
 }
 
 const progress = ref(0); // 下载进度
