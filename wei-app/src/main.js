@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, nativeTheme, Tray, nativeImage, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, nativeTheme, Tray, nativeImage, Menu, Notification } from 'electron';
 import path from 'node:path';
 import started from 'electron-squirrel-startup';
 import * as fs from "node:fs";
@@ -54,6 +54,8 @@ const createWindow = () => {
       if (state === 'completed') {
         webContents.send('download-complete', item.getSavePath());
         mainWindow.setProgressBar(-1); // 下载完成，隐藏进度条
+        // 添加系统通知
+        new Notification({ title: '下载完成', body: `文件保存至[ ${item.getSavePath()} ]`, icon: icon }).show();
       } else {
         webContents.send('download-failed');
         mainWindow.setProgressBar(0); // 下载失败，重置进度条
