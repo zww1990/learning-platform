@@ -69,6 +69,16 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  // 设置关于面板
+  app.setAboutPanelOptions({
+      applicationName: 'wei-app',
+      applicationVersion: '1.0.0',
+      authors: ['zhang weiwei'],
+      copyright: '©2025 weiwei',
+      version: '1.0.0',
+      website: 'https://gitee.com/zww1990'
+  })
+
   // 设置菜单栏为简体中文
   const appMenu = app.applicationMenu.items;
   const editSubMenu = appMenu[1].submenu.items;
@@ -111,6 +121,8 @@ app.whenReady().then(() => {
         {...helpSubMenu[1], label: '文档'},
         {...helpSubMenu[2], label: '社区讨论'},
         {...helpSubMenu[3], label: '提交反馈'},
+        { type: 'separator' },
+        { label: '关于', type: 'normal', role: 'about' },
       ]},
   ]))
 
