@@ -69,6 +69,51 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  // 设置菜单栏为简体中文
+  const appMenu = app.applicationMenu.items;
+  const editSubMenu = appMenu[1].submenu.items;
+  const viewSubMenu = appMenu[2].submenu.items;
+  const winSubMenu = appMenu[3].submenu.items;
+  const helpSubMenu = appMenu[4].submenu.items;
+  Menu.setApplicationMenu(Menu.buildFromTemplate([
+    {...appMenu[0], label: '文件', submenu: [
+        {...appMenu[0].submenu.items[0], label: '退出'}
+      ]},
+    {...appMenu[1], label: '编辑', submenu: [
+        {...editSubMenu[0], label: '撤消'},
+        {...editSubMenu[1], label: '重做'},
+        {...editSubMenu[2]},
+        {...editSubMenu[3], label: '剪切'},
+        {...editSubMenu[4], label: '复制'},
+        {...editSubMenu[5], label: '粘贴'},
+        {...editSubMenu[6], label: '删除'},
+        {...editSubMenu[7]},
+        {...editSubMenu[8], label: '全选'},
+      ]},
+    {...appMenu[2], label: '视图', submenu: [
+        {...viewSubMenu[0], label: '重新加载'},
+        {...viewSubMenu[1], label: '强制重新加载'},
+        {...viewSubMenu[2], label: '切换开发人员工具'},
+        {...viewSubMenu[3]},
+        {...viewSubMenu[4], label: '实际尺寸'},
+        {...viewSubMenu[5], label: '放大尺寸'},
+        {...viewSubMenu[6], label: '缩小尺寸'},
+        {...viewSubMenu[7]},
+        {...viewSubMenu[8], label: '切换全屏'},
+      ]},
+    {...appMenu[3], label: '窗口', submenu: [
+        {...winSubMenu[0], label: '最小化'},
+        {...winSubMenu[1], label: '隐藏菜单栏'},
+        {...winSubMenu[2], label: '关闭'},
+      ]},
+    {...appMenu[4], label: '帮助', submenu: [
+        {...helpSubMenu[0], label: '了解更多'},
+        {...helpSubMenu[1], label: '文档'},
+        {...helpSubMenu[2], label: '社区讨论'},
+        {...helpSubMenu[3], label: '提交反馈'},
+      ]},
+  ]))
+
   // 设置系统托盘
   const tray = new Tray(icon);
   tray.setToolTip('这是一款用来检查并下载最新版本JetBrains开发者工具的桌面应用程序')
