@@ -71,6 +71,14 @@ const createWindow = () => {
 app.whenReady().then(() => {
   createWindow();
 
+  // macOS设置应用程序图标、Dock菜单
+  if (process.platform === 'darwin') {
+      app.dock.setIcon(icon)
+      app.dock.setMenu(Menu.buildFromTemplate([
+          { label: '打开新窗口', click: () => createWindow() }
+      ]))
+  }
+
   // 设置关于面板
   app.setAboutPanelOptions({
       applicationName: 'wei-app',
