@@ -1,6 +1,7 @@
 import { reactive } from "vue";
 import { message, theme } from "ant-design-vue";
 import dayjs from "dayjs";
+import { saveAs } from "file-saver";
 
 export const app = reactive({
     themeStyle: 'dark',
@@ -58,5 +59,11 @@ export const download = reactive({
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    },
+    downloadJson(content, prefix) {
+        const data = JSON.stringify(content, null, 2);
+        const blob = new Blob([data], { type: "text/plain;charset=utf-8" });
+        const now = dayjs().format('YYYYMMDDHHmmss');
+        saveAs(blob, `${prefix}-${now}.json`);
     }
 });
