@@ -1,7 +1,8 @@
 import { reactive } from "vue";
 import { theme } from "ant-design-vue";
+import dayjs from "dayjs";
 
-export const store = reactive({
+export const app = reactive({
     themeStyle: 'dark',
     fontColor: 'white',
     algorithm: theme.darkAlgorithm,
@@ -14,5 +15,11 @@ export const store = reactive({
         this.fontColor = checked ? 'white' : 'black';
         document.body.style.backgroundColor = checked ? 'black' : 'white';
         window.electron.toggle();
+    },
+    isDarkTheme() {
+        return this.themeStyle === 'dark';
+    },
+    today() {
+        return dayjs().format('YYYY年MM月DD日, dddd');
     }
 })

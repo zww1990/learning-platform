@@ -6,7 +6,7 @@ import { ref, watch } from "vue";
 import { saveAs } from 'file-saver';
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
-import { store } from "../store";
+import { app } from "../store";
 
 const progress = ref(0); // 下载进度
 const isDownloading = ref(false); // 是否正在下载
@@ -33,7 +33,6 @@ window.electron.onDownloadFailed((event) => {
   message.error('下载失败!');
 });
 
-const today = dayjs().format('YYYY年MM月DD日, dddd');
 const products = {
   'AC': 'AppCode',
   'QA': 'Aqua',
@@ -161,17 +160,17 @@ function otherHandleOk() {
 }
 
 function changeTheme(checked) {
-  store.changeTheme(checked)
+  app.changeTheme(checked)
 }
 </script>
 
 <template>
   <a-row>
     <a-col :span="22">
-      <h2 :style="{ color: store.fontColor }">今天是{{today}}</h2>
+      <h2 :style="{ color: app.fontColor }">今天是{{app.today()}}</h2>
     </a-col>
     <a-col :span="2">
-      <a-switch :checked="store.themeStyle === 'dark'" @change="changeTheme">
+      <a-switch :checked="app.isDarkTheme()" @change="changeTheme">
         <template #checkedChildren><LightSun /></template>
         <template #unCheckedChildren><DarkMoon /></template>
       </a-switch>
@@ -179,7 +178,7 @@ function changeTheme(checked) {
   </a-row>
   <a-row>
     <a-col :span="9">
-      <h2 :style="{ color: store.fontColor }">检查JetBrains开发者工具版本:</h2>
+      <h2 :style="{ color: app.fontColor }">检查JetBrains开发者工具版本:</h2>
     </a-col>
     <a-col :span="15">
       <a-space>
