@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { theme } from "ant-design-vue";
+import { message, theme } from "ant-design-vue";
 import dayjs from "dayjs";
 
 export const app = reactive({
@@ -22,4 +22,41 @@ export const app = reactive({
     today() {
         return dayjs().format('YYYY年MM月DD日, dddd');
     }
-})
+});
+
+export const download = reactive({
+    // 下载进度
+    progress: 0,
+    // 是否正在下载
+    isDownloading: false,
+    // 下载状态
+    status: '',
+    // 当前正在下载的文件名
+    currentFile: '',
+    init() {
+        // 监听下载进度
+        window.electron.onDownloadProgress((event, newProgress, filename) => {
+            this.isDownloading = true;
+            this.progress = newProgress;
+            this.status = 'active';
+            this.currentFile = filename;
+        });
+        // 监听下载完成
+        window.electron.onDownloadComplete((event, savePath) => {
+            this.status = 'success';
+            message.success(`下载完成! 文件保存至[ ${savePath} ]`);
+        });
+        // 监听下载失败
+        window.electron.onDownloadFailed((event) => {
+            this.status = 'exception';
+            message.error('下载失败!');
+        });
+    },
+    downloadFile(href) {
+        const link = document.createElement('a');
+        link.href = href;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+});

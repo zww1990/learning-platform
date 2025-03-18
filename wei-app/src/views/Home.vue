@@ -6,32 +6,9 @@ import { ref, watch } from "vue";
 import { saveAs } from 'file-saver';
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
-import { app } from "../store";
+import { app, download } from "../store";
 
-const progress = ref(0); // 下载进度
-const isDownloading = ref(false); // 是否正在下载
-const status = ref(''); // 下载状态
-const current = ref(''); // 当前正在下载的文件名
-
-// 监听下载进度
-window.electron.onDownloadProgress((event, newProgress, filename) => {
-  isDownloading.value = true;
-  progress.value = newProgress;
-  status.value = 'active';
-  current.value = filename
-});
-
-// 监听下载完成
-window.electron.onDownloadComplete((event, savePath) => {
-  status.value = 'success';
-  message.success(`下载完成! 文件保存至[ ${savePath} ]`);
-});
-
-// 监听下载失败
-window.electron.onDownloadFailed((event) => {
-  status.value = 'exception';
-  message.error('下载失败!');
-});
+download.init();
 
 const products = {
   'AC': 'AppCode',
@@ -122,12 +99,8 @@ function downloadJson() {
   saveAs(blob, `JetBrains开发者工具版本-${now}.json`)
 }
 
-function downloadFile(value) {
-  const link = document.createElement('a');
-  link.href = value.link;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+function downloadFile(href) {
+  download.downloadFile(href);
 }
 
 const otherColumns = [
@@ -192,8 +165,8 @@ function changeTheme(checked) {
   <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
     <template #expandedRowRender="{ record }">
       <li v-for="(value, key) in removeUselessKey(record.downloads)">
-        {{key}} - {{value.link}} - <a @click="downloadFile(value)">下载</a>
-        <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
+        {{key}} - {{value.link}} - <a @click="downloadFile(value.link)">下载</a>
+        <a-progress :percent="download.progress" :status="download.status" size="small" v-if="download.isDownloading && value.link.endsWith(download.currentFile)"/>
       </li>
     </template>
     <template #bodyCell="{ column, record }">
@@ -213,8 +186,8 @@ function changeTheme(checked) {
     <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
       <template #expandedRowRender="{ record }">
         <li v-for="(value, key) in removeUselessKey(record.downloads)">
-          {{key}} - {{value.link}} - <a :href="value.link">下载</a>
-          <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
+          {{key}} - {{value.link}} - <a @click="downloadFile(value.link)">下载</a>
+          <a-progress :percent="download.progress" :status="download.status" size="small" v-if="download.isDownloading && value.link.endsWith(download.currentFile)"/>
         </li>
       </template>
     </a-table>
