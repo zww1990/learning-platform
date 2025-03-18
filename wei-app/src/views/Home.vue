@@ -1,24 +1,12 @@
 <script setup>
 import axios from "axios";
 import dayjs from "dayjs";
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
-import { message, theme } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { ref, watch } from "vue";
 import { saveAs } from 'file-saver';
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
-
-const themeStyle = ref('dark');
-const fontColor = ref('white')
-const algorithm = ref(theme.darkAlgorithm);
-
-function changeTheme(checked) {
-  themeStyle.value = checked ? 'dark' : 'light';
-  algorithm.value = checked ? theme.darkAlgorithm : theme.defaultAlgorithm;
-  fontColor.value = checked ? 'white' : 'black';
-  document.body.style.backgroundColor = checked ? 'black' : 'white';
-  window.electron.toggle();
-}
+import { store } from "../store";
 
 const progress = ref(0); // 下载进度
 const isDownloading = ref(false); // 是否正在下载
@@ -171,63 +159,65 @@ function otherHandleOk() {
   const now = dayjs().format('YYYYMMDDHHmmss');
   saveAs(blob, `${otherTitle.value}-${now}.json`)
 }
+
+function changeTheme(checked) {
+  store.changeTheme(checked)
+}
 </script>
 
 <template>
-  <a-config-provider :locale="zhCN" :theme="{ algorithm }">
-    <a-row>
-      <a-col :span="22">
-        <h2 :style="{ color: fontColor }">今天是{{today}}</h2>
-      </a-col>
-      <a-col :span="2">
-        <a-switch :checked="themeStyle === 'dark'" @change="changeTheme">
-          <template #checkedChildren><LightSun /></template>
-          <template #unCheckedChildren><DarkMoon /></template>
-        </a-switch>
-      </a-col>
-    </a-row>
-    <a-row>
-      <a-col :span="9">
-        <h2 :style="{ color: fontColor }">检查JetBrains开发者工具版本:</h2>
-      </a-col>
-      <a-col :span="15">
-        <a-space>
-          <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
-          <a-button type="default" @click="saveSetting">保存设置</a-button>
-          <a-button type="default" @click="reload">重新加载</a-button>
-          <a-button type="default" @click="downloadJson">下载数据</a-button>
-        </a-space>
-      </a-col>
-    </a-row>
-    <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
+  <a-row>
+    <a-col :span="22">
+      <h2 :style="{ color: store.fontColor }">今天是{{today}}</h2>
+    </a-col>
+    <a-col :span="2">
+      <a-switch :checked="store.themeStyle === 'dark'" @change="changeTheme">
+        <template #checkedChildren><LightSun /></template>
+        <template #unCheckedChildren><DarkMoon /></template>
+      </a-switch>
+    </a-col>
+  </a-row>
+  <a-row>
+    <a-col :span="9">
+      <h2 :style="{ color: store.fontColor }">检查JetBrains开发者工具版本:</h2>
+    </a-col>
+    <a-col :span="15">
+      <a-space>
+        <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
+        <a-button type="default" @click="saveSetting">保存设置</a-button>
+        <a-button type="default" @click="reload">重新加载</a-button>
+        <a-button type="default" @click="downloadJson">下载数据</a-button>
+      </a-space>
+    </a-col>
+  </a-row>
+  <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
+    <template #expandedRowRender="{ record }">
+      <li v-for="(value, key) in removeUselessKey(record.downloads)">
+        {{key}} - {{value.link}} - <a @click="downloadFile(value)">下载</a>
+        <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
+      </li>
+    </template>
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'other'">
+        <a-button @click="otherDialog(record)">查看</a-button>
+      </template>
+      <template v-else-if="column.dataIndex === 'name'">
+        {{record.name}}
+        <a-popover v-if="isNew(record.date)">
+          <template #content><span v-html="record.whatsnew"/></template>
+          <a-tag color="error">new</a-tag>
+        </a-popover>
+      </template>
+    </template>
+  </a-table>
+  <a-modal v-model:open="otherOpen" :title="otherTitle" @ok="otherHandleOk" ok-text="下载数据" cancel-text="关闭" width="800px" :centered="true" :destroy-on-close="true">
+    <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
       <template #expandedRowRender="{ record }">
         <li v-for="(value, key) in removeUselessKey(record.downloads)">
-          {{key}} - {{value.link}} - <a @click="downloadFile(value)">下载</a>
+          {{key}} - {{value.link}} - <a :href="value.link">下载</a>
           <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
         </li>
       </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.dataIndex === 'other'">
-          <a-button @click="otherDialog(record)">查看</a-button>
-        </template>
-        <template v-else-if="column.dataIndex === 'name'">
-          {{record.name}}
-          <a-popover v-if="isNew(record.date)">
-            <template #content><span v-html="record.whatsnew"/></template>
-            <a-tag color="error">new</a-tag>
-          </a-popover>
-        </template>
-      </template>
     </a-table>
-    <a-modal v-model:open="otherOpen" :title="otherTitle" @ok="otherHandleOk" ok-text="下载数据" cancel-text="关闭" width="800px" :centered="true" :destroy-on-close="true">
-      <a-table :data-source="otherDataSource" :columns="otherColumns" :pagination="true" table-layout="fixed" size="small" row-key="build">
-        <template #expandedRowRender="{ record }">
-          <li v-for="(value, key) in removeUselessKey(record.downloads)">
-            {{key}} - {{value.link}} - <a :href="value.link">下载</a>
-            <a-progress :percent="progress" :status="status" size="small" v-if="isDownloading && value.link.endsWith(current)"/>
-          </li>
-        </template>
-      </a-table>
-    </a-modal>
-  </a-config-provider>
+  </a-modal>
 </template>
