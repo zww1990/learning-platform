@@ -4,11 +4,11 @@ import dayjs from "dayjs";
 import { saveAs } from "file-saver";
 
 export const app = reactive({
-    themeStyle: 'dark',
-    fontColor: 'white',
-    algorithm: theme.darkAlgorithm,
+    themeStyle: 'light',
+    fontColor: 'black',
+    algorithm: theme.defaultAlgorithm,
     initBackgroundColor() {
-        document.body.style.backgroundColor = 'black';
+        document.body.style.backgroundColor = 'white';
     },
     changeTheme(checked) {
         this.themeStyle = checked ? 'dark' : 'light';

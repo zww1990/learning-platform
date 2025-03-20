@@ -24,6 +24,9 @@ const createWindow = () => {
     icon: icon
   });
 
+  // 设置默认主题：亮色
+  nativeTheme.themeSource = 'light'
+
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     // 本地开发环境
