@@ -88,7 +88,23 @@ function isNew(date) {
 }
 
 function reload() {
-  location.reload()
+  if (selected.value.length > 0) {
+    const join = selected.value.join(',');
+    const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
+    axios.get(latestUrl).then(res => {
+      latestDataSource.value = []
+      for (const key of selected.value) {
+        let value = res.data[key][0]
+        value['name'] = products[key]
+        value['key'] = key
+        latestDataSource.value.push(value)
+      }
+    }).catch(err => {
+      message.error(err.message)
+    })
+  } else {
+    latestDataSource.value = []
+  }
 }
 
 function downloadJson() {
