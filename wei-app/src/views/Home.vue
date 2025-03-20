@@ -155,7 +155,7 @@ function changeTheme(checked) {
       </a-space>
     </a-col>
   </a-row>
-  <a-table :dataSource="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
+  <a-table :data-source="latestDataSource" :columns="latestColumns" :pagination="false" table-layout="fixed" size="middle">
     <template #expandedRowRender="{ record }">
       <li v-for="(value, key) in removeUselessKey(record.downloads)">
         {{key}} - {{value.link}} - <a @click="downloadFile(value.link)">下载</a>
@@ -182,6 +182,14 @@ function changeTheme(checked) {
           {{key}} - {{value.link}} - <a @click="downloadFile(value.link)">下载</a>
           <a-progress :percent="download.progress" :status="download.status" size="small" v-if="download.isDownloading && value.link.endsWith(download.currentFile)"/>
         </li>
+      </template>
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.dataIndex === 'date'">
+          <a-popover>
+            <template #content><span v-html="record.whatsnew"/></template>
+            {{record.date}}
+          </a-popover>
+        </template>
       </template>
     </a-table>
   </a-modal>
