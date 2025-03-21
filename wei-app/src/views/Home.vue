@@ -1,11 +1,11 @@
 <script setup>
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
-import { ref, watch } from "vue";
+import { ref, useTemplateRef, watch } from "vue";
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
 import { app, download } from "../store";
-import { getProductsReleasesByCode, getProductsReleasesByCodeAndType } from "../services";
+import { getProductsReleasesByCode, getProductsReleasesByCodeAndType, postTranslateText } from "../services";
 
 download.init();
 
@@ -126,6 +126,13 @@ function otherHandleOk() {
 function changeTheme(checked) {
   app.changeTheme(checked)
 }
+
+const whatsnew = useTemplateRef('whatsnew');
+function translateText() {
+  postTranslateText([ whatsnew.value.innerHTML ]).then(res => {
+    whatsnew.value.innerHTML = res.data[0].translations[0].text
+  })
+}
 </script>
 
 <template>
@@ -167,7 +174,10 @@ function changeTheme(checked) {
       <template v-else-if="column.dataIndex === 'name'">
         {{record.name}}
         <a-popover v-if="isNew(record.date)">
-          <template #content><span v-html="record.whatsnew"/></template>
+          <template #content>
+            <span v-html="record.whatsnew" ref="whatsnew"/>
+            <a @click="translateText">翻译成中文</a>
+          </template>
           <a-tag color="error">new</a-tag>
         </a-popover>
       </template>
@@ -184,7 +194,10 @@ function changeTheme(checked) {
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
           <a-popover>
-            <template #content><span v-html="record.whatsnew"/></template>
+            <template #content>
+              <span v-html="record.whatsnew" ref="whatsnew"/>
+              <a @click="translateText">翻译成中文</a>
+            </template>
             {{record.date}}
           </a-popover>
         </template>
