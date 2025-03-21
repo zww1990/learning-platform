@@ -1,11 +1,11 @@
 <script setup>
-import axios from "axios";
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
 import { ref, watch } from "vue";
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
 import { app, download } from "../store";
+import { getProductsReleasesByCode, getProductsReleasesByCodeAndType } from "../services";
 
 download.init();
 
@@ -61,8 +61,7 @@ watch(selected, (newValue, oldValue) => {
 function setProductsReleases(value) {
   if (value.length > 0) {
     const join = value.join(',');
-    const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
-    axios.get(latestUrl).then(res => {
+    getProductsReleasesByCode(join).then(res => {
       latestDataSource.value = []
       for (const key of value) {
         let item = res.data[key][0]
@@ -70,9 +69,7 @@ function setProductsReleases(value) {
         item['key'] = key
         latestDataSource.value.push(item)
       }
-    }).catch(err => {
-      message.error(err.message)
-    })
+    }).catch(() => {})
   } else {
     latestDataSource.value = []
   }
@@ -115,14 +112,11 @@ const otherTitle = ref('');
 
 function otherDialog(rowData) {
   otherTitle.value = `${rowData.name}其他版本`
-  const otherUrl = `https://data.services.jetbrains.com/products/releases?code=${rowData.key}&type=${rowData.type}`
-  axios.get(otherUrl).then(res => {
+  getProductsReleasesByCodeAndType(rowData.key, rowData.type).then(res => {
     otherDataSource.value = res.data[rowData.key]
         .filter(it => Object.keys(it.downloads).length > 0)
     otherOpen.value = true
-  }).catch(err => {
-    message.error(err.message)
-  })
+  }).catch(() => {})
 }
 
 function otherHandleOk() {
