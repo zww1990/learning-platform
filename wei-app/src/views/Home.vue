@@ -55,16 +55,20 @@ function saveSetting() {
 }
 
 watch(selected, (newValue, oldValue) => {
-  if (newValue.length > 0) {
-    const join = newValue.join(',');
+  setProductsReleases(newValue)
+})
+
+function setProductsReleases(value) {
+  if (value.length > 0) {
+    const join = value.join(',');
     const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
     axios.get(latestUrl).then(res => {
       latestDataSource.value = []
-      for (const key of newValue) {
-        let value = res.data[key][0]
-        value['name'] = products[key]
-        value['key'] = key
-        latestDataSource.value.push(value)
+      for (const key of value) {
+        let item = res.data[key][0]
+        item['name'] = products[key]
+        item['key'] = key
+        latestDataSource.value.push(item)
       }
     }).catch(err => {
       message.error(err.message)
@@ -72,7 +76,11 @@ watch(selected, (newValue, oldValue) => {
   } else {
     latestDataSource.value = []
   }
-})
+}
+
+function reload() {
+  setProductsReleases(selected.value)
+}
 
 function removeUselessKey(downloads) {
   Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson')
@@ -85,26 +93,6 @@ function isNew(date) {
   const other = dayjs(date)
   const day = Math.abs(other.diff(now, 'day'));
   return day <= 1
-}
-
-function reload() {
-  if (selected.value.length > 0) {
-    const join = selected.value.join(',');
-    const latestUrl = `https://data.services.jetbrains.com/products/releases?code=${join}&latest=true&type=release,preview`;
-    axios.get(latestUrl).then(res => {
-      latestDataSource.value = []
-      for (const key of selected.value) {
-        let value = res.data[key][0]
-        value['name'] = products[key]
-        value['key'] = key
-        latestDataSource.value.push(value)
-      }
-    }).catch(err => {
-      message.error(err.message)
-    })
-  } else {
-    latestDataSource.value = []
-  }
 }
 
 function downloadJson() {
