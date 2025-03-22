@@ -36,7 +36,7 @@ import 'ant-design-vue/dist/reset.css';
 
 // 设置简体中文
 import dayjs from "dayjs";
-import 'dayjs/locale/zh-cn'
-dayjs.locale('zh-cn')
+import 'dayjs/locale/zh-cn';
+dayjs.locale('zh-cn');
 
 createApp(App).use(Antd).mount('#app');
