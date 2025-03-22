@@ -50,13 +50,13 @@ const selected = ref([]);
 if (window.electron) {
   window.electron.readFile('setting.json').then(content => selected.value = content);
 } else {
-  console.warn('当前运行环境不存在 electron 对象。');
+  console.warn('浏览器模式不存在 electron 对象。');
 }
 
 function saveSetting() {
   if (!window.electron) {
-    console.warn('当前运行环境不存在 electron 对象。');
-    message.warn('保存失败!');
+    console.warn('浏览器模式不存在 electron 对象。');
+    message.warn('浏览器模式不支持此操作!');
     return;
   }
   window.electron.writeFile('setting.json', JSON.stringify(selected.value, null, 2))

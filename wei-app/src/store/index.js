@@ -36,7 +36,7 @@ export const download = reactive({
     currentFile: '',
     init() {
         if (!window.electron) {
-            console.warn('当前运行环境不存在 electron 对象。');
+            console.warn('浏览器模式不存在 electron 对象。');
             return;
         }
         // 监听下载进度
