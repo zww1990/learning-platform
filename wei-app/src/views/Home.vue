@@ -149,7 +149,7 @@ function translateText() {
     <a-col :span="22">
       <h2 :style="{ color: app.fontColor }">今天是{{app.today()}}</h2>
     </a-col>
-    <a-col :span="2">
+    <a-col :span="2" style="text-align: right">
       <a-switch :checked="app.isDarkTheme()" @change="changeTheme">
         <template #checkedChildren><LightSun /></template>
         <template #unCheckedChildren><DarkMoon /></template>
@@ -160,9 +160,9 @@ function translateText() {
     <a-col :span="9">
       <h2 :style="{ color: app.fontColor }">检查JetBrains开发者工具版本:</h2>
     </a-col>
-    <a-col :span="15">
+    <a-col :span="15" style="text-align: right">
       <a-space>
-        <a-select v-model:value="selected" :options="options" style="width: 300px;" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
+        <a-select v-model:value="selected" :options="options" style="width: 300px;text-align: left" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
         <a-button type="default" @click="saveSetting">保存设置</a-button>
         <a-button type="default" @click="reload">重新加载</a-button>
         <a-button type="default" @click="downloadJson">下载数据</a-button>
