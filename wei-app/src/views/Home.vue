@@ -34,7 +34,8 @@ const products = {
   'FL': 'Fleet',
   'TBA': 'Toolbox App',
 };
-const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } });
+const productOptions = Object.entries(products).map(it => { return { value: it[0], label: it[1] } });
+const productSelected = ref([]);
 const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
   { title: '发布日期', dataIndex: 'date', width: '120px' },
@@ -45,20 +46,19 @@ const latestColumns = [
   { title: '其他版本', dataIndex: 'other', width: '100px' },
 ];
 const latestDataSource = ref([]);
-const selected = ref([]);
 
 if (app.isDesktopApp) {
-  window.electron.readFile('setting.json').then(content => selected.value = content);
+  window.electron.readFile('setting.json').then(content => productSelected.value = content);
 } else {
   console.warn('浏览器模式不存在 electron 对象。');
 }
 
 function saveSetting() {
-  window.electron.writeFile('setting.json', JSON.stringify(selected.value, null, 2))
+  window.electron.writeFile('setting.json', JSON.stringify(productSelected.value, null, 2))
       .then(() => message.success('设置成功!'));
 }
 
-watch(selected, (newValue, oldValue) => {
+watch(productSelected, (newValue, oldValue) => {
   setProductsReleases(newValue);
 });
 
@@ -80,7 +80,7 @@ function setProductsReleases(value) {
 }
 
 function reload() {
-  setProductsReleases(selected.value);
+  setProductsReleases(productSelected.value);
 }
 
 function removeUselessKey(downloads) {
@@ -132,6 +132,13 @@ function changeTheme(checked) {
 }
 
 const whatsnew = useTemplateRef('whatsnew');
+const voiceOptions = ref([]);
+const voiceSelected = ref('');
+
+window.speechSynthesis.onvoiceschanged = () => {
+  voiceOptions.value = window.speechSynthesis.getVoices().filter(it => it.lang.startsWith('zh'));
+  voiceSelected.value = voiceOptions.value.find(it => it.default).name;
+};
 
 function translateText() {
   postTranslateText([ whatsnew.value.innerHTML ]).then(res => {
@@ -141,6 +148,10 @@ function translateText() {
 
 function speakText() {
   const speech = new SpeechSynthesisUtterance(whatsnew.value.innerText);
+  const voice = voiceOptions.value.find(it => it.name === voiceSelected.value);
+  if (voice) {
+    speech.voice = voice;
+  }
   window.speechSynthesis.speak(speech);
 }
 
@@ -153,14 +164,17 @@ function stopSpeakText(visible) {
 
 <template>
   <a-row>
-    <a-col :span="22">
+    <a-col :span="10">
       <h2 :style="{ color: app.fontColor }">今天是{{app.today()}}</h2>
     </a-col>
-    <a-col :span="2" style="text-align: right">
-      <a-switch :checked="app.isDarkTheme()" @change="changeTheme">
-        <template #checkedChildren><LightSun /></template>
-        <template #unCheckedChildren><DarkMoon /></template>
-      </a-switch>
+    <a-col :span="14" style="text-align: right">
+      <a-space>
+        <a-select v-model:value="voiceSelected" :options="voiceOptions" :field-names="{ label: 'name', value: 'name' }" style="width: 400px;text-align: left"/>
+        <a-switch :checked="app.isDarkTheme()" @change="changeTheme">
+          <template #checkedChildren><LightSun /></template>
+          <template #unCheckedChildren><DarkMoon /></template>
+        </a-switch>
+      </a-space>
     </a-col>
   </a-row>
   <a-row>
@@ -169,7 +183,7 @@ function stopSpeakText(visible) {
     </a-col>
     <a-col :span="15" style="text-align: right">
       <a-space>
-        <a-select v-model:value="selected" :options="options" style="width: 300px;text-align: left" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
+        <a-select v-model:value="productSelected" :options="productOptions" style="width: 300px;text-align: left" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
         <a-button type="default" @click="saveSetting" v-if="app.isDesktopApp">保存设置</a-button>
         <a-button type="default" @click="reload">重新加载</a-button>
         <a-button type="default" @click="downloadJson">下载数据</a-button>
