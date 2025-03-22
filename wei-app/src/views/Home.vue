@@ -137,6 +137,15 @@ function translateText() {
     whatsnew.value.innerHTML = res.data[0].translations[0].text;
   });
 }
+function speakText() {
+  const speech = new SpeechSynthesisUtterance(whatsnew.value.innerText);
+  window.speechSynthesis.speak(speech);
+}
+function stopSpeakText(visible) {
+  if (!visible) {
+    window.speechSynthesis.cancel();
+  }
+}
 </script>
 
 <template>
@@ -177,10 +186,12 @@ function translateText() {
       </template>
       <template v-else-if="column.dataIndex === 'name'">
         {{record.name}}
-        <a-popover v-if="isNew(record.date)">
+        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText">
           <template #content>
             <span v-html="record.whatsnew" ref="whatsnew"/>
             <a @click="translateText">翻译成中文</a>
+            <a-divider type="vertical" />
+            <a @click="speakText">朗读内容</a>
           </template>
           <a-tag color="error">new</a-tag>
         </a-popover>
@@ -197,10 +208,12 @@ function translateText() {
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
-          <a-popover>
+          <a-popover @openChange="stopSpeakText">
             <template #content>
               <span v-html="record.whatsnew" ref="whatsnew"/>
               <a @click="translateText">翻译成中文</a>
+              <a-divider type="vertical" />
+              <a @click="speakText">朗读内容</a>
             </template>
             {{record.date}}
           </a-popover>
