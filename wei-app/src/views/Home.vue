@@ -37,10 +37,10 @@ const products = {
 const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } });
 const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
-  { title: '发布日期', dataIndex: 'date' },
-  { title: '发行版本', dataIndex: 'version' },
-  { title: '季度版本', dataIndex: 'majorVersion' },
-  { title: '构建版本', dataIndex: 'build' },
+  { title: '发布日期', dataIndex: 'date', width: '120px' },
+  { title: '发行版本', dataIndex: 'version', width: '100px' },
+  { title: '季度版本', dataIndex: 'majorVersion', width: '100px' },
+  { title: '构建版本', dataIndex: 'build', width: '120px' },
   { title: '版本类型', dataIndex: 'type', width: '100px' },
   { title: '其他版本', dataIndex: 'other', width: '100px' },
 ];
