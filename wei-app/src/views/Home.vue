@@ -33,8 +33,8 @@ const products = {
   'WS': 'WebStorm',
   'FL': 'Fleet',
   'TBA': 'Toolbox App',
-}
-const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } })
+};
+const options = Object.entries(products).map(it => { return { value: it[0], label: it[1] } });
 const latestColumns = [
   { title: '产品名称', dataIndex: 'name' },
   { title: '发布日期', dataIndex: 'date' },
@@ -43,9 +43,9 @@ const latestColumns = [
   { title: '构建版本', dataIndex: 'build' },
   { title: '版本类型', dataIndex: 'type', width: '100px' },
   { title: '其他版本', dataIndex: 'other', width: '100px' },
-]
-const latestDataSource = ref([])
-const selected = ref([])
+];
+const latestDataSource = ref([]);
+const selected = ref([]);
 
 window.electron.readFile('setting.json').then(content => selected.value = content);
 
@@ -55,41 +55,41 @@ function saveSetting() {
 }
 
 watch(selected, (newValue, oldValue) => {
-  setProductsReleases(newValue)
-})
+  setProductsReleases(newValue);
+});
 
 function setProductsReleases(value) {
   if (value.length > 0) {
     const join = value.join(',');
     getProductsReleasesByCode(join).then(res => {
-      latestDataSource.value = []
+      latestDataSource.value = [];
       for (const key of value) {
-        let item = res.data[key][0]
-        item['name'] = products[key]
-        item['key'] = key
-        latestDataSource.value.push(item)
+        let item = res.data[key][0];
+        item['name'] = products[key];
+        item['key'] = key;
+        latestDataSource.value.push(item);
       }
-    }).catch(() => {})
+    }).catch(() => {});
   } else {
-    latestDataSource.value = []
+    latestDataSource.value = [];
   }
 }
 
 function reload() {
-  setProductsReleases(selected.value)
+  setProductsReleases(selected.value);
 }
 
 function removeUselessKey(downloads) {
-  Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson')
-  Reflect.deleteProperty(downloads, 'sourcesArchive')
-  return downloads
+  Reflect.deleteProperty(downloads, 'thirdPartyLibrariesJson');
+  Reflect.deleteProperty(downloads, 'sourcesArchive');
+  return downloads;
 }
 
 function isNew(date) {
-  const now = dayjs()
-  const other = dayjs(date)
+  const now = dayjs();
+  const other = dayjs(date);
   const day = Math.abs(other.diff(now, 'day'));
-  return day <= 1
+  return day <= 1;
 }
 
 function downloadJson() {
@@ -105,18 +105,18 @@ const otherColumns = [
   { title: '发行版本', dataIndex: 'version' },
   { title: '季度版本', dataIndex: 'majorVersion' },
   { title: '构建版本', dataIndex: 'build' },
-]
-const otherDataSource = ref([])
+];
+const otherDataSource = ref([]);
 const otherOpen = ref(false);
 const otherTitle = ref('');
 
 function otherDialog(rowData) {
-  otherTitle.value = `${rowData.name}其他版本`
+  otherTitle.value = `${rowData.name}其他版本`;
   getProductsReleasesByCodeAndType(rowData.key, rowData.type).then(res => {
     otherDataSource.value = res.data[rowData.key]
-        .filter(it => Object.keys(it.downloads).length > 0)
-    otherOpen.value = true
-  }).catch(() => {})
+        .filter(it => Object.keys(it.downloads).length > 0);
+    otherOpen.value = true;
+  }).catch(() => {});
 }
 
 function otherHandleOk() {
@@ -124,14 +124,14 @@ function otherHandleOk() {
 }
 
 function changeTheme(checked) {
-  app.changeTheme(checked)
+  app.changeTheme(checked);
 }
 
 const whatsnew = useTemplateRef('whatsnew');
 function translateText() {
   postTranslateText([ whatsnew.value.innerHTML ]).then(res => {
-    whatsnew.value.innerHTML = res.data[0].translations[0].text
-  })
+    whatsnew.value.innerHTML = res.data[0].translations[0].text;
+  });
 }
 </script>
 
