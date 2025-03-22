@@ -15,7 +15,7 @@ export const app = reactive({
         this.algorithm = checked ? theme.darkAlgorithm : theme.defaultAlgorithm;
         this.fontColor = checked ? 'white' : 'black';
         document.body.style.backgroundColor = checked ? 'black' : 'white';
-        window.electron.toggle();
+        window.electron && window.electron.toggle();
     },
     isDarkTheme() {
         return this.themeStyle === 'dark';
@@ -35,6 +35,10 @@ export const download = reactive({
     // 当前正在下载的文件名
     currentFile: '',
     init() {
+        if (!window.electron) {
+            console.warn('当前运行环境不存在 electron 对象。');
+            return;
+        }
         // 监听下载进度
         window.electron.onDownloadProgress((event, newProgress, filename) => {
             this.isDownloading = true;

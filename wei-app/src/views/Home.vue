@@ -47,9 +47,18 @@ const latestColumns = [
 const latestDataSource = ref([]);
 const selected = ref([]);
 
-window.electron.readFile('setting.json').then(content => selected.value = content);
+if (window.electron) {
+  window.electron.readFile('setting.json').then(content => selected.value = content);
+} else {
+  console.warn('当前运行环境不存在 electron 对象。');
+}
 
 function saveSetting() {
+  if (!window.electron) {
+    console.warn('当前运行环境不存在 electron 对象。');
+    message.warn('保存失败!');
+    return;
+  }
   window.electron.writeFile('setting.json', JSON.stringify(selected.value, null, 2))
       .then(() => message.success('设置成功!'));
 }
