@@ -132,15 +132,18 @@ function changeTheme(checked) {
 }
 
 const whatsnew = useTemplateRef('whatsnew');
+
 function translateText() {
   postTranslateText([ whatsnew.value.innerHTML ]).then(res => {
     whatsnew.value.innerHTML = res.data[0].translations[0].text;
   });
 }
+
 function speakText() {
   const speech = new SpeechSynthesisUtterance(whatsnew.value.innerText);
   window.speechSynthesis.speak(speech);
 }
+
 function stopSpeakText(visible) {
   if (!visible) {
     window.speechSynthesis.cancel();
