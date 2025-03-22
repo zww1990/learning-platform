@@ -7,6 +7,8 @@ export const app = reactive({
     themeStyle: 'light',
     fontColor: 'black',
     algorithm: theme.defaultAlgorithm,
+    isDesktopApp: !!window.electron,
+    isBrowserApp: !window.electron,
     initBackgroundColor() {
         document.body.style.backgroundColor = 'white';
     },
@@ -15,7 +17,7 @@ export const app = reactive({
         this.algorithm = checked ? theme.darkAlgorithm : theme.defaultAlgorithm;
         this.fontColor = checked ? 'white' : 'black';
         document.body.style.backgroundColor = checked ? 'black' : 'white';
-        window.electron && window.electron.toggle();
+        this.isDesktopApp && window.electron.toggle();
     },
     isDarkTheme() {
         return this.themeStyle === 'dark';
@@ -35,7 +37,7 @@ export const download = reactive({
     // 当前正在下载的文件名
     currentFile: '',
     init() {
-        if (!window.electron) {
+        if (app.isBrowserApp) {
             console.warn('浏览器模式不存在 electron 对象。');
             return;
         }

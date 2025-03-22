@@ -47,18 +47,13 @@ const latestColumns = [
 const latestDataSource = ref([]);
 const selected = ref([]);
 
-if (window.electron) {
+if (app.isDesktopApp) {
   window.electron.readFile('setting.json').then(content => selected.value = content);
 } else {
   console.warn('浏览器模式不存在 electron 对象。');
 }
 
 function saveSetting() {
-  if (!window.electron) {
-    console.warn('浏览器模式不存在 electron 对象。');
-    message.warn('浏览器模式不支持此操作!');
-    return;
-  }
   window.electron.writeFile('setting.json', JSON.stringify(selected.value, null, 2))
       .then(() => message.success('设置成功!'));
 }
@@ -163,7 +158,7 @@ function translateText() {
     <a-col :span="15" style="text-align: right">
       <a-space>
         <a-select v-model:value="selected" :options="options" style="width: 300px;text-align: left" mode="multiple" placeholder="请选择JetBrains开发者工具" :max-tag-count="1"/>
-        <a-button type="default" @click="saveSetting">保存设置</a-button>
+        <a-button type="default" @click="saveSetting" v-if="app.isDesktopApp">保存设置</a-button>
         <a-button type="default" @click="reload">重新加载</a-button>
         <a-button type="default" @click="downloadJson">下载数据</a-button>
       </a-space>
