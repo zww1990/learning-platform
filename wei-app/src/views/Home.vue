@@ -137,7 +137,7 @@ const voiceSelected = ref('');
 
 window.speechSynthesis.onvoiceschanged = () => {
   voiceOptions.value = window.speechSynthesis.getVoices().filter(it => it.lang.startsWith('zh'));
-  voiceSelected.value = voiceOptions.value.find(it => it.default).name;
+  voiceSelected.value = voiceOptions.value.find(it => it.default)?.name;
 };
 
 function translateText() {
