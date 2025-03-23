@@ -1,7 +1,7 @@
 <script setup>
 import dayjs from "dayjs";
 import { message } from "ant-design-vue";
-import { ref, useTemplateRef, watch } from "vue";
+import { reactive, ref, useTemplateRef, watch } from "vue";
 import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
 import { app, download } from "../store";
@@ -162,13 +162,8 @@ function stopSpeakText(visible) {
   }
 }
 
-function overlayInnerStyle() {
-  return { maxWidth: '600px', maxHeight: '400px', overflow: 'auto' };
-}
-
-function whatsnewStyle() {
-  return { whiteSpace: 'normal', wordWrap: 'break-word', wordBreak: 'break-word', overflowWrap: 'break-word' };
-}
+const overlayInnerStyle = reactive({ maxWidth: '600px', maxHeight: '400px', overflow: 'auto' });
+const whatsnewStyle = reactive({ whiteSpace: 'normal', wordWrap: 'break-word', wordBreak: 'break-word', overflowWrap: 'break-word' });
 </script>
 
 <template>
@@ -212,9 +207,9 @@ function whatsnewStyle() {
       </template>
       <template v-else-if="column.dataIndex === 'name'">
         {{record.name}}
-        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle()">
+        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle">
           <template #content>
-            <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle()"/>
+            <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle"/>
             <a-divider type="horizontal" style="margin: 5px 0"/>
             <a @click="translateText">翻译成中文</a>
             <a-divider type="vertical" />
@@ -236,9 +231,9 @@ function whatsnewStyle() {
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
           {{record.date}}
-          <a-popover @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle()">
+          <a-popover @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle">
             <template #content>
-              <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle()"/>
+              <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle"/>
               <a-divider type="horizontal" style="margin: 5px 0"/>
               <a @click="translateText">翻译成中文</a>
               <a-divider type="vertical" />
