@@ -204,9 +204,9 @@ function stopSpeakText(visible) {
       </template>
       <template v-else-if="column.dataIndex === 'name'">
         {{record.name}}
-        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText">
+        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText" :overlayInnerStyle="{ maxWidth: '600px', maxHeight: '400px', overflow: 'auto' }">
           <template #content>
-            <span v-html="record.whatsnew" ref="whatsnew"/>
+            <span v-html="record.whatsnew" ref="whatsnew" style="white-space: normal;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word"/>
             <a-divider type="horizontal" style="margin: 5px 0"/>
             <a @click="translateText">翻译成中文</a>
             <a-divider type="vertical" />
@@ -228,9 +228,9 @@ function stopSpeakText(visible) {
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
           {{record.date}}
-          <a-popover @openChange="stopSpeakText">
+          <a-popover @openChange="stopSpeakText" :overlayInnerStyle="{ maxWidth: '600px', maxHeight: '400px', overflow: 'auto' }">
             <template #content>
-              <span v-html="record.whatsnew" ref="whatsnew"/>
+              <span v-html="record.whatsnew" ref="whatsnew" style="white-space: normal;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word"/>
               <a-divider type="horizontal" style="margin: 5px 0"/>
               <a @click="translateText">翻译成中文</a>
               <a-divider type="vertical" />
