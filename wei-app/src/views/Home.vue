@@ -161,6 +161,14 @@ function stopSpeakText(visible) {
     window.speechSynthesis.cancel();
   }
 }
+
+function overlayInnerStyle() {
+  return { maxWidth: '600px', maxHeight: '400px', overflow: 'auto' };
+}
+
+function whatsnewStyle() {
+  return { whiteSpace: 'normal', wordWrap: 'break-word', wordBreak: 'break-word', overflowWrap: 'break-word' };
+}
 </script>
 
 <template>
@@ -204,9 +212,9 @@ function stopSpeakText(visible) {
       </template>
       <template v-else-if="column.dataIndex === 'name'">
         {{record.name}}
-        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText" :overlayInnerStyle="{ maxWidth: '600px', maxHeight: '400px', overflow: 'auto' }">
+        <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle()">
           <template #content>
-            <span v-html="record.whatsnew" ref="whatsnew" style="white-space: normal;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word"/>
+            <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle()"/>
             <a-divider type="horizontal" style="margin: 5px 0"/>
             <a @click="translateText">翻译成中文</a>
             <a-divider type="vertical" />
@@ -228,9 +236,9 @@ function stopSpeakText(visible) {
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
           {{record.date}}
-          <a-popover @openChange="stopSpeakText" :overlayInnerStyle="{ maxWidth: '600px', maxHeight: '400px', overflow: 'auto' }">
+          <a-popover @openChange="stopSpeakText" :overlayInnerStyle="overlayInnerStyle()">
             <template #content>
-              <span v-html="record.whatsnew" ref="whatsnew" style="white-space: normal;word-wrap: break-word;word-break: break-word;overflow-wrap: break-word"/>
+              <span v-html="record.whatsnew" ref="whatsnew" :style="whatsnewStyle()"/>
               <a-divider type="horizontal" style="margin: 5px 0"/>
               <a @click="translateText">翻译成中文</a>
               <a-divider type="vertical" />
