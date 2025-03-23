@@ -6,7 +6,7 @@ import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
 import { app, download } from "../store";
 import { getProductsReleasesByCode, getProductsReleasesByCodeAndType, postTranslateText } from "../services";
-import { InfoCircleTwoTone } from '@ant-design/icons-vue';
+import { InfoCircleTwoTone, LikeTwoTone } from '@ant-design/icons-vue';
 
 download.init();
 
@@ -169,7 +169,18 @@ const whatsnewStyle = reactive({ whiteSpace: 'normal', wordWrap: 'break-word', w
 <template>
   <a-row>
     <a-col :span="10">
-      <h2 :style="{ color: app.fontColor }">今天是{{app.today()}}</h2>
+      <h2 :style="{ color: app.fontColor }">
+        今天是{{app.today()}}
+        <a-popover title="听说赞赏的人都会变美变帅哦~">
+          <template #content>
+            <a-space>
+              <img src="../assets/Alipay.jpg" alt="支付宝" width="200"/>
+              <img src="../assets/WeChat.jpg" alt="微信" width="200"/>
+            </a-space>
+          </template>
+          <LikeTwoTone :spin="true" two-tone-color="#eb2f96"/>
+        </a-popover>
+      </h2>
     </a-col>
     <a-col :span="14" style="text-align: right">
       <a-space>
