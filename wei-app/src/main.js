@@ -51,7 +51,7 @@ const createWindow = () => {
         webContents.send('download-progress', progress, item.getFilename());
         mainWindow.setProgressBar(num); // 设置下载进度值
       }
-    })
+    });
 
     item.once('done', (event, state) => {
       if (state === 'completed') {
@@ -63,9 +63,9 @@ const createWindow = () => {
         webContents.send('download-failed');
         mainWindow.setProgressBar(0); // 下载失败，重置进度条
       }
-    })
+    });
 
-  })
+  });
 };
 
 // This method will be called when Electron has finished
