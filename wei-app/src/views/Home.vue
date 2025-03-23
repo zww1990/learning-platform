@@ -6,6 +6,7 @@ import LightSun from "../components/LightSun.vue";
 import DarkMoon from "../components/DarkMoon.vue";
 import { app, download } from "../store";
 import { getProductsReleasesByCode, getProductsReleasesByCodeAndType, postTranslateText } from "../services";
+import { InfoCircleTwoTone } from '@ant-design/icons-vue';
 
 download.init();
 
@@ -206,11 +207,12 @@ function stopSpeakText(visible) {
         <a-popover v-if="isNew(record.date)" @openChange="stopSpeakText">
           <template #content>
             <span v-html="record.whatsnew" ref="whatsnew"/>
+            <a-divider type="horizontal" style="margin: 5px 0"/>
             <a @click="translateText">翻译成中文</a>
             <a-divider type="vertical" />
             <a @click="speakText">朗读内容</a>
           </template>
-          <a-tag color="error">new</a-tag>
+          <a-tag color="error" style="cursor: pointer">new</a-tag>
         </a-popover>
       </template>
     </template>
@@ -225,14 +227,16 @@ function stopSpeakText(visible) {
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'date'">
+          {{record.date}}
           <a-popover @openChange="stopSpeakText">
             <template #content>
               <span v-html="record.whatsnew" ref="whatsnew"/>
+              <a-divider type="horizontal" style="margin: 5px 0"/>
               <a @click="translateText">翻译成中文</a>
               <a-divider type="vertical" />
               <a @click="speakText">朗读内容</a>
             </template>
-            {{record.date}}
+            <InfoCircleTwoTone />
           </a-popover>
         </template>
       </template>

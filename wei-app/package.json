@@ -33,6 +33,7 @@
     "vite": "^5.4.14"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.0",
     "ant-design-vue": "^4.2.6",
     "axios": "^1.8.2",
     "dayjs": "^1.11.13",
