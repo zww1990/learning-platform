@@ -66,6 +66,11 @@ const createWindow = () => {
     });
 
   });
+
+  // 禁用默认滚动条
+  mainWindow.webContents.on('dom-ready', () => {
+      mainWindow.webContents.insertCSS(` ::-webkit-scrollbar { display: none; } `).then(() => {});
+  });
 };
 
 // This method will be called when Electron has finished
