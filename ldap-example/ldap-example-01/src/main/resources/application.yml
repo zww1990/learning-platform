@@ -17,22 +17,22 @@ spring:
     time-zone: GMT+8
   ldap:
     #LDAP连接
-    urls: ldap://localhost:389
+    urls: 
     #LDAP节点
-    base: dc=bacic5i5j,dc=com
+    base: 
     #LDAP用户名
-    username: cn=admin,dc=bacic5i5j,dc=com
+    username: 
     #LDAP密码
-    password: 1q2w3e4r
+    password: 
   mail:
     #SMTP邮箱地址
-    host: smtp.exmail.qq.com
+    host: 
     #SMTP邮箱端口（建议使用安全协议的端口号）
-    port: 465
+    port: 
     #SMTP邮箱用户名
-    username: cm@qq.com
+    username: 
     #SMTP邮箱密码
-    password: CMadmin123
+    password: 
     properties:
       mail:
         smtp:
