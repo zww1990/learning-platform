@@ -40,11 +40,11 @@ public class JoseJwtTests {
 			RSASSASigner signer = new RSASSASigner(rsaKey);
 			JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()//
 					.subject("userlogin")//
-					.issuer("张维维")//
+					.issuer("")//
 					.issueTime(new Date())//
 					.expirationTime(new Date(System.currentTimeMillis() + 1 * 60 * 1000))//
 					.jwtID(UUID.randomUUID().toString())//
-					.claim("username", "zhangweiwei")//
+					.claim("username", "")//
 					.build();
 			SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), claimsSet);
 			signedJWT.sign(signer);
