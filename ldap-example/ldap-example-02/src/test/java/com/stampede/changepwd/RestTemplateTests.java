@@ -14,14 +14,14 @@ public class RestTemplateTests {
 	public void testSignIn() {
 		try {
 			RestTemplate template = new RestTemplate();
-			String url = "http://gitlab.it.5i5j.com/users/auth/ldapmain/callback";
+			String url = "";
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 			MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-			String username = "siqianwen";
-			String password = "ainilaoma1234A";
-			String csrfparam = "authenticity_token";
-			String csrftoken = "qlPLbagm7IsysjTwkWS9jbCyNbSKAZFbjTzszsFIMtMXS9mpR+n7yvysCVrXAnopySPu9GYFn0Kj7z3m98M4jw==";
+			String username = "";
+			String password = "";
+			String csrfparam = "";
+			String csrftoken = "";
 			data.add("username", username);
 			data.add("password", password);
 			data.add(csrfparam, csrftoken);
@@ -37,14 +37,14 @@ public class RestTemplateTests {
 	public void testLogin() {
 		try {
 			RestTemplate template = new RestTemplate();
-			String url = "http://jira.bacic5i5j.com/login.jsp";
+			String url = "";
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 			MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-			String username = "siqianwen";
-			String password = "ainilaoma1234A";
-			String csrfparam = "atl_token";
-			String csrftoken = "BQGQ-TC3R-4ZZG-69BY|7d44d70346b552696d6866cd754a9c22867005e7|lin";
+			String username = "";
+			String password = "";
+			String csrfparam = "";
+			String csrftoken = "";
 			data.add("os_username", username);
 			data.add("os_password", password);
 			data.add(csrfparam, csrftoken);
