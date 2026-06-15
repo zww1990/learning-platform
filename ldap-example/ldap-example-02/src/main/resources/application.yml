@@ -18,22 +18,22 @@ spring:
     time-zone: GMT+8
   ldap:
     #LDAP连接
-    urls: ldap://10.2.1.114:389
+    urls: 
     #LDAP节点
-    base: 'dc=bacic5i5j,dc=com'
+    base: 
     #LDAP用户名
-    username: 'cn=admin,dc=bacic5i5j,dc=com'
+    username: 
     #LDAP密码
-    password: 1q2w3e4r
+    password: 
   mail:
     #SMTP邮箱地址
-    host: smtp.exmail.qq.com
+    host: 
     #SMTP邮箱端口（建议使用安全协议的端口号）
-    port: 465
+    port: 
     #SMTP邮箱用户名
-    username: cm@5i5j.com
+    username: 
     #SMTP邮箱密码
-    password: CMadmin123
+    password: 
     properties:
       mail:
         smtp:
@@ -52,11 +52,11 @@ spring:
     check-template-location: false
   datasource:
     #数据库连接
-    url: jdbc:oracle:thin:@10.2.2.58:1521:orcl
+    url: 
     #数据库用户名
-    username: BDM
+    username: 
     #数据库密码
-    password: BDM
+    password: 
   sql:
     init:
       enabled: false
@@ -105,14 +105,14 @@ changepwd:
     begin: '00:00:00'
     end: '23:59:59'
   #新用户默认密码
-  default-password: 20210915
+  default-password: 
   #gitlab地址
-  gitlab-url: http://10.2.4.174/
+  gitlab-url: 
   #jira地址
-  jira-url: http://10.2.2.113/
+  jira-url: 
   #jira用户目录同步地址
-  jira-sync-url: http://10.2.2.113/rest/crowd/1/directory/10000
+  jira-sync-url: 
   #jira管理员用户
-  jira-admin-username: siqianwen
+  jira-admin-username: 
   #jira管理员密码
-  jira-admin-password: ainilaoma1234A
+  jira-admin-password: 
