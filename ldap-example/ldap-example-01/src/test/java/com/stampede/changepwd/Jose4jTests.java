@@ -52,8 +52,8 @@ public class Jose4jTests {
 			claims.setExpirationTime(expirationTime);
 			claims.setNotBeforeMinutesInThePast(1);
 			claims.setSubject("userlogin");
-			claims.setIssuer("张维维");
-			claims.setStringClaim("username", "zhangweiwei");
+			claims.setIssuer("");
+			claims.setStringClaim("username", "");
 			JsonWebSignature jws = new JsonWebSignature();
 			jws.setAlgorithmHeaderValue(AlgorithmIdentifiers.RSA_USING_SHA256);
 			jws.setKeyIdHeaderValue(keyId);
